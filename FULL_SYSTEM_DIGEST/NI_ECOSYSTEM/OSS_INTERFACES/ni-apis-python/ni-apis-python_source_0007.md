@@ -1,0 +1,6645 @@
+# NI OSS SOURCE SNAPSHOT: ni-apis-python
+
+<!--NI_OSS_SNAPSHOT repo=ni/ni-apis-python commit=9a74b25be948b236787a899f5b2bfbecefeaa94d -->
+
+<!--NI_OSS_SOURCE repo=ni-apis-python path=packages/ni.protobuf.types/src/ni/protobuf/types/waveform_conversion.py sha256=fb527eedb07ee8dcc4fcd0991c686d310e238cf307fa73a5a9833121035b56fe bytes=18293 -->
+## FILE: packages/ni.protobuf.types/src/ni/protobuf/types/waveform_conversion.py
+
+- repository: `ni/ni-apis-python`
+- source_path: `packages/ni.protobuf.types/src/ni/protobuf/types/waveform_conversion.py`
+- sha256: `fb527eedb07ee8dcc4fcd0991c686d310e238cf307fa73a5a9833121035b56fe`
+- bytes: 18293
+
+````python
+"""Methods to convert to and from waveform protobuf messages."""
+
+from __future__ import annotations
+
+from collections.abc import Iterable, Mapping
+from typing import Any, TypeAlias
+
+import hightime as ht
+import nitypes.bintime as bt
+import numpy as np
+from nitypes.complex import ComplexInt32Base, ComplexInt32DType
+from nitypes.time import convert_datetime
+from nitypes.time.typing import AnyDateTime, AnyTimeDelta
+from nitypes.waveform import (
+    AnalogWaveform,
+    ComplexWaveform,
+    DigitalWaveform,
+    ExtendedPropertyDictionary,
+    LinearScaleMode,
+    NoneScaleMode,
+    SampleIntervalMode,
+    Spectrum,
+    Timing,
+)
+from nitypes.waveform.typing import ExtendedPropertyValue
+
+import ni.protobuf.types.precision_timestamp_conversion as ptc
+from ni.protobuf.types.precision_timestamp_pb2 import PrecisionTimestamp
+from ni.protobuf.types.waveform_pb2 import (
+    DigitalWaveform as DigitalWaveformProto,
+    DoubleAnalogWaveform,
+    DoubleComplexWaveform,
+    DoubleSpectrum,
+    I16AnalogWaveform,
+    I16ComplexWaveform,
+    LinearScale,
+    Scale,
+    WaveformAttributeValue,
+)
+
+DEFAULT_PRECISION_TIMESTAMP = PrecisionTimestamp()
+
+AnyNiWaveform: TypeAlias = AnalogWaveform[Any] | ComplexWaveform[Any] | DigitalWaveform[Any]
+
+AnyWaveformProto: TypeAlias = (
+    DoubleAnalogWaveform
+    | DoubleComplexWaveform
+    | I16AnalogWaveform
+    | I16ComplexWaveform
+    | DigitalWaveformProto
+)
+
+
+def float64_analog_waveform_to_protobuf(
+    value: AnalogWaveform[np.float64], /
+) -> DoubleAnalogWaveform:
+    """Convert the Python AnalogWaveform to a protobuf DoubleAnalogWaveform."""
+    attributes = _extended_properties_to_attributes(value.extended_properties)
+    if value.timing.sample_interval_mode in [SampleIntervalMode.REGULAR, SampleIntervalMode.NONE]:
+        return DoubleAnalogWaveform(
+            t0=_t0_from_waveform(value),
+            dt=_time_interval_from_waveform(value),
+            y_data=value.scaled_data,
+            attributes=attributes,
+            timestamp=_timestamp_from_waveform(value),
+            time_offset=_time_offset_from_waveform(value),
+        )
+    elif value.timing.sample_interval_mode == SampleIntervalMode.IRREGULAR:
+        return DoubleAnalogWaveform(
+            y_data=value.scaled_data,
+            attributes=attributes,
+            timestamps=_timestamps_from_waveform(value),
+        )
+    else:
+        raise ValueError(f"Invalid sample interval mode: {value.timing.sample_interval_mode}")
+
+
+def float64_analog_waveform_from_protobuf(
+    message: DoubleAnalogWaveform, /
+) -> AnalogWaveform[np.float64]:
+    """Convert the protobuf DoubleAnalogWaveform to a Python AnalogWaveform."""
+    timing = _timing_from_waveform_message(message)
+    extended_properties = _attributes_to_extended_properties(message.attributes)
+
+    return AnalogWaveform.from_array_1d(
+        message.y_data,
+        dtype=np.float64,
+        extended_properties=extended_properties,
+        timing=timing,
+        scale_mode=NoneScaleMode(),
+    )
+
+
+def float64_complex_waveform_to_protobuf(
+    value: ComplexWaveform[np.complex128], /
+) -> DoubleComplexWaveform:
+    """Convert the Python ComplexWaveform to a protobuf DoubleComplexWaveform."""
+    attributes = _extended_properties_to_attributes(value.extended_properties)
+    interleaved_array = value.scaled_data.view(np.float64)
+    if value.timing.sample_interval_mode in [SampleIntervalMode.REGULAR, SampleIntervalMode.NONE]:
+        return DoubleComplexWaveform(
+            t0=_t0_from_waveform(value),
+            dt=_time_interval_from_waveform(value),
+            y_data=interleaved_array,
+            attributes=attributes,
+            timestamp=_timestamp_from_waveform(value),
+            time_offset=_time_offset_from_waveform(value),
+        )
+    elif value.timing.sample_interval_mode == SampleIntervalMode.IRREGULAR:
+        return DoubleComplexWaveform(
+            y_data=interleaved_array,
+            attributes=attributes,
+            timestamps=_timestamps_from_waveform(value),
+        )
+    else:
+        raise ValueError(f"Invalid sample interval mode: {value.timing.sample_interval_mode}")
+
+
+def float64_complex_waveform_from_protobuf(
+    message: DoubleComplexWaveform, /
+) -> ComplexWaveform[np.complex128]:
+    """Convert the protobuf DoubleComplexWaveform to a Python ComplexWaveform."""
+    timing = _timing_from_waveform_message(message)
+    extended_properties = _attributes_to_extended_properties(message.attributes)
+
+    y_array = np.array(message.y_data, np.float64)
+    data_array = y_array.view(np.complex128)
+
+    return ComplexWaveform.from_array_1d(
+        data_array,
+        copy=False,
+        extended_properties=extended_properties,
+        timing=timing,
+        scale_mode=NoneScaleMode(),
+    )
+
+
+def int16_complex_waveform_to_protobuf(
+    value: ComplexWaveform[ComplexInt32Base], /
+) -> I16ComplexWaveform:
+    """Convert the Python ComplexWaveform to a protobuf DoubleComplexWaveform."""
+    attributes = _extended_properties_to_attributes(value.extended_properties)
+    scale = _scale_from_waveform(value)
+    interleaved_array = value.raw_data.view(np.int16)
+    if value.timing.sample_interval_mode in [SampleIntervalMode.REGULAR, SampleIntervalMode.NONE]:
+        return I16ComplexWaveform(
+            t0=_t0_from_waveform(value),
+            dt=_time_interval_from_waveform(value),
+            y_data=interleaved_array,
+            attributes=attributes,
+            scale=scale,
+            timestamp=_timestamp_from_waveform(value),
+            time_offset=_time_offset_from_waveform(value),
+        )
+    elif value.timing.sample_interval_mode == SampleIntervalMode.IRREGULAR:
+        return I16ComplexWaveform(
+            y_data=interleaved_array,
+            attributes=attributes,
+            scale=scale,
+            timestamps=_timestamps_from_waveform(value),
+        )
+    else:
+        raise ValueError(f"Invalid sample interval mode: {value.timing.sample_interval_mode}")
+
+
+def int16_complex_waveform_from_protobuf(
+    message: I16ComplexWaveform, /
+) -> ComplexWaveform[ComplexInt32Base]:
+    """Convert the protobuf DoubleComplexWaveform to a Python ComplexWaveform."""
+    timing = _timing_from_waveform_message(message)
+    extended_properties = _attributes_to_extended_properties(message.attributes)
+    scale_mode = _scale_mode_from_waveform_message(message)
+
+    y_array = np.array(message.y_data, np.int16)
+    data_array = y_array.view(ComplexInt32DType)
+
+    return ComplexWaveform.from_array_1d(
+        data_array,
+        copy=False,
+        extended_properties=extended_properties,
+        timing=timing,
+        scale_mode=scale_mode,
+    )
+
+
+def float64_spectrum_to_protobuf(value: Spectrum[np.float64], /) -> DoubleSpectrum:
+    """Convert the Python Spectrum to a protobuf DoubleSpectrum."""
+    attributes = _extended_properties_to_attributes(value.extended_properties)
+    return DoubleSpectrum(
+        start_frequency=value.start_frequency,
+        frequency_increment=value.frequency_increment,
+        data=value.data,
+        attributes=attributes,
+    )
+
+
+def float64_spectrum_from_protobuf(message: DoubleSpectrum, /) -> Spectrum[np.float64]:
+    """Convert the protobuf DoubleSpectrum to a Python Spectrum."""
+    extended_properties = _attributes_to_extended_properties(message.attributes)
+    return Spectrum.from_array_1d(
+        message.data,
+        dtype=np.float64,
+        start_frequency=message.start_frequency,
+        frequency_increment=message.frequency_increment,
+        extended_properties=extended_properties,
+    )
+
+
+def int16_analog_waveform_to_protobuf(value: AnalogWaveform[np.int16], /) -> I16AnalogWaveform:
+    """Convert the Python AnalogWaveform to a protobuf I16AnalogWaveform."""
+    scale = _scale_from_waveform(value)
+    attributes = _extended_properties_to_attributes(value.extended_properties)
+    if value.timing.sample_interval_mode in [SampleIntervalMode.REGULAR, SampleIntervalMode.NONE]:
+        return I16AnalogWaveform(
+            t0=_t0_from_waveform(value),
+            dt=_time_interval_from_waveform(value),
+            y_data=value.raw_data,
+            attributes=attributes,
+            scale=scale,
+            timestamp=_timestamp_from_waveform(value),
+            time_offset=_time_offset_from_waveform(value),
+        )
+    elif value.timing.sample_interval_mode == SampleIntervalMode.IRREGULAR:
+        return I16AnalogWaveform(
+            y_data=value.raw_data,
+            attributes=attributes,
+            scale=scale,
+            timestamps=_timestamps_from_waveform(value),
+        )
+    else:
+        raise ValueError(f"Invalid sample interval mode: {value.timing.sample_interval_mode}")
+
+
+def int16_analog_waveform_from_protobuf(message: I16AnalogWaveform, /) -> AnalogWaveform[np.int16]:
+    """Convert the protobuf I16AnalogWaveform to a Python AnalogWaveform."""
+    timing = _timing_from_waveform_message(message)
+    extended_properties = _attributes_to_extended_properties(message.attributes)
+    scale_mode = _scale_mode_from_waveform_message(message)
+
+    return AnalogWaveform.from_array_1d(
+        message.y_data,
+        dtype=np.int16,
+        extended_properties=extended_properties,
+        timing=timing,
+        scale_mode=scale_mode,
+    )
+
+
+def digital_waveform_to_protobuf(value: DigitalWaveform[Any], /) -> DigitalWaveformProto:
+    """Convert the Python DigitalWaveform to a protobuf DigitalWaveform."""
+    attributes = _extended_properties_to_attributes(value.extended_properties)
+    if value.timing.sample_interval_mode in [SampleIntervalMode.REGULAR, SampleIntervalMode.NONE]:
+        return DigitalWaveformProto(
+            t0=_t0_from_waveform(value),
+            dt=_time_interval_from_waveform(value),
+            signal_count=value.signal_count,
+            y_data=value.data.tobytes(),
+            attributes=attributes,
+            timestamp=_timestamp_from_waveform(value),
+            time_offset=_time_offset_from_waveform(value),
+        )
+    elif value.timing.sample_interval_mode == SampleIntervalMode.IRREGULAR:
+        return DigitalWaveformProto(
+            signal_count=value.signal_count,
+            y_data=value.data.tobytes(),
+            attributes=attributes,
+            timestamps=_timestamps_from_waveform(value),
+        )
+    else:
+        raise AttributeError(f"Invalid sample interval mode{value.timing.sample_interval_mode}")
+
+
+def digital_waveform_from_protobuf(message: DigitalWaveformProto, /) -> DigitalWaveform[np.uint8]:
+    """Convert the protobuf DigitalWaveform to a Python DigitalWaveform."""
+    timing = _timing_from_waveform_message(message)
+    extended_properties = _attributes_to_extended_properties(message.attributes)
+
+    if message.signal_count <= 0:
+        raise ValueError("signal_count must be greater than zero.")
+
+    data_array = np.frombuffer(message.y_data, dtype=np.uint8)
+    samples_per_signal = len(data_array) // message.signal_count
+    if len(data_array) != samples_per_signal * message.signal_count:
+        raise ValueError(f"Data array length ({len(data_array)}) does not match expected shape.")
+    reshaped_data = data_array.reshape(samples_per_signal, message.signal_count)
+
+    return DigitalWaveform.from_lines(
+        reshaped_data,
+        dtype=np.uint8,
+        signal_count=message.signal_count,
+        extended_properties=extended_properties,
+        timing=timing,
+    )
+
+
+def _attributes_to_extended_properties(
+    attributes: Mapping[str, WaveformAttributeValue],
+) -> Mapping[str, ExtendedPropertyValue]:
+    extended_properties = {}
+    for key, value in attributes.items():
+        attr_type = value.WhichOneof("attribute")
+        if attr_type is None:
+            raise ValueError("Could not determine the datatype of 'attribute'.")
+        extended_properties[key] = getattr(value, attr_type)
+
+    return extended_properties
+
+
+def _extended_properties_to_attributes(
+    extended_properties: ExtendedPropertyDictionary,
+) -> Mapping[str, WaveformAttributeValue]:
+    return {key: _value_to_attribute(value) for key, value in extended_properties.items()}
+
+
+def _value_to_attribute(value: ExtendedPropertyValue) -> WaveformAttributeValue:
+    attr_value = WaveformAttributeValue()
+    if isinstance(value, bool):
+        attr_value.bool_value = value
+    elif isinstance(value, int):
+        attr_value.integer_value = value
+    elif isinstance(value, float):
+        attr_value.double_value = value
+    elif isinstance(value, str):
+        attr_value.string_value = value
+    else:
+        raise TypeError(f"Unexpected type for extended property value {type(value)}")
+
+    return attr_value
+
+
+def _t0_from_waveform(waveform: AnyNiWaveform) -> PrecisionTimestamp | None:
+    if waveform.timing.has_start_time:
+        bin_datetime = convert_datetime(bt.DateTime, waveform.timing.start_time)
+        return ptc.bintime_datetime_to_protobuf(bin_datetime)
+    else:
+        return None
+
+
+def _timestamp_from_waveform(waveform: AnyNiWaveform) -> PrecisionTimestamp | None:
+    if waveform.timing.has_timestamp:
+        bin_datetime = convert_datetime(bt.DateTime, waveform.timing.timestamp)
+        return ptc.bintime_datetime_to_protobuf(bin_datetime)
+    else:
+        return None
+
+
+def _time_offset_from_waveform(waveform: AnyNiWaveform) -> float:
+    if waveform.timing.has_time_offset:
+        return waveform.timing.time_offset.total_seconds()
+    else:
+        return 0
+
+
+def _timestamps_from_waveform(waveform: AnyNiWaveform) -> Iterable[PrecisionTimestamp] | None:
+    if waveform.timing.sample_interval_mode == SampleIntervalMode.IRREGULAR:
+        timestamps = waveform.timing.get_timestamps(0, waveform.sample_count)
+        return [
+            ptc.bintime_datetime_to_protobuf(convert_datetime(bt.DateTime, ts)) for ts in timestamps
+        ]
+    else:
+        return None
+
+
+def _time_interval_from_waveform(waveform: AnyNiWaveform) -> float:
+    if waveform.timing.has_sample_interval:
+        return waveform.timing.sample_interval.total_seconds()
+    else:
+        return 0
+
+
+def _timing_from_waveform_message(
+    message: AnyWaveformProto,
+) -> Timing[AnyDateTime, AnyTimeDelta, AnyTimeDelta]:
+    timing: Timing[AnyDateTime, AnyTimeDelta, AnyTimeDelta]
+    _check_regular_vs_irregular_fields(message)
+    if message.timestamps:
+        timestamps_list = [ptc.bintime_datetime_from_protobuf(ts) for ts in message.timestamps]
+        timing = Timing.create_with_irregular_interval(timestamps_list)
+    else:
+        # Timestamp/T0 - Precedence is given to timestamp over t0
+        raw_timestamp = _calculate_raw_timestamp(message)
+        bin_datetime: bt.DateTime | None
+        if raw_timestamp:
+            bin_datetime = ptc.bintime_datetime_from_protobuf(raw_timestamp)
+        else:
+            bin_datetime = None
+
+        # Time Offset - Use hightime to avoid bruising of the float proto value.
+        time_offset = ht.timedelta(seconds=message.time_offset)
+
+        # Sample Interval
+        if not message.dt:
+            timing = Timing.create_with_no_interval(timestamp=bin_datetime, time_offset=time_offset)
+        else:
+            sample_interval = ht.timedelta(seconds=message.dt)
+            timing = Timing.create_with_regular_interval(
+                sample_interval=sample_interval,
+                timestamp=bin_datetime,
+                time_offset=time_offset,
+            )
+
+    return timing
+
+
+def _check_regular_vs_irregular_fields(message: AnyWaveformProto) -> None:
+    has_any_regular_timing_fields = (
+        message.dt or message.time_offset or _has_t0(message) or _has_timestamp(message)
+    )
+    if message.timestamps and has_any_regular_timing_fields:
+        raise ValueError(
+            "Waveform message has mutually exclusive timing fields set: "
+            "`timestamps` cannot be used together with `t0`, `timestamp`, "
+            "`time_offset`, or `dt`."
+        )
+
+
+def _calculate_raw_timestamp(message: AnyWaveformProto) -> PrecisionTimestamp | None:
+    _verify_t0_timestamp_offset_relationship(message)
+    raw_timestamp = None
+
+    # Agreed precedence of timestamp over t0
+    if _has_timestamp(message):
+        raw_timestamp = message.timestamp
+    elif _has_t0(message):
+        raw_timestamp = message.t0
+
+    return raw_timestamp
+
+
+def _verify_t0_timestamp_offset_relationship(message: AnyWaveformProto) -> None:
+    if not _has_timestamp(message) and _has_t0(message) and message.time_offset:
+        raise ValueError("Timestamp must be set when supplying a TimeOffset and T0.")
+
+
+def _has_timestamp(message: AnyWaveformProto) -> bool:
+    return message.HasField("timestamp") and not message.timestamp == DEFAULT_PRECISION_TIMESTAMP
+
+
+def _has_t0(message: AnyWaveformProto) -> bool:
+    return message.HasField("t0") and not message.t0 == DEFAULT_PRECISION_TIMESTAMP
+
+
+def _scale_from_waveform(waveform: AnalogWaveform[Any] | ComplexWaveform[Any]) -> Scale | None:
+    if isinstance(waveform.scale_mode, LinearScaleMode):
+        linear_scale = LinearScale(gain=waveform.scale_mode.gain, offset=waveform.scale_mode.offset)
+        return Scale(linear_scale=linear_scale)
+    elif isinstance(waveform.scale_mode, NoneScaleMode):
+        return None
+    else:
+        raise ValueError(f"The waveform scale mode {waveform.scale_mode} is not supported.")
+
+
+def _scale_mode_from_waveform_message(
+    message: I16AnalogWaveform | I16ComplexWaveform,
+) -> LinearScaleMode | NoneScaleMode:
+    if message.HasField("scale"):
+        mode = message.scale.WhichOneof("mode")
+        if mode is None:
+            raise ValueError("Could not determine waveform scale mode.")
+        elif mode == "linear_scale":
+            return LinearScaleMode(
+                message.scale.linear_scale.gain, message.scale.linear_scale.offset
+            )
+        else:
+            raise ValueError(f"The waveform scale mode {mode!r} is not supported.")
+
+    return NoneScaleMode()
+````
+
+<!--NI_OSS_SOURCE repo=ni-apis-python path=packages/ni.protobuf.types/src/ni/protobuf/types/waveform_pb2.py sha256=0a1a2ee3c4032f9ff585d104d2ec74317fab8c78da34b9a964ccd7ffa3a5772e bytes=8034 -->
+## FILE: packages/ni.protobuf.types/src/ni/protobuf/types/waveform_pb2.py
+
+- repository: `ni/ni-apis-python`
+- source_path: `packages/ni.protobuf.types/src/ni/protobuf/types/waveform_pb2.py`
+- sha256: `0a1a2ee3c4032f9ff585d104d2ec74317fab8c78da34b9a964ccd7ffa3a5772e`
+- bytes: 8034
+
+````python
+# -*- coding: utf-8 -*-
+# Generated by the protocol buffer compiler.  DO NOT EDIT!
+# source: ni/protobuf/types/waveform.proto
+"""Generated protocol buffer code."""
+from google.protobuf.internal import builder as _builder
+from google.protobuf import descriptor as _descriptor
+from google.protobuf import descriptor_pool as _descriptor_pool
+from google.protobuf import symbol_database as _symbol_database
+# @@protoc_insertion_point(imports)
+
+_sym_db = _symbol_database.Default()
+
+
+from ni.protobuf.types import precision_timestamp_pb2 as ni_dot_protobuf_dot_types_dot_precision__timestamp__pb2
+
+
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n ni/protobuf/types/waveform.proto\x12\x11ni.protobuf.types\x1a+ni/protobuf/types/precision_timestamp.proto\"\x9a\x03\n\x14\x44oubleAnalogWaveform\x12\x31\n\x02t0\x18\x01 \x01(\x0b\x32%.ni.protobuf.types.PrecisionTimestamp\x12\n\n\x02\x64t\x18\x02 \x01(\x01\x12\x0e\n\x06y_data\x18\x03 \x03(\x01\x12K\n\nattributes\x18\x04 \x03(\x0b\x32\x37.ni.protobuf.types.DoubleAnalogWaveform.AttributesEntry\x12\x38\n\ttimestamp\x18\x05 \x01(\x0b\x32%.ni.protobuf.types.PrecisionTimestamp\x12\x13\n\x0btime_offset\x18\x06 \x01(\x01\x12\x39\n\ntimestamps\x18\x07 \x03(\x0b\x32%.ni.protobuf.types.PrecisionTimestamp\x1a\\\n\x0f\x41ttributesEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\x38\n\x05value\x18\x02 \x01(\x0b\x32).ni.protobuf.types.WaveformAttributeValue:\x02\x38\x01\"\xbd\x03\n\x11I16AnalogWaveform\x12\x31\n\x02t0\x18\x01 \x01(\x0b\x32%.ni.protobuf.types.PrecisionTimestamp\x12\n\n\x02\x64t\x18\x02 \x01(\x01\x12\x0e\n\x06y_data\x18\x03 \x03(\x11\x12H\n\nattributes\x18\x04 \x03(\x0b\x32\x34.ni.protobuf.types.I16AnalogWaveform.AttributesEntry\x12\'\n\x05scale\x18\x05 \x01(\x0b\x32\x18.ni.protobuf.types.Scale\x12\x38\n\ttimestamp\x18\x06 \x01(\x0b\x32%.ni.protobuf.types.PrecisionTimestamp\x12\x13\n\x0btime_offset\x18\x07 \x01(\x01\x12\x39\n\ntimestamps\x18\x08 \x03(\x0b\x32%.ni.protobuf.types.PrecisionTimestamp\x1a\\\n\x0f\x41ttributesEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\x38\n\x05value\x18\x02 \x01(\x0b\x32).ni.protobuf.types.WaveformAttributeValue:\x02\x38\x01\"\x9c\x03\n\x15\x44oubleComplexWaveform\x12\x31\n\x02t0\x18\x01 \x01(\x0b\x32%.ni.protobuf.types.PrecisionTimestamp\x12\n\n\x02\x64t\x18\x02 \x01(\x01\x12\x0e\n\x06y_data\x18\x03 \x03(\x01\x12L\n\nattributes\x18\x04 \x03(\x0b\x32\x38.ni.protobuf.types.DoubleComplexWaveform.AttributesEntry\x12\x38\n\ttimestamp\x18\x05 \x01(\x0b\x32%.ni.protobuf.types.PrecisionTimestamp\x12\x13\n\x0btime_offset\x18\x06 \x01(\x01\x12\x39\n\ntimestamps\x18\x07 \x03(\x0b\x32%.ni.protobuf.types.PrecisionTimestamp\x1a\\\n\x0f\x41ttributesEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\x38\n\x05value\x18\x02 \x01(\x0b\x32).ni.protobuf.types.WaveformAttributeValue:\x02\x38\x01\"\xbf\x03\n\x12I16ComplexWaveform\x12\x31\n\x02t0\x18\x01 \x01(\x0b\x32%.ni.protobuf.types.PrecisionTimestamp\x12\n\n\x02\x64t\x18\x02 \x01(\x01\x12\x0e\n\x06y_data\x18\x03 \x03(\x11\x12I\n\nattributes\x18\x04 \x03(\x0b\x32\x35.ni.protobuf.types.I16ComplexWaveform.AttributesEntry\x12\'\n\x05scale\x18\x05 \x01(\x0b\x32\x18.ni.protobuf.types.Scale\x12\x38\n\ttimestamp\x18\x06 \x01(\x0b\x32%.ni.protobuf.types.PrecisionTimestamp\x12\x13\n\x0btime_offset\x18\x07 \x01(\x01\x12\x39\n\ntimestamps\x18\x08 \x03(\x0b\x32%.ni.protobuf.types.PrecisionTimestamp\x1a\\\n\x0f\x41ttributesEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\x38\n\x05value\x18\x02 \x01(\x0b\x32).ni.protobuf.types.WaveformAttributeValue:\x02\x38\x01\"\xf9\x01\n\x0e\x44oubleSpectrum\x12\x17\n\x0fstart_frequency\x18\x01 \x01(\x01\x12\x1b\n\x13\x66requency_increment\x18\x02 \x01(\x01\x12\x0c\n\x04\x64\x61ta\x18\x03 \x03(\x01\x12\x45\n\nattributes\x18\x04 \x03(\x0b\x32\x31.ni.protobuf.types.DoubleSpectrum.AttributesEntry\x1a\\\n\x0f\x41ttributesEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\x38\n\x05value\x18\x02 \x01(\x0b\x32).ni.protobuf.types.WaveformAttributeValue:\x02\x38\x01\"\x84\x01\n\x16WaveformAttributeValue\x12\x14\n\nbool_value\x18\x01 \x01(\x08H\x00\x12\x17\n\rinteger_value\x18\x02 \x01(\x05H\x00\x12\x16\n\x0c\x64ouble_value\x18\x03 \x01(\x01H\x00\x12\x16\n\x0cstring_value\x18\x04 \x01(\tH\x00\x42\x0b\n\tattribute\"\xa6\x03\n\x0f\x44igitalWaveform\x12\x31\n\x02t0\x18\x01 \x01(\x0b\x32%.ni.protobuf.types.PrecisionTimestamp\x12\n\n\x02\x64t\x18\x02 \x01(\x01\x12\x14\n\x0csignal_count\x18\x03 \x01(\x05\x12\x0e\n\x06y_data\x18\x04 \x01(\x0c\x12\x46\n\nattributes\x18\x05 \x03(\x0b\x32\x32.ni.protobuf.types.DigitalWaveform.AttributesEntry\x12\x38\n\ttimestamp\x18\x06 \x01(\x0b\x32%.ni.protobuf.types.PrecisionTimestamp\x12\x13\n\x0btime_offset\x18\x07 \x01(\x01\x12\x39\n\ntimestamps\x18\x08 \x03(\x0b\x32%.ni.protobuf.types.PrecisionTimestamp\x1a\\\n\x0f\x41ttributesEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\x38\n\x05value\x18\x02 \x01(\x0b\x32).ni.protobuf.types.WaveformAttributeValue:\x02\x38\x01\"G\n\x05Scale\x12\x36\n\x0clinear_scale\x18\x01 \x01(\x0b\x32\x1e.ni.protobuf.types.LinearScaleH\x00\x42\x06\n\x04mode\"+\n\x0bLinearScale\x12\x0c\n\x04gain\x18\x01 \x01(\x01\x12\x0e\n\x06offset\x18\x02 \x01(\x01\x42\x85\x01\n\x15\x63om.ni.protobuf.typesB\rWaveformProtoP\x01Z\x05types\xa2\x02\x04NIPT\xaa\x02\"NationalInstruments.Protobuf.Types\xca\x02\x11NI\\PROTOBUF\\TYPES\xea\x02\x13NI::Protobuf::Typesb\x06proto3')
+
+_builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, globals())
+_builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'ni.protobuf.types.waveform_pb2', globals())
+if _descriptor._USE_C_DESCRIPTORS == False:
+
+  DESCRIPTOR._options = None
+  DESCRIPTOR._serialized_options = b'\n\025com.ni.protobuf.typesB\rWaveformProtoP\001Z\005types\242\002\004NIPT\252\002\"NationalInstruments.Protobuf.Types\312\002\021NI\\PROTOBUF\\TYPES\352\002\023NI::Protobuf::Types'
+  _DOUBLEANALOGWAVEFORM_ATTRIBUTESENTRY._options = None
+  _DOUBLEANALOGWAVEFORM_ATTRIBUTESENTRY._serialized_options = b'8\001'
+  _I16ANALOGWAVEFORM_ATTRIBUTESENTRY._options = None
+  _I16ANALOGWAVEFORM_ATTRIBUTESENTRY._serialized_options = b'8\001'
+  _DOUBLECOMPLEXWAVEFORM_ATTRIBUTESENTRY._options = None
+  _DOUBLECOMPLEXWAVEFORM_ATTRIBUTESENTRY._serialized_options = b'8\001'
+  _I16COMPLEXWAVEFORM_ATTRIBUTESENTRY._options = None
+  _I16COMPLEXWAVEFORM_ATTRIBUTESENTRY._serialized_options = b'8\001'
+  _DOUBLESPECTRUM_ATTRIBUTESENTRY._options = None
+  _DOUBLESPECTRUM_ATTRIBUTESENTRY._serialized_options = b'8\001'
+  _DIGITALWAVEFORM_ATTRIBUTESENTRY._options = None
+  _DIGITALWAVEFORM_ATTRIBUTESENTRY._serialized_options = b'8\001'
+  _DOUBLEANALOGWAVEFORM._serialized_start=101
+  _DOUBLEANALOGWAVEFORM._serialized_end=511
+  _DOUBLEANALOGWAVEFORM_ATTRIBUTESENTRY._serialized_start=419
+  _DOUBLEANALOGWAVEFORM_ATTRIBUTESENTRY._serialized_end=511
+  _I16ANALOGWAVEFORM._serialized_start=514
+  _I16ANALOGWAVEFORM._serialized_end=959
+  _I16ANALOGWAVEFORM_ATTRIBUTESENTRY._serialized_start=419
+  _I16ANALOGWAVEFORM_ATTRIBUTESENTRY._serialized_end=511
+  _DOUBLECOMPLEXWAVEFORM._serialized_start=962
+  _DOUBLECOMPLEXWAVEFORM._serialized_end=1374
+  _DOUBLECOMPLEXWAVEFORM_ATTRIBUTESENTRY._serialized_start=419
+  _DOUBLECOMPLEXWAVEFORM_ATTRIBUTESENTRY._serialized_end=511
+  _I16COMPLEXWAVEFORM._serialized_start=1377
+  _I16COMPLEXWAVEFORM._serialized_end=1824
+  _I16COMPLEXWAVEFORM_ATTRIBUTESENTRY._serialized_start=419
+  _I16COMPLEXWAVEFORM_ATTRIBUTESENTRY._serialized_end=511
+  _DOUBLESPECTRUM._serialized_start=1827
+  _DOUBLESPECTRUM._serialized_end=2076
+  _DOUBLESPECTRUM_ATTRIBUTESENTRY._serialized_start=419
+  _DOUBLESPECTRUM_ATTRIBUTESENTRY._serialized_end=511
+  _WAVEFORMATTRIBUTEVALUE._serialized_start=2079
+  _WAVEFORMATTRIBUTEVALUE._serialized_end=2211
+  _DIGITALWAVEFORM._serialized_start=2214
+  _DIGITALWAVEFORM._serialized_end=2636
+  _DIGITALWAVEFORM_ATTRIBUTESENTRY._serialized_start=419
+  _DIGITALWAVEFORM_ATTRIBUTESENTRY._serialized_end=511
+  _SCALE._serialized_start=2638
+  _SCALE._serialized_end=2709
+  _LINEARSCALE._serialized_start=2711
+  _LINEARSCALE._serialized_end=2754
+# @@protoc_insertion_point(module_scope)
+````
+
+<!--NI_OSS_SOURCE repo=ni-apis-python path=packages/ni.protobuf.types/src/ni/protobuf/types/waveform_pb2.pyi sha256=16c5477abd240c4bd5618153a2402ce382f30627034bc1dc96e5822796b49f40 bytes=28536 -->
+## FILE: packages/ni.protobuf.types/src/ni/protobuf/types/waveform_pb2.pyi
+
+- repository: `ni/ni-apis-python`
+- source_path: `packages/ni.protobuf.types/src/ni/protobuf/types/waveform_pb2.pyi`
+- sha256: `16c5477abd240c4bd5618153a2402ce382f30627034bc1dc96e5822796b49f40`
+- bytes: 28536
+
+````python
+"""
+@generated by mypy-protobuf.  Do not edit manually!
+isort:skip_file
+---------------------------------------------------------------------
+---------------------------------------------------------------------
+"""
+
+import builtins
+import collections.abc
+import google.protobuf.descriptor
+import google.protobuf.internal.containers
+import google.protobuf.message
+import ni.protobuf.types.precision_timestamp_pb2
+import typing
+
+DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
+
+@typing.final
+class DoubleAnalogWaveform(google.protobuf.message.Message):
+    """A double-precision analog waveform with timing and extended properties."""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    @typing.final
+    class AttributesEntry(google.protobuf.message.Message):
+        DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+        KEY_FIELD_NUMBER: builtins.int
+        VALUE_FIELD_NUMBER: builtins.int
+        key: builtins.str
+        @property
+        def value(self) -> global___WaveformAttributeValue: ...
+        def __init__(
+            self,
+            *,
+            key: builtins.str = ...,
+            value: global___WaveformAttributeValue | None = ...,
+        ) -> None: ...
+        def HasField(self, field_name: typing.Literal["value", b"value"]) -> builtins.bool: ...
+        def ClearField(self, field_name: typing.Literal["key", b"key", "value", b"value"]) -> None: ...
+
+    T0_FIELD_NUMBER: builtins.int
+    DT_FIELD_NUMBER: builtins.int
+    Y_DATA_FIELD_NUMBER: builtins.int
+    ATTRIBUTES_FIELD_NUMBER: builtins.int
+    TIMESTAMP_FIELD_NUMBER: builtins.int
+    TIME_OFFSET_FIELD_NUMBER: builtins.int
+    TIMESTAMPS_FIELD_NUMBER: builtins.int
+    dt: builtins.float
+    """The time interval in seconds between data points in the waveform."""
+    time_offset: builtins.float
+    """The offset, in seconds, relative to timestamp when the first sample occurs.
+
+    When setting time_offset, either both t0 and timestamp should remain unset
+    or both should be set such that t0 = timestamp + time_offset.
+    """
+    @property
+    def t0(self) -> ni.protobuf.types.precision_timestamp_pb2.PrecisionTimestamp:
+        """The time of the first sample in y_data.
+
+        Leave t0 unset only when the start time is unknown or when the waveform
+        has irregular timing and the timestamps field is used instead.
+        """
+
+    @property
+    def y_data(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.float]:
+        """The data values of the waveform."""
+
+    @property
+    def attributes(self) -> google.protobuf.internal.containers.MessageMap[builtins.str, global___WaveformAttributeValue]:
+        """Attribute names and values. See WaveformAttributeValue for more details."""
+
+    @property
+    def timestamp(self) -> ni.protobuf.types.precision_timestamp_pb2.PrecisionTimestamp:
+        """A timestamp denoting some external stimulus like a trigger.
+
+        When setting timestamp, you should also always set t0 and time_offset such
+        that t0 = timestamp + time_offset. If timestamp is unset, it is inferred
+        that timestamp is the same as t0.
+        """
+
+    @property
+    def timestamps(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[ni.protobuf.types.precision_timestamp_pb2.PrecisionTimestamp]:
+        """The timestamps for each sample in y_data.
+
+        The length of this field and y_data should match. This is for use in cases where
+        the waveform has irregular timing. This timestamps field is mutually exclusive
+        with t0/timestamp/time_offset/dt.
+        """
+
+    def __init__(
+        self,
+        *,
+        t0: ni.protobuf.types.precision_timestamp_pb2.PrecisionTimestamp | None = ...,
+        dt: builtins.float = ...,
+        y_data: collections.abc.Iterable[builtins.float] | None = ...,
+        attributes: collections.abc.Mapping[builtins.str, global___WaveformAttributeValue] | None = ...,
+        timestamp: ni.protobuf.types.precision_timestamp_pb2.PrecisionTimestamp | None = ...,
+        time_offset: builtins.float = ...,
+        timestamps: collections.abc.Iterable[ni.protobuf.types.precision_timestamp_pb2.PrecisionTimestamp] | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing.Literal["t0", b"t0", "timestamp", b"timestamp"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["attributes", b"attributes", "dt", b"dt", "t0", b"t0", "time_offset", b"time_offset", "timestamp", b"timestamp", "timestamps", b"timestamps", "y_data", b"y_data"]) -> None: ...
+
+global___DoubleAnalogWaveform = DoubleAnalogWaveform
+
+@typing.final
+class I16AnalogWaveform(google.protobuf.message.Message):
+    """A 16-bit integer analog waveform with timing and extended properties."""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    @typing.final
+    class AttributesEntry(google.protobuf.message.Message):
+        DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+        KEY_FIELD_NUMBER: builtins.int
+        VALUE_FIELD_NUMBER: builtins.int
+        key: builtins.str
+        @property
+        def value(self) -> global___WaveformAttributeValue: ...
+        def __init__(
+            self,
+            *,
+            key: builtins.str = ...,
+            value: global___WaveformAttributeValue | None = ...,
+        ) -> None: ...
+        def HasField(self, field_name: typing.Literal["value", b"value"]) -> builtins.bool: ...
+        def ClearField(self, field_name: typing.Literal["key", b"key", "value", b"value"]) -> None: ...
+
+    T0_FIELD_NUMBER: builtins.int
+    DT_FIELD_NUMBER: builtins.int
+    Y_DATA_FIELD_NUMBER: builtins.int
+    ATTRIBUTES_FIELD_NUMBER: builtins.int
+    SCALE_FIELD_NUMBER: builtins.int
+    TIMESTAMP_FIELD_NUMBER: builtins.int
+    TIME_OFFSET_FIELD_NUMBER: builtins.int
+    TIMESTAMPS_FIELD_NUMBER: builtins.int
+    dt: builtins.float
+    """The time interval in seconds between data points in the waveform."""
+    time_offset: builtins.float
+    """The offset, in seconds, relative to timestamp when the first sample occurs.
+
+    When setting time_offset, either both t0 and timestamp should remain unset
+    or both should be set such that t0 = timestamp + time_offset.
+    """
+    @property
+    def t0(self) -> ni.protobuf.types.precision_timestamp_pb2.PrecisionTimestamp:
+        """The time of the first sample in y_data.
+
+        Leave t0 unset only when the start time is unknown or when the waveform
+        has irregular timing and the timestamps field is used instead.
+        """
+
+    @property
+    def y_data(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]:
+        """The data values of the waveform."""
+
+    @property
+    def attributes(self) -> google.protobuf.internal.containers.MessageMap[builtins.str, global___WaveformAttributeValue]:
+        """Attribute names and values. See WaveformAttributeValue for more details."""
+
+    @property
+    def scale(self) -> global___Scale:
+        """Optional scaling information used to convert raw data to scaled data."""
+
+    @property
+    def timestamp(self) -> ni.protobuf.types.precision_timestamp_pb2.PrecisionTimestamp:
+        """A timestamp denoting some external stimulus like a trigger.
+
+        When setting timestamp, you should also always set t0 and time_offset such
+        that t0 = timestamp + time_offset. If timestamp is unset, it is inferred
+        that timestamp is the same as t0.
+        """
+
+    @property
+    def timestamps(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[ni.protobuf.types.precision_timestamp_pb2.PrecisionTimestamp]:
+        """The timestamps for each sample in y_data.
+
+        The length of this field and y_data should match. This is for use in cases where
+        the waveform has irregular timing. This timestamps field is mutually exclusive
+        with t0/timestamp/time_offset/dt.
+        """
+
+    def __init__(
+        self,
+        *,
+        t0: ni.protobuf.types.precision_timestamp_pb2.PrecisionTimestamp | None = ...,
+        dt: builtins.float = ...,
+        y_data: collections.abc.Iterable[builtins.int] | None = ...,
+        attributes: collections.abc.Mapping[builtins.str, global___WaveformAttributeValue] | None = ...,
+        scale: global___Scale | None = ...,
+        timestamp: ni.protobuf.types.precision_timestamp_pb2.PrecisionTimestamp | None = ...,
+        time_offset: builtins.float = ...,
+        timestamps: collections.abc.Iterable[ni.protobuf.types.precision_timestamp_pb2.PrecisionTimestamp] | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing.Literal["scale", b"scale", "t0", b"t0", "timestamp", b"timestamp"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["attributes", b"attributes", "dt", b"dt", "scale", b"scale", "t0", b"t0", "time_offset", b"time_offset", "timestamp", b"timestamp", "timestamps", b"timestamps", "y_data", b"y_data"]) -> None: ...
+
+global___I16AnalogWaveform = I16AnalogWaveform
+
+@typing.final
+class DoubleComplexWaveform(google.protobuf.message.Message):
+    """A double-precision complex waveform with timing and extended properties."""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    @typing.final
+    class AttributesEntry(google.protobuf.message.Message):
+        DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+        KEY_FIELD_NUMBER: builtins.int
+        VALUE_FIELD_NUMBER: builtins.int
+        key: builtins.str
+        @property
+        def value(self) -> global___WaveformAttributeValue: ...
+        def __init__(
+            self,
+            *,
+            key: builtins.str = ...,
+            value: global___WaveformAttributeValue | None = ...,
+        ) -> None: ...
+        def HasField(self, field_name: typing.Literal["value", b"value"]) -> builtins.bool: ...
+        def ClearField(self, field_name: typing.Literal["key", b"key", "value", b"value"]) -> None: ...
+
+    T0_FIELD_NUMBER: builtins.int
+    DT_FIELD_NUMBER: builtins.int
+    Y_DATA_FIELD_NUMBER: builtins.int
+    ATTRIBUTES_FIELD_NUMBER: builtins.int
+    TIMESTAMP_FIELD_NUMBER: builtins.int
+    TIME_OFFSET_FIELD_NUMBER: builtins.int
+    TIMESTAMPS_FIELD_NUMBER: builtins.int
+    dt: builtins.float
+    """The time interval in seconds between data points in the waveform."""
+    time_offset: builtins.float
+    """The offset, in seconds, relative to timestamp when the first sample occurs.
+
+    When setting time_offset, either both t0 and timestamp should remain unset
+    or both should be set such that t0 = timestamp + time_offset.
+    """
+    @property
+    def t0(self) -> ni.protobuf.types.precision_timestamp_pb2.PrecisionTimestamp:
+        """The time of the first sample in y_data.
+
+        Leave t0 unset only when the start time is unknown or when the waveform
+        has irregular timing and the timestamps field is used instead.
+        """
+
+    @property
+    def y_data(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.float]:
+        """The data values of the waveform.
+
+        This data consists of interleaved real and imaginary parts.
+        Example: [1.0+2.0j, 3.0+4.0j] is represented as [1.0, 2.0, 3.0, 4.0].
+        """
+
+    @property
+    def attributes(self) -> google.protobuf.internal.containers.MessageMap[builtins.str, global___WaveformAttributeValue]:
+        """Attribute names and values. See WaveformAttributeValue for more details."""
+
+    @property
+    def timestamp(self) -> ni.protobuf.types.precision_timestamp_pb2.PrecisionTimestamp:
+        """A timestamp denoting some external stimulus like a trigger.
+
+        When setting timestamp, you should also always set t0 and time_offset such
+        that t0 = timestamp + time_offset. If timestamp is unset, it is inferred
+        that timestamp is the same as t0.
+        """
+
+    @property
+    def timestamps(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[ni.protobuf.types.precision_timestamp_pb2.PrecisionTimestamp]:
+        """The timestamps for each sample in y_data.
+
+        The length of this field and y_data should match. This is for use in cases where
+        the waveform has irregular timing. This timestamps field is mutually exclusive
+        with t0/timestamp/time_offset/dt.
+        """
+
+    def __init__(
+        self,
+        *,
+        t0: ni.protobuf.types.precision_timestamp_pb2.PrecisionTimestamp | None = ...,
+        dt: builtins.float = ...,
+        y_data: collections.abc.Iterable[builtins.float] | None = ...,
+        attributes: collections.abc.Mapping[builtins.str, global___WaveformAttributeValue] | None = ...,
+        timestamp: ni.protobuf.types.precision_timestamp_pb2.PrecisionTimestamp | None = ...,
+        time_offset: builtins.float = ...,
+        timestamps: collections.abc.Iterable[ni.protobuf.types.precision_timestamp_pb2.PrecisionTimestamp] | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing.Literal["t0", b"t0", "timestamp", b"timestamp"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["attributes", b"attributes", "dt", b"dt", "t0", b"t0", "time_offset", b"time_offset", "timestamp", b"timestamp", "timestamps", b"timestamps", "y_data", b"y_data"]) -> None: ...
+
+global___DoubleComplexWaveform = DoubleComplexWaveform
+
+@typing.final
+class I16ComplexWaveform(google.protobuf.message.Message):
+    """A 16-bit integer complex waveform with timing and extended properties."""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    @typing.final
+    class AttributesEntry(google.protobuf.message.Message):
+        DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+        KEY_FIELD_NUMBER: builtins.int
+        VALUE_FIELD_NUMBER: builtins.int
+        key: builtins.str
+        @property
+        def value(self) -> global___WaveformAttributeValue: ...
+        def __init__(
+            self,
+            *,
+            key: builtins.str = ...,
+            value: global___WaveformAttributeValue | None = ...,
+        ) -> None: ...
+        def HasField(self, field_name: typing.Literal["value", b"value"]) -> builtins.bool: ...
+        def ClearField(self, field_name: typing.Literal["key", b"key", "value", b"value"]) -> None: ...
+
+    T0_FIELD_NUMBER: builtins.int
+    DT_FIELD_NUMBER: builtins.int
+    Y_DATA_FIELD_NUMBER: builtins.int
+    ATTRIBUTES_FIELD_NUMBER: builtins.int
+    SCALE_FIELD_NUMBER: builtins.int
+    TIMESTAMP_FIELD_NUMBER: builtins.int
+    TIME_OFFSET_FIELD_NUMBER: builtins.int
+    TIMESTAMPS_FIELD_NUMBER: builtins.int
+    dt: builtins.float
+    """The time interval in seconds between data points in the waveform."""
+    time_offset: builtins.float
+    """The offset, in seconds, relative to timestamp when the first sample occurs.
+
+    When setting time_offset, either both t0 and timestamp should remain unset
+    or both should be set such that t0 = timestamp + time_offset.
+    """
+    @property
+    def t0(self) -> ni.protobuf.types.precision_timestamp_pb2.PrecisionTimestamp:
+        """The time of the first sample in y_data.
+
+        Leave t0 unset only when the start time is unknown or when the waveform
+        has irregular timing and the timestamps field is used instead.
+        """
+
+    @property
+    def y_data(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]:
+        """The data values of the waveform.
+
+        This data consists of interleaved real and imaginary parts.
+        Example: [1+2j, 3+4j] is represented as [1, 2, 3, 4].
+        """
+
+    @property
+    def attributes(self) -> google.protobuf.internal.containers.MessageMap[builtins.str, global___WaveformAttributeValue]:
+        """Attribute names and values. See WaveformAttributeValue for more details."""
+
+    @property
+    def scale(self) -> global___Scale:
+        """Optional scaling information used to convert raw data to scaled data."""
+
+    @property
+    def timestamp(self) -> ni.protobuf.types.precision_timestamp_pb2.PrecisionTimestamp:
+        """A timestamp denoting some external stimulus like a trigger.
+
+        When setting timestamp, you should also always set t0 and time_offset such
+        that t0 = timestamp + time_offset. If timestamp is unset, it is inferred
+        that timestamp is the same as t0.
+        """
+
+    @property
+    def timestamps(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[ni.protobuf.types.precision_timestamp_pb2.PrecisionTimestamp]:
+        """The timestamps for each sample in y_data.
+
+        The length of this field and y_data should match. This is for use in cases where
+        the waveform has irregular timing. This timestamps field is mutually exclusive
+        with t0/timestamp/time_offset/dt.
+        """
+
+    def __init__(
+        self,
+        *,
+        t0: ni.protobuf.types.precision_timestamp_pb2.PrecisionTimestamp | None = ...,
+        dt: builtins.float = ...,
+        y_data: collections.abc.Iterable[builtins.int] | None = ...,
+        attributes: collections.abc.Mapping[builtins.str, global___WaveformAttributeValue] | None = ...,
+        scale: global___Scale | None = ...,
+        timestamp: ni.protobuf.types.precision_timestamp_pb2.PrecisionTimestamp | None = ...,
+        time_offset: builtins.float = ...,
+        timestamps: collections.abc.Iterable[ni.protobuf.types.precision_timestamp_pb2.PrecisionTimestamp] | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing.Literal["scale", b"scale", "t0", b"t0", "timestamp", b"timestamp"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["attributes", b"attributes", "dt", b"dt", "scale", b"scale", "t0", b"t0", "time_offset", b"time_offset", "timestamp", b"timestamp", "timestamps", b"timestamps", "y_data", b"y_data"]) -> None: ...
+
+global___I16ComplexWaveform = I16ComplexWaveform
+
+@typing.final
+class DoubleSpectrum(google.protobuf.message.Message):
+    """A double-precision frequency spectrum with extended properties."""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    @typing.final
+    class AttributesEntry(google.protobuf.message.Message):
+        DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+        KEY_FIELD_NUMBER: builtins.int
+        VALUE_FIELD_NUMBER: builtins.int
+        key: builtins.str
+        @property
+        def value(self) -> global___WaveformAttributeValue: ...
+        def __init__(
+            self,
+            *,
+            key: builtins.str = ...,
+            value: global___WaveformAttributeValue | None = ...,
+        ) -> None: ...
+        def HasField(self, field_name: typing.Literal["value", b"value"]) -> builtins.bool: ...
+        def ClearField(self, field_name: typing.Literal["key", b"key", "value", b"value"]) -> None: ...
+
+    START_FREQUENCY_FIELD_NUMBER: builtins.int
+    FREQUENCY_INCREMENT_FIELD_NUMBER: builtins.int
+    DATA_FIELD_NUMBER: builtins.int
+    ATTRIBUTES_FIELD_NUMBER: builtins.int
+    start_frequency: builtins.float
+    """The start frequency of the spectrum."""
+    frequency_increment: builtins.float
+    """The frequency increment of the spectrum."""
+    @property
+    def data(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.float]:
+        """The data values of the spectrum."""
+
+    @property
+    def attributes(self) -> google.protobuf.internal.containers.MessageMap[builtins.str, global___WaveformAttributeValue]:
+        """Attribute names and values. See WaveformAttributeValue for more details."""
+
+    def __init__(
+        self,
+        *,
+        start_frequency: builtins.float = ...,
+        frequency_increment: builtins.float = ...,
+        data: collections.abc.Iterable[builtins.float] | None = ...,
+        attributes: collections.abc.Mapping[builtins.str, global___WaveformAttributeValue] | None = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing.Literal["attributes", b"attributes", "data", b"data", "frequency_increment", b"frequency_increment", "start_frequency", b"start_frequency"]) -> None: ...
+
+global___DoubleSpectrum = DoubleSpectrum
+
+@typing.final
+class WaveformAttributeValue(google.protobuf.message.Message):
+    """Metadata attached to a waveform.
+
+    The NI-DAQmx driver sets the following string attributes:
+
+    - NI_ChannelName: the name of the virtual channel producing the waveform.
+    - NI_LineNames: the name of the digital line in the waveform.
+    - NI_UnitDescription: the units of measure for the waveform.
+    - NI_dBReference: the reference value to use when converting measurement levels to decibel.
+
+    For additional information on waveform attributes, please visit
+    https://www.ni.com/docs/en-US/bundle/labview-api-ref/page/functions/get-waveform-attribute.html
+    """
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    BOOL_VALUE_FIELD_NUMBER: builtins.int
+    INTEGER_VALUE_FIELD_NUMBER: builtins.int
+    DOUBLE_VALUE_FIELD_NUMBER: builtins.int
+    STRING_VALUE_FIELD_NUMBER: builtins.int
+    bool_value: builtins.bool
+    """Represents a bool attribute."""
+    integer_value: builtins.int
+    """Represents an integer attribute."""
+    double_value: builtins.float
+    """Represents a double attribute."""
+    string_value: builtins.str
+    """Represents a string attribute."""
+    def __init__(
+        self,
+        *,
+        bool_value: builtins.bool = ...,
+        integer_value: builtins.int = ...,
+        double_value: builtins.float = ...,
+        string_value: builtins.str = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing.Literal["attribute", b"attribute", "bool_value", b"bool_value", "double_value", b"double_value", "integer_value", b"integer_value", "string_value", b"string_value"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["attribute", b"attribute", "bool_value", b"bool_value", "double_value", b"double_value", "integer_value", b"integer_value", "string_value", b"string_value"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing.Literal["attribute", b"attribute"]) -> typing.Literal["bool_value", "integer_value", "double_value", "string_value"] | None: ...
+
+global___WaveformAttributeValue = WaveformAttributeValue
+
+@typing.final
+class DigitalWaveform(google.protobuf.message.Message):
+    """A digital waveform as bytes with timing and extended properties."""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    @typing.final
+    class AttributesEntry(google.protobuf.message.Message):
+        DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+        KEY_FIELD_NUMBER: builtins.int
+        VALUE_FIELD_NUMBER: builtins.int
+        key: builtins.str
+        @property
+        def value(self) -> global___WaveformAttributeValue: ...
+        def __init__(
+            self,
+            *,
+            key: builtins.str = ...,
+            value: global___WaveformAttributeValue | None = ...,
+        ) -> None: ...
+        def HasField(self, field_name: typing.Literal["value", b"value"]) -> builtins.bool: ...
+        def ClearField(self, field_name: typing.Literal["key", b"key", "value", b"value"]) -> None: ...
+
+    T0_FIELD_NUMBER: builtins.int
+    DT_FIELD_NUMBER: builtins.int
+    SIGNAL_COUNT_FIELD_NUMBER: builtins.int
+    Y_DATA_FIELD_NUMBER: builtins.int
+    ATTRIBUTES_FIELD_NUMBER: builtins.int
+    TIMESTAMP_FIELD_NUMBER: builtins.int
+    TIME_OFFSET_FIELD_NUMBER: builtins.int
+    TIMESTAMPS_FIELD_NUMBER: builtins.int
+    dt: builtins.float
+    """The time interval in seconds between data points in the waveform."""
+    signal_count: builtins.int
+    """The number of signals in each sample of data."""
+    y_data: builtins.bytes
+    """The data values of the waveform.
+
+    This data is a flattened array of bytes that are ordered such that each
+    signal_count bytes represents a sample.
+    """
+    time_offset: builtins.float
+    """The offset, in seconds, relative to timestamp when the first sample occurs.
+
+    When setting time_offset, either both t0 and timestamp should remain unset
+    or both should be set such that t0 = timestamp + time_offset.
+    """
+    @property
+    def t0(self) -> ni.protobuf.types.precision_timestamp_pb2.PrecisionTimestamp:
+        """The time of the first sample in y_data.
+
+        Leave t0 unset only when the start time is unknown or when the waveform
+        has irregular timing and the timestamps field is used instead.
+        """
+
+    @property
+    def attributes(self) -> google.protobuf.internal.containers.MessageMap[builtins.str, global___WaveformAttributeValue]:
+        """Attribute names and values. See WaveformAttributeValue for more details."""
+
+    @property
+    def timestamp(self) -> ni.protobuf.types.precision_timestamp_pb2.PrecisionTimestamp:
+        """A timestamp denoting some external stimulus like a trigger.
+
+        When setting timestamp, you should also always set t0 and time_offset such
+        that t0 = timestamp + time_offset. If timestamp is unset, it is inferred
+        that timestamp is the same as t0.
+        """
+
+    @property
+    def timestamps(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[ni.protobuf.types.precision_timestamp_pb2.PrecisionTimestamp]:
+        """The timestamps for each sample in y_data.
+
+        The length of this field and y_data should match. This is for use in cases where
+        the waveform has irregular timing. This timestamps field is mutually exclusive
+        with t0/timestamp/time_offset/dt.
+        """
+
+    def __init__(
+        self,
+        *,
+        t0: ni.protobuf.types.precision_timestamp_pb2.PrecisionTimestamp | None = ...,
+        dt: builtins.float = ...,
+        signal_count: builtins.int = ...,
+        y_data: builtins.bytes = ...,
+        attributes: collections.abc.Mapping[builtins.str, global___WaveformAttributeValue] | None = ...,
+        timestamp: ni.protobuf.types.precision_timestamp_pb2.PrecisionTimestamp | None = ...,
+        time_offset: builtins.float = ...,
+        timestamps: collections.abc.Iterable[ni.protobuf.types.precision_timestamp_pb2.PrecisionTimestamp] | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing.Literal["t0", b"t0", "timestamp", b"timestamp"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["attributes", b"attributes", "dt", b"dt", "signal_count", b"signal_count", "t0", b"t0", "time_offset", b"time_offset", "timestamp", b"timestamp", "timestamps", b"timestamps", "y_data", b"y_data"]) -> None: ...
+
+global___DigitalWaveform = DigitalWaveform
+
+@typing.final
+class Scale(google.protobuf.message.Message):
+    """Scaling information for converting unscaled waveform data to scaled data."""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    LINEAR_SCALE_FIELD_NUMBER: builtins.int
+    @property
+    def linear_scale(self) -> global___LinearScale: ...
+    def __init__(
+        self,
+        *,
+        linear_scale: global___LinearScale | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing.Literal["linear_scale", b"linear_scale", "mode", b"mode"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["linear_scale", b"linear_scale", "mode", b"mode"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing.Literal["mode", b"mode"]) -> typing.Literal["linear_scale"] | None: ...
+
+global___Scale = Scale
+
+@typing.final
+class LinearScale(google.protobuf.message.Message):
+    """A linear scale consisting of a gain and an offset."""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    GAIN_FIELD_NUMBER: builtins.int
+    OFFSET_FIELD_NUMBER: builtins.int
+    gain: builtins.float
+    """The gain of the linear scale"""
+    offset: builtins.float
+    """The offset of the linear scale"""
+    def __init__(
+        self,
+        *,
+        gain: builtins.float = ...,
+        offset: builtins.float = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing.Literal["gain", b"gain", "offset", b"offset"]) -> None: ...
+
+global___LinearScale = LinearScale
+````
+
+<!--NI_OSS_SOURCE repo=ni-apis-python path=packages/ni.protobuf.types/src/ni/protobuf/types/waveform_wrappers_pb2.py sha256=7696e8bb03a6583c7694385e1d9208ace60b247b1ed6cd4fd5f7ceb61254f7f9 bytes=2853 -->
+## FILE: packages/ni.protobuf.types/src/ni/protobuf/types/waveform_wrappers_pb2.py
+
+- repository: `ni/ni-apis-python`
+- source_path: `packages/ni.protobuf.types/src/ni/protobuf/types/waveform_wrappers_pb2.py`
+- sha256: `7696e8bb03a6583c7694385e1d9208ace60b247b1ed6cd4fd5f7ceb61254f7f9`
+- bytes: 2853
+
+````python
+# -*- coding: utf-8 -*-
+# Generated by the protocol buffer compiler.  DO NOT EDIT!
+# source: ni/protobuf/types/waveform_wrappers.proto
+"""Generated protocol buffer code."""
+from google.protobuf.internal import builder as _builder
+from google.protobuf import descriptor as _descriptor
+from google.protobuf import descriptor_pool as _descriptor_pool
+from google.protobuf import symbol_database as _symbol_database
+# @@protoc_insertion_point(imports)
+
+_sym_db = _symbol_database.Default()
+
+
+from ni.protobuf.types import waveform_pb2 as ni_dot_protobuf_dot_types_dot_waveform__pb2
+
+
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n)ni/protobuf/types/waveform_wrappers.proto\x12\x11ni.protobuf.types\x1a ni/protobuf/types/waveform.proto\"\\\n\x1e\x44oubleAnalogWaveformArrayValue\x12:\n\twaveforms\x18\x01 \x03(\x0b\x32\'.ni.protobuf.types.DoubleAnalogWaveform\"V\n\x1bI16AnalogWaveformArrayValue\x12\x37\n\twaveforms\x18\x01 \x03(\x0b\x32$.ni.protobuf.types.I16AnalogWaveform\"^\n\x1f\x44oubleComplexWaveformArrayValue\x12;\n\twaveforms\x18\x01 \x03(\x0b\x32(.ni.protobuf.types.DoubleComplexWaveform\"X\n\x1cI16ComplexWaveformArrayValue\x12\x38\n\twaveforms\x18\x01 \x03(\x0b\x32%.ni.protobuf.types.I16ComplexWaveform\"P\n\x18\x44oubleSpectrumArrayValue\x12\x34\n\twaveforms\x18\x01 \x03(\x0b\x32!.ni.protobuf.types.DoubleSpectrum\"R\n\x19\x44igitalWaveformArrayValue\x12\x35\n\twaveforms\x18\x01 \x03(\x0b\x32\".ni.protobuf.types.DigitalWaveformB\x8d\x01\n\x15\x63om.ni.protobuf.typesB\x15WaveformWrappersProtoP\x01Z\x05types\xa2\x02\x04NIPT\xaa\x02\"NationalInstruments.Protobuf.Types\xca\x02\x11NI\\PROTOBUF\\TYPES\xea\x02\x13NI::Protobuf::Typesb\x06proto3')
+
+_builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, globals())
+_builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'ni.protobuf.types.waveform_wrappers_pb2', globals())
+if _descriptor._USE_C_DESCRIPTORS == False:
+
+  DESCRIPTOR._options = None
+  DESCRIPTOR._serialized_options = b'\n\025com.ni.protobuf.typesB\025WaveformWrappersProtoP\001Z\005types\242\002\004NIPT\252\002\"NationalInstruments.Protobuf.Types\312\002\021NI\\PROTOBUF\\TYPES\352\002\023NI::Protobuf::Types'
+  _DOUBLEANALOGWAVEFORMARRAYVALUE._serialized_start=98
+  _DOUBLEANALOGWAVEFORMARRAYVALUE._serialized_end=190
+  _I16ANALOGWAVEFORMARRAYVALUE._serialized_start=192
+  _I16ANALOGWAVEFORMARRAYVALUE._serialized_end=278
+  _DOUBLECOMPLEXWAVEFORMARRAYVALUE._serialized_start=280
+  _DOUBLECOMPLEXWAVEFORMARRAYVALUE._serialized_end=374
+  _I16COMPLEXWAVEFORMARRAYVALUE._serialized_start=376
+  _I16COMPLEXWAVEFORMARRAYVALUE._serialized_end=464
+  _DOUBLESPECTRUMARRAYVALUE._serialized_start=466
+  _DOUBLESPECTRUMARRAYVALUE._serialized_end=546
+  _DIGITALWAVEFORMARRAYVALUE._serialized_start=548
+  _DIGITALWAVEFORMARRAYVALUE._serialized_end=630
+# @@protoc_insertion_point(module_scope)
+````
+
+<!--NI_OSS_SOURCE repo=ni-apis-python path=packages/ni.protobuf.types/src/ni/protobuf/types/waveform_wrappers_pb2.pyi sha256=9b87e795baca9ba6dd9ca2295f80ab6b72de36a84304263d85f581e926ef24e7 bytes=4970 -->
+## FILE: packages/ni.protobuf.types/src/ni/protobuf/types/waveform_wrappers_pb2.pyi
+
+- repository: `ni/ni-apis-python`
+- source_path: `packages/ni.protobuf.types/src/ni/protobuf/types/waveform_wrappers_pb2.pyi`
+- sha256: `9b87e795baca9ba6dd9ca2295f80ab6b72de36a84304263d85f581e926ef24e7`
+- bytes: 4970
+
+````python
+"""
+@generated by mypy-protobuf.  Do not edit manually!
+isort:skip_file
+---------------------------------------------------------------------
+---------------------------------------------------------------------
+"""
+
+import builtins
+import collections.abc
+import google.protobuf.descriptor
+import google.protobuf.internal.containers
+import google.protobuf.message
+import ni.protobuf.types.waveform_pb2
+import typing
+
+DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
+
+@typing.final
+class DoubleAnalogWaveformArrayValue(google.protobuf.message.Message):
+    """An array of double-precision analog waveforms."""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    WAVEFORMS_FIELD_NUMBER: builtins.int
+    @property
+    def waveforms(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[ni.protobuf.types.waveform_pb2.DoubleAnalogWaveform]: ...
+    def __init__(
+        self,
+        *,
+        waveforms: collections.abc.Iterable[ni.protobuf.types.waveform_pb2.DoubleAnalogWaveform] | None = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing.Literal["waveforms", b"waveforms"]) -> None: ...
+
+global___DoubleAnalogWaveformArrayValue = DoubleAnalogWaveformArrayValue
+
+@typing.final
+class I16AnalogWaveformArrayValue(google.protobuf.message.Message):
+    """An array of 16-bit integer waveforms."""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    WAVEFORMS_FIELD_NUMBER: builtins.int
+    @property
+    def waveforms(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[ni.protobuf.types.waveform_pb2.I16AnalogWaveform]: ...
+    def __init__(
+        self,
+        *,
+        waveforms: collections.abc.Iterable[ni.protobuf.types.waveform_pb2.I16AnalogWaveform] | None = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing.Literal["waveforms", b"waveforms"]) -> None: ...
+
+global___I16AnalogWaveformArrayValue = I16AnalogWaveformArrayValue
+
+@typing.final
+class DoubleComplexWaveformArrayValue(google.protobuf.message.Message):
+    """An array of double-precision complex waveforms."""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    WAVEFORMS_FIELD_NUMBER: builtins.int
+    @property
+    def waveforms(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[ni.protobuf.types.waveform_pb2.DoubleComplexWaveform]: ...
+    def __init__(
+        self,
+        *,
+        waveforms: collections.abc.Iterable[ni.protobuf.types.waveform_pb2.DoubleComplexWaveform] | None = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing.Literal["waveforms", b"waveforms"]) -> None: ...
+
+global___DoubleComplexWaveformArrayValue = DoubleComplexWaveformArrayValue
+
+@typing.final
+class I16ComplexWaveformArrayValue(google.protobuf.message.Message):
+    """An array of 16-bit integer complex waveforms."""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    WAVEFORMS_FIELD_NUMBER: builtins.int
+    @property
+    def waveforms(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[ni.protobuf.types.waveform_pb2.I16ComplexWaveform]: ...
+    def __init__(
+        self,
+        *,
+        waveforms: collections.abc.Iterable[ni.protobuf.types.waveform_pb2.I16ComplexWaveform] | None = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing.Literal["waveforms", b"waveforms"]) -> None: ...
+
+global___I16ComplexWaveformArrayValue = I16ComplexWaveformArrayValue
+
+@typing.final
+class DoubleSpectrumArrayValue(google.protobuf.message.Message):
+    """An array of double-precision spectrums."""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    WAVEFORMS_FIELD_NUMBER: builtins.int
+    @property
+    def waveforms(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[ni.protobuf.types.waveform_pb2.DoubleSpectrum]: ...
+    def __init__(
+        self,
+        *,
+        waveforms: collections.abc.Iterable[ni.protobuf.types.waveform_pb2.DoubleSpectrum] | None = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing.Literal["waveforms", b"waveforms"]) -> None: ...
+
+global___DoubleSpectrumArrayValue = DoubleSpectrumArrayValue
+
+@typing.final
+class DigitalWaveformArrayValue(google.protobuf.message.Message):
+    """An array of digital waveforms."""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    WAVEFORMS_FIELD_NUMBER: builtins.int
+    @property
+    def waveforms(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[ni.protobuf.types.waveform_pb2.DigitalWaveform]: ...
+    def __init__(
+        self,
+        *,
+        waveforms: collections.abc.Iterable[ni.protobuf.types.waveform_pb2.DigitalWaveform] | None = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing.Literal["waveforms", b"waveforms"]) -> None: ...
+
+global___DigitalWaveformArrayValue = DigitalWaveformArrayValue
+````
+
+<!--NI_OSS_SOURCE repo=ni-apis-python path=packages/ni.protobuf.types/src/ni/protobuf/types/xydata_conversion.py sha256=1be7e0a3a99abfa8bbf6435423a0da78a6e0126f7b8fff2e3d27f9d5e3dd8e20 bytes=1249 -->
+## FILE: packages/ni.protobuf.types/src/ni/protobuf/types/xydata_conversion.py
+
+- repository: `ni/ni-apis-python`
+- source_path: `packages/ni.protobuf.types/src/ni/protobuf/types/xydata_conversion.py`
+- sha256: `1be7e0a3a99abfa8bbf6435423a0da78a6e0126f7b8fff2e3d27f9d5e3dd8e20`
+- bytes: 1249
+
+````python
+"""Methods to convert to and from DoubleXYData protobuf messages."""
+
+from __future__ import annotations
+
+import numpy as np
+from nitypes.xy_data import XYData
+
+from ni.protobuf.types import xydata_pb2
+from ni.protobuf.types.extended_property_conversion import (
+    extended_properties_from_protobuf,
+    extended_properties_to_protobuf,
+)
+
+
+def float64_xydata_to_protobuf(value: XYData[np.float64], /) -> xydata_pb2.DoubleXYData:
+    """Convert a XYData python object to a protobuf xydata_pb2.DoubleXYData."""
+    attributes = extended_properties_to_protobuf(value.extended_properties)
+    xydata_message = xydata_pb2.DoubleXYData(
+        x_data=value.x_data,
+        y_data=value.y_data,
+        attributes=attributes,
+    )
+    return xydata_message
+
+
+def float64_xydata_from_protobuf(message: xydata_pb2.DoubleXYData, /) -> XYData[np.float64]:
+    """Convert the protobuf xydata_pb2.DoubleXYData to a Python XYData."""
+    xydata = XYData.from_arrays_1d(
+        x_array=message.x_data,
+        y_array=message.y_data,
+        dtype=np.float64,
+    )
+
+    # Transfer attributes to extended_properties
+    extended_properties_from_protobuf(message.attributes, xydata.extended_properties)
+
+    return xydata
+````
+
+<!--NI_OSS_SOURCE repo=ni-apis-python path=packages/ni.protobuf.types/src/ni/protobuf/types/xydata_pb2.py sha256=639936e735f2f5a0d823410d34853343cc059f8d0c7e72b7784a00e2017fcabf bytes=2122 -->
+## FILE: packages/ni.protobuf.types/src/ni/protobuf/types/xydata_pb2.py
+
+- repository: `ni/ni-apis-python`
+- source_path: `packages/ni.protobuf.types/src/ni/protobuf/types/xydata_pb2.py`
+- sha256: `639936e735f2f5a0d823410d34853343cc059f8d0c7e72b7784a00e2017fcabf`
+- bytes: 2122
+
+````python
+# -*- coding: utf-8 -*-
+# Generated by the protocol buffer compiler.  DO NOT EDIT!
+# source: ni/protobuf/types/xydata.proto
+"""Generated protocol buffer code."""
+from google.protobuf.internal import builder as _builder
+from google.protobuf import descriptor as _descriptor
+from google.protobuf import descriptor_pool as _descriptor_pool
+from google.protobuf import symbol_database as _symbol_database
+# @@protoc_insertion_point(imports)
+
+_sym_db = _symbol_database.Default()
+
+
+from ni.protobuf.types import attribute_value_pb2 as ni_dot_protobuf_dot_types_dot_attribute__value__pb2
+
+
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x1eni/protobuf/types/xydata.proto\x12\x11ni.protobuf.types\x1a\'ni/protobuf/types/attribute_value.proto\"\xc9\x01\n\x0c\x44oubleXYData\x12\x0e\n\x06x_data\x18\x01 \x03(\x01\x12\x0e\n\x06y_data\x18\x02 \x03(\x01\x12\x43\n\nattributes\x18\x03 \x03(\x0b\x32/.ni.protobuf.types.DoubleXYData.AttributesEntry\x1aT\n\x0f\x41ttributesEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\x30\n\x05value\x18\x02 \x01(\x0b\x32!.ni.protobuf.types.AttributeValue:\x02\x38\x01\x42\x83\x01\n\x15\x63om.ni.protobuf.typesB\x0bXYDataProtoP\x01Z\x05types\xa2\x02\x04NIPT\xaa\x02\"NationalInstruments.Protobuf.Types\xca\x02\x11NI\\PROTOBUF\\TYPES\xea\x02\x13NI::Protobuf::Typesb\x06proto3')
+
+_builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, globals())
+_builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'ni.protobuf.types.xydata_pb2', globals())
+if _descriptor._USE_C_DESCRIPTORS == False:
+
+  DESCRIPTOR._options = None
+  DESCRIPTOR._serialized_options = b'\n\025com.ni.protobuf.typesB\013XYDataProtoP\001Z\005types\242\002\004NIPT\252\002\"NationalInstruments.Protobuf.Types\312\002\021NI\\PROTOBUF\\TYPES\352\002\023NI::Protobuf::Types'
+  _DOUBLEXYDATA_ATTRIBUTESENTRY._options = None
+  _DOUBLEXYDATA_ATTRIBUTESENTRY._serialized_options = b'8\001'
+  _DOUBLEXYDATA._serialized_start=95
+  _DOUBLEXYDATA._serialized_end=296
+  _DOUBLEXYDATA_ATTRIBUTESENTRY._serialized_start=212
+  _DOUBLEXYDATA_ATTRIBUTESENTRY._serialized_end=296
+# @@protoc_insertion_point(module_scope)
+````
+
+<!--NI_OSS_SOURCE repo=ni-apis-python path=packages/ni.protobuf.types/src/ni/protobuf/types/xydata_pb2.pyi sha256=81ae5409ecd3e01cf10d858621bdce715173f57fec6842fdd45888992d0c6a72 bytes=2930 -->
+## FILE: packages/ni.protobuf.types/src/ni/protobuf/types/xydata_pb2.pyi
+
+- repository: `ni/ni-apis-python`
+- source_path: `packages/ni.protobuf.types/src/ni/protobuf/types/xydata_pb2.pyi`
+- sha256: `81ae5409ecd3e01cf10d858621bdce715173f57fec6842fdd45888992d0c6a72`
+- bytes: 2930
+
+````python
+"""
+@generated by mypy-protobuf.  Do not edit manually!
+isort:skip_file
+---------------------------------------------------------------------
+---------------------------------------------------------------------
+"""
+
+import builtins
+import collections.abc
+import google.protobuf.descriptor
+import google.protobuf.internal.containers
+import google.protobuf.message
+import ni.protobuf.types.attribute_value_pb2
+import typing
+
+DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
+
+@typing.final
+class DoubleXYData(google.protobuf.message.Message):
+    """XYData for a cartesian graph.
+
+    x_data and y_data should contain the same number of values.
+    If they do not, the smaller-sized array will be used to determine
+    the number of XY points.
+    """
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    @typing.final
+    class AttributesEntry(google.protobuf.message.Message):
+        DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+        KEY_FIELD_NUMBER: builtins.int
+        VALUE_FIELD_NUMBER: builtins.int
+        key: builtins.str
+        @property
+        def value(self) -> ni.protobuf.types.attribute_value_pb2.AttributeValue: ...
+        def __init__(
+            self,
+            *,
+            key: builtins.str = ...,
+            value: ni.protobuf.types.attribute_value_pb2.AttributeValue | None = ...,
+        ) -> None: ...
+        def HasField(self, field_name: typing.Literal["value", b"value"]) -> builtins.bool: ...
+        def ClearField(self, field_name: typing.Literal["key", b"key", "value", b"value"]) -> None: ...
+
+    X_DATA_FIELD_NUMBER: builtins.int
+    Y_DATA_FIELD_NUMBER: builtins.int
+    ATTRIBUTES_FIELD_NUMBER: builtins.int
+    @property
+    def x_data(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.float]: ...
+    @property
+    def y_data(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.float]: ...
+    @property
+    def attributes(self) -> google.protobuf.internal.containers.MessageMap[builtins.str, ni.protobuf.types.attribute_value_pb2.AttributeValue]:
+        """The names and values of all xy data attributes.
+
+        An attribute is metadata attached to a xy data.
+        It is represented in this message as a map associating the name of
+        the attribute with the value described by AttributeValue.
+        """
+
+    def __init__(
+        self,
+        *,
+        x_data: collections.abc.Iterable[builtins.float] | None = ...,
+        y_data: collections.abc.Iterable[builtins.float] | None = ...,
+        attributes: collections.abc.Mapping[builtins.str, ni.protobuf.types.attribute_value_pb2.AttributeValue] | None = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing.Literal["attributes", b"attributes", "x_data", b"x_data", "y_data", b"y_data"]) -> None: ...
+
+global___DoubleXYData = DoubleXYData
+````
+
+<!--NI_OSS_SOURCE repo=ni-apis-python path=packages/ni.protobuf.types/src/ni/protobuf/types/xydata_wrappers_pb2.py sha256=9ff5bd8e39856c85ddbb472d1d282c1e03bb1b1798f4fd262777a569d375a140 bytes=1697 -->
+## FILE: packages/ni.protobuf.types/src/ni/protobuf/types/xydata_wrappers_pb2.py
+
+- repository: `ni/ni-apis-python`
+- source_path: `packages/ni.protobuf.types/src/ni/protobuf/types/xydata_wrappers_pb2.py`
+- sha256: `9ff5bd8e39856c85ddbb472d1d282c1e03bb1b1798f4fd262777a569d375a140`
+- bytes: 1697
+
+````python
+# -*- coding: utf-8 -*-
+# Generated by the protocol buffer compiler.  DO NOT EDIT!
+# source: ni/protobuf/types/xydata_wrappers.proto
+"""Generated protocol buffer code."""
+from google.protobuf.internal import builder as _builder
+from google.protobuf import descriptor as _descriptor
+from google.protobuf import descriptor_pool as _descriptor_pool
+from google.protobuf import symbol_database as _symbol_database
+# @@protoc_insertion_point(imports)
+
+_sym_db = _symbol_database.Default()
+
+
+from ni.protobuf.types import xydata_pb2 as ni_dot_protobuf_dot_types_dot_xydata__pb2
+
+
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\'ni/protobuf/types/xydata_wrappers.proto\x12\x11ni.protobuf.types\x1a\x1eni/protobuf/types/xydata.proto\"K\n\x16\x44oubleXYDataArrayValue\x12\x31\n\x08x_y_data\x18\x01 \x03(\x0b\x32\x1f.ni.protobuf.types.DoubleXYDataB\x8b\x01\n\x15\x63om.ni.protobuf.typesB\x13XYDataWrappersProtoP\x01Z\x05types\xa2\x02\x04NIPT\xaa\x02\"NationalInstruments.Protobuf.Types\xca\x02\x11NI\\PROTOBUF\\TYPES\xea\x02\x13NI::Protobuf::Typesb\x06proto3')
+
+_builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, globals())
+_builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'ni.protobuf.types.xydata_wrappers_pb2', globals())
+if _descriptor._USE_C_DESCRIPTORS == False:
+
+  DESCRIPTOR._options = None
+  DESCRIPTOR._serialized_options = b'\n\025com.ni.protobuf.typesB\023XYDataWrappersProtoP\001Z\005types\242\002\004NIPT\252\002\"NationalInstruments.Protobuf.Types\312\002\021NI\\PROTOBUF\\TYPES\352\002\023NI::Protobuf::Types'
+  _DOUBLEXYDATAARRAYVALUE._serialized_start=94
+  _DOUBLEXYDATAARRAYVALUE._serialized_end=169
+# @@protoc_insertion_point(module_scope)
+````
+
+<!--NI_OSS_SOURCE repo=ni-apis-python path=packages/ni.protobuf.types/src/ni/protobuf/types/xydata_wrappers_pb2.pyi sha256=54065722f87733d2f205ce01f546ae73f7fdd78110e42982ab272c5d87d549ab bytes=1180 -->
+## FILE: packages/ni.protobuf.types/src/ni/protobuf/types/xydata_wrappers_pb2.pyi
+
+- repository: `ni/ni-apis-python`
+- source_path: `packages/ni.protobuf.types/src/ni/protobuf/types/xydata_wrappers_pb2.pyi`
+- sha256: `54065722f87733d2f205ce01f546ae73f7fdd78110e42982ab272c5d87d549ab`
+- bytes: 1180
+
+````python
+"""
+@generated by mypy-protobuf.  Do not edit manually!
+isort:skip_file
+---------------------------------------------------------------------
+---------------------------------------------------------------------
+"""
+
+import builtins
+import collections.abc
+import google.protobuf.descriptor
+import google.protobuf.internal.containers
+import google.protobuf.message
+import ni.protobuf.types.xydata_pb2
+import typing
+
+DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
+
+@typing.final
+class DoubleXYDataArrayValue(google.protobuf.message.Message):
+    """An array of XY data sets."""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    X_Y_DATA_FIELD_NUMBER: builtins.int
+    @property
+    def x_y_data(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[ni.protobuf.types.xydata_pb2.DoubleXYData]: ...
+    def __init__(
+        self,
+        *,
+        x_y_data: collections.abc.Iterable[ni.protobuf.types.xydata_pb2.DoubleXYData] | None = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing.Literal["x_y_data", b"x_y_data"]) -> None: ...
+
+global___DoubleXYDataArrayValue = DoubleXYDataArrayValue
+````
+
+<!--NI_OSS_SOURCE repo=ni-apis-python path=packages/ni.protobuf.types/tests/__init__.py sha256=6b33b81a25604bb7f21d39baec4e37d2c63af67462dd9943cbd6fe02d104cf60 bytes=48 -->
+## FILE: packages/ni.protobuf.types/tests/__init__.py
+
+- repository: `ni/ni-apis-python`
+- source_path: `packages/ni.protobuf.types/tests/__init__.py`
+- sha256: `6b33b81a25604bb7f21d39baec4e37d2c63af67462dd9943cbd6fe02d104cf60`
+- bytes: 48
+
+````python
+"""Tests for the ni.protobuf.types package."""
+````
+
+<!--NI_OSS_SOURCE repo=ni-apis-python path=packages/ni.protobuf.types/tests/unit/__init__.py sha256=a905389e063e2a373169f6ba996bd9987465f2047647435988b637e6a7524a3b bytes=35 -->
+## FILE: packages/ni.protobuf.types/tests/unit/__init__.py
+
+- repository: `ni/ni-apis-python`
+- source_path: `packages/ni.protobuf.types/tests/unit/__init__.py`
+- sha256: `a905389e063e2a373169f6ba996bd9987465f2047647435988b637e6a7524a3b`
+- bytes: 35
+
+````python
+"""Unit tests for the package."""
+````
+
+<!--NI_OSS_SOURCE repo=ni-apis-python path=packages/ni.protobuf.types/tests/unit/base_waveform_conversion_tests.py sha256=509605160729b61732a74defc73b8fac38308625f70a028f8a48b23c3627356d bytes=21508 -->
+## FILE: packages/ni.protobuf.types/tests/unit/base_waveform_conversion_tests.py
+
+- repository: `ni/ni-apis-python`
+- source_path: `packages/ni.protobuf.types/tests/unit/base_waveform_conversion_tests.py`
+- sha256: `509605160729b61732a74defc73b8fac38308625f70a028f8a48b23c3627356d`
+- bytes: 21508
+
+````python
+"""Unit tests for conversion of the timing aspects of various types of waveforms."""
+
+import datetime as dt
+from abc import ABC, abstractmethod
+from collections.abc import Mapping
+from typing import runtime_checkable, Generic, Protocol, TypeVar
+
+import hightime as ht
+import nitypes.bintime as bt
+import pytest
+from nitypes.time import convert_datetime
+from nitypes.waveform import (
+    AnalogWaveform,
+    ComplexWaveform,
+    LinearScaleMode,
+    NoneScaleMode,
+    SampleIntervalMode,
+    ScaleMode,
+    Timing,
+)
+
+from ni.protobuf.types.precision_timestamp_conversion import (
+    bintime_datetime_to_protobuf,
+)
+from ni.protobuf.types.precision_timestamp_pb2 import PrecisionTimestamp
+from ni.protobuf.types.waveform_conversion import AnyNiWaveform, AnyWaveformProto
+from ni.protobuf.types.waveform_pb2 import (
+    LinearScale,
+    Scale,
+    WaveformAttributeValue,
+)
+
+TWaveform = TypeVar("TWaveform", bound=AnyNiWaveform)
+TWaveformProto = TypeVar("TWaveformProto", bound=AnyWaveformProto)
+
+
+# ========================================================
+# Base class
+# ========================================================
+class BaseWaveformConversionTests(ABC, Generic[TWaveform, TWaveformProto]):
+    """Base class for testing waveform conversion.
+
+    Subclasses implement more specific or typed waveform conversion tests.
+    """
+
+    @abstractmethod
+    def make_waveform(self) -> TWaveform:
+        """Create a waveform with small non-zero sample data."""
+        ...
+
+    @abstractmethod
+    def make_waveform_proto(
+        self,
+        attributes: Mapping[str, WaveformAttributeValue] | None = None,
+        scale: Scale | None = None,
+    ) -> TWaveformProto:
+        """Create a waveform protobuf object with small non-zero sample data."""
+        ...
+
+    @abstractmethod
+    def to_protobuf(self, waveform: TWaveform) -> TWaveformProto:
+        """Convert a Python waveform to its corresponding proto message."""
+        ...
+
+    @abstractmethod
+    def from_protobuf(self, waveform_proto: TWaveformProto) -> TWaveform:
+        """Convert a proto message to the corresponding Python waveform."""
+        ...
+
+    # ========================================================
+    # To Protobuf
+    # ========================================================
+    def test___waveform_with_standard_timing___convert___valid_protobuf(  # noqa D102: Missing docstring in public method
+        self,
+    ) -> None:
+        waveform = self.make_waveform()
+        t0_dt = dt.datetime(2000, 12, 1, tzinfo=dt.timezone.utc)
+        sample_interval_seconds = 1.5
+        waveform.timing = Timing.create_with_regular_interval(
+            sample_interval=dt.timedelta(seconds=sample_interval_seconds),
+            timestamp=t0_dt,
+        )
+
+        waveform_proto = self.to_protobuf(waveform)
+
+        self._assert_proto_standard_timing(waveform_proto, t0_dt, sample_interval_seconds)
+
+    def test___waveform_with_standard_timing_and_offset___convert___valid_protobuf(  # noqa D102: Missing docstring in public method
+        self,
+    ) -> None:
+        waveform = self.make_waveform()
+        t0_dt = dt.datetime(2000, 12, 1, tzinfo=dt.timezone.utc)
+        sample_interval_seconds = 2.5
+        sample_interval = dt.timedelta(seconds=sample_interval_seconds)
+        time_offset = dt.timedelta(seconds=0.5)
+        waveform.timing = Timing.create_with_regular_interval(
+            sample_interval=sample_interval,
+            timestamp=t0_dt,
+            time_offset=time_offset,
+        )
+
+        waveform_proto = self.to_protobuf(waveform)
+
+        self._assert_proto_standard_timing_with_offset(
+            waveform_proto, t0_dt, time_offset, sample_interval_seconds
+        )
+
+    def test___waveform_with_standard_timing___round_trip___waveforms_match(  # noqa D102: Missing docstring in public method
+        self,
+    ) -> None:
+        waveform = self.make_waveform()
+        t0_dt = dt.datetime(2000, 12, 1, tzinfo=dt.timezone.utc)
+        sample_interval = dt.timedelta(seconds=1.5)
+        time_offset = dt.timedelta(seconds=2.3)
+        waveform.timing = Timing.create_with_regular_interval(
+            sample_interval=sample_interval,
+            timestamp=t0_dt,
+            time_offset=time_offset,
+        )
+
+        waveform_proto = self.to_protobuf(waveform)
+        converted_waveform = self.from_protobuf(waveform_proto)
+
+        assert waveform == converted_waveform
+
+    def test___waveform_with_irregular_timing___convert___valid_protobuf(  # noqa D102: Missing docstring in public method
+        self,
+    ) -> None:
+        waveform = self.make_waveform()
+        t0_dt = dt.datetime(2000, 12, 1, tzinfo=dt.timezone.utc)
+        timestamps = [
+            t0_dt,
+            t0_dt + dt.timedelta(seconds=1.5),
+        ]
+        waveform.timing = Timing.create_with_irregular_interval(timestamps)
+
+        waveform_proto = self.to_protobuf(waveform)
+
+        assert list(waveform_proto.timestamps) == self._to_proto_timestamps(timestamps)
+
+    @pytest.mark.parametrize(
+        "timestamp_seconds, time_offset",
+        [
+            (0, 0),
+            (0, 10.5),
+            (100.5, 10.5),
+            (100.5, 0),
+        ],
+    )
+    def test___waveform_with_regular_timing___round_trip___waveforms_match(  # noqa D102: Missing docstring in public method
+        self, timestamp_seconds: float, time_offset: float
+    ) -> None:
+        sample_interval = 1  # Regular interval of 1s
+        if timestamp_seconds:
+            timestamp = convert_datetime(
+                bt.DateTime, dt.datetime.fromtimestamp(timestamp_seconds, tz=dt.timezone.utc)
+            )
+        else:
+            timestamp = None
+        waveform = self.make_waveform()
+        waveform.timing = Timing.create_with_regular_interval(
+            sample_interval=ht.timedelta(seconds=sample_interval),
+            timestamp=timestamp,
+            time_offset=ht.timedelta(seconds=time_offset),
+        )
+        if isinstance(waveform, SupportsScaleMode):
+            waveform.scale_mode = NoneScaleMode()
+
+        waveform_proto = self.to_protobuf(waveform)
+        converted_waveform = self.from_protobuf(waveform_proto)
+
+        assert waveform == converted_waveform
+
+    @pytest.mark.parametrize(
+        "timestamp_seconds, time_offset",
+        [
+            (0, 0),
+            (0, 10.5),
+            (100.5, 10.5),
+            (100.5, 0),
+        ],
+    )
+    def test___waveform_with_none_timing___round_trip___waveforms_match(  # noqa D102: Missing docstring in public method
+        self, timestamp_seconds: int, time_offset: float
+    ) -> None:
+        if timestamp_seconds:
+            timestamp = convert_datetime(
+                bt.DateTime, dt.datetime.fromtimestamp(timestamp_seconds, tz=dt.timezone.utc)
+            )
+        else:
+            timestamp = None
+        waveform = self.make_waveform()
+        waveform.timing = Timing.create_with_no_interval(
+            timestamp=timestamp,
+            time_offset=ht.timedelta(seconds=time_offset),
+        )
+        if isinstance(waveform, SupportsScaleMode):
+            waveform.scale_mode = NoneScaleMode()
+
+        waveform_proto = self.to_protobuf(waveform)
+        converted_waveform = self.from_protobuf(waveform_proto)
+
+        assert waveform == converted_waveform
+
+    def test___waveform_with_extended_properties___convert___valid_protobuf(self) -> None:  # noqa D102: Missing docstring in public method
+        waveform = self.make_waveform()
+        waveform.extended_properties["NI_ChannelName"] = "Dev1/ai0"
+        waveform.extended_properties["NI_UnitDescription"] = "Volts"
+
+        dbl_analog_waveform = self.to_protobuf(waveform)
+
+        assert dbl_analog_waveform.attributes["NI_ChannelName"].string_value == "Dev1/ai0"
+        assert dbl_analog_waveform.attributes["NI_UnitDescription"].string_value == "Volts"
+
+    def test____waveform_with_scaling___convert___valid_protobuf(self) -> None:  # noqa D102: Missing docstring in public method
+        scale_mode = LinearScaleMode(2.0, 3.0)
+        waveform = self.make_waveform()
+        waveform_with_scale_mode = waveform  # Use a second variable to get around mypy issue.
+        if not isinstance(waveform_with_scale_mode, SupportsScaleMode):
+            pytest.skip("Waveform type does not support scaling")
+        waveform_with_scale_mode.scale_mode = scale_mode
+
+        waveform_proto = self.to_protobuf(waveform)
+
+        # The SupportsScaleMode check above is not sufficient since some waveform converters
+        # don't set the scale even though the original waveform has a scale_mode. An example
+        # of this is AnalogWaveform[np.float64] -> DoubleAnalogWaveform. So I added a second
+        # check before accessing waveform_proto.scale.
+        waveform_proto_with_scaling = waveform_proto  # Use a second variable to get around mypy issue.
+        if not isinstance(waveform_proto_with_scaling, SupportsScale):
+            pytest.skip("Waveform type does not support scaling")
+        assert waveform_proto_with_scaling.scale.linear_scale.gain == 2.0
+        assert waveform_proto_with_scaling.scale.linear_scale.offset == 3.0
+
+    # ========================================================
+    # From Protobuf
+    # ========================================================
+    def test___waveform_proto_with_timing___convert___valid_python_object(  # noqa D102: Missing docstring in public method
+        self,
+    ) -> None:
+        t0_dt = bt.DateTime(2020, 5, 5, tzinfo=dt.timezone.utc)
+        t0_pt = bintime_datetime_to_protobuf(t0_dt)
+        waveform_proto = self.make_waveform_proto()
+        waveform_proto.t0.CopyFrom(t0_pt)
+        sample_interval_seconds = 0.1
+        waveform_proto.dt = sample_interval_seconds
+
+        waveform = self.from_protobuf(waveform_proto)
+
+        assert waveform.timing.start_time == t0_dt._to_datetime_datetime()
+        assert waveform.timing.sample_interval == ht.timedelta(seconds=sample_interval_seconds)
+        assert waveform.timing.sample_interval_mode == SampleIntervalMode.REGULAR
+
+    def test___waveform_proto_with_timing___round_trip___waveforms_match(  # noqa D102: Missing docstring in public method
+        self,
+    ) -> None:
+        t0_dt = bt.DateTime(2020, 5, 5, tzinfo=dt.timezone.utc)
+        t0_pt = bintime_datetime_to_protobuf(t0_dt)
+        waveform_proto = self.make_waveform_proto()
+        waveform_proto.t0.CopyFrom(t0_pt)
+        waveform_proto.dt = 0.1
+        waveform_proto.timestamp.CopyFrom(t0_pt)
+        waveform_proto.time_offset = 0.0
+
+        waveform = self.from_protobuf(waveform_proto)
+        converted_waveform_proto = self.to_protobuf(waveform)
+
+        assert waveform_proto == converted_waveform_proto
+
+    @pytest.mark.parametrize(
+        "timestamp_seconds, start_time_seconds, offset, normalized_timestamp_seconds, normalized_start_time_seconds",
+        [
+            (0, 0, 0, 0, 0),
+            (0, 0, 1, 0, 0),
+            (0, 10, 0, 10, 10),
+            (100, 0, 0, 100, 100),
+            (100, 0, 1, 100, 101),
+            (100, 10, 0, 100, 100),
+            (100, 10, 1, 100, 101),
+        ],
+    )
+    def test___waveform_proto_regular_timing___round_trip___timing_equivalent(  # noqa D102: Missing docstring in public method
+        self,
+        timestamp_seconds: int,
+        start_time_seconds: int,
+        offset: float,
+        normalized_timestamp_seconds: int,
+        normalized_start_time_seconds: int,
+    ) -> None:
+        t0_pt = PrecisionTimestamp(seconds=start_time_seconds, fractional_seconds=0)
+        timestamp_pt = PrecisionTimestamp(seconds=timestamp_seconds, fractional_seconds=0)
+        waveform_proto = self.make_waveform_proto()
+        waveform_proto.t0.CopyFrom(t0_pt)
+        waveform_proto.dt = 0.1
+        waveform_proto.timestamp.CopyFrom(timestamp_pt)
+        waveform_proto.time_offset = offset
+
+        waveform = self.from_protobuf(waveform_proto)
+        converted_waveform_proto = self.to_protobuf(waveform)
+
+        assert (
+            normalized_timestamp_seconds
+            == self._normalize_precision_timestamp(converted_waveform_proto.timestamp).seconds
+        )
+        assert (
+            normalized_start_time_seconds
+            == self._normalize_precision_timestamp(converted_waveform_proto.t0).seconds
+        )
+
+    def test___waveform_proto_with_timing_no_t0___convert___valid_python_object(  # noqa D102: Missing docstring in public method
+        self,
+    ) -> None:
+        waveform_proto = self.make_waveform_proto()
+        waveform_proto.dt = 0.1
+
+        waveform = self.from_protobuf(waveform_proto)
+
+        assert not waveform.timing.has_start_time
+        assert waveform.timing.sample_interval == ht.timedelta(seconds=0.1)
+        assert waveform.timing.sample_interval_mode == SampleIntervalMode.REGULAR
+
+    def test___waveform_proto_with_timing_no_dt___convert___valid_python_object(  # noqa D102: Missing docstring in public method
+        self,
+    ) -> None:
+        t0_dt = bt.DateTime(2020, 5, 5, tzinfo=dt.timezone.utc)
+        t0_pt = bintime_datetime_to_protobuf(t0_dt)
+        waveform_proto = self.make_waveform_proto()
+        waveform_proto.t0.CopyFrom(t0_pt)
+
+        waveform = self.from_protobuf(waveform_proto)
+
+        assert waveform.timing.start_time == t0_dt._to_datetime_datetime()
+        assert not waveform.timing.has_sample_interval
+        assert waveform.timing.sample_interval_mode == SampleIntervalMode.NONE
+
+    def test___waveform_proto_with_dt_and_offset___convert___valid_python_object(  # noqa D102: Missing docstring in public method
+        self,
+    ) -> None:
+        waveform_proto = self.make_waveform_proto()
+        waveform_proto.dt = 0.1
+        waveform_proto.time_offset = 1.5
+
+        waveform = self.from_protobuf(waveform_proto)
+
+        assert not waveform.timing.has_timestamp
+        assert waveform.timing.sample_interval == ht.timedelta(seconds=0.1)
+        assert waveform.timing.time_offset == ht.timedelta(seconds=1.5)
+        assert waveform.timing.sample_interval_mode == SampleIntervalMode.REGULAR
+
+    def test___waveform_proto_with_t0_and_timestamp_and_offset___convert___valid_python_object(  # noqa D102: Missing docstring in public method
+        self,
+    ) -> None:
+        sample_interval = 0.1
+        t0_seconds = 1000001
+        t0_pt = PrecisionTimestamp(seconds=t0_seconds, fractional_seconds=0)
+        timestamp_seconds = 1000000
+        timestamp_pt = PrecisionTimestamp(seconds=timestamp_seconds, fractional_seconds=0)
+        time_offset = 1.0
+        waveform_proto = self.make_waveform_proto()
+        waveform_proto.t0.CopyFrom(t0_pt)
+        waveform_proto.dt = 0.1
+        waveform_proto.timestamp.CopyFrom(timestamp_pt)
+        waveform_proto.time_offset = time_offset
+
+        waveform = self.from_protobuf(waveform_proto)
+
+        self._assert_waveform_timestamp_and_t0_timing(
+            waveform, t0_seconds, timestamp_seconds, sample_interval, time_offset
+        )
+
+    def test___waveform_proto_with_timestamps___convert___valid_python_object(  # noqa D102: Missing docstring in public method
+        self,
+    ) -> None:
+        expected_timestamps = [
+            PrecisionTimestamp(seconds=1000, fractional_seconds=300),
+            PrecisionTimestamp(seconds=1001, fractional_seconds=400),
+        ]
+        waveform_proto = self.make_waveform_proto()
+        waveform_proto.timestamps.extend(expected_timestamps)
+
+        waveform = self.from_protobuf(waveform_proto)
+
+        self._assert_waveform_irregular_timing_with_timestamps(waveform, expected_timestamps)
+
+    def test___waveform_proto_with_t0_and_offset_no_timestamp___convert___raises_exception(  # noqa D102: Missing docstring in public method
+        self,
+    ) -> None:
+        t0_dt = bt.DateTime(2020, 5, 5, tzinfo=dt.timezone.utc)
+        t0_pt = bintime_datetime_to_protobuf(t0_dt)
+        waveform_proto = self.make_waveform_proto()
+        waveform_proto.t0.CopyFrom(t0_pt)
+        waveform_proto.dt = 0.1
+        waveform_proto.time_offset = 1.0
+
+        with pytest.raises(ValueError):
+            _ = self.from_protobuf(waveform_proto)
+
+    def test___waveform_proto_with_attributes___convert___valid_python_object(self) -> None:  # noqa D102: Missing docstring in public method
+        attributes = {
+            "NI_ChannelName": WaveformAttributeValue(string_value="Dev1/ai0"),
+            "NI_UnitDescription": WaveformAttributeValue(string_value="Volts"),
+        }
+        waveform_proto = self.make_waveform_proto(attributes=attributes)
+
+        waveform = self.from_protobuf(waveform_proto)
+
+        assert waveform.extended_properties["NI_ChannelName"] == "Dev1/ai0"
+        assert waveform.extended_properties["NI_UnitDescription"] == "Volts"
+
+    def test___waveform_proto_with_scaling___convert___valid_python_object(self) -> None:  # noqa D102: Missing docstring in public method
+        linear_scale = LinearScale(gain=2.0, offset=3.0)
+        scale = Scale(linear_scale=linear_scale)
+        waveform_proto = self.make_waveform_proto(scale=scale)
+        waveform_proto_with_scaling = waveform_proto  # Use a second variable to get around mypy issue.
+        if not isinstance(waveform_proto_with_scaling, SupportsScale):
+            pytest.skip("Waveform type does not support scaling")
+
+        waveform = self.from_protobuf(waveform_proto)
+
+        assert isinstance(waveform, AnalogWaveform | ComplexWaveform)  # To work around pyright error.
+        assert isinstance(waveform.scale_mode, LinearScaleMode)
+        assert waveform.scale_mode.gain == 2.0
+        assert waveform.scale_mode.offset == 3.0
+
+    def _to_proto_timestamps(self, timestamps: list[dt.datetime]) -> list[PrecisionTimestamp]:
+        return [bintime_datetime_to_protobuf(bt.DateTime(ts)) for ts in timestamps]
+
+    def _assert_proto_standard_timing(
+        self,
+        waveform_proto: TWaveformProto,
+        t0_dt: dt.datetime,
+        sample_interval: float,
+    ) -> None:
+        assert waveform_proto.dt == sample_interval
+        assert waveform_proto.t0 == bintime_datetime_to_protobuf(bt.DateTime(t0_dt))
+
+    def _assert_proto_standard_timing_with_offset(
+        self,
+        waveform_proto: TWaveformProto,
+        t0_dt: dt.datetime,
+        time_offset: dt.timedelta,
+        sample_interval: float,
+    ) -> None:
+        assert waveform_proto.dt == sample_interval
+        assert waveform_proto.t0 == bintime_datetime_to_protobuf(bt.DateTime(t0_dt + time_offset))
+        assert waveform_proto.HasField("timestamp")
+        assert waveform_proto.timestamp == bintime_datetime_to_protobuf(bt.DateTime(t0_dt))
+        assert waveform_proto.time_offset == pytest.approx(time_offset.total_seconds())
+
+    def _assert_waveform_irregular_timing_with_timestamps(
+        self,
+        waveform: TWaveform,
+        expected_timestamps: list[PrecisionTimestamp],
+    ) -> None:
+        assert waveform.timing.sample_interval_mode == SampleIntervalMode.IRREGULAR
+        actual_timestamps = waveform.timing.get_timestamps(0, waveform.sample_count)
+        bintime_datetimes = [convert_datetime(bt.DateTime, ts) for ts in actual_timestamps]
+        assert [
+            bintime_datetime_to_protobuf(btdt) for btdt in bintime_datetimes
+        ] == expected_timestamps
+
+    def _assert_waveform_timestamp_and_t0_timing(
+        self,
+        waveform: TWaveform,
+        t0_seconds: int,
+        timestamp_seconds: int,
+        sample_interval: float,
+        time_offset: float,
+    ) -> None:
+        bt_timestamp = convert_datetime(bt.DateTime, waveform.timing.timestamp)
+        bt_start_time = convert_datetime(bt.DateTime, waveform.timing.start_time)
+        assert timestamp_seconds == bintime_datetime_to_protobuf(bt_timestamp).seconds
+        assert not bintime_datetime_to_protobuf(bt_timestamp).fractional_seconds
+        assert t0_seconds == bintime_datetime_to_protobuf(bt_start_time).seconds
+        assert not bintime_datetime_to_protobuf(bt_start_time).fractional_seconds
+        assert waveform.timing.sample_interval == ht.timedelta(seconds=sample_interval)
+        assert waveform.timing.time_offset == ht.timedelta(seconds=time_offset)
+        assert waveform.timing.sample_interval_mode == SampleIntervalMode.REGULAR
+
+    def _normalize_precision_timestamp(self, timestamp: PrecisionTimestamp) -> PrecisionTimestamp:
+        return PrecisionTimestamp() if timestamp is None else timestamp
+
+
+@runtime_checkable
+class SupportsScaleMode(Protocol):
+    """A protocol to test if something has the scale_mode property."""
+    @property
+    def scale_mode(self) -> ScaleMode:
+        """The scale mode."""
+        ...
+
+    @scale_mode.setter
+    def scale_mode(self, value: ScaleMode) -> None:
+         """The scale mode setter."""
+         ...
+
+
+@runtime_checkable
+class SupportsScale(Protocol):
+    """A protocol to test if something has the scale property."""
+    @property
+    def scale(self) -> Scale:
+        """The scale."""
+        ...
+
+    @scale.setter
+    def scale(self, value: Scale) -> None:
+         """The scale setter."""
+         ...
+````
+
+<!--NI_OSS_SOURCE repo=ni-apis-python path=packages/ni.protobuf.types/tests/unit/test_ni_protobuf_types.py sha256=e1d5227504e6db3fd1b0fd54a1b5836fdd9ce81123c5f54d3025636d42f7d7d3 bytes=6813 -->
+## FILE: packages/ni.protobuf.types/tests/unit/test_ni_protobuf_types.py
+
+- repository: `ni/ni-apis-python`
+- source_path: `packages/ni.protobuf.types/tests/unit/test_ni_protobuf_types.py`
+- sha256: `e1d5227504e6db3fd1b0fd54a1b5836fdd9ce81123c5f54d3025636d42f7d7d3`
+- bytes: 6813
+
+````python
+"""Tests for the ni.protobuf.types package."""
+
+from ni.protobuf.types.array_pb2 import (
+    BoolArray,
+    Double2DArray,
+    DoubleArray,
+    SInt32Array,
+    String2DArray,
+    StringArray,
+)
+from ni.protobuf.types.attribute_value_pb2 import AttributeValue
+from ni.protobuf.types.precision_timestamp_pb2 import PrecisionTimestamp
+from ni.protobuf.types.scalar_pb2 import Scalar
+from ni.protobuf.types.vector_pb2 import Vector
+from ni.protobuf.types.waveform_pb2 import (
+    DoubleAnalogWaveform,
+    DoubleComplexWaveform,
+    DoubleSpectrum,
+    I16AnalogWaveform,
+    I16ComplexWaveform,
+    WaveformAttributeValue,
+)
+from ni.protobuf.types.xydata_pb2 import DoubleXYData
+
+EXPECTED_T0 = PrecisionTimestamp(seconds=5, fractional_seconds=0)
+EXPECTED_DT = 0.01
+EXPECTED_ATTRIBUTES = {
+    "attr1": WaveformAttributeValue(integer_value=1),
+    "attr2": WaveformAttributeValue(string_value="two"),
+}
+EXPECTED_SCALAR_ATTRIBUTES = {
+    "attr1": AttributeValue(integer_value=1),
+    "attr2": AttributeValue(string_value="two"),
+}
+
+
+def test___valid_inputs___createdouble2darray___message_created() -> None:
+    test_array = Double2DArray(rows=3, columns=2, data=[1.0, 2.0, 3.0, 4.0, 5.0, 6.0])
+
+    assert test_array.rows == 3
+    assert test_array.columns == 2
+    assert list(test_array.data) == [1.0, 2.0, 3.0, 4.0, 5.0, 6.0]
+
+
+def test___valid_inputs___createstring2darray___message_created() -> None:
+    test_array = String2DArray(rows=2, columns=3, data=["A", "B", "C", "D", "E", "F"])
+
+    assert test_array.rows == 2
+    assert test_array.columns == 3
+    assert list(test_array.data) == ["A", "B", "C", "D", "E", "F"]
+
+
+def test___valid_inputs___create_doubleanalogwaveform___message_created() -> None:
+    test_wfm = DoubleAnalogWaveform(
+        t0=EXPECTED_T0,
+        dt=EXPECTED_DT,
+        y_data=[1.0, 2.0, 3.0],
+        attributes=EXPECTED_ATTRIBUTES,
+    )
+
+    assert test_wfm.t0 == EXPECTED_T0
+    assert test_wfm.dt == EXPECTED_DT
+    assert list(test_wfm.y_data) == [1.0, 2.0, 3.0]
+    assert test_wfm.attributes == EXPECTED_ATTRIBUTES
+
+
+def test___valid_inputs___create_i16analogwaveform___message_created() -> None:
+    test_wfm = I16AnalogWaveform(
+        t0=EXPECTED_T0,
+        dt=EXPECTED_DT,
+        y_data=[1, 2, 3],
+        attributes=EXPECTED_ATTRIBUTES,
+    )
+
+    assert test_wfm.t0 == EXPECTED_T0
+    assert test_wfm.dt == EXPECTED_DT
+    assert list(test_wfm.y_data) == [1, 2, 3]
+    assert test_wfm.attributes == EXPECTED_ATTRIBUTES
+
+
+def test___valid_inputs___create_doublecomplexwaveform___message_created() -> None:
+    test_wfm = DoubleComplexWaveform(
+        t0=EXPECTED_T0,
+        dt=EXPECTED_DT,
+        y_data=[1.0, 2.0, 3.0, 4.0],
+        attributes=EXPECTED_ATTRIBUTES,
+    )
+
+    assert test_wfm.t0 == EXPECTED_T0
+    assert test_wfm.dt == EXPECTED_DT
+    assert list(test_wfm.y_data) == [1.0, 2.0, 3.0, 4.0]
+    assert test_wfm.attributes == EXPECTED_ATTRIBUTES
+
+
+def test___valid_inputs___create_i16complexwaveform___message_created() -> None:
+    test_wfm = I16ComplexWaveform(
+        t0=EXPECTED_T0,
+        dt=EXPECTED_DT,
+        y_data=[1, 2, 3, 4],
+        attributes=EXPECTED_ATTRIBUTES,
+    )
+
+    assert test_wfm.t0 == EXPECTED_T0
+    assert test_wfm.dt == EXPECTED_DT
+    assert list(test_wfm.y_data) == [1, 2, 3, 4]
+    assert test_wfm.attributes == EXPECTED_ATTRIBUTES
+
+
+def test___valid_inputs___create_doublespectrum___message_created() -> None:
+    test_wfm = DoubleSpectrum(
+        start_frequency=10.0,
+        frequency_increment=1.0,
+        data=[1.0, 2.0, 3.0],
+        attributes=EXPECTED_ATTRIBUTES,
+    )
+
+    assert test_wfm.start_frequency == 10.0
+    assert test_wfm.frequency_increment == 1.0
+    assert list(test_wfm.data) == [1.0, 2.0, 3.0]
+    assert test_wfm.attributes == EXPECTED_ATTRIBUTES
+
+
+def test___valid_inputs___create_doublexydata___message_created() -> None:
+    test_wfm = DoubleXYData(
+        x_data=[1.0, 2.0, 3.0],
+        y_data=[4.0, 5.0, 6.0],
+    )
+
+    assert list(test_wfm.x_data) == [1.0, 2.0, 3.0]
+    assert list(test_wfm.y_data) == [4.0, 5.0, 6.0]
+
+
+def test___valid_inputs___create_double_scalar___message_created() -> None:
+    test_scalar = Scalar(attributes=EXPECTED_SCALAR_ATTRIBUTES, double_value=1.0)
+
+    assert test_scalar.double_value == 1.0
+    assert test_scalar.attributes == EXPECTED_SCALAR_ATTRIBUTES
+
+
+def test___valid_inputs___create_int_scalar___message_created() -> None:
+    test_scalar = Scalar(attributes=EXPECTED_SCALAR_ATTRIBUTES, sint32_value=1)
+
+    assert test_scalar.sint32_value == 1
+    assert test_scalar.attributes == EXPECTED_SCALAR_ATTRIBUTES
+
+
+def test___valid_inputs___create_bool_scalar___message_created() -> None:
+    test_scalar = Scalar(attributes=EXPECTED_SCALAR_ATTRIBUTES, bool_value=True)
+
+    assert test_scalar.bool_value is True
+    assert test_scalar.attributes == EXPECTED_SCALAR_ATTRIBUTES
+
+
+def test___valid_inputs___create_string_scalar___message_created() -> None:
+    test_scalar = Scalar(attributes=EXPECTED_SCALAR_ATTRIBUTES, string_value="one")
+
+    assert test_scalar.string_value == "one"
+    assert test_scalar.attributes == EXPECTED_SCALAR_ATTRIBUTES
+
+
+def test___valid_inputs___create_double_vector___message_created() -> None:
+    expected_value = [10.0, 20.0]
+    test_vector = Vector(
+        attributes=EXPECTED_SCALAR_ATTRIBUTES,
+        double_array=DoubleArray(values=expected_value),
+    )
+
+    assert test_vector.double_array.values == expected_value
+    assert test_vector.attributes == EXPECTED_SCALAR_ATTRIBUTES
+
+
+def test___valid_inputs___create_int_vector___message_created() -> None:
+    expected_value = [50, 60]
+    test_vector = Vector(
+        attributes=EXPECTED_SCALAR_ATTRIBUTES,
+        sint32_array=SInt32Array(values=expected_value),
+    )
+
+    assert test_vector.sint32_array.values == expected_value
+    assert test_vector.attributes == EXPECTED_SCALAR_ATTRIBUTES
+
+
+def test___valid_inputs___create_bool_vector___message_created() -> None:
+    expected_value = [True, False]
+    test_vector = Vector(
+        attributes=EXPECTED_SCALAR_ATTRIBUTES,
+        bool_array=BoolArray(values=expected_value),
+    )
+
+    assert test_vector.bool_array.values == expected_value
+    assert test_vector.attributes == EXPECTED_SCALAR_ATTRIBUTES
+
+
+def test___valid_inputs___create_string_vector___message_created() -> None:
+    expected_value = ["one", "two"]
+    test_vector = Vector(
+        attributes=EXPECTED_SCALAR_ATTRIBUTES,
+        string_array=StringArray(values=expected_value),
+    )
+
+    assert test_vector.string_array.values == expected_value
+    assert test_vector.attributes == EXPECTED_SCALAR_ATTRIBUTES
+````
+
+<!--NI_OSS_SOURCE repo=ni-apis-python path=packages/ni.protobuf.types/tests/unit/test_precision_duration_conversion.py sha256=b4777fc71acbe56d50a6486132481ee3dbbfd7f6ca72510b10b7a40f0278bcbf bytes=2497 -->
+## FILE: packages/ni.protobuf.types/tests/unit/test_precision_duration_conversion.py
+
+- repository: `ni/ni-apis-python`
+- source_path: `packages/ni.protobuf.types/tests/unit/test_precision_duration_conversion.py`
+- sha256: `b4777fc71acbe56d50a6486132481ee3dbbfd7f6ca72510b10b7a40f0278bcbf`
+- bytes: 2497
+
+````python
+import hightime as ht
+import nitypes.bintime as bt
+from nitypes.time import convert_timedelta
+
+from ni.protobuf.types.precision_duration_conversion import (
+    bintime_timedelta_to_protobuf,
+    bintime_timedelta_from_protobuf,
+    hightime_timedelta_to_protobuf,
+    hightime_timedelta_from_protobuf,
+)
+from ni.protobuf.types.precision_duration_pb2 import PrecisionDuration
+
+
+# ========================================================
+# bintime.TimeDelta <--> PrecisionDuration
+# ========================================================
+def test___precision_duration___convert___valid_bintime_timedelta() -> None:
+    seconds = 25
+    fractional_seconds = 123
+    pts = PrecisionDuration(seconds=seconds, fractional_seconds=fractional_seconds)
+
+    bintime_timedelta = bintime_timedelta_from_protobuf(pts)
+
+    time_value = bintime_timedelta.to_tuple()
+    assert time_value.whole_seconds == seconds
+    assert time_value.fractional_seconds == fractional_seconds
+
+
+def test___bintime_timedelta___convert___valid_precision_duration() -> None:
+    seconds = 25
+    fractional_seconds = 123
+    bintime_timedelta = bt.TimeDelta.from_tuple(bt.TimeValueTuple(seconds, fractional_seconds))
+
+    pts = bintime_timedelta_to_protobuf(bintime_timedelta)
+
+    assert pts.seconds == seconds
+    assert pts.fractional_seconds == fractional_seconds
+
+
+# ========================================================
+# hightime.timedelta <--> PrecisionDuration
+# ========================================================
+def test___precision_duration___convert___valid_hightime_timedelta() -> None:
+    seconds = 25
+    fractional_seconds = 123
+    pts = PrecisionDuration(seconds=seconds, fractional_seconds=fractional_seconds)
+
+    ht_timedelta = hightime_timedelta_from_protobuf(pts)
+
+    bt_timedelta = convert_timedelta(bt.TimeDelta, ht_timedelta)
+    time_value = bt_timedelta.to_tuple()
+    assert time_value.whole_seconds == seconds
+    assert time_value.fractional_seconds == fractional_seconds
+
+
+def test___hightime_timedelta___convert___valid_precision_duration() -> None:
+    ht_timedelta = ht.timedelta(days=1, hours=5, minutes=26, seconds=35, picoseconds=7)
+
+    pts = hightime_timedelta_to_protobuf(ht_timedelta)
+
+    bt_timedelta = convert_timedelta(bt.TimeDelta, ht_timedelta)
+    time_value = bt_timedelta.to_tuple()
+    assert pts.seconds == time_value.whole_seconds
+    assert pts.fractional_seconds == time_value.fractional_seconds
+````
+
+<!--NI_OSS_SOURCE repo=ni-apis-python path=packages/ni.protobuf.types/tests/unit/test_precision_timestamp_conversion.py sha256=a64a0dd7cbcfce0d7a39d5704f6fa6809a8fb6c1671009998ad91d60522e9427 bytes=2513 -->
+## FILE: packages/ni.protobuf.types/tests/unit/test_precision_timestamp_conversion.py
+
+- repository: `ni/ni-apis-python`
+- source_path: `packages/ni.protobuf.types/tests/unit/test_precision_timestamp_conversion.py`
+- sha256: `a64a0dd7cbcfce0d7a39d5704f6fa6809a8fb6c1671009998ad91d60522e9427`
+- bytes: 2513
+
+````python
+import datetime as dt
+
+import hightime as ht
+import nitypes.bintime as bt
+from nitypes.time import convert_datetime
+
+from ni.protobuf.types.precision_timestamp_conversion import (
+    bintime_datetime_to_protobuf,
+    bintime_datetime_from_protobuf,
+    hightime_datetime_to_protobuf,
+    hightime_datetime_from_protobuf,
+)
+from ni.protobuf.types.precision_timestamp_pb2 import PrecisionTimestamp
+
+
+# ========================================================
+# bintime.DateTime <--> PrecisionTimestamp
+# ========================================================
+def test___precision_timestamp___convert___valid_bintime_datetime() -> None:
+    seconds = 25
+    fractional_seconds = 123
+    pts = PrecisionTimestamp(seconds=seconds, fractional_seconds=fractional_seconds)
+
+    bintime_datetime = bintime_datetime_from_protobuf(pts)
+
+    time_value = bintime_datetime.to_tuple()
+    assert time_value.whole_seconds == seconds
+    assert time_value.fractional_seconds == fractional_seconds
+
+
+def test___bintime_datetime___convert___valid_precision_timestamp() -> None:
+    seconds = 25
+    fractional_seconds = 123
+    bintime_datetime = bt.DateTime.from_tuple(bt.TimeValueTuple(seconds, fractional_seconds))
+
+    pts = bintime_datetime_to_protobuf(bintime_datetime)
+
+    assert pts.seconds == seconds
+    assert pts.fractional_seconds == fractional_seconds
+
+
+# ========================================================
+# hightime.datetime <--> PrecisionTimestamp
+# ========================================================
+def test___precision_timestamp___convert___valid_hightime_datetime() -> None:
+    seconds = 25
+    fractional_seconds = 123
+    pts = PrecisionTimestamp(seconds=seconds, fractional_seconds=fractional_seconds)
+
+    ht_datetime = hightime_datetime_from_protobuf(pts)
+
+    bt_datetime = convert_datetime(bt.DateTime, ht_datetime)
+    time_value = bt_datetime.to_tuple()
+    assert time_value.whole_seconds == seconds
+    assert time_value.fractional_seconds == fractional_seconds
+
+
+def test___hightime_datetime___convert___valid_precision_timestamp() -> None:
+    ht_datetime = ht.datetime(year=2020, month=1, day=1, hour=5, minute=26, tzinfo=dt.timezone.utc)
+
+    pts = hightime_datetime_to_protobuf(ht_datetime)
+
+    bt_datetime = convert_datetime(bt.DateTime, ht_datetime)
+    time_value = bt_datetime.to_tuple()
+    assert pts.seconds == time_value.whole_seconds
+    assert pts.fractional_seconds == time_value.fractional_seconds
+````
+
+<!--NI_OSS_SOURCE repo=ni-apis-python path=packages/ni.protobuf.types/tests/unit/test_scalar_conversion.py sha256=0e9e0c602916eb0571f0b9577200d5491d6c58aa9ac4cdf1ee4b1354ad8d5ca8 bytes=6679 -->
+## FILE: packages/ni.protobuf.types/tests/unit/test_scalar_conversion.py
+
+- repository: `ni/ni-apis-python`
+- source_path: `packages/ni.protobuf.types/tests/unit/test_scalar_conversion.py`
+- sha256: `0e9e0c602916eb0571f0b9577200d5491d6c58aa9ac4cdf1ee4b1354ad8d5ca8`
+- bytes: 6679
+
+````python
+import pytest
+from nitypes.scalar import Scalar
+
+from ni.protobuf.types import scalar_pb2
+from ni.protobuf.types.attribute_value_pb2 import AttributeValue
+from ni.protobuf.types.scalar_conversion import scalar_from_protobuf, scalar_to_protobuf
+
+
+# ========================================================
+# Scalar: Protobuf to Python
+# ========================================================
+def test___bool_scalar_protobuf___convert___valid_bool_scalar() -> None:
+    attributes = {"NI_UnitDescription": AttributeValue(string_value="Volts")}
+    protobuf_value = scalar_pb2.Scalar(attributes=attributes)
+    protobuf_value.bool_value = True
+
+    python_value = scalar_from_protobuf(protobuf_value)
+
+    assert isinstance(python_value.value, bool)
+    assert python_value.value is True
+    assert python_value.units == "Volts"
+
+
+def test___int32_scalar_protobuf___convert___valid_int_scalar() -> None:
+    attributes = {"NI_UnitDescription": AttributeValue(string_value="Volts")}
+    protobuf_value = scalar_pb2.Scalar(attributes=attributes)
+    protobuf_value.sint32_value = 10
+
+    python_value = scalar_from_protobuf(protobuf_value)
+
+    assert isinstance(python_value.value, int)
+    assert python_value.value == 10
+    assert python_value.units == "Volts"
+
+
+def test___double_scalar_protobuf___convert___valid_float_scalar() -> None:
+    attributes = {"NI_UnitDescription": AttributeValue(string_value="Volts")}
+    protobuf_value = scalar_pb2.Scalar(attributes=attributes)
+    protobuf_value.double_value = 20.0
+
+    python_value = scalar_from_protobuf(protobuf_value)
+
+    assert isinstance(python_value.value, float)
+    assert python_value.value == 20.0
+    assert python_value.units == "Volts"
+
+
+def test___string_scalar_protobuf___convert___valid_str_scalar() -> None:
+    attributes = {"NI_UnitDescription": AttributeValue(string_value="Volts")}
+    protobuf_value = scalar_pb2.Scalar(attributes=attributes)
+    protobuf_value.string_value = "value"
+
+    python_value = scalar_from_protobuf(protobuf_value)
+
+    assert isinstance(python_value.value, str)
+    assert python_value.value == "value"
+    assert python_value.units == "Volts"
+
+
+def test___scalar_protobuf_value_unset___convert___throws_value_error() -> None:
+    attributes = {"NI_UnitDescription": AttributeValue(string_value="Volts")}
+    protobuf_value = scalar_pb2.Scalar(attributes=attributes)
+
+    with pytest.raises(ValueError) as exc:
+        _ = scalar_from_protobuf(protobuf_value)
+
+    assert exc.value.args[0].startswith("Could not determine the data type of 'value'.")
+
+
+def test___scalar_protobuf_units_unset___convert___python_units_blank() -> None:
+    protobuf_value = scalar_pb2.Scalar()
+    protobuf_value.bool_value = True
+
+    python_value = scalar_from_protobuf(protobuf_value)
+
+    assert isinstance(python_value.value, bool)
+    assert python_value.value is True
+    assert python_value.units == ""
+
+
+def test___non_units_attributes___to_python___attributes_converted() -> None:
+    attributes = {
+        "NI_ChannelName": AttributeValue(string_value="Dev1/ai0"),
+        "NI_UnitDescription": AttributeValue(string_value="Volts"),
+    }
+    protobuf_value = scalar_pb2.Scalar(attributes=attributes)
+    protobuf_value.string_value = "value"
+
+    python_value = scalar_from_protobuf(protobuf_value)
+    channel_name = python_value.extended_properties["NI_ChannelName"]
+
+    assert isinstance(python_value.value, str)
+    assert python_value.value == "value"
+    assert python_value.units == "Volts"
+    assert isinstance(channel_name, str)
+    assert channel_name == "Dev1/ai0"
+
+
+# ========================================================
+# Scalar: Python to Protobuf
+# ========================================================
+def test___bool_scalar___convert___valid_bool_scalar_protobuf() -> None:
+    python_value = Scalar(True, "Volts")
+
+    protobuf_value = scalar_to_protobuf(python_value)
+
+    assert protobuf_value.WhichOneof("value") == "bool_value"
+    assert protobuf_value.bool_value is True
+    assert protobuf_value.attributes["NI_UnitDescription"].string_value == "Volts"
+
+
+def test___int_scalar___convert___valid_int32_scalar_protobuf() -> None:
+    python_value = Scalar(10, "Volts")
+
+    protobuf_value = scalar_to_protobuf(python_value)
+
+    assert protobuf_value.WhichOneof("value") == "sint32_value"
+    assert protobuf_value.sint32_value == 10
+    assert protobuf_value.attributes["NI_UnitDescription"].string_value == "Volts"
+
+
+def test___float_scalar___convert___valid_double_scalar_protobuf() -> None:
+    python_value = Scalar(20.0, "Volts")
+
+    protobuf_value = scalar_to_protobuf(python_value)
+
+    assert protobuf_value.WhichOneof("value") == "double_value"
+    assert protobuf_value.double_value == 20.0
+    assert protobuf_value.attributes["NI_UnitDescription"].string_value == "Volts"
+
+
+def test___str_scalar___convert___valid_string_scalar_protobuf() -> None:
+    python_value = Scalar("value", "Volts")
+
+    protobuf_value = scalar_to_protobuf(python_value)
+
+    assert protobuf_value.WhichOneof("value") == "string_value"
+    assert protobuf_value.string_value == "value"
+    assert protobuf_value.attributes["NI_UnitDescription"].string_value == "Volts"
+
+
+def test___scalar_units_unset___convert___protobuf_units_blank() -> None:
+    python_value = Scalar(10)
+
+    protobuf_value = scalar_to_protobuf(python_value)
+
+    assert protobuf_value.WhichOneof("value") == "sint32_value"
+    assert protobuf_value.sint32_value == 10
+    assert protobuf_value.attributes["NI_UnitDescription"].string_value == ""
+
+
+def test___non_units_attributes___to_protobuf___attributes_converted() -> None:
+    python_value = Scalar("value", "Volts")
+    python_value.extended_properties["NI_ChannelName"] = "Dev1/ai0"
+
+    protobuf_value = scalar_to_protobuf(python_value)
+
+    assert protobuf_value.WhichOneof("value") == "string_value"
+    assert protobuf_value.string_value == "value"
+    assert protobuf_value.attributes["NI_UnitDescription"].string_value == "Volts"
+    assert protobuf_value.attributes["NI_ChannelName"].string_value == "Dev1/ai0"
+
+
+def test___int_scalar_out_of_range___convert___raises_value_error() -> None:
+    # AB#3227866: We should do range checking during the conversion, not in the python object.
+    with pytest.raises(ValueError) as exc:
+        python_value = Scalar(0x8FFFFFFF, "Volts")
+        _ = scalar_to_protobuf(python_value)
+
+    assert exc.value.args[0].startswith(
+        "The integer value in a scalar must be within the range of an Int32."
+    )
+````
+
+<!--NI_OSS_SOURCE repo=ni-apis-python path=packages/ni.protobuf.types/tests/unit/test_spectrum_conversion.py sha256=05efbe41cb7577b6856c9ff0b9d9ec2a63827391825cec91dd9df5381d09e483 bytes=3059 -->
+## FILE: packages/ni.protobuf.types/tests/unit/test_spectrum_conversion.py
+
+- repository: `ni/ni-apis-python`
+- source_path: `packages/ni.protobuf.types/tests/unit/test_spectrum_conversion.py`
+- sha256: `05efbe41cb7577b6856c9ff0b9d9ec2a63827391825cec91dd9df5381d09e483`
+- bytes: 3059
+
+````python
+import numpy as np
+from nitypes.waveform import Spectrum
+
+from ni.protobuf.types.waveform_conversion import (
+    float64_spectrum_from_protobuf,
+    float64_spectrum_to_protobuf,
+)
+from ni.protobuf.types.waveform_pb2 import (
+    DoubleSpectrum,
+    WaveformAttributeValue,
+)
+
+
+# ========================================================
+# Spectrum to DoubleSpectrum
+# ========================================================
+def test___default_spectrum___convert___valid_protobuf() -> None:
+    spectrum = Spectrum()
+
+    dbl_spectrum = float64_spectrum_to_protobuf(spectrum)
+
+    assert not dbl_spectrum.attributes
+    assert spectrum.start_frequency == 0.0
+    assert spectrum.frequency_increment == 0.0
+    assert list(dbl_spectrum.data) == []
+
+
+def test___spectrum_with_data___convert___valid_protobuf() -> None:
+    spectrum = Spectrum.from_array_1d(np.array([1.0, 2.0, 3.0]))
+    spectrum.start_frequency = 100.0
+    spectrum.frequency_increment = 10.0
+
+    dbl_spectrum = float64_spectrum_to_protobuf(spectrum)
+
+    assert list(dbl_spectrum.data) == [1.0, 2.0, 3.0]
+    assert dbl_spectrum.start_frequency == 100.0
+    assert dbl_spectrum.frequency_increment == 10.0
+
+
+def test___spectrum_with_extended_properties___convert___valid_protobuf() -> None:
+    spectrum = Spectrum()
+    spectrum.channel_name = "Dev1/ai0"
+    spectrum.units = "Volts"
+
+    dbl_spectrum = float64_spectrum_to_protobuf(spectrum)
+
+    assert dbl_spectrum.attributes["NI_ChannelName"].string_value == "Dev1/ai0"
+    assert dbl_spectrum.attributes["NI_UnitDescription"].string_value == "Volts"
+
+
+# ========================================================
+# DoubleSpectrum to Spectrum
+# ========================================================
+def test___default_dbl_spectrum___convert___valid_python_object() -> None:
+    dbl_spectrum = DoubleSpectrum()
+
+    spectrum = float64_spectrum_from_protobuf(dbl_spectrum)
+
+    assert not spectrum.extended_properties
+    assert spectrum.start_frequency == 0.0
+    assert spectrum.frequency_increment == 0.0
+    assert spectrum.sample_count == 0
+    assert spectrum.data.size == 0
+
+
+def test___dbl_spectrum_with_data___convert___valid_python_object() -> None:
+    dbl_spectrum = DoubleSpectrum(
+        data=[1.0, 2.0, 3.0], start_frequency=100.0, frequency_increment=10.0
+    )
+
+    spectrum = float64_spectrum_from_protobuf(dbl_spectrum)
+
+    assert list(spectrum.data) == [1.0, 2.0, 3.0]
+    assert spectrum.start_frequency == 100.0
+    assert spectrum.frequency_increment == 10.0
+
+
+def test___dbl_spectrum_with_attributes___convert___valid_python_object() -> None:
+    attributes = {
+        "NI_ChannelName": WaveformAttributeValue(string_value="Dev1/ai0"),
+        "NI_UnitDescription": WaveformAttributeValue(string_value="Volts"),
+    }
+    dbl_spectrum = DoubleSpectrum(attributes=attributes)
+
+    spectrum = float64_spectrum_from_protobuf(dbl_spectrum)
+
+    assert spectrum.channel_name == "Dev1/ai0"
+    assert spectrum.units == "Volts"
+````
+
+<!--NI_OSS_SOURCE repo=ni-apis-python path=packages/ni.protobuf.types/tests/unit/test_vector_conversion.py sha256=65504724e671f5d557336b8a2f568c4de22e9771e7dc8c015e66435ea0e11739 bytes=8442 -->
+## FILE: packages/ni.protobuf.types/tests/unit/test_vector_conversion.py
+
+- repository: `ni/ni-apis-python`
+- source_path: `packages/ni.protobuf.types/tests/unit/test_vector_conversion.py`
+- sha256: `65504724e671f5d557336b8a2f568c4de22e9771e7dc8c015e66435ea0e11739`
+- bytes: 8442
+
+````python
+import pytest
+from nitypes.vector import Vector
+
+from ni.protobuf.types import array_pb2
+from ni.protobuf.types import vector_pb2
+from ni.protobuf.types.attribute_value_pb2 import AttributeValue
+from ni.protobuf.types.vector_conversion import vector_from_protobuf, vector_to_protobuf
+
+
+# ========================================================
+# Scalar: Protobuf to Python
+# ========================================================
+def test___bool_vector_protobuf___convert___valid_bool_vector() -> None:
+    attributes = {"NI_UnitDescription": AttributeValue(string_value="Volts")}
+    expected_value = [True, False]
+    protobuf_value = vector_pb2.Vector(
+        attributes=attributes,
+        bool_array=array_pb2.BoolArray(values=expected_value),
+    )
+
+    python_value = vector_from_protobuf(protobuf_value)
+
+    assert isinstance(python_value, Vector)
+    assert isinstance(python_value[0], bool)
+    assert len(python_value) == 2
+    assert list(python_value) == expected_value
+    assert python_value.units == "Volts"
+
+
+def test___int32_vector_protobuf___convert___valid_int_vector() -> None:
+    attributes = {"NI_UnitDescription": AttributeValue(string_value="Volts")}
+    expected_value = [10, 20, 30]
+    protobuf_value = vector_pb2.Vector(
+        attributes=attributes,
+        sint32_array=array_pb2.SInt32Array(values=expected_value),
+    )
+
+    python_value = vector_from_protobuf(protobuf_value)
+
+    assert isinstance(python_value, Vector)
+    assert isinstance(python_value[0], int)
+    assert len(python_value) == 3
+    assert list(python_value) == expected_value
+    assert python_value.units == "Volts"
+
+
+def test___double_vector_protobuf___convert___valid_float_vector() -> None:
+    attributes = {"NI_UnitDescription": AttributeValue(string_value="Volts")}
+    expected_value = [20.0, 30.0, 40.5]
+    protobuf_value = vector_pb2.Vector(
+        attributes=attributes,
+        double_array=array_pb2.DoubleArray(values=expected_value),
+    )
+
+    python_value = vector_from_protobuf(protobuf_value)
+
+    assert isinstance(python_value, Vector)
+    assert isinstance(python_value[0], float)
+    assert len(python_value) == 3
+    assert list(python_value) == expected_value
+    assert python_value.units == "Volts"
+
+
+def test___string_vector_protobuf___convert___valid_str_vector() -> None:
+    attributes = {"NI_UnitDescription": AttributeValue(string_value="Volts")}
+    expected_value = ["one"]
+    protobuf_value = vector_pb2.Vector(
+        attributes=attributes,
+        string_array=array_pb2.StringArray(values=expected_value),
+    )
+
+    python_value = vector_from_protobuf(protobuf_value)
+
+    assert isinstance(python_value, Vector)
+    assert isinstance(python_value[0], str)
+    assert len(python_value) == 1
+    assert list(python_value) == expected_value
+    assert python_value.units == "Volts"
+
+
+def test___vector_protobuf_value_unset___convert___throws_value_error() -> None:
+    attributes = {"NI_UnitDescription": AttributeValue(string_value="Volts")}
+    protobuf_value = vector_pb2.Vector(attributes=attributes)
+
+    with pytest.raises(ValueError) as exc:
+        _ = vector_from_protobuf(protobuf_value)
+
+    assert exc.value.args[0].startswith("Could not determine the data type of 'value'.")
+
+
+def test___vector_protobuf_units_unset___convert___python_units_blank() -> None:
+    expected_value = [True, False]
+    protobuf_value = vector_pb2.Vector(bool_array=array_pb2.BoolArray(values=expected_value))
+
+    python_value = vector_from_protobuf(protobuf_value)
+
+    assert isinstance(python_value, Vector)
+    assert isinstance(python_value[0], bool)
+    assert len(python_value) == 2
+    assert list(python_value) == expected_value
+    assert python_value.units == ""
+
+
+def test___vector_with_non_units_attributes___to_python___attributes_converted() -> None:
+    attributes = {
+        "NI_ChannelName": AttributeValue(string_value="Dev1/ai0"),
+        "NI_UnitDescription": AttributeValue(string_value="Volts"),
+    }
+    expected_value = ["one", "two", "three"]
+    protobuf_value = vector_pb2.Vector(
+        attributes=attributes,
+        string_array=array_pb2.StringArray(values=expected_value),
+    )
+
+    python_value = vector_from_protobuf(protobuf_value)
+    channel_name = python_value.extended_properties["NI_ChannelName"]
+
+    assert isinstance(python_value, Vector)
+    assert isinstance(python_value[0], str)
+    assert len(python_value) == 3
+    assert list(python_value) == expected_value
+    assert python_value.units == "Volts"
+    assert isinstance(channel_name, str)
+    assert channel_name == "Dev1/ai0"
+
+
+# ========================================================
+# Vector: Python to Protobuf
+# ========================================================
+def test___bool_vector___convert___valid_bool_vector_protobuf() -> None:
+    python_value = Vector([True, False], "Volts")
+
+    protobuf_value = vector_to_protobuf(python_value)
+
+    assert isinstance(protobuf_value, vector_pb2.Vector)
+    assert protobuf_value.WhichOneof("value") == "bool_array"
+    assert protobuf_value.bool_array.values == [True, False]
+    assert protobuf_value.attributes["NI_UnitDescription"].string_value == "Volts"
+
+
+def test___int_vector___convert___valid_int32_vector_protobuf() -> None:
+    python_value = Vector([10, 20, 30], "Volts")
+
+    protobuf_value = vector_to_protobuf(python_value)
+
+    assert isinstance(protobuf_value, vector_pb2.Vector)
+    assert protobuf_value.WhichOneof("value") == "sint32_array"
+    assert protobuf_value.sint32_array.values == [10, 20, 30]
+    assert protobuf_value.attributes["NI_UnitDescription"].string_value == "Volts"
+
+
+def test___float_vector___convert___valid_double_vector_protobuf() -> None:
+    python_value = Vector([20.0, 30.0, 40.5], "Volts")
+
+    protobuf_value = vector_to_protobuf(python_value)
+
+    assert isinstance(protobuf_value, vector_pb2.Vector)
+    assert protobuf_value.WhichOneof("value") == "double_array"
+    assert protobuf_value.double_array.values == [20.0, 30.0, 40.5]
+    assert protobuf_value.attributes["NI_UnitDescription"].string_value == "Volts"
+
+
+def test___str_vector___convert___valid_string_vector_protobuf() -> None:
+    python_value = Vector(["one", "two", "three"], "Volts")
+
+    protobuf_value = vector_to_protobuf(python_value)
+
+    assert isinstance(protobuf_value, vector_pb2.Vector)
+    assert protobuf_value.WhichOneof("value") == "string_array"
+    assert protobuf_value.string_array.values == ["one", "two", "three"]
+    assert protobuf_value.attributes["NI_UnitDescription"].string_value == "Volts"
+
+
+def test___vector_units_unset___convert___protobuf_units_blank() -> None:
+    python_value = Vector([10, 20, 30])
+
+    protobuf_value = vector_to_protobuf(python_value)
+
+    assert isinstance(protobuf_value, vector_pb2.Vector)
+    assert protobuf_value.WhichOneof("value") == "sint32_array"
+    assert protobuf_value.sint32_array.values == [10, 20, 30]
+    assert protobuf_value.attributes["NI_UnitDescription"].string_value == ""
+
+
+def test___vector_with_non_units_attributes___to_protobuf___attributes_converted() -> None:
+    python_value = Vector(["value"], "Volts")
+    python_value.extended_properties["NI_ChannelName"] = "Dev1/ai0"
+
+    protobuf_value = vector_to_protobuf(python_value)
+
+    assert isinstance(protobuf_value, vector_pb2.Vector)
+    assert protobuf_value.WhichOneof("value") == "string_array"
+    assert protobuf_value.string_array.values == ["value"]
+    assert protobuf_value.attributes["NI_UnitDescription"].string_value == "Volts"
+    assert protobuf_value.attributes["NI_ChannelName"].string_value == "Dev1/ai0"
+
+
+def test___empty_vector___to_protobuf___raises_value_error() -> None:
+    python_value = Vector([], "Volts", value_type=int)
+
+    with pytest.raises(ValueError) as exc:
+        _ = vector_to_protobuf(python_value)
+
+    assert exc.value.args[0].startswith("Cannot convert an empty vector.")
+
+
+def test___int_vector_out_of_range___convert___raises_value_error() -> None:
+    python_value = Vector([10, 20, 0x8FFFFFFF], "Volts")
+
+    with pytest.raises(ValueError) as exc:
+        _ = vector_to_protobuf(python_value)
+
+    assert exc.value.args[0].startswith(
+        "Integer values in a vector must be within the range of an Int32."
+    )
+````
+
+<!--NI_OSS_SOURCE repo=ni-apis-python path=packages/ni.protobuf.types/tests/unit/test_waveform_conversion.py sha256=5d6bc4498d50bebba37293fbc3c3b89de121114b0d869dc4477dbfdb19487310 bytes=19747 -->
+## FILE: packages/ni.protobuf.types/tests/unit/test_waveform_conversion.py
+
+- repository: `ni/ni-apis-python`
+- source_path: `packages/ni.protobuf.types/tests/unit/test_waveform_conversion.py`
+- sha256: `5d6bc4498d50bebba37293fbc3c3b89de121114b0d869dc4477dbfdb19487310`
+- bytes: 19747
+
+````python
+from collections.abc import Mapping
+from typing import Any
+
+import hightime as ht
+import numpy as np
+from nitypes.complex import ComplexInt32Base, ComplexInt32DType
+from nitypes.waveform import (
+    AnalogWaveform,
+    ComplexWaveform,
+    DigitalWaveform,
+    NoneScaleMode,
+    SampleIntervalMode,
+)
+
+from ni.protobuf.types.waveform_conversion import (
+    digital_waveform_from_protobuf,
+    digital_waveform_to_protobuf,
+    float64_analog_waveform_from_protobuf,
+    float64_analog_waveform_to_protobuf,
+    float64_complex_waveform_from_protobuf,
+    float64_complex_waveform_to_protobuf,
+    int16_analog_waveform_from_protobuf,
+    int16_analog_waveform_to_protobuf,
+    int16_complex_waveform_from_protobuf,
+    int16_complex_waveform_to_protobuf,
+)
+from ni.protobuf.types.waveform_pb2 import (
+    DigitalWaveform as DigitalWaveformProto,
+    DoubleAnalogWaveform,
+    DoubleComplexWaveform,
+    I16AnalogWaveform,
+    I16ComplexWaveform,
+    Scale,
+    WaveformAttributeValue,
+)
+from tests.unit.base_waveform_conversion_tests import BaseWaveformConversionTests
+
+
+class TestDoubleAnalogConversion(
+    BaseWaveformConversionTests[AnalogWaveform[np.float64], DoubleAnalogWaveform]
+):
+    """Test for converting double analog waveforms to/from protobuf messages."""
+
+    def make_waveform(self) -> AnalogWaveform[np.float64]:
+        """Create a waveform with small non-zero sample data."""
+        return AnalogWaveform.from_array_1d(np.array([1.0, 2.0]))
+
+    def make_waveform_proto(
+        self,
+        attributes: Mapping[str, WaveformAttributeValue] | None = None,
+        scale: Scale | None = None,
+    ) -> DoubleAnalogWaveform:
+        """Create a waveform protobuf object with small non-zero sample data."""
+        return DoubleAnalogWaveform(y_data=[1.0, 2.0], attributes=attributes)
+
+    def to_protobuf(self, waveform: AnalogWaveform[np.float64]) -> DoubleAnalogWaveform:
+        """Convert a Python waveform to its corresponding proto message."""
+        return float64_analog_waveform_to_protobuf(waveform)
+
+    def from_protobuf(self, waveform_proto: DoubleAnalogWaveform) -> AnalogWaveform[np.float64]:
+        """Convert a proto message to the corresponding Python waveform."""
+        return float64_analog_waveform_from_protobuf(waveform_proto)
+
+    # ========================================================
+    # To Protobuf
+    # ========================================================
+    def test___default_analog_waveform___convert___valid_protobuf(self) -> None:
+        analog_waveform = AnalogWaveform()
+
+        dbl_analog_waveform = float64_analog_waveform_to_protobuf(analog_waveform)
+
+        assert not dbl_analog_waveform.attributes
+        assert dbl_analog_waveform.dt == 0
+        assert not dbl_analog_waveform.HasField("t0")
+        assert list(dbl_analog_waveform.y_data) == []
+
+    def test___analog_waveform_samples_only___convert___valid_protobuf(self) -> None:
+        analog_waveform = AnalogWaveform(5)
+
+        dbl_analog_waveform = float64_analog_waveform_to_protobuf(analog_waveform)
+
+        assert list(dbl_analog_waveform.y_data) == [0.0, 0.0, 0.0, 0.0, 0.0]
+
+    def test___analog_waveform_non_zero_samples___convert___valid_protobuf(self) -> None:
+        analog_waveform = AnalogWaveform.from_array_1d(np.array([1.0, 2.0, 3.0]))
+
+        dbl_analog_waveform = float64_analog_waveform_to_protobuf(analog_waveform)
+
+        assert list(dbl_analog_waveform.y_data) == [1.0, 2.0, 3.0]
+
+    # ========================================================
+    # From Protobuf
+    # ========================================================
+    def test___default_dbl_analog_wfm___convert___valid_python_object(self) -> None:
+        dbl_analog_wfm = DoubleAnalogWaveform()
+
+        analog_waveform = float64_analog_waveform_from_protobuf(dbl_analog_wfm)
+
+        print(analog_waveform.timing)
+        assert not analog_waveform.extended_properties
+        assert analog_waveform.timing.sample_interval_mode == SampleIntervalMode.NONE
+        assert analog_waveform.timing.time_offset == ht.timedelta()
+        assert analog_waveform.scaled_data.size == 0
+        assert analog_waveform.scale_mode == NoneScaleMode()
+
+    def test___dbl_analog_wfm_with_y_data___convert___valid_python_object(self) -> None:
+        dbl_analog_wfm = DoubleAnalogWaveform(y_data=[1.0, 2.0, 3.0])
+
+        analog_waveform = float64_analog_waveform_from_protobuf(dbl_analog_wfm)
+
+        assert list(analog_waveform.scaled_data) == [1.0, 2.0, 3.0]
+
+
+class TestDoubleComplexWaveformConversion(
+    BaseWaveformConversionTests[ComplexWaveform[np.complex128], DoubleComplexWaveform]
+):
+    """Test for converting double complex waveforms to/from protobuf messages."""
+
+    def make_waveform(self) -> ComplexWaveform[np.complex128]:
+        """Create a waveform with small non-zero sample data."""
+        return ComplexWaveform.from_array_1d([1.5 + 2.5j, 3.5 + 4.5j], np.complex128)
+
+    def make_waveform_proto(
+        self,
+        attributes: Mapping[str, WaveformAttributeValue] | None = None,
+        scale: Scale | None = None,
+    ) -> DoubleComplexWaveform:
+        """Create a waveform protobuf object with small non-zero sample data."""
+        return DoubleComplexWaveform(y_data=[1.0, 2.0, 3.0, 4.0], attributes=attributes)
+
+    def to_protobuf(self, waveform: ComplexWaveform[np.complex128]) -> DoubleComplexWaveform:
+        """Convert a Python waveform to its corresponding proto message."""
+        return float64_complex_waveform_to_protobuf(waveform)
+
+    def from_protobuf(
+        self, waveform_proto: DoubleComplexWaveform
+    ) -> ComplexWaveform[np.complex128]:
+        """Convert a proto message to the corresponding Python waveform."""
+        return float64_complex_waveform_from_protobuf(waveform_proto)
+
+    # ========================================================
+    # To Protobuf
+    # ========================================================
+    def test___default_float64_complex_waveform___convert___valid_protobuf(self) -> None:
+        complex_waveform = ComplexWaveform(0, np.complex128)
+
+        dbl_complex_waveform = float64_complex_waveform_to_protobuf(complex_waveform)
+
+        assert not dbl_complex_waveform.attributes
+        assert dbl_complex_waveform.dt == 0
+        assert not dbl_complex_waveform.HasField("t0")
+        assert list(dbl_complex_waveform.y_data) == []
+
+    def test___float64_complex_waveform_samples_only___convert___valid_protobuf(self) -> None:
+        complex_waveform = ComplexWaveform(2, np.complex128)
+
+        dbl_complex_waveform = float64_complex_waveform_to_protobuf(complex_waveform)
+
+        # Interleaved real/imaginary data.
+        assert list(dbl_complex_waveform.y_data) == [0.0, 0.0, 0.0, 0.0]
+
+    def test___float64_complex_waveform_non_zero_samples___convert___valid_protobuf(self) -> None:
+        complex_waveform = ComplexWaveform.from_array_1d([1.5 + 2.5j, 3.5 + 4.5j], np.complex128)
+
+        dbl_complex_waveform = float64_complex_waveform_to_protobuf(complex_waveform)
+
+        assert list(dbl_complex_waveform.y_data) == [1.5, 2.5, 3.5, 4.5]
+
+    # ========================================================
+    # From Protobuf
+    # ========================================================
+    def test___default_dbl_complex_wfm___convert___valid_python_object(self) -> None:
+        dbl_complex_waveform = DoubleComplexWaveform()
+
+        complex_waveform = float64_complex_waveform_from_protobuf(dbl_complex_waveform)
+
+        assert not complex_waveform.extended_properties
+        assert complex_waveform.timing.sample_interval_mode == SampleIntervalMode.NONE
+        assert complex_waveform.timing.time_offset == ht.timedelta()
+        assert complex_waveform.scaled_data.size == 0
+        assert complex_waveform.scale_mode == NoneScaleMode()
+
+    def test___dbl_complex_wfm_with_y_data___convert___valid_python_object(self) -> None:
+        dbl_complex_waveform = DoubleComplexWaveform(y_data=[1.0, 2.0, 3.0, 4.0])
+
+        complex_waveform = float64_complex_waveform_from_protobuf(dbl_complex_waveform)
+
+        assert list(complex_waveform.scaled_data) == [1.0 + 2.0j, 3.0 + 4.0j]
+
+
+class TestI16ComplexWaveformConversion(
+    BaseWaveformConversionTests[ComplexWaveform[ComplexInt32Base], I16ComplexWaveform]
+):
+    """Test for converting int complex waveforms to/from protobuf messages."""
+
+    def make_waveform(self) -> ComplexWaveform[ComplexInt32Base]:
+        """Create a waveform with small non-zero sample data."""
+        return ComplexWaveform.from_array_1d([(1, 2), (3, 4)], ComplexInt32DType)
+
+    def make_waveform_proto(
+        self,
+        attributes: Mapping[str, WaveformAttributeValue] | None = None,
+        scale: Scale | None = None,
+    ) -> I16ComplexWaveform:
+        """Create a waveform protobuf object with small non-zero sample data."""
+        return I16ComplexWaveform(y_data=[1, 2, 3, 4], attributes=attributes, scale=scale)
+
+    def to_protobuf(self, waveform: ComplexWaveform[ComplexInt32Base]) -> I16ComplexWaveform:
+        """Convert a Python waveform to its corresponding proto message."""
+        return int16_complex_waveform_to_protobuf(waveform)
+
+    def from_protobuf(
+        self, waveform_proto: I16ComplexWaveform
+    ) -> ComplexWaveform[ComplexInt32Base]:
+        """Convert a proto message to the corresponding Python waveform."""
+        return int16_complex_waveform_from_protobuf(waveform_proto)
+
+    # ========================================================
+    # From Protobuf
+    # ========================================================
+    def test___default_int16_complex_waveform___convert___valid_protobuf(self) -> None:
+        complex_waveform = ComplexWaveform(0, ComplexInt32DType)
+
+        i16_complex_waveform = int16_complex_waveform_to_protobuf(complex_waveform)
+
+        assert not i16_complex_waveform.attributes
+        assert i16_complex_waveform.dt == 0
+        assert not i16_complex_waveform.HasField("t0")
+        assert not i16_complex_waveform.HasField("scale")
+        assert list(i16_complex_waveform.y_data) == []
+
+    def test___int16_complex_waveform_samples_only___convert___valid_protobuf(self) -> None:
+        complex_waveform = ComplexWaveform(2, ComplexInt32DType)
+
+        i16_complex_waveform = int16_complex_waveform_to_protobuf(complex_waveform)
+
+        # Interleaved real/imaginary data.
+        assert list(i16_complex_waveform.y_data) == [0, 0, 0, 0]
+
+    def test___int16_complex_waveform_non_zero_samples___convert___valid_protobuf(self) -> None:
+        complex_waveform = ComplexWaveform.from_array_1d([(1, 2), (3, 4)], ComplexInt32DType)
+
+        i16_complex_waveform = int16_complex_waveform_to_protobuf(complex_waveform)
+
+        assert list(i16_complex_waveform.y_data) == [1, 2, 3, 4]
+
+    # ========================================================
+    # From Protobuf
+    # ========================================================
+    def test___default_int16_complex_wfm___convert___valid_python_object(self) -> None:
+        i16_complex_waveform = I16ComplexWaveform()
+
+        complex_waveform = int16_complex_waveform_from_protobuf(i16_complex_waveform)
+
+        assert not complex_waveform.extended_properties
+        assert complex_waveform.timing.sample_interval_mode == SampleIntervalMode.NONE
+        assert complex_waveform.timing.time_offset == ht.timedelta()
+        assert complex_waveform.scaled_data.size == 0
+        assert complex_waveform.scale_mode == NoneScaleMode()
+
+    def test___int16_complex_wfm_with_y_data___convert___valid_python_object(self) -> None:
+        i16_complex_waveform = I16ComplexWaveform(y_data=[1, 2, 3, 4])
+
+        complex_waveform = int16_complex_waveform_from_protobuf(i16_complex_waveform)
+
+        expected_raw_data = np.array([(1, 2), (3, 4)], ComplexInt32DType)
+        assert np.array_equal(complex_waveform.raw_data, expected_raw_data)
+
+
+class TestI16AnalogWaveformConversion(
+    BaseWaveformConversionTests[AnalogWaveform[np.int16], I16AnalogWaveform]
+):
+    """Test for converting int analog waveforms to/from protobuf messages."""
+
+    def make_waveform(self) -> AnalogWaveform[np.int16]:
+        """Create a waveform with small non-zero sample data."""
+        return AnalogWaveform.from_array_1d(np.array([1, 2], dtype=np.int16))
+
+    def make_waveform_proto(
+        self,
+        attributes: Mapping[str, WaveformAttributeValue] | None = None,
+        scale: Scale | None = None,
+    ) -> I16AnalogWaveform:
+        """Create a waveform protobuf object with small non-zero sample data."""
+        return I16AnalogWaveform(y_data=[1, 2], attributes=attributes, scale=scale)
+
+    def to_protobuf(self, waveform: AnalogWaveform[np.int16]) -> I16AnalogWaveform:
+        """Convert a Python waveform to its corresponding proto message."""
+        return int16_analog_waveform_to_protobuf(waveform)
+
+    def from_protobuf(self, waveform_proto: I16AnalogWaveform) -> AnalogWaveform[np.int16]:
+        """Convert a proto message to the corresponding Python waveform."""
+        return int16_analog_waveform_from_protobuf(waveform_proto)
+
+    # ========================================================
+    # To Protobuf
+    # ========================================================
+    def test___default_int16_analog_waveform___convert___valid_protobuf(self) -> None:
+        analog_waveform = AnalogWaveform(0, np.int16)
+
+        i16_analog_waveform = int16_analog_waveform_to_protobuf(analog_waveform)
+
+        assert not i16_analog_waveform.attributes
+        assert i16_analog_waveform.dt == 0
+        assert not i16_analog_waveform.HasField("t0")
+        assert not i16_analog_waveform.HasField("scale")
+        assert list(i16_analog_waveform.y_data) == []
+
+    def test___int16_analog_waveform_samples_only___convert___valid_protobuf(self) -> None:
+        analog_waveform = AnalogWaveform(5, np.int16)
+
+        i16_analog_waveform = int16_analog_waveform_to_protobuf(analog_waveform)
+
+        assert list(i16_analog_waveform.y_data) == [0, 0, 0, 0, 0]
+
+    def test___int16_analog_waveform_non_zero_samples___convert___valid_protobuf(self) -> None:
+        analog_waveform = AnalogWaveform.from_array_1d(np.array([1, 2, 3], dtype=np.int16))
+
+        i16_analog_waveform = int16_analog_waveform_to_protobuf(analog_waveform)
+
+        assert list(i16_analog_waveform.y_data) == [1, 2, 3]
+
+    # ========================================================
+    # From Protobuf
+    # ========================================================
+    def test___default_i16_analog_wfm___convert___valid_python_object(self) -> None:
+        i16_analog_wfm = I16AnalogWaveform()
+
+        analog_waveform = int16_analog_waveform_from_protobuf(i16_analog_wfm)
+
+        assert not analog_waveform.extended_properties
+        assert analog_waveform.timing.sample_interval_mode == SampleIntervalMode.NONE
+        assert analog_waveform.timing.time_offset == ht.timedelta()
+        assert analog_waveform.scaled_data.size == 0
+        assert analog_waveform.scale_mode == NoneScaleMode()
+
+    def test___i16_analog_wfm_with_y_data___convert___valid_python_object(self) -> None:
+        i16_analog_wfm = I16AnalogWaveform(y_data=[1, 2, 3])
+
+        analog_waveform = int16_analog_waveform_from_protobuf(i16_analog_wfm)
+
+        expected_raw_data = np.array([1, 2, 3], dtype=np.int16)
+        assert np.array_equal(analog_waveform.raw_data, expected_raw_data)
+
+
+class TestDigitalWaveformConversion(
+    BaseWaveformConversionTests[DigitalWaveform[Any], DigitalWaveformProto]
+):
+    """Test for converting digital waveforms to/from protobuf messages."""
+
+    def make_waveform(self) -> DigitalWaveform[Any]:
+        """Create a waveform with small non-zero sample data."""
+        data = np.array([[0, 1, 3], [7, 5, 1]], dtype=np.uint8)
+        return DigitalWaveform.from_lines(data, signal_count=3)
+
+    def make_waveform_proto(
+        self,
+        attributes: Mapping[str, WaveformAttributeValue] | None = None,
+        scale: Scale | None = None,
+    ) -> DigitalWaveformProto:
+        """Create a waveform protobuf object with small non-zero sample data."""
+        data = np.array([[0, 1, 0], [1, 0, 1]], dtype=np.uint8)
+        return DigitalWaveformProto(y_data=data.tobytes(), signal_count=3, attributes=attributes)
+
+    def to_protobuf(self, waveform: DigitalWaveform[Any]) -> DigitalWaveformProto:
+        """Convert a Python waveform to its corresponding proto message."""
+        return digital_waveform_to_protobuf(waveform)
+
+    def from_protobuf(self, waveform_proto: DigitalWaveformProto) -> DigitalWaveform[Any]:
+        """Convert a proto message to the corresponding Python waveform."""
+        return digital_waveform_from_protobuf(waveform_proto)
+
+    # ========================================================
+    # To Protobuf
+    # ========================================================
+    def test___default_digital_waveform___convert___valid_protobuf(self) -> None:
+        digital_waveform = DigitalWaveform()
+
+        digital_waveform_proto = digital_waveform_to_protobuf(digital_waveform)
+
+        assert not digital_waveform_proto.attributes
+        assert digital_waveform_proto.dt == 0
+        assert not digital_waveform_proto.HasField("t0")
+        assert digital_waveform_proto.y_data == b""
+        assert digital_waveform_proto.signal_count == 1
+
+    def test___digital_waveform_with_data___convert___valid_protobuf(self) -> None:
+        data = np.array([[0, 1, 3], [7, 5, 1]], dtype=np.uint8)
+        digital_waveform = DigitalWaveform.from_lines(data, signal_count=3)
+
+        digital_waveform_proto = digital_waveform_to_protobuf(digital_waveform)
+
+        assert digital_waveform_proto.y_data == b"\x00\x01\x03\x07\x05\x01"
+        assert digital_waveform_proto.signal_count == 3
+
+    # ========================================================
+    # From Protobuf
+    # ========================================================
+    def test___default_digital_waveform_proto___convert___valid_python_object(self) -> None:
+        digital_waveform_proto = DigitalWaveformProto(signal_count=1)
+
+        digital_waveform = digital_waveform_from_protobuf(digital_waveform_proto)
+
+        assert not digital_waveform.extended_properties
+        assert digital_waveform.timing.sample_interval_mode == SampleIntervalMode.NONE
+        assert digital_waveform.timing.time_offset == ht.timedelta()
+        assert digital_waveform.data.size == 0
+        assert digital_waveform.signal_count == 1
+
+    def test___digital_waveform_proto_with_data___convert___valid_python_object(self) -> None:
+        data = np.array([[0, 1, 0], [1, 0, 1]], dtype=np.uint8)
+        digital_waveform_proto = DigitalWaveformProto(y_data=data.tobytes(), signal_count=3)
+
+        digital_waveform = digital_waveform_from_protobuf(digital_waveform_proto)
+
+        assert np.array_equal(digital_waveform.data, data)
+        assert digital_waveform.signal_count == 3
+
+    def test___digital_waveform_proto_with_attributes___convert___valid_python_object(self) -> None:
+        attributes = {
+            "NI_ChannelName": WaveformAttributeValue(string_value="Dev1/port0"),
+        }
+        digital_waveform_proto = DigitalWaveformProto(attributes=attributes, signal_count=1)
+
+        digital_waveform = digital_waveform_from_protobuf(digital_waveform_proto)
+
+        assert digital_waveform.channel_name == "Dev1/port0"
+````
+
+<!--NI_OSS_SOURCE repo=ni-apis-python path=packages/ni.protobuf.types/tests/unit/test_xydata_conversion.py sha256=e0d7ed4e9ee3cddbebca85fd983004f53e11b7bf39c47cc3ccf7273a35bce772 bytes=4990 -->
+## FILE: packages/ni.protobuf.types/tests/unit/test_xydata_conversion.py
+
+- repository: `ni/ni-apis-python`
+- source_path: `packages/ni.protobuf.types/tests/unit/test_xydata_conversion.py`
+- sha256: `e0d7ed4e9ee3cddbebca85fd983004f53e11b7bf39c47cc3ccf7273a35bce772`
+- bytes: 4990
+
+````python
+import numpy as np
+from nitypes.xy_data import XYData
+
+from ni.protobuf.types import xydata_pb2
+from ni.protobuf.types.attribute_value_pb2 import AttributeValue
+from ni.protobuf.types.xydata_conversion import (
+    float64_xydata_from_protobuf,
+    float64_xydata_to_protobuf,
+)
+
+
+# ========================================================
+# XYData: Protobuf to Python
+# ========================================================
+def test___doublexydata_protobuf___convert___valid_xydata_default_units() -> None:
+    expected_x_data = [1.0, 2.0, 3.0]
+    expected_y_data = [4.0, 5.0, 6.0]
+    protobuf_value = xydata_pb2.DoubleXYData(x_data=expected_x_data, y_data=expected_y_data)
+
+    python_value = float64_xydata_from_protobuf(protobuf_value)
+    assert isinstance(python_value, XYData)
+    assert python_value.dtype == np.float64
+    assert list(python_value.x_data) == expected_x_data
+    assert list(python_value.y_data) == expected_y_data
+    assert python_value.x_units == ""
+    assert python_value.y_units == ""
+
+
+def test___doublexydata_protobuf_with_units___convert___valid_xydata() -> None:
+    attributes = {
+        "NI_UnitDescription_X": AttributeValue(string_value="Volts"),
+        "NI_UnitDescription_Y": AttributeValue(string_value="Seconds"),
+    }
+    expected_x_data = [1.0, 2.0, 3.0]
+    expected_y_data = [4.0, 5.0, 6.0]
+    protobuf_value = xydata_pb2.DoubleXYData(
+        x_data=expected_x_data,
+        y_data=expected_y_data,
+        attributes=attributes,
+    )
+
+    python_value = float64_xydata_from_protobuf(protobuf_value)
+
+    assert isinstance(python_value, XYData)
+    assert python_value.dtype == np.float64
+    assert list(python_value.x_data) == expected_x_data
+    assert list(python_value.y_data) == expected_y_data
+    assert python_value.x_units == "Volts"
+    assert python_value.y_units == "Seconds"
+
+
+def test___doublexydata_protobuf_with_other_attrs___convert___attrs_converted() -> None:
+    attributes = {
+        "NI_UnitDescription_X": AttributeValue(string_value="Volts"),
+        "NI_UnitDescription_Y": AttributeValue(string_value="Seconds"),
+        "Non_Units_Attribute": AttributeValue(double_value=1.1),
+    }
+    protobuf_value = xydata_pb2.DoubleXYData(
+        x_data=[1.0],
+        y_data=[2.0],
+        attributes=attributes,
+    )
+
+    python_value = float64_xydata_from_protobuf(protobuf_value)
+
+    assert isinstance(python_value, XYData)
+    assert python_value.x_units == "Volts"
+    assert python_value.y_units == "Seconds"
+    assert python_value.extended_properties.get("Non_Units_Attribute") == 1.1
+
+
+# ========================================================
+# XYData: Python to Protobuf
+# ========================================================
+def test___float64_xydata___convert___valid_doublexydata_protobuf() -> None:
+    expected_x_data = [1.0, 2.0, 3.0]
+    expected_y_data = [4.0, 5.0, 6.0]
+    python_value = XYData.from_arrays_1d(
+        x_array=expected_x_data,
+        y_array=expected_y_data,
+        dtype=np.float64,
+    )
+
+    protobuf_value = float64_xydata_to_protobuf(python_value)
+
+    assert isinstance(protobuf_value, xydata_pb2.DoubleXYData)
+    assert list(protobuf_value.x_data) == expected_x_data
+    assert list(protobuf_value.y_data) == expected_y_data
+
+
+def test___int16_xydata___convert___causes_mypy_error() -> None:
+    python_value = XYData.from_arrays_1d(
+        x_array=[1, 2, 3],
+        y_array=[4, 5, 6],
+        dtype=np.int16,
+    )
+
+    # The next line should generate a mypy error. If it doesn't, we'll get an 'unused
+    # ignore' mypy error.
+    protobuf_value = float64_xydata_to_protobuf(python_value)  # type: ignore[arg-type]
+
+    # This conversion still works, so we might as well check it. Int values are converted to float.
+    assert isinstance(protobuf_value, xydata_pb2.DoubleXYData)
+    assert list(protobuf_value.x_data) == [1.0, 2.0, 3.0]
+    assert list(protobuf_value.y_data) == [4.0, 5.0, 6.0]
+
+
+def test___xydata_with_extended_properties___convert___valid_doublexydata_protobuf() -> None:
+    expected_x_data = [1.0]
+    expected_y_data = [2.0]
+    python_value = XYData.from_arrays_1d(
+        x_array=expected_x_data,
+        y_array=expected_y_data,
+        dtype=np.float64,
+        extended_properties={
+            "true": True,
+            "1": 1,
+            "1.0": 1.0,
+            "str": "str",
+        },
+    )
+
+    protobuf_value = float64_xydata_to_protobuf(python_value)
+
+    assert isinstance(protobuf_value, xydata_pb2.DoubleXYData)
+    assert list(protobuf_value.x_data) == expected_x_data
+    assert list(protobuf_value.y_data) == expected_y_data
+    assert protobuf_value.attributes["true"].bool_value is True
+    assert protobuf_value.attributes["1"].integer_value == 1
+    assert protobuf_value.attributes["1.0"].double_value == 1.0
+    assert protobuf_value.attributes["str"].string_value == "str"
+````
+
+<!--NI_OSS_SOURCE repo=ni-apis-python path=packages.json sha256=222e4c7868614e64d1e90747cc5a88b2fcc31240a716ec578d687a70905a4ff5 bytes=5389 -->
+## FILE: packages.json
+
+- repository: `ni/ni-apis-python`
+- source_path: `packages.json`
+- sha256: `222e4c7868614e64d1e90747cc5a88b2fcc31240a716ec578d687a70905a4ff5`
+- bytes: 5389
+
+````json
+{
+  "grpc_generator": {
+    "comment.schema": "See the packages.json section in CONTRIBUTING.md",
+    "package-basepath": "tools",
+    "proto-basepath": null,
+    "proto-subpath": null,
+    "proto-include-path": null,
+    "output-format": null,
+    "install-extras": null
+  },
+ "ni.datamonikers.v1.client": {
+    "package-basepath": "packages",
+    "proto-basepath": null,
+    "proto-subpath": null,
+    "proto-include-path": null,
+    "output-format": null,
+    "install-extras": null
+  },
+  "ni.datamonikers.v1.proto": {
+    "package-basepath": "packages",
+    "proto-basepath": "third_party/ni-apis",
+    "proto-subpath": "ni/datamonikers/v1",
+    "proto-include-path": "third_party/ni-apis",
+    "output-format": "subpackage",
+    "install-extras": null
+  },
+  "ni-grpc-extensions": {
+    "package-basepath": "packages",
+    "proto-basepath": null,
+    "proto-subpath": null,
+    "proto-include-path": null,
+    "output-format": null,
+    "install-extras": null
+  },
+  "ni.grpcdevice.v1.proto": {
+    "package-basepath": "packages",
+    "proto-basepath": "proto",
+    "proto-subpath": ".",
+    "proto-include-path": "proto",
+    "output-format": "subpackage",
+    "install-extras": null
+  },
+  "ni.measurementlink.discovery.v1.client": {
+    "package-basepath": "packages",
+    "proto-basepath": null,
+    "proto-subpath": null,
+    "proto-include-path": null,
+    "output-format": null,
+    "install-extras": null
+  },
+  "ni.measurementlink.discovery.v1.proto": {
+    "package-basepath": "packages",
+    "proto-basepath": "third_party/ni-apis",
+    "proto-subpath": "ni/measurementlink/discovery/v1",
+    "proto-include-path": "third_party/ni-apis",
+    "output-format": "subpackage",
+    "install-extras": null
+  },
+  "ni.measurementlink.measurement.v1.proto": {
+    "package-basepath": "packages",
+    "proto-basepath": "third_party/ni-apis",
+    "proto-subpath": "ni/measurementlink/measurement/v1",
+    "proto-include-path": "third_party/ni-apis",
+    "output-format": "subpackage",
+    "install-extras": null
+  },
+  "ni.measurementlink.measurement.v2.proto": {
+    "package-basepath": "packages",
+    "proto-basepath": "third_party/ni-apis",
+    "proto-subpath": "ni/measurementlink/measurement/v2",
+    "proto-include-path": "third_party/ni-apis",
+    "output-format": "subpackage",
+    "install-extras": null
+  },
+  "ni.measurementlink.pinmap.v1.client": {
+    "package-basepath": "packages",
+    "proto-basepath": null,
+    "proto-subpath": null,
+    "proto-include-path": null,
+    "output-format": null,
+    "install-extras": null
+  },
+  "ni.measurementlink.pinmap.v1.proto": {
+    "package-basepath": "packages",
+    "proto-basepath": "third_party/ni-apis",
+    "proto-subpath": "ni/measurementlink/pinmap/v1",
+    "proto-include-path": "third_party/ni-apis",
+    "output-format": "subpackage",
+    "install-extras": null
+  },
+  "ni.measurementlink.proto": {
+    "package-basepath": "packages",
+    "proto-basepath": "third_party/ni-apis",
+    "proto-subpath": "ni/measurementlink",
+    "proto-include-path": "third_party/ni-apis",
+    "output-format": "subpackage",
+    "install-extras": null
+  },
+  "ni.measurementlink.sessionmanagement.v1.client": {
+    "package-basepath": "packages",
+    "proto-basepath": null,
+    "proto-subpath": null,
+    "proto-include-path": null,
+    "output-format": null,
+    "install-extras": "drivers"
+  },
+  "ni.measurementlink.sessionmanagement.v1.proto": {
+    "package-basepath": "packages",
+    "proto-basepath": "third_party/ni-apis",
+    "proto-subpath": "ni/measurementlink/sessionmanagement/v1",
+    "proto-include-path": "third_party/ni-apis/ni/grpcdevice/v1",
+    "output-format": "subpackage",
+    "install-extras": null
+  },
+  "ni.measurements.data.v1.client": {
+    "package-basepath": "packages",
+    "proto-basepath": null,
+    "proto-subpath": null,
+    "proto-include-path": null,
+    "output-format": null,
+    "install-extras": null
+  },
+  "ni.measurements.data.v1.proto": {
+    "package-basepath": "packages",
+    "proto-basepath": "third_party/ni-apis",
+    "proto-subpath": "ni/measurements/data/v1",
+    "proto-include-path": "third_party/ni-apis",
+    "output-format": "subpackage",
+    "install-extras": null
+  },
+  "ni.measurements.metadata.v1.client": {
+    "package-basepath": "packages",
+    "proto-basepath": null,
+    "proto-subpath": null,
+    "proto-include-path": null,
+    "output-format": null,
+    "install-extras": null
+  },
+  "ni.measurements.metadata.v1.proto": {
+    "package-basepath": "packages",
+    "proto-basepath": "third_party/ni-apis",
+    "proto-subpath": "ni/measurements/metadata/v1",
+    "proto-include-path": "third_party/ni-apis",
+    "output-format": "subpackage",
+    "install-extras": null
+  },
+  "ni.panels.v1.proto": {
+    "package-basepath": "packages",
+    "proto-basepath": "third_party/ni-apis",
+    "proto-subpath": "ni/panels/v1",
+    "proto-include-path": "third_party/ni-apis",
+    "output-format": "submodule",
+    "install-extras": null
+  },
+  "ni.protobuf.types": {
+    "package-basepath": "packages",
+    "proto-basepath": "third_party/ni-apis",
+    "proto-subpath": "ni/protobuf/types",
+    "proto-include-path": "third_party/ni-apis",
+    "output-format": "submodule",
+    "install-extras": null
+  }
+}
+````
+
+<!--NI_OSS_SOURCE repo=ni-apis-python path=proto/README.md sha256=a37cd3a016f248f6b47c379f4d2fba5997521f7ce70afb8af44d9902f90ae0f3 bytes=477 -->
+## FILE: proto/README.md
+
+- repository: `ni/ni-apis-python`
+- source_path: `proto/README.md`
+- sha256: `a37cd3a016f248f6b47c379f4d2fba5997521f7ce70afb8af44d9902f90ae0f3`
+- bytes: 477
+
+````markdown
+# Proto files
+
+## `session.proto`
+
+`session.proto` originally came from NI grpc-device. Its contents and relative file path
+must match nimi-python, or else the `protobuf` will raise "duplicate symbol" errors. It
+is checked into this Git repo in order to reuse the `Session` message in the `.proto`
+files here.
+
+Origin:
+- Git repo: https://github.com/ni/nimi-python/blob/master/src/shared_protos/session.proto
+- Commit hash: c9787038978642a257b85c452f097469369ad184
+````
+
+<!--NI_OSS_SOURCE repo=ni-apis-python path=proto/session.proto sha256=f057874dabe2a463fdbf241201ac22deed37673c8fef86b70906e0a277e7d5e5 bytes=2518 -->
+## FILE: proto/session.proto
+
+- repository: `ni/ni-apis-python`
+- source_path: `proto/session.proto`
+- sha256: `f057874dabe2a463fdbf241201ac22deed37673c8fef86b70906e0a277e7d5e5`
+- bytes: 2518
+
+````protobuf
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "com.ni.grpc.device";
+option java_outer_classname = "NiDevice";
+option csharp_namespace = "NationalInstruments.Grpc.Device";
+
+package nidevice_grpc;
+
+service SessionUtilities {
+  // Provides a list of devices or chassis connected to server under localhost
+  rpc EnumerateDevices(EnumerateDevicesRequest)
+      returns (EnumerateDevicesResponse);
+
+  // Reserve a set of client defined resources for exclusive use
+  rpc Reserve(ReserveRequest) returns (ReserveResponse);
+
+  // Determines if a set of client defined resources is currently reserved by a
+  // specific client
+  rpc IsReservedByClient(IsReservedByClientRequest)
+      returns (IsReservedByClientResponse);
+
+  // Unreserves a previously reserved resource
+  rpc Unreserve(UnreserveRequest) returns (UnreserveResponse);
+
+  // Resets the server to a default state with no open sessions
+  rpc ResetServer(ResetServerRequest) returns (ResetServerResponse);
+}
+
+enum SessionInitializationBehavior {
+  SESSION_INITIALIZATION_BEHAVIOR_UNSPECIFIED = 0;
+  SESSION_INITIALIZATION_BEHAVIOR_INITIALIZE_NEW = 1;
+  SESSION_INITIALIZATION_BEHAVIOR_ATTACH_TO_EXISTING = 2;
+}
+
+message Session {
+  oneof session {
+    string name = 1;
+    uint32 id = 2;
+  }
+}
+
+message DeviceProperties {
+  string name = 1;
+  string model = 2;
+  string vendor = 3;
+  string serial_number = 4;
+  uint32 product_id = 5;
+}
+
+message EnumerateDevicesRequest {}
+
+message EnumerateDevicesResponse {
+  repeated DeviceProperties devices = 1;
+}
+
+message ReserveRequest {
+  // client defined string representing a set of reservable resources
+  string reservation_id = 1;
+  // client defined identifier for a specific client
+  string client_id = 2;
+}
+
+message ReserveResponse {
+  bool is_reserved = 1;
+}
+
+message IsReservedByClientRequest {
+  // client defined string representing a set of reservable resources
+  string reservation_id = 1;
+  // client defined identifier for a specific client
+  string client_id = 2;
+}
+
+message IsReservedByClientResponse {
+  bool is_reserved = 1;
+}
+
+message UnreserveRequest {
+  // client defined string representing a set of reservable resources
+  string reservation_id = 1;
+  // client defined identifier for a specific client
+  string client_id = 2;
+}
+
+message UnreserveResponse {
+  bool is_unreserved = 1;
+}
+
+message ResetServerRequest {}
+
+message ResetServerResponse {
+  bool is_server_reset = 1;
+}
+````
+
+<!--NI_OSS_SOURCE repo=ni-apis-python path=README.md sha256=f3095ba575cebf757643701162b15af366b695e49dd796a631fa3a2d0979861e bytes=6065 -->
+## FILE: README.md
+
+- repository: `ni/ni-apis-python`
+- source_path: `README.md`
+- sha256: `f3095ba575cebf757643701162b15af366b695e49dd796a631fa3a2d0979861e`
+- bytes: 6065
+
+````markdown
+# Table of Contents
+
+- [Table of Contents](#table-of-contents)
+- [About](#about)
+  - [Operating System Support](#operating-system-support)
+  - [Python Version Support](#python-version-support)
+
+# About
+
+`ni-apis-python` is a Git repository that provides Python packages for [NI's gRPC APIs](https://github.com/ni/ni-apis).
+
+NI created and supports these packages.
+
+- [`ni-grpc-extensions`](https://github.com/ni/ni-apis-python/tree/main/packages/ni-grpc-extensions) -- provides channel pool handling for gRPC communication
+- [`ni.datamonikers.v1.client`](https://github.com/ni/ni-apis-python/tree/main/packages/ni.datamonikers.v1.client) -- provides gRPC client code for the NI Data Moniker Service, version 1. The corresponding service is defined in the
+`ni.datamonikers.v1.proto` package.
+- [`ni.datamonikers.v1.proto`](https://github.com/ni/ni-apis-python/tree/main/packages/ni.datamonikers.v1.proto) -- provides Python stubs for the definitions in the `ni.datamonikers.v1` package. (.proto files at [ni/datamonikers/v1](https://github.com/ni/ni-apis/tree/main/ni/datamonikers/v1))
+- [`ni.grpcdevice.v1.proto`](https://github.com/ni/ni-apis-python/tree/main/packages/ni.grpcdevice.v1.proto) -- provides stubs for definitions in the `nidevice_grpc` package. (.proto files at [ni/grpcdevice/v1](https://github.com/ni/ni-apis/tree/main/ni/grpcdevice/v1))
+- [`ni.measurementlink.discovery.v1.client`](https://github.com/ni/ni-apis-python/tree/main/packages/ni.measurementlink.discovery.v1.client) -- provides gRPC client code for the NI
+Discovery Service, version 1. The corresponding service is defined in the
+`ni.measurementlink.discovery.v1.proto` package.
+- [`ni.measurementlink.discovery.v1.proto`](https://github.com/ni/ni-apis-python/tree/main/packages/ni.measurementlink.discovery.v1.proto) -- provides Python stubs for the definitions in the `ni.measurementlink.discovery.v1` package. (.proto files at [ni/measurementlink/discovery/v1](https://github.com/ni/ni-apis/tree/main/ni/measurementlink/discovery/v1))
+- [`ni.measurementlink.measurement.v1.proto`](https://github.com/ni/ni-apis-python/tree/main/packages/ni.measurementlink.measurement.v1.proto) -- provides Python stubs for the definitions in the `ni.measurementlink.measurement.v1` package. (.proto files at [ni/measurementlink/measurement/v1](https://github.com/ni/ni-apis/tree/main/ni/measurementlink/measurement/v1))
+- [`ni.measurementlink.measurement.v2.proto`](https://github.com/ni/ni-apis-python/tree/main/packages/ni.measurementlink.measurement.v2.proto) -- provides Python stubs for the definitions in the `ni.measurementlink.measurement.v2` package. (.proto files at [ni/measurementlink/measurement/v2](https://github.com/ni/ni-apis/tree/main/ni/measurementlink/measurement/v2))
+- [`ni.measurementlink.pinmap.v1.client`](https://github.com/ni/ni-apis-python/tree/main/packages/ni.measurementlink.pinmap.v1.client) -- provides gRPC client code for the NI Pin Map Service, version 1. The corresponding service is defined in the
+`ni.measurementlink.pinmap.v1.proto` package.
+- [`ni.measurementlink.pinmap.v1.proto`](https://github.com/ni/ni-apis-python/tree/main/packages/ni.measurementlink.pinmap.v1.proto) -- provides Python stubs for the definitions in the `ni.measurement.pinmap.v1` package. (.proto files at [ni/measurementlink/pinmap/v1](https://github.com/ni/ni-apis/tree/main/ni/measurementlink/pinmap/v1))
+- [`ni.measurementlink.proto`](https://github.com/ni/ni-apis-python/tree/main/packages/ni.measurementlink.proto) -- provides Python stubs for the definitions in the `ni.measurementlink` package. (.proto files at [ni/measurementlink](https://github.com/ni/ni-apis/tree/main/ni/measurementlink))
+- [`ni.measurementlink.sessionmanagement.v1.proto`](https://github.com/ni/ni-apis-python/tree/main/packages/ni.measurementlink.sessionmanagement.v1.proto) -- provides Python stubs for the definitions in the `ni.measurementlink.sessionmanagment.v1` package. (.proto files at [ni/measurementlink/sessionmanagement/v1](https://github.com/ni/ni-apis/tree/main/ni/measurementlink/sessionmanagement/v1))
+- [`ni.measurements.data.v1.client`](https://github.com/ni/ni-apis-python/tree/main/packages/ni.measurements.data.v1.client) -- provides gRPC client code for the NI Data Store Service, version 1. The corresponding service is defined in the
+`ni.measurements.data.v1.proto` package.
+- [`ni.measurements.data.v1.proto`](https://github.com/ni/ni-apis-python/tree/main/packages/ni.measurements.data.v1.proto) -- provides Python stubs for the definitions in the `ni.measurements.data.v1` package. (.proto files at [ni/measurements/data/v1](https://github.com/ni/ni-apis/tree/main/ni/measurements/data/v1))
+- [`ni.measurements.metadata.v1.client`](https://github.com/ni/ni-apis-python/tree/main/packages/ni.measurements.metadata.v1.client) -- provides gRPC client code for the NI Metadata Store Service, version 1. The corresponding service is defined in the
+`ni.measurements.metadata.v1.proto` package.
+- [`ni.measurements.metadata.v1.proto`](https://github.com/ni/ni-apis-python/tree/main/packages/ni.measurements.metadata.v1.proto) -- provides Python stubs for the definitions in the `ni.measurements.metadata.v1` package. (.proto files at [ni/measurements/metadata/v1](https://github.com/ni/ni-apis/tree/main/ni/measurements/metadata/v1))
+- [`ni.panels.v1.proto`](https://github.com/ni/ni-apis-python/tree/main/packages/ni.panels.v1.proto) -- provides Python stubs for the definitions in the `ni.panels.v1` package. (.proto files at [ni/panels/v1](https://github.com/ni/ni-apis/tree/main/ni/panels/v1))
+- [`ni.protobuf.types`](https://github.com/ni/ni-apis-python/tree/main/packages/ni.protobuf.types) -- provides Python stubs for the definitions in the `ni.protobuf.types` package. (.proto files at [ni/protobuf/types](https://github.com/ni/ni-apis/tree/main/ni/protobuf/types))
+
+## Operating System Support
+
+`ni-apis-python` supports Windows and Linux operating systems.
+
+## Python Version Support
+
+`ni-apis-python` supports CPython 3.10+.
+````
+
+<!--NI_OSS_SOURCE repo=ni-apis-python path=SECURITY.md sha256=902fdb6117cc80678811544ea01d98ec9e3afdde21c15b3940883623f71efb11 bytes=1330 -->
+## FILE: SECURITY.md
+
+- repository: `ni/ni-apis-python`
+- source_path: `SECURITY.md`
+- sha256: `902fdb6117cc80678811544ea01d98ec9e3afdde21c15b3940883623f71efb11`
+- bytes: 1330
+
+````markdown
+<!-- Begin NI SECURITY.md V1.0 -->
+
+# Security
+
+NI views the security of our software products as an important part of our commitment to our users.  This includes source code repositories managed through the [NI](https://github.com/ni) GitHub organization.
+
+## Reporting Security Issues
+
+We encourage you to report security vulnerabilities to us privately so we can follow the principle of [Coordinated Vulnerability Disclosure (CVD)](https://vuls.cert.org/confluence/display/CVD).  This allows us time to thoroughly investigate security issues and publicly disclose them when appropriate.
+
+**Please do not report security vulnerabilities through public GitHub issues.**
+
+Instead, please report them by sending an email to [security@ni.com](mailto:security@ni.com) with sufficient details about the type of issue, the impact of the issue, and how to reproduce the issue.  You may use the [NI PGP key](https://www.ni.com/en/support/security/pgp.html) to encrypt any sensitive communications you send to us. When you notify us of a potential security issue, our remediation process includes acknowledging receipt and coordinating any necessary response activities with you. 
+
+## Learn More
+
+To learn more about NI Security, please see [https://ni.com/security](https://ni.com/security)
+
+<!-- End NI SECURITY.md -->
+````
+
+<!--NI_OSS_SOURCE repo=ni-apis-python path=tools/grpc_generator/poetry.lock sha256=5adf1d6bae82815bd5429509ea1d5902b7044158167ea8680b24af8f6406fd08 bytes=150555 -->
+## FILE: tools/grpc_generator/poetry.lock
+
+- repository: `ni/ni-apis-python`
+- source_path: `tools/grpc_generator/poetry.lock`
+- sha256: `5adf1d6bae82815bd5429509ea1d5902b7044158167ea8680b24af8f6406fd08`
+- bytes: 150555
+
+````text
+# This file is automatically @generated by Poetry 2.1.4 and should not be changed by hand.
+
+[[package]]
+name = "ast-serialize"
+version = "0.5.0"
+description = "Python bindings for mypy AST serialization"
+optional = false
+python-versions = ">=3.7"
+groups = ["lint"]
+files = [
+    {file = "ast_serialize-0.5.0-cp314-cp314t-macosx_10_12_x86_64.whl", hash = "sha256:8f5c14f169eb0972c0c21bada5358b23d6047c76583b005234f865b11f1fa00a"},
+    {file = "ast_serialize-0.5.0-cp314-cp314t-macosx_11_0_arm64.whl", hash = "sha256:7d1a2de9de5be04652f0ed60738356ef94f66db37924a9499fffe98dc491aa0b"},
+    {file = "ast_serialize-0.5.0-cp314-cp314t-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:be5173fb66f9b49026d9d5a2ff0fc7c7009077107c0eb285b2d60fdf1fe10bd1"},
+    {file = "ast_serialize-0.5.0-cp314-cp314t-manylinux_2_17_armv7l.manylinux2014_armv7l.whl", hash = "sha256:f8015cd071ac1339924ee2b8098c93e00e155f30a16f40ec9816fcf84f4753f6"},
+    {file = "ast_serialize-0.5.0-cp314-cp314t-manylinux_2_17_ppc64le.manylinux2014_ppc64le.whl", hash = "sha256:5499e8797edff2a9186aa313ed382c6b422e798e9332d9953badcee6e69a88f2"},
+    {file = "ast_serialize-0.5.0-cp314-cp314t-manylinux_2_17_s390x.manylinux2014_s390x.whl", hash = "sha256:6848f2a093fb5548751a9a09bff8fcd229e2bbeb0e3331f391b6ae6d26cd9903"},
+    {file = "ast_serialize-0.5.0-cp314-cp314t-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:832d4c998e0b091fd60a6d6bceee535483c4d490de9ba85003af835225719261"},
+    {file = "ast_serialize-0.5.0-cp314-cp314t-manylinux_2_31_riscv64.whl", hash = "sha256:16db7c62ec0b8efe1d7afd283a388d8f74f2605d56032e5a37747d2de8dba027"},
+    {file = "ast_serialize-0.5.0-cp314-cp314t-manylinux_2_5_i686.manylinux1_i686.whl", hash = "sha256:baf5eb061eb5bccade4128ad42da33787d72f6013809cd1b590376ece8b3c937"},
+    {file = "ast_serialize-0.5.0-cp314-cp314t-musllinux_1_2_aarch64.whl", hash = "sha256:104e4a35bd7c124173c41760ef9aaea17ddb3f86c65cb643671d59afbe3ee94c"},
+    {file = "ast_serialize-0.5.0-cp314-cp314t-musllinux_1_2_armv7l.whl", hash = "sha256:36be371028fc1675acb38a331bde160dbab7ff907fdf00b67eb6911aa106951b"},
+    {file = "ast_serialize-0.5.0-cp314-cp314t-musllinux_1_2_i686.whl", hash = "sha256:061ee58bdb52341c8201a6df41182a977736bae3b7ded87ca7176ca25a8a47ab"},
+    {file = "ast_serialize-0.5.0-cp314-cp314t-musllinux_1_2_x86_64.whl", hash = "sha256:b15219e9cdc9f53f6f4cb51c009203507228226148c05c5e8fe451c28b435eb3"},
+    {file = "ast_serialize-0.5.0-cp314-cp314t-win32.whl", hash = "sha256:842d1c004bb466c7df036f95fabef789570541922b10976b12f5592a69cf0b38"},
+    {file = "ast_serialize-0.5.0-cp314-cp314t-win_amd64.whl", hash = "sha256:b0c06d760909b095cc466356dfccd05a1c7233a6ca191c020dca2c6a6f16c24c"},
+    {file = "ast_serialize-0.5.0-cp314-cp314t-win_arm64.whl", hash = "sha256:787baedb0262cc49e8ce37cc15c00ae818e46a165a3b36f5e21ed174998104cb"},
+    {file = "ast_serialize-0.5.0-cp39-abi3-macosx_10_12_x86_64.whl", hash = "sha256:0668aa9459cfa8c9c49ddd2163ebcf43088ba045ef7492af6fe22e0098303101"},
+    {file = "ast_serialize-0.5.0-cp39-abi3-macosx_11_0_arm64.whl", hash = "sha256:bf683d6363edf2b39eed6b6d4fe22d34b6203867a67e27134d9e2a2680c4bc4a"},
+    {file = "ast_serialize-0.5.0-cp39-abi3-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:9cc22cf0c9be65e71cf88fda130af60d61eb4a79370ad4cfe7900d48a4aa2211"},
+    {file = "ast_serialize-0.5.0-cp39-abi3-manylinux_2_17_armv7l.manylinux2014_armv7l.whl", hash = "sha256:f66173891548c9f2726bf27957b41cabce12fa679dc6da505ddbde4d4b3b31cf"},
+    {file = "ast_serialize-0.5.0-cp39-abi3-manylinux_2_17_ppc64le.manylinux2014_ppc64le.whl", hash = "sha256:e42d729ef2be96a14efbad355093284739e3670ece3e534f82cc8832790911d9"},
+    {file = "ast_serialize-0.5.0-cp39-abi3-manylinux_2_17_s390x.manylinux2014_s390x.whl", hash = "sha256:b725026bafa801dbd7310eb13a75f0a2e370e7e51b2cb225f9d21fcfadf919ee"},
+    {file = "ast_serialize-0.5.0-cp39-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:b54f60c1d78767a53b67eaa663f0dfac3afe606aa07f1301572f588b73d64809"},
+    {file = "ast_serialize-0.5.0-cp39-abi3-manylinux_2_31_riscv64.whl", hash = "sha256:27d51654fc240a1e87e742d353d98eb45b75f62f129086b3596ab53df2ac2a43"},
+    {file = "ast_serialize-0.5.0-cp39-abi3-manylinux_2_5_i686.manylinux1_i686.whl", hash = "sha256:2782c36237c46dd1674542f2109740ea5ea485a169bf1431939ada0434e17934"},
+    {file = "ast_serialize-0.5.0-cp39-abi3-musllinux_1_2_aarch64.whl", hash = "sha256:1943db345233cc7194a470f13afa9c59772c0b123dea0c9414c4d4ca54369759"},
+    {file = "ast_serialize-0.5.0-cp39-abi3-musllinux_1_2_armv7l.whl", hash = "sha256:df1c00022cbbcb064bfaa505aa9c9295362443ce5dacb459d1331d3da353f887"},
+    {file = "ast_serialize-0.5.0-cp39-abi3-musllinux_1_2_i686.whl", hash = "sha256:cae65289fc456fde04af979a2be09302ef5d8ab92ef23e596d6746dc267ada27"},
+    {file = "ast_serialize-0.5.0-cp39-abi3-musllinux_1_2_x86_64.whl", hash = "sha256:239a4c354e8d676e9d94631d1d4a64edc6b266f86ff3a5a80aedd344f342c01d"},
+    {file = "ast_serialize-0.5.0-cp39-abi3-win32.whl", hash = "sha256:143a4ef63285a075871908fda3672dc21864b83a8ec3ee12304aa3e4c5387b9a"},
+    {file = "ast_serialize-0.5.0-cp39-abi3-win_amd64.whl", hash = "sha256:cf25572c526add400f26a4750dc6ce0c3bb93fc1f75e7ae0cad4ce4f2cd5c590"},
+    {file = "ast_serialize-0.5.0-cp39-abi3-win_arm64.whl", hash = "sha256:92a31c9c20d25a076edaeec76b128a3535d74a24f340b9a8a7e96c9b86dc9642"},
+    {file = "ast_serialize-0.5.0.tar.gz", hash = "sha256:5880091bfe6f4f986f22866375c2e884843e7a0b6343ae41aeea659613d879b6"},
+]
+
+[[package]]
+name = "bandit"
+version = "1.9.4"
+description = "Security oriented static analyser for python code."
+optional = false
+python-versions = ">=3.10"
+groups = ["lint"]
+files = [
+    {file = "bandit-1.9.4-py3-none-any.whl", hash = "sha256:f89ffa663767f5a0585ea075f01020207e966a9c0f2b9ef56a57c7963a3f6f8e"},
+    {file = "bandit-1.9.4.tar.gz", hash = "sha256:b589e5de2afe70bd4d53fa0c1da6199f4085af666fde00e8a034f152a52cd628"},
+]
+
+[package.dependencies]
+colorama = {version = ">=0.3.9", markers = "platform_system == \"Windows\""}
+PyYAML = ">=5.3.1"
+rich = "*"
+stevedore = ">=1.20.0"
+tomli = {version = ">=1.1.0", optional = true, markers = "python_version < \"3.11\" and extra == \"toml\""}
+
+[package.extras]
+baseline = ["GitPython (>=3.1.30)"]
+sarif = ["jschema-to-python (>=1.2.3)", "sarif-om (>=1.0.4)"]
+test = ["beautifulsoup4 (>=4.8.0)", "coverage (>=4.5.4)", "fixtures (>=3.0.0)", "flake8 (>=4.0.0)", "pylint (==1.9.4)", "stestr (>=2.5.0)", "testscenarios (>=0.5.0)", "testtools (>=2.3.0)"]
+toml = ["tomli (>=1.1.0) ; python_version < \"3.11\""]
+yaml = ["PyYAML"]
+
+[[package]]
+name = "better-diff"
+version = "0.1.4"
+description = "A simple library for printing better diffs based on the stdlib unified_diff format."
+optional = false
+python-versions = "<4.0,>=3.8"
+groups = ["lint"]
+files = [
+    {file = "better_diff-0.1.4-py3-none-any.whl", hash = "sha256:06e63358b2047ae2695abd96316f47c6d3c38b9e641f53012279878d66d8792e"},
+    {file = "better_diff-0.1.4.tar.gz", hash = "sha256:920ca76bdbcd2f0c361fa5d9a2d4727624a3545d6cb467b1b6616cad8a634de7"},
+]
+
+[[package]]
+name = "black"
+version = "25.12.0"
+description = "The uncompromising code formatter."
+optional = false
+python-versions = ">=3.10"
+groups = ["lint"]
+files = [
+    {file = "black-25.12.0-cp310-cp310-macosx_10_9_x86_64.whl", hash = "sha256:f85ba1ad15d446756b4ab5f3044731bf68b777f8f9ac9cdabd2425b97cd9c4e8"},
+    {file = "black-25.12.0-cp310-cp310-macosx_11_0_arm64.whl", hash = "sha256:546eecfe9a3a6b46f9d69d8a642585a6eaf348bcbbc4d87a19635570e02d9f4a"},
+    {file = "black-25.12.0-cp310-cp310-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:17dcc893da8d73d8f74a596f64b7c98ef5239c2cd2b053c0f25912c4494bf9ea"},
+    {file = "black-25.12.0-cp310-cp310-win_amd64.whl", hash = "sha256:09524b0e6af8ba7a3ffabdfc7a9922fb9adef60fed008c7cd2fc01f3048e6e6f"},
+    {file = "black-25.12.0-cp310-cp310-win_arm64.whl", hash = "sha256:b162653ed89eb942758efeb29d5e333ca5bb90e5130216f8369857db5955a7da"},
+    {file = "black-25.12.0-cp311-cp311-macosx_10_9_x86_64.whl", hash = "sha256:d0cfa263e85caea2cff57d8f917f9f51adae8e20b610e2b23de35b5b11ce691a"},
+    {file = "black-25.12.0-cp311-cp311-macosx_11_0_arm64.whl", hash = "sha256:1a2f578ae20c19c50a382286ba78bfbeafdf788579b053d8e4980afb079ab9be"},
+    {file = "black-25.12.0-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:d3e1b65634b0e471d07ff86ec338819e2ef860689859ef4501ab7ac290431f9b"},
+    {file = "black-25.12.0-cp311-cp311-win_amd64.whl", hash = "sha256:a3fa71e3b8dd9f7c6ac4d818345237dfb4175ed3bf37cd5a581dbc4c034f1ec5"},
+    {file = "black-25.12.0-cp311-cp311-win_arm64.whl", hash = "sha256:51e267458f7e650afed8445dc7edb3187143003d52a1b710c7321aef22aa9655"},
+    {file = "black-25.12.0-cp312-cp312-macosx_10_13_x86_64.whl", hash = "sha256:31f96b7c98c1ddaeb07dc0f56c652e25bdedaac76d5b68a059d998b57c55594a"},
+    {file = "black-25.12.0-cp312-cp312-macosx_11_0_arm64.whl", hash = "sha256:05dd459a19e218078a1f98178c13f861fe6a9a5f88fc969ca4d9b49eb1809783"},
+    {file = "black-25.12.0-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:c1f68c5eff61f226934be6b5b80296cf6939e5d2f0c2f7d543ea08b204bfaf59"},
+    {file = "black-25.12.0-cp312-cp312-win_amd64.whl", hash = "sha256:274f940c147ddab4442d316b27f9e332ca586d39c85ecf59ebdea82cc9ee8892"},
+    {file = "black-25.12.0-cp312-cp312-win_arm64.whl", hash = "sha256:169506ba91ef21e2e0591563deda7f00030cb466e747c4b09cb0a9dae5db2f43"},
+    {file = "black-25.12.0-cp313-cp313-macosx_10_13_x86_64.whl", hash = "sha256:a05ddeb656534c3e27a05a29196c962877c83fa5503db89e68857d1161ad08a5"},
+    {file = "black-25.12.0-cp313-cp313-macosx_11_0_arm64.whl", hash = "sha256:9ec77439ef3e34896995503865a85732c94396edcc739f302c5673a2315e1e7f"},
+    {file = "black-25.12.0-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:0e509c858adf63aa61d908061b52e580c40eae0dfa72415fa47ac01b12e29baf"},
+    {file = "black-25.12.0-cp313-cp313-win_amd64.whl", hash = "sha256:252678f07f5bac4ff0d0e9b261fbb029fa530cfa206d0a636a34ab445ef8ca9d"},
+    {file = "black-25.12.0-cp313-cp313-win_arm64.whl", hash = "sha256:bc5b1c09fe3c931ddd20ee548511c64ebf964ada7e6f0763d443947fd1c603ce"},
+    {file = "black-25.12.0-cp314-cp314-macosx_10_15_x86_64.whl", hash = "sha256:0a0953b134f9335c2434864a643c842c44fba562155c738a2a37a4d61f00cad5"},
+    {file = "black-25.12.0-cp314-cp314-macosx_11_0_arm64.whl", hash = "sha256:2355bbb6c3b76062870942d8cc450d4f8ac71f9c93c40122762c8784df49543f"},
+    {file = "black-25.12.0-cp314-cp314-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:9678bd991cc793e81d19aeeae57966ee02909877cb65838ccffef24c3ebac08f"},
+    {file = "black-25.12.0-cp314-cp314-win_amd64.whl", hash = "sha256:97596189949a8aad13ad12fcbb4ae89330039b96ad6742e6f6b45e75ad5cfd83"},
+    {file = "black-25.12.0-cp314-cp314-win_arm64.whl", hash = "sha256:778285d9ea197f34704e3791ea9404cd6d07595745907dd2ce3da7a13627b29b"},
+    {file = "black-25.12.0-py3-none-any.whl", hash = "sha256:48ceb36c16dbc84062740049eef990bb2ce07598272e673c17d1a7720c71c828"},
+    {file = "black-25.12.0.tar.gz", hash = "sha256:8d3dd9cea14bff7ddc0eb243c811cdb1a011ebb4800a5f0335a01a68654796a7"},
+]
+
+[package.dependencies]
+click = ">=8.0.0"
+mypy-extensions = ">=0.4.3"
+packaging = ">=22.0"
+pathspec = ">=0.9.0"
+platformdirs = ">=2"
+pytokens = ">=0.3.0"
+tomli = {version = ">=1.1.0", markers = "python_version < \"3.11\""}
+typing-extensions = {version = ">=4.0.1", markers = "python_version < \"3.11\""}
+
+[package.extras]
+colorama = ["colorama (>=0.4.3)"]
+d = ["aiohttp (>=3.10)"]
+jupyter = ["ipython (>=7.8.0)", "tokenize-rt (>=3.2.0)"]
+uvloop = ["uvloop (>=0.15.2)"]
+
+[[package]]
+name = "click"
+version = "8.4.2"
+description = "Composable command line interface toolkit"
+optional = false
+python-versions = ">=3.10"
+groups = ["main", "lint"]
+files = [
+    {file = "click-8.4.2-py3-none-any.whl", hash = "sha256:e6f9f66136c816745b9d65817da91d61d957fb16e02e4dcd0552553c5a197b76"},
+    {file = "click-8.4.2.tar.gz", hash = "sha256:9a6cea6e60b17ebe0a44c5cc636d94f09bd66142c1cd7d8b4cd731c4917a15f6"},
+]
+
+[package.dependencies]
+colorama = {version = "*", markers = "platform_system == \"Windows\""}
+
+[[package]]
+name = "colorama"
+version = "0.4.6"
+description = "Cross-platform colored terminal text."
+optional = false
+python-versions = "!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*,!=3.4.*,!=3.5.*,!=3.6.*,>=2.7"
+groups = ["main", "lint", "test"]
+files = [
+    {file = "colorama-0.4.6-py2.py3-none-any.whl", hash = "sha256:4f1d9991f5acc0ca119f9d443620b77f9d6b33703e51011c16baf57afb285fc6"},
+    {file = "colorama-0.4.6.tar.gz", hash = "sha256:08695f5cb7ed6e0531a20572697297273c47b8cae5a63ffc6d6ed5c201be6e44"},
+]
+markers = {main = "platform_system == \"Windows\"", lint = "platform_system == \"Windows\"", test = "sys_platform == \"win32\""}
+
+[[package]]
+name = "coverage"
+version = "7.14.3"
+description = "Code coverage measurement for Python"
+optional = false
+python-versions = ">=3.10"
+groups = ["test"]
+files = [
+    {file = "coverage-7.14.3-cp310-cp310-macosx_10_9_x86_64.whl", hash = "sha256:360bec1f58e7243e3405d3bdf7a1a8115aa9b448d54dc7cd6f7b7e0e9406b62e"},
+    {file = "coverage-7.14.3-cp310-cp310-macosx_11_0_arm64.whl", hash = "sha256:ed68faa5e85de2f3e400bc3f122e5c82735a58c8bb24b9f63a2215954ba17b2d"},
+    {file = "coverage-7.14.3-cp310-cp310-manylinux1_i686.manylinux_2_28_i686.manylinux_2_5_i686.whl", hash = "sha256:830c1fca669c572dec37ce9c838224ee45aac5be0f6961edf871e82e49d6537c"},
+    {file = "coverage-7.14.3-cp310-cp310-manylinux1_x86_64.manylinux_2_28_x86_64.manylinux_2_5_x86_64.whl", hash = "sha256:a64caee2193563601dbaaa55fe2dcf597debef04a2f8f1fa8a07aa4bb7ac7a1e"},
+    {file = "coverage-7.14.3-cp310-cp310-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:0096fd7559178f0cc9cf088f2dbd2a02ef85bacaa69732c633517286b4494610"},
+    {file = "coverage-7.14.3-cp310-cp310-manylinux2014_ppc64le.manylinux_2_17_ppc64le.manylinux_2_28_ppc64le.whl", hash = "sha256:6197e5a00183c11a8ce7c6abd18be1a9189fd8399084ffc95196f4f0db4f2137"},
+    {file = "coverage-7.14.3-cp310-cp310-manylinux_2_31_riscv64.manylinux_2_39_riscv64.whl", hash = "sha256:7dfe427045520d6abca33687dfef767b4f635015893a1816c5decb12eb72ce18"},
+    {file = "coverage-7.14.3-cp310-cp310-musllinux_1_2_aarch64.whl", hash = "sha256:9a3f142070eb7b82fc4085a55d887396f9c4e21250bccebe2ba22502c45b9647"},
+    {file = "coverage-7.14.3-cp310-cp310-musllinux_1_2_i686.whl", hash = "sha256:64b2055bb6e0dc945af35cdeceb3633e6ed9273475ef3af85592410fd6803803"},
+    {file = "coverage-7.14.3-cp310-cp310-musllinux_1_2_ppc64le.whl", hash = "sha256:1551b4caac3e3ec9f2bfcec6bf3776e01c0edbdd2e240431a50ca1a1aac72c27"},
+    {file = "coverage-7.14.3-cp310-cp310-musllinux_1_2_riscv64.whl", hash = "sha256:583d50d59142f8549470bd6390471d0fe8b8c8d69d6a0f28ac71e05380cef640"},
+    {file = "coverage-7.14.3-cp310-cp310-musllinux_1_2_x86_64.whl", hash = "sha256:e0bb8a6bc7015efdf8a928753b25da1b9ca2d6f24ef04d2ee0688e486f32aae7"},
+    {file = "coverage-7.14.3-cp310-cp310-win32.whl", hash = "sha256:d48400185564042287dc487c1f016a3397f18ab4f4c5d5ec36edc218f7ffa35b"},
+    {file = "coverage-7.14.3-cp310-cp310-win_amd64.whl", hash = "sha256:eadea7aba74e40adee867a8c0eec17b820b061d308a4b014f7a0e118c2b0aa61"},
+    {file = "coverage-7.14.3-cp311-cp311-macosx_10_9_x86_64.whl", hash = "sha256:e574801e1d643561594aa021206c46d80b257e9853087090ba97bed8b0a509d3"},
+    {file = "coverage-7.14.3-cp311-cp311-macosx_11_0_arm64.whl", hash = "sha256:f82b6bb7d75a2613e85d07cefa3a8c973d0544a8993337f6e2728e4a1e94c305"},
+    {file = "coverage-7.14.3-cp311-cp311-manylinux1_i686.manylinux_2_28_i686.manylinux_2_5_i686.whl", hash = "sha256:a2335ea5fed26af2e831094964fa3f8fae60b45f7e37fcc2d3b615b2add3ad87"},
+    {file = "coverage-7.14.3-cp311-cp311-manylinux1_x86_64.manylinux_2_28_x86_64.manylinux_2_5_x86_64.whl", hash = "sha256:fbb8c3a98e779013786ae01d229662aeacbc77100efbd3f2f245219ace5af700"},
+    {file = "coverage-7.14.3-cp311-cp311-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:ac082660de8f429ba0ea363595abb838998570b9a7546777c60f413ab902bbde"},
+    {file = "coverage-7.14.3-cp311-cp311-manylinux2014_ppc64le.manylinux_2_17_ppc64le.manylinux_2_28_ppc64le.whl", hash = "sha256:8ac012839ff7e396030f1e94e10553a431d14e4de2ab65cb3acb72bbd5628ca2"},
+    {file = "coverage-7.14.3-cp311-cp311-manylinux_2_31_riscv64.manylinux_2_39_riscv64.whl", hash = "sha256:5952f8c1bda2a5347154450379316e6dfa4d934d62ca35f6784451e6f55074fb"},
+    {file = "coverage-7.14.3-cp311-cp311-musllinux_1_2_aarch64.whl", hash = "sha256:8cf0f2509acb4619e2471a1951089054dd58ebea7a912066d2ea56dd4c24ca4a"},
+    {file = "coverage-7.14.3-cp311-cp311-musllinux_1_2_i686.whl", hash = "sha256:2e41fd3aab806770008279a93879b0924b16247e09ab537c043d08bbca53b4ab"},
+    {file = "coverage-7.14.3-cp311-cp311-musllinux_1_2_ppc64le.whl", hash = "sha256:f0a47095963cfe054e0df178daca95aec21e680d6076da807c3add28dfe920f7"},
+    {file = "coverage-7.14.3-cp311-cp311-musllinux_1_2_riscv64.whl", hash = "sha256:a090cbf9521e78ffdb2fcf448b72902afe9f5923ff6a12d5c0d0120200348af9"},
+    {file = "coverage-7.14.3-cp311-cp311-musllinux_1_2_x86_64.whl", hash = "sha256:4d310baf69a4fbe8a098ce727e4808a34866ac718a6f759ae659cbd3221358bc"},
+    {file = "coverage-7.14.3-cp311-cp311-win32.whl", hash = "sha256:74fdd718d88fe144f4579b8747873a07ec3f04cb837d5faec5a25d9e22fa31a8"},
+    {file = "coverage-7.14.3-cp311-cp311-win_amd64.whl", hash = "sha256:cc96aa922e21d4bc5d5ed3c915cef27dfcbc13686f47d5e378d647fbfba655a2"},
+    {file = "coverage-7.14.3-cp311-cp311-win_arm64.whl", hash = "sha256:c66f9f9d4f1e9712eb9b1de5310f881d4e2188cfcba5065e1a8490f38687f2c4"},
+    {file = "coverage-7.14.3-cp312-cp312-macosx_10_13_x86_64.whl", hash = "sha256:3d74ff26299c4879ce3a4d826f9d3d4d556fd285fde7bbce3c0ef5a8ab1cec24"},
+    {file = "coverage-7.14.3-cp312-cp312-macosx_11_0_arm64.whl", hash = "sha256:96150a9cf3468ea20f0bc5d0e21b3df8972c31480ef90fa7614b773cc6429665"},
+    {file = "coverage-7.14.3-cp312-cp312-manylinux1_i686.manylinux_2_28_i686.manylinux_2_5_i686.whl", hash = "sha256:27d07a46500ba23515b838dbcf52512026af04090755cf6cc64166d88c9b9a1a"},
+    {file = "coverage-7.14.3-cp312-cp312-manylinux1_x86_64.manylinux_2_28_x86_64.manylinux_2_5_x86_64.whl", hash = "sha256:621e13c6108234d7960aaf5762ab5c3c00f33c30c15af06dcbff0c73bf112727"},
+    {file = "coverage-7.14.3-cp312-cp312-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:4b60ca6d8af70473491a15a343cbabab2e8f9ea66a4376e81c7aa24876a6f977"},
+    {file = "coverage-7.14.3-cp312-cp312-manylinux2014_ppc64le.manylinux_2_17_ppc64le.manylinux_2_28_ppc64le.whl", hash = "sha256:c90a7cdd5e380e1ce02f19792e2ac2fbfbf177e35a27e69fd3e873b30d895c0c"},
+    {file = "coverage-7.14.3-cp312-cp312-manylinux_2_31_riscv64.manylinux_2_39_riscv64.whl", hash = "sha256:5d788e5fd55347eef06ca0732c77d04a264de67e8ff24631270cdff3767a60cf"},
+    {file = "coverage-7.14.3-cp312-cp312-musllinux_1_2_aarch64.whl", hash = "sha256:62c7f79db2851c95ef020e5d28b97afde3daf9f7febcd35b53e05638f729063f"},
+    {file = "coverage-7.14.3-cp312-cp312-musllinux_1_2_i686.whl", hash = "sha256:90f7608aeb5d9b60b523b9fb2a4ee1973867cc4865a3f26fe6c7577073b70205"},
+    {file = "coverage-7.14.3-cp312-cp312-musllinux_1_2_ppc64le.whl", hash = "sha256:1e3b91f9c4740aeb571ecf82e5e8d8e4ab62d34fcb5a5d4e5baa38c6f7d2857c"},
+    {file = "coverage-7.14.3-cp312-cp312-musllinux_1_2_riscv64.whl", hash = "sha256:c946099774a7699de03cbd0ff0a64e21aed4525eed9d959adde4afe6d15758ef"},
+    {file = "coverage-7.14.3-cp312-cp312-musllinux_1_2_x86_64.whl", hash = "sha256:16b206e521feb8b7133a45754643dead0538489cf8b783b90cf5f4e3299625fd"},
+    {file = "coverage-7.14.3-cp312-cp312-win32.whl", hash = "sha256:ea3169c7116eb6cdf7608c6c7da9ecfcb3da40688e3a510fac2d1d2bafd6dc35"},
+    {file = "coverage-7.14.3-cp312-cp312-win_amd64.whl", hash = "sha256:7ea52fc08f007bcc494d4bb3df3851e95843d881860ba38fe2c64dc100db5e7d"},
+    {file = "coverage-7.14.3-cp312-cp312-win_arm64.whl", hash = "sha256:8cec0ad652ec57790970d817490105bd917d783c2f7b38d6b58a0ca312e1a336"},
+    {file = "coverage-7.14.3-cp313-cp313-macosx_10_13_x86_64.whl", hash = "sha256:47968988b367990ae4ab17523790c38cd125e02c6bfd379b6022be2d40bdc38c"},
+    {file = "coverage-7.14.3-cp313-cp313-macosx_11_0_arm64.whl", hash = "sha256:0ee68f5c34812780f3a7063382c0a9fcbb99985b7ddcdcaa626e4f3fb2e0783a"},
+    {file = "coverage-7.14.3-cp313-cp313-manylinux1_i686.manylinux_2_28_i686.manylinux_2_5_i686.whl", hash = "sha256:fa9e5c6857a7e80fa22ace5cf3550ae392bbfc322f1d8dd2d2d5a8be38cec027"},
+    {file = "coverage-7.14.3-cp313-cp313-manylinux1_x86_64.manylinux_2_28_x86_64.manylinux_2_5_x86_64.whl", hash = "sha256:98a0859b0e98e43e1178a9402e19c8127766b14f7109a374d976e5a62c0e5c73"},
+    {file = "coverage-7.14.3-cp313-cp313-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:69918344541ed9c8368566c2adc03c0e33d4550d7faa87d1b35e49b6a3286ea9"},
+    {file = "coverage-7.14.3-cp313-cp313-manylinux2014_ppc64le.manylinux_2_17_ppc64le.manylinux_2_28_ppc64le.whl", hash = "sha256:b7f300ac92cd4b570724c8ffbbd0c130fee298d2447f41d5a3abf58976fae1de"},
+    {file = "coverage-7.14.3-cp313-cp313-manylinux_2_31_riscv64.manylinux_2_39_riscv64.whl", hash = "sha256:11a7ec9f97ab950f4c5af62229befc7faf208fdbc0116d3902d7e306cf2c5abd"},
+    {file = "coverage-7.14.3-cp313-cp313-musllinux_1_2_aarch64.whl", hash = "sha256:a571bd889cd36c5922ce8e42e059f9d37d02301531d11374afa4c87a578625d5"},
+    {file = "coverage-7.14.3-cp313-cp313-musllinux_1_2_i686.whl", hash = "sha256:de76caefc8deabb0dd1678b6a980be97d14c8d87e213ac194dbf8b09e96d63fb"},
+    {file = "coverage-7.14.3-cp313-cp313-musllinux_1_2_ppc64le.whl", hash = "sha256:d20a15c622194234161535459affa8f7905830391c9ccfa060d495dbfe3a1c7f"},
+    {file = "coverage-7.14.3-cp313-cp313-musllinux_1_2_riscv64.whl", hash = "sha256:b488bd4b23397db62e7a9459129d01ff06a846582a732efd24834b24a6ada498"},
+    {file = "coverage-7.14.3-cp313-cp313-musllinux_1_2_x86_64.whl", hash = "sha256:6a3693b4153394d265f44fb855fdc80e72403024d4d6f91c4871b334d028e4e0"},
+    {file = "coverage-7.14.3-cp313-cp313-win32.whl", hash = "sha256:338b19131ab1a6b767b462bfcbaa692e7ae22f24463e39d49b02a83410ff6b37"},
+    {file = "coverage-7.14.3-cp313-cp313-win_amd64.whl", hash = "sha256:b3d77f7f196abdef7e01415de1bce09f216189e83e58159cfeef2b92d0464994"},
+    {file = "coverage-7.14.3-cp313-cp313-win_arm64.whl", hash = "sha256:e6230e688c7c3e65cedd41a774eb4ec221adc6bfee13768231015b702d5e4150"},
+    {file = "coverage-7.14.3-cp314-cp314-macosx_10_15_x86_64.whl", hash = "sha256:605ab2b566a22bd94834529d66d295c364aba84afd3e5498285c7a524017b1fc"},
+    {file = "coverage-7.14.3-cp314-cp314-macosx_11_0_arm64.whl", hash = "sha256:a3c2134809e80fac091bfed18a6991b5a5eb5df5ae32b17ac4f4f99864b73dd7"},
+    {file = "coverage-7.14.3-cp314-cp314-manylinux1_i686.manylinux_2_28_i686.manylinux_2_5_i686.whl", hash = "sha256:c02efd507227bde9969cab0db8f48890eb3b5dcad6afac57a4792df4133543ce"},
+    {file = "coverage-7.14.3-cp314-cp314-manylinux1_x86_64.manylinux_2_28_x86_64.manylinux_2_5_x86_64.whl", hash = "sha256:1bb93c2aa61d2a5b38f1526546d95cf4132cb681e541a337bf8dfd092be816e5"},
+    {file = "coverage-7.14.3-cp314-cp314-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:f502e948e03e866538048bba081c075caaa62e5bda6ea5b7432e45f587eb462a"},
+    {file = "coverage-7.14.3-cp314-cp314-manylinux2014_ppc64le.manylinux_2_17_ppc64le.manylinux_2_28_ppc64le.whl", hash = "sha256:9973ef2463f8e6cfb61a6324126bb3e17d67a85f22f58d856e583ea2e3ca6501"},
+    {file = "coverage-7.14.3-cp314-cp314-manylinux_2_31_riscv64.manylinux_2_39_riscv64.whl", hash = "sha256:9be4e7d4c5ca0427889f8f9d614bd630c2be741b1de7699bca3b2b6c0e41003e"},
+    {file = "coverage-7.14.3-cp314-cp314-musllinux_1_2_aarch64.whl", hash = "sha256:a574912f3bde4b0619f6e97d01aa590b70998859244793769eb3a6df78ee56d3"},
+    {file = "coverage-7.14.3-cp314-cp314-musllinux_1_2_i686.whl", hash = "sha256:e343fb086c9cd780b38622fea7c369acd64c1a0724312149b5d769c387a2b1f5"},
+    {file = "coverage-7.14.3-cp314-cp314-musllinux_1_2_ppc64le.whl", hash = "sha256:3c68df8e61f1e09633fefc7538297145623957a048534368c9d212782aa5e845"},
+    {file = "coverage-7.14.3-cp314-cp314-musllinux_1_2_riscv64.whl", hash = "sha256:3e5b550a128419373c2f6cec28a244207013ef15f5cbcff6a5ca09d1dfaaf027"},
+    {file = "coverage-7.14.3-cp314-cp314-musllinux_1_2_x86_64.whl", hash = "sha256:2bfc4dd0a912329eccc7484a7d0b2a38032b38c40663b1e1ac595f10c457954b"},
+    {file = "coverage-7.14.3-cp314-cp314-win32.whl", hash = "sha256:0423d64c013057a06e70f070f073cec4b0cbc7d2b27f3c7007292f2ff1d52965"},
+    {file = "coverage-7.14.3-cp314-cp314-win_amd64.whl", hash = "sha256:92c22e19ce64ca3f2ad751f16f14df1468b4c231bd6af97185063a9c292a0cb3"},
+    {file = "coverage-7.14.3-cp314-cp314-win_arm64.whl", hash = "sha256:41de778bd41780586e2b04912079c73089ab5d839624e28db3bdb26de638da92"},
+    {file = "coverage-7.14.3-cp314-cp314t-macosx_10_15_x86_64.whl", hash = "sha256:8427f370ca67db4c975d2a26acfc0e5783ca0b52444dbc50278ace0f35445949"},
+    {file = "coverage-7.14.3-cp314-cp314t-macosx_11_0_arm64.whl", hash = "sha256:d8e88f335544a47e22ae2e45b344772925ec65166555c958720d5ed971880891"},
+    {file = "coverage-7.14.3-cp314-cp314t-manylinux1_i686.manylinux_2_28_i686.manylinux_2_5_i686.whl", hash = "sha256:beaab199b9e5ceaf5a225e16a9d4df136f2a1eae0a5c20de1e277c8a5225f388"},
+    {file = "coverage-7.14.3-cp314-cp314t-manylinux1_x86_64.manylinux_2_28_x86_64.manylinux_2_5_x86_64.whl", hash = "sha256:b3ff255799f5a1676c71c1c32ec01fd043aa09d57b3d95764b24992757184784"},
+    {file = "coverage-7.14.3-cp314-cp314t-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:878832eaac515b62decfa76965aed558775f86bf1fc8cca76993c0c84ae31aed"},
+    {file = "coverage-7.14.3-cp314-cp314t-manylinux2014_ppc64le.manylinux_2_17_ppc64le.manylinux_2_28_ppc64le.whl", hash = "sha256:611e62cb9386096d81b63e0a05330750268617231e7bd598e1fe77482a2c58a5"},
+    {file = "coverage-7.14.3-cp314-cp314t-manylinux_2_31_riscv64.manylinux_2_39_riscv64.whl", hash = "sha256:02c41de2a88011b893050fc9830267d927a50a215f7ad5ec17349db7090ccf26"},
+    {file = "coverage-7.14.3-cp314-cp314t-musllinux_1_2_aarch64.whl", hash = "sha256:526ce9721116af23b1065089f0b75046fe521e7772ab94b641cd66b7a0421889"},
+    {file = "coverage-7.14.3-cp314-cp314t-musllinux_1_2_i686.whl", hash = "sha256:e4ed44705ca4bead6fc977a8b741f2145608289b33c8a9b42a95d0f15aedbf4d"},
+    {file = "coverage-7.14.3-cp314-cp314t-musllinux_1_2_ppc64le.whl", hash = "sha256:2415902f385a23dcc4ccd26e0ba803249a169af6a930c003a4c715eeb9a5444e"},
+    {file = "coverage-7.14.3-cp314-cp314t-musllinux_1_2_riscv64.whl", hash = "sha256:b75ee850fc2d7c831e883220c445b035f2224de2ba6103f1e56dbd237ab913f7"},
+    {file = "coverage-7.14.3-cp314-cp314t-musllinux_1_2_x86_64.whl", hash = "sha256:dc9b4e35e7c3920e925ba7f14886fd5fbe481232754624e832ddba66c7535635"},
+    {file = "coverage-7.14.3-cp314-cp314t-win32.whl", hash = "sha256:7b27c822a8161afbe48e99f1adfb098d270ae7e0f7d7b0555ce110529bdb69cc"},
+    {file = "coverage-7.14.3-cp314-cp314t-win_amd64.whl", hash = "sha256:39e1dbbb6ff2c338e0196a482558a792a1de3aa64261196f5cdb3da016ad9cda"},
+    {file = "coverage-7.14.3-cp314-cp314t-win_arm64.whl", hash = "sha256:68520c90babfa2d560eca6d497921ed3a4f469623bd709733124491b2aa8ef3f"},
+    {file = "coverage-7.14.3-py3-none-any.whl", hash = "sha256:fb7e18afb6e903c1a92401a2f0501ac277dca527bb9ca6fe1f691a8a0026a0e8"},
+    {file = "coverage-7.14.3.tar.gz", hash = "sha256:1a7563a443f3d53fdeb040ec8c9f7466aed7ca3dc5891aa09d3ca3625fa4387f"},
+]
+
+[package.dependencies]
+tomli = {version = "*", optional = true, markers = "python_full_version <= \"3.11.0a6\" and extra == \"toml\""}
+
+[package.extras]
+toml = ["tomli ; python_full_version <= \"3.11.0a6\""]
+
+[[package]]
+name = "exceptiongroup"
+version = "1.3.1"
+description = "Backport of PEP 654 (exception groups)"
+optional = false
+python-versions = ">=3.7"
+groups = ["test"]
+markers = "python_version == \"3.10\""
+files = [
+    {file = "exceptiongroup-1.3.1-py3-none-any.whl", hash = "sha256:a7a39a3bd276781e98394987d3a5701d0c4edffb633bb7a5144577f82c773598"},
+    {file = "exceptiongroup-1.3.1.tar.gz", hash = "sha256:8b412432c6055b0b7d14c310000ae93352ed6754f70fa8f7c34141f91c4e3219"},
+]
+
+[package.dependencies]
+typing-extensions = {version = ">=4.6.0", markers = "python_version < \"3.13\""}
+
+[package.extras]
+test = ["pytest (>=6)"]
+
+[[package]]
+name = "flake8"
+version = "5.0.4"
+description = "the modular source code checker: pep8 pyflakes and co"
+optional = false
+python-versions = ">=3.6.1"
+groups = ["lint"]
+markers = "python_version < \"3.12\""
+files = [
+    {file = "flake8-5.0.4-py2.py3-none-any.whl", hash = "sha256:7a1cf6b73744f5806ab95e526f6f0d8c01c66d7bbe349562d22dfca20610b248"},
+    {file = "flake8-5.0.4.tar.gz", hash = "sha256:6fbe320aad8d6b95cec8b8e47bc933004678dc63095be98528b7bdd2a9f510db"},
+]
+
+[package.dependencies]
+mccabe = ">=0.7.0,<0.8.0"
+pycodestyle = ">=2.9.0,<2.10.0"
+pyflakes = ">=2.5.0,<2.6.0"
+
+[[package]]
+name = "flake8"
+version = "6.1.0"
+description = "the modular source code checker: pep8 pyflakes and co"
+optional = false
+python-versions = ">=3.8.1"
+groups = ["lint"]
+markers = "python_version >= \"3.12\""
+files = [
+    {file = "flake8-6.1.0-py2.py3-none-any.whl", hash = "sha256:ffdfce58ea94c6580c77888a86506937f9a1a227dfcd15f245d694ae20a6b6e5"},
+    {file = "flake8-6.1.0.tar.gz", hash = "sha256:d5b3857f07c030bdb5bf41c7f53799571d75c4491748a3adcd47de929e34cd23"},
+]
+
+[package.dependencies]
+mccabe = ">=0.7.0,<0.8.0"
+pycodestyle = ">=2.11.0,<2.12.0"
+pyflakes = ">=3.1.0,<3.2.0"
+
+[[package]]
+name = "flake8-black"
+version = "0.4.0"
+description = "flake8 plugin to call black as a code style validator"
+optional = false
+python-versions = ">=3.9"
+groups = ["lint"]
+files = [
+    {file = "flake8_black-0.4.0-py3-none-any.whl", hash = "sha256:288762d0c9ea065782d87eeecbcc20c69079d17fe1d0f0445f0eb0b0ffb80c39"},
+    {file = "flake8_black-0.4.0.tar.gz", hash = "sha256:bf226868f695dee48d55ff6d7747e900709bfd6f605b7a378c70e711e3fc26cb"},
+]
+
+[package.dependencies]
+black = ">=22.1.0"
+flake8 = ">=3"
+tomli = {version = "*", markers = "python_version < \"3.11\""}
+
+[package.extras]
+develop = ["build", "twine"]
+
+[[package]]
+name = "flake8-docstrings"
+version = "1.7.0"
+description = "Extension for flake8 which uses pydocstyle to check docstrings"
+optional = false
+python-versions = ">=3.7"
+groups = ["lint"]
+files = [
+    {file = "flake8_docstrings-1.7.0-py2.py3-none-any.whl", hash = "sha256:51f2344026da083fc084166a9353f5082b01f72901df422f74b4d953ae88ac75"},
+    {file = "flake8_docstrings-1.7.0.tar.gz", hash = "sha256:4c8cc748dc16e6869728699e5d0d685da9a10b0ea718e090b1ba088e67a941af"},
+]
+
+[package.dependencies]
+flake8 = ">=3"
+pydocstyle = ">=2.1"
+
+[[package]]
+name = "flake8-import-order"
+version = "0.18.2"
+description = "Flake8 and pylama plugin that checks the ordering of import statements."
+optional = false
+python-versions = "*"
+groups = ["lint"]
+files = [
+    {file = "flake8-import-order-0.18.2.tar.gz", hash = "sha256:e23941f892da3e0c09d711babbb0c73bc735242e9b216b726616758a920d900e"},
+    {file = "flake8_import_order-0.18.2-py2.py3-none-any.whl", hash = "sha256:82ed59f1083b629b030ee9d3928d9e06b6213eb196fe745b3a7d4af2168130df"},
+]
+
+[package.dependencies]
+pycodestyle = "*"
+setuptools = "*"
+
+[[package]]
+name = "flake8-tidy-imports"
+version = "4.12.0"
+description = "A flake8 plugin that helps you write tidier imports."
+optional = false
+python-versions = ">=3.9"
+groups = ["lint"]
+files = [
+    {file = "flake8_tidy_imports-4.12.0-py3-none-any.whl", hash = "sha256:ab1e31a5ce07518a31c0a34cd92551f4c27639ae2c35a21364680a0318da312e"},
+    {file = "flake8_tidy_imports-4.12.0.tar.gz", hash = "sha256:9254788c3b6862c2fcec0250d2dc9af089afebff9c5b8a8ac8b9525b059b06db"},
+]
+
+[package.dependencies]
+flake8 = ">=3.8"
+
+[[package]]
+name = "grpcio"
+version = "1.81.1"
+description = "HTTP/2-based RPC framework"
+optional = false
+python-versions = ">=3.10"
+groups = ["main"]
+files = [
+    {file = "grpcio-1.81.1-cp310-cp310-linux_armv7l.whl", hash = "sha256:6f9a0c9c1cc15c112d1c053064fd032b64917062292c3d70aea280e02ae10b77"},
+    {file = "grpcio-1.81.1-cp310-cp310-macosx_11_0_universal2.whl", hash = "sha256:69ef28e54fc85397f91b8c19592b8ef3d81952080366914823bd8572a2958120"},
+    {file = "grpcio-1.81.1-cp310-cp310-manylinux2014_aarch64.manylinux_2_17_aarch64.whl", hash = "sha256:15641444eca4a29358107b3dceb74c1c6305c55c822fd199b458aaea4068a7fb"},
+    {file = "grpcio-1.81.1-cp310-cp310-manylinux2014_i686.manylinux_2_17_i686.whl", hash = "sha256:d4b2dddfc219f54f956ccd53cf76a1d338ffe68fc7f2849ec9c7feb9927ff692"},
+    {file = "grpcio-1.81.1-cp310-cp310-manylinux2014_x86_64.manylinux_2_17_x86_64.whl", hash = "sha256:ca1cc11d82677b9662082e5478b7528e2b7db7beaa6bdff42bd62789d81be399"},
+    {file = "grpcio-1.81.1-cp310-cp310-musllinux_1_2_aarch64.whl", hash = "sha256:aa2ba7d2ad6df4d80127cea65e5b8d5e2c3adbf153ff4804452836328aca7c54"},
+    {file = "grpcio-1.81.1-cp310-cp310-musllinux_1_2_i686.whl", hash = "sha256:592b5fee597faa91cce2dd294dd7d9a1c83d76c4dbf877e33ec1adb866b2fbed"},
+    {file = "grpcio-1.81.1-cp310-cp310-musllinux_1_2_x86_64.whl", hash = "sha256:62481553b1793a27e9b9c3cf9e5bd483ef045ca72462592074b46d42b0c4d9b9"},
+    {file = "grpcio-1.81.1-cp310-cp310-win32.whl", hash = "sha256:bb693b1e3d9a2f3fd228e2110daf4b5aeedb36761ca1e4282f74725f6d89f611"},
+    {file = "grpcio-1.81.1-cp310-cp310-win_amd64.whl", hash = "sha256:88268ca418cacea64cecb0d1d600d3c6b3a8038fcba02e1e205178c5b1f47661"},
+    {file = "grpcio-1.81.1-cp311-cp311-linux_armv7l.whl", hash = "sha256:d71d30f2d92f67d944631c523713934fee37292469e182ebcd2c1dd8a64ce53f"},
+    {file = "grpcio-1.81.1-cp311-cp311-macosx_11_0_universal2.whl", hash = "sha256:b137f4bf3ada9dc44d411478decc6ff09a79ed30b306cd2abaa98408c3588137"},
+    {file = "grpcio-1.81.1-cp311-cp311-manylinux2014_aarch64.manylinux_2_17_aarch64.whl", hash = "sha256:a3acb384427816dd5d470f47e62137b87f74da694faa8a50147012cf40df276a"},
+    {file = "grpcio-1.81.1-cp311-cp311-manylinux2014_i686.manylinux_2_17_i686.whl", hash = "sha256:f9a0ebbe45c29b5e5866593c12b78bd9035f0f0f0d4bc8361680cd580d99db49"},
+    {file = "grpcio-1.81.1-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.whl", hash = "sha256:0a37165cc80b1a368384b383e63a4c38116a10467ae44c904d2d7468c4470ec2"},
+    {file = "grpcio-1.81.1-cp311-cp311-musllinux_1_2_aarch64.whl", hash = "sha256:6282caffb41ec326d4cb67ca9cf53b739d1b2f975a2acb498c7418e9f7d9a416"},
+    {file = "grpcio-1.81.1-cp311-cp311-musllinux_1_2_i686.whl", hash = "sha256:a35009284d0d3d5c2c9601c164a911b8b4331608d98a9a66d47d97bb2f522b70"},
+    {file = "grpcio-1.81.1-cp311-cp311-musllinux_1_2_x86_64.whl", hash = "sha256:1b22c80559854b789a01fd89e8929b3798a156c0829b5282a8939f33ad4115ad"},
+    {file = "grpcio-1.81.1-cp311-cp311-win32.whl", hash = "sha256:428bec0161b48d8cf583c068591bc0016d0d9cfff52462b72b3884861ea768c5"},
+    {file = "grpcio-1.81.1-cp311-cp311-win_amd64.whl", hash = "sha256:30e825f6848d9f18bba350ed6c75c1b02a0b5184474a31db9a32b1fa66fd8c79"},
+    {file = "grpcio-1.81.1-cp312-cp312-linux_armv7l.whl", hash = "sha256:8b39472beafc0bdcafc4c8c73ad082ebfdb449d566897a61e7acb4fa88089115"},
+    {file = "grpcio-1.81.1-cp312-cp312-macosx_11_0_universal2.whl", hash = "sha256:12b7524c88d4026d3dcb7b0ebe16b6714f3b4af402ddd0f0639ab064a00c87c3"},
+    {file = "grpcio-1.81.1-cp312-cp312-manylinux2014_aarch64.manylinux_2_17_aarch64.whl", hash = "sha256:1e123f9b37edb8375fd74130d1f69c944bbf0a7b06761ae7211154b8759e94d2"},
+    {file = "grpcio-1.81.1-cp312-cp312-manylinux2014_i686.manylinux_2_17_i686.whl", hash = "sha256:2c2e2ae6867c2966b8daccc836d54a13218e0007e9a490aeb81dd05be64d22d7"},
+    {file = "grpcio-1.81.1-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl", hash = "sha256:766bc7c9a9c340342f4c864ccbda8e78111e4751f13b895812b9c148fb79e9d0"},
+    {file = "grpcio-1.81.1-cp312-cp312-musllinux_1_2_aarch64.whl", hash = "sha256:b259a04a737cb3496be0901328eb8b7552ed8df4865d8c8f1cf1bffcfc0776a3"},
+    {file = "grpcio-1.81.1-cp312-cp312-musllinux_1_2_i686.whl", hash = "sha256:85b10a45b8993d195c4f3ff57025b8d1e11834909ee475c403bfa60cb4caefaf"},
+    {file = "grpcio-1.81.1-cp312-cp312-musllinux_1_2_x86_64.whl", hash = "sha256:8ea1936c26b99999b27479853039a7f34713f56c49375ad52b38535ec93a796c"},
+    {file = "grpcio-1.81.1-cp312-cp312-win32.whl", hash = "sha256:a185a04039df6cae8648bc8ab6d6fde7bf94f7188ecf7828e76ac52eef1e41d6"},
+    {file = "grpcio-1.81.1-cp312-cp312-win_amd64.whl", hash = "sha256:3ad74f8bb1a18963914c5452d289422830b39459e8776ebbcd207be1fbfb1d94"},
+    {file = "grpcio-1.81.1-cp313-cp313-linux_armv7l.whl", hash = "sha256:b10e1ff4756ed27d5a29d7fc79cfce7ef1ff56ad20025b89bac7cf79e09abbbe"},
+    {file = "grpcio-1.81.1-cp313-cp313-macosx_11_0_universal2.whl", hash = "sha256:819edbdcb42ab8598b494bcf0222684bbb7a3c772bd1b1f0be7e029a6063c28e"},
+    {file = "grpcio-1.81.1-cp313-cp313-manylinux2014_aarch64.manylinux_2_17_aarch64.whl", hash = "sha256:c5bf2dc311127d91230cc79b92188c082634a06cf66c5234db49a43b910183b0"},
+    {file = "grpcio-1.81.1-cp313-cp313-manylinux2014_i686.manylinux_2_17_i686.whl", hash = "sha256:e8ca6a1fcdb2943c9cbc1804a1baf3acb6071d72a471591678ded84218006e14"},
+    {file = "grpcio-1.81.1-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.whl", hash = "sha256:e64dd101d380a115cc5a0c7856788adb535f1a4e21fc543775602f8be95180ae"},
+    {file = "grpcio-1.81.1-cp313-cp313-musllinux_1_2_aarch64.whl", hash = "sha256:98a07f9bf591e3a8919797bee1c53f026ba4acd587e5a4404c8e57c9ec36b2a5"},
+    {file = "grpcio-1.81.1-cp313-cp313-musllinux_1_2_i686.whl", hash = "sha256:c261d74b1a945cf895a9d6eccd1685a8e837531beaab782da4d630a8d12deffb"},
+    {file = "grpcio-1.81.1-cp313-cp313-musllinux_1_2_x86_64.whl", hash = "sha256:58ad1131c300d3c9b933802b3cc4dc69d380822935ba50b28703156ea826fbf7"},
+    {file = "grpcio-1.81.1-cp313-cp313-win32.whl", hash = "sha256:78e29211f26da2fdd0e9c6d2b79f489476140cf7029b6a64808ade7ca4156a42"},
+    {file = "grpcio-1.81.1-cp313-cp313-win_amd64.whl", hash = "sha256:edb59506291b647a30884b1d51a599d605f40b20af4a7dc3d33786a47a31de60"},
+    {file = "grpcio-1.81.1-cp314-cp314-linux_armv7l.whl", hash = "sha256:506f48f2f9c29b143fca3dad7b0d518c188b6c9648c75a2ae6e2d9f2c13a060b"},
+    {file = "grpcio-1.81.1-cp314-cp314-macosx_11_0_universal2.whl", hash = "sha256:d865db4a6318e1c1bea83292e0ed231090538fc4ca45425b0f0480eb338bbc6e"},
+    {file = "grpcio-1.81.1-cp314-cp314-manylinux2014_aarch64.manylinux_2_17_aarch64.whl", hash = "sha256:e2aa72e3ce1770317ef534f63d397b55e130725f5149bd36077c3b539019db27"},
+    {file = "grpcio-1.81.1-cp314-cp314-manylinux2014_i686.manylinux_2_17_i686.whl", hash = "sha256:0490c30c261eded63f3f354979f9dc4502a9fb944cccb60cd9dc85f5a7349854"},
+    {file = "grpcio-1.81.1-cp314-cp314-manylinux2014_x86_64.manylinux_2_17_x86_64.whl", hash = "sha256:410482da976329fe5f4067270401b12cf2bd552ff8020f054ecfaddb5475f9d6"},
+    {file = "grpcio-1.81.1-cp314-cp314-musllinux_1_2_aarch64.whl", hash = "sha256:e3657301562ac3cb8018d30d0d3ebfa39932239f7b5703422057ef14b69949f5"},
+    {file = "grpcio-1.81.1-cp314-cp314-musllinux_1_2_i686.whl", hash = "sha256:24c8e57504c8f45b237e40b99262d181071e5099a07053695b75d97bb53053a0"},
+    {file = "grpcio-1.81.1-cp314-cp314-musllinux_1_2_x86_64.whl", hash = "sha256:b427c19380991a4eaab2f6144b64b99b412043314c6bf4ab544f97bb31ee4190"},
+    {file = "grpcio-1.81.1-cp314-cp314-win32.whl", hash = "sha256:61233fe8951e5c85dff81c2458b6528624760166946b5b47ea150a589168411f"},
+    {file = "grpcio-1.81.1-cp314-cp314-win_amd64.whl", hash = "sha256:3768a5ff1b2125e6f552e561b6b2dca0e64982d8949689b4df145cf8b98d7821"},
+    {file = "grpcio-1.81.1.tar.gz", hash = "sha256:6fa10a767143a5e82e8eaab53918af0cd8909a57a27f8cb2288b80a613ac671b"},
+]
+
+[package.dependencies]
+typing-extensions = ">=4.12,<5.0"
+
+[package.extras]
+protobuf = ["grpcio-tools (>=1.81.1)"]
+
+[[package]]
+name = "grpcio-tools"
+version = "1.49.1"
+description = "Protobuf code generator for gRPC"
+optional = false
+python-versions = ">=3.7"
+groups = ["main"]
+markers = "python_version < \"3.12\""
+files = [
+    {file = "grpcio-tools-1.49.1.tar.gz", hash = "sha256:84cc64e5b46bad43d5d7bd2fd772b656eba0366961187a847e908e2cb735db91"},
+    {file = "grpcio_tools-1.49.1-cp310-cp310-linux_armv7l.whl", hash = "sha256:2dfb6c7ece84d46bd690b23d3e060d18115c8bc5047d2e8a33e6747ed323a348"},
+    {file = "grpcio_tools-1.49.1-cp310-cp310-macosx_10_10_x86_64.whl", hash = "sha256:8f452a107c054a04db2570f7851a07f060313c6e841b0d394ce6030d598290e6"},
+    {file = "grpcio_tools-1.49.1-cp310-cp310-manylinux_2_17_aarch64.whl", hash = "sha256:6a198871b582287213c4d70792bf275e1d7cf34eed1d019f534ddf4cd15ab039"},
+    {file = "grpcio_tools-1.49.1-cp310-cp310-manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:a0cca67a7d0287bdc855d81fdd38dc949c4273273a74f832f9e520abe4f20bc6"},
+    {file = "grpcio_tools-1.49.1-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:bdaff4c89eecb37c247b93025410db68114d97fa093cbb028e9bd7cda5912473"},
+    {file = "grpcio_tools-1.49.1-cp310-cp310-musllinux_1_1_i686.whl", hash = "sha256:bb8773118ad315db317d7b22b5ff75d649ca20931733281209e7cbd8c0fad53e"},
+    {file = "grpcio_tools-1.49.1-cp310-cp310-musllinux_1_1_x86_64.whl", hash = "sha256:7cc5534023735b8a8f56760b7c533918f874ce5a9064d7c5456d2709ae2b31f9"},
+    {file = "grpcio_tools-1.49.1-cp310-cp310-win32.whl", hash = "sha256:d277642acbe305f5586f9597b78fb9970d6633eb9f89c61e429c92c296c37129"},
+    {file = "grpcio_tools-1.49.1-cp310-cp310-win_amd64.whl", hash = "sha256:eed599cf08fc1a06c72492d3c5750c32f58de3750eddd984af1f257c14326701"},
+    {file = "grpcio_tools-1.49.1-cp311-cp311-linux_armv7l.whl", hash = "sha256:9e5c13809ab2f245398e8446c4c3b399a62d591db651e46806cccf52a700452e"},
+    {file = "grpcio_tools-1.49.1-cp311-cp311-macosx_10_10_x86_64.whl", hash = "sha256:ab3d0ee9623720ee585fdf3753b3755d3144a4a8ae35bca8e3655fa2f41056be"},
+    {file = "grpcio_tools-1.49.1-cp311-cp311-manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:6ba87e3512bc91d78bf9febcfb522eadda171d2d4ddaf886066b0f01aa4929ad"},
+    {file = "grpcio_tools-1.49.1-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:13e13b3643e7577a3ec13b79689eb4d7548890b1e104c04b9ed6557a3c3dd452"},
+    {file = "grpcio_tools-1.49.1-cp311-cp311-musllinux_1_1_i686.whl", hash = "sha256:324f67d9cb4b7058b6ce45352fb64c20cc1fa04c34d97ad44772cfe6a4ae0cf5"},
+    {file = "grpcio_tools-1.49.1-cp311-cp311-musllinux_1_1_x86_64.whl", hash = "sha256:a64bab81b220c50033f584f57978ebbea575f09c1ccee765cd5c462177988098"},
+    {file = "grpcio_tools-1.49.1-cp311-cp311-win32.whl", hash = "sha256:f632d376f92f23e5931697a3acf1b38df7eb719774213d93c52e02acd2d529ac"},
+    {file = "grpcio_tools-1.49.1-cp311-cp311-win_amd64.whl", hash = "sha256:28ff2b978d9509474928b9c096a0cce4eaa9c8f7046136aee1545f6211ed8126"},
+    {file = "grpcio_tools-1.49.1-cp37-cp37m-linux_armv7l.whl", hash = "sha256:46afd3cb7e555187451a5d283f108cdef397952a662cb48680afc615b158864a"},
+    {file = "grpcio_tools-1.49.1-cp37-cp37m-macosx_10_10_x86_64.whl", hash = "sha256:9284568b728e41fa8f7e9c2e7399545d605f75d8072ef0e9aa2a05655cb679eb"},
+    {file = "grpcio_tools-1.49.1-cp37-cp37m-manylinux_2_17_aarch64.whl", hash = "sha256:aa34442cf787732cb41f2aa6172007e24f480b8b9d3dc5166de80d63e9072ea4"},
+    {file = "grpcio_tools-1.49.1-cp37-cp37m-manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:3b8c9eb5a4250905414cd53a68caea3eb8f0c515aadb689e6e81b71ebe9ab5c6"},
+    {file = "grpcio_tools-1.49.1-cp37-cp37m-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:ab15db024051bf21feb21c29cb2c3ea0a2e4f5cf341d46ef76e17fcf6aaef164"},
+    {file = "grpcio_tools-1.49.1-cp37-cp37m-musllinux_1_1_i686.whl", hash = "sha256:502084b622f758bef620a9107c2db9fcdf66d26c7e0e481d6bb87db4dc917d70"},
+    {file = "grpcio_tools-1.49.1-cp37-cp37m-musllinux_1_1_x86_64.whl", hash = "sha256:4085890b77c640085f82bf1e90a0ea166ce48000bc2f5180914b974783c9c0a8"},
+    {file = "grpcio_tools-1.49.1-cp37-cp37m-win32.whl", hash = "sha256:da0edb984699769ce02e18e3392d54b59a7a3f93acd285a68043f5bde4fc028e"},
+    {file = "grpcio_tools-1.49.1-cp37-cp37m-win_amd64.whl", hash = "sha256:9887cd622770271101a7dd1832845d64744c3f88fd11ccb2620394079197a42e"},
+    {file = "grpcio_tools-1.49.1-cp38-cp38-linux_armv7l.whl", hash = "sha256:8440fe7dae6a40c279e3a24b82793735babd38ecbb0d07bb712ff9c8963185d9"},
+    {file = "grpcio_tools-1.49.1-cp38-cp38-macosx_10_10_x86_64.whl", hash = "sha256:b5de2bb7dd6b6231da9b1556ade981513330b740e767f1d902c71ceee0a7d196"},
+    {file = "grpcio_tools-1.49.1-cp38-cp38-manylinux_2_17_aarch64.whl", hash = "sha256:1e6f06a763aea7836b63d9c117347f2bf7038008ceef72758815c9e09c5fb1fc"},
+    {file = "grpcio_tools-1.49.1-cp38-cp38-manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:e31562f90120318c5395aabec0f2f69ad8c14b6676996b7730d9d2eaf9415d57"},
+    {file = "grpcio_tools-1.49.1-cp38-cp38-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:49ef9a4e389a618157a9daa9fafdfeeaef1ece9adda7f50f85db928f24d4b3e8"},
+    {file = "grpcio_tools-1.49.1-cp38-cp38-musllinux_1_1_i686.whl", hash = "sha256:b384cb8e8d9bcb55ee8f9b064374561c7a1a05d848249581403d36fc7060032f"},
+    {file = "grpcio_tools-1.49.1-cp38-cp38-musllinux_1_1_x86_64.whl", hash = "sha256:73732f77943ac3e898879cbb29c27253aa3c47566b8a59780fd24c6a54de1b66"},
+    {file = "grpcio_tools-1.49.1-cp38-cp38-win32.whl", hash = "sha256:b594b2745a5ba9e7a76ce561bc5ab40bc65bb44743c505529b1e4f12af29104d"},
+    {file = "grpcio_tools-1.49.1-cp38-cp38-win_amd64.whl", hash = "sha256:680fbc88f8709ddcabb88f86749f2d8e429160890cff2c70680880a6970d4eef"},
+    {file = "grpcio_tools-1.49.1-cp39-cp39-linux_armv7l.whl", hash = "sha256:e8c3869121860f6767eedb7d24fc54dfd71e737fdfbb26e1334684606f3274fd"},
+    {file = "grpcio_tools-1.49.1-cp39-cp39-macosx_10_10_x86_64.whl", hash = "sha256:73e9d7c886ba10e20c97d1dab0ff961ba5800757ae5e31be21b1cda8130c52f8"},
+    {file = "grpcio_tools-1.49.1-cp39-cp39-manylinux_2_17_aarch64.whl", hash = "sha256:1760de2dd2c4f08de87b039043a4797f3c17193656e7e3eb84e92f0517083c0c"},
+    {file = "grpcio_tools-1.49.1-cp39-cp39-manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:cd4b1e216dd04d9245ee8f4e601a1f98c25e6e417ea5cf8d825c50589a8b447e"},
+    {file = "grpcio_tools-1.49.1-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:c1c28751ab5955cae563d07677e799233f0fe1c0fc49d9cbd61ff1957e83617f"},
+    {file = "grpcio_tools-1.49.1-cp39-cp39-musllinux_1_1_i686.whl", hash = "sha256:c24239c3ee9ed16314c14b4e24437b5079ebc344f343f33629a582f8699f583b"},
+    {file = "grpcio_tools-1.49.1-cp39-cp39-musllinux_1_1_x86_64.whl", hash = "sha256:892d3dacf1942820f0b7a868a30e6fbcdf5bec08543b682c7274b0101cee632d"},
+    {file = "grpcio_tools-1.49.1-cp39-cp39-win32.whl", hash = "sha256:704d21509ec06efc9d034dbe70e7152715aac004941f4f0f553cf3a0aff15bd5"},
+    {file = "grpcio_tools-1.49.1-cp39-cp39-win_amd64.whl", hash = "sha256:1efa0c221c719433f441ac0e026fc3c4dbc9a1a08a552ecdc707775e2f2fbbae"},
+]
+
+[package.dependencies]
+grpcio = ">=1.49.1"
+protobuf = ">=4.21.3,<5.0dev"
+setuptools = "*"
+
+[[package]]
+name = "grpcio-tools"
+version = "1.59.0"
+description = "Protobuf code generator for gRPC"
+optional = false
+python-versions = ">=3.7"
+groups = ["main"]
+markers = "python_version == \"3.12\""
+files = [
+    {file = "grpcio-tools-1.59.0.tar.gz", hash = "sha256:aa4018f2d8662ac4d9830445d3d253a11b3e096e8afe20865547137aa1160e93"},
+    {file = "grpcio_tools-1.59.0-cp310-cp310-linux_armv7l.whl", hash = "sha256:882b809b42b5464bee55288f4e60837297f9618e53e69ae3eea6d61b05ce48fa"},
+    {file = "grpcio_tools-1.59.0-cp310-cp310-macosx_12_0_universal2.whl", hash = "sha256:4499d4bc5aa9c7b645018d8b0db4bebd663d427aabcd7bee7777046cb1bcbca7"},
+    {file = "grpcio_tools-1.59.0-cp310-cp310-manylinux_2_17_aarch64.whl", hash = "sha256:f381ae3ad6a5eb27aad8d810438937d8228977067c54e0bd456fce7e11fdbf3d"},
+    {file = "grpcio_tools-1.59.0-cp310-cp310-manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:f1c684c0d9226d04cadafced620a46ab38c346d0780eaac7448da96bf12066a3"},
+    {file = "grpcio_tools-1.59.0-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:40cbf712769242c2ba237745285ef789114d7fcfe8865fc4817d87f20015e99a"},
+    {file = "grpcio_tools-1.59.0-cp310-cp310-musllinux_1_1_i686.whl", hash = "sha256:1df755951f204e65bf9232a9cac5afe7d6b8e4c87ac084d3ecd738fdc7aa4174"},
+    {file = "grpcio_tools-1.59.0-cp310-cp310-musllinux_1_1_x86_64.whl", hash = "sha256:de156c18b0c638aaee3be6ad650c8ba7dec94ed4bac26403aec3dce95ffe9407"},
+    {file = "grpcio_tools-1.59.0-cp310-cp310-win32.whl", hash = "sha256:9af7e138baa9b2895cf1f3eb718ac96fc5ae2f8e31fca405e21e0e5cd1643c52"},
+    {file = "grpcio_tools-1.59.0-cp310-cp310-win_amd64.whl", hash = "sha256:f14a6e4f700dfd30ff8f0e6695f944affc16ae5a1e738666b3fae4e44b65637e"},
+    {file = "grpcio_tools-1.59.0-cp311-cp311-linux_armv7l.whl", hash = "sha256:db030140d0da2368319e2f23655df3baec278c7e0078ecbe051eaf609a69382c"},
+    {file = "grpcio_tools-1.59.0-cp311-cp311-macosx_10_10_universal2.whl", hash = "sha256:eeed386971bb8afc3ec45593df6a1154d680d87be1209ef8e782e44f85f47e64"},
+    {file = "grpcio_tools-1.59.0-cp311-cp311-manylinux_2_17_aarch64.whl", hash = "sha256:962d1a3067129152cee3e172213486cb218a6bad703836991f46f216caefcf00"},
+    {file = "grpcio_tools-1.59.0-cp311-cp311-manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:26eb2eebf150a33ebf088e67c1acf37eb2ac4133d9bfccbaa011ad2148c08b42"},
+    {file = "grpcio_tools-1.59.0-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:5b2d6da553980c590487f2e7fd3ec9c1ad8805ff2ec77977b92faa7e3ca14e1f"},
+    {file = "grpcio_tools-1.59.0-cp311-cp311-musllinux_1_1_i686.whl", hash = "sha256:335e2f355a0c544a88854e2c053aff8a3f398b84a263a96fa19d063ca1fe513a"},
+    {file = "grpcio_tools-1.59.0-cp311-cp311-musllinux_1_1_x86_64.whl", hash = "sha256:204e08f807b1d83f5f0efea30c4e680afe26a43dec8ba614a45fa698a7ef0a19"},
+    {file = "grpcio_tools-1.59.0-cp311-cp311-win32.whl", hash = "sha256:05bf7b3ed01c8a562bb7e840f864c58acedbd6924eb616367c0bd0a760bdf483"},
+    {file = "grpcio_tools-1.59.0-cp311-cp311-win_amd64.whl", hash = "sha256:df85096fcac7cea8aa5bd84b7a39c4cdbf556b93669bb4772eb96aacd3222a4e"},
+    {file = "grpcio_tools-1.59.0-cp312-cp312-linux_armv7l.whl", hash = "sha256:240a7a3c2c54f77f1f66085a635bca72003d02f56a670e7db19aec531eda8f78"},
+    {file = "grpcio_tools-1.59.0-cp312-cp312-macosx_10_10_universal2.whl", hash = "sha256:6119f62c462d119c63227b9534210f0f13506a888151b9bf586f71e7edf5088b"},
+    {file = "grpcio_tools-1.59.0-cp312-cp312-manylinux_2_17_aarch64.whl", hash = "sha256:387662bee8e4c0b52cc0f61eaaca0ca583f5b227103f685b76083a3590a71a3e"},
+    {file = "grpcio_tools-1.59.0-cp312-cp312-manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:8f0da5861ee276ca68493b217daef358960e8527cc63c7cb292ca1c9c54939af"},
+    {file = "grpcio_tools-1.59.0-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:d0f0806de1161c7f248e4c183633ee7a58dfe45c2b77ddf0136e2e7ad0650b1b"},
+    {file = "grpcio_tools-1.59.0-cp312-cp312-musllinux_1_1_i686.whl", hash = "sha256:c683be38a9bf4024c223929b4cd2f0a0858c94e9dc8b36d7eaa5a48ce9323a6f"},
+    {file = "grpcio_tools-1.59.0-cp312-cp312-musllinux_1_1_x86_64.whl", hash = "sha256:f965707da2b48a33128615bcfebedd215a3a30e346447e885bb3da37a143177a"},
+    {file = "grpcio_tools-1.59.0-cp312-cp312-win32.whl", hash = "sha256:2ee960904dde12a7fa48e1591a5b3eeae054bdce57bacf9fd26685a98138f5bf"},
+    {file = "grpcio_tools-1.59.0-cp312-cp312-win_amd64.whl", hash = "sha256:71cc6db1d66da3bc3730d9937bddc320f7b1f1dfdff6342bcb5741515fe4110b"},
+    {file = "grpcio_tools-1.59.0-cp37-cp37m-linux_armv7l.whl", hash = "sha256:f6263b85261b62471cb97b7505df72d72b8b62e5e22d8184924871a6155b4dbf"},
+    {file = "grpcio_tools-1.59.0-cp37-cp37m-macosx_10_10_universal2.whl", hash = "sha256:b8e95d921cc2a1521d4750eedefec9f16031457920a6677edebe9d1b2ad6ae60"},
+    {file = "grpcio_tools-1.59.0-cp37-cp37m-manylinux_2_17_aarch64.whl", hash = "sha256:cb63055739808144b541986291679d643bae58755d0eb082157c4d4c04443905"},
+    {file = "grpcio_tools-1.59.0-cp37-cp37m-manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:8c4634b3589efa156a8d5860c0a2547315bd5c9e52d14c960d716fe86e0927be"},
+    {file = "grpcio_tools-1.59.0-cp37-cp37m-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:2d970aa26854f535ffb94ea098aa8b43de020d9a14682e4a15dcdaeac7801b27"},
+    {file = "grpcio_tools-1.59.0-cp37-cp37m-musllinux_1_1_i686.whl", hash = "sha256:821dba464d84ebbcffd9d420302404db2fa7a40c7ff4c4c4c93726f72bfa2769"},
+    {file = "grpcio_tools-1.59.0-cp37-cp37m-musllinux_1_1_x86_64.whl", hash = "sha256:0548e901894399886ff4a4cd808cb850b60c021feb4a8977a0751f14dd7e55d9"},
+    {file = "grpcio_tools-1.59.0-cp37-cp37m-win_amd64.whl", hash = "sha256:bb87158dbbb9e5a79effe78d54837599caa16df52d8d35366e06a91723b587ae"},
+    {file = "grpcio_tools-1.59.0-cp38-cp38-linux_armv7l.whl", hash = "sha256:1d551ff42962c7c333c3da5c70d5e617a87dee581fa2e2c5ae2d5137c8886779"},
+    {file = "grpcio_tools-1.59.0-cp38-cp38-macosx_10_10_universal2.whl", hash = "sha256:4ee443abcd241a5befb05629013fbf2eac637faa94aaa3056351aded8a31c1bc"},
+    {file = "grpcio_tools-1.59.0-cp38-cp38-manylinux_2_17_aarch64.whl", hash = "sha256:520c0c83ea79d14b0679ba43e19c64ca31d30926b26ad2ca7db37cbd89c167e2"},
+    {file = "grpcio_tools-1.59.0-cp38-cp38-manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:9fc02a6e517c34dcf885ff3b57260b646551083903e3d2c780b4971ce7d4ab7c"},
+    {file = "grpcio_tools-1.59.0-cp38-cp38-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:6aec8a4ed3808b7dfc1276fe51e3e24bec0eeaf610d395bcd42934647cf902a3"},
+    {file = "grpcio_tools-1.59.0-cp38-cp38-musllinux_1_1_i686.whl", hash = "sha256:99b3bde646720bbfb77f263f5ba3e1a0de50632d43c38d405a0ef9c7e94373cd"},
+    {file = "grpcio_tools-1.59.0-cp38-cp38-musllinux_1_1_x86_64.whl", hash = "sha256:51d9595629998d8b519126c5a610f15deb0327cd6325ed10796b47d1d292e70b"},
+    {file = "grpcio_tools-1.59.0-cp38-cp38-win32.whl", hash = "sha256:bfa4b2b7d21c5634b62e5f03462243bd705adc1a21806b5356b8ce06d902e160"},
+    {file = "grpcio_tools-1.59.0-cp38-cp38-win_amd64.whl", hash = "sha256:9ed05197c5ab071e91bcef28901e97ca168c4ae94510cb67a14cb4931b94255a"},
+    {file = "grpcio_tools-1.59.0-cp39-cp39-linux_armv7l.whl", hash = "sha256:498e7be0b14385980efa681444ba481349c131fc5ec88003819f5d929646947c"},
+    {file = "grpcio_tools-1.59.0-cp39-cp39-macosx_10_10_universal2.whl", hash = "sha256:b519f2ecde9a579cad2f4a7057d5bb4e040ad17caab8b5e691ed7a13b9db0be9"},
+    {file = "grpcio_tools-1.59.0-cp39-cp39-manylinux_2_17_aarch64.whl", hash = "sha256:ef3e8aca2261f7f07436d4e2111556c1fb9bf1f9cfcdf35262743ccdee1b6ce9"},
+    {file = "grpcio_tools-1.59.0-cp39-cp39-manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:27a7f226b741b2ebf7e2d0779d2c9b17f446d1b839d59886c1619e62cc2ae472"},
+    {file = "grpcio_tools-1.59.0-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:784aa52965916fec5afa1a28eeee6f0073bb43a2a1d7fedf963393898843077a"},
+    {file = "grpcio_tools-1.59.0-cp39-cp39-musllinux_1_1_i686.whl", hash = "sha256:e312ddc2d8bec1a23306a661ad52734f984c9aad5d8f126ebb222a778d95407d"},
+    {file = "grpcio_tools-1.59.0-cp39-cp39-musllinux_1_1_x86_64.whl", hash = "sha256:868892ad9e00651a38dace3e4924bae82fc4fd4df2c65d37b74381570ee8deb1"},
+    {file = "grpcio_tools-1.59.0-cp39-cp39-win32.whl", hash = "sha256:a4f6cae381f21fee1ef0a5cbbbb146680164311157ae618edf3061742d844383"},
+    {file = "grpcio_tools-1.59.0-cp39-cp39-win_amd64.whl", hash = "sha256:4a10e59cca462208b489478340b52a96d64e8b8b6f1ac097f3e8cb211d3f66c0"},
+]
+
+[package.dependencies]
+grpcio = ">=1.59.0"
+protobuf = ">=4.21.6,<5.0dev"
+setuptools = "*"
+
+[[package]]
+name = "grpcio-tools"
+version = "1.67.0"
+description = "Protobuf code generator for gRPC"
+optional = false
+python-versions = ">=3.8"
+groups = ["main"]
+markers = "python_version == \"3.13\""
+files = [
+    {file = "grpcio_tools-1.67.0-cp310-cp310-linux_armv7l.whl", hash = "sha256:12aa38af76b5ef00a55808c7c374ed18d5dc7cc8081b717e56da3c50df1776e2"},
+    {file = "grpcio_tools-1.67.0-cp310-cp310-macosx_12_0_universal2.whl", hash = "sha256:b0b03d055127bbc7c629454804b53b5cad2cedfcf904576d159a8a04c22b8e66"},
+    {file = "grpcio_tools-1.67.0-cp310-cp310-manylinux_2_17_aarch64.whl", hash = "sha256:02b0b50c59a8f7428326197027a2f586d216c46138c547f861533c46bff78bfe"},
+    {file = "grpcio_tools-1.67.0-cp310-cp310-manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:b2afdfe151ed9edbd4a3fd646716f83b58010769c57f9c0aa1cf4c3bfb1240a8"},
+    {file = "grpcio_tools-1.67.0-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:fc3eeb87575b2b360c5ef5aef22eb76cfdd6a255d2f628a48ab0e5a61a0039fb"},
+    {file = "grpcio_tools-1.67.0-cp310-cp310-musllinux_1_1_i686.whl", hash = "sha256:ead78089c4771605a1ff8894e47f2267440693f1beeee06fd5a788aede83370f"},
+    {file = "grpcio_tools-1.67.0-cp310-cp310-musllinux_1_1_x86_64.whl", hash = "sha256:0671dcdccef09ca4eb415c1d6f470a857c6486733c146676f6810a3ade1d42cb"},
+    {file = "grpcio_tools-1.67.0-cp310-cp310-win32.whl", hash = "sha256:a7398d90b8c7da479aec8f853d3664d5a93c209f8ac3bd41cb7ae4e8677a45c6"},
+    {file = "grpcio_tools-1.67.0-cp310-cp310-win_amd64.whl", hash = "sha256:f7e7d70a74df7e07be7cceaa694b7e8e5f3bef8e0299906f60885ecf7a40adb4"},
+    {file = "grpcio_tools-1.67.0-cp311-cp311-linux_armv7l.whl", hash = "sha256:655716bf931a22a090134d87953710033640996d31e36f5f9b0106ff5f552d8e"},
+    {file = "grpcio_tools-1.67.0-cp311-cp311-macosx_10_9_universal2.whl", hash = "sha256:484ae782f9d3ff58e0bbb2f4cad14d5f5d9132fc701835b1dffd2c2a06f73ba6"},
+    {file = "grpcio_tools-1.67.0-cp311-cp311-manylinux_2_17_aarch64.whl", hash = "sha256:f3e34de876efe1273f91e25ef241e449ed7f9411472dd9ff56d2039618017c30"},
+    {file = "grpcio_tools-1.67.0-cp311-cp311-manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:d8301719edde2c3d388995703cdd962f558b76e9750405f772dce61402e4c3d0"},
+    {file = "grpcio_tools-1.67.0-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:1629ea246044ccd473d9ac4c9f137a440d830b5e08d35225e1b354dbbb15b75d"},
+    {file = "grpcio_tools-1.67.0-cp311-cp311-musllinux_1_1_i686.whl", hash = "sha256:d77a3c5cec0065267ca1a0b2589ececd1277ce25aa67f13ec50c816ee6f26f7f"},
+    {file = "grpcio_tools-1.67.0-cp311-cp311-musllinux_1_1_x86_64.whl", hash = "sha256:c9bf992bcc7d9e6eaa20705056e1b955593092a38cec1746fef389d873ab2056"},
+    {file = "grpcio_tools-1.67.0-cp311-cp311-win32.whl", hash = "sha256:7e6e3db119c38629e0767cdb2ee18726ecc87e2249117d4c9e7ce06ea8c894ea"},
+    {file = "grpcio_tools-1.67.0-cp311-cp311-win_amd64.whl", hash = "sha256:c6c27aec301a0e6cf231f9ee1c467c64002af51170fa7c0f3bb10bbfcd03fee7"},
+    {file = "grpcio_tools-1.67.0-cp312-cp312-linux_armv7l.whl", hash = "sha256:dca7f053cbdb26a587d4410ddb893877c585fb60a31f22fdd128e4f7c4dab27c"},
+    {file = "grpcio_tools-1.67.0-cp312-cp312-macosx_10_9_universal2.whl", hash = "sha256:de8c4f68ffa690769d84329c17c7fdd5fbe4c61b8f8a0de03f1ad8ef8bb06963"},
+    {file = "grpcio_tools-1.67.0-cp312-cp312-manylinux_2_17_aarch64.whl", hash = "sha256:6e4ecb24c27a78f09fead45d4ed873805d6026124ccb6793b6fb93a490b78ddf"},
+    {file = "grpcio_tools-1.67.0-cp312-cp312-manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:004d6ef1b5f724480f05c0bdc904bf8c78c43d633c537d99abe51b52ce0cadeb"},
+    {file = "grpcio_tools-1.67.0-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:9dd257072c86eb9b36791b3674a513a215ba76bbdd38fc228f0e8c6dc5ce3524"},
+    {file = "grpcio_tools-1.67.0-cp312-cp312-musllinux_1_1_i686.whl", hash = "sha256:a8cca551317ed26e17d13b6ee27b2bd62f5fe9b3842b4e88389deb984f995848"},
+    {file = "grpcio_tools-1.67.0-cp312-cp312-musllinux_1_1_x86_64.whl", hash = "sha256:a7ac3b4f837c693142f6688b629d1f6408f6ab250d927159b572555f5339fe25"},
+    {file = "grpcio_tools-1.67.0-cp312-cp312-win32.whl", hash = "sha256:95feec33388e2a8f72c360a68efe6f0bfed9c771e94d21b7f2359d0010f60219"},
+    {file = "grpcio_tools-1.67.0-cp312-cp312-win_amd64.whl", hash = "sha256:50a31d035193ebe7154181eac84734e25bdcdb36adba849d3b2adf1c3b0c382b"},
+    {file = "grpcio_tools-1.67.0-cp313-cp313-linux_armv7l.whl", hash = "sha256:9ecb7c2e5da052a3feaeaa83d8f2a946a8feec8a50751b0e6175da982b49ebb1"},
+    {file = "grpcio_tools-1.67.0-cp313-cp313-macosx_10_13_universal2.whl", hash = "sha256:3c52164f2b9d41c6d75464bb45f45737dcb421e92e98d85d94fda100c67a24d8"},
+    {file = "grpcio_tools-1.67.0-cp313-cp313-manylinux_2_17_aarch64.whl", hash = "sha256:471f58b919767290260d427dd9b760796e6208ee5fcda2f76bb8bd585ff842ec"},
+    {file = "grpcio_tools-1.67.0-cp313-cp313-manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:72c6bcdf38f672721c093c92b1fb1f9a02a365acc5bd42e1c69fe6e904b26081"},
+    {file = "grpcio_tools-1.67.0-cp313-cp313-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:833b1eb9c03d28a798294523f75294055eff78fa897adf797876337b901afeb9"},
+    {file = "grpcio_tools-1.67.0-cp313-cp313-musllinux_1_1_i686.whl", hash = "sha256:1db92ad6ade1946fc5705eb04956fcfdb3a0a4682de8dc3fce31cb97b6e4fcb8"},
+    {file = "grpcio_tools-1.67.0-cp313-cp313-musllinux_1_1_x86_64.whl", hash = "sha256:38128310ded818e1044c0cd0979d76f7c0d3c3946a526a8aa39cd258624c3bf3"},
+    {file = "grpcio_tools-1.67.0-cp313-cp313-win32.whl", hash = "sha256:db57930dc20ab678311727883bdb9f122daf06c14f3fd3067c9ccedb7eb056c3"},
+    {file = "grpcio_tools-1.67.0-cp313-cp313-win_amd64.whl", hash = "sha256:7de44d8d3bb920a4973a559f2950d03382fa4aed4880306416ffa73d24838477"},
+    {file = "grpcio_tools-1.67.0-cp38-cp38-linux_armv7l.whl", hash = "sha256:793896648734aad3ad8f26795dcdd6040aecd35efef43fcbb67d221373e6379a"},
+    {file = "grpcio_tools-1.67.0-cp38-cp38-macosx_10_9_universal2.whl", hash = "sha256:941418cba6a8adfcac3ff7ff3bdef00b55a44d673634c15bddcfa7778e49239e"},
+    {file = "grpcio_tools-1.67.0-cp38-cp38-manylinux_2_17_aarch64.whl", hash = "sha256:0d63ff6be6f3d0294249fc7a21f26f06c9cc209130c5328907cd678406d7d232"},
+    {file = "grpcio_tools-1.67.0-cp38-cp38-manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:af80ced3ba49377ef7bec93e9ccbfa357875460e9a624ed12d9a7d5348741a76"},
+    {file = "grpcio_tools-1.67.0-cp38-cp38-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:e3c3fbb4a6d10764295540579492397bc7a3334e1a92dd17a4bc7b69159cf70a"},
+    {file = "grpcio_tools-1.67.0-cp38-cp38-musllinux_1_1_i686.whl", hash = "sha256:a05c10fb783f609d16e1f754ebad9bb432a1adbfc46139d154e8fd6b15f59988"},
+    {file = "grpcio_tools-1.67.0-cp38-cp38-musllinux_1_1_x86_64.whl", hash = "sha256:ea8af001f08c678ab59e2bf2614d8b09d62210e540f7af1129c172fe4fd330c7"},
+    {file = "grpcio_tools-1.67.0-cp38-cp38-win32.whl", hash = "sha256:004d329aee385fa874979196e5359a967c370d31813f61eba88043ccaa2e06d8"},
+    {file = "grpcio_tools-1.67.0-cp38-cp38-win_amd64.whl", hash = "sha256:fc43593bd051abb73a5d130fc041923144089ac459fb01165960106ebb686fd0"},
+    {file = "grpcio_tools-1.67.0-cp39-cp39-linux_armv7l.whl", hash = "sha256:d285c036ddfc2618c4db60b584409dd8313d41473bd46177c763ea22ed9aeb1f"},
+    {file = "grpcio_tools-1.67.0-cp39-cp39-macosx_10_9_universal2.whl", hash = "sha256:623fdad489447e1565d0ba5a818d54b4e74cd73800b6a32c4c009601c7f7a36c"},
+    {file = "grpcio_tools-1.67.0-cp39-cp39-manylinux_2_17_aarch64.whl", hash = "sha256:24536af8a5f8e532fbd996c1763eff51526d1d1563f9499ff5ffffb9a08811f3"},
+    {file = "grpcio_tools-1.67.0-cp39-cp39-manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:bd64a9a8eb675dd2aa59cb4b2ab025a3b02ae1bb9e483c7fb518ffa0f0755cda"},
+    {file = "grpcio_tools-1.67.0-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:f94378bc90fb008b0a56237748aa42c787fd86c392e7df3d65f0fe7fcd93844a"},
+    {file = "grpcio_tools-1.67.0-cp39-cp39-musllinux_1_1_i686.whl", hash = "sha256:d0f39a9d860a6768574cd77b5d9ad81513fa1c575d3a050d4e72e6d79dcd62f3"},
+    {file = "grpcio_tools-1.67.0-cp39-cp39-musllinux_1_1_x86_64.whl", hash = "sha256:c578f1306bfd0dd0668e24f8c04d61529928de2660217022a947a56be177bc2d"},
+    {file = "grpcio_tools-1.67.0-cp39-cp39-win32.whl", hash = "sha256:0c2cf8d09bdc05e0550ad413e0bc0d552500bb7f98d36079b7b9d38e064e02f7"},
+    {file = "grpcio_tools-1.67.0-cp39-cp39-win_amd64.whl", hash = "sha256:cc570bcd9c9681bb011f746ea90cc50559be629227aaaaae9fde8549525f0287"},
+    {file = "grpcio_tools-1.67.0.tar.gz", hash = "sha256:181b3d4e61b83142c182ec366f3079b0023509743986e54c9465ca38cac255f8"},
+]
+
+[package.dependencies]
+grpcio = ">=1.67.0"
+protobuf = ">=5.26.1,<6.0dev"
+setuptools = "*"
+
+[[package]]
+name = "grpcio-tools"
+version = "1.75.1"
+description = "Protobuf code generator for gRPC"
+optional = false
+python-versions = ">=3.9"
+groups = ["main"]
+markers = "python_version >= \"3.14\""
+files = [
+    {file = "grpcio_tools-1.75.1-cp310-cp310-linux_armv7l.whl", hash = "sha256:ae0f04d5ec8b8e13476bf516a08fc1de4e58c6bf79f99123a6b964ca7d02c790"},
+    {file = "grpcio_tools-1.75.1-cp310-cp310-macosx_11_0_universal2.whl", hash = "sha256:24a881ad7292e904fc256892b647da17d9137ef2e72faf8b7c8e515314ad1377"},
+    {file = "grpcio_tools-1.75.1-cp310-cp310-manylinux2014_aarch64.manylinux_2_17_aarch64.whl", hash = "sha256:1b5810ace274dba12ecfac69ac32c8047c6ee0200a23274cb4885ed4187271f8"},
+    {file = "grpcio_tools-1.75.1-cp310-cp310-manylinux2014_i686.manylinux_2_17_i686.whl", hash = "sha256:ab33993288b97b1180e092fa447a8ce00fbc8c59d67b23553245b88d14fe36bb"},
+    {file = "grpcio_tools-1.75.1-cp310-cp310-manylinux2014_x86_64.manylinux_2_17_x86_64.whl", hash = "sha256:4cac693621043ef11d3ab2318e811d919779f8cd5011ba8e37f44c178c831d94"},
+    {file = "grpcio_tools-1.75.1-cp310-cp310-musllinux_1_2_aarch64.whl", hash = "sha256:a09cd5d267b296af67116fe098633ad770bc8c19831a5f3c896f65fad90c1064"},
+    {file = "grpcio_tools-1.75.1-cp310-cp310-musllinux_1_2_i686.whl", hash = "sha256:dff4bcb4d16cf9ef745c1984394ed15187e6c23d73d71377377deaf443d11358"},
+    {file = "grpcio_tools-1.75.1-cp310-cp310-musllinux_1_2_x86_64.whl", hash = "sha256:16d5986b37e2a9203f85e456c7ff8705b932718021d408adfe4a79e0f4d95949"},
+    {file = "grpcio_tools-1.75.1-cp310-cp310-win32.whl", hash = "sha256:3fbac14998bfadc6b9140b6339dbc5f673700ebb4d45ba0c4d4fbe0ffb8559a9"},
+    {file = "grpcio_tools-1.75.1-cp310-cp310-win_amd64.whl", hash = "sha256:b56e495844eb899de721eb77d9e077192bdeb40842f598481d32a8f6de3db124"},
+    {file = "grpcio_tools-1.75.1-cp311-cp311-linux_armv7l.whl", hash = "sha256:f0635231feb70a9d551452829943a1a5fa651283e7a300aadc22df5ea5da696f"},
+    {file = "grpcio_tools-1.75.1-cp311-cp311-macosx_11_0_universal2.whl", hash = "sha256:626293296ef7e2d87ab1a80b81a55eef91883c65b59a97576099a28b9535100b"},
+    {file = "grpcio_tools-1.75.1-cp311-cp311-manylinux2014_aarch64.manylinux_2_17_aarch64.whl", hash = "sha256:071339d90f1faab332ce4919c815a10b9c3ed2c09473f550f686bf9cc148579f"},
+    {file = "grpcio_tools-1.75.1-cp311-cp311-manylinux2014_i686.manylinux_2_17_i686.whl", hash = "sha256:44195f58c052fa935b78c7438c85cbcd4b273dd685028e4f6d4d7b30d47daad1"},
+    {file = "grpcio_tools-1.75.1-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.whl", hash = "sha256:860fafdb85726029d646c99859ff7bdca5aae61b5ff038c3bd355fc1ec6b2764"},
+    {file = "grpcio_tools-1.75.1-cp311-cp311-musllinux_1_2_aarch64.whl", hash = "sha256:4559547a0cb3d3db1b982eea87d4656036339b400f48127fef932210672fb59e"},
+    {file = "grpcio_tools-1.75.1-cp311-cp311-musllinux_1_2_i686.whl", hash = "sha256:9af65a310807d7f36a8f7cddea142fe97d6dffba74444f38870272f2e5a3a06b"},
+    {file = "grpcio_tools-1.75.1-cp311-cp311-musllinux_1_2_x86_64.whl", hash = "sha256:8c1de31aefc0585d2f915a7cd0994d153547495b8d79c44c58048a3ede0b65be"},
+    {file = "grpcio_tools-1.75.1-cp311-cp311-win32.whl", hash = "sha256:efaf95fcaa5d3ac1bcfe44ceed9e2512eb95b5c8c476569bdbbe2bee4b59c8a9"},
+    {file = "grpcio_tools-1.75.1-cp311-cp311-win_amd64.whl", hash = "sha256:7cefe76fc35c825f0148d60d2294a527053d0f5dd6a60352419214a8c53223c9"},
+    {file = "grpcio_tools-1.75.1-cp312-cp312-linux_armv7l.whl", hash = "sha256:49b68936cf212052eeafa50b824e17731b78d15016b235d36e0d32199000b14c"},
+    {file = "grpcio_tools-1.75.1-cp312-cp312-macosx_11_0_universal2.whl", hash = "sha256:08cb6e568e58b76a2178ad3b453845ff057131fff00f634d7e15dcd015cd455b"},
+    {file = "grpcio_tools-1.75.1-cp312-cp312-manylinux2014_aarch64.manylinux_2_17_aarch64.whl", hash = "sha256:168402ad29a249092673079cf46266936ec2fb18d4f854d96e9c5fa5708efa39"},
+    {file = "grpcio_tools-1.75.1-cp312-cp312-manylinux2014_i686.manylinux_2_17_i686.whl", hash = "sha256:bbae11c29fcf450730f021bfc14b12279f2f985e2e493ccc2f133108728261db"},
+    {file = "grpcio_tools-1.75.1-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl", hash = "sha256:38c6c7d5d4800f636ee691cd073db1606d1a6a76424ca75c9b709436c9c20439"},
+    {file = "grpcio_tools-1.75.1-cp312-cp312-musllinux_1_2_aarch64.whl", hash = "sha256:626f6a61a8f141dde9a657775854d1c0d99509f9a2762b82aa401a635f6ec73d"},
+    {file = "grpcio_tools-1.75.1-cp312-cp312-musllinux_1_2_i686.whl", hash = "sha256:f61a8334ae38d4f98c744a732b89527e5af339d17180e25fff0676060f8709b7"},
+    {file = "grpcio_tools-1.75.1-cp312-cp312-musllinux_1_2_x86_64.whl", hash = "sha256:bd0c3fb40d89a1e24a41974e77c7331e80396ab7cde39bc396a13d6b5e2a750b"},
+    {file = "grpcio_tools-1.75.1-cp312-cp312-win32.whl", hash = "sha256:004bc5327593eea48abd03be3188e757c3ca0039079587a6aac24275127cac20"},
+    {file = "grpcio_tools-1.75.1-cp312-cp312-win_amd64.whl", hash = "sha256:23952692160b5fe7900653dfdc9858dc78c2c42e15c27e19ee780c8917ba6028"},
+    {file = "grpcio_tools-1.75.1-cp313-cp313-linux_armv7l.whl", hash = "sha256:ca9e116aab0ecf4365fc2980f2e8ae1b22273c3847328b9a8e05cbd14345b397"},
+    {file = "grpcio_tools-1.75.1-cp313-cp313-macosx_11_0_universal2.whl", hash = "sha256:9fe87a926b65eb7f41f8738b6d03677cc43185ff77a9d9b201bdb2f673f3fa1e"},
+    {file = "grpcio_tools-1.75.1-cp313-cp313-manylinux2014_aarch64.manylinux_2_17_aarch64.whl", hash = "sha256:45503a6094f91b3fd31c3d9adef26ac514f102086e2a37de797e220a6791ee87"},
+    {file = "grpcio_tools-1.75.1-cp313-cp313-manylinux2014_i686.manylinux_2_17_i686.whl", hash = "sha256:b01b60b3de67be531a39fd869d7613fa8f178aff38c05e4d8bc2fc530fa58cb5"},
+    {file = "grpcio_tools-1.75.1-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.whl", hash = "sha256:09e2b9b9488735514777d44c1e4eda813122d2c87aad219f98d5d49b359a8eab"},
+    {file = "grpcio_tools-1.75.1-cp313-cp313-musllinux_1_2_aarch64.whl", hash = "sha256:55e60300e62b220fabe6f062fe69f143abaeff3335f79b22b56d86254f3c3c80"},
+    {file = "grpcio_tools-1.75.1-cp313-cp313-musllinux_1_2_i686.whl", hash = "sha256:49ce00fcc6facbbf52bf376e55b8e08810cecd03dab0b3a2986d73117c6f6ee4"},
+    {file = "grpcio_tools-1.75.1-cp313-cp313-musllinux_1_2_x86_64.whl", hash = "sha256:71e95479aea868f8c8014d9dc4267f26ee75388a0d8a552e1648cfa0b53d24b4"},
+    {file = "grpcio_tools-1.75.1-cp313-cp313-win32.whl", hash = "sha256:fff9d2297416eae8861e53154ccf70a19994e5935e6c8f58ebf431f81cbd8d12"},
+    {file = "grpcio_tools-1.75.1-cp313-cp313-win_amd64.whl", hash = "sha256:1849ddd508143eb48791e81d42ddc924c554d1b4900e06775a927573a8d4267f"},
+    {file = "grpcio_tools-1.75.1-cp314-cp314-linux_armv7l.whl", hash = "sha256:f281b594489184b1f9a337cdfed1fc1ddb8428f41c4b4023de81527e90b38e1e"},
+    {file = "grpcio_tools-1.75.1-cp314-cp314-macosx_11_0_universal2.whl", hash = "sha256:becf8332f391abc62bf4eea488b63be063d76a7cf2ef00b2e36c617d9ee9216b"},
+    {file = "grpcio_tools-1.75.1-cp314-cp314-manylinux2014_aarch64.manylinux_2_17_aarch64.whl", hash = "sha256:a08330f24e5cd7b39541882a95a8ba04ffb4df79e2984aa0cd01ed26dcdccf49"},
+    {file = "grpcio_tools-1.75.1-cp314-cp314-manylinux2014_i686.manylinux_2_17_i686.whl", hash = "sha256:6bf3742bd8f102630072ed317d1496f31c454cd85ad19d37a68bd85bf9d5f8b9"},
+    {file = "grpcio_tools-1.75.1-cp314-cp314-manylinux2014_x86_64.manylinux_2_17_x86_64.whl", hash = "sha256:f26028949474feb380460ce52d9d090d00023940c65236294a66c42ac5850e8b"},
+    {file = "grpcio_tools-1.75.1-cp314-cp314-musllinux_1_2_aarch64.whl", hash = "sha256:1bd68fb98bf08f11b6c3210834a14eefe585bad959bdba38e78b4ae3b04ba5bd"},
+    {file = "grpcio_tools-1.75.1-cp314-cp314-musllinux_1_2_i686.whl", hash = "sha256:f1496e21586193da62c3a73cd16f9c63c5b3efd68ff06dab96dbdfefa90d40bf"},
+    {file = "grpcio_tools-1.75.1-cp314-cp314-musllinux_1_2_x86_64.whl", hash = "sha256:14a78b1e36310cdb3516cdf9ee2726107875e0b247e2439d62fc8dc38cf793c1"},
+    {file = "grpcio_tools-1.75.1-cp314-cp314-win32.whl", hash = "sha256:0e6f916daf222002fb98f9a6f22de0751959e7e76a24941985cc8e43cea77b50"},
+    {file = "grpcio_tools-1.75.1-cp314-cp314-win_amd64.whl", hash = "sha256:878c3b362264588c45eba57ce088755f8b2b54893d41cc4a68cdeea62996da5c"},
+    {file = "grpcio_tools-1.75.1-cp39-cp39-linux_armv7l.whl", hash = "sha256:eca28a90020fc1596f48cf51b02e56bc3d285f7f9ebaf0493144160d69c2cae7"},
+    {file = "grpcio_tools-1.75.1-cp39-cp39-macosx_11_0_universal2.whl", hash = "sha256:6744a14983f82e04cfd799ed779d06ee92035bb497f2d0fa84e81921a6c9c985"},
+    {file = "grpcio_tools-1.75.1-cp39-cp39-manylinux2014_aarch64.manylinux_2_17_aarch64.whl", hash = "sha256:2a59120f17d36de6e16a058d88f2fcd255bafaccb487fea0613860a5287f77c6"},
+    {file = "grpcio_tools-1.75.1-cp39-cp39-manylinux2014_i686.manylinux_2_17_i686.whl", hash = "sha256:02b0c237882e45247570afdc34717ce80831184882186ef47afca9f8cac2f71c"},
+    {file = "grpcio_tools-1.75.1-cp39-cp39-manylinux2014_x86_64.manylinux_2_17_x86_64.whl", hash = "sha256:4999ada9721ce2a0eae66bf7f2793bc6fe7a473eef4e38bb542d1e5c6d9f7d91"},
+    {file = "grpcio_tools-1.75.1-cp39-cp39-musllinux_1_2_aarch64.whl", hash = "sha256:dd13f0d87605eb34f8b8868e3ad9202b90e9e58417276db79c3298538d0d60e3"},
+    {file = "grpcio_tools-1.75.1-cp39-cp39-musllinux_1_2_i686.whl", hash = "sha256:9555db0d2eb22850b7e9a27c0476627d483c114fcdf40d29b03aef446f5e4c43"},
+    {file = "grpcio_tools-1.75.1-cp39-cp39-musllinux_1_2_x86_64.whl", hash = "sha256:a35800ce3ecea4aaad511bc18daccd37b1560132694f30b606f2044f1242c9a0"},
+    {file = "grpcio_tools-1.75.1-cp39-cp39-win32.whl", hash = "sha256:8e7f2c1a37a5c8db92c5cba4034c370598f7458b275606f7a2a114f8c25c0326"},
+    {file = "grpcio_tools-1.75.1-cp39-cp39-win_amd64.whl", hash = "sha256:0de3a82ee33d960f117ab66da51254cccd8bda9118d11ec3379f954cfbf6bc39"},
+    {file = "grpcio_tools-1.75.1.tar.gz", hash = "sha256:bb78960cf3d58941e1fec70cbdaccf255918beed13c34112a6915a6d8facebd1"},
+]
+
+[package.dependencies]
+grpcio = ">=1.75.1"
+protobuf = ">=6.31.1,<7.0.0"
+setuptools = "*"
+
+[[package]]
+name = "iniconfig"
+version = "2.3.0"
+description = "brain-dead simple config-ini parsing"
+optional = false
+python-versions = ">=3.10"
+groups = ["test"]
+files = [
+    {file = "iniconfig-2.3.0-py3-none-any.whl", hash = "sha256:f631c04d2c48c52b84d0d0549c99ff3859c98df65b3101406327ecc7d53fbf12"},
+    {file = "iniconfig-2.3.0.tar.gz", hash = "sha256:c76315c77db068650d49c5b56314774a7804df16fee4402c1f19d6d15d8c4730"},
+]
+
+[[package]]
+name = "isort"
+version = "8.0.1"
+description = "A Python utility / library to sort Python imports."
+optional = false
+python-versions = ">=3.10.0"
+groups = ["lint"]
+files = [
+    {file = "isort-8.0.1-py3-none-any.whl", hash = "sha256:28b89bc70f751b559aeca209e6120393d43fbe2490de0559662be7a9787e3d75"},
+    {file = "isort-8.0.1.tar.gz", hash = "sha256:171ac4ff559cdc060bcfff550bc8404a486fee0caab245679c2abe7cb253c78d"},
+]
+
+[package.extras]
+colors = ["colorama"]
+
+[[package]]
+name = "librt"
+version = "0.11.0"
+description = "Mypyc runtime library"
+optional = false
+python-versions = ">=3.9"
+groups = ["lint"]
+markers = "platform_python_implementation != \"PyPy\""
+files = [
+    {file = "librt-0.11.0-cp310-cp310-macosx_10_9_x86_64.whl", hash = "sha256:6e94ebfcfa2d5e9926d6c3b9aa4617ffc42a845b4321fb84021b872358c82a0f"},
+    {file = "librt-0.11.0-cp310-cp310-macosx_11_0_arm64.whl", hash = "sha256:ae627397a2f351560440d872d6f7c8dbb4072e57868e7b2fc5b8b430fe489d45"},
+    {file = "librt-0.11.0-cp310-cp310-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:dc329359321b67d24efdf4bc69012b0597001649544db662c001db5a0184794c"},
+    {file = "librt-0.11.0-cp310-cp310-manylinux2014_i686.manylinux_2_17_i686.manylinux_2_28_i686.whl", hash = "sha256:7e82e642ab0f7608ce2fe53d76ca2280a9ee33a1b06556142c7c6fe80a86fc33"},
+    {file = "librt-0.11.0-cp310-cp310-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:88145c15c67731d54283d135b03244028c750cc9edc334a96a4f5950ebdb2884"},
+    {file = "librt-0.11.0-cp310-cp310-manylinux_2_34_riscv64.manylinux_2_39_riscv64.whl", hash = "sha256:9d36a51b3d93320b686588e27123f4995804dbf1bce81df78c02fc3c6eea9280"},
+    {file = "librt-0.11.0-cp310-cp310-musllinux_1_2_aarch64.whl", hash = "sha256:d00f3ac06a2a8b246327f11e186a53a100a4d5c7ed52346367e5ec751d51586c"},
+    {file = "librt-0.11.0-cp310-cp310-musllinux_1_2_i686.whl", hash = "sha256:461bbceede621f1ffb8839755f8663e886087ee7af16294cab7fb4d782c62eeb"},
+    {file = "librt-0.11.0-cp310-cp310-musllinux_1_2_riscv64.whl", hash = "sha256:0cad8a4d6a8ff03c9b76f9414caccd78e7cfbc8a2e12fa334d8e1d9932753783"},
+    {file = "librt-0.11.0-cp310-cp310-musllinux_1_2_x86_64.whl", hash = "sha256:f37aa505b3cf60701562eddb32df74b12a9e380c207fd8b06dd157a943ac7ea0"},
+    {file = "librt-0.11.0-cp310-cp310-win32.whl", hash = "sha256:94663a21534637f0e787ec2a2a756022df6e5b7b2335a5cdd7d8e33d68a2af89"},
+    {file = "librt-0.11.0-cp310-cp310-win_amd64.whl", hash = "sha256:dec7db73758c2b54953fd8b7fe348c45188fe26b39ee18446196edd08453a5d4"},
+    {file = "librt-0.11.0-cp311-cp311-macosx_10_9_x86_64.whl", hash = "sha256:93d95bd45b7d58343d8b90d904450a545144eec19a002511163426f8ab1fae29"},
+    {file = "librt-0.11.0-cp311-cp311-macosx_11_0_arm64.whl", hash = "sha256:4ee278c769a713638cdacd4c0436d72156e75df3ebc0166ab2b9dc43acc386c9"},
+    {file = "librt-0.11.0-cp311-cp311-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:f230cb1cbc9faaa616f9a678f530ebcf186e414b6bcbd88b960e4ba1b92428d5"},
+    {file = "librt-0.11.0-cp311-cp311-manylinux2014_i686.manylinux_2_17_i686.manylinux_2_28_i686.whl", hash = "sha256:5d63c855d86938d9de93e265c9bd8c705b51ec494de5738340ee93767a686e4b"},
+    {file = "librt-0.11.0-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:993f028be9e96a08d31df3479ac80d99be374d17f3b78e4796b3fd3c913d4e89"},
+    {file = "librt-0.11.0-cp311-cp311-manylinux_2_34_riscv64.manylinux_2_39_riscv64.whl", hash = "sha256:258d73a0aa66a055e65b2e4d1b8cdb23b9d132c5bb915d9547d804fcaed116cc"},
+    {file = "librt-0.11.0-cp311-cp311-musllinux_1_2_aarch64.whl", hash = "sha256:0827efe7854718f04aaddf6496e96960a956e676fe1d0f04eb41511fd8ad06d5"},
+    {file = "librt-0.11.0-cp311-cp311-musllinux_1_2_i686.whl", hash = "sha256:7753e57d6e12d019c0d8786f1c09c709f4c3fcc57c3887b24e36e6c06ec938b7"},
+    {file = "librt-0.11.0-cp311-cp311-musllinux_1_2_riscv64.whl", hash = "sha256:11bd19822431cc21af9f27374e7ae2e58103c7d98bda823536a6c47f6bb2bb3d"},
+    {file = "librt-0.11.0-cp311-cp311-musllinux_1_2_x86_64.whl", hash = "sha256:22bdf239b219d3993761a148ffa134b19e52e9989c84f845d5d7b71d70a17412"},
+    {file = "librt-0.11.0-cp311-cp311-win32.whl", hash = "sha256:46c60b61e308eb535fbd6fa622b1ee1bb2815691c1ad9c98bf7b84952ec3bc8d"},
+    {file = "librt-0.11.0-cp311-cp311-win_amd64.whl", hash = "sha256:902e546ff044f579ff1c953ff5fce97b636fe9e3943996b2177710c6ef076f73"},
+    {file = "librt-0.11.0-cp311-cp311-win_arm64.whl", hash = "sha256:65ac3bc20f78aa0ee5ae84baa68917f89fef4af63e941084dd019a0d0e749f0c"},
+    {file = "librt-0.11.0-cp312-cp312-macosx_10_13_x86_64.whl", hash = "sha256:b87504f1690a23b9a2cca841191a04f83895d4fc2dd04df91d82b1a04ca2ad46"},
+    {file = "librt-0.11.0-cp312-cp312-macosx_11_0_arm64.whl", hash = "sha256:40071fc5fe0ce8daa6de616702314a01e1250711682b0523d6ab8d4525910cb3"},
+    {file = "librt-0.11.0-cp312-cp312-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:137e79445c896a0ea7b265f52d23954e05b64222ee1af69e2cb34219067cbb67"},
+    {file = "librt-0.11.0-cp312-cp312-manylinux2014_i686.manylinux_2_17_i686.manylinux_2_28_i686.whl", hash = "sha256:cca6644054e78746d8d4ef238681f9c34ff8b584fe6b988ecebb8db3b15e622a"},
+    {file = "librt-0.11.0-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:d5b0eea49f5562861ee8d757a32ef7d559c1d35be2aaaa1ec28941d74c9ffc8a"},
+    {file = "librt-0.11.0-cp312-cp312-manylinux_2_34_riscv64.manylinux_2_39_riscv64.whl", hash = "sha256:0d1029d7e1ae1a7e647ed6fb5df8c4ce2dffefb7a9f5fd1376a4554d96dac09f"},
+    {file = "librt-0.11.0-cp312-cp312-musllinux_1_2_aarch64.whl", hash = "sha256:bc3ce6b33c5828d9e80592011a5c584cb2ce86edbc4088405f70da47dc1d1b3b"},
+    {file = "librt-0.11.0-cp312-cp312-musllinux_1_2_i686.whl", hash = "sha256:936c5995f3514a42111f20099397d8177c79b4d7e70961e396c6f5a0a3566766"},
+    {file = "librt-0.11.0-cp312-cp312-musllinux_1_2_riscv64.whl", hash = "sha256:9bc0ca6ad9381cbe8e4aa6e5726e4c80c78115a6e9723c599ed1d73e092bc49d"},
+    {file = "librt-0.11.0-cp312-cp312-musllinux_1_2_x86_64.whl", hash = "sha256:070aa8c26c0a74774317a72df8851facc7f0f012a5b406557ac56992d92e1ec8"},
+    {file = "librt-0.11.0-cp312-cp312-win32.whl", hash = "sha256:6bf14feb84b05ae945277395451998c89c54d0def4070eb5c08de544930b245a"},
+    {file = "librt-0.11.0-cp312-cp312-win_amd64.whl", hash = "sha256:75672f0bc524ede266287d532d7923dbce94c7514ad07627bac3d0c6d92cc4d9"},
+    {file = "librt-0.11.0-cp312-cp312-win_arm64.whl", hash = "sha256:2f10cf143e4a9bb0f4f5af568a00df94a2d69ef41c2579584454bb0fe5cc642c"},
+    {file = "librt-0.11.0-cp313-cp313-macosx_10_13_x86_64.whl", hash = "sha256:78dc31f7fdfe9c9d0eb0e8f42d139db230e826415bbcabd9f0e9faaaee909894"},
+    {file = "librt-0.11.0-cp313-cp313-macosx_11_0_arm64.whl", hash = "sha256:fa475675db22290c3158e1d42326d0f5a65f04f44a0e68c3630a25b53560fb9c"},
+    {file = "librt-0.11.0-cp313-cp313-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:621db29691044bdeda22e789e482e1b0f3a985d90e3426c9c6d17606416205ea"},
+    {file = "librt-0.11.0-cp313-cp313-manylinux2014_i686.manylinux_2_17_i686.manylinux_2_28_i686.whl", hash = "sha256:a9010e2ed5b3a9e158c5fd966b3ab7e834bb3d3aacc8f66c91dd4b57a3799230"},
+    {file = "librt-0.11.0-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:7c39513d8b7477a2e1ed8c43fc21c524e8d5a0f8d4e8b7b074dbdbe7820a08e2"},
+    {file = "librt-0.11.0-cp313-cp313-manylinux_2_34_riscv64.manylinux_2_39_riscv64.whl", hash = "sha256:7aef3cf1d5af86e770ab04bfd993dfc4ae8b8c17f66fb77dd4a7d50de7bbb1a3"},
+    {file = "librt-0.11.0-cp313-cp313-musllinux_1_2_aarch64.whl", hash = "sha256:557183ddc36babe46b27dd60facbd5adb4492181a5be887587d57cda6e092f21"},
+    {file = "librt-0.11.0-cp313-cp313-musllinux_1_2_i686.whl", hash = "sha256:83d3e1f72bd42f6c5c0b7daec530c3f829bd02db42c70b8ddf0c2d90a2459930"},
+    {file = "librt-0.11.0-cp313-cp313-musllinux_1_2_riscv64.whl", hash = "sha256:4ce1f21fbe589bc1afd7872dece84fb0e1144f794a288e58a10d2c54a55c43be"},
+    {file = "librt-0.11.0-cp313-cp313-musllinux_1_2_x86_64.whl", hash = "sha256:970b09f7044ea2b64c9da42fd3d335666518cfd1c6e8a182c95da73d0214b41e"},
+    {file = "librt-0.11.0-cp313-cp313-win32.whl", hash = "sha256:78fddc31cd4d3caa897ad5d31f856b1faadc9474021ad6cb182b9018793e254e"},
+    {file = "librt-0.11.0-cp313-cp313-win_amd64.whl", hash = "sha256:8ca8aa88751a775870b764e93bad5135385f563cb8dcee399abf034ea4d3cb47"},
+    {file = "librt-0.11.0-cp313-cp313-win_arm64.whl", hash = "sha256:96f044bb325fd9cf1a723015638c219e9143f0dfbc0ca54c565df2b7fc748b44"},
+    {file = "librt-0.11.0-cp314-cp314-macosx_10_13_x86_64.whl", hash = "sha256:4a017a95e5837dc15a8c5661d60e05daa96b90908b1aa6b7acdf443cd25c8ebd"},
+    {file = "librt-0.11.0-cp314-cp314-macosx_11_0_arm64.whl", hash = "sha256:b1ecbd9819deccc39b7542bf4d2a740d8a620694d39989e58661d3763458f8d4"},
+    {file = "librt-0.11.0-cp314-cp314-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:7da327dacd7be8f8ec36547373550744a3cc0e536d54665cd83f8bcd961200e8"},
+    {file = "librt-0.11.0-cp314-cp314-manylinux2014_i686.manylinux_2_17_i686.manylinux_2_28_i686.whl", hash = "sha256:0dc56b1f8d06e60db362cc3fdae206681817f86ce4725d34511473487f12a34b"},
+    {file = "librt-0.11.0-cp314-cp314-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:05fb8fb2ab90e21c8d12ea240d744ad514da9baf381ebfa70d91d20d21713175"},
+    {file = "librt-0.11.0-cp314-cp314-manylinux_2_34_riscv64.manylinux_2_39_riscv64.whl", hash = "sha256:cae74872be221df4374d10fec61f93ed1513b9546ea84f2c0bf73ab3e9bd0b03"},
+    {file = "librt-0.11.0-cp314-cp314-musllinux_1_2_aarch64.whl", hash = "sha256:32bcc918c0148eb7e3d57385125bac7e5f9e4359d05f07448b09f6f778c2f31c"},
+    {file = "librt-0.11.0-cp314-cp314-musllinux_1_2_i686.whl", hash = "sha256:f9743fc99135d5f78d2454435615f6dec0473ca507c26ce9d92b10b562a280d3"},
+    {file = "librt-0.11.0-cp314-cp314-musllinux_1_2_riscv64.whl", hash = "sha256:5ba067f4aadae8fda802d91d2124c90c42195ff32d9161d3549e6d05cfe26f96"},
+    {file = "librt-0.11.0-cp314-cp314-musllinux_1_2_x86_64.whl", hash = "sha256:de3bf945454d032f9e390b85c4072e0a0570bf825421c8be0e71209fa65e1abe"},
+    {file = "librt-0.11.0-cp314-cp314-win32.whl", hash = "sha256:d2277a05f6dcb9fd13db9566aac4fabd68c3ea1ea46ee5567d4eef8efa495a2f"},
+    {file = "librt-0.11.0-cp314-cp314-win_amd64.whl", hash = "sha256:ab73e8db5e3f564d812c1f5c3a175930a5f9bc96ccb5e3b22a34d7858b401cf7"},
+    {file = "librt-0.11.0-cp314-cp314-win_arm64.whl", hash = "sha256:aea3caa317752e3a466fa8af45d91ee0ea8c7fdd96e42b0a8dd9b76a7931eba1"},
+    {file = "librt-0.11.0-cp314-cp314t-macosx_10_13_x86_64.whl", hash = "sha256:d1b36540d7aaf9b9101b3a6f376c8d8e9f7a9aec93ed05918f2c69d493ffef72"},
+    {file = "librt-0.11.0-cp314-cp314t-macosx_11_0_arm64.whl", hash = "sha256:efbb343ab2ce3540f4ecbe6315d677ed70f37cd9a72b1e58066c918ca83acbaa"},
+    {file = "librt-0.11.0-cp314-cp314t-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:aa0dd688aab3f7914d3e6e5e3554978e0383312fb8e771d84be008a35b9ee548"},
+    {file = "librt-0.11.0-cp314-cp314t-manylinux2014_i686.manylinux_2_17_i686.manylinux_2_28_i686.whl", hash = "sha256:f5fb36b8c6c63fdcbb1d526d94c0d1331610d43f4118cc1beb4efef4f3faacb2"},
+    {file = "librt-0.11.0-cp314-cp314t-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:4a9a237d13addb93715b6fee74023d5ee3469b53fce527626c0e088aa585805f"},
+    {file = "librt-0.11.0-cp314-cp314t-manylinux_2_34_riscv64.manylinux_2_39_riscv64.whl", hash = "sha256:5ddd17bd87b2c56ddd60e546a7984a2e64c4e8eab92fb4cf3830a48ad5469d51"},
+    {file = "librt-0.11.0-cp314-cp314t-musllinux_1_2_aarch64.whl", hash = "sha256:bd43992b4473d42f12ff9e68326079f0696d9d4e6000e8f39a0238d482ba6ee2"},
+    {file = "librt-0.11.0-cp314-cp314t-musllinux_1_2_i686.whl", hash = "sha256:f8e3e8056dd674e279741485e2e512d6e9a751c7455809d0114e6ebf8d781085"},
+    {file = "librt-0.11.0-cp314-cp314t-musllinux_1_2_riscv64.whl", hash = "sha256:c1f708d8ae9c56cf38a903c44297243d2ec83fd82b396b977e0144a3e76217e3"},
+    {file = "librt-0.11.0-cp314-cp314t-musllinux_1_2_x86_64.whl", hash = "sha256:0add982e0e7b9fc14cf4b33789d5f13f66581889b88c2f58099f6ce8f92617bd"},
+    {file = "librt-0.11.0-cp314-cp314t-win32.whl", hash = "sha256:2b481d846ac894c4e8403c5fd0e87c5d11d6499e404b474602508a224ff531c8"},
+    {file = "librt-0.11.0-cp314-cp314t-win_amd64.whl", hash = "sha256:28edb433edde181112a908c78907af28f964eabc15f4dd16c9d66c834302677c"},
+    {file = "librt-0.11.0-cp314-cp314t-win_arm64.whl", hash = "sha256:dee008f20b542e3cd162ba338a7f9ec0f6d23d395f66fe8aeeec3c9d067ea253"},
+    {file = "librt-0.11.0-cp39-cp39-macosx_10_9_x86_64.whl", hash = "sha256:6bd72d903911d995ab666dbd1871f8b1e80925a699af8063fbf50053329fb05f"},
+    {file = "librt-0.11.0-cp39-cp39-macosx_11_0_arm64.whl", hash = "sha256:0ef69ac715f3cd8e5cd252cb2aebfa72c015492aacc339d5d7bf8fef3c62c677"},
+    {file = "librt-0.11.0-cp39-cp39-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:624a40c4a4ad7773315c287276cd024509b2c66ff5904f504bfc08d2c70293ab"},
+    {file = "librt-0.11.0-cp39-cp39-manylinux2014_i686.manylinux_2_17_i686.manylinux_2_28_i686.whl", hash = "sha256:41dc19fe150b69716c8ece4f76773a9e8813fe3e35e032a58b4d46423fb8d7c0"},
+    {file = "librt-0.11.0-cp39-cp39-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:4e8bd98ea9c47ae90b319a087ab28dac493f1ffbc1ecd1f28fcdbf3b7e1108d1"},
+    {file = "librt-0.11.0-cp39-cp39-manylinux_2_34_riscv64.manylinux_2_39_riscv64.whl", hash = "sha256:84308fc49423ce6475d1c5d1985cd69a8ca9f0325fc7d5f81bb690a3f3625d4e"},
+    {file = "librt-0.11.0-cp39-cp39-musllinux_1_2_aarch64.whl", hash = "sha256:ff0fbaf5f44a21beeb0110f2ab64f45135a9536a834b79c0d1ef018f2786bbfa"},
+    {file = "librt-0.11.0-cp39-cp39-musllinux_1_2_i686.whl", hash = "sha256:9c028a9442a18e266955d364ce42259136e79a7ba14d773e0d778d5f70cd56f1"},
+    {file = "librt-0.11.0-cp39-cp39-musllinux_1_2_riscv64.whl", hash = "sha256:9f1692105a02bcf853f355032a5fdc5494358ef83d8fd22d16de375c85cec3f5"},
+    {file = "librt-0.11.0-cp39-cp39-musllinux_1_2_x86_64.whl", hash = "sha256:7a80a71e1fda83cc752a9141e87aae7fef279538597564d670e9ce513f286192"},
+    {file = "librt-0.11.0-cp39-cp39-win32.whl", hash = "sha256:140695816ddf3c86eb972981a26f35efd871c44b0c3aed44c8cd01749386617f"},
+    {file = "librt-0.11.0-cp39-cp39-win_amd64.whl", hash = "sha256:92f7ff819c197fc30473190a12c2856f325ac90aabfccbeb2072d28cc2e234e3"},
+    {file = "librt-0.11.0.tar.gz", hash = "sha256:075dc3ef4458a278e0195cbf6ac9d38808d9b906c5a6c7f7f79c3888276a3fb1"},
+]
+
+[[package]]
+name = "markdown-it-py"
+version = "4.2.0"
+description = "Python port of markdown-it. Markdown parsing, done right!"
+optional = false
+python-versions = ">=3.10"
+groups = ["lint"]
+files = [
+    {file = "markdown_it_py-4.2.0-py3-none-any.whl", hash = "sha256:9f7ebbcd14fe59494226453aed97c1070d83f8d24b6fc3a3bcf9a38092641c4a"},
+    {file = "markdown_it_py-4.2.0.tar.gz", hash = "sha256:04a21681d6fbb623de53f6f364d352309d4094dd4194040a10fd51833e418d49"},
+]
+
+[package.dependencies]
+mdurl = ">=0.1,<1.0"
+
+[package.extras]
+benchmarking = ["psutil", "pytest", "pytest-benchmark"]
+compare = ["commonmark (>=0.9,<1.0)", "markdown (>=3.4,<4.0)", "markdown-it-pyrs", "mistletoe (>=1.0,<2.0)", "mistune (>=3.0,<4.0)", "panflute (>=2.3,<3.0)"]
+linkify = ["linkify-it-py (>=1,<3)"]
+plugins = ["mdit-py-plugins (>=0.5.0)"]
+profiling = ["gprof2dot"]
+rtd = ["ipykernel", "jupyter_sphinx", "mdit-py-plugins (>=0.5.0)", "myst-parser", "pyyaml", "sphinx", "sphinx-book-theme (>=1.0,<2.0)", "sphinx-copybutton", "sphinx-design"]
+testing = ["coverage", "pytest", "pytest-cov", "pytest-regressions", "pytest-timeout", "requests"]
+
+[[package]]
+name = "mccabe"
+version = "0.7.0"
+description = "McCabe checker, plugin for flake8"
+optional = false
+python-versions = ">=3.6"
+groups = ["lint"]
+files = [
+    {file = "mccabe-0.7.0-py2.py3-none-any.whl", hash = "sha256:6c2d30ab6be0e4a46919781807b4f0d834ebdd6c6e3dca0bda5a15f863427b6e"},
+    {file = "mccabe-0.7.0.tar.gz", hash = "sha256:348e0240c33b60bbdf4e523192ef919f28cb2c3d7d5c7794f74009290f236325"},
+]
+
+[[package]]
+name = "mdurl"
+version = "0.1.2"
+description = "Markdown URL utilities"
+optional = false
+python-versions = ">=3.7"
+groups = ["lint"]
+files = [
+    {file = "mdurl-0.1.2-py3-none-any.whl", hash = "sha256:84008a41e51615a49fc9966191ff91509e3c40b939176e643fd50a5c2196b8f8"},
+    {file = "mdurl-0.1.2.tar.gz", hash = "sha256:bb413d29f5eea38f31dd4754dd7377d4465116fb207585f97bf925588687c1ba"},
+]
+
+[[package]]
+name = "mypy"
+version = "2.1.0"
+description = "Optional static typing for Python"
+optional = false
+python-versions = ">=3.10"
+groups = ["lint"]
+files = [
+    {file = "mypy-2.1.0-cp310-cp310-macosx_10_9_x86_64.whl", hash = "sha256:11a6beb180257a805961aea9ec591bbd0bd17f1e18d35b8456d57aee5bedfedc"},
+    {file = "mypy-2.1.0-cp310-cp310-macosx_11_0_arm64.whl", hash = "sha256:8ef78c1d306bbf9a8a12f526c44902c9c28dffd6c52c52bf6a72641ce18d3849"},
+    {file = "mypy-2.1.0-cp310-cp310-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:c209a90853081ff01d01ee895cafe10f7db1474e0d95beaeef0f6c1db9119bbd"},
+    {file = "mypy-2.1.0-cp310-cp310-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:47cebf61abde7c088a4e27718a8b13a81655686b2e9c251f5c0915a802248166"},
+    {file = "mypy-2.1.0-cp310-cp310-musllinux_1_2_x86_64.whl", hash = "sha256:d57a90ae5e872138a425ec328edbc9b235d1934c4377881a33ec05b341acc9a8"},
+    {file = "mypy-2.1.0-cp310-cp310-win_amd64.whl", hash = "sha256:aea7f7a8a55b459c34275fc468ada6ca7c173a5e43a68f5dbe588a563d8a06b8"},
+    {file = "mypy-2.1.0-cp310-cp310-win_arm64.whl", hash = "sha256:c989640253f0d76843e9c6c1bbf4bd48c5e85ada61bde4beb37cb3eca035685e"},
+    {file = "mypy-2.1.0-cp311-cp311-macosx_10_9_x86_64.whl", hash = "sha256:a683016b16fe2f572dc04c72be7ee0504ac1605a265d0200f5cea695fb788f41"},
+    {file = "mypy-2.1.0-cp311-cp311-macosx_11_0_arm64.whl", hash = "sha256:1a293c534adb55271fef24a26da04b855540a8c13cc07bc5917b9fd2c394f2ca"},
+    {file = "mypy-2.1.0-cp311-cp311-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:7406f4d048e71e576f5356d317e5b0a9e666dfd966bd99f9d14ca06e1a341538"},
+    {file = "mypy-2.1.0-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:e0210d626fc8b31ccc90233754c7bc90e1f43205e85d96387f7db1285b55c398"},
+    {file = "mypy-2.1.0-cp311-cp311-musllinux_1_2_x86_64.whl", hash = "sha256:3712c20deed54e814eaaa825603bada8ea1c390670a397c95b98405347acc563"},
+    {file = "mypy-2.1.0-cp311-cp311-win_amd64.whl", hash = "sha256:fcaa0e479066e31f7cceb6a3bea39cb22b2ff51a6b2f24f193d19179ba17c389"},
+    {file = "mypy-2.1.0-cp311-cp311-win_arm64.whl", hash = "sha256:0b1a5260c95aa443083f9ed3592662941951bca3d4ca224a5dc517c38b7cf666"},
+    {file = "mypy-2.1.0-cp312-cp312-macosx_10_13_x86_64.whl", hash = "sha256:244358bf1c0da7722230bce60683d52e8e9fd030554926f15b747a84efb5b3af"},
+    {file = "mypy-2.1.0-cp312-cp312-macosx_11_0_arm64.whl", hash = "sha256:4ec7c57657493c7a75534df2751c8ae2cda383c16ecc55d2106c54476b1b16f6"},
+    {file = "mypy-2.1.0-cp312-cp312-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:d8161b6ff4392410023224f0969d17db93e1e154bc3e4ba62598e720723ae211"},
+    {file = "mypy-2.1.0-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:bf03e12003084a67395184d3eb8cbd6a489dc3655b5664b28c210a9e2403ab0b"},
+    {file = "mypy-2.1.0-cp312-cp312-musllinux_1_2_x86_64.whl", hash = "sha256:20509760fd791c51579d573153407d226385ec1f8bcce55d730b354f3336bc22"},
+    {file = "mypy-2.1.0-cp312-cp312-win_amd64.whl", hash = "sha256:6753d0c1fdd6b1a23b9e4f283ce80b2153b724adcb2653b20b85a8a28ac6436b"},
+    {file = "mypy-2.1.0-cp312-cp312-win_arm64.whl", hash = "sha256:98ebb6589bb3b6d0c6f0c459d53ca55b8091fbc13d277c4041c885392e8195e8"},
+    {file = "mypy-2.1.0-cp313-cp313-macosx_10_13_x86_64.whl", hash = "sha256:35aac3bb114e03888f535d5eb51b8bafbb3266586b599da1940f9b1be3ec5bd5"},
+    {file = "mypy-2.1.0-cp313-cp313-macosx_11_0_arm64.whl", hash = "sha256:8de55a8c861f2a49331f807be98d90caeceeef520bde13d43a160207f8af613e"},
+    {file = "mypy-2.1.0-cp313-cp313-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:5fdf2941a07434af755837d9880f7d7d25f1dacb1af9dcd4b9b66f2220a3024e"},
+    {file = "mypy-2.1.0-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:e195b817c13f02352a9c124301f9f30f078405444679b6753c1b96b6eed37285"},
+    {file = "mypy-2.1.0-cp313-cp313-musllinux_1_2_x86_64.whl", hash = "sha256:5431d42af987ebd92ba2f71d45c85ed41d8e6ca9f5fd209a69f68f707d2469e5"},
+    {file = "mypy-2.1.0-cp313-cp313-win_amd64.whl", hash = "sha256:767fe8c66dc3e01e19e1737d4c38ebefead16125e1b8e58ad421903b376f5c65"},
+    {file = "mypy-2.1.0-cp313-cp313-win_arm64.whl", hash = "sha256:ecfe70d43775ab99562ab128ce49854a362044c9f894961f68f898c23cb7429d"},
+    {file = "mypy-2.1.0-cp314-cp314-macosx_10_15_x86_64.whl", hash = "sha256:7354c5a7f69d9345c3d6e69921d57088eea3ddeeb6b20d34c1b3855b02c36ec2"},
+    {file = "mypy-2.1.0-cp314-cp314-macosx_11_0_arm64.whl", hash = "sha256:49890d4f76ac9e06ec117f9e09f3174da70a620a0c300953d8595c926e80947f"},
+    {file = "mypy-2.1.0-cp314-cp314-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:761be68e023ef5d94678772396a8af1220030f80837a3afd8d0aef3b419666f4"},
+    {file = "mypy-2.1.0-cp314-cp314-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:c90345fc182dc363b891350457ec69c35140858538f38b4540845afcc32b1aef"},
+    {file = "mypy-2.1.0-cp314-cp314-musllinux_1_2_x86_64.whl", hash = "sha256:b84802e7b5a6daf1f5e15bc9fcd7ddae77be13981ffab037f1c67bb84d67d135"},
+    {file = "mypy-2.1.0-cp314-cp314-win_amd64.whl", hash = "sha256:022c771234936ceac541ebaf836fe9e2abeb3f5e09aff21588fe543ff006fe21"},
+    {file = "mypy-2.1.0-cp314-cp314-win_arm64.whl", hash = "sha256:498207db725cec88829a6a5c2fc771205fd043719ef98bc49aba8fb9fc4e6d57"},
+    {file = "mypy-2.1.0-cp314-cp314t-macosx_10_15_x86_64.whl", hash = "sha256:7d5e5cad0efeba72b93cd17490cc0d69c5ac9ca132994fe3fb0314808aeeb83e"},
+    {file = "mypy-2.1.0-cp314-cp314t-macosx_11_0_arm64.whl", hash = "sha256:ff715050c127d724fd260a2e666e7747fdd83511c0c47d449d98238970aef780"},
+    {file = "mypy-2.1.0-cp314-cp314t-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:82208da9e09414d520e912d3e462d454854bed0810b71540bb016dcbca7308fd"},
+    {file = "mypy-2.1.0-cp314-cp314t-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:e79ebc1b904b84f0310dff7469655a9c36c7a68bddb37bdd42b67a332df61d08"},
+    {file = "mypy-2.1.0-cp314-cp314t-musllinux_1_2_x86_64.whl", hash = "sha256:e583edc957cfb0deb142079162ae826f58449b116c1d442f2d91c69d9fced081"},
+    {file = "mypy-2.1.0-cp314-cp314t-win_amd64.whl", hash = "sha256:b33b6cd332695bba180d55e717a79d3038e479a2c49cc5eb3d53603409b9a5d7"},
+    {file = "mypy-2.1.0-cp314-cp314t-win_arm64.whl", hash = "sha256:4f910fe825376a7b66ef7ca8c98e5a149e8cd64c19ae71d84047a74ee060d4e6"},
+    {file = "mypy-2.1.0-py3-none-any.whl", hash = "sha256:a663814603a5c563fb87a4f96fb473eeb30d1f5a4885afcf44f9db000a366289"},
+    {file = "mypy-2.1.0.tar.gz", hash = "sha256:81e76ad12c2d804512e9b13240d1588316531bfba07558286078bfbce9613633"},
+]
+
+[package.dependencies]
+ast-serialize = ">=0.3.0,<1.0.0"
+librt = {version = ">=0.11.0", markers = "platform_python_implementation != \"PyPy\""}
+mypy_extensions = ">=1.0.0"
+pathspec = ">=1.0.0"
+tomli = {version = ">=1.1.0", markers = "python_version < \"3.11\""}
+typing_extensions = [
+    {version = ">=4.6.0", markers = "python_version < \"3.15\""},
+    {version = ">=4.14.0", markers = "python_version >= \"3.15\""},
+]
+
+[package.extras]
+dmypy = ["psutil (>=4.0)"]
+faster-cache = ["orjson"]
+install-types = ["pip"]
+mypyc = ["setuptools (>=50)"]
+reports = ["lxml"]
+
+[[package]]
+name = "mypy-extensions"
+version = "1.1.0"
+description = "Type system extensions for programs checked with the mypy type checker."
+optional = false
+python-versions = ">=3.8"
+groups = ["lint"]
+files = [
+    {file = "mypy_extensions-1.1.0-py3-none-any.whl", hash = "sha256:1be4cccdb0f2482337c4743e60421de3a356cd97508abadd57d47403e94f5505"},
+    {file = "mypy_extensions-1.1.0.tar.gz", hash = "sha256:52e68efc3284861e772bbcd66823fde5ae21fd2fdb51c62a211403730b916558"},
+]
+
+[[package]]
+name = "mypy-protobuf"
+version = "3.6.0"
+description = "Generate mypy stub files from protobuf specs"
+optional = false
+python-versions = ">=3.8"
+groups = ["main"]
+markers = "python_version < \"3.14\""
+files = [
+    {file = "mypy-protobuf-3.6.0.tar.gz", hash = "sha256:02f242eb3409f66889f2b1a3aa58356ec4d909cdd0f93115622e9e70366eca3c"},
+    {file = "mypy_protobuf-3.6.0-py3-none-any.whl", hash = "sha256:56176e4d569070e7350ea620262478b49b7efceba4103d468448f1d21492fd6c"},
+]
+
+[package.dependencies]
+protobuf = ">=4.25.3"
+types-protobuf = ">=4.24"
+
+[[package]]
+name = "mypy-protobuf"
+version = "5.1.0"
+description = "Generate mypy stub files from protobuf specs"
+optional = false
+python-versions = ">=3.8"
+groups = ["main"]
+markers = "python_version >= \"3.14\""
+files = [
+    {file = "mypy_protobuf-5.1.0-py3-none-any.whl", hash = "sha256:d7031f563f806b8bcd448a3e86768bf0994c0af5b0017b344a4fbbba4191f43c"},
+    {file = "mypy_protobuf-5.1.0.tar.gz", hash = "sha256:8493758852a9cdc075a11dbe96c6e37ea2feba5fd5f33ef7442b9a275322a94c"},
+]
+
+[package.dependencies]
+protobuf = ">=4.25.3"
+types-protobuf = ">=4.24"
+
+[[package]]
+name = "ni-python-styleguide"
+version = "0.5.0"
+description = "NI's internal and external Python linter rules and plugins"
+optional = false
+python-versions = "<4.0,>=3.9"
+groups = ["lint"]
+files = [
+    {file = "ni_python_styleguide-0.5.0-py3-none-any.whl", hash = "sha256:66784d97bc2898552386ca8e0667a11fa5f712820130585df7709d08836f6bc0"},
+    {file = "ni_python_styleguide-0.5.0.tar.gz", hash = "sha256:66bd05f7d9fc98a87e5e85319faa752efd54549c979938ed1bb64e2d1f412630"},
+]
+
+[package.dependencies]
+better-diff = ">=0.1.3,<0.2.0"
+black = ">=23.1,<26.0"
+click = ">=7.1.2"
+flake8 = [
+    {version = ">=5.0,<6.0", markers = "python_version >= \"3.8\" and python_version < \"3.12\""},
+    {version = ">=6.1,<7.0", markers = "python_version >= \"3.12\" and python_version < \"4.0\""},
+]
+flake8-black = ">=0.2.1"
+flake8-docstrings = ">=1.5.0"
+flake8-import-order = ">=0.18.1,<0.19.0"
+flake8-tidy-imports = ">=4.11.0"
+isort = ">=5.10"
+pathspec = ">=0.11.1"
+pep8-naming = ">=0.11.1"
+pycodestyle = [
+    {version = ">=2.9,<3.0", markers = "python_version >= \"3.8\" and python_version < \"3.12\""},
+    {version = ">=2.11,<3.0", markers = "python_version >= \"3.12\" and python_version < \"4.0\""},
+]
+setuptools = "<82"
+toml = ">=0.10.1"
+
+[[package]]
+name = "nodeenv"
+version = "1.10.0"
+description = "Node.js virtual environment builder"
+optional = false
+python-versions = "!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*,!=3.4.*,!=3.5.*,!=3.6.*,>=2.7"
+groups = ["lint"]
+files = [
+    {file = "nodeenv-1.10.0-py2.py3-none-any.whl", hash = "sha256:5bb13e3eed2923615535339b3c620e76779af4cb4c6a90deccc9e36b274d3827"},
+    {file = "nodeenv-1.10.0.tar.gz", hash = "sha256:996c191ad80897d076bdfba80a41994c2b47c68e224c542b48feba42ba00f8bb"},
+]
+
+[[package]]
+name = "nodejs-wheel-binaries"
+version = "24.16.0"
+description = "unoffical Node.js package"
+optional = false
+python-versions = ">=3.7"
+groups = ["lint"]
+files = [
+    {file = "nodejs_wheel_binaries-24.16.0-py2.py3-none-macosx_13_0_arm64.whl", hash = "sha256:d9f8f677dcf30e37ac244f07869726abe043f01eb0f45722b1df31cc2af7093c"},
+    {file = "nodejs_wheel_binaries-24.16.0-py2.py3-none-macosx_13_0_x86_64.whl", hash = "sha256:3d0370fe7120ce9697a4f60d40480d2bd8808d9f30131458d5afc0040d4e5a51"},
+    {file = "nodejs_wheel_binaries-24.16.0-py2.py3-none-manylinux_2_28_aarch64.whl", hash = "sha256:85dc92bbb79c851569c5925dcc2a4c915a034efab375f99e4e7e6bbe9cca8342"},
+    {file = "nodejs_wheel_binaries-24.16.0-py2.py3-none-manylinux_2_28_x86_64.whl", hash = "sha256:2f3036292811514ba847b3708492644764f88a833ac425c5f55007014308ddfd"},
+    {file = "nodejs_wheel_binaries-24.16.0-py2.py3-none-musllinux_1_2_aarch64.whl", hash = "sha256:db8a8a76ebd2b28ecbfc9ad464baa3707241b9e050a30e2efdf6f60c0f886502"},
+    {file = "nodejs_wheel_binaries-24.16.0-py2.py3-none-musllinux_1_2_x86_64.whl", hash = "sha256:f1a3d8f7b4491cbbd023ba3fc4e901fcca2d9fb80d57f24ba3890de8b1dbac03"},
+    {file = "nodejs_wheel_binaries-24.16.0-py2.py3-none-win_amd64.whl", hash = "sha256:bb136be9944f0662dcf1120f45193a6b75b13fac378971a95cc42c9f879a81aa"},
+    {file = "nodejs_wheel_binaries-24.16.0-py2.py3-none-win_arm64.whl", hash = "sha256:8308940b5edd0a50dc5267ea36ba21c9f668e83fe0d9f293937174d3a7e31c36"},
+    {file = "nodejs_wheel_binaries-24.16.0.tar.gz", hash = "sha256:c973cb69dc5fd16e6f6dc6e579e2c3d5534e2a1f57619dddf5ba070efa7dde37"},
+]
+
+[[package]]
+name = "packaging"
+version = "26.2"
+description = "Core utilities for Python packages"
+optional = false
+python-versions = ">=3.8"
+groups = ["lint", "test"]
+files = [
+    {file = "packaging-26.2-py3-none-any.whl", hash = "sha256:5fc45236b9446107ff2415ce77c807cee2862cb6fac22b8a73826d0693b0980e"},
+    {file = "packaging-26.2.tar.gz", hash = "sha256:ff452ff5a3e828ce110190feff1178bb1f2ea2281fa2075aadb987c2fb221661"},
+]
+
+[[package]]
+name = "pathspec"
+version = "1.1.1"
+description = "Utility library for gitignore style pattern matching of file paths."
+optional = false
+python-versions = ">=3.9"
+groups = ["lint"]
+files = [
+    {file = "pathspec-1.1.1-py3-none-any.whl", hash = "sha256:a00ce642f577bf7f473932318056212bc4f8bfdf53128c78bbd5af0b9b20b189"},
+    {file = "pathspec-1.1.1.tar.gz", hash = "sha256:17db5ecd524104a120e173814c90367a96a98d07c45b2e10c2f3919fff91bf5a"},
+]
+
+[package.extras]
+hyperscan = ["hyperscan (>=0.7)"]
+optional = ["typing-extensions (>=4)"]
+re2 = ["google-re2 (>=1.1)"]
+
+[[package]]
+name = "pep8-naming"
+version = "0.15.1"
+description = "Check PEP-8 naming conventions, plugin for flake8"
+optional = false
+python-versions = ">=3.9"
+groups = ["lint"]
+files = [
+    {file = "pep8_naming-0.15.1-py3-none-any.whl", hash = "sha256:eb63925e7fd9e028c7f7ee7b1e413ec03d1ee5de0e627012102ee0222c273c86"},
+    {file = "pep8_naming-0.15.1.tar.gz", hash = "sha256:f6f4a499aba2deeda93c1f26ccc02f3da32b035c8b2db9696b730ef2c9639d29"},
+]
+
+[package.dependencies]
+flake8 = ">=5.0.0"
+
+[[package]]
+name = "platformdirs"
+version = "4.10.0"
+description = "A small Python package for determining appropriate platform-specific dirs, e.g. a `user data dir`."
+optional = false
+python-versions = ">=3.10"
+groups = ["lint"]
+files = [
+    {file = "platformdirs-4.10.0-py3-none-any.whl", hash = "sha256:fb516cdb12eb0d857d0cd85a7c57cea4d060bee4578d6cf5a14dfdf8cbf8784a"},
+    {file = "platformdirs-4.10.0.tar.gz", hash = "sha256:31e761a6a0ca04faf7353ea759bdba55652be214725111e5aac52dfa29d4bef7"},
+]
+
+[[package]]
+name = "pluggy"
+version = "1.6.0"
+description = "plugin and hook calling mechanisms for python"
+optional = false
+python-versions = ">=3.9"
+groups = ["test"]
+files = [
+    {file = "pluggy-1.6.0-py3-none-any.whl", hash = "sha256:e920276dd6813095e9377c0bc5566d94c932c33b27a3e3945d8389c374dd4746"},
+    {file = "pluggy-1.6.0.tar.gz", hash = "sha256:7dcc130b76258d33b90f61b658791dede3486c3e6bfb003ee5c9bfb396dd22f3"},
+]
+
+[package.extras]
+dev = ["pre-commit", "tox"]
+testing = ["coverage", "pytest", "pytest-benchmark"]
+
+[[package]]
+name = "protobuf"
+version = "4.25.9"
+description = ""
+optional = false
+python-versions = ">=3.8"
+groups = ["main"]
+markers = "python_version <= \"3.12\""
+files = [
+    {file = "protobuf-4.25.9-cp310-abi3-win32.whl", hash = "sha256:bde396f568b0b46fc8fbfe9f02facf25b6755b2578a3b8ac61e74b9d69499e03"},
+    {file = "protobuf-4.25.9-cp310-abi3-win_amd64.whl", hash = "sha256:3683c05154252206f7cb2d371626514b3708199d9bcf683b503dabf3a2e38e06"},
+    {file = "protobuf-4.25.9-cp37-abi3-macosx_10_9_universal2.whl", hash = "sha256:9560813560e6ee72c11ca8873878bdb7ee003c96a57ebb013245fe84e2540904"},
+    {file = "protobuf-4.25.9-cp37-abi3-manylinux2014_aarch64.whl", hash = "sha256:999146ef02e7fa6a692477badd1528bcd7268df211852a3df2d834ba2b480791"},
+    {file = "protobuf-4.25.9-cp37-abi3-manylinux2014_x86_64.whl", hash = "sha256:438c636de8fb706a0de94a12a268ef1ae8f5ba5ae655a7671fcda5968ba3c9be"},
+    {file = "protobuf-4.25.9-cp38-cp38-win32.whl", hash = "sha256:7f7c1abcea3fc215918fba67a2d2a80fbcccc0f84159610eb187e9bbe6f939ee"},
+    {file = "protobuf-4.25.9-cp38-cp38-win_amd64.whl", hash = "sha256:79faf4e5a80b231d94dcf3a0a2917ccbacf0f586f12c9b9c91794b41b913a853"},
+    {file = "protobuf-4.25.9-cp39-cp39-win32.whl", hash = "sha256:9481e80e8cffb1c492c68e7c4e6726f4ad02eebc4fa97ead7beebeaa3639511d"},
+    {file = "protobuf-4.25.9-cp39-cp39-win_amd64.whl", hash = "sha256:b1d467352de666dc1b6d5740b6319d9c08cab7b21b452501e4ee5b0ac5156780"},
+    {file = "protobuf-4.25.9-py3-none-any.whl", hash = "sha256:d49b615e7c935194ac161f0965699ac84df6112c378e05ec53da65d2e4cbb6d4"},
+    {file = "protobuf-4.25.9.tar.gz", hash = "sha256:b0dc7e7c68de8b1ce831dacb12fb407e838edbb8b6cc0dc3a2a6b4cbf6de9cff"},
+]
+
+[[package]]
+name = "protobuf"
+version = "5.29.6"
+description = ""
+optional = false
+python-versions = ">=3.8"
+groups = ["main"]
+markers = "python_version == \"3.13\""
+files = [
+    {file = "protobuf-5.29.6-cp310-abi3-win32.whl", hash = "sha256:62e8a3114992c7c647bce37dcc93647575fc52d50e48de30c6fcb28a6a291eb1"},
+    {file = "protobuf-5.29.6-cp310-abi3-win_amd64.whl", hash = "sha256:7e6ad413275be172f67fdee0f43484b6de5a904cc1c3ea9804cb6fe2ff366eda"},
+    {file = "protobuf-5.29.6-cp38-abi3-macosx_10_9_universal2.whl", hash = "sha256:b5a169e664b4057183a34bdc424540e86eea47560f3c123a0d64de4e137f9269"},
+    {file = "protobuf-5.29.6-cp38-abi3-manylinux2014_aarch64.whl", hash = "sha256:a8866b2cff111f0f863c1b3b9e7572dc7eaea23a7fae27f6fc613304046483e6"},
+    {file = "protobuf-5.29.6-cp38-abi3-manylinux2014_x86_64.whl", hash = "sha256:e3387f44798ac1106af0233c04fb8abf543772ff241169946f698b3a9a3d3ab9"},
+    {file = "protobuf-5.29.6-cp38-cp38-win32.whl", hash = "sha256:36ade6ff88212e91aef4e687a971a11d7d24d6948a66751abc1b3238648f5d05"},
+    {file = "protobuf-5.29.6-cp38-cp38-win_amd64.whl", hash = "sha256:831e2da16b6cc9d8f1654c041dd594eda43391affd3c03a91bea7f7f6da106d6"},
+    {file = "protobuf-5.29.6-cp39-cp39-win32.whl", hash = "sha256:cb4c86de9cd8a7f3a256b9744220d87b847371c6b2f10bde87768918ef33ba49"},
+    {file = "protobuf-5.29.6-cp39-cp39-win_amd64.whl", hash = "sha256:76e07e6567f8baf827137e8d5b8204b6c7b6488bbbff1bf0a72b383f77999c18"},
+    {file = "protobuf-5.29.6-py3-none-any.whl", hash = "sha256:6b9edb641441b2da9fa8f428760fc136a49cf97a52076010cf22a2ff73438a86"},
+    {file = "protobuf-5.29.6.tar.gz", hash = "sha256:da9ee6a5424b6b30fd5e45c5ea663aef540ca95f9ad99d1e887e819cdf9b8723"},
+]
+
+[[package]]
+name = "protobuf"
+version = "6.33.6"
+description = ""
+optional = false
+python-versions = ">=3.9"
+groups = ["main"]
+markers = "python_version >= \"3.14\""
+files = [
+    {file = "protobuf-6.33.6-cp310-abi3-win32.whl", hash = "sha256:7d29d9b65f8afef196f8334e80d6bc1d5d4adedb449971fefd3723824e6e77d3"},
+    {file = "protobuf-6.33.6-cp310-abi3-win_amd64.whl", hash = "sha256:0cd27b587afca21b7cfa59a74dcbd48a50f0a6400cfb59391340ad729d91d326"},
+    {file = "protobuf-6.33.6-cp39-abi3-macosx_10_9_universal2.whl", hash = "sha256:9720e6961b251bde64edfdab7d500725a2af5280f3f4c87e57c0208376aa8c3a"},
+    {file = "protobuf-6.33.6-cp39-abi3-manylinux2014_aarch64.whl", hash = "sha256:e2afbae9b8e1825e3529f88d514754e094278bb95eadc0e199751cdd9a2e82a2"},
+    {file = "protobuf-6.33.6-cp39-abi3-manylinux2014_s390x.whl", hash = "sha256:c96c37eec15086b79762ed265d59ab204dabc53056e3443e702d2681f4b39ce3"},
+    {file = "protobuf-6.33.6-cp39-abi3-manylinux2014_x86_64.whl", hash = "sha256:e9db7e292e0ab79dd108d7f1a94fe31601ce1ee3f7b79e0692043423020b0593"},
+    {file = "protobuf-6.33.6-cp39-cp39-win32.whl", hash = "sha256:bd56799fb262994b2c2faa1799693c95cc2e22c62f56fb43af311cae45d26f0e"},
+    {file = "protobuf-6.33.6-cp39-cp39-win_amd64.whl", hash = "sha256:f443a394af5ed23672bc6c486be138628fbe5c651ccbc536873d7da23d1868cf"},
+    {file = "protobuf-6.33.6-py3-none-any.whl", hash = "sha256:77179e006c476e69bf8e8ce866640091ec42e1beb80b213c3900006ecfba6901"},
+    {file = "protobuf-6.33.6.tar.gz", hash = "sha256:a6768d25248312c297558af96a9f9c929e8c4cee0659cb07e780731095f38135"},
+]
+
+[[package]]
+name = "pycodestyle"
+version = "2.9.1"
+description = "Python style guide checker"
+optional = false
+python-versions = ">=3.6"
+groups = ["lint"]
+markers = "python_version < \"3.12\""
+files = [
+    {file = "pycodestyle-2.9.1-py2.py3-none-any.whl", hash = "sha256:d1735fc58b418fd7c5f658d28d943854f8a849b01a5d0a1e6f3f3fdd0166804b"},
+    {file = "pycodestyle-2.9.1.tar.gz", hash = "sha256:2c9607871d58c76354b697b42f5d57e1ada7d261c261efac224b664affdc5785"},
+]
+
+[[package]]
+name = "pycodestyle"
+version = "2.11.1"
+description = "Python style guide checker"
+optional = false
+python-versions = ">=3.8"
+groups = ["lint"]
+markers = "python_version >= \"3.12\""
+files = [
+    {file = "pycodestyle-2.11.1-py2.py3-none-any.whl", hash = "sha256:44fe31000b2d866f2e41841b18528a505fbd7fef9017b04eff4e2648a0fadc67"},
+    {file = "pycodestyle-2.11.1.tar.gz", hash = "sha256:41ba0e7afc9752dfb53ced5489e89f8186be00e599e712660695b7a75ff2663f"},
+]
+
+[[package]]
+name = "pydocstyle"
+version = "6.3.0"
+description = "Python docstring style checker"
+optional = false
+python-versions = ">=3.6"
+groups = ["lint"]
+files = [
+    {file = "pydocstyle-6.3.0-py3-none-any.whl", hash = "sha256:118762d452a49d6b05e194ef344a55822987a462831ade91ec5c06fd2169d019"},
+    {file = "pydocstyle-6.3.0.tar.gz", hash = "sha256:7ce43f0c0ac87b07494eb9c0b462c0b73e6ff276807f204d6b53edc72b7e44e1"},
+]
+
+[package.dependencies]
+snowballstemmer = ">=2.2.0"
+
+[package.extras]
+toml = ["tomli (>=1.2.3) ; python_version < \"3.11\""]
+
+[[package]]
+name = "pyflakes"
+version = "2.5.0"
+description = "passive checker of Python programs"
+optional = false
+python-versions = ">=3.6"
+groups = ["lint"]
+markers = "python_version < \"3.12\""
+files = [
+    {file = "pyflakes-2.5.0-py2.py3-none-any.whl", hash = "sha256:4579f67d887f804e67edb544428f264b7b24f435b263c4614f384135cea553d2"},
+    {file = "pyflakes-2.5.0.tar.gz", hash = "sha256:491feb020dca48ccc562a8c0cbe8df07ee13078df59813b83959cbdada312ea3"},
+]
+
+[[package]]
+name = "pyflakes"
+version = "3.1.0"
+description = "passive checker of Python programs"
+optional = false
+python-versions = ">=3.8"
+groups = ["lint"]
+markers = "python_version >= \"3.12\""
+files = [
+    {file = "pyflakes-3.1.0-py2.py3-none-any.whl", hash = "sha256:4132f6d49cb4dae6819e5379898f2b8cce3c5f23994194c24b77d5da2e36f774"},
+    {file = "pyflakes-3.1.0.tar.gz", hash = "sha256:a0aae034c444db0071aa077972ba4768d40c830d9539fd45bf4cd3f8f6992efc"},
+]
+
+[[package]]
+name = "pygments"
+version = "2.20.0"
+description = "Pygments is a syntax highlighting package written in Python."
+optional = false
+python-versions = ">=3.9"
+groups = ["lint", "test"]
+files = [
+    {file = "pygments-2.20.0-py3-none-any.whl", hash = "sha256:81a9e26dd42fd28a23a2d169d86d7ac03b46e2f8b59ed4698fb4785f946d0176"},
+    {file = "pygments-2.20.0.tar.gz", hash = "sha256:6757cd03768053ff99f3039c1a36d6c0aa0b263438fcab17520b30a303a82b5f"},
+]
+
+[package.extras]
+windows-terminal = ["colorama (>=0.4.6)"]
+
+[[package]]
+name = "pyright"
+version = "1.1.411"
+description = "Command line wrapper for pyright"
+optional = false
+python-versions = ">=3.7"
+groups = ["lint"]
+files = [
+    {file = "pyright-1.1.411-py3-none-any.whl", hash = "sha256:dc7c72a8e2700c55baa127554040e067041ea53ccfd50bf96308cc4291c7d5d9"},
+    {file = "pyright-1.1.411.tar.gz", hash = "sha256:d885a0551f2e763b089a02702174e7f4ba77548cddabc972ab86d1f7f1b0f998"},
+]
+
+[package.dependencies]
+nodeenv = ">=1.6.0"
+nodejs-wheel-binaries = {version = "*", optional = true, markers = "extra == \"nodejs\""}
+typing-extensions = ">=4.1"
+
+[package.extras]
+all = ["nodejs-wheel-binaries", "twine (>=3.4.1)"]
+dev = ["twine (>=3.4.1)"]
+nodejs = ["nodejs-wheel-binaries"]
+
+[[package]]
+name = "pytest"
+version = "9.1.1"
+description = "pytest: simple powerful testing with Python"
+optional = false
+python-versions = ">=3.10"
+groups = ["test"]
+files = [
+    {file = "pytest-9.1.1-py3-none-any.whl", hash = "sha256:37a86b45efb9a47a61a36449063e8e18d0cab3161329fc099eb21783169c4f0c"},
+    {file = "pytest-9.1.1.tar.gz", hash = "sha256:1088fbde8f2b49d95a549a195707afa7a76a3ce9bcadc26b6d71f0ffda5fe313"},
+]
+
+[package.dependencies]
+colorama = {version = ">=0.4", markers = "sys_platform == \"win32\""}
+exceptiongroup = {version = ">=1", markers = "python_version < \"3.11\""}
+iniconfig = ">=1.0.1"
+packaging = ">=22"
+pluggy = ">=1.5,<2"
+pygments = ">=2.7.2"
+tomli = {version = ">=1", markers = "python_version < \"3.11\""}
+
+[package.extras]
+dev = ["argcomplete", "attrs (>=19.2)", "hypothesis (>=3.56)", "mock", "requests", "setuptools", "xmlschema"]
+
+[[package]]
+name = "pytest-cov"
+version = "7.1.0"
+description = "Pytest plugin for measuring coverage."
+optional = false
+python-versions = ">=3.9"
+groups = ["test"]
+files = [
+    {file = "pytest_cov-7.1.0-py3-none-any.whl", hash = "sha256:a0461110b7865f9a271aa1b51e516c9a95de9d696734a2f71e3e78f46e1d4678"},
+    {file = "pytest_cov-7.1.0.tar.gz", hash = "sha256:30674f2b5f6351aa09702a9c8c364f6a01c27aae0c1366ae8016160d1efc56b2"},
+]
+
+[package.dependencies]
+coverage = {version = ">=7.10.6", extras = ["toml"]}
+pluggy = ">=1.2"
+pytest = ">=7"
+
+[package.extras]
+testing = ["process-tests", "pytest-xdist", "virtualenv"]
+
+[[package]]
+name = "pytest-mock"
+version = "3.15.1"
+description = "Thin-wrapper around the mock package for easier use with pytest"
+optional = false
+python-versions = ">=3.9"
+groups = ["test"]
+files = [
+    {file = "pytest_mock-3.15.1-py3-none-any.whl", hash = "sha256:0a25e2eb88fe5168d535041d09a4529a188176ae608a6d249ee65abc0949630d"},
+    {file = "pytest_mock-3.15.1.tar.gz", hash = "sha256:1849a238f6f396da19762269de72cb1814ab44416fa73a8686deac10b0d87a0f"},
+]
+
+[package.dependencies]
+pytest = ">=6.2.5"
+
+[package.extras]
+dev = ["pre-commit", "pytest-asyncio", "tox"]
+
+[[package]]
+name = "pytokens"
+version = "0.4.1"
+description = "A Fast, spec compliant Python 3.14+ tokenizer that runs on older Pythons."
+optional = false
+python-versions = ">=3.8"
+groups = ["lint"]
+files = [
+    {file = "pytokens-0.4.1-cp310-cp310-macosx_11_0_arm64.whl", hash = "sha256:2a44ed93ea23415c54f3face3b65ef2b844d96aeb3455b8a69b3df6beab6acc5"},
+    {file = "pytokens-0.4.1-cp310-cp310-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:add8bf86b71a5d9fb5b89f023a80b791e04fba57960aa790cc6125f7f1d39dfe"},
+    {file = "pytokens-0.4.1-cp310-cp310-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:670d286910b531c7b7e3c0b453fd8156f250adb140146d234a82219459b9640c"},
+    {file = "pytokens-0.4.1-cp310-cp310-musllinux_1_2_x86_64.whl", hash = "sha256:4e691d7f5186bd2842c14813f79f8884bb03f5995f0575272009982c5ac6c0f7"},
+    {file = "pytokens-0.4.1-cp310-cp310-win_amd64.whl", hash = "sha256:27b83ad28825978742beef057bfe406ad6ed524b2d28c252c5de7b4a6dd48fa2"},
+    {file = "pytokens-0.4.1-cp311-cp311-macosx_11_0_arm64.whl", hash = "sha256:d70e77c55ae8380c91c0c18dea05951482e263982911fc7410b1ffd1dadd3440"},
+    {file = "pytokens-0.4.1-cp311-cp311-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:4a58d057208cb9075c144950d789511220b07636dd2e4708d5645d24de666bdc"},
+    {file = "pytokens-0.4.1-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:b49750419d300e2b5a3813cf229d4e5a4c728dae470bcc89867a9ad6f25a722d"},
+    {file = "pytokens-0.4.1-cp311-cp311-musllinux_1_2_x86_64.whl", hash = "sha256:d9907d61f15bf7261d7e775bd5d7ee4d2930e04424bab1972591918497623a16"},
+    {file = "pytokens-0.4.1-cp311-cp311-win_amd64.whl", hash = "sha256:ee44d0f85b803321710f9239f335aafe16553b39106384cef8e6de40cb4ef2f6"},
+    {file = "pytokens-0.4.1-cp312-cp312-macosx_11_0_arm64.whl", hash = "sha256:140709331e846b728475786df8aeb27d24f48cbcf7bcd449f8de75cae7a45083"},
+    {file = "pytokens-0.4.1-cp312-cp312-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:6d6c4268598f762bc8e91f5dbf2ab2f61f7b95bdc07953b602db879b3c8c18e1"},
+    {file = "pytokens-0.4.1-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:24afde1f53d95348b5a0eb19488661147285ca4dd7ed752bbc3e1c6242a304d1"},
+    {file = "pytokens-0.4.1-cp312-cp312-musllinux_1_2_x86_64.whl", hash = "sha256:5ad948d085ed6c16413eb5fec6b3e02fa00dc29a2534f088d3302c47eb59adf9"},
+    {file = "pytokens-0.4.1-cp312-cp312-win_amd64.whl", hash = "sha256:3f901fe783e06e48e8cbdc82d631fca8f118333798193e026a50ce1b3757ea68"},
+    {file = "pytokens-0.4.1-cp313-cp313-macosx_11_0_arm64.whl", hash = "sha256:8bdb9d0ce90cbf99c525e75a2fa415144fd570a1ba987380190e8b786bc6ef9b"},
+    {file = "pytokens-0.4.1-cp313-cp313-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:5502408cab1cb18e128570f8d598981c68a50d0cbd7c61312a90507cd3a1276f"},
+    {file = "pytokens-0.4.1-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:29d1d8fb1030af4d231789959f21821ab6325e463f0503a61d204343c9b355d1"},
+    {file = "pytokens-0.4.1-cp313-cp313-musllinux_1_2_x86_64.whl", hash = "sha256:970b08dd6b86058b6dc07efe9e98414f5102974716232d10f32ff39701e841c4"},
+    {file = "pytokens-0.4.1-cp313-cp313-win_amd64.whl", hash = "sha256:9bd7d7f544d362576be74f9d5901a22f317efc20046efe2034dced238cbbfe78"},
+    {file = "pytokens-0.4.1-cp314-cp314-macosx_11_0_arm64.whl", hash = "sha256:4a14d5f5fc78ce85e426aa159489e2d5961acf0e47575e08f35584009178e321"},
+    {file = "pytokens-0.4.1-cp314-cp314-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:97f50fd18543be72da51dd505e2ed20d2228c74e0464e4262e4899797803d7fa"},
+    {file = "pytokens-0.4.1-cp314-cp314-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:dc74c035f9bfca0255c1af77ddd2d6ae8419012805453e4b0e7513e17904545d"},
+    {file = "pytokens-0.4.1-cp314-cp314-musllinux_1_2_x86_64.whl", hash = "sha256:f66a6bbe741bd431f6d741e617e0f39ec7257ca1f89089593479347cc4d13324"},
+    {file = "pytokens-0.4.1-cp314-cp314-win_amd64.whl", hash = "sha256:b35d7e5ad269804f6697727702da3c517bb8a5228afa450ab0fa787732055fc9"},
+    {file = "pytokens-0.4.1-cp314-cp314t-macosx_11_0_arm64.whl", hash = "sha256:8fcb9ba3709ff77e77f1c7022ff11d13553f3c30299a9fe246a166903e9091eb"},
+    {file = "pytokens-0.4.1-cp314-cp314t-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:79fc6b8699564e1f9b521582c35435f1bd32dd06822322ec44afdeba666d8cb3"},
+    {file = "pytokens-0.4.1-cp314-cp314t-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:d31b97b3de0f61571a124a00ffe9a81fb9939146c122c11060725bd5aea79975"},
+    {file = "pytokens-0.4.1-cp314-cp314t-musllinux_1_2_x86_64.whl", hash = "sha256:967cf6e3fd4adf7de8fc73cd3043754ae79c36475c1c11d514fc72cf5490094a"},
+    {file = "pytokens-0.4.1-cp314-cp314t-win_amd64.whl", hash = "sha256:584c80c24b078eec1e227079d56dc22ff755e0ba8654d8383b2c549107528918"},
+    {file = "pytokens-0.4.1-cp38-cp38-macosx_11_0_arm64.whl", hash = "sha256:da5baeaf7116dced9c6bb76dc31ba04a2dc3695f3d9f74741d7910122b456edc"},
+    {file = "pytokens-0.4.1-cp38-cp38-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:11edda0942da80ff58c4408407616a310adecae1ddd22eef8c692fe266fa5009"},
+    {file = "pytokens-0.4.1-cp38-cp38-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:0fc71786e629cef478cbf29d7ea1923299181d0699dbe7c3c0f4a583811d9fc1"},
+    {file = "pytokens-0.4.1-cp38-cp38-musllinux_1_2_x86_64.whl", hash = "sha256:dcafc12c30dbaf1e2af0490978352e0c4041a7cde31f4f81435c2a5e8b9cabb6"},
+    {file = "pytokens-0.4.1-cp38-cp38-win_amd64.whl", hash = "sha256:42f144f3aafa5d92bad964d471a581651e28b24434d184871bd02e3a0d956037"},
+    {file = "pytokens-0.4.1-cp39-cp39-macosx_11_0_arm64.whl", hash = "sha256:34bcc734bd2f2d5fe3b34e7b3c0116bfb2397f2d9666139988e7a3eb5f7400e3"},
+    {file = "pytokens-0.4.1-cp39-cp39-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:941d4343bf27b605e9213b26bfa1c4bf197c9c599a9627eb7305b0defcfe40c1"},
+    {file = "pytokens-0.4.1-cp39-cp39-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:3ad72b851e781478366288743198101e5eb34a414f1d5627cdd585ca3b25f1db"},
+    {file = "pytokens-0.4.1-cp39-cp39-musllinux_1_2_x86_64.whl", hash = "sha256:682fa37ff4d8e95f7df6fe6fe6a431e8ed8e788023c6bcc0f0880a12eab80ad1"},
+    {file = "pytokens-0.4.1-cp39-cp39-win_amd64.whl", hash = "sha256:30f51edd9bb7f85c748979384165601d028b84f7bd13fe14d3e065304093916a"},
+    {file = "pytokens-0.4.1-py3-none-any.whl", hash = "sha256:26cef14744a8385f35d0e095dc8b3a7583f6c953c2e3d269c7f82484bf5ad2de"},
+    {file = "pytokens-0.4.1.tar.gz", hash = "sha256:292052fe80923aae2260c073f822ceba21f3872ced9a68bb7953b348e561179a"},
+]
+
+[package.extras]
+dev = ["black", "build", "mypy", "pytest", "pytest-cov", "setuptools", "tox", "twine", "wheel"]
+
+[[package]]
+name = "pyyaml"
+version = "6.0.3"
+description = "YAML parser and emitter for Python"
+optional = false
+python-versions = ">=3.8"
+groups = ["lint"]
+files = [
+    {file = "PyYAML-6.0.3-cp38-cp38-macosx_10_13_x86_64.whl", hash = "sha256:c2514fceb77bc5e7a2f7adfaa1feb2fb311607c9cb518dbc378688ec73d8292f"},
+    {file = "PyYAML-6.0.3-cp38-cp38-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:9c57bb8c96f6d1808c030b1687b9b5fb476abaa47f0db9c0101f5e9f394e97f4"},
+    {file = "PyYAML-6.0.3-cp38-cp38-manylinux2014_s390x.manylinux_2_17_s390x.manylinux_2_28_s390x.whl", hash = "sha256:efd7b85f94a6f21e4932043973a7ba2613b059c4a000551892ac9f1d11f5baf3"},
+    {file = "PyYAML-6.0.3-cp38-cp38-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:22ba7cfcad58ef3ecddc7ed1db3409af68d023b7f940da23c6c2a1890976eda6"},
+    {file = "PyYAML-6.0.3-cp38-cp38-musllinux_1_2_x86_64.whl", hash = "sha256:6344df0d5755a2c9a276d4473ae6b90647e216ab4757f8426893b5dd2ac3f369"},
+    {file = "PyYAML-6.0.3-cp38-cp38-win32.whl", hash = "sha256:3ff07ec89bae51176c0549bc4c63aa6202991da2d9a6129d7aef7f1407d3f295"},
+    {file = "PyYAML-6.0.3-cp38-cp38-win_amd64.whl", hash = "sha256:5cf4e27da7e3fbed4d6c3d8e797387aaad68102272f8f9752883bc32d61cb87b"},
+    {file = "pyyaml-6.0.3-cp310-cp310-macosx_10_13_x86_64.whl", hash = "sha256:214ed4befebe12df36bcc8bc2b64b396ca31be9304b8f59e25c11cf94a4c033b"},
+    {file = "pyyaml-6.0.3-cp310-cp310-macosx_11_0_arm64.whl", hash = "sha256:02ea2dfa234451bbb8772601d7b8e426c2bfa197136796224e50e35a78777956"},
+    {file = "pyyaml-6.0.3-cp310-cp310-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:b30236e45cf30d2b8e7b3e85881719e98507abed1011bf463a8fa23e9c3e98a8"},
+    {file = "pyyaml-6.0.3-cp310-cp310-manylinux2014_s390x.manylinux_2_17_s390x.manylinux_2_28_s390x.whl", hash = "sha256:66291b10affd76d76f54fad28e22e51719ef9ba22b29e1d7d03d6777a9174198"},
+    {file = "pyyaml-6.0.3-cp310-cp310-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:9c7708761fccb9397fe64bbc0395abcae8c4bf7b0eac081e12b809bf47700d0b"},
+    {file = "pyyaml-6.0.3-cp310-cp310-musllinux_1_2_aarch64.whl", hash = "sha256:418cf3f2111bc80e0933b2cd8cd04f286338bb88bdc7bc8e6dd775ebde60b5e0"},
+    {file = "pyyaml-6.0.3-cp310-cp310-musllinux_1_2_x86_64.whl", hash = "sha256:5e0b74767e5f8c593e8c9b5912019159ed0533c70051e9cce3e8b6aa699fcd69"},
+    {file = "pyyaml-6.0.3-cp310-cp310-win32.whl", hash = "sha256:28c8d926f98f432f88adc23edf2e6d4921ac26fb084b028c733d01868d19007e"},
+    {file = "pyyaml-6.0.3-cp310-cp310-win_amd64.whl", hash = "sha256:bdb2c67c6c1390b63c6ff89f210c8fd09d9a1217a465701eac7316313c915e4c"},
+    {file = "pyyaml-6.0.3-cp311-cp311-macosx_10_13_x86_64.whl", hash = "sha256:44edc647873928551a01e7a563d7452ccdebee747728c1080d881d68af7b997e"},
+    {file = "pyyaml-6.0.3-cp311-cp311-macosx_11_0_arm64.whl", hash = "sha256:652cb6edd41e718550aad172851962662ff2681490a8a711af6a4d288dd96824"},
+    {file = "pyyaml-6.0.3-cp311-cp311-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:10892704fc220243f5305762e276552a0395f7beb4dbf9b14ec8fd43b57f126c"},
+    {file = "pyyaml-6.0.3-cp311-cp311-manylinux2014_s390x.manylinux_2_17_s390x.manylinux_2_28_s390x.whl", hash = "sha256:850774a7879607d3a6f50d36d04f00ee69e7fc816450e5f7e58d7f17f1ae5c00"},
+    {file = "pyyaml-6.0.3-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:b8bb0864c5a28024fac8a632c443c87c5aa6f215c0b126c449ae1a150412f31d"},
+    {file = "pyyaml-6.0.3-cp311-cp311-musllinux_1_2_aarch64.whl", hash = "sha256:1d37d57ad971609cf3c53ba6a7e365e40660e3be0e5175fa9f2365a379d6095a"},
+    {file = "pyyaml-6.0.3-cp311-cp311-musllinux_1_2_x86_64.whl", hash = "sha256:37503bfbfc9d2c40b344d06b2199cf0e96e97957ab1c1b546fd4f87e53e5d3e4"},
+    {file = "pyyaml-6.0.3-cp311-cp311-win32.whl", hash = "sha256:8098f252adfa6c80ab48096053f512f2321f0b998f98150cea9bd23d83e1467b"},
+    {file = "pyyaml-6.0.3-cp311-cp311-win_amd64.whl", hash = "sha256:9f3bfb4965eb874431221a3ff3fdcddc7e74e3b07799e0e84ca4a0f867d449bf"},
+    {file = "pyyaml-6.0.3-cp312-cp312-macosx_10_13_x86_64.whl", hash = "sha256:7f047e29dcae44602496db43be01ad42fc6f1cc0d8cd6c83d342306c32270196"},
+    {file = "pyyaml-6.0.3-cp312-cp312-macosx_11_0_arm64.whl", hash = "sha256:fc09d0aa354569bc501d4e787133afc08552722d3ab34836a80547331bb5d4a0"},
+    {file = "pyyaml-6.0.3-cp312-cp312-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:9149cad251584d5fb4981be1ecde53a1ca46c891a79788c0df828d2f166bda28"},
+    {file = "pyyaml-6.0.3-cp312-cp312-manylinux2014_s390x.manylinux_2_17_s390x.manylinux_2_28_s390x.whl", hash = "sha256:5fdec68f91a0c6739b380c83b951e2c72ac0197ace422360e6d5a959d8d97b2c"},
+    {file = "pyyaml-6.0.3-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:ba1cc08a7ccde2d2ec775841541641e4548226580ab850948cbfda66a1befcdc"},
+    {file = "pyyaml-6.0.3-cp312-cp312-musllinux_1_2_aarch64.whl", hash = "sha256:8dc52c23056b9ddd46818a57b78404882310fb473d63f17b07d5c40421e47f8e"},
+    {file = "pyyaml-6.0.3-cp312-cp312-musllinux_1_2_x86_64.whl", hash = "sha256:41715c910c881bc081f1e8872880d3c650acf13dfa8214bad49ed4cede7c34ea"},
+    {file = "pyyaml-6.0.3-cp312-cp312-win32.whl", hash = "sha256:96b533f0e99f6579b3d4d4995707cf36df9100d67e0c8303a0c55b27b5f99bc5"},
+    {file = "pyyaml-6.0.3-cp312-cp312-win_amd64.whl", hash = "sha256:5fcd34e47f6e0b794d17de1b4ff496c00986e1c83f7ab2fb8fcfe9616ff7477b"},
+    {file = "pyyaml-6.0.3-cp312-cp312-win_arm64.whl", hash = "sha256:64386e5e707d03a7e172c0701abfb7e10f0fb753ee1d773128192742712a98fd"},
+    {file = "pyyaml-6.0.3-cp313-cp313-macosx_10_13_x86_64.whl", hash = "sha256:8da9669d359f02c0b91ccc01cac4a67f16afec0dac22c2ad09f46bee0697eba8"},
+    {file = "pyyaml-6.0.3-cp313-cp313-macosx_11_0_arm64.whl", hash = "sha256:2283a07e2c21a2aa78d9c4442724ec1eb15f5e42a723b99cb3d822d48f5f7ad1"},
+    {file = "pyyaml-6.0.3-cp313-cp313-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:ee2922902c45ae8ccada2c5b501ab86c36525b883eff4255313a253a3160861c"},
+    {file = "pyyaml-6.0.3-cp313-cp313-manylinux2014_s390x.manylinux_2_17_s390x.manylinux_2_28_s390x.whl", hash = "sha256:a33284e20b78bd4a18c8c2282d549d10bc8408a2a7ff57653c0cf0b9be0afce5"},
+    {file = "pyyaml-6.0.3-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:0f29edc409a6392443abf94b9cf89ce99889a1dd5376d94316ae5145dfedd5d6"},
+    {file = "pyyaml-6.0.3-cp313-cp313-musllinux_1_2_aarch64.whl", hash = "sha256:f7057c9a337546edc7973c0d3ba84ddcdf0daa14533c2065749c9075001090e6"},
+    {file = "pyyaml-6.0.3-cp313-cp313-musllinux_1_2_x86_64.whl", hash = "sha256:eda16858a3cab07b80edaf74336ece1f986ba330fdb8ee0d6c0d68fe82bc96be"},
+    {file = "pyyaml-6.0.3-cp313-cp313-win32.whl", hash = "sha256:d0eae10f8159e8fdad514efdc92d74fd8d682c933a6dd088030f3834bc8e6b26"},
+    {file = "pyyaml-6.0.3-cp313-cp313-win_amd64.whl", hash = "sha256:79005a0d97d5ddabfeeea4cf676af11e647e41d81c9a7722a193022accdb6b7c"},
+    {file = "pyyaml-6.0.3-cp313-cp313-win_arm64.whl", hash = "sha256:5498cd1645aa724a7c71c8f378eb29ebe23da2fc0d7a08071d89469bf1d2defb"},
+    {file = "pyyaml-6.0.3-cp314-cp314-macosx_10_13_x86_64.whl", hash = "sha256:8d1fab6bb153a416f9aeb4b8763bc0f22a5586065f86f7664fc23339fc1c1fac"},
+    {file = "pyyaml-6.0.3-cp314-cp314-macosx_11_0_arm64.whl", hash = "sha256:34d5fcd24b8445fadc33f9cf348c1047101756fd760b4dacb5c3e99755703310"},
+    {file = "pyyaml-6.0.3-cp314-cp314-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:501a031947e3a9025ed4405a168e6ef5ae3126c59f90ce0cd6f2bfc477be31b7"},
+    {file = "pyyaml-6.0.3-cp314-cp314-manylinux2014_s390x.manylinux_2_17_s390x.manylinux_2_28_s390x.whl", hash = "sha256:b3bc83488de33889877a0f2543ade9f70c67d66d9ebb4ac959502e12de895788"},
+    {file = "pyyaml-6.0.3-cp314-cp314-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:c458b6d084f9b935061bc36216e8a69a7e293a2f1e68bf956dcd9e6cbcd143f5"},
+    {file = "pyyaml-6.0.3-cp314-cp314-musllinux_1_2_aarch64.whl", hash = "sha256:7c6610def4f163542a622a73fb39f534f8c101d690126992300bf3207eab9764"},
+    {file = "pyyaml-6.0.3-cp314-cp314-musllinux_1_2_x86_64.whl", hash = "sha256:5190d403f121660ce8d1d2c1bb2ef1bd05b5f68533fc5c2ea899bd15f4399b35"},
+    {file = "pyyaml-6.0.3-cp314-cp314-win_amd64.whl", hash = "sha256:4a2e8cebe2ff6ab7d1050ecd59c25d4c8bd7e6f400f5f82b96557ac0abafd0ac"},
+    {file = "pyyaml-6.0.3-cp314-cp314-win_arm64.whl", hash = "sha256:93dda82c9c22deb0a405ea4dc5f2d0cda384168e466364dec6255b293923b2f3"},
+    {file = "pyyaml-6.0.3-cp314-cp314t-macosx_10_13_x86_64.whl", hash = "sha256:02893d100e99e03eda1c8fd5c441d8c60103fd175728e23e431db1b589cf5ab3"},
+    {file = "pyyaml-6.0.3-cp314-cp314t-macosx_11_0_arm64.whl", hash = "sha256:c1ff362665ae507275af2853520967820d9124984e0f7466736aea23d8611fba"},
+    {file = "pyyaml-6.0.3-cp314-cp314t-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:6adc77889b628398debc7b65c073bcb99c4a0237b248cacaf3fe8a557563ef6c"},
+    {file = "pyyaml-6.0.3-cp314-cp314t-manylinux2014_s390x.manylinux_2_17_s390x.manylinux_2_28_s390x.whl", hash = "sha256:a80cb027f6b349846a3bf6d73b5e95e782175e52f22108cfa17876aaeff93702"},
+    {file = "pyyaml-6.0.3-cp314-cp314t-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:00c4bdeba853cc34e7dd471f16b4114f4162dc03e6b7afcc2128711f0eca823c"},
+    {file = "pyyaml-6.0.3-cp314-cp314t-musllinux_1_2_aarch64.whl", hash = "sha256:66e1674c3ef6f541c35191caae2d429b967b99e02040f5ba928632d9a7f0f065"},
+    {file = "pyyaml-6.0.3-cp314-cp314t-musllinux_1_2_x86_64.whl", hash = "sha256:16249ee61e95f858e83976573de0f5b2893b3677ba71c9dd36b9cf8be9ac6d65"},
+    {file = "pyyaml-6.0.3-cp314-cp314t-win_amd64.whl", hash = "sha256:4ad1906908f2f5ae4e5a8ddfce73c320c2a1429ec52eafd27138b7f1cbe341c9"},
+    {file = "pyyaml-6.0.3-cp314-cp314t-win_arm64.whl", hash = "sha256:ebc55a14a21cb14062aa4162f906cd962b28e2e9ea38f9b4391244cd8de4ae0b"},
+    {file = "pyyaml-6.0.3-cp39-cp39-macosx_10_13_x86_64.whl", hash = "sha256:b865addae83924361678b652338317d1bd7e79b1f4596f96b96c77a5a34b34da"},
+    {file = "pyyaml-6.0.3-cp39-cp39-macosx_11_0_arm64.whl", hash = "sha256:c3355370a2c156cffb25e876646f149d5d68f5e0a3ce86a5084dd0b64a994917"},
+    {file = "pyyaml-6.0.3-cp39-cp39-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:3c5677e12444c15717b902a5798264fa7909e41153cdf9ef7ad571b704a63dd9"},
+    {file = "pyyaml-6.0.3-cp39-cp39-manylinux2014_s390x.manylinux_2_17_s390x.manylinux_2_28_s390x.whl", hash = "sha256:5ed875a24292240029e4483f9d4a4b8a1ae08843b9c54f43fcc11e404532a8a5"},
+    {file = "pyyaml-6.0.3-cp39-cp39-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:0150219816b6a1fa26fb4699fb7daa9caf09eb1999f3b70fb6e786805e80375a"},
+    {file = "pyyaml-6.0.3-cp39-cp39-musllinux_1_2_aarch64.whl", hash = "sha256:fa160448684b4e94d80416c0fa4aac48967a969efe22931448d853ada8baf926"},
+    {file = "pyyaml-6.0.3-cp39-cp39-musllinux_1_2_x86_64.whl", hash = "sha256:27c0abcb4a5dac13684a37f76e701e054692a9b2d3064b70f5e4eb54810553d7"},
+    {file = "pyyaml-6.0.3-cp39-cp39-win32.whl", hash = "sha256:1ebe39cb5fc479422b83de611d14e2c0d3bb2a18bbcb01f229ab3cfbd8fee7a0"},
+    {file = "pyyaml-6.0.3-cp39-cp39-win_amd64.whl", hash = "sha256:2e71d11abed7344e42a8849600193d15b6def118602c4c176f748e4583246007"},
+    {file = "pyyaml-6.0.3.tar.gz", hash = "sha256:d76623373421df22fb4cf8817020cbb7ef15c725b9d5e45f17e189bfc384190f"},
+]
+
+[[package]]
+name = "rich"
+version = "15.0.0"
+description = "Render rich text, tables, progress bars, syntax highlighting, markdown and more to the terminal"
+optional = false
+python-versions = ">=3.9.0"
+groups = ["lint"]
+files = [
+    {file = "rich-15.0.0-py3-none-any.whl", hash = "sha256:33bd4ef74232fb73fe9279a257718407f169c09b78a87ad3d296f548e27de0bb"},
+    {file = "rich-15.0.0.tar.gz", hash = "sha256:edd07a4824c6b40189fb7ac9bc4c52536e9780fbbfbddf6f1e2502c31b068c36"},
+]
+
+[package.dependencies]
+markdown-it-py = ">=2.2.0"
+pygments = ">=2.13.0,<3.0.0"
+
+[package.extras]
+jupyter = ["ipywidgets (>=7.5.1,<9)"]
+
+[[package]]
+name = "setuptools"
+version = "81.0.0"
+description = "Easily download, build, install, upgrade, and uninstall Python packages"
+optional = false
+python-versions = ">=3.9"
+groups = ["main", "lint"]
+files = [
+    {file = "setuptools-81.0.0-py3-none-any.whl", hash = "sha256:fdd925d5c5d9f62e4b74b30d6dd7828ce236fd6ed998a08d81de62ce5a6310d6"},
+    {file = "setuptools-81.0.0.tar.gz", hash = "sha256:487b53915f52501f0a79ccfd0c02c165ffe06631443a886740b91af4b7a5845a"},
+]
+
+[package.extras]
+check = ["pytest-checkdocs (>=2.4)", "pytest-ruff (>=0.2.1) ; sys_platform != \"cygwin\"", "ruff (>=0.13.0) ; sys_platform != \"cygwin\""]
+core = ["importlib_metadata (>=6) ; python_version < \"3.10\"", "jaraco.functools (>=4)", "jaraco.text (>=3.7)", "more_itertools", "more_itertools (>=8.8)", "packaging (>=24.2)", "platformdirs (>=4.2.2)", "tomli (>=2.0.1) ; python_version < \"3.11\"", "wheel (>=0.43.0)"]
+cover = ["pytest-cov"]
+doc = ["furo", "jaraco.packaging (>=9.3)", "jaraco.tidelift (>=1.4)", "pygments-github-lexers (==0.0.5)", "pyproject-hooks (!=1.1)", "rst.linker (>=1.9)", "sphinx (>=3.5)", "sphinx-favicon", "sphinx-inline-tabs", "sphinx-lint", "sphinx-notfound-page (>=1,<2)", "sphinx-reredirects", "sphinxcontrib-towncrier", "towncrier (<24.7)"]
+enabler = ["pytest-enabler (>=2.2)"]
+test = ["build[virtualenv] (>=1.0.3)", "filelock (>=3.4.0)", "ini2toml[lite] (>=0.14)", "jaraco.develop (>=7.21) ; python_version >= \"3.9\" and sys_platform != \"cygwin\"", "jaraco.envs (>=2.2)", "jaraco.path (>=3.7.2)", "jaraco.test (>=5.5)", "packaging (>=24.2)", "pip (>=19.1)", "pyproject-hooks (!=1.1)", "pytest (>=6,!=8.1.*)", "pytest-home (>=0.5)", "pytest-perf ; sys_platform != \"cygwin\"", "pytest-subprocess", "pytest-timeout", "pytest-xdist (>=3)", "tomli-w (>=1.0.0)", "virtualenv (>=13.0.0)", "wheel (>=0.44.0)"]
+type = ["importlib_metadata (>=7.0.2) ; python_version < \"3.10\"", "jaraco.develop (>=7.21) ; sys_platform != \"cygwin\"", "mypy (==1.18.*)", "pytest-mypy"]
+
+[[package]]
+name = "snowballstemmer"
+version = "3.1.1"
+description = "This package provides 36 stemmers for 34 languages generated from Snowball algorithms."
+optional = false
+python-versions = ">=3.3"
+groups = ["lint"]
+files = [
+    {file = "snowballstemmer-3.1.1-py3-none-any.whl", hash = "sha256:7e207fa178741da09cdee59d3ecec3827ad5f92b1fc5c9ff3755b639f71f5752"},
+    {file = "snowballstemmer-3.1.1.tar.gz", hash = "sha256:e07bbc54a0d798fe6010a12398422e62a8bfbba95c394fd0956ef58cb4d3e260"},
+]
+
+[[package]]
+name = "stevedore"
+version = "5.8.0"
+description = "Manage dynamic plugins for Python applications"
+optional = false
+python-versions = ">=3.10"
+groups = ["lint"]
+files = [
+    {file = "stevedore-5.8.0-py3-none-any.whl", hash = "sha256:88eede9e66ca80e34085b9174e2327da2c61ac91f24f70e41c3ad76e4bb4872b"},
+    {file = "stevedore-5.8.0.tar.gz", hash = "sha256:b49867b32ca3016e94100e68dbf26e72aa7b8708d0a3f73c08aeb220370ac715"},
+]
+
+[[package]]
+name = "toml"
+version = "0.10.2"
+description = "Python Library for Tom's Obvious, Minimal Language"
+optional = false
+python-versions = ">=2.6, !=3.0.*, !=3.1.*, !=3.2.*"
+groups = ["lint"]
+files = [
+    {file = "toml-0.10.2-py2.py3-none-any.whl", hash = "sha256:806143ae5bfb6a3c6e736a764057db0e6a0e05e338b5630894a5f779cabb4f9b"},
+    {file = "toml-0.10.2.tar.gz", hash = "sha256:b3bda1d108d5dd99f4a20d24d9c348e91c4db7ab1b749200bded2f839ccbe68f"},
+]
+
+[[package]]
+name = "tomli"
+version = "2.4.1"
+description = "A lil' TOML parser"
+optional = false
+python-versions = ">=3.8"
+groups = ["lint", "test"]
+files = [
+    {file = "tomli-2.4.1-cp311-cp311-macosx_10_9_x86_64.whl", hash = "sha256:f8f0fc26ec2cc2b965b7a3b87cd19c5c6b8c5e5f436b984e85f486d652285c30"},
+    {file = "tomli-2.4.1-cp311-cp311-macosx_11_0_arm64.whl", hash = "sha256:4ab97e64ccda8756376892c53a72bd1f964e519c77236368527f758fbc36a53a"},
+    {file = "tomli-2.4.1-cp311-cp311-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:96481a5786729fd470164b47cdb3e0e58062a496f455ee41b4403be77cb5a076"},
+    {file = "tomli-2.4.1-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:5a881ab208c0baf688221f8cecc5401bd291d67e38a1ac884d6736cbcd8247e9"},
+    {file = "tomli-2.4.1-cp311-cp311-musllinux_1_2_aarch64.whl", hash = "sha256:47149d5bd38761ac8be13a84864bf0b7b70bc051806bc3669ab1cbc56216b23c"},
+    {file = "tomli-2.4.1-cp311-cp311-musllinux_1_2_x86_64.whl", hash = "sha256:ec9bfaf3ad2df51ace80688143a6a4ebc09a248f6ff781a9945e51937008fcbc"},
+    {file = "tomli-2.4.1-cp311-cp311-win32.whl", hash = "sha256:ff2983983d34813c1aeb0fa89091e76c3a22889ee83ab27c5eeb45100560c049"},
+    {file = "tomli-2.4.1-cp311-cp311-win_amd64.whl", hash = "sha256:5ee18d9ebdb417e384b58fe414e8d6af9f4e7a0ae761519fb50f721de398dd4e"},
+    {file = "tomli-2.4.1-cp311-cp311-win_arm64.whl", hash = "sha256:c2541745709bad0264b7d4705ad453b76ccd191e64aa6f0fc66b69a293a45ece"},
+    {file = "tomli-2.4.1-cp312-cp312-macosx_10_13_x86_64.whl", hash = "sha256:c742f741d58a28940ce01d58f0ab2ea3ced8b12402f162f4d534dfe18ba1cd6a"},
+    {file = "tomli-2.4.1-cp312-cp312-macosx_11_0_arm64.whl", hash = "sha256:7f86fd587c4ed9dd76f318225e7d9b29cfc5a9d43de44e5754db8d1128487085"},
+    {file = "tomli-2.4.1-cp312-cp312-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:ff18e6a727ee0ab0388507b89d1bc6a22b138d1e2fa56d1ad494586d61d2eae9"},
+    {file = "tomli-2.4.1-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:136443dbd7e1dee43c68ac2694fde36b2849865fa258d39bf822c10e8068eac5"},
+    {file = "tomli-2.4.1-cp312-cp312-musllinux_1_2_aarch64.whl", hash = "sha256:5e262d41726bc187e69af7825504c933b6794dc3fbd5945e41a79bb14c31f585"},
+    {file = "tomli-2.4.1-cp312-cp312-musllinux_1_2_x86_64.whl", hash = "sha256:5cb41aa38891e073ee49d55fbc7839cfdb2bc0e600add13874d048c94aadddd1"},
+    {file = "tomli-2.4.1-cp312-cp312-win32.whl", hash = "sha256:da25dc3563bff5965356133435b757a795a17b17d01dbc0f42fb32447ddfd917"},
+    {file = "tomli-2.4.1-cp312-cp312-win_amd64.whl", hash = "sha256:52c8ef851d9a240f11a88c003eacb03c31fc1c9c4ec64a99a0f922b93874fda9"},
+    {file = "tomli-2.4.1-cp312-cp312-win_arm64.whl", hash = "sha256:f758f1b9299d059cc3f6546ae2af89670cb1c4d48ea29c3cacc4fe7de3058257"},
+    {file = "tomli-2.4.1-cp313-cp313-macosx_10_13_x86_64.whl", hash = "sha256:36d2bd2ad5fb9eaddba5226aa02c8ec3fa4f192631e347b3ed28186d43be6b54"},
+    {file = "tomli-2.4.1-cp313-cp313-macosx_11_0_arm64.whl", hash = "sha256:eb0dc4e38e6a1fd579e5d50369aa2e10acfc9cace504579b2faabb478e76941a"},
+    {file = "tomli-2.4.1-cp313-cp313-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:c7f2c7f2b9ca6bdeef8f0fa897f8e05085923eb091721675170254cbc5b02897"},
+    {file = "tomli-2.4.1-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:f3c6818a1a86dd6dca7ddcaaf76947d5ba31aecc28cb1b67009a5877c9a64f3f"},
+    {file = "tomli-2.4.1-cp313-cp313-musllinux_1_2_aarch64.whl", hash = "sha256:d312ef37c91508b0ab2cee7da26ec0b3ed2f03ce12bd87a588d771ae15dcf82d"},
+    {file = "tomli-2.4.1-cp313-cp313-musllinux_1_2_x86_64.whl", hash = "sha256:51529d40e3ca50046d7606fa99ce3956a617f9b36380da3b7f0dd3dd28e68cb5"},
+    {file = "tomli-2.4.1-cp313-cp313-win32.whl", hash = "sha256:2190f2e9dd7508d2a90ded5ed369255980a1bcdd58e52f7fe24b8162bf9fedbd"},
+    {file = "tomli-2.4.1-cp313-cp313-win_amd64.whl", hash = "sha256:8d65a2fbf9d2f8352685bc1364177ee3923d6baf5e7f43ea4959d7d8bc326a36"},
+    {file = "tomli-2.4.1-cp313-cp313-win_arm64.whl", hash = "sha256:4b605484e43cdc43f0954ddae319fb75f04cc10dd80d830540060ee7cd0243cd"},
+    {file = "tomli-2.4.1-cp314-cp314-macosx_10_15_x86_64.whl", hash = "sha256:fd0409a3653af6c147209d267a0e4243f0ae46b011aa978b1080359fddc9b6cf"},
+    {file = "tomli-2.4.1-cp314-cp314-macosx_11_0_arm64.whl", hash = "sha256:a120733b01c45e9a0c34aeef92bf0cf1d56cfe81ed9d47d562f9ed591a9828ac"},
+    {file = "tomli-2.4.1-cp314-cp314-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:559db847dc486944896521f68d8190be1c9e719fced785720d2216fe7022b662"},
+    {file = "tomli-2.4.1-cp314-cp314-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:01f520d4f53ef97964a240a035ec2a869fe1a37dde002b57ebc4417a27ccd853"},
+    {file = "tomli-2.4.1-cp314-cp314-musllinux_1_2_aarch64.whl", hash = "sha256:7f94b27a62cfad8496c8d2513e1a222dd446f095fca8987fceef261225538a15"},
+    {file = "tomli-2.4.1-cp314-cp314-musllinux_1_2_x86_64.whl", hash = "sha256:ede3e6487c5ef5d28634ba3f31f989030ad6af71edfb0055cbbd14189ff240ba"},
+    {file = "tomli-2.4.1-cp314-cp314-win32.whl", hash = "sha256:3d48a93ee1c9b79c04bb38772ee1b64dcf18ff43085896ea460ca8dec96f35f6"},
+    {file = "tomli-2.4.1-cp314-cp314-win_amd64.whl", hash = "sha256:88dceee75c2c63af144e456745e10101eb67361050196b0b6af5d717254dddf7"},
+    {file = "tomli-2.4.1-cp314-cp314-win_arm64.whl", hash = "sha256:b8c198f8c1805dc42708689ed6864951fd2494f924149d3e4bce7710f8eb5232"},
+    {file = "tomli-2.4.1-cp314-cp314t-macosx_10_15_x86_64.whl", hash = "sha256:d4d8fe59808a54658fcc0160ecfb1b30f9089906c50b23bcb4c69eddc19ec2b4"},
+    {file = "tomli-2.4.1-cp314-cp314t-macosx_11_0_arm64.whl", hash = "sha256:7008df2e7655c495dd12d2a4ad038ff878d4ca4b81fccaf82b714e07eae4402c"},
+    {file = "tomli-2.4.1-cp314-cp314t-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:1d8591993e228b0c930c4bb0db464bdad97b3289fb981255d6c9a41aedc84b2d"},
+    {file = "tomli-2.4.1-cp314-cp314t-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:734e20b57ba95624ecf1841e72b53f6e186355e216e5412de414e3c51e5e3c41"},
+    {file = "tomli-2.4.1-cp314-cp314t-musllinux_1_2_aarch64.whl", hash = "sha256:8a650c2dbafa08d42e51ba0b62740dae4ecb9338eefa093aa5c78ceb546fcd5c"},
+    {file = "tomli-2.4.1-cp314-cp314t-musllinux_1_2_x86_64.whl", hash = "sha256:504aa796fe0569bb43171066009ead363de03675276d2d121ac1a4572397870f"},
+    {file = "tomli-2.4.1-cp314-cp314t-win32.whl", hash = "sha256:b1d22e6e9387bf4739fbe23bfa80e93f6b0373a7f1b96c6227c32bef95a4d7a8"},
+    {file = "tomli-2.4.1-cp314-cp314t-win_amd64.whl", hash = "sha256:2c1c351919aca02858f740c6d33adea0c5deea37f9ecca1cc1ef9e884a619d26"},
+    {file = "tomli-2.4.1-cp314-cp314t-win_arm64.whl", hash = "sha256:eab21f45c7f66c13f2a9e0e1535309cee140182a9cdae1e041d02e47291e8396"},
+    {file = "tomli-2.4.1-py3-none-any.whl", hash = "sha256:0d85819802132122da43cb86656f8d1f8c6587d54ae7dcaf30e90533028b49fe"},
+    {file = "tomli-2.4.1.tar.gz", hash = "sha256:7c7e1a961a0b2f2472c1ac5b69affa0ae1132c39adcb67aba98568702b9cc23f"},
+]
+markers = {lint = "python_version == \"3.10\"", test = "python_full_version <= \"3.11.0a6\""}
+
+[[package]]
+name = "types-protobuf"
+version = "7.34.1.20260518"
+description = "Typing stubs for protobuf"
+optional = false
+python-versions = ">=3.10"
+groups = ["main"]
+files = [
+    {file = "types_protobuf-7.34.1.20260518-py3-none-any.whl", hash = "sha256:a0a5337413347166439c0e07cbc26c6164d091401c6f01b1dfd8cdb966c4dd8f"},
+    {file = "types_protobuf-7.34.1.20260518.tar.gz", hash = "sha256:28cfaded25889cb83ebfb63cfb0a43628f0b6f3785767bec17287dc6468795f2"},
+]
+
+[[package]]
+name = "typing-extensions"
+version = "4.15.0"
+description = "Backported and Experimental Type Hints for Python 3.9+"
+optional = false
+python-versions = ">=3.9"
+groups = ["main", "lint", "test"]
+files = [
+    {file = "typing_extensions-4.15.0-py3-none-any.whl", hash = "sha256:f0fa19c6845758ab08074a0cfa8b7aecb71c999ca73d62883bc25cc018c4e548"},
+    {file = "typing_extensions-4.15.0.tar.gz", hash = "sha256:0cea48d173cc12fa28ecabc3b837ea3cf6f38c6d1136f85cbaaf598984861466"},
+]
+markers = {test = "python_version == \"3.10\""}
+
+[metadata]
+lock-version = "2.1"
+python-versions = ">=3.10,<4.0"
+content-hash = "2b4d2a3d970693ef5f37772a322195d120e50bb4c8a0cf3c94a66b0a10c805db"
+````
+
+<!--NI_OSS_SOURCE repo=ni-apis-python path=tools/grpc_generator/poetry.toml sha256=ab9805d8c59ec531486a127a4ad51adf2eb61c352b456eedf24185b33661829e bytes=34 -->
+## FILE: tools/grpc_generator/poetry.toml
+
+- repository: `ni/ni-apis-python`
+- source_path: `tools/grpc_generator/poetry.toml`
+- sha256: `ab9805d8c59ec531486a127a4ad51adf2eb61c352b456eedf24185b33661829e`
+- bytes: 34
+
+````toml
+[virtualenvs]
+in-project = true
+````
+
+<!--NI_OSS_SOURCE repo=ni-apis-python path=tools/grpc_generator/pyproject.toml sha256=fea3f6d758c1ba12e81da4aca585a10e01cf2dcfafccbc9425a9c811678eeb00 bytes=1991 -->
+## FILE: tools/grpc_generator/pyproject.toml
+
+- repository: `ni/ni-apis-python`
+- source_path: `tools/grpc_generator/pyproject.toml`
+- sha256: `fea3f6d758c1ba12e81da4aca585a10e01cf2dcfafccbc9425a9c811678eeb00`
+- bytes: 1991
+
+````toml
+[project]
+name = "ni-apis-grpc-generator"
+version = "0.1.0"
+license = "MIT"
+description = "Python generator for NI gRPC APIs"
+authors = [{name = "NI", email = "opensource@ni.com"}]
+readme = "README.md"
+dynamic = ["dependencies"]
+requires-python = ">=3.10,<4.0"
+
+[tool.poetry]
+packages = [{include = "grpc_generator", from = "src"}]
+requires-poetry = ">=2.1,<3.0"
+
+[project.scripts]
+grpc-generator = "grpc_generator.__main__:cli"
+generate-stubs = "grpc_generator.generate_stubs:main"
+
+[tool.poetry.dependencies]
+click = [
+  { version = "^8.2.1", python = "^3.10" },
+]
+# When updating the grpcio-tools version, also update the minimum grpcio version
+# and regenerate gRPC stubs.
+grpcio-tools = [
+  # requires protobuf v4 or later
+  { version = "1.49.1", python = ">=3.10,<3.12" },
+  { version = "1.59.0", python = ">=3.12,<3.13" },
+  # requires protobuf v5 or later
+  { version = "1.67.0", python = ">=3.13,<3.14" },
+  # requires protobuf v6 or later
+  { version = "1.75.1", python = "^3.14" },
+]
+# mypy-protobuf 3.6 is the last version that supports protobuf v4.
+mypy-protobuf = [
+  # requires protobuf v4 or later
+  {version = ">=3.6,<3.7", python = ">=3.10,<3.14"},
+  # requires protobuf v6 or later
+  {version = ">=3.6", python = "^3.14"}
+]
+
+[tool.poetry.group.lint.dependencies]
+bandit = { version = ">=1.7", extras = ["toml"] }
+ni-python-styleguide = ">=0.4.1"
+mypy = ">=1.0"
+pyright = { version = ">=1.1.400", extras = ["nodejs"] }
+
+[tool.poetry.group.test.dependencies]
+pytest = ">=7.2"
+pytest-cov = ">=4.0"
+pytest-mock = ">=3.0"
+
+[build-system]
+requires = ["poetry-core>=2.1.0,<3.0"]
+build-backend = "poetry.core.masonry.api"
+
+
+[tool.bandit]
+skips = [
+  "B101", # assert_used
+]
+
+[tool.black]
+line-length = 100
+
+[tool.mypy]
+files = "src/,tests/"
+namespace_packages = true
+strict = true
+
+[tool.pyright]
+include = ["src/", "tests/"]
+
+[tool.pytest.ini_options]
+addopts = "--strict-markers"
+testpaths = ["tests"]
+````
+
+<!--NI_OSS_SOURCE repo=ni-apis-python path=tools/grpc_generator/README.md sha256=ff6f6a1c1a4d1dce1451b2f7155af6f5cbcd067ef674fc42558c0287f35e9111 bytes=3413 -->
+## FILE: tools/grpc_generator/README.md
+
+- repository: `ni/ni-apis-python`
+- source_path: `tools/grpc_generator/README.md`
+- sha256: `ff6f6a1c1a4d1dce1451b2f7155af6f5cbcd067ef674fc42558c0287f35e9111`
+- bytes: 3413
+
+````markdown
+# About
+
+`grpc_generator` is a Python tool that generates gRPC stubs from proto files.
+
+It supports emitting stubs into namespace packages, transforming them as necessary from submodules to subpackages.
+
+## Setup
+
+```pwsh
+# Initialize the tool
+cd tools\grpc_generator
+poetry install
+```
+
+## Generate
+
+```pwsh
+# PowerShell
+poetry run grpc-generator `
+   --proto-basepath ..\..\third_party\ni-apis `
+   --proto-subpath ni\protobuf\types `
+   --output-basepath ..\..\packages\ni.protobuf.types\src `
+   --output-format submodule
+```
+
+## Generate into a namespace package
+
+```pwsh
+# PowerShell
+poetry run grpc-generator `
+   --proto-basepath ..\..\third_party\ni-apis `
+   --proto-subpath ni\measurementlink\pinmap\v1 `
+   --output-basepath ..\..\packages\ni.measurementlink.pinmap.v1\src `
+   --output-format subpackage
+```
+
+## Generate (stubs for all packages)
+
+You can also use `generate-stubs` to invoke `grpc_generator` and regenerate the gRPC stubs for all packages in the repository.
+
+```pwsh
+# PowerShell
+poetry run generate-stubs
+```
+
+## Options
+
+**`grpc-generator --help`**
+```
+Usage: grpc-generator [OPTIONS]
+
+  Generate gRPC Python stubs from proto files.
+
+  Specifying input and output locations
+
+    This script uses the protobuf files from the folder specified by --proto-
+    basepath and --proto-subpath and emits Python files into the folder
+    specified by --output-basepath:
+
+    {proto-basepath}/{proto-subpath}  -->  {output-basepath}/{proto-subpath}
+
+    The script resolves gRPC imports from --proto-basepath by default. Include
+    additional paths by using --proto-include-path for each required folder.
+
+  Specifying output format
+
+    The script supports generating gRPC packages as either subpackages or
+    submodules with --output-format.
+
+    When generating submodules, the script creates Python files with names
+    that match the source protobuf files:
+
+    waveform.proto  -->  waveform_pb2.py
+
+    When generating subpackages, the script creates folders with names that
+    match the source protobuf files:
+
+    waveform.proto  -->  waveform_pb2/__init__.py
+
+    Clients use the same "import waveform_pb2" syntax.
+
+Options:
+  --output-basepath PATH          Emit the generated gRPC files to PATH
+                                  [required]
+  --output-format [submodule|subpackage]
+                                  Generate a Python submodule or subpackage
+                                  [required]
+  --proto-basepath PATH           Use PATH as the base for --proto-subpath
+                                  [default: C:\dev\ni\git\github\ni-apis-
+                                  python\third_party\ni-apis]
+  --proto-include-path PATH       Add PATH to the import search list, can be
+                                  used more than once  [default:
+                                  C:\dev\ni\git\github\ni-apis-
+                                  python\third_party\ni-apis]
+  --proto-subpath PATH            Use the proto files under PATH as input
+                                  [required]
+  --help                          Show this message and exit.
+  --version                       Show the version and exit.
+
+  Example:
+
+  grpc-generator  --proto-subpath ni/protobuf/types  --output-basepath ../../packages/ni.protobuf.types/src  --output-format submodule
+```
+````
+
+<!--NI_OSS_SOURCE repo=ni-apis-python path=tools/grpc_generator/src/grpc_generator/__init__.py sha256=2b58e13e65b7a2654956c75ae3094c9422f707bacaf4581945518b88ca3d9b8e bytes=237 -->
+## FILE: tools/grpc_generator/src/grpc_generator/__init__.py
+
+- repository: `ni/ni-apis-python`
+- source_path: `tools/grpc_generator/src/grpc_generator/__init__.py`
+- sha256: `2b58e13e65b7a2654956c75ae3094c9422f707bacaf4581945518b88ca3d9b8e`
+- bytes: 237
+
+````python
+"""grpc_generator package."""
+
+import warnings
+
+warnings.filterwarnings(
+    action="ignore",
+    category=UserWarning,
+    module=r"^grpc_tools",
+)  # grpc_tools\protoc.py:21: UserWarning: pkg_resources is deprecated as an API
+````
+
+<!--NI_OSS_SOURCE repo=ni-apis-python path=tools/grpc_generator/src/grpc_generator/__main__.py sha256=30dfbb2d38cc34cbeb2f7ccd80f0602f95e776e22466e1ff6c57b8f5f0ed8dae bytes=3204 -->
+## FILE: tools/grpc_generator/src/grpc_generator/__main__.py
+
+- repository: `ni/ni-apis-python`
+- source_path: `tools/grpc_generator/src/grpc_generator/__main__.py`
+- sha256: `30dfbb2d38cc34cbeb2f7ccd80f0602f95e776e22466e1ff6c57b8f5f0ed8dae`
+- bytes: 3204
+
+````python
+"""grpc_generator entry points."""
+
+import pathlib
+
+import click
+from grpc_generator import generator
+
+REPO_ROOT = next(
+    (p for p in pathlib.Path(__file__).parents if (p / "third_party").exists()), pathlib.Path(".")
+)
+
+
+@click.command(epilog=generator.USAGE_EXAMPLE)
+@click.option(
+    "--output-basepath",
+    metavar="PATH",
+    type=click.Path(file_okay=False, writable=True, path_type=pathlib.Path),
+    required=True,
+    help="Emit the generated gRPC files to PATH",
+)
+@click.option(
+    "--output-format",
+    type=click.Choice(choices=[entry.value for entry in generator.OutputFormat]),
+    required=True,
+    help="Generate a Python submodule or subpackage",
+)
+@click.option(
+    "--proto-basepath",
+    metavar="PATH",
+    type=click.Path(file_okay=False, path_type=pathlib.Path),
+    default=REPO_ROOT.joinpath("third_party/ni-apis"),
+    show_default=True,
+    help="Use PATH as the base for --proto-subpath",
+)
+@click.option(
+    "--proto-include-path",
+    metavar="PATH",
+    multiple=True,
+    type=click.Path(file_okay=False, path_type=pathlib.Path),
+    default=[REPO_ROOT.joinpath("third_party/ni-apis")],
+    show_default=True,
+    help="Add PATH to the import search list, can be used more than once",
+)
+@click.option(
+    "--proto-subpath",
+    metavar="PATH",
+    type=click.Path(file_okay=False, path_type=pathlib.Path),
+    required=True,
+    help="Use the proto files under PATH as input",
+)
+@click.help_option()
+@click.version_option()
+def cli(
+    proto_basepath: pathlib.Path,
+    proto_subpath: pathlib.Path,
+    proto_include_path: list[pathlib.Path],
+    output_basepath: pathlib.Path,
+    output_format: str,
+) -> None:
+    """Generate gRPC Python stubs from proto files.
+
+    Specifying input and output locations
+
+      This script uses the protobuf files from the folder specified by
+    --proto-basepath and --proto-subpath and emits Python files into the
+    folder specified by --output-basepath:
+
+    \b
+      {proto-basepath}/{proto-subpath}  -->  {output-basepath}/{proto-subpath}
+
+      The script resolves gRPC imports from --proto-basepath by default. Include
+    additional paths by using --proto-include-path for each required folder.
+
+    Specifying output format
+
+      The script supports generating gRPC packages as either subpackages
+    or submodules with --output-format.
+
+      When generating submodules, the script creates Python files with names
+    that match the source protobuf files:
+
+    \b
+      waveform.proto  -->  waveform_pb2.py
+
+      When generating subpackages, the script creates folders with names
+    that match the source protobuf files:
+
+    \b
+      waveform.proto  -->  waveform_pb2/__init__.py
+
+      Clients use the same "import waveform_pb2" syntax.
+
+    """  # noqa: D301 - Use r""" if any backslashes in a docstring
+    generator.handle_cli(
+        proto_basepath=proto_basepath,
+        proto_subpath=proto_subpath,
+        proto_include_paths=proto_include_path,
+        output_basepath=output_basepath,
+        output_format=generator.OutputFormat(output_format),
+    )
+
+
+if __name__ == "__main__":
+    cli()
+````
+
+<!--NI_OSS_SOURCE repo=ni-apis-python path=tools/grpc_generator/src/grpc_generator/generate_stubs.py sha256=d1e7a37fb35daefa11b1cff38e5cd77d9222711b301a718747bfaf5de4b51f0a bytes=1633 -->
+## FILE: tools/grpc_generator/src/grpc_generator/generate_stubs.py
+
+- repository: `ni/ni-apis-python`
+- source_path: `tools/grpc_generator/src/grpc_generator/generate_stubs.py`
+- sha256: `d1e7a37fb35daefa11b1cff38e5cd77d9222711b301a718747bfaf5de4b51f0a`
+- bytes: 1633
+
+````python
+"""Script to generate gRPC stubs for all packages in the repository."""
+
+import json
+from pathlib import Path
+
+from grpc_generator import generator
+
+
+def main() -> None:
+    """Executes the generation of the gRPC stubs based on the specified package information."""
+    packages_file_name = "packages.json"
+    repo_root_path = next(p for p in Path.cwd().parents if (p / packages_file_name).is_file())
+
+    packages_file_path = repo_root_path / packages_file_name
+
+    packages = json.loads(packages_file_path.read_text(encoding="utf-8"))
+
+    for package_name, package_info in packages.items():
+        # Skip package entries with no specified output format
+        if not package_info.get("output-format"):
+            continue
+
+        proto_basepath = repo_root_path.joinpath(package_info["proto-basepath"])
+        proto_subpath = Path(package_info["proto-subpath"])
+        proto_include_path = repo_root_path.joinpath(package_info["proto-include-path"])
+        output_basepath = repo_root_path.joinpath(f"./packages/{package_name}/src")
+        output_format = package_info["output-format"]
+
+        print(f"Generating stubs for {package_name}...")
+        print("------------------------------------------------------------------------")
+        generator.handle_cli(
+            proto_basepath=proto_basepath,
+            proto_subpath=proto_subpath,
+            proto_include_paths=[proto_include_path],
+            output_basepath=output_basepath,
+            output_format=generator.OutputFormat(output_format),
+        )
+        print()
+
+
+if __name__ == "__main__":
+    main()
+````
+
+<!--NI_OSS_SOURCE repo=ni-apis-python path=tools/grpc_generator/src/grpc_generator/generator.py sha256=b17036929f586416892fbbf476bb60e2f468aae5a3e21662e560db9dc8e3ba7e bytes=10361 -->
+## FILE: tools/grpc_generator/src/grpc_generator/generator.py
+
+- repository: `ni/ni-apis-python`
+- source_path: `tools/grpc_generator/src/grpc_generator/generator.py`
+- sha256: `b17036929f586416892fbbf476bb60e2f468aae5a3e21662e560db9dc8e3ba7e`
+- bytes: 10361
+
+````python
+"""Generate gRPC Python stubs from proto files."""
+
+import enum
+import importlib.resources
+import pathlib
+import shutil
+from dataclasses import dataclass
+
+import click
+import grpc_tools.protoc  # type: ignore[import-untyped]
+from google.protobuf import descriptor_pb2
+
+USAGE_EXAMPLE = """Example:
+
+\b
+grpc-generator  --proto-subpath ni/protobuf/types  --output-basepath ../../packages/ni.protobuf.types/src  --output-format submodule"""
+
+
+class OutputFormat(str, enum.Enum):
+    """Supported Python output formats for generated gRPC packages."""
+
+    SUBMODULE = "submodule"
+    SUBPACKAGE = "subpackage"
+
+
+@dataclass(frozen=True)
+class GenerationSpec:
+    """A NamedTuple that describes a gRPC package for code generation."""
+
+    proto_basepath: pathlib.Path
+    proto_subpath: pathlib.Path
+    proto_include_paths: list[pathlib.Path]
+    output_basepath: pathlib.Path
+    output_format: OutputFormat
+
+    @property
+    def name(self) -> str:
+        """Return the name of the protobuf package."""
+        subpath_as_name = self.proto_subpath.as_posix().replace("/", ".")
+        return subpath_as_name
+
+    @property
+    def package_folder(self) -> pathlib.Path:
+        """Return the full path to the folder for the generated files."""
+        return self.output_basepath.joinpath(self.proto_subpath)
+
+    @property
+    def package_descriptor_file(self) -> pathlib.Path:
+        """Return the path to use for the package's FileDescriptorSet."""
+        return self.output_basepath.joinpath(f"{self.name}-descriptor.pb")
+
+    @property
+    def proto_paths(self) -> list[pathlib.Path]:
+        """Return a list of all proto files under proto_subpath."""
+        full_proto_path = self.proto_basepath.joinpath(self.proto_subpath)
+        proto_files = sorted(full_proto_path.glob("*.proto"))
+        return proto_files
+
+    def get_matching_message_files(
+        self, relative_proto_file_path: pathlib.Path
+    ) -> list[pathlib.Path]:
+        """Get the full paths to the message files for the specified proto package path."""
+        full_path = self.output_basepath.joinpath(relative_proto_file_path)
+        logic_file = full_path.with_name(f"{full_path.stem}_pb2.py")
+        types_file = full_path.with_name(f"{full_path.stem}_pb2.pyi")
+        return [logic_file, types_file]
+
+    def get_matching_service_files(
+        self, relative_proto_file_path: pathlib.Path
+    ) -> list[pathlib.Path]:
+        """Get the full paths to the service files for the specified proto package path."""
+        full_path = self.output_basepath.joinpath(relative_proto_file_path)
+        logic_file = full_path.with_name(f"{full_path.stem}_pb2_grpc.py")
+        types_file = full_path.with_name(f"{full_path.stem}_pb2_grpc.pyi")
+        return [logic_file, types_file]
+
+
+def handle_cli(
+    proto_basepath: pathlib.Path,
+    proto_subpath: pathlib.Path,
+    proto_include_paths: list[pathlib.Path],
+    output_basepath: pathlib.Path,
+    output_format: OutputFormat,
+) -> None:
+    """Handle the command line interface invocation."""
+    all_include_paths = set([proto_basepath, *proto_include_paths])
+    generation_spec = GenerationSpec(
+        proto_basepath=proto_basepath,
+        proto_subpath=proto_subpath,
+        proto_include_paths=sorted(all_include_paths),
+        output_basepath=output_basepath,
+        output_format=output_format,
+    )
+
+    do_generation(generation_spec)
+
+
+def do_generation(generation_spec: GenerationSpec) -> None:
+    """Regenerate the gRPC package according to the generation_spec."""
+    click.echo(
+        f"Starting {click.style(generation_spec.name, 'bright_cyan')} as {click.style(generation_spec.output_format, 'bright_cyan')}"
+    )
+    reset_python_package(generation_spec)
+    generate_python_files(generation_spec)
+    finalize_python_package(generation_spec)
+
+
+def reset_python_package(generation_spec: GenerationSpec) -> None:
+    """Delete all generated gRPC files to accommodate API name changes and deletions."""
+    click.echo(
+        f"  {click.style('Deleting', 'red')} all gRPC files under {click.style(str(generation_spec.package_folder), 'bright_cyan')}"
+    )
+    if not generation_spec.package_folder.exists():
+        return
+
+    if generation_spec.output_format == OutputFormat.SUBPACKAGE:
+        # Only remove generated subpackage dirs.
+        # This allows for non-generated "mixin" subpackages.
+        dirs_to_remove = []
+        for subpackage_dir in generation_spec.package_folder.iterdir():
+            if is_generated_subpackage_dir(subpackage_dir):
+                dirs_to_remove.append(subpackage_dir)
+
+        for dir_to_remove in dirs_to_remove:
+            shutil.rmtree(dir_to_remove)
+    elif generation_spec.output_format == OutputFormat.SUBMODULE:
+        grpc_files = sorted(generation_spec.package_folder.glob("*_pb2.py*"))
+        grpc_files.extend(generation_spec.package_folder.glob("*_pb2_grpc.py*"))
+        remove_files(grpc_files)
+    else:
+        raise ValueError(f"Invalid output format: {generation_spec.output_format}")
+
+
+def generate_python_files(generation_spec: GenerationSpec) -> None:
+    """Generate Python files from the Protobuf files."""
+    click.echo(
+        f"  {click.style('Generating', 'green')} new gRPC files in {click.style(str(generation_spec.package_folder), 'bright_cyan')}"
+    )
+    for path in generation_spec.proto_include_paths:
+        click.echo(f"    Include: {path!s}")
+    for path in generation_spec.proto_paths:
+        click.echo(f"    Compile: {path!s}")
+
+    proto_include_options = [
+        f"--proto_path={source_path!s}" for source_path in generation_spec.proto_include_paths
+    ]
+    output_path_options = [
+        f"{arg_name}={generation_spec.output_basepath!s}"
+        for arg_name in ["--python_out", "--mypy_out", "--grpc_python_out", "--mypy_grpc_out"]
+    ]
+    proto_file_args = [f"{proto_file!s}" for proto_file in generation_spec.proto_paths]
+
+    protoc_arguments = [
+        "protoc",
+        *proto_include_options,
+        *output_path_options,
+        f"--descriptor_set_out={generation_spec.package_descriptor_file!s}",
+        *proto_file_args,
+    ]
+
+    generation_spec.output_basepath.mkdir(parents=True, exist_ok=True)
+    invoke_protoc(protoc_arguments)
+
+
+def finalize_python_package(generation_spec: GenerationSpec) -> None:
+    """Post process the generated files according to the generation_spec."""
+    with open(generation_spec.package_descriptor_file, "rb") as f:
+        package_descriptor_set = descriptor_pb2.FileDescriptorSet()
+        package_descriptor_set.ParseFromString(f.read())
+
+    for file_descriptor in package_descriptor_set.file:
+        relative_proto_file_path = pathlib.Path(file_descriptor.name)
+        if not file_descriptor.message_type:
+            click.echo(
+                f"  {click.style('Removing', 'yellow')} empty gRPC message files for {click.style(file_descriptor.name, 'bright_cyan')}"
+            )
+            remove_files(generation_spec.get_matching_message_files(relative_proto_file_path))
+
+        if not file_descriptor.service:
+            click.echo(
+                f"  {click.style('Removing', 'yellow')} empty gRPC service files for {click.style(file_descriptor.name, 'bright_cyan')}"
+            )
+            remove_files(generation_spec.get_matching_service_files(relative_proto_file_path))
+
+    if generation_spec.output_format == OutputFormat.SUBPACKAGE:
+        transform_files_for_namespace(generation_spec)
+    elif generation_spec.output_format == OutputFormat.SUBMODULE:
+        add_submodule_files(generation_spec)
+    else:
+        raise ValueError(f"Invalid output format: {generation_spec.output_format}")
+
+    generation_spec.package_descriptor_file.unlink()
+
+
+def transform_files_for_namespace(generation_spec: GenerationSpec) -> None:
+    """Convert a submodule to a subpackage."""
+    click.echo(f"  {click.style('Transforming', 'yellow')} gRPC submodules to subpackages")
+    files = sorted(generation_spec.package_folder.glob("*.py*"))
+    new_subpackage_folders: set[pathlib.Path] = set()
+    for file in files:
+        subpackage_folder = file.with_name(file.stem)
+        new_subpackage_folders.add(subpackage_folder)
+        submodule_file = subpackage_folder.joinpath(f"__init__{file.suffix}")
+        subpackage_folder.mkdir(exist_ok=True)
+        file.rename(submodule_file)
+        click.echo(f"    Xformed: {submodule_file!s}")
+    for folder in new_subpackage_folders:
+        py_typed_file = folder.joinpath("py.typed")
+        py_typed_file.touch()
+        click.echo(f"    Created: {py_typed_file!s}")
+
+
+def add_submodule_files(generation_spec: GenerationSpec) -> None:
+    """Add an __init__.py file to the specified protobuf package."""
+    click.echo(f"  {click.style('Initializing', 'yellow')} gRPC submodules")
+
+    init_file = generation_spec.package_folder.joinpath("__init__.py")
+    init_file.write_text(f'"""Package for {generation_spec.name}."""\n')
+    click.echo(f"    Created: {init_file!s}")
+
+    py_typed_file = init_file.with_name("py.typed")
+    py_typed_file.touch()
+    click.echo(f"    Created: {py_typed_file!s}")
+
+
+def remove_files(files: list[pathlib.Path]) -> None:
+    """Delete the specified files."""
+    for file in files:
+        file.unlink()
+        click.echo(f"    Removed: {file!s}")
+
+
+def invoke_protoc(protoc_arguments: list[str]) -> None:
+    """Invoke the Protobuf compiler."""
+    builtin_proto_folder = importlib.resources.files(grpc_tools).joinpath("_proto")
+    protoc_arguments.insert(1, f"--proto_path={builtin_proto_folder!s}")
+
+    click.echo(f"    Invoking '{click.style(' '.join(protoc_arguments), 'bright_white')}'")
+    exit_code = grpc_tools.protoc.main(protoc_arguments)
+    if exit_code != 0:
+        raise click.ClickException(
+            click.style(f"protoc exited with error code {exit_code}", "bright_magenta")
+        )
+
+
+def is_generated_subpackage_dir(candidate: pathlib.Path) -> bool:
+    """Determine if the input path is named like a generated subpackage dir."""
+    if not candidate.is_dir():
+        return False
+    return candidate.name.endswith("_pb2") or candidate.name.endswith("_pb2_grpc")
+````
+
+<!--NI_OSS_SOURCE repo=ni-apis-python path=tools/grpc_generator/src/grpc_generator/py.typed sha256=e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855 bytes=0 -->
+## FILE: tools/grpc_generator/src/grpc_generator/py.typed
+
+- repository: `ni/ni-apis-python`
+- source_path: `tools/grpc_generator/src/grpc_generator/py.typed`
+- sha256: `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855`
+- bytes: 0
+
+````text
+
+````
+
+<!--NI_OSS_SOURCE repo=ni-apis-python path=tools/grpc_generator/tests/__init__.py sha256=027b337b29f73af81f93bec5a4a37b131d97fb5b388e11a20bf176899f42e356 bytes=33 -->
+## FILE: tools/grpc_generator/tests/__init__.py
+
+- repository: `ni/ni-apis-python`
+- source_path: `tools/grpc_generator/tests/__init__.py`
+- sha256: `027b337b29f73af81f93bec5a4a37b131d97fb5b388e11a20bf176899f42e356`
+- bytes: 33
+
+````python
+"""Tests for grpc_generator."""
+````
+
+<!--NI_OSS_SOURCE repo=ni-apis-python path=tools/grpc_generator/tests/unit/__init__.py sha256=f12c41d53737177d2a3fc49547f9e3c82ead42f946b357041b819ea4b1715c1d bytes=38 -->
+## FILE: tools/grpc_generator/tests/unit/__init__.py
+
+- repository: `ni/ni-apis-python`
+- source_path: `tools/grpc_generator/tests/unit/__init__.py`
+- sha256: `f12c41d53737177d2a3fc49547f9e3c82ead42f946b357041b819ea4b1715c1d`
+- bytes: 38
+
+````python
+"""Unit tests for grpc_generator."""
+````
+
+<!--NI_OSS_SOURCE repo=ni-apis-python path=tools/grpc_generator/tests/unit/test_main.py sha256=20f5c6b7f578e7d73044b45da15b49663883fd368534c81a76c22fe1a2aba33c bytes=7282 -->
+## FILE: tools/grpc_generator/tests/unit/test_main.py
+
+- repository: `ni/ni-apis-python`
+- source_path: `tools/grpc_generator/tests/unit/test_main.py`
+- sha256: `20f5c6b7f578e7d73044b45da15b49663883fd368534c81a76c22fe1a2aba33c`
+- bytes: 7282
+
+````python
+"""Acceptance tests for the command line interface."""
+
+import pathlib
+
+from click.testing import CliRunner, Result
+from grpc_generator import __main__, generator
+
+
+def call_generate(args: list[str]) -> Result:
+    """Invoke the 'generate' CLI command."""
+    runner = CliRunner()
+    result = runner.invoke(
+        __main__.cli,
+        args,
+    )
+    return result
+
+
+def assert_is_submodule(output_path: pathlib.Path) -> None:
+    """Assert the output_path contains Python submodules."""
+    assert output_path.joinpath("__init__.py").exists()
+    assert output_path.joinpath("py.typed").exists()
+    assert all(entry.is_file() for entry in output_path.iterdir())
+
+
+def assert_is_subpackage(output_path: pathlib.Path) -> None:
+    """Assert the output_path contains Python subpackages."""
+    assert not output_path.joinpath("__init__.py").exists()
+    assert not output_path.joinpath("py.typed").exists()
+    assert all(entry.is_dir() for entry in output_path.iterdir())
+    for entry in output_path.iterdir():
+        # Assumption: Any subpackage dir that does not end in _pb2
+        # contains handwritten mixin files we want to keep and won't
+        # have the same format as a generated subpackage dir.
+        if generator.is_generated_subpackage_dir(entry):
+            assert entry.joinpath("__init__.py").exists()
+            assert entry.joinpath("__init__.pyi").exists()
+            assert entry.joinpath("py.typed").exists()
+
+
+def test___generator___call_generator_help___succeeds() -> None:
+    result = call_generate(args=["--help"])
+    assert result.exit_code == 0
+
+
+def test___empty_package___generate_submodules___creates_submodules(
+    tmp_path: pathlib.Path,
+) -> None:
+    result = call_generate(
+        [
+            "--output-basepath",
+            f"{tmp_path!s}",
+            "--output-format",
+            generator.OutputFormat.SUBMODULE.value,
+            "--proto-subpath",
+            "ni/protobuf/types",
+        ]
+    )
+
+    assert result.exit_code == 0
+    output_folder = tmp_path.joinpath("ni/protobuf/types")
+    assert_is_submodule(output_folder)
+    assert len(sorted(output_folder.glob("*_pb2_grpc.*"))) == 0
+
+
+def test___empty_package___generate_subpackages___creates_subpackages(
+    tmp_path: pathlib.Path,
+) -> None:
+    result = call_generate(
+        [
+            "--output-basepath",
+            f"{tmp_path!s}",
+            "--output-format",
+            generator.OutputFormat.SUBPACKAGE.value,
+            "--proto-subpath",
+            "ni/protobuf/types",
+        ]
+    )
+    assert result.exit_code == 0
+    output_folder = tmp_path.joinpath("ni/protobuf/types")
+    assert_is_subpackage(output_folder)
+    assert len(sorted(output_folder.glob("*_pb2_grpc.*"))) == 0
+
+
+def test___existing_package___generate_submodules___updates_submodules(
+    tmp_path: pathlib.Path,
+) -> None:
+    # Add files to the package that are not gRPC APIs
+    output_folder = tmp_path.joinpath("ni/protobuf/types")
+    output_folder.mkdir(parents=True, exist_ok=True)
+    support_files = [
+        output_folder.joinpath("helper.py"),
+        output_folder.joinpath("converter.py"),
+    ]
+    for support_file in support_files:
+        support_file.touch()
+    result = call_generate(
+        [
+            "--output-basepath",
+            f"{tmp_path!s}",
+            "--output-format",
+            generator.OutputFormat.SUBMODULE.value,
+            "--proto-subpath",
+            "ni/protobuf/types",
+        ]
+    )
+    assert result.exit_code == 0
+    assert_is_submodule(output_folder)
+    assert len(sorted(output_folder.glob("*_pb2_grpc.*"))) == 0
+    for support_file in support_files:
+        assert support_file.exists(), "Support file incorrectly deleted!"
+
+    # Mimic an API change by pretending the first version has this API
+    previous_api_files = [
+        output_folder.joinpath("previous_grpc_file_pb2.py"),
+        output_folder.joinpath("previous_grpc_file_pb2.pyi"),
+        output_folder.joinpath("previous_grpc_file_pb2_grpc.py"),
+        output_folder.joinpath("previous_grpc_file_pb2_grpc.pyi"),
+    ]
+    for previous_api_file in previous_api_files:
+        previous_api_file.touch()
+
+    result = call_generate(
+        [
+            "--output-basepath",
+            f"{tmp_path!s}",
+            "--output-format",
+            generator.OutputFormat.SUBMODULE.value,
+            "--proto-subpath",
+            "ni/protobuf/types",
+        ]
+    )
+    assert result.exit_code == 0
+    output_folder = tmp_path.joinpath("ni/protobuf/types")
+    assert_is_submodule(output_folder)
+    assert len(sorted(output_folder.glob("*_pb2_grpc.*"))) == 0
+    for previous_api_file in previous_api_files:
+        assert not previous_api_file.exists()
+    for support_file in support_files:
+        assert support_file.exists(), "Support file incorrectly deleted!"
+
+
+def test___existing_package___generate_subpackages___updates_subpackages(
+    tmp_path: pathlib.Path,
+) -> None:
+    # Add files to a separate subpackage that aren't generated files.
+    output_folder = tmp_path.joinpath("ni/protobuf/types")
+    mixin_folder = output_folder.joinpath("mixin")
+    mixin_folder.mkdir(parents=True, exist_ok=True)
+    support_files = [
+        mixin_folder.joinpath("helper.py"),
+        mixin_folder.joinpath("converter.py"),
+    ]
+    for support_file in support_files:
+        support_file.touch()
+
+    result = call_generate(
+        [
+            "--output-basepath",
+            f"{tmp_path!s}",
+            "--output-format",
+            generator.OutputFormat.SUBPACKAGE.value,
+            "--proto-subpath",
+            "ni/protobuf/types",
+        ]
+    )
+    assert result.exit_code == 0
+    assert_is_subpackage(output_folder)
+    for support_file in support_files:
+        assert support_file.exists(), "Support file incorrectly deleted!"
+
+    # Mimic an API change by adding "previous" generated subpackage dirs
+    previous_pb2_dir = output_folder.joinpath("prev_dir_pb2")
+    previous_pb2_dir.mkdir(parents=True, exist_ok=True)
+    previous_pb2_grpc_dir = output_folder.joinpath("prev_dir_pb2_grpc")
+    previous_pb2_grpc_dir.mkdir(parents=True, exist_ok=True)
+    previous_api_files = [
+        previous_pb2_dir.joinpath("__init__.py"),
+        previous_pb2_dir.joinpath("__init__.pyi"),
+        previous_pb2_dir.joinpath("py.typed"),
+        previous_pb2_grpc_dir.joinpath("__init__.py"),
+        previous_pb2_grpc_dir.joinpath("__init__.pyi"),
+        previous_pb2_grpc_dir.joinpath("py.typed"),
+    ]
+    for previous_api_file in previous_api_files:
+        previous_api_file.touch()
+
+    result = call_generate(
+        [
+            "--output-basepath",
+            f"{tmp_path!s}",
+            "--output-format",
+            generator.OutputFormat.SUBPACKAGE.value,
+            "--proto-subpath",
+            "ni/protobuf/types",
+        ]
+    )
+    assert result.exit_code == 0
+    assert_is_subpackage(output_folder)
+    assert not previous_pb2_dir.exists(), "Previous subpackage dir not deleted correctly!"
+    assert not previous_pb2_grpc_dir.exists(), "Previous subpackage dir not deleted correctly!"
+````

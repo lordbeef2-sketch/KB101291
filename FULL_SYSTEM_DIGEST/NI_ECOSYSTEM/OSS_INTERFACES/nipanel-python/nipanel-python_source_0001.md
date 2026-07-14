@@ -1,0 +1,13123 @@
+# NI OSS SOURCE SNAPSHOT: nipanel-python
+
+<!--NI_OSS_SNAPSHOT repo=ni/nipanel-python commit=4d45604ddd6c83d79491d1dfd6c27176e636a83d -->
+
+<!--NI_OSS_SOURCE repo=nipanel-python path=.github/CODEOWNERS sha256=16913a117db6983861c90ffa57e64868e96e6362ae652251641d00411a1abbff bytes=67 -->
+## FILE: .github/CODEOWNERS
+
+- repository: `ni/nipanel-python`
+- source_path: `.github/CODEOWNERS`
+- sha256: `16913a117db6983861c90ffa57e64868e96e6362ae652251641d00411a1abbff`
+- bytes: 67
+
+````text
+# Default code owner for nipanel-python
+* @mikeprosserni @csjall
+````
+
+<!--NI_OSS_SOURCE repo=nipanel-python path=.github/copilot-instructions.md sha256=65208119d654bf15d7c203da5366b91b2e24f555522f150a87d44bc81c9746ea bytes=6742 -->
+## FILE: .github/copilot-instructions.md
+
+- repository: `ni/nipanel-python`
+- source_path: `.github/copilot-instructions.md`
+- sha256: `65208119d654bf15d7c203da5366b91b2e24f555522f150a87d44bc81c9746ea`
+- bytes: 6742
+
+````markdown
+# Copilot Instructions for nipanel-python
+
+## Repository Overview
+
+**nipanel** is a Python package that provides support for creating and controlling measurement and visualization panels. It's developed by NI and enables Python applications to create Streamlit-based panels that can be served and controlled via gRPC services.
+
+### Key Repository Information
+- **Language**: Python (3.10+)
+- **Package Manager**: Poetry 2.1+
+- **Framework**: Uses Streamlit for panel UI, gRPC for communication
+- **Size**: Medium-sized repository (~1300 lines of code in src/)
+- **Architecture**: Client-server model with Python panel service and Streamlit frontend
+- **Testing**: Comprehensive test suite with unit, integration, and acceptance tests
+
+## Build and Validation Commands
+
+**CRITICAL**: Always run commands in this exact order for successful builds and validation.
+
+### Environment Setup
+```powershell
+# 1. Verify Poetry is installed (required version 2.1+)
+poetry --version
+
+# 2. Install project dependencies (ALWAYS run first)
+poetry install
+
+# 3. For examples and development work
+poetry install --with examples
+
+# 4. For documentation work
+poetry install --with docs
+```
+
+### Development Workflow Commands
+Follow this sequence when making changes:
+
+```powershell
+# 1. Run linting (shows warnings but continues)
+poetry run nps lint
+
+# 2. Apply automatic formatting fixes
+poetry run nps fix
+
+# 3. Run static type checking (must pass)
+poetry run mypy
+
+# 4. Run security analysis (must pass)
+poetry run bandit -c pyproject.toml -r src/nipanel
+
+# 5. Run all tests (must pass)
+poetry run pytest -v
+
+# 6. Run only unit tests (faster feedback)
+poetry run pytest ./tests/unit -v
+
+# 7. Run tests with coverage
+poetry run pytest ./tests/unit -v --cov=nipanel
+```
+
+### Documentation Build
+```powershell
+# Build documentation (may fail due to external SSL cert issues - this is expected)
+poetry run sphinx-build docs docs/_build --builder html --fail-on-warning
+```
+
+### Runtime Requirements
+- **Python**: 3.10+
+- **Poetry**: 2.1+ required for build system
+- **Virtual Environment**: Configured in-project (`.venv/` directory)
+
+## Project Layout and Architecture
+
+### Source Code Structure
+```
+src/nipanel/                 # Main package directory
+├── __init__.py             # Public API exports
+├── _streamlit_panel.py     # Core StreamlitPanel class
+├── _panel_client.py        # gRPC client for panel communication
+├── _panel_value_accessor.py # Value management for panels
+├── _streamlit_panel_initializer.py # Panel creation utilities
+├── _convert.py             # Type conversion utilities
+├── controls/               # Streamlit UI control components
+├── converters/             # Type conversion modules
+├── panel_refresh/          # Panel refresh functionality
+└── streamlit_refresh/      # Streamlit-specific refresh logic
+```
+
+### Configuration Files
+- **pyproject.toml**: Main project configuration, dependencies, tool settings
+- **poetry.toml**: Poetry configuration (sets `in-project = true` for venv)
+- **.github/workflows/**: Complete CI/CD pipeline
+
+### Test Structure
+```
+tests/
+├── unit/                   # Unit tests (primary test suite)
+├── integration/            # Integration tests
+├── acceptance/             # End-to-end acceptance tests
+├── utils/                  # Test utilities and fakes
+└── conftest.py            # Pytest configuration and fixtures
+```
+
+### Examples
+```
+examples/
+├── hello/                  # Basic panel example
+├── all_types/              # Demonstrates all supported data types
+├── simple_graph/           # Graph visualization example
+├── nidaqmx/               # Hardware integration examples
+└── performance_checker/    # Performance monitoring example
+```
+
+## CI/CD Pipeline
+
+The repository uses a comprehensive GitHub Actions pipeline:
+
+1. **check_nipanel.yml**: Runs on Windows, Ubuntu, macOS with Python 3.10, 3.13
+   - Linting with `poetry run nps lint`
+   - Type checking with `poetry run mypy`
+   - Security scanning with `poetry run bandit -c pyproject.toml -r src/nipanel`
+
+2. **run_unit_tests.yml**: Cross-platform testing (Windows, Ubuntu) with Python 3.10-3.13
+   - Unit tests: `poetry run pytest ./tests/unit -v --cov=nipanel --junitxml=test_results/nipanel-{os}-py{version}.xml`
+
+3. **check_docs.yml**: Documentation validation
+   - Lock file verification: `poetry check --lock`
+   - Documentation build: `poetry run sphinx-build docs docs/_build -b html -W`
+
+### Key Dependencies
+- **Core Runtime**: grpcio, protobuf, streamlit, nitypes, numpy, debugpy
+- **NI Packages**: ni-grpc-extensions, ni-measurementlink-discovery-v1-client, ni-protobuf-types, ni-panels-v1-proto
+- **Development Tools**: ni-python-styleguide, mypy, bandit, pytest
+
+## Architecture Overview
+
+**nipanel** implements a client-server architecture:
+
+1. **Python Application**: Uses nipanel API to create and control panels
+2. **Panel Service**: Separate gRPC service (PythonPanelService - external dependency)
+3. **Streamlit Frontend**: Web-based UI for the panels
+4. **Communication**: gRPC for Python ↔ Service, HTTP for Service ↔ Streamlit
+
+### Core Classes
+- `StreamlitPanel`: Main panel interface
+- `PanelValueAccessor`: Manages panel state and values
+- `create_streamlit_panel()`: Factory function for panel creation
+
+## Validation Steps
+
+### Pre-commit Validation (replicate CI locally)
+```powershell
+# Complete validation sequence
+poetry install
+poetry run nps lint
+poetry run nps fix
+poetry run mypy
+poetry run bandit -c pyproject.toml -r src/nipanel
+poetry run pytest -v
+```
+
+### Common Issues and Solutions
+
+1. **Poetry Lock Issues**: Run `poetry check --lock` to verify lock file consistency
+2. **Import Warnings**: flake8_import_order pkg_resources warnings are expected and harmless
+3. **Documentation SSL Errors**: External inventory fetch failures are known issues
+
+### File System Requirements
+- Virtual environment created in `.venv/` (configured in poetry.toml)
+- Test results written to `test_results/` directory
+- Documentation built to `docs/_build/`
+
+## Trust These Instructions
+
+These instructions are comprehensive and tested. Only perform additional searches if:
+- Commands fail unexpectedly
+- You need to understand specific implementation details not covered here
+- You're working with files not mentioned in this overview
+
+The build and test commands listed here are the authoritative source - they match exactly what the CI pipeline runs and have been validated to work correctly.
+````
+
+<!--NI_OSS_SOURCE repo=nipanel-python path=.github/ISSUE_TEMPLATE/bug_report.md sha256=b0a2cc8b3338cdbfbfafff9104588e73157c8e5ccf856b22984fc4d9b1e78171 bytes=1358 -->
+## FILE: .github/ISSUE_TEMPLATE/bug_report.md
+
+- repository: `ni/nipanel-python`
+- source_path: `.github/ISSUE_TEMPLATE/bug_report.md`
+- sha256: `b0a2cc8b3338cdbfbfafff9104588e73157c8e5ccf856b22984fc4d9b1e78171`
+- bytes: 1358
+
+````markdown
+---
+name: Bug report
+about: Create a report to help us improve
+title: ''
+labels: 'bug,triage'
+---
+
+<!---
+Thanks for filing an issue! Before you submit, please read the following:
+
+Search open/closed issues before submitting. Someone may have reported the same issue before.
+-->
+
+# Bug Report
+
+<!--- Provide a general summary of the issue here -->
+
+## Repro or Code Sample
+
+<!-- Please provide steps to reproduce the issue and/or a code repository, gist, code snippet or sample files -->
+
+## Expected Behavior
+
+<!--- Tell us what should happen -->
+
+## Current Behavior
+
+<!--- Tell us what happens instead of the expected behavior -->
+<!--- If you are seeing an error, please include the full error message and stack trace -->
+<!--- If applicable, provide screenshots -->
+
+## Possible Solution
+
+<!--- Not obligatory, but suggest a fix/reason for the bug -->
+<!--- Please let us know if you'd be willing to contribute the fix; we'd be happy to work with you -->
+
+## Context
+
+<!--- How has this issue affected you? What are you trying to accomplish? -->
+<!--- Providing context helps us come up with a solution that is most useful in the real world -->
+
+## Your Environment
+
+<!--- Include as many relevant details as possible about the environment you experienced the bug in -->
+
+* `nipanel` version
+* Python version
+````
+
+<!--NI_OSS_SOURCE repo=nipanel-python path=.github/ISSUE_TEMPLATE/feature_request.md sha256=e00ddb5b02a84de7f991b8a86a1bc750d91141603aad727f2a85d4c0bc8be6b1 bytes=712 -->
+## FILE: .github/ISSUE_TEMPLATE/feature_request.md
+
+- repository: `ni/nipanel-python`
+- source_path: `.github/ISSUE_TEMPLATE/feature_request.md`
+- sha256: `e00ddb5b02a84de7f991b8a86a1bc750d91141603aad727f2a85d4c0bc8be6b1`
+- bytes: 712
+
+````markdown
+---
+name: Feature request
+about: Suggest an idea for this project
+title: ''
+labels: 'enhancement,triage'
+---
+
+<!---
+Thanks for filing an issue! Before you submit, please read the following:
+
+Search open/closed issues before submitting. Someone may have requested the same feature before.
+-->
+
+## Problem to Solve
+
+<!--- Provide a clear and concise description of why this feature is wanted or what problem it solves. -->
+
+## Proposed Solution
+
+<!--- Provide a clear and concise description of the feature you're proposing. -->
+
+<!--- The implementing team may build a list of tasks/sub-issues here:
+## Tasks
+- [ ] This is a subtask of the feature. (It can be converted to an issue.)
+-->
+````
+
+<!--NI_OSS_SOURCE repo=nipanel-python path=.github/ISSUE_TEMPLATE/tech_debt.md sha256=a80e6afbbd5f723466dab578104fedfe7d38413e65714a4e5ccb40d1d35389d0 bytes=164 -->
+## FILE: .github/ISSUE_TEMPLATE/tech_debt.md
+
+- repository: `ni/nipanel-python`
+- source_path: `.github/ISSUE_TEMPLATE/tech_debt.md`
+- sha256: `a80e6afbbd5f723466dab578104fedfe7d38413e65714a4e5ccb40d1d35389d0`
+- bytes: 164
+
+````markdown
+---
+name: Tech debt
+about: (DEV TEAM ONLY) Non-user-visible improvement to code or development process
+title: ''
+labels: 'tech debt,triage'
+---
+## Tech Debt
+````
+
+<!--NI_OSS_SOURCE repo=nipanel-python path=.github/ISSUE_TEMPLATE/user_story.md sha256=db24cb4a5576436f0dd3e0fbfd2d95a20336d2aa1c5d68cddbd5a717dc993012 bytes=321 -->
+## FILE: .github/ISSUE_TEMPLATE/user_story.md
+
+- repository: `ni/nipanel-python`
+- source_path: `.github/ISSUE_TEMPLATE/user_story.md`
+- sha256: `db24cb4a5576436f0dd3e0fbfd2d95a20336d2aa1c5d68cddbd5a717dc993012`
+- bytes: 321
+
+````markdown
+---
+name: User story
+about: (DEV TEAM ONLY) A small chunk of work to be done
+title: '(Fully descriptive title)'
+labels: 'user story,triage'
+---
+
+<!-- Ensure the title can be understood without the parent item's context, e.g. "nimble-button Angular wrapper" rather than just "Angular wrapper" -->
+
+## User Story
+````
+
+<!--NI_OSS_SOURCE repo=nipanel-python path=.github/PULL_REQUEST_TEMPLATE.md sha256=b116ab9575b774ee50bef29b6cda04edd1b259ef46e122c178295b17277f1b54 bytes=361 -->
+## FILE: .github/PULL_REQUEST_TEMPLATE.md
+
+- repository: `ni/nipanel-python`
+- source_path: `.github/PULL_REQUEST_TEMPLATE.md`
+- sha256: `b116ab9575b774ee50bef29b6cda04edd1b259ef46e122c178295b17277f1b54`
+- bytes: 361
+
+````markdown
+### What does this Pull Request accomplish?
+
+TODO: Include high-level description of the changes in this pull request.
+
+### Why should this Pull Request be merged?
+
+TODO: Justify why this contribution should be part of the project.
+
+### What testing has been done?
+
+TODO: Detail what testing has been done to ensure this submission meets requirements.
+````
+
+<!--NI_OSS_SOURCE repo=nipanel-python path=.github/renovate.json sha256=60909f4835c7ec398d2e67ef80b54755d8288f94e525c80d00865267c91128c2 bytes=153 -->
+## FILE: .github/renovate.json
+
+- repository: `ni/nipanel-python`
+- source_path: `.github/renovate.json`
+- sha256: `60909f4835c7ec398d2e67ef80b54755d8288f94e525c80d00865267c91128c2`
+- bytes: 153
+
+````json
+{
+    "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+    "extends": [
+        "local>ni/python-renovate-config:recommended"
+    ]
+}
+````
+
+<!--NI_OSS_SOURCE repo=nipanel-python path=.github/workflows/check_docs.yml sha256=4b8074d7d5ad375bfe3129989116294e5e8b0bb283ba2fcbcc01400da8eff7d4 bytes=1292 -->
+## FILE: .github/workflows/check_docs.yml
+
+- repository: `ni/nipanel-python`
+- source_path: `.github/workflows/check_docs.yml`
+- sha256: `4b8074d7d5ad375bfe3129989116294e5e8b0bb283ba2fcbcc01400da8eff7d4`
+- bytes: 1292
+
+````yaml
+name: Check docs
+
+on:
+  workflow_call:
+  workflow_dispatch:
+
+jobs:
+  check_docs:
+    name: Check docs
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repo
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      - name: Set up Python
+        uses: ni/python-actions/setup-python@aa64e60612cb078b0c2ada666becbd70d4817d55 # 0.7.1
+        id: setup-python
+      - name: Set up Poetry
+        uses: ni/python-actions/setup-poetry@aa64e60612cb078b0c2ada666becbd70d4817d55 # 0.7.1
+      - name: Check for lock changes
+        run: poetry check --lock
+      - name: Cache virtualenv (with docs)
+        uses: actions/cache@8b402f58fbc84540c8b491a91e594a4576fec3d7 # v5.0.2
+        with:
+          path: .venv
+          key: nipanel-with-docs-${{ runner.os }}-py${{ steps.setup-python.outputs.python-version }}-${{ hashFiles('poetry.lock') }}
+      - name: Install nipanel (with docs)
+        run: poetry install -v --only main,docs
+      - name: Generate docs
+        run:  poetry run sphinx-build docs docs/_build -b html -W
+      - name: Upload docs artifact
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: nipanel-docs
+          path: docs/_build/
+````
+
+<!--NI_OSS_SOURCE repo=nipanel-python path=.github/workflows/check_nipanel.yml sha256=49f900f24386a0533d816c139c015a7acad101d065f664ea857e11839a0059d0 bytes=1046 -->
+## FILE: .github/workflows/check_nipanel.yml
+
+- repository: `ni/nipanel-python`
+- source_path: `.github/workflows/check_nipanel.yml`
+- sha256: `49f900f24386a0533d816c139c015a7acad101d065f664ea857e11839a0059d0`
+- bytes: 1046
+
+````yaml
+name: Check nipanel
+
+on:
+  workflow_call:
+  workflow_dispatch:
+
+jobs:
+  check_nipanel:
+    name: Check nipanel
+    strategy:
+      matrix:
+        os: [windows-latest, ubuntu-latest, macos-latest]
+        python-version: ["3.10", 3.13]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - name: Check out repo
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      - name: Set up Python
+        uses: ni/python-actions/setup-python@aa64e60612cb078b0c2ada666becbd70d4817d55 # 0.7.1
+        id: setup-python
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Set up Poetry
+        uses: ni/python-actions/setup-poetry@aa64e60612cb078b0c2ada666becbd70d4817d55 # 0.7.1
+      - name: Analyze Python Project
+        uses: ni/python-actions/analyze-project@aa64e60612cb078b0c2ada666becbd70d4817d55 # 0.7.1
+        with:
+          install-args: "--with examples"
+      - name: Bandit security checks
+        run: poetry run bandit -c pyproject.toml -r src/nipanel
+````
+
+<!--NI_OSS_SOURCE repo=nipanel-python path=.github/workflows/CI.yml sha256=db565466c7b5ba76b71cb43923f831f0542ba9a0fdf88f96e874236edf779c17 bytes=822 -->
+## FILE: .github/workflows/CI.yml
+
+- repository: `ni/nipanel-python`
+- source_path: `.github/workflows/CI.yml`
+- sha256: `db565466c7b5ba76b71cb43923f831f0542ba9a0fdf88f96e874236edf779c17`
+- bytes: 822
+
+````yaml
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+      - 'releases/**'
+  workflow_call:
+  workflow_dispatch:
+
+jobs:
+  check_nipanel:
+    name: Check nipanel
+    uses: ./.github/workflows/check_nipanel.yml
+  check_docs:
+    name: Check docs
+    uses: ./.github/workflows/check_docs.yml
+  checks_succeeded:
+    name: Checks succeeded
+    needs: [check_nipanel, check_docs]
+    runs-on: ubuntu-latest
+    steps:
+      - run: exit 0
+  run_unit_tests:
+    name: Run unit tests
+    uses: ./.github/workflows/run_unit_tests.yml
+    needs: [checks_succeeded]
+  report_test_results:
+    name: Report test results
+    uses: ./.github/workflows/report_test_results.yml
+    needs: [run_unit_tests]
+    if: always()
+    permissions:
+      contents: read
+      checks: write
+      pull-requests: write
+````
+
+<!--NI_OSS_SOURCE repo=nipanel-python path=.github/workflows/PR.yml sha256=2080f64c96f44ee94750ccd599df4705b205a9d96a141b56440f4237350c704d bytes=420 -->
+## FILE: .github/workflows/PR.yml
+
+- repository: `ni/nipanel-python`
+- source_path: `.github/workflows/PR.yml`
+- sha256: `2080f64c96f44ee94750ccd599df4705b205a9d96a141b56440f4237350c704d`
+- bytes: 420
+
+````yaml
+name: PR
+
+on:
+  pull_request:
+    branches:
+      - main
+      - 'releases/**'
+  workflow_call:
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  run_ci:
+    name: Run CI
+    uses: ./.github/workflows/CI.yml
+    permissions:
+      contents: read
+      checks: write
+      pull-requests: write
+````
+
+<!--NI_OSS_SOURCE repo=nipanel-python path=.github/workflows/publish.yml sha256=1e935c1a096574c7aca19caaf07465aa8d1c5d012392e0884e44dd9e845fb137 bytes=3561 -->
+## FILE: .github/workflows/publish.yml
+
+- repository: `ni/nipanel-python`
+- source_path: `.github/workflows/publish.yml`
+- sha256: `1e935c1a096574c7aca19caaf07465aa8d1c5d012392e0884e44dd9e845fb137`
+- bytes: 3561
+
+````yaml
+name: Publish nipanel
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: The environment to publish to.
+        default: 'none'
+        required: true
+        type: choice
+        options:
+          - none
+          - pypi
+          - testpypi
+
+env:
+  dist-artifact-name: nipanel-distribution-packages
+  environment: ${{ github.event_name == 'release' && 'pypi' || inputs.environment }}
+  environment-info: |
+    {
+      "pypi": {
+        "base-url": "https://pypi.org",
+        "upload-url": "https://upload.pypi.org/legacy/"
+      },
+      "testpypi": {
+        "base-url": "https://test.pypi.org",
+        "upload-url": "https://test.pypi.org/legacy/"
+      }
+    }
+
+jobs:
+  check_nipanel:
+    name: Check nipanel
+    uses: ./.github/workflows/check_nipanel.yml
+  check_docs:
+    name: Check docs
+    uses: ./.github/workflows/check_docs.yml
+  build_nipanel:
+    name: Build nipanel
+    runs-on: ubuntu-latest
+    needs: [check_nipanel, check_docs]
+    steps:
+      - name: Check out repo
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      - name: Set up Python
+        uses: ni/python-actions/setup-python@aa64e60612cb078b0c2ada666becbd70d4817d55 # 0.7.1
+      - name: Set up Poetry
+        uses: ni/python-actions/setup-poetry@aa64e60612cb078b0c2ada666becbd70d4817d55 # 0.7.1
+      - name: Check project version
+        if: github.event_name == 'release'
+        uses: ni/python-actions/check-project-version@aa64e60612cb078b0c2ada666becbd70d4817d55 # 0.7.1
+      - name: Build distribution packages
+        run: poetry build
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: ${{ env.dist-artifact-name }}
+          path: dist/*
+  publish_to_pypi:
+    name: Publish nipanel to PyPI
+    if: github.event_name == 'release' || inputs.environment != 'none'
+    runs-on: ubuntu-latest
+    needs: [build_nipanel]
+    environment:
+      # This logic is duplicated because `name` doesn't support the `env` context.
+      name: ${{ github.event_name == 'release' && 'pypi' || inputs.environment }}
+      url: ${{ fromJson(env.environment-info)[env.environment].base-url }}/p/nipanel
+    permissions:
+      id-token: write
+    steps:
+    - name: Download build artifacts
+      uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
+      with:
+        name: ${{ env.dist-artifact-name }}
+        path: dist/
+    - run: ls -lR
+    - name: Upload to ${{ env.environment }}
+      uses: pypa/gh-action-pypi-publish@ed0c53931b1dc9bd32cbe73a98c7f6766f8a527e # v1.13.0
+      with:
+        repository-url: ${{ fromJson(env.environment-info)[env.environment].upload-url }}
+  update_version:
+    name: Update nipanel version
+    runs-on: ubuntu-latest
+    needs: [build_nipanel]
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - name: Check out repo
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      - name: Set up Python
+        uses: ni/python-actions/setup-python@aa64e60612cb078b0c2ada666becbd70d4817d55 # 0.7.1
+      - name: Set up Poetry
+        uses: ni/python-actions/setup-poetry@aa64e60612cb078b0c2ada666becbd70d4817d55 # 0.7.1
+      - name: Update project version
+        uses: ni/python-actions/update-project-version@aa64e60612cb078b0c2ada666becbd70d4817d55 # 0.7.1
+````
+
+<!--NI_OSS_SOURCE repo=nipanel-python path=.github/workflows/report_test_results.yml sha256=4274acfdaf092651c7577e9c898ebc95bb4834b95626319c642813046d404439 bytes=897 -->
+## FILE: .github/workflows/report_test_results.yml
+
+- repository: `ni/nipanel-python`
+- source_path: `.github/workflows/report_test_results.yml`
+- sha256: `4274acfdaf092651c7577e9c898ebc95bb4834b95626319c642813046d404439`
+- bytes: 897
+
+````yaml
+name: Report test results
+
+on:
+  workflow_call:
+  workflow_dispatch:
+
+jobs:
+  report_test_results:
+    name: Report test results
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      checks: write
+      pull-requests: write
+    steps:
+      - name: Check out repo
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      - name: Download test results
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
+        with:
+          path: test_results
+          pattern: test_results_*
+          merge-multiple: true
+      - name: List downloaded files
+        run: ls -lR
+      - name: Publish test results
+        uses: EnricoMi/publish-unit-test-result-action@27d65e188ec43221b20d26de30f4892fad91df2f # v2.22.0
+        with:
+          files: "test_results/**/*.xml"
+        if: always()
+````
+
+<!--NI_OSS_SOURCE repo=nipanel-python path=.github/workflows/run_unit_tests.yml sha256=8aac448d9f8fd2002484b8a52107a8fd0c7665f7d26271c15642889cf7496cec bytes=1703 -->
+## FILE: .github/workflows/run_unit_tests.yml
+
+- repository: `ni/nipanel-python`
+- source_path: `.github/workflows/run_unit_tests.yml`
+- sha256: `8aac448d9f8fd2002484b8a52107a8fd0c7665f7d26271c15642889cf7496cec`
+- bytes: 1703
+
+````yaml
+name: Run unit tests
+
+on:
+  workflow_call:
+  workflow_dispatch:
+
+jobs:
+  run_unit_tests:
+    name: Run unit tests
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [windows-latest, ubuntu-latest]
+        python-version: ["3.10", 3.11, 3.12, 3.13]
+      # Fail-fast skews the pass/fail ratio and seems to make pytest produce
+      # incomplete JUnit XML results.
+      fail-fast: false
+    steps:
+      - name: Check out repo
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      - name: Set up Python
+        uses: ni/python-actions/setup-python@aa64e60612cb078b0c2ada666becbd70d4817d55 # 0.7.1
+        id: setup-python
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Set up Poetry
+        uses: ni/python-actions/setup-poetry@aa64e60612cb078b0c2ada666becbd70d4817d55 # 0.7.1
+      - name: Cache virtualenv
+        uses: actions/cache@8b402f58fbc84540c8b491a91e594a4576fec3d7 # v5.0.2
+        with:
+          path: .venv
+          key: nipanel-${{ runner.os }}-py${{ steps.setup-python.outputs.python-version }}-${{ hashFiles('poetry.lock') }}
+      - name: Install nipanel
+        run: poetry install -v
+      - name: Run unit tests and code coverage
+        run: poetry run pytest ./tests/unit -v --cov=nipanel --junitxml=test_results/nipanel-${{ matrix.os }}-py${{ matrix.python-version }}.xml
+      - name: Upload test results
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: test_results_unit_${{ matrix.os }}_py${{ matrix.python-version }}
+          path: ./test_results/*.xml
+        if: always()
+````
+
+<!--NI_OSS_SOURCE repo=nipanel-python path=.github/workflows/sync_github_issues_to_azdo.yml sha256=f89e1ab5213411b5f58224a32072d05afd2aa2a84100e6f340811f16c6024501 bytes=1720 -->
+## FILE: .github/workflows/sync_github_issues_to_azdo.yml
+
+- repository: `ni/nipanel-python`
+- source_path: `.github/workflows/sync_github_issues_to_azdo.yml`
+- sha256: `f89e1ab5213411b5f58224a32072d05afd2aa2a84100e6f340811f16c6024501`
+- bytes: 1720
+
+````yaml
+name: Sync issue to Azure DevOps work item
+
+on:
+  issues:
+    # Omit "labeled" and "unlabeled" to work around https://github.com/danhellem/github-actions-issue-to-work-item/issues/70
+    types:
+      [opened, edited, deleted, closed, reopened, assigned]
+  issue_comment:
+    types: [created, edited, deleted]
+
+jobs:
+  alert:
+    if: ${{ !github.event.issue.pull_request && github.event.issue.title != 'Dependency Dashboard' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Choose work item type
+        id: choose_work_item_type
+        run: |
+          if [ "${{ contains(github.event.issue.labels.*.name, 'enhancement') || contains(github.event.issue.labels.*.name, 'user story') }}" == "true" ]; then
+            echo "work_item_type=User Story" >> $GITHUB_OUTPUT
+          elif [ "${{ contains(github.event.issue.labels.*.name, 'tech debt') }}" == "true" ]; then
+            echo "work_item_type=Technical Debt" >> $GITHUB_OUTPUT
+          else
+            echo "work_item_type=Bug" >> $GITHUB_OUTPUT
+          fi
+      - uses: danhellem/github-actions-issue-to-work-item@45eb3b46e684f2acd2954f02ef70350c835ee4bb # v2.4
+        env:
+          ado_token: "${{ secrets.AZDO_WORK_ITEM_TOKEN }}"
+          github_token: "${{ secrets.GH_REPO_TOKEN }}"
+          ado_organization: "ni"
+          ado_project: "DevCentral"
+          ado_area_path: "DevCentral\\Product RnD\\Platform HW and SW\\SW New Invest and Tech\\ETW\\Python CodeGen"
+          ado_wit: "${{ steps.choose_work_item_type.outputs.work_item_type }}"
+          ado_new_state: "New"
+          ado_active_state: "Active"
+          ado_close_state: "Closed"
+          ado_bypassrules: true
+          log_level: 100
+````
+
+<!--NI_OSS_SOURCE repo=nipanel-python path=.gitignore sha256=b96529c28fdb75c9256db7abf2bc2a67e575d9c2aae2ca26a9e7ed8f46722e2c bytes=3617 -->
+## FILE: .gitignore
+
+- repository: `ni/nipanel-python`
+- source_path: `.gitignore`
+- sha256: `b96529c28fdb75c9256db7abf2bc2a67e575d9c2aae2ca26a9e7ed8f46722e2c`
+- bytes: 3617
+
+````text
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# PyInstaller
+#  Usually these files are written by a python script from a template
+#  before PyInstaller builds the exe, so as to inject date/other infos into it.
+*.manifest
+*.spec
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+.pytest_cache/
+cover/
+
+# Translations
+*.mo
+*.pot
+
+# Django stuff:
+*.log
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+
+# Flask stuff:
+instance/
+.webassets-cache
+
+# Scrapy stuff:
+.scrapy
+
+# Sphinx documentation
+docs/_build/
+
+# PyBuilder
+.pybuilder/
+target/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# IPython
+profile_default/
+ipython_config.py
+
+# pyenv
+#   For a library or package, you might want to ignore these files since the code is
+#   intended to run in multiple environments; otherwise, check them in:
+# .python-version
+
+# pipenv
+#   According to pypa/pipenv#598, it is recommended to include Pipfile.lock in version control.
+#   However, in case of collaboration, if having platform-specific dependencies or dependencies
+#   having no cross-platform support, pipenv may install dependencies that don't work, or not
+#   install all needed dependencies.
+#Pipfile.lock
+
+# UV
+#   Similar to Pipfile.lock, it is generally recommended to include uv.lock in version control.
+#   This is especially recommended for binary packages to ensure reproducibility, and is more
+#   commonly ignored for libraries.
+#uv.lock
+
+# poetry
+#   Similar to Pipfile.lock, it is generally recommended to include poetry.lock in version control.
+#   This is especially recommended for binary packages to ensure reproducibility, and is more
+#   commonly ignored for libraries.
+#   https://python-poetry.org/docs/basic-usage/#commit-your-poetrylock-file-to-version-control
+#poetry.lock
+
+# pdm
+#   Similar to Pipfile.lock, it is generally recommended to include pdm.lock in version control.
+#pdm.lock
+#   pdm stores project-wide configurations in .pdm.toml, but it is recommended to not include it
+#   in version control.
+#   https://pdm.fming.dev/latest/usage/project/#working-with-version-control
+.pdm.toml
+.pdm-python
+.pdm-build/
+
+# PEP 582; used by e.g. github.com/David-OConnor/pyflow and github.com/pdm-project/pdm
+__pypackages__/
+
+# Celery stuff
+celerybeat-schedule
+celerybeat.pid
+
+# SageMath parsed files
+*.sage.py
+
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Spyder project settings
+.spyderproject
+.spyproject
+
+# Rope project settings
+.ropeproject
+
+# mkdocs documentation
+/site
+
+# mypy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Pyre type checker
+.pyre/
+
+# pytype static type analyzer
+.pytype/
+
+# Cython debug symbols
+cython_debug/
+
+# PyCharm
+#  JetBrains specific template is maintained in a separate JetBrains.gitignore that can
+#  be found at https://github.com/github/gitignore/blob/main/Global/JetBrains.gitignore
+#  and can be added to the global gitignore or merged into this file.  For a more nuclear
+#  option (not recommended) you can uncomment the following to ignore the entire idea folder.
+#.idea/
+
+# Ruff stuff:
+.ruff_cache/
+
+# PyPI configuration file
+.pypirc
+````
+
+<!--NI_OSS_SOURCE repo=nipanel-python path=.vscode/launch.json sha256=39db6c9d69a2f6174cf8ee4d50bf4f08081b4e1281a0e90443832d9a90c95c2d bytes=898 -->
+## FILE: .vscode/launch.json
+
+- repository: `ni/nipanel-python`
+- source_path: `.vscode/launch.json`
+- sha256: `39db6c9d69a2f6174cf8ee4d50bf4f08081b4e1281a0e90443832d9a90c95c2d`
+- bytes: 898
+
+````json
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Python Debugger: Current File",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal"
+        },
+        {
+            // To use this configuration, add `debugpy.listen(("localhost", 5678))` to the script you wish to debug
+            "name": "Attach to Streamlit at localhost:5678",
+            "type": "debugpy",
+            "request": "attach",
+            "connect": {
+                "host": "localhost",
+                "port": 5678
+            },
+            "justMyCode": false
+        }
+    ]
+}
+````
+
+<!--NI_OSS_SOURCE repo=nipanel-python path=.vscode/settings.json sha256=e15b462ec85c12f46a28bc58a195d0957bf7d59fffafdfcb4716e131081c8d07 bytes=473 -->
+## FILE: .vscode/settings.json
+
+- repository: `ni/nipanel-python`
+- source_path: `.vscode/settings.json`
+- sha256: `e15b462ec85c12f46a28bc58a195d0957bf7d59fffafdfcb4716e131081c8d07`
+- bytes: 473
+
+````json
+{
+    "python.testing.unittestEnabled": false,
+    "python.testing.pytestEnabled": true,
+    "debug.allowBreakpointsEverywhere": true,
+    "flake8.path": [
+        "ni-python-styleguide",
+        "lint"
+    ],
+    "python.analysis.includeAliasesFromUserFiles": true,
+    "black-formatter.args": [
+        "--line-length",
+        "100"
+    ],
+    "editor.formatOnSave": true,
+    "[python]": {
+        "editor.rulers": [
+            100
+        ]
+    }
+}
+````
+
+<!--NI_OSS_SOURCE repo=nipanel-python path=CONTRIBUTING.md sha256=50f98b4d9f3db0365cfb682281b71bd709a3506a9da7537465f9dd7e5a0c0e34 bytes=8933 -->
+## FILE: CONTRIBUTING.md
+
+- repository: `ni/nipanel-python`
+- source_path: `CONTRIBUTING.md`
+- sha256: `50f98b4d9f3db0365cfb682281b71bd709a3506a9da7537465f9dd7e5a0c0e34`
+- bytes: 8933
+
+````markdown
+# Contributing to nipanel-python
+
+Contributions to nipanel-python are welcome from all!
+
+nipanel-python is managed via [git](https://git-scm.com), with the canonical upstream
+repository hosted on [GitHub](https://github.com/ni/<reponame>/).
+
+nipanel-python follows a pull-request model for development.  If you wish to
+contribute, you will need to create a GitHub account, fork this project, push a
+branch with your changes to your project, and then submit a pull request.
+
+Please remember to sign off your commits (e.g., by using `git commit -s` if you
+are using the command line client). This amends your git commit message with a line
+of the form `Signed-off-by: Name Lastname <name.lastmail@emailaddress.com>`. Please
+include all authors of any given commit into the commit message with a
+`Signed-off-by` line. This indicates that you have read and signed the Developer
+Certificate of Origin (see below) and are able to legally submit your code to
+this repository.
+
+See [GitHub's official documentation](https://help.github.com/articles/using-pull-requests/) for more details.
+
+# Getting Started
+
+To contribute to this project, it is recommended that you follow these steps:
+
+1. Ensure you have poetry installed
+1. Fork the repository on GitHub.
+1. Install `nipanel` dependencies using `poetry install`
+1. Run the regression tests on your system (see Testing section). At this point, if any tests fail, do not begin development. Try to investigate these failures. If you're unable to do so, report an issue through our [GitHub issues page](https://github.com/ni/nipanel-python/issues).
+1. Write new tests that demonstrate your bug or feature. Ensure that these new tests fail.
+1. Make your change.
+1. Run all the regression tests again (including the tests you just added), and confirm that they all pass.
+1. Run `poetry run nps lint` to check that the updated code follows NI's Python coding conventions. If this reports errors, first run `poetry run nps fix` in order to sort imports and format the code with Black, then manually fix any remaining errors.
+1. Run `poetry run mypy` to statically type-check the updated code.
+1. Send a GitHub Pull Request to the main repository's main branch. GitHub Pull Requests are the expected method of code collaboration on this project.
+
+# Testing
+
+## Simple development loop
+
+```
+# Create a new branch
+git fetch
+git switch --create users/{username}/{branch-purpose} origin/main
+
+# Install the project dependencies
+poetry install --with docs
+
+# ✍ Make source changes
+
+# Run the analyzers -- see files in .github/workflows for details
+poetry run nps lint
+poetry run mypy
+poetry run bandit -c pyproject.toml -r src/nipanel
+
+# Apply safe fixes
+poetry run nps fix
+
+# Run the tests
+poetry run pytest -v
+
+# Build and inspect the documentation
+poetry run sphinx-build docs docs/_build --builder html --fail-on-warning
+start docs\_build\index.html
+```
+
+## Running examples
+
+1. Run the **PythonPanelService** (not part of this repo, provided seperately)
+2. `poetry install --with examples` to get the dependencies needed for the examples
+3. Run the examples with these command(s):
+    - `poetry run python examples/hello/hello.py`
+    - `poetry run python examples/all_types/all_types.py`
+    - `poetry run python examples/simple_graph/simple_graph.py`
+    - `poetry run python examples/nidaqmx/nidaqmx_continuous_analog_input/nidaqmx_continuous_analog_input.py` (requires real or simulated devices)
+4. Open http://localhost:42001/panel-service/ in your browser, which will show all running panels
+
+# Debugging on the streamlit side
+
+Debugging the measurement script can be done using standard Python debugging
+techniques. However, debugging the Streamlit script—or any code invoked by the
+Streamlit script—is more complex because it runs in a separate process launched
+by the PythonPanelServer. To debug the Streamlit script, you can use debugpy to
+attach the Visual Studio Code debugger as follows:
+
+## Instrument Streamlit script to debug
+
+To enable debugpy debugging, include this code in your streamlit script:
+
+```python
+import debugpy  # type: ignore
+
+try:
+    debugpy.listen(("localhost", 5678))
+    debugpy.wait_for_client() 
+except RuntimeError as e:
+    if "debugpy.listen() has already been called on this process" not in str(e):
+        raise
+```
+
+The `debugpy.listen()` function opens a port that allows the debugger to attach
+to the running process. You can specify any available port, as long as it
+matches the port configured in the launch.json file shown below. Since calling
+listen() more than once will raise an exception, it is wrapped in a try block to
+prevent the script from crashing if it is rerun.
+
+The `debugpy.wait_for_client()` function pauses script execution until the
+debugger is attached. This is helpful if you need to debug initialization code,
+but you can omit this line if it is not required.
+
+The `import debugpy` statement includes a type suppression comment to satisfy mypy.
+
+## Add debugpy configuration in launch.json 
+
+You will also need this configuration in your launch.json:
+
+```json
+        {
+            "name": "Attach to Streamlit at localhost:5678",
+            "type": "debugpy",
+            "request": "attach",
+            "connect": {
+                "host": "localhost",
+                "port": 5678
+            },
+            "justMyCode": false
+        }
+```
+
+After running your measurement script and allowing the PythonPanelServer to
+launch Streamlit with your Streamlit script, you can attach the debugger by
+clicking the **Attach to Streamlit at localhost:5678** button in the VS Code
+**Run and Debug** tab. Once attached, you can set breakpoints and use all
+standard debugging features in your Streamlit script, as well as in any nipanel
+code invoked by the Streamlit script.
+
+# Publishing on PyPI
+
+You can publish the nipanel package by creating a GitHub release
+in the nipanel-python repo. Here are the steps to follow to publish the package:
+
+1. From the main GitHub repo page, select "Create a new release".
+2. On the "New Release" page, create a new tag using the "Select Tag" drop down. The tag must be the package version, matching the
+value found in pyproject.toml. Example: `0.1.0-dev0`.
+3. Enter a title in the "Release title" field. The title should contain the package name and
+version in the format `nipanel <package-version>`. For example: `nipanel 0.1.0-dev0`.
+4. Click "Generate release notes" and edit the release notes.
+  - Delete entries for PRs that do not affect users, such as "chore(deps):" and "fix(deps):" PRs.
+  - Consider grouping related entries.
+  - Reformat entries to be more readable. For example, change "Blah blah by so-and-so in \#123" to "Blah blah (\#123)".
+5. If this is a pre-release release, check the "Set as a pre-release" checkbox.
+6. Click "Publish release".
+7. Creating a release will start the publish workflow. You can track the
+progress of this workflow in the "Actions" page of the GitHub repo.
+8. The workflow job that publishes a package to pypi requires code owner approval. This job will automatically send code owners a notification email, then it will wait for them to log in and approve the deployment.
+9. After receiving code owner approval, the publish workflow will resume.
+10. Once the publish workflow has finished, you should see your release on pypi.
+
+# Developer Certificate of Origin (DCO)
+
+   Developer's Certificate of Origin 1.1
+
+   By making a contribution to this project, I certify that:
+
+   (a) The contribution was created in whole or in part by me and I
+       have the right to submit it under the open source license
+       indicated in the file; or
+
+   (b) The contribution is based upon previous work that, to the best
+       of my knowledge, is covered under an appropriate open source
+       license and I have the right under that license to submit that
+       work with modifications, whether created in whole or in part
+       by me, under the same open source license (unless I am
+       permitted to submit under a different license), as indicated
+       in the file; or
+
+   (c) The contribution was provided directly to me by some other
+       person who certified (a), (b) or (c) and I have not modified
+       it.
+
+   (d) I understand and agree that this project and the contribution
+       are public and that a record of the contribution (including all
+       personal information I submit with it, including my sign-off) is
+       maintained indefinitely and may be redistributed consistent with
+       this project or the open source license(s) involved.
+
+(taken from [developercertificate.org](https://developercertificate.org/))
+
+See [LICENSE](https://github.com/ni/<reponame>/blob/main/LICENSE)
+for details about how \<reponame\> is licensed.
+````
+
+<!--NI_OSS_SOURCE repo=nipanel-python path=docs/conf.py sha256=d0ded82a5026eb2d5ee9eb00de01552e4e9fac6493296f486292c5c26dae3811 bytes=3138 -->
+## FILE: docs/conf.py
+
+- repository: `ni/nipanel-python`
+- source_path: `docs/conf.py`
+- sha256: `d0ded82a5026eb2d5ee9eb00de01552e4e9fac6493296f486292c5c26dae3811`
+- bytes: 3138
+
+````python
+"""Sphinx Configuration File."""
+
+import datetime
+import pathlib
+
+import autoapi.extension
+import toml
+
+# Add any Sphinx extension module names here, as strings. They can be
+# extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
+# ones.
+extensions = [
+    "autoapi.extension",
+    "m2r2",
+    "sphinx.ext.autodoc",
+    "sphinx.ext.intersphinx",
+    "sphinx.ext.napoleon",
+    "sphinx.ext.viewcode",
+]
+
+root_path = pathlib.Path(__file__).parent.parent
+pyproj_file = root_path / "pyproject.toml"
+proj_config = toml.loads(pyproj_file.read_text())
+
+
+project = proj_config["project"]["name"]
+company = "National Instruments"
+copyright = f"2025-%Y, {company}"
+if datetime.datetime.now().year == 2025:
+    copyright = f"%Y, {company}"
+
+
+# The version info for the project you're documenting, acts as replacement for
+# |version| and |release|, also used in various other places throughout the
+# built documents.
+#
+version = proj_config["project"]["version"]
+release = ".".join(version.split(".")[:2])
+description = proj_config["project"]["description"]
+
+
+htmlhelp_basename = f"{project}doc"
+
+
+# tell autoapi to doc the public options
+autoapi_options = list(autoapi.extension._DEFAULT_OPTIONS)
+autoapi_options.remove("private-members")  # note: remove this to include "_" members in docs
+autoapi_dirs = [root_path / "src" / "nipanel"]
+autoapi_type = "python"
+autodoc_typehints = "description"
+
+
+# TODO: https://github.com/ni/nitypes-python/issues/16 - Update nitypes-python docs to use
+# :canonical: to resolve aliases (once supported by sphinx-autoapi)
+def skip_aliases(app, what, name, obj, skip, options):
+    """Skip documentation for classes that are exported from multiple modules."""
+    # For names that are defined in a private sub-module and aliased into a
+    # public package, hide the definition.
+    if name.startswith("nipanel._"):
+        skip = True
+
+    return skip
+
+
+def setup(sphinx):
+    """Sphinx setup callback."""
+    sphinx.connect("autoapi-skip-member", skip_aliases)
+
+
+# List of patterns, relative to source directory, that match files and
+# directories to ignore when looking for source files.
+# This patterns also effect to html_static_path and html_extra_path
+exclude_patterns = ["_build", "Thumbs.db", ".DS_Store"]
+
+
+intersphinx_mapping = {
+    "grpc": ("https://grpc.github.io/grpc/python/", None),
+    "measurement-plugin-python": (
+        "https://measurement-plugin-python.readthedocs.io/en/latest/",
+        None,
+    ),
+    "nitypes": ("https://nitypes.readthedocs.io/en/latest/", None),
+    "numpy": ("https://numpy.org/doc/stable/", None),
+    "protobuf": ("https://googleapis.dev/python/protobuf/latest/", None),
+    "python": ("https://docs.python.org/3", None),
+}
+
+
+# -- Options for HTML output ----------------------------------------------
+
+
+# The theme to use for HTML and HTML Help pages. See the documentation for
+# a list of builtin themes.
+#
+html_theme = "sphinx_rtd_theme"
+html_theme_options = {
+    "navigation_depth": -1,
+}
+
+# Napoleon settings
+napoleon_numpy_docstring = False
+````
+
+<!--NI_OSS_SOURCE repo=nipanel-python path=docs/index.rst sha256=ef63990eed941e357ac7e4b85fc1b6af9e01af08a17732c06682ba6123e9edc5 bytes=169 -->
+## FILE: docs/index.rst
+
+- repository: `ni/nipanel-python`
+- source_path: `docs/index.rst`
+- sha256: `ef63990eed941e357ac7e4b85fc1b6af9e01af08a17732c06682ba6123e9edc5`
+- bytes: 169
+
+````rst
+NI Panel Python API
+===================
+.. toctree::
+   :maxdepth: 3
+
+   autoapi/index
+
+Indices and tables
+------------------
+* :ref:`modindex`
+* :ref:`search`
+````
+
+<!--NI_OSS_SOURCE repo=nipanel-python path=examples/all_types/all_types.py sha256=a14560e0e5693540b58cc236ba81b90828ad614590ee5f0537837825bdb06073 bytes=900 -->
+## FILE: examples/all_types/all_types.py
+
+- repository: `ni/nipanel-python`
+- source_path: `examples/all_types/all_types.py`
+- sha256: `a14560e0e5693540b58cc236ba81b90828ad614590ee5f0537837825bdb06073`
+- bytes: 900
+
+````python
+"""An example that demonstrates the supported data types for nipanel scripts."""
+
+from pathlib import Path
+
+from define_types import all_types_with_values
+
+import nipanel
+
+panel_script_path = Path(__file__).with_name("all_types_panel.py")
+panel = nipanel.create_streamlit_panel(panel_script_path)
+
+panel.set_value("example_selectbox", "Option 1")
+panel.set_value("example_slider", 50)
+panel.set_value("example_color_picker", "#000000")
+panel.set_value("example_multiselect", ["Option 1"])
+panel.set_value("example_radio", "Option 1")
+
+print("Setting values")
+for name, value in all_types_with_values.items():
+    print(f"{name:>15}   {value}")
+    panel.set_value(name, value)
+
+print()
+print("Getting values")
+for name in all_types_with_values.keys():
+    the_value = panel.get_value(name)
+    print(f"{name:>20}   {the_value}")
+
+
+print(f"Panel URL: {panel.panel_url}")
+````
+
+<!--NI_OSS_SOURCE repo=nipanel-python path=examples/all_types/all_types_panel.py sha256=354c1b100d36732d94d85f6809744f57286b073efcdd9ef4dda4a75dfc1c2807 bytes=4738 -->
+## FILE: examples/all_types/all_types_panel.py
+
+- repository: `ni/nipanel-python`
+- source_path: `examples/all_types/all_types_panel.py`
+- sha256: `354c1b100d36732d94d85f6809744f57286b073efcdd9ef4dda4a75dfc1c2807`
+- bytes: 4738
+
+````python
+"""A Streamlit visualization panel for the all_types.py example script."""
+
+import datetime as dt
+from enum import Enum, Flag
+
+import hightime as ht
+import streamlit as st
+from define_types import all_types_with_values
+
+import nipanel
+from nipanel.controls import enum_selectbox, flag_checkboxes
+
+
+st.set_page_config(page_title="All Types Example", page_icon="📊", layout="wide")
+st.title("All Types Example")
+
+panel = nipanel.get_streamlit_panel_accessor()
+
+col1, col2, col3 = st.columns([0.2, 0.2, 0.6])
+with col1:
+    st.header("Control or Type")
+with col2:
+    st.header("Input")
+with col3:
+    st.header("Output")
+
+st.markdown("---")
+col1, col2, col3 = st.columns([0.2, 0.2, 0.6])
+with col1:
+    st.write("st.selectbox")
+with col2:
+    st.selectbox(
+        label="string",
+        options=["Option 1", "Option 2", "Option 3", "Option 4"],
+        key="example_selectbox",
+    )
+with col3:
+    st.write(panel.get_value("example_selectbox", ""))
+
+st.markdown("---")
+col1, col2, col3 = st.columns([0.2, 0.2, 0.6])
+with col1:
+    st.write("st.slider & st.progress")
+with col2:
+    st.slider(
+        label="int",
+        min_value=0,
+        max_value=100,
+        value=50,
+        key="example_slider",
+    )
+with col3:
+    progress = panel.get_value("example_slider", 50)
+    st.progress(progress / 100, text=f"{progress}%")
+
+
+st.markdown("---")
+col1, col2, col3 = st.columns([0.2, 0.2, 0.6])
+with col1:
+    st.write("st.color_picker")
+with col2:
+    st.color_picker(
+        label="color",
+        value="#000000",
+        key="example_color_picker",
+    )
+with col3:
+    color = panel.get_value("example_color_picker", "#000000")
+    st.write(color)
+    st.markdown(
+        f"<div style='width:40px; height:20px; background:{color}; border:1px solid #888;'></div>",
+        unsafe_allow_html=True,
+    )
+
+st.markdown("---")
+col1, col2, col3 = st.columns([0.2, 0.2, 0.6])
+with col1:
+    st.write("st.multiselect")
+with col2:
+    st.multiselect(
+        label="list of strings",
+        options=["Option A", "Option B", "Option C", "Option D"],
+        default=["Option A"],
+        key="example_multiselect",
+    )
+with col3:
+    st.write(panel.get_value("example_multiselect", ["Option A"]))
+
+st.markdown("---")
+col1, col2, col3 = st.columns([0.2, 0.2, 0.6])
+with col1:
+    st.write("st.radio")
+with col2:
+    st.radio(
+        label="string",
+        options=["Choice 1", "Choice 2", "Choice 3"],
+        index=0,
+        key="example_radio",
+    )
+with col3:
+    st.write(panel.get_value("example_radio", "Choice 1"))
+
+for name in all_types_with_values.keys():
+    st.markdown("---")
+
+    default_value = all_types_with_values[name]
+
+    col1, col2, col3 = st.columns([0.2, 0.2, 0.6])
+    with col1:
+        st.write(name)
+
+    with col2:
+        if isinstance(default_value, bool):
+            st.checkbox(label=name, value=default_value, key=name)
+        elif isinstance(default_value, Flag):
+            flag_checkboxes(panel, label=name, value=default_value, key=name)
+        elif isinstance(default_value, Enum) and not isinstance(default_value, Flag):
+            enum_selectbox(panel, label=name, value=default_value, key=name)
+        elif isinstance(default_value, int) and not isinstance(default_value, Flag):
+            st.number_input(label=name, value=default_value, key=name)
+        elif isinstance(default_value, float):
+            st.number_input(label=name, value=default_value, key=name, format="%.2f")
+        elif isinstance(default_value, str):
+            st.text_input(label=name, value=default_value, key=name)
+        elif isinstance(default_value, ht.datetime):
+            # In order to avoid multiple date_input elements with the same ID,
+            # specify a unique key for both ht.datetime and dt.datetime.
+            date = st.date_input(label="date", key="ht1", value=default_value)
+            time = st.time_input(label="time", key="ht2", value=default_value)
+            ht_datetime = ht.datetime.combine(date, time, tzinfo=dt.timezone.utc)
+            panel.set_value(name, ht_datetime)
+        elif isinstance(default_value, dt.datetime):
+            # In order to avoid multiple date_input elements with the same ID,
+            # specify a unique key for both ht.datetime and dt.datetime.
+            date = st.date_input(label="date", key="dt1", value=default_value)
+            time = st.time_input(label="time", key="dt2", value=default_value)
+            dt_datetime = dt.datetime.combine(date, time)
+            panel.set_value(name, dt_datetime)
+
+    with col3:
+        st.write(panel.get_value(name, default_value=default_value))
+````
+
+<!--NI_OSS_SOURCE repo=nipanel-python path=examples/all_types/define_types.py sha256=e2d8444db062e4cbb4d7a51ac492a1e1b416e5c9a326b140acda6f0df1c29d22 bytes=3855 -->
+## FILE: examples/all_types/define_types.py
+
+- repository: `ni/nipanel-python`
+- source_path: `examples/all_types/define_types.py`
+- sha256: `e2d8444db062e4cbb4d7a51ac492a1e1b416e5c9a326b140acda6f0df1c29d22`
+- bytes: 3855
+
+````python
+"""Define types."""
+
+import datetime as dt
+import enum
+
+import hightime as ht
+import nitypes.bintime as bt
+import numpy as np
+from nitypes.complex import ComplexInt32DType
+from nitypes.scalar import Scalar
+from nitypes.vector import Vector
+from nitypes.waveform import AnalogWaveform, ComplexWaveform, DigitalWaveform, Spectrum
+
+
+class MyIntFlags(enum.IntFlag):
+    """Example of an IntFlag enum."""
+
+    VALUE1 = 1
+    VALUE2 = 2
+    VALUE4 = 4
+
+
+class MyIntableFlags(enum.Flag):
+    """Example of an Flag enum with int values."""
+
+    VALUE8 = 8
+    VALUE16 = 16
+    VALUE32 = 32
+
+
+class MyIntEnum(enum.IntEnum):
+    """Example of an IntEnum enum."""
+
+    VALUE10 = 10
+    VALUE20 = 20
+    VALUE30 = 30
+
+
+class MyIntableEnum(enum.Enum):
+    """Example of an enum with int values."""
+
+    VALUE100 = 100
+    VALUE200 = 200
+    VALUE300 = 300
+
+
+class MyStrEnum(str, enum.Enum):
+    """Example of a mixin string enum."""
+
+    VALUE1 = "value1"
+    VALUE2 = "value2"
+    VALUE3 = "value3"
+
+
+class MyStringableEnum(enum.Enum):
+    """Example of an enum with string values."""
+
+    VALUE1 = "value1"
+    VALUE2 = "value2"
+    VALUE3 = "value3"
+
+
+class MyMixedEnum(enum.Enum):
+    """Example of an enum with mixed values."""
+
+    VALUE1 = "value1"
+    VALUE2 = 2
+    VALUE3 = 3.0
+
+
+all_types_with_values = {
+    # supported scalar types
+    "bool": True,
+    "bytes": b"robotext",
+    "float": 13.12,
+    "int": 42,
+    "str": "sample string",
+    "dt_datetime": dt.datetime.now(),
+    "ht_datetime": ht.datetime.now(tz=dt.timezone.utc),
+    "bt_datetime": bt.DateTime.now(tz=dt.timezone.utc),
+    "dt_timedelta": dt.timedelta(weeks=2, days=5, minutes=12, milliseconds=75),
+    "ht_timedelta": ht.timedelta(days=5, seconds=25, picoseconds=88),
+    "bt_timedelta": bt.TimeDelta(seconds=1234.56),
+    # supported enum and flag types
+    "intflags": MyIntFlags.VALUE1 | MyIntFlags.VALUE4,
+    "intenum": MyIntEnum.VALUE20,
+    "strenum": MyStrEnum.VALUE3,
+    "intableenum": MyIntableEnum.VALUE200,
+    "intableflags": MyIntableFlags.VALUE8 | MyIntableFlags.VALUE32,
+    "stringableenum": MyStringableEnum.VALUE2,
+    "mixedenum": MyMixedEnum.VALUE2,
+    # NI types
+    "nitypes_Scalar": Scalar(42, "m"),
+    "nitypes_Vector": Vector([1, 2, 3], "volts"),
+    "nitypes_DoubleAnalogWaveform": AnalogWaveform.from_array_1d(np.array([1.0, 2.0, 3.0])),
+    "nitypes_I16AnalogWaveform": AnalogWaveform.from_array_1d(np.array([1, 2, 3]), dtype=np.int16),
+    "nitypes_DoubleComplexWaveform": ComplexWaveform(2, np.complex128),
+    "nitypes_I16ComplexWaveform": ComplexWaveform(2, ComplexInt32DType),
+    "nitypes_DigitalWaveform": DigitalWaveform.from_lines(
+        np.array([[0, 1, 0], [1, 0, 1]], dtype=np.bool), dtype=np.bool, signal_count=3
+    ),
+    "nitypes_Spectrum": Spectrum.from_array_1d(np.array([1.0, 2.0, 3.0])),
+    # supported collection types
+    "bool_collection": [True, False, True],
+    "bytes_collection": [b"one", b"two", b"three"],
+    "float_collection": [1.1, 2.2, 3.3],
+    "int_collection": [1, 2, 3],
+    "str_collection": ["one", "two", "three"],
+    "intflags_collection": [MyIntFlags.VALUE1, MyIntFlags.VALUE2, MyIntFlags.VALUE4],
+    "intenum_collection": [MyIntEnum.VALUE10, MyIntEnum.VALUE20, MyIntEnum.VALUE30],
+    "strenum_collection": [MyStrEnum.VALUE1, MyStrEnum.VALUE2, MyStrEnum.VALUE3],
+    # supported collections
+    "list": [1, 2, 3],
+    "tuple": (4, 5, 6),
+    "set": {7, 8, 9},
+    "frozenset": frozenset([10, 11, 12]),
+    # supported 2D collections
+    "list_list_float": [[1.0, 2.0], [3.0, 4.0]],
+    "tuple_tuple_float": ((1.0, 2.0), (3.0, 4.0)),
+    "set_list_float": set([(1.0, 2.0), (3.0, 4.0)]),
+    "frozenset_frozenset_float": frozenset([frozenset([1.0, 2.0]), frozenset([3.0, 4.0])]),
+}
+````
+
+<!--NI_OSS_SOURCE repo=nipanel-python path=examples/all_types/README.md sha256=5f60509553161d333637eb64a2caabe436a99237cafa914803ba1ac8a29b07ec bytes=323 -->
+## FILE: examples/all_types/README.md
+
+- repository: `ni/nipanel-python`
+- source_path: `examples/all_types/README.md`
+- sha256: `5f60509553161d333637eb64a2caabe436a99237cafa914803ba1ac8a29b07ec`
+- bytes: 323
+
+````markdown
+## All Types Example
+
+This is an example for `nipanel` that demonstrates all supported data types.
+
+### Feature
+
+- Demonstrates all supported data types
+
+### Required Software
+
+- Python 3.10 or later
+
+### Usage
+
+```pwsh
+poetry install --with examples
+poetry run python examples/all_types/all_types.py
+```
+````
+
+<!--NI_OSS_SOURCE repo=nipanel-python path=examples/hello/hello.py sha256=4c623e45ddbd4011850795a5b0be86f5991d420350fb35cf6eac4d24213d9beb bytes=364 -->
+## FILE: examples/hello/hello.py
+
+- repository: `ni/nipanel-python`
+- source_path: `examples/hello/hello.py`
+- sha256: `4c623e45ddbd4011850795a5b0be86f5991d420350fb35cf6eac4d24213d9beb`
+- bytes: 364
+
+````python
+"""This example demonstrates how to open/update a Streamlit application using nipanel package."""
+
+from pathlib import Path
+
+import nipanel
+
+panel_script_path = Path(__file__).with_name("hello_panel.py")
+panel = nipanel.create_streamlit_panel(panel_script_path)
+
+panel.set_value("hello_string", "Hello, World!")
+
+print(f"Panel URL: {panel.panel_url}")
+````
+
+<!--NI_OSS_SOURCE repo=nipanel-python path=examples/hello/hello_panel.py sha256=62ad810f7cdfa4f42ef10dd1daa455f70fc069ee08c09f780cc907e95c443f88 bytes=337 -->
+## FILE: examples/hello/hello_panel.py
+
+- repository: `ni/nipanel-python`
+- source_path: `examples/hello/hello_panel.py`
+- sha256: `62ad810f7cdfa4f42ef10dd1daa455f70fc069ee08c09f780cc907e95c443f88`
+- bytes: 337
+
+````python
+"""A Streamlit visualization panel for the hello.py example script."""
+
+import streamlit as st
+
+import nipanel
+
+
+st.set_page_config(page_title="Hello World Example", page_icon="📊", layout="wide")
+st.title("Hello World Example")
+
+panel = nipanel.get_streamlit_panel_accessor()
+st.write(panel.get_value("hello_string", ""))
+````
+
+<!--NI_OSS_SOURCE repo=nipanel-python path=examples/hello/README.md sha256=e9954ec328e9515db4a9e75c7869b4009028848bd67cd218131a2d5938d145bd bytes=273 -->
+## FILE: examples/hello/README.md
+
+- repository: `ni/nipanel-python`
+- source_path: `examples/hello/README.md`
+- sha256: `e9954ec328e9515db4a9e75c7869b4009028848bd67cd218131a2d5938d145bd`
+- bytes: 273
+
+````markdown
+## Hello
+
+This is a simple `nipanel` example that displays a Streamlit app.
+
+### Feature
+
+- Just a Hello World
+
+### Required Software
+
+- Python 3.10 or later
+
+### Usage
+
+```pwsh
+poetry install --with examples
+poetry run python examples/hello/hello.py
+```
+````
+
+<!--NI_OSS_SOURCE repo=nipanel-python path=examples/nidaqmx/nidaqmx_analog_input_fft/nidaqmx_analog_input_fft.py sha256=76cc47086db146862f5375c1f64d45a021b4d394b4f4306ee0b5bd23e3eaef50 bytes=4535 -->
+## FILE: examples/nidaqmx/nidaqmx_analog_input_fft/nidaqmx_analog_input_fft.py
+
+- repository: `ni/nipanel-python`
+- source_path: `examples/nidaqmx/nidaqmx_analog_input_fft/nidaqmx_analog_input_fft.py`
+- sha256: `76cc47086db146862f5375c1f64d45a021b4d394b4f4306ee0b5bd23e3eaef50`
+- bytes: 4535
+
+````python
+"""Example of analog input voltage acquisition with a Fast Fourier Transform.
+
+This example demonstrates how to acquire a continuous amount of data using the
+DAQ device's internal clock. The settings are configured from the Streamlit
+panel, and the acquired data is displayed on a graph. An FFT is computed from
+the acquired data and displayed on a separate graph. Refer to the panel script
+for details: nidaqmx_analog_input_fft_panel.py
+"""
+
+import time
+from pathlib import Path
+from typing import cast
+
+import nidaqmx
+import nidaqmx.system
+import numpy as np
+from nidaqmx.constants import (
+    AcquisitionType,
+    TerminalConfiguration,
+    UsageTypeAI,
+)
+from nidaqmx.errors import DaqError
+from nitypes.waveform import AnalogWaveform
+
+import nipanel
+
+panel_script_path = Path(__file__).with_name("nidaqmx_analog_input_fft_panel.py")
+panel = nipanel.create_streamlit_panel(panel_script_path)
+panel.set_value("is_running", False)
+
+system = nidaqmx.system.System.local()
+
+available_voltage_channels = []
+for dev in system.devices:
+    for chan in dev.ai_physical_chans:
+        if UsageTypeAI.VOLTAGE in chan.ai_meas_types:
+            available_voltage_channels.append(chan.name)
+panel.set_value("available_voltage_channels", available_voltage_channels)
+
+print(f"Panel URL: {panel.panel_url}")
+print(f"Waiting for the 'Run' button to be pressed...")
+print(f"(Press Ctrl + C to quit)")
+
+try:
+    while True:
+        while not panel.get_value("is_running", False):
+            time.sleep(0.1)
+
+        print(f"Running...")
+        try:
+            # How to use nidaqmx: https://nidaqmx-python.readthedocs.io/en/stable/
+            panel.set_value("daq_error", "")
+            with nidaqmx.Task() as task:
+                task.ai_channels.add_ai_voltage_chan(
+                    physical_channel=panel.get_value("voltage_channel", ""),
+                    min_val=panel.get_value("voltage_min_value", -5.0),
+                    max_val=panel.get_value("voltage_max_value", 5.0),
+                    terminal_config=panel.get_value(
+                        "terminal_configuration", TerminalConfiguration.DEFAULT
+                    ),
+                )
+                task.timing.cfg_samp_clk_timing(
+                    rate=panel.get_value("sample_rate_input", 1000.0),
+                    sample_mode=AcquisitionType.CONTINUOUS,
+                    samps_per_chan=panel.get_value("samples_per_channel", 100),
+                )
+                panel.set_value("sample_rate", task.timing.samp_clk_rate)
+                try:
+                    print(f"Starting data acquisition...")
+                    samples_per_channel = panel.get_value("samples_per_channel", 100)
+                    task.start()
+
+                    while panel.get_value("is_running", False):
+                        waveform = cast(
+                            AnalogWaveform[np.float64],
+                            task.read_waveform(number_of_samples_per_channel=samples_per_channel),
+                        )
+                        panel.set_value("voltage_waveform", waveform)
+
+                        # calculate the Discrete Fourier Transform
+                        fft = np.fft.fft(waveform.scaled_data)
+                        dft_sample_freqs = np.fft.fftfreq(
+                            waveform.sample_count, d=waveform.timing.sample_interval.total_seconds()
+                        )
+
+                        # convert to decibels
+                        magnitudes = np.abs(fft)
+                        normalized_magnitudes = magnitudes / np.max(magnitudes)
+                        dbs = 20 * np.log10(normalized_magnitudes)
+
+                        # only graph up to Nyquist
+                        num_freqs_to_graph = samples_per_channel // 2
+                        panel.set_value("fft_freqs", dft_sample_freqs[0:num_freqs_to_graph])
+                        panel.set_value("fft_mags", dbs[0:num_freqs_to_graph])
+                except KeyboardInterrupt:
+                    raise
+                finally:
+                    print(f"Stopping data acquisition...")
+                    task.stop()
+                    panel.set_value("is_running", False)
+                    print(f"Stopped")
+
+        except DaqError as e:
+            daq_error = str(e)
+            panel.set_value("daq_error", daq_error)
+            panel.set_value("is_running", False)
+            print(f"ERRORED")
+
+except KeyboardInterrupt:
+    pass
+````
+
+<!--NI_OSS_SOURCE repo=nipanel-python path=examples/nidaqmx/nidaqmx_analog_input_fft/nidaqmx_analog_input_fft_panel.py sha256=8fb67d3aae9ef589089750b44dcd01e575c13d51214af3c7e83bba11bcc7874e bytes=7668 -->
+## FILE: examples/nidaqmx/nidaqmx_analog_input_fft/nidaqmx_analog_input_fft_panel.py
+
+- repository: `ni/nipanel-python`
+- source_path: `examples/nidaqmx/nidaqmx_analog_input_fft/nidaqmx_analog_input_fft_panel.py`
+- sha256: `8fb67d3aae9ef589089750b44dcd01e575c13d51214af3c7e83bba11bcc7874e`
+- bytes: 7668
+
+````python
+"""Streamlit visualization script to display data acquired by nidaqmx_continuous_analog_input.py."""
+
+from typing import cast
+
+import hightime as ht
+import streamlit as st
+from nidaqmx.constants import (
+    TerminalConfiguration,
+)
+from nitypes.waveform import AnalogWaveform
+from streamlit_echarts import st_echarts
+
+import nipanel
+from nipanel.controls import enum_selectbox
+
+st.set_page_config(
+    page_title="NI-DAQmx - Analog Input - Voltage with FFT", page_icon="📈", layout="wide"
+)
+
+st.markdown(
+    """
+    <style>
+    div[data-baseweb="select"] {
+        max-width: 250px !important;
+    }
+    div.stNumberInput {
+        max-width: 250px !important;
+    }
+    div.stTextInput {
+        max-width: 250px !important;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True,
+)
+
+
+def _click_start() -> None:
+    panel.set_value("is_running", True)
+
+
+def _click_stop() -> None:
+    panel.set_value("is_running", False)
+
+
+panel = nipanel.get_streamlit_panel_accessor()
+
+st.header("NI-DAQmx - Analog Input - Voltage with FFT")
+if panel.get_value("is_running", False):
+    st.button(r"⏹️ Stop", key="stop_button", on_click=_click_stop)
+else:
+    st.button(r"▶️ Run", key="run_button", on_click=_click_start)
+
+sample_rate = panel.get_value("sample_rate", 0.0)
+
+# Create two-column layout for the entire interface
+left_column, right_column = st.columns([1, 1])
+
+# Left column - Channel tabs and Timing Settings
+with left_column:
+    # Channel Settings tabs
+    with st.container(border=True):
+        st.header("Channel Settings")
+        voltage_tab = st.tabs(["Voltage"])[0]
+
+        voltage_tab.header("Voltage")
+        with voltage_tab:
+            channel_left_column, channel_right_column = st.columns(2)
+            with channel_left_column:
+                st.selectbox(
+                    options=panel.get_value("available_voltage_channels", [""]),
+                    index=0,
+                    label="Voltage Channel",
+                    disabled=panel.get_value("is_running", False),
+                    key="voltage_channel",
+                )
+                st.number_input(
+                    "Min Value",
+                    value=-5.0,
+                    step=0.1,
+                    disabled=panel.get_value("is_running", False),
+                    key="voltage_min_value",
+                )
+                st.number_input(
+                    "Max Value",
+                    value=5.0,
+                    step=0.1,
+                    disabled=panel.get_value("is_running", False),
+                    key="voltage_max_value",
+                )
+            with channel_right_column:
+                enum_selectbox(
+                    panel,
+                    label="Terminal Configuration",
+                    value=TerminalConfiguration.DEFAULT,
+                    disabled=panel.get_value("is_running", False),
+                    key="terminal_configuration",
+                )
+
+    # Timing Settings section in left column
+    with st.container(border=True):
+        st.header("Timing Settings")
+        timing_left_column, timing_right_column = st.columns(2)
+        with timing_left_column:
+            st.selectbox(
+                options=["OnboardClock"],
+                label="Sample Clock Source",
+                disabled=True,
+            )
+            st.number_input(
+                "Sample Rate",
+                value=1000.0,
+                step=100.0,
+                min_value=1.0,
+                disabled=panel.get_value("is_running", False),
+                key="sample_rate_input",
+            )
+        with timing_right_column:
+            st.number_input(
+                "Samples to Read",
+                value=1000,
+                step=100,
+                min_value=10,
+                disabled=panel.get_value("is_running", False),
+                key="samples_per_channel",
+            )
+            st.text_input(
+                label="Actual Sample Rate",
+                value=str(sample_rate) if sample_rate else "",
+                disabled=True,
+            )
+
+# Right column - Graph
+with right_column:
+    if panel.get_value("daq_error", "") != "":
+        st.error(
+            f"There was an error running the script. Fix the issue and click Run again. \n\n {panel.get_value('daq_error', '')}"
+        )
+    else:
+        with st.container(border=True):
+            # Voltage Data Graph section
+            st.header("Acquired Data")
+
+            voltage_waveform = panel.get_value("voltage_waveform", AnalogWaveform())
+            if voltage_waveform.sample_count == 0:
+                time_labels = ["00:00:00.000"]
+            else:
+                timestamps = cast(
+                    list[ht.datetime],
+                    list(voltage_waveform.timing.get_timestamps(0, voltage_waveform.sample_count)),
+                )
+                time_labels = [
+                    f"{ts.hour:02d}:{ts.minute:02d}:{ts.second:02d}.{ts.microsecond//1000:03d}"
+                    for ts in timestamps
+                ]
+
+            voltage_graph = {
+                "animation": False,
+                "tooltip": {"trigger": "axis"},
+                "legend": {"data": [voltage_waveform.units]},
+                "xAxis": {
+                    "type": "category",
+                    "data": time_labels,
+                    "name": "Time",
+                    "nameLocation": "center",
+                    "nameGap": 40,
+                },
+                "yAxis": {
+                    "type": "value",
+                    "name": "Measurement",
+                    "nameRotate": 90,
+                    "nameLocation": "center",
+                    "nameGap": 40,
+                },
+                "series": [
+                    {
+                        "name": voltage_waveform.units,
+                        "type": "line",
+                        "data": list(voltage_waveform.scaled_data),
+                        "emphasis": {"focus": "series"},
+                        "smooth": True,
+                        "seriesLayoutBy": "row",
+                    },
+                ],
+            }
+            st_echarts(options=voltage_graph, height="300px", key="voltage_graph")
+
+            frequencies = panel.get_value("fft_freqs", [0.0])
+            magnitudes = panel.get_value("fft_mags", [0.0])
+            fft_data = [{"value": [x, y]} for x, y in zip(frequencies, magnitudes)]
+
+            fft_graph = {
+                "animation": False,
+                "tooltip": {"trigger": "axis"},
+                "legend": {"data": ["Magnitude"]},
+                "xAxis": {
+                    "type": "value",
+                    "name": "Frequency",
+                    "nameLocation": "center",
+                    "nameGap": 40,
+                },
+                "yAxis": {
+                    "type": "value",
+                    "name": "Magnitude",
+                    "nameRotate": 90,
+                    "nameLocation": "center",
+                    "nameGap": 40,
+                },
+                "series": [
+                    {
+                        "name": "Magnitude",
+                        "type": "line",
+                        "data": fft_data,
+                        "emphasis": {"focus": "series"},
+                        "smooth": True,
+                        "seriesLayoutBy": "row",
+                    },
+                ],
+            }
+            st_echarts(options=fft_graph, height="300px", key="fft_graph")
+````
+
+<!--NI_OSS_SOURCE repo=nipanel-python path=examples/nidaqmx/nidaqmx_analog_input_fft/README.md sha256=35fe5c55e0f494c6b314cf5c0e8c4efedf434b74cdf0779008e2719f98615fb5 bytes=857 -->
+## FILE: examples/nidaqmx/nidaqmx_analog_input_fft/README.md
+
+- repository: `ni/nipanel-python`
+- source_path: `examples/nidaqmx/nidaqmx_analog_input_fft/README.md`
+- sha256: `35fe5c55e0f494c6b314cf5c0e8c4efedf434b74cdf0779008e2719f98615fb5`
+- bytes: 857
+
+````markdown
+# NI-DAQmx Analog Input with FFT Example
+
+### Overview
+
+This is a nipanel example that acquires a continuous amount of data using the DAQ device's internal clock and graphs the acquired data in both the time domain and frequency domain in an interactive Streamlit panel.
+
+### Features
+
+- NI-DAQmx Python configuration and acquisition
+- Displays data in an interactive chart using ECharts
+- Updates automatically as new data is acquired
+
+### Prerequisites
+
+- Python 3.10 or later
+- InstrumentStudio 2026 Q1 or later
+- A physical or simulated device, refer to the [NI-DAQmx Python README (Getting Started section)](https://github.com/ni/nidaqmx-python/blob/master/README.rst#getting-started)
+
+### Usage
+
+```pwsh
+poetry install --with examples
+poetry run python examples\nidaqmx\nidaqmx_analog_input_fft\nidaqmx_analog_input_fft.py
+```
+````
+
+<!--NI_OSS_SOURCE repo=nipanel-python path=examples/nidaqmx/nidaqmx_analog_input_filtering/nidaqmx_analog_input_filtering.py sha256=bf64d38714c81445e3f18659dec9890cd7b1e37bc6e3ef75c5c73dd07719aa6b bytes=7793 -->
+## FILE: examples/nidaqmx/nidaqmx_analog_input_filtering/nidaqmx_analog_input_filtering.py
+
+- repository: `ni/nipanel-python`
+- source_path: `examples/nidaqmx/nidaqmx_analog_input_filtering/nidaqmx_analog_input_filtering.py`
+- sha256: `bf64d38714c81445e3f18659dec9890cd7b1e37bc6e3ef75c5c73dd07719aa6b`
+- bytes: 7793
+
+````python
+"""Example of analog input voltage, current, or strain gage acquisition.
+
+This example demonstrates how to acquire a continuous amount of data using the
+DAQ device's internal clock. There is sensor-specific configuration and
+hardware filtering can be enabled. The settings are configured from the
+Streamlit panel, and the acquired data is displayed on a graph. Refer to the
+panel script for details: nidaqmx_analog_input_filtering_panel.py
+"""
+
+import time
+from pathlib import Path
+
+import nidaqmx
+import nidaqmx.system
+from nidaqmx.constants import (
+    AcquisitionType,
+    CurrentShuntResistorLocation,
+    CurrentUnits,
+    Edge,
+    ExcitationSource,
+    FilterResponse,
+    Slope,
+    StrainGageBridgeType,
+    TerminalConfiguration,
+    UsageTypeAI,
+)
+from nidaqmx.errors import DaqError
+
+import nipanel
+
+panel_script_path = Path(__file__).with_name("nidaqmx_analog_input_filtering_panel.py")
+panel = nipanel.create_streamlit_panel(panel_script_path)
+panel.set_value("is_running", False)
+
+system = nidaqmx.system.System.local()
+
+available_channel_names = []
+for dev in system.devices:
+    for chan in dev.ai_physical_chans:
+        if UsageTypeAI.VOLTAGE in chan.ai_meas_types:
+            available_channel_names.append(chan.name)
+panel.set_value("available_channel_names", available_channel_names)
+
+available_trigger_sources = [""]
+for dev in system.devices:
+    if hasattr(dev, "terminals"):
+        for term in dev.terminals:
+            available_trigger_sources.append(term)
+panel.set_value("available_trigger_sources", available_trigger_sources)
+
+try:
+    print(f"Panel URL: {panel.panel_url}")
+    print(f"Waiting for the 'Run' button to be pressed...")
+    print(f"(Press Ctrl + C to quit)")
+    while True:
+        while not panel.get_value("is_running", False):
+            time.sleep(0.1)
+
+        print(f"Running...")
+        try:
+            # How to use nidaqmx: https://nidaqmx-python.readthedocs.io/en/stable/
+            panel.set_value("daq_error", "")
+            with nidaqmx.Task() as task:
+
+                chan_type = panel.get_value("chan_type", "1")
+
+                if chan_type == "2":
+                    chan = task.ai_channels.add_ai_current_chan(
+                        panel.get_value("physical_channel", ""),
+                        max_val=panel.get_value("max_value_current", 0.01),
+                        min_val=panel.get_value("min_value_current", -0.01),
+                        ext_shunt_resistor_val=panel.get_value("shunt_resistor_value", 249.0),
+                        shunt_resistor_loc=panel.get_value(
+                            "shunt_location", CurrentShuntResistorLocation.EXTERNAL
+                        ),
+                        units=panel.get_value("units", CurrentUnits.AMPS),
+                    )
+
+                elif chan_type == "3":
+                    chan = task.ai_channels.add_ai_strain_gage_chan(
+                        panel.get_value("physical_channel", ""),
+                        nominal_gage_resistance=panel.get_value("gage_resistance", 350.0),
+                        voltage_excit_source=ExcitationSource.EXTERNAL,  # Only mode that works
+                        max_val=panel.get_value("max_value_strain", 0.001),
+                        min_val=panel.get_value("min_value_strain", -0.001),
+                        poisson_ratio=panel.get_value("poisson_ratio", 0.3),
+                        lead_wire_resistance=panel.get_value("wire_resistance", 0.0),
+                        initial_bridge_voltage=panel.get_value("initial_voltage", 0.0),
+                        gage_factor=panel.get_value("gage_factor", 2.0),
+                        voltage_excit_val=panel.get_value("voltage_excitation_value", 0.0),
+                        strain_config=panel.get_value(
+                            "strain_configuration", StrainGageBridgeType.FULL_BRIDGE_I
+                        ),
+                    )
+                else:
+                    chan = task.ai_channels.add_ai_voltage_chan(
+                        panel.get_value("physical_channel", ""),
+                        terminal_config=panel.get_value(
+                            "terminal_configuration", TerminalConfiguration.DEFAULT
+                        ),
+                        max_val=panel.get_value("max_value_voltage", 5.0),
+                        min_val=panel.get_value("min_value_voltage", -5.0),
+                    )
+                task.timing.cfg_samp_clk_timing(
+                    source=panel.get_value(
+                        "source", ""
+                    ),  # "" - means Onboard Clock (default value)
+                    rate=panel.get_value("rate", 1000.0),
+                    sample_mode=AcquisitionType.CONTINUOUS,
+                    samps_per_chan=panel.get_value("total_samples", 100),
+                )
+                panel.set_value("sample_rate", task.timing.samp_clk_rate)
+                # Not all hardware supports all filter types.
+                # Refer to your device documentation for more information.
+                if panel.get_value("filter", "Filter") == "Filter":
+                    chan.ai_filter_enable = True
+                    chan.ai_filter_freq = panel.get_value("filter_freq", 0.0)
+                    chan.ai_filter_response = panel.get_value(
+                        "filter_response", FilterResponse.COMB
+                    )
+                    chan.ai_filter_order = panel.get_value("filter_order", 1)
+                    panel.set_value("actual_filter_freq", chan.ai_filter_freq)
+                    panel.set_value("actual_filter_response", chan.ai_filter_response)
+                    panel.set_value("actual_filter_order", chan.ai_filter_order)
+                else:
+                    panel.set_value("actual_filter_freq", 0.0)
+                    panel.set_value("actual_filter_response", FilterResponse.COMB)
+                    panel.set_value("actual_filter_order", 0)
+                # Not all hardware supports all filter types.
+                # Refer to your device documentation for more information.
+                trigger_type = panel.get_value("trigger_type")
+                if trigger_type == "5":
+                    task.triggers.start_trigger.cfg_anlg_edge_start_trig(
+                        trigger_source=panel.get_value("analog_source", ""),
+                        trigger_slope=panel.get_value("slope", Slope.FALLING),
+                        trigger_level=panel.get_value("level", 0.0),
+                    )
+
+                if trigger_type == "2":
+                    task.triggers.start_trigger.cfg_dig_edge_start_trig(
+                        trigger_source=panel.get_value("digital_source", ""),
+                        trigger_edge=panel.get_value("edge", Edge.FALLING),
+                    )
+                    task.triggers.start_trigger.anlg_edge_hyst = hysteresis = panel.get_value(
+                        "hysteresis", 0.0
+                    )
+
+                try:
+                    task.start()
+                    while panel.get_value("is_running", False):
+                        waveform = task.read_waveform(number_of_samples_per_channel=100)
+                        panel.set_value("waveform", waveform)
+                except KeyboardInterrupt:
+                    pass
+                finally:
+                    task.stop()
+                    panel.set_value("is_running", False)
+                    print(f"Stopped")
+
+        except DaqError as e:
+            daq_error = str(e)
+            panel.set_value("daq_error", daq_error)
+            panel.set_value("is_running", False)
+            print(f"ERRORED")
+
+except KeyboardInterrupt:
+    pass
+````
+
+<!--NI_OSS_SOURCE repo=nipanel-python path=examples/nidaqmx/nidaqmx_analog_input_filtering/nidaqmx_analog_input_filtering_panel.py sha256=5f9e64b5cc04990c3c479c41289d180b5e31541b3717e51458a0bbc4454464a6 bytes=14195 -->
+## FILE: examples/nidaqmx/nidaqmx_analog_input_filtering/nidaqmx_analog_input_filtering_panel.py
+
+- repository: `ni/nipanel-python`
+- source_path: `examples/nidaqmx/nidaqmx_analog_input_filtering/nidaqmx_analog_input_filtering_panel.py`
+- sha256: `5f9e64b5cc04990c3c479c41289d180b5e31541b3717e51458a0bbc4454464a6`
+- bytes: 14195
+
+````python
+"""Streamlit visualization script to display data acquired by nidaqmx_analog_input_filtering.py."""
+
+from typing import cast
+
+import extra_streamlit_components as stx  # type: ignore[import-untyped]
+import hightime as ht
+import streamlit as st
+from nidaqmx.constants import (
+    CurrentShuntResistorLocation,
+    CurrentUnits,
+    Edge,
+    FilterResponse,
+    Slope,
+    StrainGageBridgeType,
+    TerminalConfiguration,
+)
+from nitypes.waveform import AnalogWaveform
+from streamlit_echarts import st_echarts
+
+import nipanel
+from nipanel.controls import enum_selectbox
+
+
+def _click_start() -> None:
+    panel.set_value("is_running", True)
+
+
+def _click_stop() -> None:
+    panel.set_value("is_running", False)
+
+
+st.set_page_config(page_title="NI-DAQmx - Analog Input - Filtering", page_icon="📈", layout="wide")
+panel = nipanel.get_streamlit_panel_accessor()
+
+
+st.markdown(
+    """
+    <style>
+     div.stNumberInput {
+        max-width: 250px !important;
+    }
+    div.stTextInput {
+        max-width: 250px !important;
+    }
+   
+    div[data-baseweb="select"] {
+        width: 250px !important; /* Adjust the width as needed */
+    }
+    </style>
+    <style>
+    iframe[title="streamlit_echarts.st_echarts"]{ height: 400px; width:100%;} 
+   </style>
+    """,
+    unsafe_allow_html=True,
+)
+
+st.header("NI-DAQmx - Analog Input - Filtering")
+if panel.get_value("is_running", True):
+    st.button("⏹️ Stop", key="stop_button", on_click=_click_stop)
+else:
+    st.button("▶️ Run", key="run_button", on_click=_click_start)
+
+left_col, right_col = st.columns(2)
+
+with left_col:
+    with st.container(border=True):
+        st.header("Channel Settings")
+        st.selectbox(
+            options=panel.get_value("available_channel_names", [""]),
+            index=0,
+            label="Physical Channels",
+            disabled=panel.get_value("is_running", False),
+            key="physical_channel",
+        )
+        enum_selectbox(
+            panel,
+            label="Terminal Configuration",
+            value=TerminalConfiguration.DEFAULT,
+            disabled=panel.get_value("is_running", False),
+            key="terminal_configuration",
+        )
+
+        st.header("Timing Settings")
+
+        st.selectbox(
+            "Sample Clock Source",
+            options=panel.get_value("available_trigger_sources", [""]),
+            index=0,
+            disabled=panel.get_value("is_running", False),
+            key="source",
+        )
+        st.number_input(
+            "Sample Rate",
+            value=1000.0,
+            min_value=1.0,
+            step=1.0,
+            disabled=panel.get_value("is_running", False),
+            key="rate",
+        )
+        st.number_input(
+            "Number of Samples",
+            value=100,
+            min_value=1,
+            step=1,
+            disabled=panel.get_value("is_running", False),
+            key="total_samples",
+        )
+        st.number_input(
+            "Actual Sample Rate",
+            value=panel.get_value("sample_rate", 1000.0),
+            key="actual_sample_rate",
+            step=1.0,
+            disabled=True,
+        )
+        st.header("Filtering Settings")
+
+        st.selectbox(
+            "Filter",
+            options=["No Filtering", "Filter"],
+            disabled=panel.get_value("is_running", False),
+            key="filter",
+        )
+        enum_selectbox(
+            panel,
+            label="Filter Response",
+            value=FilterResponse.COMB,
+            disabled=panel.get_value("is_running", False),
+            key="filter_response",
+        )
+
+        filter_freq = st.number_input(
+            "Filtering Frequency",
+            value=1000.0,
+            step=1.0,
+            disabled=panel.get_value("is_running", False),
+        )
+        filter_order = st.number_input(
+            "Filter Order",
+            min_value=0,
+            max_value=1,
+            value=1,
+            disabled=panel.get_value("is_running", False),
+        )
+        st.selectbox(
+            "Actual Filter Frequency",
+            options=[panel.get_value("actual_filter_freq", 0.0)],
+            disabled=True,
+        )
+        st.selectbox(
+            "Actual Filter Order",
+            options=[panel.get_value("actual_filter_order", 0)],
+            disabled=True,
+        )
+
+with right_col:
+
+    if panel.get_value("daq_error", "") != "":
+        st.error(
+            f"There was an error running the script. Fix the issue and click Run again. \n\n {panel.get_value('daq_error', '')}"
+        )
+    else:
+        with st.container(border=True):
+            st.header("Acquired Data")
+
+            waveform = panel.get_value("waveform", AnalogWaveform())
+            if waveform.sample_count == 0:
+                time_labels = ["00:00:00.000"]
+            else:
+                timestamps = cast(
+                    list[ht.datetime],
+                    list(waveform.timing.get_timestamps(0, waveform.sample_count)),
+                )
+                time_labels = [
+                    f"{ts.hour:02d}:{ts.minute:02d}:{ts.second:02d}.{ts.microsecond//1000:03d}"
+                    for ts in timestamps
+                ]
+
+            graph = {
+                "animation": False,
+                "tooltip": {"trigger": "axis"},
+                "legend": {"data": [waveform.units]},
+                "xAxis": {
+                    "type": "category",
+                    "data": time_labels,
+                    "name": "Time",
+                    "nameLocation": "center",
+                    "nameGap": 40,
+                },
+                "yAxis": {
+                    "type": "value",
+                    "name": waveform.units,
+                    "nameRotate": 90,
+                    "nameLocation": "center",
+                    "nameGap": 40,
+                },
+                "series": [
+                    {
+                        "name": waveform.units,
+                        "type": "line",
+                        "data": list(waveform.scaled_data),
+                        "emphasis": {"focus": "series"},
+                        "smooth": True,
+                        "seriesLayoutBy": "row",
+                    },
+                ],
+            }
+            st_echarts(options=graph, height="400px", key="graph", width="100%")
+
+    st.header("Trigger Settings")
+    trigger_type = stx.tab_bar(
+        data=[
+            stx.TabBarItemData(id=1, title="No Trigger", description=""),
+            stx.TabBarItemData(id=2, title="Digital Start", description=""),
+            stx.TabBarItemData(id=3, title="Analog Start", description=""),
+        ],
+        default=1,
+    )
+    panel.set_value("trigger_type", trigger_type)
+
+    if trigger_type == "1":
+        with st.container(border=True):
+            st.write(
+                "To enable triggers, select a tab above, and configure the settings. \n Not all hardware supports all trigger types. Refer to your device documentation for more information."
+            )
+    if trigger_type == "2":
+        with st.container(border=True):
+            st.selectbox(
+                "Source",
+                options=panel.get_value("available_trigger_sources", [""]),
+                key="digital_source",
+            )
+            enum_selectbox(
+                panel,
+                label="Edge",
+                value=Edge.FALLING,
+                disabled=panel.get_value("is_running", False),
+                key="edge",
+            )
+    if trigger_type == "3":
+        with st.container(border=True):
+            analog_source = st.text_input("Source", "APFI0", key="analog_source")
+            enum_selectbox(
+                panel,
+                label="Slope",
+                value=Slope.FALLING,
+                disabled=panel.get_value("is_running", False),
+                key="slope",
+            )
+
+            level = st.number_input("Level", key="level")
+            hysteriesis = st.number_input(
+                "Hysteriesis",
+                disabled=panel.get_value("is_running", False),
+                key="hysteriesis",
+            )
+
+    st.header("Task Types")
+
+    chan_type = stx.tab_bar(
+        data=[
+            stx.TabBarItemData(id=1, title="Voltage", description=""),
+            stx.TabBarItemData(id=2, title="Current", description=""),
+            stx.TabBarItemData(id=3, title="Strain Gage", description=""),
+        ],
+        default=1,
+    )
+
+    panel.set_value("chan_type", chan_type)
+    if chan_type == "1":
+        with st.container(border=True):
+            st.header("Voltage Data")
+            channel_left, channel_right = st.columns(2)
+            with channel_left:
+                max_value_voltage = st.number_input(
+                    "Max Value",
+                    value=5.0,
+                    step=0.1,
+                    disabled=panel.get_value("is_running", False),
+                    key="max_value_voltage",
+                )
+
+                min_value_voltage = st.number_input(
+                    "Min Value",
+                    value=-5.0,
+                    step=0.1,
+                    disabled=panel.get_value("is_running", False),
+                    key="min_value_voltage",
+                )
+
+    if chan_type == "2":
+        with st.container(border=True):
+            st.header("Current Data")
+            channel_left, channel_right = st.columns(2)
+            with channel_left:
+                enum_selectbox(
+                    panel,
+                    label="Shunt Resistor Location",
+                    value=CurrentShuntResistorLocation.EXTERNAL,
+                    disabled=panel.get_value("is_running", False),
+                    key="shunt_location",
+                )
+                enum_selectbox(
+                    panel,
+                    label="Units",
+                    value=CurrentUnits.AMPS,
+                    disabled=panel.get_value("is_running", False),
+                    key="units",
+                )
+                min_value_current = st.number_input(
+                    "Min Value",
+                    value=-0.01,
+                    step=0.001,
+                    disabled=panel.get_value("is_running", False),
+                )
+                max_value_current = st.number_input(
+                    "Max Value",
+                    value=0.01,
+                    step=1.0,
+                    key="max_value_current",
+                    disabled=panel.get_value("is_running", False),
+                )
+                shunt_resistor_value = st.number_input(
+                    "Shunt Resistor Value",
+                    value=249.0,
+                    step=1.0,
+                    disabled=panel.get_value("is_running", False),
+                )
+    if chan_type == "3":
+        with st.container(border=True):
+            st.header("Strain Gage Data")
+            channel_left, channel_right = st.columns(2)
+            with channel_left:
+                min_value_strain = st.number_input(
+                    "Min Value",
+                    value=-0.01,
+                    step=0.01,
+                    key="min_value_strain",
+                )
+                max_value_strain = st.number_input(
+                    "Max Value",
+                    value=0.01,
+                    step=0.01,
+                    max_value=2.0,
+                    key="max_value_strain",
+                )
+                enum_selectbox(
+                    panel,
+                    label="Strain Units",
+                    value=CurrentUnits.AMPS,
+                    disabled=panel.get_value("is_running", False),
+                    key="strain_units",
+                )
+                st.header("Strain Gage Information")
+                gage_factor = st.number_input(
+                    "Gage Factor",
+                    value=2.0,
+                    step=1.0,
+                    disabled=panel.get_value("is_running", False),
+                    key="gage_factor",
+                )
+                nominal_gage = st.number_input(
+                    "Nominal Gage Resistance",
+                    value=350.0,
+                    step=1.0,
+                    disabled=panel.get_value("is_running", False),
+                    key="gage_resistance",
+                )
+                poisson_ratio = st.number_input(
+                    "Poisson Ratio",
+                    value=0.3,
+                    step=1.0,
+                    disabled=panel.get_value("is_running", False),
+                    key="poisson_ratio",
+                )
+            st.header("Bridge Information")
+            enum_selectbox(
+                panel,
+                label="Strain Configuration",
+                value=StrainGageBridgeType.FULL_BRIDGE_I,
+                disabled=panel.get_value("is_running", False),
+                key="strain_configuration",
+            )
+            wire_resistance = st.number_input(
+                "Lead Wire Resistance",
+                value=0.0,
+                step=1.0,
+                key="wire_resistance",
+            )
+            initial_voltage = st.number_input(
+                "Initial Bridge Voltage",
+                value=0.0,
+                step=1.0,
+                disabled=panel.get_value("is_running", False),
+                key="initial_voltage",
+            )
+
+            st.selectbox(
+                label="Voltage Excitation Source",
+                key="voltage_excit",
+                options=["External"],
+                disabled=True,
+            )
+            panel.set_value("voltage_excitation_source", "voltage_excit")
+            voltage_excit = st.number_input(
+                "Voltage Excitation Value",
+                value=2.5,
+                step=1.0,
+                key="voltage_excitation_value",
+                disabled=panel.get_value("is_running", False),
+            )
+````
+
+<!--NI_OSS_SOURCE repo=nipanel-python path=examples/nidaqmx/nidaqmx_analog_input_filtering/README.md sha256=2c300f0c4d74299cd5b8b6475ee5a3f29403512fff9051df792459dfc5401ca3 bytes=833 -->
+## FILE: examples/nidaqmx/nidaqmx_analog_input_filtering/README.md
+
+- repository: `ni/nipanel-python`
+- source_path: `examples/nidaqmx/nidaqmx_analog_input_filtering/README.md`
+- sha256: `2c300f0c4d74299cd5b8b6475ee5a3f29403512fff9051df792459dfc5401ca3`
+- bytes: 833
+
+````markdown
+# NI-DAQmx Analog Input Filtering Example
+
+### Overview
+
+This is a nipanel example that acquires a continuous amount of data with filters enabled using the DAQ device's internal clock and displays it in an interactive Streamlit panel.
+
+### Features
+
+- NI-DAQmx Python configuration and acquisition
+- Displays data in an interactive chart using ECharts
+- Updates automatically as new data is acquired
+
+### Prerequisites
+
+- Python 3.10 or later
+- InstrumentStudio 2026 Q1 or later
+- A physical or simulated device, refer to the [NI-DAQmx Python README (Getting Started section)](https://github.com/ni/nidaqmx-python/blob/master/README.rst#getting-started)
+
+### Usage
+
+```pwsh
+poetry install --with examples
+poetry run python examples\nidaqmx\nidaqmx_analog_input_filtering\nidaqmx_analog_input_filtering.py
+```
+````
+
+<!--NI_OSS_SOURCE repo=nipanel-python path=examples/nidaqmx/nidaqmx_analog_output_voltage/nidaqmx_analog_output_voltage.py sha256=3303074451a5dd15705d93a367e2e69bd0b919d5a6230188b157b455538d9237 bytes=5294 -->
+## FILE: examples/nidaqmx/nidaqmx_analog_output_voltage/nidaqmx_analog_output_voltage.py
+
+- repository: `ni/nipanel-python`
+- source_path: `examples/nidaqmx/nidaqmx_analog_output_voltage/nidaqmx_analog_output_voltage.py`
+- sha256: `3303074451a5dd15705d93a367e2e69bd0b919d5a6230188b157b455538d9237`
+- bytes: 5294
+
+````python
+"""Example of analog output voltage generation.
+
+This example demonstrates how to output a continuous periodic waveform using an
+internal sample clock. The settings are configured from the Streamlit panel,
+and the acquired data is displayed on a graph. Refer to the panel script for
+details: nidaqmx_analog_output_voltage_panel.py
+"""
+
+import time
+from pathlib import Path
+
+import hightime as ht
+import nidaqmx
+import nidaqmx.stream_writers
+import nidaqmx.system
+import numpy as np
+from nidaqmx.constants import AcquisitionType, Edge, UsageTypeAO
+from nidaqmx.errors import DaqError
+from nitypes.waveform import AnalogWaveform, SampleIntervalMode, Timing
+
+import nipanel
+
+panel_script_path = Path(__file__).with_name("nidaqmx_analog_output_voltage_panel.py")
+panel = nipanel.create_streamlit_panel(panel_script_path)
+panel.set_value("is_running", False)
+
+system = nidaqmx.system.System.local()
+
+available_channel_names = []
+for dev in system.devices:
+    for chan in dev.ao_physical_chans:
+        if UsageTypeAO.VOLTAGE in chan.ao_output_types:
+            available_channel_names.append(chan.name)
+panel.set_value("available_channel_names", available_channel_names)
+
+available_trigger_sources = [""]
+for dev in system.devices:
+    if hasattr(dev, "terminals"):
+        for term in dev.terminals:
+            available_trigger_sources.append(term)
+panel.set_value("available_trigger_sources", available_trigger_sources)
+
+try:
+    print(f"Panel URL: {panel.panel_url}")
+    print(f"Waiting for the 'Run' button to be pressed...")
+    print(f"(Press Ctrl + C to quit)")
+    while True:
+        while not panel.get_value("is_running", False):
+            time.sleep(0.1)
+
+        print(f"Running...")
+        try:
+            # How to use nidaqmx: https://nidaqmx-python.readthedocs.io/en/stable/
+            panel.set_value("daq_error", "")
+            with nidaqmx.Task() as task:
+                chan = task.ao_channels.add_ao_voltage_chan(
+                    panel.get_value("physical_channel", ""),
+                    max_val=panel.get_value("max_value_voltage", 5.0),
+                    min_val=panel.get_value("min_value_voltage", -5.0),
+                )
+
+                sample_rate = panel.get_value("rate", 1000.0)
+                num_samples = panel.get_value("total_samples", 1000)
+                frequency = panel.get_value("frequency", 10.0)
+                amplitude = panel.get_value("amplitude", 1.0)
+
+                task.timing.cfg_samp_clk_timing(
+                    source=panel.get_value("source", ""),  # "" - OnboardClock
+                    rate=sample_rate,
+                    sample_mode=AcquisitionType.CONTINUOUS,
+                )
+                # Not all hardware supports all trigger types.
+                # Refer to your device documentation for more information.
+                trigger_type = panel.get_value("trigger_type")
+
+                if trigger_type == 2:
+                    task.triggers.start_trigger.cfg_dig_edge_start_trig(
+                        trigger_source=panel.get_value("digital_source", ""),
+                        trigger_edge=panel.get_value("edge", Edge.FALLING),
+                    )
+                else:
+                    pass
+
+                panel.set_value("sample_rate", task.timing.samp_clk_rate)
+                t = np.arange(num_samples) / sample_rate
+                wave_type = panel.get_value("wave_type", "Sine Wave")
+
+                if wave_type == "Sine Wave":
+                    waveform = AnalogWaveform.from_array_1d(
+                        amplitude * np.sin(2 * np.pi * frequency * t)
+                    )
+                elif wave_type == "Square Wave":
+                    waveform = AnalogWaveform.from_array_1d(
+                        amplitude * np.sign(np.sin(2 * np.pi * frequency * t))
+                    )
+                else:
+                    waveform = AnalogWaveform.from_array_1d(
+                        amplitude * (2 * np.abs(2 * (t * frequency % 1) - 1) - 1)
+                    )
+                waveform.timing = Timing(
+                    sample_interval_mode=SampleIntervalMode.REGULAR,
+                    sample_interval=ht.timedelta(seconds=1.0 / sample_rate),
+                )
+                waveform.units = chan.ao_voltage_units.name
+
+                writer = nidaqmx.stream_writers.AnalogSingleChannelWriter(
+                    task.out_stream, auto_start=False  # pyright: ignore[reportArgumentType]
+                )
+                writer.write_waveform(waveform)
+                panel.set_value("waveform", waveform)
+                try:
+                    task.start()
+                    while panel.get_value("is_running", False):
+                        time.sleep(0.1)
+
+                except KeyboardInterrupt:
+                    break
+                finally:
+                    task.stop()
+                    panel.set_value("is_running", False)
+                    print(f"Stopped")
+
+        except DaqError as e:
+            daq_error = str(e)
+            panel.set_value("daq_error", daq_error)
+            panel.set_value("is_running", False)
+            print(f"ERRORED")
+
+except KeyboardInterrupt:
+    pass
+````
+
+<!--NI_OSS_SOURCE repo=nipanel-python path=examples/nidaqmx/nidaqmx_analog_output_voltage/nidaqmx_analog_output_voltage_panel.py sha256=a76d103b58a4dfc492dd38efc680b09d03d23366740b3385b1de860c6aa43905 bytes=7369 -->
+## FILE: examples/nidaqmx/nidaqmx_analog_output_voltage/nidaqmx_analog_output_voltage_panel.py
+
+- repository: `ni/nipanel-python`
+- source_path: `examples/nidaqmx/nidaqmx_analog_output_voltage/nidaqmx_analog_output_voltage_panel.py`
+- sha256: `a76d103b58a4dfc492dd38efc680b09d03d23366740b3385b1de860c6aa43905`
+- bytes: 7369
+
+````python
+"""Streamlit visualization script to display data acquired by nidaqmx_analog_output_voltage.py."""
+
+from typing import cast
+
+import extra_streamlit_components as stx  # type: ignore[import-untyped]
+import hightime as ht
+import streamlit as st
+from nidaqmx.constants import Edge
+from nitypes.waveform import AnalogWaveform
+from streamlit_echarts import st_echarts
+
+import nipanel
+from nipanel.controls import enum_selectbox
+
+
+def _click_start() -> None:
+    panel.set_value("is_running", True)
+
+
+def _click_stop() -> None:
+    panel.set_value("is_running", False)
+
+
+st.set_page_config(page_title="NI-DAQmx - Analog Output - Voltage", page_icon="📈", layout="wide")
+panel = nipanel.get_streamlit_panel_accessor()
+
+st.markdown(
+    """
+    <style>
+     div.stNumberInput {
+        max-width: 250px !important;
+    }
+    div.stTextInput {
+        max-width: 250px !important;
+    }
+   
+    div[data-baseweb="select"] {
+        width: 250px !important; /* Adjust the width as needed */
+    }
+    </style>
+    <style>
+    iframe[title="streamlit_echarts.st_echarts"]{ height: 400px; width:100%;} 
+   </style>
+    """,
+    unsafe_allow_html=True,
+)
+
+st.header("NI-DAQmx - Analog Output - Voltage")
+if panel.get_value("is_running", False):
+    st.button("⏹️ Stop", key="stop_button", on_click=_click_stop)
+else:
+    st.button("▶️ Run", key="run_button", on_click=_click_start)
+
+left_col, right_col = st.columns(2)
+
+with left_col:
+    with st.container(border=True):
+        st.header("Channel Settings")
+        st.selectbox(
+            options=panel.get_value("available_channel_names", [""]),
+            index=0,
+            label="Physical Channels",
+            disabled=panel.get_value("is_running", False),
+            key="physical_channel",
+        )
+
+        max_value_voltage = st.number_input(
+            "Max Value",
+            value=5.0,
+            step=1.0,
+            disabled=panel.get_value("is_running", False),
+            key="max_value_voltage",
+        )
+
+        min_value_voltage = st.number_input(
+            "Min Value",
+            value=-5.0,
+            step=1.0,
+            disabled=panel.get_value("is_running", False),
+            key="min_value_voltage",
+        )
+        st.header("Timing and Buffer Settings")
+
+        source = st.selectbox(
+            "Sample Clock Source",
+            options=panel.get_value("available_trigger_sources", [""]),
+            index=0,
+            disabled=panel.get_value("is_running", False),
+        )
+        panel.set_value("source", source)
+        st.number_input(
+            "Sample Rate",
+            value=1000.0,
+            min_value=1.0,
+            step=1.0,
+            disabled=panel.get_value("is_running", False),
+            key="rate",
+        )
+        st.number_input(
+            "Number of Samples",
+            value=1000,
+            min_value=1,
+            step=1,
+            disabled=panel.get_value("is_running", False),
+            key="total_samples",
+        )
+        st.number_input(
+            "Actual Sample Rate",
+            value=panel.get_value("actual_sample_rate", 1000.0),
+            key="actual_sample_rate",
+            step=1.0,
+            disabled=True,
+        )
+        st.header("Waveform Settings")
+        st.number_input(
+            "Frequency",
+            value=panel.get_value("frequency", 10.0),
+            key="frequency",
+            step=1.0,
+            disabled=panel.get_value("is_running", False),
+        )
+        st.number_input(
+            "Amplitude",
+            value=panel.get_value("amplitude", 1.0),
+            key="amplitude",
+            step=1.0,
+            disabled=panel.get_value("is_running", False),
+        )
+        wave_type = st.selectbox(
+            label="Wave Type",
+            options=["Sine Wave", "Triangle Wave", "Square Wave"],
+            key="wave_type",
+            disabled=panel.get_value("is_running", False),
+        )
+        panel.set_value("wave_type", wave_type)
+
+with right_col:
+    if panel.get_value("daq_error", "") != "":
+        st.error(
+            f"There was an error running the script. Fix the issue and click Run again. \n\n {panel.get_value('daq_error', '')}"
+        )
+    else:
+        with st.container(border=True):
+            st.header("Output")
+
+            waveform = panel.get_value("waveform", AnalogWaveform())
+            if waveform.sample_count == 0:
+                time_labels = ["0.000"]
+            else:
+                timestamps = cast(
+                    list[ht.datetime],
+                    list(waveform.timing.get_timestamps(0, waveform.sample_count)),
+                )
+                time_labels = [f"{ts.second}.{ts.microsecond//1000:03d}" for ts in timestamps]
+
+            graph = {
+                "animation": False,
+                "tooltip": {"trigger": "axis"},
+                "legend": {"data": [waveform.units]},
+                "xAxis": {
+                    "type": "category",
+                    "data": time_labels,
+                    "name": "Time (s)",
+                    "nameLocation": "center",
+                    "nameGap": 40,
+                },
+                "yAxis": {
+                    "type": "value",
+                    "name": waveform.units,
+                    "nameRotate": 90,
+                    "nameLocation": "center",
+                    "nameGap": 40,
+                },
+                "series": [
+                    {
+                        "name": waveform.units,
+                        "type": "line",
+                        "data": list(waveform.scaled_data),
+                        "emphasis": {"focus": "series"},
+                        "smooth": True,
+                        "seriesLayoutBy": "row",
+                    },
+                ],
+            }
+            st_echarts(options=graph, height="400px", key="graph", width="100%")
+
+    with st.container(border=True):
+        st.header("Trigger Settings")
+        trigger_type = stx.tab_bar(
+            data=[
+                stx.TabBarItemData(id=1, title="No Trigger", description=""),
+                stx.TabBarItemData(id=2, title="Digital Start", description=""),
+            ],
+            default=1,
+        )
+        trigger_type = int(trigger_type)  # pyright: ignore[reportArgumentType]
+        panel.set_value("trigger_type", trigger_type)
+
+        if trigger_type == 1:
+            with st.container(border=True):
+                st.write(
+                    "To enable triggers, select a tab above, and configure the settings. Not all hardware supports all trigger types. Refer to your device documentation for more information."
+                )
+        if trigger_type == 2:
+            with st.container(border=True):
+                source = st.selectbox(
+                    "Source:", options=panel.get_value("available_trigger_sources", [""])
+                )
+                panel.set_value("digital_source", source)
+                enum_selectbox(
+                    panel,
+                    label="Edge",
+                    value=Edge.FALLING,
+                    disabled=panel.get_value("is_running", False),
+                    key="edge",
+                )
+````
+
+<!--NI_OSS_SOURCE repo=nipanel-python path=examples/nidaqmx/nidaqmx_analog_output_voltage/README.md sha256=2b3c2f920dea710ee96f9741600f42de538750b1e023e1295dd9e02af1e0442e bytes=750 -->
+## FILE: examples/nidaqmx/nidaqmx_analog_output_voltage/README.md
+
+- repository: `ni/nipanel-python`
+- source_path: `examples/nidaqmx/nidaqmx_analog_output_voltage/README.md`
+- sha256: `2b3c2f920dea710ee96f9741600f42de538750b1e023e1295dd9e02af1e0442e`
+- bytes: 750
+
+````markdown
+# NI-DAQmx Analog Output Voltage Example
+
+### Overview
+
+This is a nipanel example that outputs a continuous periodic waveform using an internal sample clock and displays it in an interactive Streamlit panel.
+
+### Features
+
+- NI-DAQmx Python configuration and generation
+- Displays data in interactive charts using ECharts
+
+### Prerequisites
+
+- Python 3.10 or later
+- InstrumentStudio 2026 Q1 or later
+- A physical or simulated device, refer to the [NI-DAQmx Python README (Getting Started section)](https://github.com/ni/nidaqmx-python/blob/master/README.rst#getting-started)
+
+### Usage
+
+```pwsh
+poetry install --with examples
+poetry run python examples\nidaqmx\nidaqmx_analog_output_voltage\nidaqmx_analog_output_voltage.py
+```
+````
+
+<!--NI_OSS_SOURCE repo=nipanel-python path=examples/nidaqmx/nidaqmx_continuous_analog_input/nidaqmx_continuous_analog_input.py sha256=60220c268679387619ec48b3a1e3f7921abdfbb1278974eaca3bac6bc63cce0d bytes=5124 -->
+## FILE: examples/nidaqmx/nidaqmx_continuous_analog_input/nidaqmx_continuous_analog_input.py
+
+- repository: `ni/nipanel-python`
+- source_path: `examples/nidaqmx/nidaqmx_continuous_analog_input/nidaqmx_continuous_analog_input.py`
+- sha256: `60220c268679387619ec48b3a1e3f7921abdfbb1278974eaca3bac6bc63cce0d`
+- bytes: 5124
+
+````python
+"""Example of analog input voltage acquisition.
+
+This example demonstrates how to acquire a continuous amount of data using the
+DAQ device's internal clock. The settings are configured from the Streamlit
+panel, and the acquired data is displayed on a graph. Refer to the panel script
+for details: nidaqmx_continuous_analog_input_panel.py
+"""
+
+import time
+from pathlib import Path
+from typing import cast
+
+import nidaqmx
+import nidaqmx.system
+import numpy as np
+from nidaqmx.constants import (
+    AcquisitionType,
+    CJCSource,
+    LoggingMode,
+    LoggingOperation,
+    TemperatureUnits,
+    TerminalConfiguration,
+    ThermocoupleType,
+    UsageTypeAI,
+)
+from nidaqmx.errors import DaqError
+from nitypes.waveform import AnalogWaveform
+
+import nipanel
+
+panel_script_path = Path(__file__).with_name("nidaqmx_continuous_analog_input_panel.py")
+panel = nipanel.create_streamlit_panel(panel_script_path)
+panel.set_value("is_running", False)
+
+system = nidaqmx.system.System.local()
+
+available_voltage_channels = []
+available_thermocouple_channels = []
+for dev in system.devices:
+    for chan in dev.ai_physical_chans:
+        if UsageTypeAI.VOLTAGE in chan.ai_meas_types:
+            available_voltage_channels.append(chan.name)
+        if UsageTypeAI.TEMPERATURE_THERMOCOUPLE in chan.ai_meas_types:
+            available_thermocouple_channels.append(chan.name)
+panel.set_value("available_voltage_channels", available_voltage_channels)
+panel.set_value("available_thermocouple_channels", available_thermocouple_channels)
+
+print(f"Panel URL: {panel.panel_url}")
+print(f"Waiting for the 'Run' button to be pressed...")
+print(f"(Press Ctrl + C to quit)")
+
+try:
+    while True:
+        while not panel.get_value("is_running", False):
+            time.sleep(0.1)
+
+        print(f"Running...")
+        try:
+            # How to use nidaqmx: https://nidaqmx-python.readthedocs.io/en/stable/
+            panel.set_value("daq_error", "")
+            with nidaqmx.Task() as task:
+                task.ai_channels.add_ai_voltage_chan(
+                    physical_channel=panel.get_value("voltage_channel", ""),
+                    min_val=panel.get_value("voltage_min_value", -5.0),
+                    max_val=panel.get_value("voltage_max_value", 5.0),
+                    terminal_config=panel.get_value(
+                        "terminal_configuration", TerminalConfiguration.DEFAULT
+                    ),
+                )
+                task.ai_channels.add_ai_thrmcpl_chan(
+                    physical_channel=panel.get_value("thermocouple_channel", ""),
+                    min_val=panel.get_value("thermocouple_min_value", 0.0),
+                    max_val=panel.get_value("thermocouple_max_value", 100.0),
+                    units=panel.get_value("thermocouple_units", TemperatureUnits.DEG_C),
+                    thermocouple_type=panel.get_value("thermocouple_type", ThermocoupleType.K),
+                    cjc_source=panel.get_value(
+                        "thermocouple_cjc_source", CJCSource.CONSTANT_USER_VALUE
+                    ),
+                    cjc_val=panel.get_value("thermocouple_cjc_val", 25.0),
+                )
+                task.timing.cfg_samp_clk_timing(
+                    rate=panel.get_value("sample_rate_input", 1000.0),
+                    sample_mode=AcquisitionType.CONTINUOUS,
+                    samps_per_chan=panel.get_value("samples_per_channel", 100),
+                )
+                task.in_stream.configure_logging(
+                    file_path=panel.get_value("tdms_file_path", "data.tdms"),
+                    logging_mode=panel.get_value("logging_mode", LoggingMode.OFF),
+                    operation=LoggingOperation.OPEN_OR_CREATE,
+                )
+                panel.set_value("sample_rate", task.timing.samp_clk_rate)
+                try:
+                    print(f"Starting data acquisition...")
+                    task.start()
+
+                    while panel.get_value("is_running", False):
+                        waveforms = cast(
+                            list[AnalogWaveform[np.float64]],
+                            task.read_waveform(
+                                number_of_samples_per_channel=panel.get_value(
+                                    "samples_per_channel", 100
+                                )
+                            ),
+                        )
+                        panel.set_value("voltage_waveform", waveforms[0])
+                        panel.set_value("thermocouple_waveform", waveforms[1])
+                except KeyboardInterrupt:
+                    raise
+                finally:
+                    print(f"Stopping data acquisition...")
+                    task.stop()
+                    panel.set_value("is_running", False)
+                    print(f"Stopped")
+
+        except DaqError as e:
+            daq_error = str(e)
+            panel.set_value("daq_error", daq_error)
+            panel.set_value("is_running", False)
+            print(f"ERRORED")
+
+except KeyboardInterrupt:
+    pass
+````
+
+<!--NI_OSS_SOURCE repo=nipanel-python path=examples/nidaqmx/nidaqmx_continuous_analog_input/nidaqmx_continuous_analog_input_panel.py sha256=9c66f6478eb1180dd7d33e55220fe920c929c644e92de68d04c057397d71f531 bytes=10215 -->
+## FILE: examples/nidaqmx/nidaqmx_continuous_analog_input/nidaqmx_continuous_analog_input_panel.py
+
+- repository: `ni/nipanel-python`
+- source_path: `examples/nidaqmx/nidaqmx_continuous_analog_input/nidaqmx_continuous_analog_input_panel.py`
+- sha256: `9c66f6478eb1180dd7d33e55220fe920c929c644e92de68d04c057397d71f531`
+- bytes: 10215
+
+````python
+"""Streamlit visualization script to display data acquired by nidaqmx_continuous_analog_input.py."""
+
+from typing import cast
+
+import hightime as ht
+import streamlit as st
+from nidaqmx.constants import (
+    TerminalConfiguration,
+    CJCSource,
+    TemperatureUnits,
+    ThermocoupleType,
+    LoggingMode,
+)
+from nitypes.waveform import AnalogWaveform
+from streamlit_echarts import st_echarts
+
+import nipanel
+from nipanel.controls import enum_selectbox
+
+st.set_page_config(
+    page_title="NI-DAQmx - Analog Input - Voltage and Thermocouple", page_icon="📈", layout="wide"
+)
+
+st.markdown(
+    """
+    <style>
+    div[data-baseweb="select"] {
+        max-width: 250px !important;
+    }
+    div.stNumberInput {
+        max-width: 250px !important;
+    }
+    div.stTextInput {
+        max-width: 250px !important;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True,
+)
+
+
+def _click_start() -> None:
+    panel.set_value("is_running", True)
+
+
+def _click_stop() -> None:
+    panel.set_value("is_running", False)
+
+
+panel = nipanel.get_streamlit_panel_accessor()
+
+st.header("NI-DAQmx - Analog Input - Voltage and Thermocouple")
+if panel.get_value("is_running", False):
+    st.button(r"⏹️ Stop", key="stop_button", on_click=_click_stop)
+else:
+    st.button(r"▶️ Run", key="run_button", on_click=_click_start)
+
+sample_rate = panel.get_value("sample_rate", 0.0)
+
+# Create two-column layout for the entire interface
+left_column, right_column = st.columns([1, 1])
+
+# Left column - Channel tabs and Timing Settings
+with left_column:
+    # Channel Settings tabs
+    with st.container(border=True):
+        st.header("Channel Settings")
+        voltage_tab, thermocouple_tab = st.tabs(["Voltage", "Thermocouple"])
+
+        voltage_tab.header("Voltage")
+        with voltage_tab:
+            channel_left_column, channel_right_column = st.columns(2)
+            with channel_left_column:
+                st.selectbox(
+                    options=panel.get_value("available_voltage_channels", [""]),
+                    index=0,
+                    label="Voltage Channel",
+                    disabled=panel.get_value("is_running", False),
+                    key="voltage_channel",
+                )
+                st.number_input(
+                    "Min Value",
+                    value=-5.0,
+                    step=0.1,
+                    disabled=panel.get_value("is_running", False),
+                    key="voltage_min_value",
+                )
+                st.number_input(
+                    "Max Value",
+                    value=5.0,
+                    step=0.1,
+                    disabled=panel.get_value("is_running", False),
+                    key="voltage_max_value",
+                )
+            with channel_right_column:
+                enum_selectbox(
+                    panel,
+                    label="Terminal Configuration",
+                    value=TerminalConfiguration.DEFAULT,
+                    disabled=panel.get_value("is_running", False),
+                    key="terminal_configuration",
+                )
+
+        thermocouple_tab.header("Thermocouple")
+        with thermocouple_tab:
+            channel_left_column, channel_middle_column, channel_right_column = st.columns(3)
+            with channel_left_column:
+                st.selectbox(
+                    options=panel.get_value("available_thermocouple_channels", [""]),
+                    index=1,
+                    label="Thermocouple Channel",
+                    disabled=panel.get_value("is_running", False),
+                    key="thermocouple_channel",
+                )
+                st.number_input(
+                    "Min Value",
+                    value=0.0,
+                    step=1.0,
+                    disabled=panel.get_value("is_running", False),
+                    key="thermocouple_min_value",
+                )
+                st.number_input(
+                    "Max Value",
+                    value=100.0,
+                    step=1.0,
+                    disabled=panel.get_value("is_running", False),
+                    key="thermocouple_max_value",
+                )
+            with channel_middle_column:
+                enum_selectbox(
+                    panel,
+                    label="Units",
+                    value=TemperatureUnits.DEG_C,
+                    disabled=panel.get_value("is_running", False),
+                    key="thermocouple_units",
+                )
+                enum_selectbox(
+                    panel,
+                    label="Thermocouple Type",
+                    value=ThermocoupleType.K,
+                    disabled=panel.get_value("is_running", False),
+                    key="thermocouple_type",
+                )
+            with channel_right_column:
+                enum_selectbox(
+                    panel,
+                    label="CJC Source",
+                    value=CJCSource.CONSTANT_USER_VALUE,
+                    disabled=panel.get_value("is_running", False),
+                    key="thermocouple_cjc_source",
+                )
+                st.number_input(
+                    "CJC Value",
+                    value=25.0,
+                    step=1.0,
+                    disabled=panel.get_value("is_running", False),
+                    key="thermocouple_cjc_val",
+                )
+
+    # Timing Settings section in left column
+    with st.container(border=True):
+        st.header("Timing Settings")
+        timing_left_column, timing_right_column = st.columns(2)
+        with timing_left_column:
+            st.selectbox(
+                options=["OnboardClock"],
+                label="Sample Clock Source",
+                disabled=True,
+            )
+            st.number_input(
+                "Sample Rate",
+                value=1000.0,
+                step=100.0,
+                min_value=1.0,
+                disabled=panel.get_value("is_running", False),
+                key="sample_rate_input",
+            )
+        with timing_right_column:
+            st.number_input(
+                "Samples to Read",
+                value=100,
+                step=100,
+                min_value=10,
+                disabled=panel.get_value("is_running", False),
+                key="samples_per_channel",
+            )
+            st.text_input(
+                label="Actual Sample Rate",
+                value=str(sample_rate) if sample_rate else "",
+                disabled=True,
+            )
+
+# Right column - Graph and Logging Settings
+with right_column:
+    if panel.get_value("daq_error", "") != "":
+        st.error(
+            f"There was an error running the script. Fix the issue and click Run again. \n\n {panel.get_value('daq_error', '')}"
+        )
+    else:
+        with st.container(border=True):
+            # Graph section
+            st.header("Acquired Data")
+
+            thermocouple_waveform = panel.get_value("thermocouple_waveform", AnalogWaveform())
+            voltage_waveform = panel.get_value("voltage_waveform", AnalogWaveform())
+            if voltage_waveform.sample_count == 0:
+                time_labels = ["00:00:00.000"]
+            else:
+                timestamps = cast(
+                    list[ht.datetime],
+                    list(voltage_waveform.timing.get_timestamps(0, voltage_waveform.sample_count)),
+                )
+                time_labels = [
+                    f"{ts.hour:02d}:{ts.minute:02d}:{ts.second:02d}.{ts.microsecond//1000:03d}"
+                    for ts in timestamps
+                ]
+
+            graph = {
+                "animation": False,
+                "tooltip": {"trigger": "axis"},
+                "legend": {"data": [voltage_waveform.units, thermocouple_waveform.units]},
+                "xAxis": {
+                    "type": "category",
+                    "data": time_labels,
+                    "name": "Time",
+                    "nameLocation": "center",
+                    "nameGap": 40,
+                },
+                "yAxis": {
+                    "type": "value",
+                    "name": "Measurement",
+                    "nameRotate": 90,
+                    "nameLocation": "center",
+                    "nameGap": 40,
+                },
+                "series": [
+                    {
+                        "name": voltage_waveform.units,
+                        "type": "line",
+                        "data": list(voltage_waveform.scaled_data),
+                        "emphasis": {"focus": "series"},
+                        "smooth": True,
+                        "seriesLayoutBy": "row",
+                    },
+                    {
+                        "name": thermocouple_waveform.units,
+                        "type": "line",
+                        "data": list(thermocouple_waveform.scaled_data),
+                        "color": "red",
+                        "emphasis": {"focus": "series"},
+                        "smooth": True,
+                        "seriesLayoutBy": "row",
+                    },
+                ],
+            }
+            st_echarts(options=graph, height="446px", key="voltage_therm_graph")
+
+    # Logging Settings section in right column
+    with st.container(border=True):
+        st.header("Logging Settings")
+        logging_left_column, logging_right_column = st.columns(2)
+        with logging_left_column:
+            enum_selectbox(
+                panel,
+                label="Logging Mode",
+                value=LoggingMode.OFF,
+                disabled=panel.get_value("is_running", False),
+                key="logging_mode",
+            )
+        with logging_right_column:
+            left_sub_column, right_sub_column = st.columns([3, 1])
+            with left_sub_column:
+                tdms_file_path = st.text_input(
+                    label="TDMS File Path",
+                    disabled=panel.get_value("is_running", False),
+                    value="data.tdms",
+                    key="tdms_file_path",
+                )
+````
+
+<!--NI_OSS_SOURCE repo=nipanel-python path=examples/nidaqmx/nidaqmx_continuous_analog_input/README.md sha256=695d505e6a84c0eb1389489ed711d0521bb818902fa3e48aa59337465745d7f8 bytes=815 -->
+## FILE: examples/nidaqmx/nidaqmx_continuous_analog_input/README.md
+
+- repository: `ni/nipanel-python`
+- source_path: `examples/nidaqmx/nidaqmx_continuous_analog_input/README.md`
+- sha256: `695d505e6a84c0eb1389489ed711d0521bb818902fa3e48aa59337465745d7f8`
+- bytes: 815
+
+````markdown
+# NI-DAQmx Continuous Analog Input Example
+
+### Overview
+
+This is a nipanel example that acquires a continuous amount of data using the DAQ device's internal clock and displays it in an interactive Streamlit panel.
+
+### Features
+
+- NI-DAQmx Python configuration and acquisition
+- Displays data in an interactive chart using ECharts
+- Updates automatically as new data is acquired
+
+### Prerequisites
+
+- Python 3.10 or later
+- InstrumentStudio 2026 Q1 or later
+- A physical or simulated device, refer to the [NI-DAQmx Python README (Getting Started section)](https://github.com/ni/nidaqmx-python/blob/master/README.rst#getting-started)
+
+### Usage
+
+```pwsh
+poetry install --with examples
+poetry run python examples\nidaqmx\nidaqmx_continuous_analog_input\nidaqmx_continuous_analog_input.py
+```
+````
+
+<!--NI_OSS_SOURCE repo=nipanel-python path=examples/niscope/niscope_binary_acquisition/niscope_binary_acquisition.py sha256=de947072a1ce0e18e22bbf894e3bccab10f105943bce9bc2479a3b3eae90e818 bytes=4028 -->
+## FILE: examples/niscope/niscope_binary_acquisition/niscope_binary_acquisition.py
+
+- repository: `ni/nipanel-python`
+- source_path: `examples/niscope/niscope_binary_acquisition/niscope_binary_acquisition.py`
+- sha256: `de947072a1ce0e18e22bbf894e3bccab10f105943bce9bc2479a3b3eae90e818`
+- bytes: 4028
+
+````python
+"""Continuously acquires waveforms from NI-SCOPE, processes/scales them."""
+
+import time
+from pathlib import Path
+from typing import Any
+
+import hightime
+import niscope
+import numpy as np
+from niscope.errors import Error
+
+import nipanel
+
+panel_script_path = Path(__file__).with_name("niscope_binary_acquisition_panel.py")
+panel = nipanel.create_streamlit_panel(panel_script_path)
+
+
+"""Example fetch data from device (Dev1)."""
+panel.set_value("is_running", False)
+panel.set_value("run_button", False)
+
+try:
+    panel.set_value("scope_error", "")
+    print(f"Panel URL: {panel.panel_url}")
+    print(f"Waiting for the 'Run' button to be pressed...")
+    print(f"(Press Ctrl + C to quit)")
+    while True:
+        panel.set_value("run_button", False)
+        while not panel.get_value("run_button", False):
+            time.sleep(0.1)
+        with niscope.Session(resource_name=panel.get_value("resource_name", "Dev1")) as session:
+            session.configure_vertical(
+                range=panel.get_value("vertical_range", 5.0),
+                coupling=niscope.VerticalCoupling.DC,
+                offset=panel.get_value("vertical_offset", 0.0),
+            )
+            session.configure_horizontal_timing(
+                min_sample_rate=panel.get_value("min_sample_rate", 200000000.0),
+                min_num_pts=1000,
+                ref_position=50.0,
+                num_records=1000,
+                enforce_realtime=True,
+            )
+
+            session.configure_trigger_immediate()
+
+            with session.initiate():
+                data_size = panel.get_value("data_size", 8)
+                wfm: np.ndarray[Any, Any]
+
+                if data_size == 8:
+                    wfm = np.ndarray(1000 * 1000, dtype=np.int8)
+
+                elif data_size == 16:
+                    wfm = np.ndarray(1000 * 1000, dtype=np.int16)
+                else:
+                    wfm = np.ndarray(1000 * 1000, dtype=np.int32)
+
+                waveforms = session.channels[panel.get_value("channel_number", 0)].fetch_into(
+                    relative_to=niscope.FetchRelativeTo.READ_POINTER,
+                    offset=0,
+                    timeout=hightime.timedelta(seconds=5.0),
+                    waveform=wfm,
+                )
+
+                try:
+                    panel.set_value("is_running", True)
+
+                    panel.set_value("stop_button", False)
+                    while not panel.get_value("stop_button", False):
+                        gain = 0
+                        offset = 0
+                        for waveform in waveforms:
+                            gain = waveform.gain
+                            offset = waveform.offset
+                            panel.set_value("gain_factor", gain)
+                            panel.set_value("offset", offset)
+
+                        for i in range(len(waveforms)):
+                            if panel.get_value("stop_button", True):
+                                break
+                            else:
+                                time.sleep(0.1)
+                                binary_data = waveforms[i].samples.tolist()
+                                panel.set_value("binary_data", waveforms[i].samples.tolist())
+
+                                samples_array = np.array(binary_data)
+                                voltage_values = samples_array * gain + offset
+                                panel.set_value("scaled_voltage_data", voltage_values.tolist())
+
+                    actual_binary_data_size = session.binary_sample_width
+                    panel.set_value("actual_binary_data_size", actual_binary_data_size)
+                except KeyboardInterrupt:
+                    pass
+                finally:
+                    panel.set_value("is_running", False)
+
+except Error as e:
+    scope_error = str(e)
+    print(scope_error)
+    panel.set_value("scope_error", scope_error)
+
+except KeyboardInterrupt:
+    pass
+````
+
+<!--NI_OSS_SOURCE repo=nipanel-python path=examples/niscope/niscope_binary_acquisition/niscope_binary_acquisition_panel.py sha256=b287aff763ebcaaf7526f5df2f644ac83a4f27453b70982f6c5ab2cd92fa903b bytes=6152 -->
+## FILE: examples/niscope/niscope_binary_acquisition/niscope_binary_acquisition_panel.py
+
+- repository: `ni/nipanel-python`
+- source_path: `examples/niscope/niscope_binary_acquisition/niscope_binary_acquisition_panel.py`
+- sha256: `b287aff763ebcaaf7526f5df2f644ac83a4f27453b70982f6c5ab2cd92fa903b`
+- bytes: 6152
+
+````python
+"""Streamlit dashboard for visualizing NI-SCOPE waveform data in real time."""
+
+import streamlit as st
+from streamlit_echarts import st_echarts
+
+import nipanel
+
+st.set_page_config(page_title="NI-SCOPE Binary Acquisition", page_icon="📈", layout="wide")
+st.title("NI-SCOPE Binary Acquisition")
+panel = nipanel.get_streamlit_panel_accessor()
+
+left_col, right_col = st.columns(2)
+
+
+st.markdown(
+    """
+    <style>
+     div.stNumberInput {
+        max-width: 190px !important;
+    }
+    div.stTextInput {
+        max-width: 190px !important;
+    }
+   
+    div[data-baseweb="select"] {
+        width: 190px !important; /* Adjust the width as needed */
+    }
+    </style>
+    <style>
+    iframe[title="streamlit_echarts.st_echarts"]{ height: 400px; width:100%;} 
+   </style>
+    """,
+    unsafe_allow_html=True,
+)
+
+
+with left_col:
+    with st.container(border=True):
+        if panel.get_value("is_running", False):
+            st.button(r"⏹️ Stop", key="stop_button")
+        elif not panel.get_value("is_running", False) and panel.get_value("scope_error", "") == "":
+            run_button = st.button(r"▶️ Run", key="run_button")
+        else:
+            st.error(
+                f"There was an error running the script. Fix the issue and re-run niscope_binary_acquisition.py \n\n {panel.get_value('scope_error', '')}"
+            )
+
+        st.text_input(
+            label="Resource Name",
+            value="Dev1",
+            disabled=panel.get_value("is_running", False),
+            key="resource_name",
+        )
+        st.number_input(
+            "Channel",
+            value=0,
+            step=1,
+            disabled=panel.get_value("is_running", False),
+            key="channel_number",
+        )
+
+        st.title("Vertical")
+        st.number_input(
+            "Vertical Range(V)",
+            value=5.0,
+            step=1.0,
+            disabled=panel.get_value("is_running", False),
+            key="vertical_range",
+        )
+        st.number_input(
+            "Vertical Offset",
+            value=0.0,
+            step=1.0,
+            disabled=panel.get_value("is_running", False),
+            key="vertical_offset",
+        )
+        st.title("Horizontal")
+        st.number_input(
+            "Min Sample Rate",
+            value=20000000.0,
+            step=1.0,
+            disabled=panel.get_value("is_running", False),
+            key="min_sample_rate",
+        )
+        st.number_input(
+            "Min Record Length",
+            value=1000,
+            step=1,
+            disabled=panel.get_value("is_running", False),
+            key="min_record_length",
+        )
+        data_size = st.selectbox(
+            "Binary Data Size",
+            options=[8, 16, 32],
+            disabled=panel.get_value("is_running", False),
+            key="data_size",
+        )
+        st.number_input(
+            "Actual Binary Data Size",
+            value=panel.get_value("actual_binary_data_size", 16),
+            step=1,
+            disabled=True,
+            key="actual_binary_data_size",
+        )
+        st.title("Scaling Calculation")
+        st.number_input(
+            "Gain Factor",
+            value=panel.get_value("gain_factor", 0.0000),
+            step=0.0001,
+            disabled=True,
+            format="%.10f",
+            key="gain_factor",
+        )
+        st.number_input(
+            "Offset",
+            value=panel.get_value("offset", 0.0000),
+            step=0.0001,
+            disabled=True,
+            key="offset",
+        )
+
+
+with right_col:
+    with st.container(border=True):
+        st.title("Binary Waveform Graph")
+        binary_data = panel.get_value("binary_data", [0])
+
+        binary_graph = {
+            "animation": False,
+            "tooltip": {"trigger": "axis"},
+            "legend": {"data": ["Amplitude (ADC Codes)"]},
+            "xAxis": {
+                "type": "category",
+                "data": list(range(len(binary_data))),
+                "name": "Samples",
+                "nameLocation": "center",
+                "nameGap": 40,
+            },
+            "yAxis": {
+                "type": "value",
+                "name": "Amplitude(ADC Codes)",
+                "nameRotate": 90,
+                "nameLocation": "center",
+                "nameGap": 40,
+            },
+            "series": [
+                {
+                    "name": "niscope data",
+                    "type": "line",
+                    "data": binary_data,
+                    "emphasis": {"focus": "series"},
+                    "smooth": True,
+                    "seriesLayoutBy": "row",
+                },
+            ],
+        }
+        st_echarts(options=binary_graph, height="400px", width="75%", key="binary_graph")
+    with st.container(border=True):
+        st.title("Scaled Voltage Graph")
+        scaled_voltage_data = panel.get_value("scaled_voltage_data", [0])
+        scaled_voltage_graph = {
+            "animation": False,
+            "tooltip": {"trigger": "axis"},
+            "legend": {"data": ["Amplitude (V)"]},
+            "xAxis": {
+                "type": "category",
+                "data": list(range(len(scaled_voltage_data))),
+                "name": "Samples",
+                "nameLocation": "center",
+                "nameGap": 40,
+            },
+            "yAxis": {
+                "type": "value",
+                "name": "Amplitude(V)",
+                "nameRotate": 90,
+                "nameLocation": "center",
+                "nameGap": 40,
+            },
+            "series": [
+                {
+                    "name": "niscope data",
+                    "type": "line",
+                    "data": scaled_voltage_data,
+                    "emphasis": {"focus": "series"},
+                    "smooth": True,
+                    "seriesLayoutBy": "row",
+                },
+            ],
+        }
+        st_echarts(
+            options=scaled_voltage_graph, height="400px", width="75%", key="scaled_voltage_graph"
+        )
+````
+
+<!--NI_OSS_SOURCE repo=nipanel-python path=examples/niscope/niscope_binary_acquisition/README.md sha256=7109027a0e43bdebb5929e72edc3a74f43e55a9b22f6621feb05c9429030dbc5 bytes=777 -->
+## FILE: examples/niscope/niscope_binary_acquisition/README.md
+
+- repository: `ni/nipanel-python`
+- source_path: `examples/niscope/niscope_binary_acquisition/README.md`
+- sha256: `7109027a0e43bdebb5929e72edc3a74f43e55a9b22f6621feb05c9429030dbc5`
+- bytes: 777
+
+````markdown
+Prerequisites
+===============
+Requires a Physical or Simulated Device. Refer to the [Getting Started Section](https://github.com/ni/nidaqmx-python/blob/master/README.rst) to learn how to create a simulated device. This example uses NI oscilloscopes and digitizers like the NI PXIe-5114
+
+## Sample
+
+This is an nipanel example that displays an interactive Streamlit app and updates and fetches data from an NI device.
+
+### Feature
+
+Script demonstrates waveform data getting continuously acquired and being converted to binary data.
+- Supports various data types
+
+### Required Software
+
+- Python 3.10 or later
+
+### Usage
+
+```pwsh
+poetry install --with examples
+poetry run python examples\niscope\niscope_binary_acquisition\niscope_binary_acquisition.py
+```
+````
+
+<!--NI_OSS_SOURCE repo=nipanel-python path=examples/niscope/niscope_configured_acquisition/niscope_configured_acquisition.py sha256=18e66ceae0cbdc10849c3a46aaaed998ab60ece3fc6e4f2ef7704ed86161171d bytes=5789 -->
+## FILE: examples/niscope/niscope_configured_acquisition/niscope_configured_acquisition.py
+
+- repository: `ni/nipanel-python`
+- source_path: `examples/niscope/niscope_configured_acquisition/niscope_configured_acquisition.py`
+- sha256: `18e66ceae0cbdc10849c3a46aaaed998ab60ece3fc6e4f2ef7704ed86161171d`
+- bytes: 5789
+
+````python
+"""Continuously acquires waveforms from NI-SCOPE, and configures desired acquisition settings."""
+
+import time
+from pathlib import Path
+
+import hightime
+import niscope
+import numpy as np
+from niscope.errors import Error
+
+import nipanel
+
+panel_script_path = Path(__file__).with_name("niscope_configured_acquisition_panel.py")
+panel = nipanel.create_streamlit_panel(panel_script_path)
+
+panel.set_value("is_running", False)
+panel.set_value("run_button", False)
+
+try:
+    panel.set_value("scope_error", "")
+    print(f"Panel URL: {panel.panel_url}")
+    print(f"Waiting for the 'Run' button to be pressed...")
+    print(f"(Press Ctrl + C to quit)")
+    while True:
+        panel.set_value("run_button", False)
+        while not panel.get_value("run_button", False):
+            time.sleep(0.1)
+        with niscope.Session(resource_name=panel.get_value("resource_name", "Dev1")) as session:
+            session.configure_vertical(
+                range=panel.get_value("vertical_range", 5.0),
+                coupling=niscope.VerticalCoupling.DC,
+                offset=panel.get_value("vertical_offset", 0.0),
+            )
+            session.configure_chan_characteristics(
+                input_impedance=panel.get_value("input_impedance", 1.0e6),
+                max_input_frequency=panel.get_value("max_input_frequency", 100.0e6),
+            )
+            session.configure_horizontal_timing(
+                min_sample_rate=panel.get_value("min_sample_rate", 10.0e6),
+                min_num_pts=panel.get_value("min_record_length", 1000),
+                ref_position=panel.get_value("ref_position", 0.0),
+                num_records=1000,
+                enforce_realtime=panel.get_value("enforce_realtime", True),
+            )
+            trigger_type = int(panel.get_value("trigger_type", "1"))
+            if trigger_type == 1:
+                immediate = session.configure_trigger_immediate()
+            elif trigger_type == 2:
+                edge = session.configure_trigger_edge(
+                    trigger_source=str(panel.get_value("edge_source", 0)),
+                    level=panel.get_value("edge_level", 0.0),
+                    slope=panel.get_value("edge_slope", niscope.TriggerSlope.POSITIVE),
+                    trigger_coupling=panel.get_value("edge_coupling", niscope.TriggerCoupling.DC),
+                    delay=hightime.timedelta(seconds=panel.get_value("trigger_delay", 0.0)),
+                )
+            elif trigger_type == 3:
+                digital = session.configure_trigger_digital(
+                    trigger_source=panel.get_value("digital_source", "PFI 1"),
+                    slope=panel.get_value("digital_slope", niscope.TriggerSlope.POSITIVE),
+                    delay=hightime.timedelta(seconds=panel.get_value("trigger_delay", 0.0)),
+                )
+            elif trigger_type == 4:
+                window = session.configure_trigger_window(
+                    trigger_source=str(panel.get_value("window_source", 0)),
+                    window_mode=panel.get_value("window_mode", niscope.TriggerWindowMode.ENTERING),
+                    low_level=panel.get_value("window_low_level", -0.1),
+                    high_level=panel.get_value("window_high_level", 0.1),
+                    trigger_coupling=panel.get_value("window_coupling", niscope.TriggerCoupling.DC),
+                    delay=hightime.timedelta(seconds=panel.get_value("trigger_delay", 0.0)),
+                )
+            else:
+                hysteresis = session.configure_trigger_hysteresis(
+                    trigger_source=str(panel.get_value("hysteresis_source", 0)),
+                    level=panel.get_value("hysteresis_level", 0.0),
+                    hysteresis=panel.get_value("hysteresis", 0.05),
+                    slope=panel.get_value("hysteresis_slope", niscope.TriggerSlope.POSITIVE),
+                    trigger_coupling=panel.get_value(
+                        "hysteresis_coupling", niscope.TriggerCoupling.DC
+                    ),
+                    delay=hightime.timedelta(seconds=panel.get_value("trigger_delay", 0.0)),
+                )
+
+            with session.initiate():
+                wfm = np.array(
+                    session.channels[panel.get_value("channel_number", 0)].fetch(
+                        num_samples=1000,
+                        num_records=1000,
+                        relative_to=niscope.FetchRelativeTo.READ_POINTER,
+                        offset=0,
+                        timeout=hightime.timedelta(seconds=panel.get_value("timeout", 5.0)),
+                    )
+                )
+                try:
+                    panel.set_value("is_running", True)
+
+                    panel.set_value("stop_button", False)
+                    while not panel.get_value("stop_button", False):
+
+                        for i in range(len(wfm)):
+                            if panel.get_value("stop_button", True):
+                                break
+                            else:
+                                data = wfm[i].samples.tolist()
+                                panel.set_value("waveform_data", data)
+                    panel.set_value("actual_record_length", session.horz_record_length)
+                    panel.set_value("actual_sample_rate", session.samp_clk_timebase_rate)
+                    panel.set_value("auto_triggered", session.trigger_auto_triggered)
+                except KeyboardInterrupt:
+                    pass
+                finally:
+                    panel.set_value("is_running", False)
+
+except Error as e:
+    scope_error = str(e)
+    print(scope_error)
+    panel.set_value("scope_error", scope_error)
+
+except KeyboardInterrupt:
+    pass
+````
+
+<!--NI_OSS_SOURCE repo=nipanel-python path=examples/niscope/niscope_configured_acquisition/niscope_configured_acquisition_panel.py sha256=de78c21230f4a554e9de4473a9a949dbfa1dcf413f63cdf4515af561a400a474 bytes=12668 -->
+## FILE: examples/niscope/niscope_configured_acquisition/niscope_configured_acquisition_panel.py
+
+- repository: `ni/nipanel-python`
+- source_path: `examples/niscope/niscope_configured_acquisition/niscope_configured_acquisition_panel.py`
+- sha256: `de78c21230f4a554e9de4473a9a949dbfa1dcf413f63cdf4515af561a400a474`
+- bytes: 12668
+
+````python
+"""Streamlit dashboard for visualizing NI-SCOPE waveform data in real time."""
+
+from enum import Enum
+
+import extra_streamlit_components as stx  # type: ignore[import-untyped]
+import niscope
+import streamlit as st
+from streamlit_echarts import st_echarts
+
+import nipanel
+from nipanel.controls import enum_selectbox
+
+
+class ChannelSource(Enum):
+    """Enum for channel source options."""
+
+    CHANNEL_0 = 0
+    CHANNEL_1 = 1
+    CHANNEL_2 = 2
+    CHANNEL_3 = 3
+    CHANNEL_4 = 4
+    CHANNEL_5 = 5
+    CHANNEL_6 = 6
+    CHANNEL_7 = 7
+
+
+st.set_page_config(page_title="NI-SCOPE EX Configured Acquisition", page_icon="📈", layout="wide")
+st.title("NI-SCOPE EX Configured Acquisition")
+panel = nipanel.get_streamlit_panel_accessor()
+
+left_col, right_col = st.columns(2)
+
+
+st.markdown(
+    """
+    <style>
+     div.stNumberInput {
+        max-width: 190px !important;
+    }
+    div.stTextInput {
+        max-width: 190px !important;
+    }
+   
+    div[data-baseweb="select"] {
+        width: 190px !important; /* Adjust the width as needed */
+    }
+    </style>
+    <style>
+    iframe[title="streamlit_echarts.st_echarts"]{ height: 400px; width:100%;} 
+   </style>
+    """,
+    unsafe_allow_html=True,
+)
+
+with left_col:
+    with st.container(border=True):
+        if panel.get_value("is_running", False):
+            st.button(r"⏹️ Stop", key="stop_button")
+        elif not panel.get_value("is_running", False) and panel.get_value("scope_error", "") == "":
+            run_button = st.button(r"▶️ Run", key="run_button")
+        else:
+            st.error(
+                f"There was an error running the script. Fix the issue and re-run niscope_binary_acquisition.py \n\n {panel.get_value('scope_error', '')}"
+            )
+
+        st.text_input(
+            label="Resource Name",
+            value="Dev1",
+            disabled=panel.get_value("is_running", False),
+            key="resource_name",
+        )
+        st.number_input(
+            "Channel",
+            value=0,
+            step=1,
+            disabled=panel.get_value("is_running", False),
+            key="channel_number",
+        )
+        st.number_input(
+            "Timeout(s)",
+            value=5.00,
+            step=1.00,
+            disabled=panel.get_value("is_running", False),
+            key="timeout",
+        )
+
+        st.title("Vertical")
+        st.number_input(
+            "Vertical Range(V)",
+            value=5.0,
+            step=1.0,
+            disabled=panel.get_value("is_running", False),
+            key="vertical_range",
+        )
+        st.number_input(
+            "Probe Attenuation",
+            value=1.0,
+            step=1.0,
+            disabled=panel.get_value("is_running", False),
+            key="probe_attenuation",
+        )
+        st.number_input(
+            "Vertical Offset",
+            value=0.0,
+            step=1.0,
+            disabled=panel.get_value("is_running", False),
+            key="vertical_offset",
+        )
+        enum_selectbox(
+            panel,
+            label="Vertical Coupling",
+            value=niscope.VerticalCoupling.DC,
+            disabled=panel.get_value("is_running", False),
+            key="vertical_coupling",
+        )
+
+        st.title("Channel")
+        st.number_input(
+            "Max. Input Frequency(Hz)",
+            value=0.0,
+            step=1.0,
+            disabled=panel.get_value("is_running", False),
+            key="max_input_frequency",
+        )
+        st.number_input(
+            "Input Impedance",
+            value=1.0e6,
+            step=1000.0,
+            disabled=panel.get_value("is_running", False),
+            key="input_impedance",
+        )
+
+        st.title("Horizontal")
+        st.radio(
+            "Enforce Realtime",
+            options=[True, False],
+            disabled=panel.get_value("is_running", False),
+            key="enforce_realtime",
+        )
+
+        sample_rate = st.number_input(
+            "Min Sample Rate",
+            value=10000000.0,
+            step=1.0,
+            disabled=panel.get_value("is_running", False),
+            key="min_sample_rate",
+        )
+        st.number_input(
+            "Actual Sample Rate",
+            value=panel.get_value("actual_sample_rate", 1.0e7),
+            step=1.0,
+            disabled=True,
+            key="actual_sample_rate",
+        )
+        record_length = st.number_input(
+            "Min Record Length",
+            value=1000,
+            step=1,
+            disabled=panel.get_value("is_running", False),
+            key="min_record_length",
+        )
+        st.number_input(
+            "Actual Record Length",
+            value=panel.get_value("actual_record_length", 1000),
+            step=1,
+            disabled=True,
+            key="actual_record_length",
+        )
+
+
+with right_col:
+    with st.container(border=True):
+        st.title("Waveform Graph")
+        waveform_data = panel.get_value("waveform_data", [0.0])
+        waveform_graph = {
+            "animation": False,
+            "tooltip": {"trigger": "axis"},
+            "legend": {"data": ["Amplitude (V)"]},
+            "xAxis": {
+                "type": "category",
+                "data": [x / record_length for x in range(len(waveform_data))],
+                "name": "Time (s)",
+                "nameLocation": "center",
+                "nameGap": 40,
+            },
+            "yAxis": {
+                "type": "value",
+                "name": "Amplitude(V)",
+                "nameRotate": 90,
+                "nameLocation": "center",
+                "nameGap": 40,
+            },
+            "series": [
+                {
+                    "name": "niscope data",
+                    "type": "line",
+                    "data": waveform_data,
+                    "emphasis": {"focus": "series"},
+                    "smooth": True,
+                    "seriesLayoutBy": "row",
+                },
+            ],
+        }
+        st_echarts(options=waveform_graph, height="400px", width="75%", key="waveform_graph")
+        st.title("Trigger")
+        trigger_type = stx.tab_bar(
+            data=[
+                stx.TabBarItemData(id=1, title="Immediate", description=""),
+                stx.TabBarItemData(id=2, title="Edge", description=""),
+                stx.TabBarItemData(id=3, title="Digital", description=""),
+                stx.TabBarItemData(id=4, title="Window", description=""),
+                stx.TabBarItemData(id=5, title="Hysteresis", description=""),
+            ],
+            default=1,
+        )
+        panel.set_value("trigger_type", trigger_type)
+
+        if trigger_type == "1":
+            with st.container(border=True):
+                st.write(
+                    "Note: When configured for Immediate reference trigger, this example does not configure any additional trigger settings - the acquisition is triggered as soon as possible after being initiated by driver software."
+                )
+        if trigger_type == "2":
+            with st.container(border=True):
+                st.selectbox(
+                    "Trigger Source",
+                    options=list(ChannelSource),
+                    format_func=lambda x: f"Channel {x.value}",
+                    disabled=panel.get_value("is_running", False),
+                    key="edge_source",
+                )
+                st.number_input(
+                    "Trigger Level",
+                    value=0.0,
+                    step=1.0,
+                    disabled=panel.get_value("is_running", False),
+                    key="edge_level",
+                )
+                enum_selectbox(
+                    panel,
+                    label="Trigger Slope",
+                    value=niscope.TriggerSlope.POSITIVE,
+                    disabled=panel.get_value("is_running", False),
+                    key="edge_slope",
+                )
+                enum_selectbox(
+                    panel,
+                    label="Trigger Coupling",
+                    value=niscope.TriggerCoupling.DC,
+                    disabled=panel.get_value("is_running", False),
+                    key="edge_coupling",
+                )
+        if trigger_type == "3":
+            with st.container(border=True):
+                st.text_input(
+                    "Trigger Source",
+                    value="PFI 1",
+                    disabled=panel.get_value("is_running", False),
+                    key="digital_source",
+                )
+                enum_selectbox(
+                    panel,
+                    label="Trigger Slope",
+                    value=niscope.TriggerSlope.POSITIVE,
+                    disabled=panel.get_value("is_running", False),
+                    key="digital_slope",
+                )
+        if trigger_type == "4":
+            with st.container(border=True):
+                st.selectbox(
+                    "Trigger Source",
+                    options=list(ChannelSource),
+                    format_func=lambda x: f"Channel {x.value}",
+                    disabled=panel.get_value("is_running", False),
+                    key="window_source",
+                )
+                enum_selectbox(
+                    panel,
+                    label="Window Mode",
+                    value=niscope.TriggerWindowMode.ENTERING,
+                    disabled=panel.get_value("is_running", False),
+                    key="window_mode",
+                )
+                st.number_input(
+                    "Window Low Level",
+                    value=-0.1,
+                    step=1.0,
+                    disabled=panel.get_value("is_running", False),
+                    key="window_low_level",
+                )
+                st.number_input(
+                    "Window High Level",
+                    value=0.1,
+                    step=1.0,
+                    disabled=panel.get_value("is_running", False),
+                    key="window_high_level",
+                )
+                enum_selectbox(
+                    panel,
+                    label="Trigger Coupling",
+                    value=niscope.TriggerCoupling.DC,
+                    disabled=panel.get_value("is_running", False),
+                    key="window_coupling",
+                )
+
+        if trigger_type == "5":
+            with st.container(border=True):
+                st.selectbox(
+                    "Trigger Source",
+                    options=list(ChannelSource),
+                    format_func=lambda x: f"Channel {x.value}",
+                    disabled=panel.get_value("is_running", False),
+                    key="hysteresis_source",
+                )
+                st.number_input(
+                    "Trigger Level",
+                    value=0.0,
+                    step=1.0,
+                    disabled=panel.get_value("is_running", False),
+                    key="hysteresis_trigger_level",
+                )
+                st.number_input(
+                    "Hysteresis",
+                    value=0.05,
+                    step=1.0,
+                    disabled=panel.get_value("is_running", False),
+                    key="hysteresis",
+                )
+                enum_selectbox(
+                    panel,
+                    label="Trigger Slope",
+                    value=niscope.TriggerSlope.POSITIVE,
+                    disabled=panel.get_value("is_running", False),
+                    key="hysteresis_slope",
+                )
+                enum_selectbox(
+                    panel,
+                    label="Trigger Coupling",
+                    value=niscope.TriggerCoupling.DC,
+                    disabled=panel.get_value("is_running", False),
+                    key="hysteresis_coupling",
+                )
+        st.title("Common Trigger Settings")
+        st.number_input(
+            "Trigger Delay (s)",
+            value=0.0,
+            step=0.1,
+            disabled=panel.get_value("is_running", False),
+            key="trigger_delay",
+        )
+        st.number_input(
+            "Ref Position",
+            value=50.0,
+            step=1.0,
+            disabled=panel.get_value("is_running", False),
+            key="ref_position",
+        )
+        if panel.get_value("auto_triggered", False):
+            st.write("This acquisition is auto-triggered.")
+        else:
+            st.write("This acquisition is not auto-triggered.")
+````
+
+<!--NI_OSS_SOURCE repo=nipanel-python path=examples/niscope/niscope_configured_acquisition/README.md sha256=ea1abd67af114d8cf3f4fc76c45d5d32d0310ee310a1ca0fdb46adf67ce4d99d bytes=878 -->
+## FILE: examples/niscope/niscope_configured_acquisition/README.md
+
+- repository: `ni/nipanel-python`
+- source_path: `examples/niscope/niscope_configured_acquisition/README.md`
+- sha256: `ea1abd67af114d8cf3f4fc76c45d5d32d0310ee310a1ca0fdb46adf67ce4d99d`
+- bytes: 878
+
+````markdown
+Prerequisites
+===============
+Requires a Physical or Simulated Device. Refer to the [Getting Started Section](https://github.com/ni/nidaqmx-python/blob/master/README.rst) to learn how to create a simulated device. This example uses NI oscilloscopes and digitizers like the NI PXIe-5114
+
+## Sample
+
+This is an nipanel example that displays an interactive Streamlit app and updates and fetches data from an NI device.
+
+### Feature
+
+Script demonstrates how to configure vertical, horizontal, and triggering properties and allows you to experiment with numerous configurations, including acquisition types and triggering mode.
+- Supports various data types
+
+### Required Software
+
+- Python 3.10 or later
+
+### Usage
+
+```pwsh
+poetry install --with examples
+poetry run python examples\niscope\niscope_configured_acquisition\niscope_configured_acquisition.py
+```
+````
+
+<!--NI_OSS_SOURCE repo=nipanel-python path=examples/niscope/niscope_ex_fetch_forever/niscope_ex_fetch_forever.py sha256=be7a51384cce704d307fa9b6057acaf40278cb3acd9ebcacb1c78a9bf63a56e3 bytes=2031 -->
+## FILE: examples/niscope/niscope_ex_fetch_forever/niscope_ex_fetch_forever.py
+
+- repository: `ni/nipanel-python`
+- source_path: `examples/niscope/niscope_ex_fetch_forever/niscope_ex_fetch_forever.py`
+- sha256: `be7a51384cce704d307fa9b6057acaf40278cb3acd9ebcacb1c78a9bf63a56e3`
+- bytes: 2031
+
+````python
+"""Continuously acquires waveforms from NI-SCOPE, processes/scales them."""
+
+import time
+from pathlib import Path
+from typing import Any
+
+import hightime
+import niscope
+import numpy as np
+
+import nipanel
+
+panel_script_path = Path(__file__).with_name("niscope_ex_fetch_forever_panel.py")
+panel = nipanel.create_streamlit_panel(panel_script_path)
+
+print(f"Panel URL: {panel.panel_url}")
+
+resource_name = "Dev1"
+channels = 0
+options = ""
+length = 1000
+samples_per_fetch = 1000
+
+"""Example fetch data from device (Dev1)."""
+with niscope.Session(resource_name=resource_name, options=options) as session:
+    session.configure_vertical(range=2, coupling=niscope.VerticalCoupling.DC, enabled=True)
+    session.configure_horizontal_timing(
+        min_sample_rate=100000000,
+        min_num_pts=1000,
+        ref_position=50.0,
+        num_records=1000,
+        enforce_realtime=True,
+    )
+    session.configure_trigger_software()
+
+    with session.initiate():
+        wfm: np.ndarray[Any, np.dtype[np.int8]] = np.ndarray(
+            length * samples_per_fetch, dtype=np.int8
+        )
+        waveforms = session.channels[channels].fetch_into(
+            relative_to=niscope.FetchRelativeTo.READ_POINTER,
+            offset=0,
+            timeout=hightime.timedelta(seconds=5.0),
+            waveform=wfm,
+        )
+        try:
+            print(f"Press Ctrl + C to stop")
+            while True:
+                offset = session.meas_array_offset
+                gain = session.meas_array_gain
+                for i in range(len(waveforms)):
+                    time.sleep(0.2)
+                    amplitude_list = []
+                    total_data = waveforms[i].samples.tolist()
+                    for amplitude in total_data:
+                        amplitude = (amplitude * 10) * gain + offset
+                        amplitude_list.append(amplitude)
+                    panel.set_value("Waveform", amplitude_list)
+
+        except KeyboardInterrupt:
+            pass
+````
+
+<!--NI_OSS_SOURCE repo=nipanel-python path=examples/niscope/niscope_ex_fetch_forever/niscope_ex_fetch_forever_panel.py sha256=b01edaaf38df06bf79f89d84d515a33811a5b8fcf15d72dad3b16f807a0650d6 bytes=1190 -->
+## FILE: examples/niscope/niscope_ex_fetch_forever/niscope_ex_fetch_forever_panel.py
+
+- repository: `ni/nipanel-python`
+- source_path: `examples/niscope/niscope_ex_fetch_forever/niscope_ex_fetch_forever_panel.py`
+- sha256: `b01edaaf38df06bf79f89d84d515a33811a5b8fcf15d72dad3b16f807a0650d6`
+- bytes: 1190
+
+````python
+"""Streamlit dashboard for visualizing NI-SCOPE waveform data in real time."""
+
+import streamlit as st
+from streamlit_echarts import st_echarts
+
+import nipanel
+
+st.set_page_config(page_title="NI-SCOPE Example", page_icon="📈", layout="wide")
+st.title("NIScope EX Fetch Forever")
+
+panel = nipanel.get_streamlit_panel_accessor()
+
+waveform = panel.get_value("Waveform", [0])
+
+graph = {
+    "animation": False,
+    "tooltip": {"trigger": "axis"},
+    "legend": {"data": ["Amplitude (V)"]},
+    "xAxis": {
+        "type": "category",
+        "data": list(range(len(waveform))),
+        "name": "Samples",
+        "nameLocation": "center",
+        "nameGap": 40,
+    },
+    "yAxis": {
+        "type": "value",
+        "name": "Amplitude(V)",
+        "nameRotate": 90,
+        "nameLocation": "center",
+        "nameGap": 40,
+    },
+    "series": [
+        {
+            "name": "niscope data",
+            "type": "line",
+            "data": waveform,
+            "emphasis": {"focus": "series"},
+            "smooth": True,
+            "seriesLayoutBy": "row",
+        },
+    ],
+}
+st_echarts(options=graph, height="400px", width="75%", key="graph")
+````
+
+<!--NI_OSS_SOURCE repo=nipanel-python path=examples/niscope/niscope_ex_fetch_forever/README.md sha256=eee2d3d17013d38cfd3bc6fa2d9fa3c49f4f40c08cf4e60c45ac9f37503667f5 bytes=791 -->
+## FILE: examples/niscope/niscope_ex_fetch_forever/README.md
+
+- repository: `ni/nipanel-python`
+- source_path: `examples/niscope/niscope_ex_fetch_forever/README.md`
+- sha256: `eee2d3d17013d38cfd3bc6fa2d9fa3c49f4f40c08cf4e60c45ac9f37503667f5`
+- bytes: 791
+
+````markdown
+Prerequisites
+===============
+Requires a Physical or Simulated Device. Refer to the [Getting Started Section](https://github.com/ni/nidaqmx-python/blob/master/README.rst) to learn how to create a simulated device. This example uses NI oscilloscopes/digitizers, which have the module numbering pattern _51xx_. One example is NI PXIe-5114.
+
+## Sample
+
+This is a nipanel example that displays an interactive Streamlit app and updates and fetches data from device.
+
+### Feature
+
+Script demonstrates NIScope waveform data getting continuously acquired.
+- Supports various data types
+
+### Required Software
+
+- Python 3.10 or later
+
+### Usage
+
+```pwsh
+poetry install --with examples
+poetry run python examples\niscope\niscope_ex_fetch_forever\niscope_ex_fetch_forever.py
+```
+````
+
+<!--NI_OSS_SOURCE repo=nipanel-python path=examples/performance_checker/performance_checker.py sha256=85d68913c79034295cc925519f94b0bf7240bad0e0f5584eea028c3eb9555219 bytes=2484 -->
+## FILE: examples/performance_checker/performance_checker.py
+
+- repository: `ni/nipanel-python`
+- source_path: `examples/performance_checker/performance_checker.py`
+- sha256: `85d68913c79034295cc925519f94b0bf7240bad0e0f5584eea028c3eb9555219`
+- bytes: 2484
+
+````python
+"""Check the performance of get_value and set_value methods in nipanel."""
+
+import math
+import time
+import timeit
+from pathlib import Path
+
+import numpy as np
+
+import nipanel
+
+
+panel_script_path = Path(__file__).with_name("performance_checker_panel.py")
+panel = nipanel.create_streamlit_panel(panel_script_path)
+
+amplitude = 1.0
+frequency = 1.0
+num_points = 1000
+time_points = np.linspace(0, num_points, num_points)
+sine_values = amplitude * np.sin(frequency * time_points)
+
+
+def _set_time_points() -> None:
+    panel.set_value("time_points", time_points.tolist())
+
+
+def _set_amplitude() -> None:
+    panel.set_value("amplitude", amplitude)
+
+
+def _get_time_points() -> None:
+    panel.get_value("time_points", [0.0])
+
+
+def _get_amplitude() -> None:
+    panel.get_value("amplitude", 1.0)
+
+
+def _get_unset_value() -> None:
+    panel.get_value("unset_value", 1.0)
+
+
+iterations = 100
+
+set_time_points_time = timeit.timeit(_set_time_points, number=iterations) * 1000 / iterations
+print(f"Average time to set 'time_points': {set_time_points_time:.2f} ms")
+
+set_amplitude_time = timeit.timeit(_set_amplitude, number=iterations) * 1000 / iterations
+print(f"Average time to set 'amplitude': {set_amplitude_time:.2f} ms")
+
+get_time_points_time = timeit.timeit(_get_time_points, number=iterations) * 1000 / iterations
+print(f"Average time to get 'time_points': {get_time_points_time:.2f} ms")
+
+get_amplitude_time = timeit.timeit(_get_amplitude, number=iterations) * 1000 / iterations
+print(f"Average time to get 'amplitude': {get_amplitude_time:.2f} ms")
+
+get_unset_value_time = timeit.timeit(_get_unset_value, number=iterations) * 1000 / iterations
+print(f"Average time to get 'unset_value': {get_unset_value_time:.2f} ms")
+
+try:
+    print(f"Panel URL: {panel.panel_url}")
+    print("Press Ctrl+C to exit")
+
+    # Generate and update the sine wave data as fast as possible
+    while True:
+        time_points = np.linspace(0, num_points, num_points)
+        sine_values = amplitude * np.sin(frequency * time_points)
+
+        panel.set_value("time_points", time_points.tolist())
+        panel.set_value("sine_values", sine_values.tolist())
+        panel.set_value("amplitude", amplitude)
+        panel.set_value("frequency", frequency)
+
+        # Slowly vary the frequency for a more dynamic visualization
+        frequency = 1.0 + 0.5 * math.sin(time.time() / 5.0)
+
+except KeyboardInterrupt:
+    print("Exiting...")
+````
+
+<!--NI_OSS_SOURCE repo=nipanel-python path=examples/performance_checker/performance_checker_panel.py sha256=5eb88401ee9d1db2e5510d1b7db49d1308df8f2f2c06d34e8211bd2ff0152213 bytes=4721 -->
+## FILE: examples/performance_checker/performance_checker_panel.py
+
+- repository: `ni/nipanel-python`
+- source_path: `examples/performance_checker/performance_checker_panel.py`
+- sha256: `5eb88401ee9d1db2e5510d1b7db49d1308df8f2f2c06d34e8211bd2ff0152213`
+- bytes: 4721
+
+````python
+"""A Streamlit visualization panel for the performance_checker.py example script."""
+
+import statistics
+import time
+import timeit
+from functools import partial
+from typing import Any, Tuple
+
+import streamlit as st
+from streamlit_echarts import st_echarts
+
+import nipanel
+
+
+def profile_get_value(
+    panel: "nipanel.PanelValueAccessor",
+    value_id: str,
+    default_value: Any = None,
+    num_runs: int = 5,
+) -> Tuple[Any, float]:
+    """Measure the time it takes to get a value from the panel.
+
+    Args:
+        panel: The panel accessor object
+        value_id: The ID of the value to get
+        default_value: Default value if the value is not found
+        num_runs: Number of runs for timing
+
+    Returns:
+        A tuple of (value, time_ms) where time_ms is the time in milliseconds
+    """
+    value = panel.get_value(value_id, default_value)
+    get_value_func = partial(panel.get_value, value_id, default_value)
+    time_ms = timeit.timeit(get_value_func, number=num_runs) * 1000 / num_runs
+    return value, time_ms
+
+
+st.set_page_config(page_title="Performance Checker Example", page_icon="📈", layout="wide")
+st.title("Performance Checker Example")
+
+if "refresh_history" not in st.session_state:
+    st.session_state.refresh_history = []  # List of tuples (timestamp, refresh_time_ms)
+
+# Store current timestamp and calculate time since last refresh
+current_time = time.time()
+if "last_refresh_time" not in st.session_state:
+    st.session_state.last_refresh_time = current_time
+    time_since_last_refresh = 0.0
+else:
+    time_since_last_refresh = (current_time - st.session_state.last_refresh_time) * 1000
+    st.session_state.last_refresh_time = current_time
+
+    # Store refresh times with timestamps, keeping only the last 1 second of data
+    st.session_state.refresh_history.append((current_time, time_since_last_refresh))
+
+    # Remove entries older than 1 second
+    cutoff_time = current_time - 1.0  # 1 second ago
+    st.session_state.refresh_history = [
+        item for item in st.session_state.refresh_history if item[0] >= cutoff_time
+    ]
+
+# Extract just the refresh times for calculations
+if st.session_state.refresh_history:
+    refresh_history = [item[1] for item in st.session_state.refresh_history]
+else:
+    refresh_history = []
+
+min_refresh_time = min(refresh_history) if refresh_history else 0
+max_refresh_time = max(refresh_history) if refresh_history else 0
+avg_refresh_time = statistics.mean(refresh_history) if refresh_history else 0
+
+panel = nipanel.get_streamlit_panel_accessor()
+
+num_timing_runs = 5
+time_points, time_points_ms = profile_get_value(panel, "time_points", [0.0], num_timing_runs)
+sine_values, sine_values_ms = profile_get_value(panel, "sine_values", [0.0], num_timing_runs)
+amplitude, amplitude_ms = profile_get_value(panel, "amplitude", 1.0, num_timing_runs)
+frequency, frequency_ms = profile_get_value(panel, "frequency", 1.0, num_timing_runs)
+unset_value, unset_value_ms = profile_get_value(panel, "unset_value", "default", num_timing_runs)
+
+data = [{"value": [x, y]} for x, y in zip(time_points, sine_values)]
+
+options = {
+    "animation": False,  # Disable animation for smoother updates
+    "title": {"text": "Sine Wave"},
+    "tooltip": {"trigger": "axis"},
+    "xAxis": {"type": "value", "name": "Time (s)", "nameLocation": "middle", "nameGap": 30},
+    "yAxis": {
+        "type": "value",
+        "name": "Amplitude",
+        "nameLocation": "middle",
+        "nameGap": 30,
+    },
+    "series": [
+        {
+            "data": data,
+            "type": "line",
+            "showSymbol": True,
+            "smooth": True,
+            "lineStyle": {"width": 2, "color": "#1f77b4"},
+            "areaStyle": {"color": "#1f77b4", "opacity": 0.3},
+            "name": "Sine Wave",
+        }
+    ],
+}
+
+st_echarts(options=options, height="400px", key="graph")
+
+col1, col2, col3 = st.columns(3)
+with col1:
+    st.metric("Amplitude", f"{amplitude:.2f}")
+    st.metric("Frequency", f"{frequency:.2f} Hz")
+with col2:
+    st.metric("Refresh Time", f"{time_since_last_refresh:.1f} ms")
+    st.metric("Min Refresh Time", f"{min_refresh_time:.1f} ms")
+    st.metric("Max Refresh Time", f"{max_refresh_time:.1f} ms")
+    st.metric("Avg Refresh Time", f"{avg_refresh_time:.1f} ms")
+    st.metric("FPS", f"{len(refresh_history)}")
+
+with col3:
+    st.metric("get time_points", f"{time_points_ms:.1f} ms")
+    st.metric("get sine_values", f"{sine_values_ms:.1f} ms")
+    st.metric("get amplitude", f"{amplitude_ms:.1f} ms")
+    st.metric("get frequency", f"{frequency_ms:.1f} ms")
+    st.metric("get unset_value", f"{unset_value_ms:.1f} ms")
+````
+
+<!--NI_OSS_SOURCE repo=nipanel-python path=examples/performance_checker/README.md sha256=0d42d8576c4ee3dfa2fd8da116e3e2e5b19d15847830195bc86170b50ab34237 bytes=437 -->
+## FILE: examples/performance_checker/README.md
+
+- repository: `ni/nipanel-python`
+- source_path: `examples/performance_checker/README.md`
+- sha256: `0d42d8576c4ee3dfa2fd8da116e3e2e5b19d15847830195bc86170b50ab34237`
+- bytes: 437
+
+````markdown
+# Performance checker Example
+
+This example measures the performance of a streamlit panel with a graph.
+
+## Features
+
+- Generates sine wave data with varying frequency
+- Displays the data in a graph
+- Updates rapidly
+- Shows timing information
+
+### Required Software
+
+- Python 3.10 or later
+
+### Usage
+
+```pwsh
+poetry install --with examples
+poetry run python examples/performance_checker/performance_checker.py
+```
+````
+
+<!--NI_OSS_SOURCE repo=nipanel-python path=examples/simple_graph/README.md sha256=81eeaf6bea7573e1541d27fb132e5bfa800ef501aad8f49679a158b1755bb243 bytes=535 -->
+## FILE: examples/simple_graph/README.md
+
+- repository: `ni/nipanel-python`
+- source_path: `examples/simple_graph/README.md`
+- sha256: `81eeaf6bea7573e1541d27fb132e5bfa800ef501aad8f49679a158b1755bb243`
+- bytes: 535
+
+````markdown
+# Simple Graph Example
+
+This example demonstrates using `nipanel` with Streamlit to display a dynamic sine wave using the `streamlit-echarts` library.
+
+## Features
+
+- Generates sine wave data with varying frequency
+- Displays the data in an interactive chart using ECharts
+- Updates automatically every 1 second
+- Shows statistics about the displayed data
+
+### Required Software
+
+- Python 3.10 or later
+
+### Usage
+
+```pwsh
+poetry install --with examples
+poetry run python examples/simple_graph/simple_graph.py
+```
+````
+
+<!--NI_OSS_SOURCE repo=nipanel-python path=examples/simple_graph/simple_graph.py sha256=184f1d01b55e06d84a846706518a82a86fc0374f9eb6fed0ce4f8812b5f3a3a8 bytes=1091 -->
+## FILE: examples/simple_graph/simple_graph.py
+
+- repository: `ni/nipanel-python`
+- source_path: `examples/simple_graph/simple_graph.py`
+- sha256: `184f1d01b55e06d84a846706518a82a86fc0374f9eb6fed0ce4f8812b5f3a3a8`
+- bytes: 1091
+
+````python
+"""Example of using nipanel to display a sine wave graph using st_echarts."""
+
+import math
+import time
+from pathlib import Path
+
+import numpy as np
+
+import nipanel
+
+
+panel_script_path = Path(__file__).with_name("simple_graph_panel.py")
+panel = nipanel.create_streamlit_panel(panel_script_path)
+
+amplitude = 1.0
+frequency = 1.0
+num_points = 100
+
+try:
+    print(f"Panel URL: {panel.panel_url}")
+    print("Press Ctrl+C to exit")
+
+    # Generate and update the sine wave data periodically
+    while True:
+        time_points = np.linspace(0, num_points, num_points)
+        sine_values = amplitude * np.sin(frequency * time_points)
+
+        panel.set_value("time_points", time_points.tolist())
+        panel.set_value("sine_values", sine_values.tolist())
+        panel.set_value("amplitude", amplitude)
+        panel.set_value("frequency", frequency)
+
+        # Slowly vary the frequency for a more dynamic visualization
+        frequency = 1.0 + 0.5 * math.sin(time.time() / 5.0)
+        time.sleep(0.1)
+
+except KeyboardInterrupt:
+    print("Exiting...")
+````
+
+<!--NI_OSS_SOURCE repo=nipanel-python path=examples/simple_graph/simple_graph_panel.py sha256=56ac7f40a9fc23da8d2d4e89f65558a5265ac1cecca1bdab2ee51727cb7d6f0f bytes=1833 -->
+## FILE: examples/simple_graph/simple_graph_panel.py
+
+- repository: `ni/nipanel-python`
+- source_path: `examples/simple_graph/simple_graph_panel.py`
+- sha256: `56ac7f40a9fc23da8d2d4e89f65558a5265ac1cecca1bdab2ee51727cb7d6f0f`
+- bytes: 1833
+
+````python
+"""A Streamlit visualization panel for the simple_graph.py example script."""
+
+import streamlit as st
+from streamlit_echarts import st_echarts
+
+import nipanel
+
+
+st.set_page_config(page_title="Simple Graph Example", page_icon="📈", layout="wide")
+st.title("Simple Graph Example")
+
+panel = nipanel.get_streamlit_panel_accessor()
+time_points = panel.get_value("time_points", [0.0])
+sine_values = panel.get_value("sine_values", [0.0])
+amplitude = panel.get_value("amplitude", 1.0)
+frequency = panel.get_value("frequency", 1.0)
+
+col1, col2, col3, col4, col5 = st.columns(5)
+with col1:
+    st.metric("Amplitude", f"{amplitude:.2f}")
+with col2:
+    st.metric("Frequency", f"{frequency:.2f} Hz")
+with col3:
+    st.metric("Min Value", f"{min(sine_values):.3f}")
+with col4:
+    st.metric("Max Value", f"{max(sine_values):.3f}")
+with col5:
+    st.metric("Data Points", len(sine_values))
+
+# Prepare data for echarts
+data = [{"value": [x, y]} for x, y in zip(time_points, sine_values)]
+
+# Configure the chart options
+options = {
+    "animation": False,  # Disable animation for smoother updates
+    "title": {"text": "Sine Wave"},
+    "tooltip": {"trigger": "axis"},
+    "xAxis": {"type": "value", "name": "Time (s)", "nameLocation": "middle", "nameGap": 30},
+    "yAxis": {
+        "type": "value",
+        "name": "Amplitude",
+        "nameLocation": "middle",
+        "nameGap": 30,
+    },
+    "series": [
+        {
+            "data": data,
+            "type": "line",
+            "showSymbol": True,
+            "smooth": True,
+            "lineStyle": {"width": 2, "color": "#1f77b4"},
+            "areaStyle": {"color": "#1f77b4", "opacity": 0.3},
+            "name": "Sine Wave",
+        }
+    ],
+}
+
+# Display the chart
+st_echarts(options=options, height="400px", key="graph")
+````
+
+<!--NI_OSS_SOURCE repo=nipanel-python path=LICENSE sha256=a12ad97f56774bc8f44f4e085cb58d198aa5e1c44b38e10aa0565fdee0c801bf bytes=1089 -->
+## FILE: LICENSE
+
+- repository: `ni/nipanel-python`
+- source_path: `LICENSE`
+- sha256: `a12ad97f56774bc8f44f4e085cb58d198aa5e1c44b38e10aa0565fdee0c801bf`
+- bytes: 1089
+
+````text
+Copyright (c) 2025, National Instruments Corp.
+
+Permission is hereby granted, free of charge, to any person obtaining
+a copy of this software and associated documentation files (the
+"Software"), to deal in the Software without restriction, including
+without limitation the rights to use, copy, modify, merge, publish,
+distribute, sublicense, and/or sell copies of the Software, and to
+permit persons to whom the Software is furnished to do so, subject to
+the following conditions:
+
+The above copyright notice and this permission notice shall be included
+in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
+CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+````
+
+<!--NI_OSS_SOURCE repo=nipanel-python path=poetry.lock sha256=8f58e580a8aa2180e542251f801ed9c960b3a6f1bf8cae114a7393a71136b8b0 bytes=276281 -->
+## FILE: poetry.lock
+
+- repository: `ni/nipanel-python`
+- source_path: `poetry.lock`
+- sha256: `8f58e580a8aa2180e542251f801ed9c960b3a6f1bf8cae114a7393a71136b8b0`
+- bytes: 276281
+
+````text
+# This file is automatically @generated by Poetry 2.1.4 and should not be changed by hand.
+
+[[package]]
+name = "alabaster"
+version = "1.0.0"
+description = "A light, configurable Sphinx theme"
+optional = false
+python-versions = ">=3.10"
+groups = ["docs"]
+files = [
+    {file = "alabaster-1.0.0-py3-none-any.whl", hash = "sha256:fc6786402dc3fcb2de3cabd5fe455a2db534b371124f1f21de8731783dec828b"},
+    {file = "alabaster-1.0.0.tar.gz", hash = "sha256:c00dca57bca26fa62a6d7d0a9fcce65f3e026e9bfe33e9c538fd3fbb2144fd9e"},
+]
+
+[[package]]
+name = "altair"
+version = "6.0.0"
+description = "Vega-Altair: A declarative statistical visualization library for Python."
+optional = false
+python-versions = ">=3.9"
+groups = ["main", "examples"]
+files = [
+    {file = "altair-6.0.0-py3-none-any.whl", hash = "sha256:09ae95b53d5fe5b16987dccc785a7af8588f2dca50de1e7a156efa8a461515f8"},
+    {file = "altair-6.0.0.tar.gz", hash = "sha256:614bf5ecbe2337347b590afb111929aa9c16c9527c4887d96c9bc7f6640756b4"},
+]
+
+[package.dependencies]
+jinja2 = "*"
+jsonschema = ">=3.0"
+narwhals = ">=1.27.1"
+packaging = "*"
+typing-extensions = {version = ">=4.12.0", markers = "python_version < \"3.15\""}
+
+[package.extras]
+all = ["altair-tiles (>=0.3.0)", "anywidget (>=0.9.0)", "numpy", "pandas (>=1.1.3)", "pyarrow (>=11)", "vegafusion (>=2.0.3)", "vl-convert-python (>=1.8.0)"]
+dev = ["duckdb (>=1.0) ; python_version < \"3.14\"", "geopandas (>=0.14.3) ; python_version < \"3.14\"", "hatch (>=1.13.0)", "ipykernel", "ipython", "mistune", "mypy", "pandas (>=1.1.3)", "pandas-stubs", "polars (>=0.20.3)", "pyarrow-stubs", "pytest", "pytest-cov", "pytest-xdist[psutil] (>=3.5,<4.0)", "ruff (>=0.9.5)", "taskipy (>=1.14.1)", "tomli (>=2.2.1)", "types-jsonschema", "types-setuptools"]
+doc = ["docutils", "jinja2", "myst-parser", "numpydoc", "pillow", "pydata-sphinx-theme (>=0.14.1)", "scipy", "scipy-stubs ; python_version >= \"3.10\"", "sphinx", "sphinx-copybutton", "sphinx-design", "sphinxext-altair"]
+save = ["vl-convert-python (>=1.8.0)"]
+
+[[package]]
+name = "astroid"
+version = "3.3.11"
+description = "An abstract syntax tree for Python with inference support."
+optional = false
+python-versions = ">=3.9.0"
+groups = ["docs"]
+markers = "python_version < \"3.12\""
+files = [
+    {file = "astroid-3.3.11-py3-none-any.whl", hash = "sha256:54c760ae8322ece1abd213057c4b5bba7c49818853fc901ef09719a60dbf9dec"},
+    {file = "astroid-3.3.11.tar.gz", hash = "sha256:1e5a5011af2920c7c67a53f65d536d65bfa7116feeaf2354d8b94f29573bb0ce"},
+]
+
+[package.dependencies]
+typing-extensions = {version = ">=4", markers = "python_version < \"3.11\""}
+
+[[package]]
+name = "astroid"
+version = "4.0.2"
+description = "An abstract syntax tree for Python with inference support."
+optional = false
+python-versions = ">=3.10.0"
+groups = ["docs"]
+markers = "python_version >= \"3.12\""
+files = [
+    {file = "astroid-4.0.2-py3-none-any.whl", hash = "sha256:d7546c00a12efc32650b19a2bb66a153883185d3179ab0d4868086f807338b9b"},
+    {file = "astroid-4.0.2.tar.gz", hash = "sha256:ac8fb7ca1c08eb9afec91ccc23edbd8ac73bb22cbdd7da1d488d9fb8d6579070"},
+]
+
+[[package]]
+name = "attrs"
+version = "25.4.0"
+description = "Classes Without Boilerplate"
+optional = false
+python-versions = ">=3.9"
+groups = ["main", "examples"]
+files = [
+    {file = "attrs-25.4.0-py3-none-any.whl", hash = "sha256:adcf7e2a1fb3b36ac48d97835bb6d8ade15b8dcce26aba8bf1d14847b57a3373"},
+    {file = "attrs-25.4.0.tar.gz", hash = "sha256:16d5969b87f0859ef33a48b35d55ac1be6e42ae49d5e853b597db70c35c57e11"},
+]
+
+[[package]]
+name = "babel"
+version = "2.17.0"
+description = "Internationalization utilities"
+optional = false
+python-versions = ">=3.8"
+groups = ["docs"]
+files = [
+    {file = "babel-2.17.0-py3-none-any.whl", hash = "sha256:4d0b53093fdfb4b21c92b5213dba5a1b23885afa8383709427046b21c366e5f2"},
+    {file = "babel-2.17.0.tar.gz", hash = "sha256:0c54cffb19f690cdcc52a3b50bcbf71e07a808d1c80d549f2459b9d2cf0afb9d"},
+]
+
+[package.extras]
+dev = ["backports.zoneinfo ; python_version < \"3.9\"", "freezegun (>=1.0,<2.0)", "jinja2 (>=3.0)", "pytest (>=6.0)", "pytest-cov", "pytz", "setuptools", "tzdata ; sys_platform == \"win32\""]
+
+[[package]]
+name = "bandit"
+version = "1.9.3"
+description = "Security oriented static analyser for python code."
+optional = false
+python-versions = ">=3.10"
+groups = ["lint"]
+files = [
+    {file = "bandit-1.9.3-py3-none-any.whl", hash = "sha256:4745917c88d2246def79748bde5e08b9d5e9b92f877863d43fab70cd8814ce6a"},
+    {file = "bandit-1.9.3.tar.gz", hash = "sha256:ade4b9b7786f89ef6fc7344a52b34558caec5da74cb90373aed01de88472f774"},
+]
+
+[package.dependencies]
+colorama = {version = ">=0.3.9", markers = "platform_system == \"Windows\""}
+PyYAML = ">=5.3.1"
+rich = "*"
+stevedore = ">=1.20.0"
+tomli = {version = ">=1.1.0", optional = true, markers = "python_version < \"3.11\" and extra == \"toml\""}
+
+[package.extras]
+baseline = ["GitPython (>=3.1.30)"]
+sarif = ["jschema-to-python (>=1.2.3)", "sarif-om (>=1.0.4)"]
+test = ["beautifulsoup4 (>=4.8.0)", "coverage (>=4.5.4)", "fixtures (>=3.0.0)", "flake8 (>=4.0.0)", "pylint (==1.9.4)", "stestr (>=2.5.0)", "testscenarios (>=0.5.0)", "testtools (>=2.3.0)"]
+toml = ["tomli (>=1.1.0) ; python_version < \"3.11\""]
+yaml = ["PyYAML"]
+
+[[package]]
+name = "black"
+version = "25.12.0"
+description = "The uncompromising code formatter."
+optional = false
+python-versions = ">=3.10"
+groups = ["lint"]
+files = [
+    {file = "black-25.12.0-cp310-cp310-macosx_10_9_x86_64.whl", hash = "sha256:f85ba1ad15d446756b4ab5f3044731bf68b777f8f9ac9cdabd2425b97cd9c4e8"},
+    {file = "black-25.12.0-cp310-cp310-macosx_11_0_arm64.whl", hash = "sha256:546eecfe9a3a6b46f9d69d8a642585a6eaf348bcbbc4d87a19635570e02d9f4a"},
+    {file = "black-25.12.0-cp310-cp310-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:17dcc893da8d73d8f74a596f64b7c98ef5239c2cd2b053c0f25912c4494bf9ea"},
+    {file = "black-25.12.0-cp310-cp310-win_amd64.whl", hash = "sha256:09524b0e6af8ba7a3ffabdfc7a9922fb9adef60fed008c7cd2fc01f3048e6e6f"},
+    {file = "black-25.12.0-cp310-cp310-win_arm64.whl", hash = "sha256:b162653ed89eb942758efeb29d5e333ca5bb90e5130216f8369857db5955a7da"},
+    {file = "black-25.12.0-cp311-cp311-macosx_10_9_x86_64.whl", hash = "sha256:d0cfa263e85caea2cff57d8f917f9f51adae8e20b610e2b23de35b5b11ce691a"},
+    {file = "black-25.12.0-cp311-cp311-macosx_11_0_arm64.whl", hash = "sha256:1a2f578ae20c19c50a382286ba78bfbeafdf788579b053d8e4980afb079ab9be"},
+    {file = "black-25.12.0-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:d3e1b65634b0e471d07ff86ec338819e2ef860689859ef4501ab7ac290431f9b"},
+    {file = "black-25.12.0-cp311-cp311-win_amd64.whl", hash = "sha256:a3fa71e3b8dd9f7c6ac4d818345237dfb4175ed3bf37cd5a581dbc4c034f1ec5"},
+    {file = "black-25.12.0-cp311-cp311-win_arm64.whl", hash = "sha256:51e267458f7e650afed8445dc7edb3187143003d52a1b710c7321aef22aa9655"},
+    {file = "black-25.12.0-cp312-cp312-macosx_10_13_x86_64.whl", hash = "sha256:31f96b7c98c1ddaeb07dc0f56c652e25bdedaac76d5b68a059d998b57c55594a"},
+    {file = "black-25.12.0-cp312-cp312-macosx_11_0_arm64.whl", hash = "sha256:05dd459a19e218078a1f98178c13f861fe6a9a5f88fc969ca4d9b49eb1809783"},
+    {file = "black-25.12.0-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:c1f68c5eff61f226934be6b5b80296cf6939e5d2f0c2f7d543ea08b204bfaf59"},
+    {file = "black-25.12.0-cp312-cp312-win_amd64.whl", hash = "sha256:274f940c147ddab4442d316b27f9e332ca586d39c85ecf59ebdea82cc9ee8892"},
+    {file = "black-25.12.0-cp312-cp312-win_arm64.whl", hash = "sha256:169506ba91ef21e2e0591563deda7f00030cb466e747c4b09cb0a9dae5db2f43"},
+    {file = "black-25.12.0-cp313-cp313-macosx_10_13_x86_64.whl", hash = "sha256:a05ddeb656534c3e27a05a29196c962877c83fa5503db89e68857d1161ad08a5"},
+    {file = "black-25.12.0-cp313-cp313-macosx_11_0_arm64.whl", hash = "sha256:9ec77439ef3e34896995503865a85732c94396edcc739f302c5673a2315e1e7f"},
+    {file = "black-25.12.0-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:0e509c858adf63aa61d908061b52e580c40eae0dfa72415fa47ac01b12e29baf"},
+    {file = "black-25.12.0-cp313-cp313-win_amd64.whl", hash = "sha256:252678f07f5bac4ff0d0e9b261fbb029fa530cfa206d0a636a34ab445ef8ca9d"},
+    {file = "black-25.12.0-cp313-cp313-win_arm64.whl", hash = "sha256:bc5b1c09fe3c931ddd20ee548511c64ebf964ada7e6f0763d443947fd1c603ce"},
+    {file = "black-25.12.0-cp314-cp314-macosx_10_15_x86_64.whl", hash = "sha256:0a0953b134f9335c2434864a643c842c44fba562155c738a2a37a4d61f00cad5"},
+    {file = "black-25.12.0-cp314-cp314-macosx_11_0_arm64.whl", hash = "sha256:2355bbb6c3b76062870942d8cc450d4f8ac71f9c93c40122762c8784df49543f"},
+    {file = "black-25.12.0-cp314-cp314-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:9678bd991cc793e81d19aeeae57966ee02909877cb65838ccffef24c3ebac08f"},
+    {file = "black-25.12.0-cp314-cp314-win_amd64.whl", hash = "sha256:97596189949a8aad13ad12fcbb4ae89330039b96ad6742e6f6b45e75ad5cfd83"},
+    {file = "black-25.12.0-cp314-cp314-win_arm64.whl", hash = "sha256:778285d9ea197f34704e3791ea9404cd6d07595745907dd2ce3da7a13627b29b"},
+    {file = "black-25.12.0-py3-none-any.whl", hash = "sha256:48ceb36c16dbc84062740049eef990bb2ce07598272e673c17d1a7720c71c828"},
+    {file = "black-25.12.0.tar.gz", hash = "sha256:8d3dd9cea14bff7ddc0eb243c811cdb1a011ebb4800a5f0335a01a68654796a7"},
+]
+
+[package.dependencies]
+click = ">=8.0.0"
+mypy-extensions = ">=0.4.3"
+packaging = ">=22.0"
+pathspec = ">=0.9.0"
+platformdirs = ">=2"
+pytokens = ">=0.3.0"
+tomli = {version = ">=1.1.0", markers = "python_version < \"3.11\""}
+typing-extensions = {version = ">=4.0.1", markers = "python_version < \"3.11\""}
+
+[package.extras]
+colorama = ["colorama (>=0.4.3)"]
+d = ["aiohttp (>=3.10)"]
+jupyter = ["ipython (>=7.8.0)", "tokenize-rt (>=3.2.0)"]
+uvloop = ["uvloop (>=0.15.2)"]
+
+[[package]]
+name = "blinker"
+version = "1.9.0"
+description = "Fast, simple object-to-object and broadcast signaling"
+optional = false
+python-versions = ">=3.9"
+groups = ["main", "examples"]
+files = [
+    {file = "blinker-1.9.0-py3-none-any.whl", hash = "sha256:ba0efaa9080b619ff2f3459d1d500c57bddea4a6b424b60a91141db6fd2f08bc"},
+    {file = "blinker-1.9.0.tar.gz", hash = "sha256:b4ce2265a7abece45e7cc896e98dbebe6cead56bcf805a3d23136d145f5445bf"},
+]
+
+[[package]]
+name = "cachetools"
+version = "6.2.4"
+description = "Extensible memoizing collections and decorators"
+optional = false
+python-versions = ">=3.9"
+groups = ["main", "examples"]
+files = [
+    {file = "cachetools-6.2.4-py3-none-any.whl", hash = "sha256:69a7a52634fed8b8bf6e24a050fb60bff1c9bd8f6d24572b99c32d4e71e62a51"},
+    {file = "cachetools-6.2.4.tar.gz", hash = "sha256:82c5c05585e70b6ba2d3ae09ea60b79548872185d2f24ae1f2709d37299fd607"},
+]
+
+[[package]]
+name = "certifi"
+version = "2025.11.12"
+description = "Python package for providing Mozilla's CA Bundle."
+optional = false
+python-versions = ">=3.7"
+groups = ["main", "docs", "examples"]
+files = [
+    {file = "certifi-2025.11.12-py3-none-any.whl", hash = "sha256:97de8790030bbd5c2d96b7ec782fc2f7820ef8dba6db909ccf95449f2d062d4b"},
+    {file = "certifi-2025.11.12.tar.gz", hash = "sha256:d8ab5478f2ecd78af242878415affce761ca6bc54a22a27e026d7c25357c3316"},
+]
+
+[[package]]
+name = "charset-normalizer"
+version = "3.4.4"
+description = "The Real First Universal Charset Detector. Open, modern and actively maintained alternative to Chardet."
+optional = false
+python-versions = ">=3.7"
+groups = ["main", "docs", "examples"]
+files = [
+    {file = "charset_normalizer-3.4.4-cp310-cp310-macosx_10_9_universal2.whl", hash = "sha256:e824f1492727fa856dd6eda4f7cee25f8518a12f3c4a56a74e8095695089cf6d"},
+    {file = "charset_normalizer-3.4.4-cp310-cp310-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:4bd5d4137d500351a30687c2d3971758aac9a19208fc110ccb9d7188fbe709e8"},
+    {file = "charset_normalizer-3.4.4-cp310-cp310-manylinux2014_armv7l.manylinux_2_17_armv7l.manylinux_2_31_armv7l.whl", hash = "sha256:027f6de494925c0ab2a55eab46ae5129951638a49a34d87f4c3eda90f696b4ad"},
+    {file = "charset_normalizer-3.4.4-cp310-cp310-manylinux2014_ppc64le.manylinux_2_17_ppc64le.manylinux_2_28_ppc64le.whl", hash = "sha256:f820802628d2694cb7e56db99213f930856014862f3fd943d290ea8438d07ca8"},
+    {file = "charset_normalizer-3.4.4-cp310-cp310-manylinux2014_s390x.manylinux_2_17_s390x.manylinux_2_28_s390x.whl", hash = "sha256:798d75d81754988d2565bff1b97ba5a44411867c0cf32b77a7e8f8d84796b10d"},
+    {file = "charset_normalizer-3.4.4-cp310-cp310-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:9d1bb833febdff5c8927f922386db610b49db6e0d4f4ee29601d71e7c2694313"},
+    {file = "charset_normalizer-3.4.4-cp310-cp310-manylinux_2_31_riscv64.manylinux_2_39_riscv64.whl", hash = "sha256:9cd98cdc06614a2f768d2b7286d66805f94c48cde050acdbbb7db2600ab3197e"},
+    {file = "charset_normalizer-3.4.4-cp310-cp310-musllinux_1_2_aarch64.whl", hash = "sha256:077fbb858e903c73f6c9db43374fd213b0b6a778106bc7032446a8e8b5b38b93"},
+    {file = "charset_normalizer-3.4.4-cp310-cp310-musllinux_1_2_armv7l.whl", hash = "sha256:244bfb999c71b35de57821b8ea746b24e863398194a4014e4c76adc2bbdfeff0"},
+    {file = "charset_normalizer-3.4.4-cp310-cp310-musllinux_1_2_ppc64le.whl", hash = "sha256:64b55f9dce520635f018f907ff1b0df1fdc31f2795a922fb49dd14fbcdf48c84"},
+    {file = "charset_normalizer-3.4.4-cp310-cp310-musllinux_1_2_riscv64.whl", hash = "sha256:faa3a41b2b66b6e50f84ae4a68c64fcd0c44355741c6374813a800cd6695db9e"},
+    {file = "charset_normalizer-3.4.4-cp310-cp310-musllinux_1_2_s390x.whl", hash = "sha256:6515f3182dbe4ea06ced2d9e8666d97b46ef4c75e326b79bb624110f122551db"},
+    {file = "charset_normalizer-3.4.4-cp310-cp310-musllinux_1_2_x86_64.whl", hash = "sha256:cc00f04ed596e9dc0da42ed17ac5e596c6ccba999ba6bd92b0e0aef2f170f2d6"},
+    {file = "charset_normalizer-3.4.4-cp310-cp310-win32.whl", hash = "sha256:f34be2938726fc13801220747472850852fe6b1ea75869a048d6f896838c896f"},
+    {file = "charset_normalizer-3.4.4-cp310-cp310-win_amd64.whl", hash = "sha256:a61900df84c667873b292c3de315a786dd8dac506704dea57bc957bd31e22c7d"},
+    {file = "charset_normalizer-3.4.4-cp310-cp310-win_arm64.whl", hash = "sha256:cead0978fc57397645f12578bfd2d5ea9138ea0fac82b2f63f7f7c6877986a69"},
+    {file = "charset_normalizer-3.4.4-cp311-cp311-macosx_10_9_universal2.whl", hash = "sha256:6e1fcf0720908f200cd21aa4e6750a48ff6ce4afe7ff5a79a90d5ed8a08296f8"},
+    {file = "charset_normalizer-3.4.4-cp311-cp311-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:5f819d5fe9234f9f82d75bdfa9aef3a3d72c4d24a6e57aeaebba32a704553aa0"},
+    {file = "charset_normalizer-3.4.4-cp311-cp311-manylinux2014_armv7l.manylinux_2_17_armv7l.manylinux_2_31_armv7l.whl", hash = "sha256:a59cb51917aa591b1c4e6a43c132f0cdc3c76dbad6155df4e28ee626cc77a0a3"},
+    {file = "charset_normalizer-3.4.4-cp311-cp311-manylinux2014_ppc64le.manylinux_2_17_ppc64le.manylinux_2_28_ppc64le.whl", hash = "sha256:8ef3c867360f88ac904fd3f5e1f902f13307af9052646963ee08ff4f131adafc"},
+    {file = "charset_normalizer-3.4.4-cp311-cp311-manylinux2014_s390x.manylinux_2_17_s390x.manylinux_2_28_s390x.whl", hash = "sha256:d9e45d7faa48ee908174d8fe84854479ef838fc6a705c9315372eacbc2f02897"},
+    {file = "charset_normalizer-3.4.4-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:840c25fb618a231545cbab0564a799f101b63b9901f2569faecd6b222ac72381"},
+    {file = "charset_normalizer-3.4.4-cp311-cp311-manylinux_2_31_riscv64.manylinux_2_39_riscv64.whl", hash = "sha256:ca5862d5b3928c4940729dacc329aa9102900382fea192fc5e52eb69d6093815"},
+    {file = "charset_normalizer-3.4.4-cp311-cp311-musllinux_1_2_aarch64.whl", hash = "sha256:d9c7f57c3d666a53421049053eaacdd14bbd0a528e2186fcb2e672effd053bb0"},
+    {file = "charset_normalizer-3.4.4-cp311-cp311-musllinux_1_2_armv7l.whl", hash = "sha256:277e970e750505ed74c832b4bf75dac7476262ee2a013f5574dd49075879e161"},
+    {file = "charset_normalizer-3.4.4-cp311-cp311-musllinux_1_2_ppc64le.whl", hash = "sha256:31fd66405eaf47bb62e8cd575dc621c56c668f27d46a61d975a249930dd5e2a4"},
+    {file = "charset_normalizer-3.4.4-cp311-cp311-musllinux_1_2_riscv64.whl", hash = "sha256:0d3d8f15c07f86e9ff82319b3d9ef6f4bf907608f53fe9d92b28ea9ae3d1fd89"},
+    {file = "charset_normalizer-3.4.4-cp311-cp311-musllinux_1_2_s390x.whl", hash = "sha256:9f7fcd74d410a36883701fafa2482a6af2ff5ba96b9a620e9e0721e28ead5569"},
+    {file = "charset_normalizer-3.4.4-cp311-cp311-musllinux_1_2_x86_64.whl", hash = "sha256:ebf3e58c7ec8a8bed6d66a75d7fb37b55e5015b03ceae72a8e7c74495551e224"},
+    {file = "charset_normalizer-3.4.4-cp311-cp311-win32.whl", hash = "sha256:eecbc200c7fd5ddb9a7f16c7decb07b566c29fa2161a16cf67b8d068bd21690a"},
+    {file = "charset_normalizer-3.4.4-cp311-cp311-win_amd64.whl", hash = "sha256:5ae497466c7901d54b639cf42d5b8c1b6a4fead55215500d2f486d34db48d016"},
+    {file = "charset_normalizer-3.4.4-cp311-cp311-win_arm64.whl", hash = "sha256:65e2befcd84bc6f37095f5961e68a6f077bf44946771354a28ad434c2cce0ae1"},
+    {file = "charset_normalizer-3.4.4-cp312-cp312-macosx_10_13_universal2.whl", hash = "sha256:0a98e6759f854bd25a58a73fa88833fba3b7c491169f86ce1180c948ab3fd394"},
+    {file = "charset_normalizer-3.4.4-cp312-cp312-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:b5b290ccc2a263e8d185130284f8501e3e36c5e02750fc6b6bdeb2e9e96f1e25"},
+    {file = "charset_normalizer-3.4.4-cp312-cp312-manylinux2014_armv7l.manylinux_2_17_armv7l.manylinux_2_31_armv7l.whl", hash = "sha256:74bb723680f9f7a6234dcf67aea57e708ec1fbdf5699fb91dfd6f511b0a320ef"},
+    {file = "charset_normalizer-3.4.4-cp312-cp312-manylinux2014_ppc64le.manylinux_2_17_ppc64le.manylinux_2_28_ppc64le.whl", hash = "sha256:f1e34719c6ed0b92f418c7c780480b26b5d9c50349e9a9af7d76bf757530350d"},
+    {file = "charset_normalizer-3.4.4-cp312-cp312-manylinux2014_s390x.manylinux_2_17_s390x.manylinux_2_28_s390x.whl", hash = "sha256:2437418e20515acec67d86e12bf70056a33abdacb5cb1655042f6538d6b085a8"},
+    {file = "charset_normalizer-3.4.4-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:11d694519d7f29d6cd09f6ac70028dba10f92f6cdd059096db198c283794ac86"},
+    {file = "charset_normalizer-3.4.4-cp312-cp312-manylinux_2_31_riscv64.manylinux_2_39_riscv64.whl", hash = "sha256:ac1c4a689edcc530fc9d9aa11f5774b9e2f33f9a0c6a57864e90908f5208d30a"},
+    {file = "charset_normalizer-3.4.4-cp312-cp312-musllinux_1_2_aarch64.whl", hash = "sha256:21d142cc6c0ec30d2efee5068ca36c128a30b0f2c53c1c07bd78cb6bc1d3be5f"},
+    {file = "charset_normalizer-3.4.4-cp312-cp312-musllinux_1_2_armv7l.whl", hash = "sha256:5dbe56a36425d26d6cfb40ce79c314a2e4dd6211d51d6d2191c00bed34f354cc"},
+    {file = "charset_normalizer-3.4.4-cp312-cp312-musllinux_1_2_ppc64le.whl", hash = "sha256:5bfbb1b9acf3334612667b61bd3002196fe2a1eb4dd74d247e0f2a4d50ec9bbf"},
+    {file = "charset_normalizer-3.4.4-cp312-cp312-musllinux_1_2_riscv64.whl", hash = "sha256:d055ec1e26e441f6187acf818b73564e6e6282709e9bcb5b63f5b23068356a15"},
+    {file = "charset_normalizer-3.4.4-cp312-cp312-musllinux_1_2_s390x.whl", hash = "sha256:af2d8c67d8e573d6de5bc30cdb27e9b95e49115cd9baad5ddbd1a6207aaa82a9"},
+    {file = "charset_normalizer-3.4.4-cp312-cp312-musllinux_1_2_x86_64.whl", hash = "sha256:780236ac706e66881f3b7f2f32dfe90507a09e67d1d454c762cf642e6e1586e0"},
+    {file = "charset_normalizer-3.4.4-cp312-cp312-win32.whl", hash = "sha256:5833d2c39d8896e4e19b689ffc198f08ea58116bee26dea51e362ecc7cd3ed26"},
+    {file = "charset_normalizer-3.4.4-cp312-cp312-win_amd64.whl", hash = "sha256:a79cfe37875f822425b89a82333404539ae63dbdddf97f84dcbc3d339aae9525"},
+    {file = "charset_normalizer-3.4.4-cp312-cp312-win_arm64.whl", hash = "sha256:376bec83a63b8021bb5c8ea75e21c4ccb86e7e45ca4eb81146091b56599b80c3"},
+    {file = "charset_normalizer-3.4.4-cp313-cp313-macosx_10_13_universal2.whl", hash = "sha256:e1f185f86a6f3403aa2420e815904c67b2f9ebc443f045edd0de921108345794"},
+    {file = "charset_normalizer-3.4.4-cp313-cp313-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:6b39f987ae8ccdf0d2642338faf2abb1862340facc796048b604ef14919e55ed"},
+    {file = "charset_normalizer-3.4.4-cp313-cp313-manylinux2014_armv7l.manylinux_2_17_armv7l.manylinux_2_31_armv7l.whl", hash = "sha256:3162d5d8ce1bb98dd51af660f2121c55d0fa541b46dff7bb9b9f86ea1d87de72"},
+    {file = "charset_normalizer-3.4.4-cp313-cp313-manylinux2014_ppc64le.manylinux_2_17_ppc64le.manylinux_2_28_ppc64le.whl", hash = "sha256:81d5eb2a312700f4ecaa977a8235b634ce853200e828fbadf3a9c50bab278328"},
+    {file = "charset_normalizer-3.4.4-cp313-cp313-manylinux2014_s390x.manylinux_2_17_s390x.manylinux_2_28_s390x.whl", hash = "sha256:5bd2293095d766545ec1a8f612559f6b40abc0eb18bb2f5d1171872d34036ede"},
+    {file = "charset_normalizer-3.4.4-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:a8a8b89589086a25749f471e6a900d3f662d1d3b6e2e59dcecf787b1cc3a1894"},
+    {file = "charset_normalizer-3.4.4-cp313-cp313-manylinux_2_31_riscv64.manylinux_2_39_riscv64.whl", hash = "sha256:bc7637e2f80d8530ee4a78e878bce464f70087ce73cf7c1caf142416923b98f1"},
+    {file = "charset_normalizer-3.4.4-cp313-cp313-musllinux_1_2_aarch64.whl", hash = "sha256:f8bf04158c6b607d747e93949aa60618b61312fe647a6369f88ce2ff16043490"},
+    {file = "charset_normalizer-3.4.4-cp313-cp313-musllinux_1_2_armv7l.whl", hash = "sha256:554af85e960429cf30784dd47447d5125aaa3b99a6f0683589dbd27e2f45da44"},
+    {file = "charset_normalizer-3.4.4-cp313-cp313-musllinux_1_2_ppc64le.whl", hash = "sha256:74018750915ee7ad843a774364e13a3db91682f26142baddf775342c3f5b1133"},
+    {file = "charset_normalizer-3.4.4-cp313-cp313-musllinux_1_2_riscv64.whl", hash = "sha256:c0463276121fdee9c49b98908b3a89c39be45d86d1dbaa22957e38f6321d4ce3"},
+    {file = "charset_normalizer-3.4.4-cp313-cp313-musllinux_1_2_s390x.whl", hash = "sha256:362d61fd13843997c1c446760ef36f240cf81d3ebf74ac62652aebaf7838561e"},
+    {file = "charset_normalizer-3.4.4-cp313-cp313-musllinux_1_2_x86_64.whl", hash = "sha256:9a26f18905b8dd5d685d6d07b0cdf98a79f3c7a918906af7cc143ea2e164c8bc"},
+    {file = "charset_normalizer-3.4.4-cp313-cp313-win32.whl", hash = "sha256:9b35f4c90079ff2e2edc5b26c0c77925e5d2d255c42c74fdb70fb49b172726ac"},
+    {file = "charset_normalizer-3.4.4-cp313-cp313-win_amd64.whl", hash = "sha256:b435cba5f4f750aa6c0a0d92c541fb79f69a387c91e61f1795227e4ed9cece14"},
+    {file = "charset_normalizer-3.4.4-cp313-cp313-win_arm64.whl", hash = "sha256:542d2cee80be6f80247095cc36c418f7bddd14f4a6de45af91dfad36d817bba2"},
+    {file = "charset_normalizer-3.4.4-cp314-cp314-macosx_10_13_universal2.whl", hash = "sha256:da3326d9e65ef63a817ecbcc0df6e94463713b754fe293eaa03da99befb9a5bd"},
+    {file = "charset_normalizer-3.4.4-cp314-cp314-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:8af65f14dc14a79b924524b1e7fffe304517b2bff5a58bf64f30b98bbc5079eb"},
+    {file = "charset_normalizer-3.4.4-cp314-cp314-manylinux2014_armv7l.manylinux_2_17_armv7l.manylinux_2_31_armv7l.whl", hash = "sha256:74664978bb272435107de04e36db5a9735e78232b85b77d45cfb38f758efd33e"},
+    {file = "charset_normalizer-3.4.4-cp314-cp314-manylinux2014_ppc64le.manylinux_2_17_ppc64le.manylinux_2_28_ppc64le.whl", hash = "sha256:752944c7ffbfdd10c074dc58ec2d5a8a4cd9493b314d367c14d24c17684ddd14"},
+    {file = "charset_normalizer-3.4.4-cp314-cp314-manylinux2014_s390x.manylinux_2_17_s390x.manylinux_2_28_s390x.whl", hash = "sha256:d1f13550535ad8cff21b8d757a3257963e951d96e20ec82ab44bc64aeb62a191"},
+    {file = "charset_normalizer-3.4.4-cp314-cp314-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:ecaae4149d99b1c9e7b88bb03e3221956f68fd6d50be2ef061b2381b61d20838"},
+    {file = "charset_normalizer-3.4.4-cp314-cp314-manylinux_2_31_riscv64.manylinux_2_39_riscv64.whl", hash = "sha256:cb6254dc36b47a990e59e1068afacdcd02958bdcce30bb50cc1700a8b9d624a6"},
+    {file = "charset_normalizer-3.4.4-cp314-cp314-musllinux_1_2_aarch64.whl", hash = "sha256:c8ae8a0f02f57a6e61203a31428fa1d677cbe50c93622b4149d5c0f319c1d19e"},
+    {file = "charset_normalizer-3.4.4-cp314-cp314-musllinux_1_2_armv7l.whl", hash = "sha256:47cc91b2f4dd2833fddaedd2893006b0106129d4b94fdb6af1f4ce5a9965577c"},
+    {file = "charset_normalizer-3.4.4-cp314-cp314-musllinux_1_2_ppc64le.whl", hash = "sha256:82004af6c302b5d3ab2cfc4cc5f29db16123b1a8417f2e25f9066f91d4411090"},
+    {file = "charset_normalizer-3.4.4-cp314-cp314-musllinux_1_2_riscv64.whl", hash = "sha256:2b7d8f6c26245217bd2ad053761201e9f9680f8ce52f0fcd8d0755aeae5b2152"},
+    {file = "charset_normalizer-3.4.4-cp314-cp314-musllinux_1_2_s390x.whl", hash = "sha256:799a7a5e4fb2d5898c60b640fd4981d6a25f1c11790935a44ce38c54e985f828"},
+    {file = "charset_normalizer-3.4.4-cp314-cp314-musllinux_1_2_x86_64.whl", hash = "sha256:99ae2cffebb06e6c22bdc25801d7b30f503cc87dbd283479e7b606f70aff57ec"},
+    {file = "charset_normalizer-3.4.4-cp314-cp314-win32.whl", hash = "sha256:f9d332f8c2a2fcbffe1378594431458ddbef721c1769d78e2cbc06280d8155f9"},
+    {file = "charset_normalizer-3.4.4-cp314-cp314-win_amd64.whl", hash = "sha256:8a6562c3700cce886c5be75ade4a5db4214fda19fede41d9792d100288d8f94c"},
+    {file = "charset_normalizer-3.4.4-cp314-cp314-win_arm64.whl", hash = "sha256:de00632ca48df9daf77a2c65a484531649261ec9f25489917f09e455cb09ddb2"},
+    {file = "charset_normalizer-3.4.4-cp38-cp38-macosx_10_9_universal2.whl", hash = "sha256:ce8a0633f41a967713a59c4139d29110c07e826d131a316b50ce11b1d79b4f84"},
+    {file = "charset_normalizer-3.4.4-cp38-cp38-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:eaabd426fe94daf8fd157c32e571c85cb12e66692f15516a83a03264b08d06c3"},
+    {file = "charset_normalizer-3.4.4-cp38-cp38-manylinux2014_armv7l.manylinux_2_17_armv7l.manylinux_2_31_armv7l.whl", hash = "sha256:c4ef880e27901b6cc782f1b95f82da9313c0eb95c3af699103088fa0ac3ce9ac"},
+    {file = "charset_normalizer-3.4.4-cp38-cp38-manylinux2014_ppc64le.manylinux_2_17_ppc64le.manylinux_2_28_ppc64le.whl", hash = "sha256:2aaba3b0819274cc41757a1da876f810a3e4d7b6eb25699253a4effef9e8e4af"},
+    {file = "charset_normalizer-3.4.4-cp38-cp38-manylinux2014_s390x.manylinux_2_17_s390x.manylinux_2_28_s390x.whl", hash = "sha256:778d2e08eda00f4256d7f672ca9fef386071c9202f5e4607920b86d7803387f2"},
+    {file = "charset_normalizer-3.4.4-cp38-cp38-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:f155a433c2ec037d4e8df17d18922c3a0d9b3232a396690f17175d2946f0218d"},
+    {file = "charset_normalizer-3.4.4-cp38-cp38-manylinux_2_31_riscv64.manylinux_2_39_riscv64.whl", hash = "sha256:a8bf8d0f749c5757af2142fe7903a9df1d2e8aa3841559b2bad34b08d0e2bcf3"},
+    {file = "charset_normalizer-3.4.4-cp38-cp38-musllinux_1_2_aarch64.whl", hash = "sha256:194f08cbb32dc406d6e1aea671a68be0823673db2832b38405deba2fb0d88f63"},
+    {file = "charset_normalizer-3.4.4-cp38-cp38-musllinux_1_2_armv7l.whl", hash = "sha256:6aee717dcfead04c6eb1ce3bd29ac1e22663cdea57f943c87d1eab9a025438d7"},
+    {file = "charset_normalizer-3.4.4-cp38-cp38-musllinux_1_2_ppc64le.whl", hash = "sha256:cd4b7ca9984e5e7985c12bc60a6f173f3c958eae74f3ef6624bb6b26e2abbae4"},
+    {file = "charset_normalizer-3.4.4-cp38-cp38-musllinux_1_2_riscv64.whl", hash = "sha256:b7cf1017d601aa35e6bb650b6ad28652c9cd78ee6caff19f3c28d03e1c80acbf"},
+    {file = "charset_normalizer-3.4.4-cp38-cp38-musllinux_1_2_s390x.whl", hash = "sha256:e912091979546adf63357d7e2ccff9b44f026c075aeaf25a52d0e95ad2281074"},
+    {file = "charset_normalizer-3.4.4-cp38-cp38-musllinux_1_2_x86_64.whl", hash = "sha256:5cb4d72eea50c8868f5288b7f7f33ed276118325c1dfd3957089f6b519e1382a"},
+    {file = "charset_normalizer-3.4.4-cp38-cp38-win32.whl", hash = "sha256:837c2ce8c5a65a2035be9b3569c684358dfbf109fd3b6969630a87535495ceaa"},
+    {file = "charset_normalizer-3.4.4-cp38-cp38-win_amd64.whl", hash = "sha256:44c2a8734b333e0578090c4cd6b16f275e07aa6614ca8715e6c038e865e70576"},
+    {file = "charset_normalizer-3.4.4-cp39-cp39-macosx_10_9_universal2.whl", hash = "sha256:a9768c477b9d7bd54bc0c86dbaebdec6f03306675526c9927c0e8a04e8f94af9"},
+    {file = "charset_normalizer-3.4.4-cp39-cp39-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:1bee1e43c28aa63cb16e5c14e582580546b08e535299b8b6158a7c9c768a1f3d"},
+    {file = "charset_normalizer-3.4.4-cp39-cp39-manylinux2014_armv7l.manylinux_2_17_armv7l.manylinux_2_31_armv7l.whl", hash = "sha256:fd44c878ea55ba351104cb93cc85e74916eb8fa440ca7903e57575e97394f608"},
+    {file = "charset_normalizer-3.4.4-cp39-cp39-manylinux2014_ppc64le.manylinux_2_17_ppc64le.manylinux_2_28_ppc64le.whl", hash = "sha256:0f04b14ffe5fdc8c4933862d8306109a2c51e0704acfa35d51598eb45a1e89fc"},
+    {file = "charset_normalizer-3.4.4-cp39-cp39-manylinux2014_s390x.manylinux_2_17_s390x.manylinux_2_28_s390x.whl", hash = "sha256:cd09d08005f958f370f539f186d10aec3377d55b9eeb0d796025d4886119d76e"},
+    {file = "charset_normalizer-3.4.4-cp39-cp39-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:4fe7859a4e3e8457458e2ff592f15ccb02f3da787fcd31e0183879c3ad4692a1"},
+    {file = "charset_normalizer-3.4.4-cp39-cp39-manylinux_2_31_riscv64.manylinux_2_39_riscv64.whl", hash = "sha256:fa09f53c465e532f4d3db095e0c55b615f010ad81803d383195b6b5ca6cbf5f3"},
+    {file = "charset_normalizer-3.4.4-cp39-cp39-musllinux_1_2_aarch64.whl", hash = "sha256:7fa17817dc5625de8a027cb8b26d9fefa3ea28c8253929b8d6649e705d2835b6"},
+    {file = "charset_normalizer-3.4.4-cp39-cp39-musllinux_1_2_armv7l.whl", hash = "sha256:5947809c8a2417be3267efc979c47d76a079758166f7d43ef5ae8e9f92751f88"},
+    {file = "charset_normalizer-3.4.4-cp39-cp39-musllinux_1_2_ppc64le.whl", hash = "sha256:4902828217069c3c5c71094537a8e623f5d097858ac6ca8252f7b4d10b7560f1"},
+    {file = "charset_normalizer-3.4.4-cp39-cp39-musllinux_1_2_riscv64.whl", hash = "sha256:7c308f7e26e4363d79df40ca5b2be1c6ba9f02bdbccfed5abddb7859a6ce72cf"},
+    {file = "charset_normalizer-3.4.4-cp39-cp39-musllinux_1_2_s390x.whl", hash = "sha256:2c9d3c380143a1fedbff95a312aa798578371eb29da42106a29019368a475318"},
+    {file = "charset_normalizer-3.4.4-cp39-cp39-musllinux_1_2_x86_64.whl", hash = "sha256:cb01158d8b88ee68f15949894ccc6712278243d95f344770fa7593fa2d94410c"},
+    {file = "charset_normalizer-3.4.4-cp39-cp39-win32.whl", hash = "sha256:2677acec1a2f8ef614c6888b5b4ae4060cc184174a938ed4e8ef690e15d3e505"},
+    {file = "charset_normalizer-3.4.4-cp39-cp39-win_amd64.whl", hash = "sha256:f8e160feb2aed042cd657a72acc0b481212ed28b1b9a95c0cee1621b524e1966"},
+    {file = "charset_normalizer-3.4.4-cp39-cp39-win_arm64.whl", hash = "sha256:b5d84d37db046c5ca74ee7bb47dd6cbc13f80665fdde3e8040bdd3fb015ecb50"},
+    {file = "charset_normalizer-3.4.4-py3-none-any.whl", hash = "sha256:7a32c560861a02ff789ad905a2fe94e3f840803362c84fecf1851cb4cf3dc37f"},
+    {file = "charset_normalizer-3.4.4.tar.gz", hash = "sha256:94537985111c35f28720e43603b8e7b43a6ecfb2ce1d3058bbe955b73404e21a"},
+]
+
+[[package]]
+name = "click"
+version = "8.3.1"
+description = "Composable command line interface toolkit"
+optional = false
+python-versions = ">=3.10"
+groups = ["main", "examples", "lint"]
+files = [
+    {file = "click-8.3.1-py3-none-any.whl", hash = "sha256:981153a64e25f12d547d3426c367a4857371575ee7ad18df2a6183ab0545b2a6"},
+    {file = "click-8.3.1.tar.gz", hash = "sha256:12ff4785d337a1bb490bb7e9c2b1ee5da3112e94a8622f26a6c77f5d2fc6842a"},
+]
+
+[package.dependencies]
+colorama = {version = "*", markers = "platform_system == \"Windows\""}
+
+[[package]]
+name = "colorama"
+version = "0.4.6"
+description = "Cross-platform colored terminal text."
+optional = false
+python-versions = "!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*,!=3.4.*,!=3.5.*,!=3.6.*,>=2.7"
+groups = ["main", "docs", "examples", "lint", "test"]
+files = [
+    {file = "colorama-0.4.6-py2.py3-none-any.whl", hash = "sha256:4f1d9991f5acc0ca119f9d443620b77f9d6b33703e51011c16baf57afb285fc6"},
+    {file = "colorama-0.4.6.tar.gz", hash = "sha256:08695f5cb7ed6e0531a20572697297273c47b8cae5a63ffc6d6ed5c201be6e44"},
+]
+markers = {main = "platform_system == \"Windows\"", docs = "sys_platform == \"win32\"", examples = "platform_system == \"Windows\"", lint = "platform_system == \"Windows\"", test = "sys_platform == \"win32\""}
+
+[[package]]
+name = "coverage"
+version = "7.13.1"
+description = "Code coverage measurement for Python"
+optional = false
+python-versions = ">=3.10"
+groups = ["test"]
+files = [
+    {file = "coverage-7.13.1-cp310-cp310-macosx_10_9_x86_64.whl", hash = "sha256:e1fa280b3ad78eea5be86f94f461c04943d942697e0dac889fa18fff8f5f9147"},
+    {file = "coverage-7.13.1-cp310-cp310-macosx_11_0_arm64.whl", hash = "sha256:c3d8c679607220979434f494b139dfb00131ebf70bb406553d69c1ff01a5c33d"},
+    {file = "coverage-7.13.1-cp310-cp310-manylinux1_i686.manylinux_2_28_i686.manylinux_2_5_i686.whl", hash = "sha256:339dc63b3eba969067b00f41f15ad161bf2946613156fb131266d8debc8e44d0"},
+    {file = "coverage-7.13.1-cp310-cp310-manylinux1_x86_64.manylinux_2_28_x86_64.manylinux_2_5_x86_64.whl", hash = "sha256:db622b999ffe49cb891f2fff3b340cdc2f9797d01a0a202a0973ba2562501d90"},
+    {file = "coverage-7.13.1-cp310-cp310-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:d1443ba9acbb593fa7c1c29e011d7c9761545fe35e7652e85ce7f51a16f7e08d"},
+    {file = "coverage-7.13.1-cp310-cp310-manylinux_2_31_riscv64.manylinux_2_39_riscv64.whl", hash = "sha256:c832ec92c4499ac463186af72f9ed4d8daec15499b16f0a879b0d1c8e5cf4a3b"},
+    {file = "coverage-7.13.1-cp310-cp310-musllinux_1_2_aarch64.whl", hash = "sha256:562ec27dfa3f311e0db1ba243ec6e5f6ab96b1edfcfc6cf86f28038bc4961ce6"},
+    {file = "coverage-7.13.1-cp310-cp310-musllinux_1_2_i686.whl", hash = "sha256:4de84e71173d4dada2897e5a0e1b7877e5eefbfe0d6a44edee6ce31d9b8ec09e"},
+    {file = "coverage-7.13.1-cp310-cp310-musllinux_1_2_riscv64.whl", hash = "sha256:a5a68357f686f8c4d527a2dc04f52e669c2fc1cbde38f6f7eb6a0e58cbd17cae"},
+    {file = "coverage-7.13.1-cp310-cp310-musllinux_1_2_x86_64.whl", hash = "sha256:77cc258aeb29a3417062758975521eae60af6f79e930d6993555eeac6a8eac29"},
+    {file = "coverage-7.13.1-cp310-cp310-win32.whl", hash = "sha256:bb4f8c3c9a9f34423dba193f241f617b08ffc63e27f67159f60ae6baf2dcfe0f"},
+    {file = "coverage-7.13.1-cp310-cp310-win_amd64.whl", hash = "sha256:c8e2706ceb622bc63bac98ebb10ef5da80ed70fbd8a7999a5076de3afaef0fb1"},
+    {file = "coverage-7.13.1-cp311-cp311-macosx_10_9_x86_64.whl", hash = "sha256:1a55d509a1dc5a5b708b5dad3b5334e07a16ad4c2185e27b40e4dba796ab7f88"},
+    {file = "coverage-7.13.1-cp311-cp311-macosx_11_0_arm64.whl", hash = "sha256:4d010d080c4888371033baab27e47c9df7d6fb28d0b7b7adf85a4a49be9298b3"},
+    {file = "coverage-7.13.1-cp311-cp311-manylinux1_i686.manylinux_2_28_i686.manylinux_2_5_i686.whl", hash = "sha256:d938b4a840fb1523b9dfbbb454f652967f18e197569c32266d4d13f37244c3d9"},
+    {file = "coverage-7.13.1-cp311-cp311-manylinux1_x86_64.manylinux_2_28_x86_64.manylinux_2_5_x86_64.whl", hash = "sha256:bf100a3288f9bb7f919b87eb84f87101e197535b9bd0e2c2b5b3179633324fee"},
+    {file = "coverage-7.13.1-cp311-cp311-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:ef6688db9bf91ba111ae734ba6ef1a063304a881749726e0d3575f5c10a9facf"},
+    {file = "coverage-7.13.1-cp311-cp311-manylinux_2_31_riscv64.manylinux_2_39_riscv64.whl", hash = "sha256:0b609fc9cdbd1f02e51f67f51e5aee60a841ef58a68d00d5ee2c0faf357481a3"},
+    {file = "coverage-7.13.1-cp311-cp311-musllinux_1_2_aarch64.whl", hash = "sha256:c43257717611ff5e9a1d79dce8e47566235ebda63328718d9b65dd640bc832ef"},
+    {file = "coverage-7.13.1-cp311-cp311-musllinux_1_2_i686.whl", hash = "sha256:e09fbecc007f7b6afdfb3b07ce5bd9f8494b6856dd4f577d26c66c391b829851"},
+    {file = "coverage-7.13.1-cp311-cp311-musllinux_1_2_riscv64.whl", hash = "sha256:a03a4f3a19a189919c7055098790285cc5c5b0b3976f8d227aea39dbf9f8bfdb"},
+    {file = "coverage-7.13.1-cp311-cp311-musllinux_1_2_x86_64.whl", hash = "sha256:3820778ea1387c2b6a818caec01c63adc5b3750211af6447e8dcfb9b6f08dbba"},
+    {file = "coverage-7.13.1-cp311-cp311-win32.whl", hash = "sha256:ff10896fa55167371960c5908150b434b71c876dfab97b69478f22c8b445ea19"},
+    {file = "coverage-7.13.1-cp311-cp311-win_amd64.whl", hash = "sha256:a998cc0aeeea4c6d5622a3754da5a493055d2d95186bad877b0a34ea6e6dbe0a"},
+    {file = "coverage-7.13.1-cp311-cp311-win_arm64.whl", hash = "sha256:fea07c1a39a22614acb762e3fbbb4011f65eedafcb2948feeef641ac78b4ee5c"},
+    {file = "coverage-7.13.1-cp312-cp312-macosx_10_13_x86_64.whl", hash = "sha256:6f34591000f06e62085b1865c9bc5f7858df748834662a51edadfd2c3bfe0dd3"},
+    {file = "coverage-7.13.1-cp312-cp312-macosx_11_0_arm64.whl", hash = "sha256:b67e47c5595b9224599016e333f5ec25392597a89d5744658f837d204e16c63e"},
+    {file = "coverage-7.13.1-cp312-cp312-manylinux1_i686.manylinux_2_28_i686.manylinux_2_5_i686.whl", hash = "sha256:3e7b8bd70c48ffb28461ebe092c2345536fb18bbbf19d287c8913699735f505c"},
+    {file = "coverage-7.13.1-cp312-cp312-manylinux1_x86_64.manylinux_2_28_x86_64.manylinux_2_5_x86_64.whl", hash = "sha256:c223d078112e90dc0e5c4e35b98b9584164bea9fbbd221c0b21c5241f6d51b62"},
+    {file = "coverage-7.13.1-cp312-cp312-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:794f7c05af0763b1bbd1b9e6eff0e52ad068be3b12cd96c87de037b01390c968"},
+    {file = "coverage-7.13.1-cp312-cp312-manylinux_2_31_riscv64.manylinux_2_39_riscv64.whl", hash = "sha256:0642eae483cc8c2902e4af7298bf886d605e80f26382124cddc3967c2a3df09e"},
+    {file = "coverage-7.13.1-cp312-cp312-musllinux_1_2_aarch64.whl", hash = "sha256:9f5e772ed5fef25b3de9f2008fe67b92d46831bd2bc5bdc5dd6bfd06b83b316f"},
+    {file = "coverage-7.13.1-cp312-cp312-musllinux_1_2_i686.whl", hash = "sha256:45980ea19277dc0a579e432aef6a504fe098ef3a9032ead15e446eb0f1191aee"},
+    {file = "coverage-7.13.1-cp312-cp312-musllinux_1_2_riscv64.whl", hash = "sha256:e4f18eca6028ffa62adbd185a8f1e1dd242f2e68164dba5c2b74a5204850b4cf"},
+    {file = "coverage-7.13.1-cp312-cp312-musllinux_1_2_x86_64.whl", hash = "sha256:f8dca5590fec7a89ed6826fce625595279e586ead52e9e958d3237821fbc750c"},
+    {file = "coverage-7.13.1-cp312-cp312-win32.whl", hash = "sha256:ff86d4e85188bba72cfb876df3e11fa243439882c55957184af44a35bd5880b7"},
+    {file = "coverage-7.13.1-cp312-cp312-win_amd64.whl", hash = "sha256:16cc1da46c04fb0fb128b4dc430b78fa2aba8a6c0c9f8eb391fd5103409a6ac6"},
+    {file = "coverage-7.13.1-cp312-cp312-win_arm64.whl", hash = "sha256:8d9bc218650022a768f3775dd7fdac1886437325d8d295d923ebcfef4892ad5c"},
+    {file = "coverage-7.13.1-cp313-cp313-macosx_10_13_x86_64.whl", hash = "sha256:cb237bfd0ef4d5eb6a19e29f9e528ac67ac3be932ea6b44fb6cc09b9f3ecff78"},
+    {file = "coverage-7.13.1-cp313-cp313-macosx_11_0_arm64.whl", hash = "sha256:1dcb645d7e34dcbcc96cd7c132b1fc55c39263ca62eb961c064eb3928997363b"},
+    {file = "coverage-7.13.1-cp313-cp313-manylinux1_i686.manylinux_2_28_i686.manylinux_2_5_i686.whl", hash = "sha256:3d42df8201e00384736f0df9be2ced39324c3907607d17d50d50116c989d84cd"},
+    {file = "coverage-7.13.1-cp313-cp313-manylinux1_x86_64.manylinux_2_28_x86_64.manylinux_2_5_x86_64.whl", hash = "sha256:fa3edde1aa8807de1d05934982416cb3ec46d1d4d91e280bcce7cca01c507992"},
+    {file = "coverage-7.13.1-cp313-cp313-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:9edd0e01a343766add6817bc448408858ba6b489039eaaa2018474e4001651a4"},
+    {file = "coverage-7.13.1-cp313-cp313-manylinux_2_31_riscv64.manylinux_2_39_riscv64.whl", hash = "sha256:985b7836931d033570b94c94713c6dba5f9d3ff26045f72c3e5dbc5fe3361e5a"},
+    {file = "coverage-7.13.1-cp313-cp313-musllinux_1_2_aarch64.whl", hash = "sha256:ffed1e4980889765c84a5d1a566159e363b71d6b6fbaf0bebc9d3c30bc016766"},
+    {file = "coverage-7.13.1-cp313-cp313-musllinux_1_2_i686.whl", hash = "sha256:8842af7f175078456b8b17f1b73a0d16a65dcbdc653ecefeb00a56b3c8c298c4"},
+    {file = "coverage-7.13.1-cp313-cp313-musllinux_1_2_riscv64.whl", hash = "sha256:ccd7a6fca48ca9c131d9b0a2972a581e28b13416fc313fb98b6d24a03ce9a398"},
+    {file = "coverage-7.13.1-cp313-cp313-musllinux_1_2_x86_64.whl", hash = "sha256:0403f647055de2609be776965108447deb8e384fe4a553c119e3ff6bfbab4784"},
+    {file = "coverage-7.13.1-cp313-cp313-win32.whl", hash = "sha256:549d195116a1ba1e1ae2f5ca143f9777800f6636eab917d4f02b5310d6d73461"},
+    {file = "coverage-7.13.1-cp313-cp313-win_amd64.whl", hash = "sha256:5899d28b5276f536fcf840b18b61a9fce23cc3aec1d114c44c07fe94ebeaa500"},
+    {file = "coverage-7.13.1-cp313-cp313-win_arm64.whl", hash = "sha256:868a2fae76dfb06e87291bcbd4dcbcc778a8500510b618d50496e520bd94d9b9"},
+    {file = "coverage-7.13.1-cp313-cp313t-macosx_10_13_x86_64.whl", hash = "sha256:67170979de0dacac3f3097d02b0ad188d8edcea44ccc44aaa0550af49150c7dc"},
+    {file = "coverage-7.13.1-cp313-cp313t-macosx_11_0_arm64.whl", hash = "sha256:f80e2bb21bfab56ed7405c2d79d34b5dc0bc96c2c1d2a067b643a09fb756c43a"},
+    {file = "coverage-7.13.1-cp313-cp313t-manylinux1_i686.manylinux_2_28_i686.manylinux_2_5_i686.whl", hash = "sha256:f83351e0f7dcdb14d7326c3d8d8c4e915fa685cbfdc6281f9470d97a04e9dfe4"},
+    {file = "coverage-7.13.1-cp313-cp313t-manylinux1_x86_64.manylinux_2_28_x86_64.manylinux_2_5_x86_64.whl", hash = "sha256:bb3f6562e89bad0110afbe64e485aac2462efdce6232cdec7862a095dc3412f6"},
+    {file = "coverage-7.13.1-cp313-cp313t-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:77545b5dcda13b70f872c3b5974ac64c21d05e65b1590b441c8560115dc3a0d1"},
+    {file = "coverage-7.13.1-cp313-cp313t-manylinux_2_31_riscv64.manylinux_2_39_riscv64.whl", hash = "sha256:a4d240d260a1aed814790bbe1f10a5ff31ce6c21bc78f0da4a1e8268d6c80dbd"},
+    {file = "coverage-7.13.1-cp313-cp313t-musllinux_1_2_aarch64.whl", hash = "sha256:d2287ac9360dec3837bfdad969963a5d073a09a85d898bd86bea82aa8876ef3c"},
+    {file = "coverage-7.13.1-cp313-cp313t-musllinux_1_2_i686.whl", hash = "sha256:0d2c11f3ea4db66b5cbded23b20185c35066892c67d80ec4be4bab257b9ad1e0"},
+    {file = "coverage-7.13.1-cp313-cp313t-musllinux_1_2_riscv64.whl", hash = "sha256:3fc6a169517ca0d7ca6846c3c5392ef2b9e38896f61d615cb75b9e7134d4ee1e"},
+    {file = "coverage-7.13.1-cp313-cp313t-musllinux_1_2_x86_64.whl", hash = "sha256:d10a2ed46386e850bb3de503a54f9fe8192e5917fcbb143bfef653a9355e9a53"},
+    {file = "coverage-7.13.1-cp313-cp313t-win32.whl", hash = "sha256:75a6f4aa904301dab8022397a22c0039edc1f51e90b83dbd4464b8a38dc87842"},
+    {file = "coverage-7.13.1-cp313-cp313t-win_amd64.whl", hash = "sha256:309ef5706e95e62578cda256b97f5e097916a2c26247c287bbe74794e7150df2"},
+    {file = "coverage-7.13.1-cp313-cp313t-win_arm64.whl", hash = "sha256:92f980729e79b5d16d221038dbf2e8f9a9136afa072f9d5d6ed4cb984b126a09"},
+    {file = "coverage-7.13.1-cp314-cp314-macosx_10_15_x86_64.whl", hash = "sha256:97ab3647280d458a1f9adb85244e81587505a43c0c7cff851f5116cd2814b894"},
+    {file = "coverage-7.13.1-cp314-cp314-macosx_11_0_arm64.whl", hash = "sha256:8f572d989142e0908e6acf57ad1b9b86989ff057c006d13b76c146ec6a20216a"},
+    {file = "coverage-7.13.1-cp314-cp314-manylinux1_i686.manylinux_2_28_i686.manylinux_2_5_i686.whl", hash = "sha256:d72140ccf8a147e94274024ff6fd8fb7811354cf7ef88b1f0a988ebaa5bc774f"},
+    {file = "coverage-7.13.1-cp314-cp314-manylinux1_x86_64.manylinux_2_28_x86_64.manylinux_2_5_x86_64.whl", hash = "sha256:d3c9f051b028810f5a87c88e5d6e9af3c0ff32ef62763bf15d29f740453ca909"},
+    {file = "coverage-7.13.1-cp314-cp314-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:f398ba4df52d30b1763f62eed9de5620dcde96e6f491f4c62686736b155aa6e4"},
+    {file = "coverage-7.13.1-cp314-cp314-manylinux_2_31_riscv64.manylinux_2_39_riscv64.whl", hash = "sha256:132718176cc723026d201e347f800cd1a9e4b62ccd3f82476950834dad501c75"},
+    {file = "coverage-7.13.1-cp314-cp314-musllinux_1_2_aarch64.whl", hash = "sha256:9e549d642426e3579b3f4b92d0431543b012dcb6e825c91619d4e93b7363c3f9"},
+    {file = "coverage-7.13.1-cp314-cp314-musllinux_1_2_i686.whl", hash = "sha256:90480b2134999301eea795b3a9dbf606c6fbab1b489150c501da84a959442465"},
+    {file = "coverage-7.13.1-cp314-cp314-musllinux_1_2_riscv64.whl", hash = "sha256:e825dbb7f84dfa24663dd75835e7257f8882629fc11f03ecf77d84a75134b864"},
+    {file = "coverage-7.13.1-cp314-cp314-musllinux_1_2_x86_64.whl", hash = "sha256:623dcc6d7a7ba450bbdbeedbaa0c42b329bdae16491af2282f12a7e809be7eb9"},
+    {file = "coverage-7.13.1-cp314-cp314-win32.whl", hash = "sha256:6e73ebb44dca5f708dc871fe0b90cf4cff1a13f9956f747cc87b535a840386f5"},
+    {file = "coverage-7.13.1-cp314-cp314-win_amd64.whl", hash = "sha256:be753b225d159feb397bd0bf91ae86f689bad0da09d3b301478cd39b878ab31a"},
+    {file = "coverage-7.13.1-cp314-cp314-win_arm64.whl", hash = "sha256:228b90f613b25ba0019361e4ab81520b343b622fc657daf7e501c4ed6a2366c0"},
+    {file = "coverage-7.13.1-cp314-cp314t-macosx_10_15_x86_64.whl", hash = "sha256:60cfb538fe9ef86e5b2ab0ca8fc8d62524777f6c611dcaf76dc16fbe9b8e698a"},
+    {file = "coverage-7.13.1-cp314-cp314t-macosx_11_0_arm64.whl", hash = "sha256:57dfc8048c72ba48a8c45e188d811e5efd7e49b387effc8fb17e97936dde5bf6"},
+    {file = "coverage-7.13.1-cp314-cp314t-manylinux1_i686.manylinux_2_28_i686.manylinux_2_5_i686.whl", hash = "sha256:3f2f725aa3e909b3c5fdb8192490bdd8e1495e85906af74fe6e34a2a77ba0673"},
+    {file = "coverage-7.13.1-cp314-cp314t-manylinux1_x86_64.manylinux_2_28_x86_64.manylinux_2_5_x86_64.whl", hash = "sha256:9ee68b21909686eeb21dfcba2c3b81fee70dcf38b140dcd5aa70680995fa3aa5"},
+    {file = "coverage-7.13.1-cp314-cp314t-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:724b1b270cb13ea2e6503476e34541a0b1f62280bc997eab443f87790202033d"},
+    {file = "coverage-7.13.1-cp314-cp314t-manylinux_2_31_riscv64.manylinux_2_39_riscv64.whl", hash = "sha256:916abf1ac5cf7eb16bc540a5bf75c71c43a676f5c52fcb9fe75a2bd75fb944e8"},
+    {file = "coverage-7.13.1-cp314-cp314t-musllinux_1_2_aarch64.whl", hash = "sha256:776483fd35b58d8afe3acbd9988d5de592ab6da2d2a865edfdbc9fdb43e7c486"},
+    {file = "coverage-7.13.1-cp314-cp314t-musllinux_1_2_i686.whl", hash = "sha256:b6f3b96617e9852703f5b633ea01315ca45c77e879584f283c44127f0f1ec564"},
+    {file = "coverage-7.13.1-cp314-cp314t-musllinux_1_2_riscv64.whl", hash = "sha256:bd63e7b74661fed317212fab774e2a648bc4bb09b35f25474f8e3325d2945cd7"},
+    {file = "coverage-7.13.1-cp314-cp314t-musllinux_1_2_x86_64.whl", hash = "sha256:933082f161bbb3e9f90d00990dc956120f608cdbcaeea15c4d897f56ef4fe416"},
+    {file = "coverage-7.13.1-cp314-cp314t-win32.whl", hash = "sha256:18be793c4c87de2965e1c0f060f03d9e5aff66cfeae8e1dbe6e5b88056ec153f"},
+    {file = "coverage-7.13.1-cp314-cp314t-win_amd64.whl", hash = "sha256:0e42e0ec0cd3e0d851cb3c91f770c9301f48647cb2877cb78f74bdaa07639a79"},
+    {file = "coverage-7.13.1-cp314-cp314t-win_arm64.whl", hash = "sha256:eaecf47ef10c72ece9a2a92118257da87e460e113b83cc0d2905cbbe931792b4"},
+    {file = "coverage-7.13.1-py3-none-any.whl", hash = "sha256:2016745cb3ba554469d02819d78958b571792bb68e31302610e898f80dd3a573"},
+    {file = "coverage-7.13.1.tar.gz", hash = "sha256:b7593fe7eb5feaa3fbb461ac79aac9f9fc0387a5ca8080b0c6fe2ca27b091afd"},
+]
+
+[package.dependencies]
+tomli = {version = "*", optional = true, markers = "python_full_version <= \"3.11.0a6\" and extra == \"toml\""}
+
+[package.extras]
+toml = ["tomli ; python_full_version <= \"3.11.0a6\""]
+
+[[package]]
+name = "debugpy"
+version = "1.8.19"
+description = "An implementation of the Debug Adapter Protocol for Python"
+optional = false
+python-versions = ">=3.8"
+groups = ["main"]
+files = [
+    {file = "debugpy-1.8.19-cp310-cp310-macosx_15_0_x86_64.whl", hash = "sha256:fce6da15d73be5935b4438435c53adb512326a3e11e4f90793ea87cd9f018254"},
+    {file = "debugpy-1.8.19-cp310-cp310-manylinux_2_34_x86_64.whl", hash = "sha256:e24b1652a1df1ab04d81e7ead446a91c226de704ff5dde6bd0a0dbaab07aa3f2"},
+    {file = "debugpy-1.8.19-cp310-cp310-win32.whl", hash = "sha256:327cb28c3ad9e17bc925efc7f7018195fd4787c2fe4b7af1eec11f1d19bdec62"},
+    {file = "debugpy-1.8.19-cp310-cp310-win_amd64.whl", hash = "sha256:b7dd275cf2c99e53adb9654f5ae015f70415bbe2bacbe24cfee30d54b6aa03c5"},
+    {file = "debugpy-1.8.19-cp311-cp311-macosx_15_0_universal2.whl", hash = "sha256:c5dcfa21de1f735a4f7ced4556339a109aa0f618d366ede9da0a3600f2516d8b"},
+    {file = "debugpy-1.8.19-cp311-cp311-manylinux_2_34_x86_64.whl", hash = "sha256:806d6800246244004625d5222d7765874ab2d22f3ba5f615416cf1342d61c488"},
+    {file = "debugpy-1.8.19-cp311-cp311-win32.whl", hash = "sha256:783a519e6dfb1f3cd773a9bda592f4887a65040cb0c7bd38dde410f4e53c40d4"},
+    {file = "debugpy-1.8.19-cp311-cp311-win_amd64.whl", hash = "sha256:14035cbdbb1fe4b642babcdcb5935c2da3b1067ac211c5c5a8fdc0bb31adbcaa"},
+    {file = "debugpy-1.8.19-cp312-cp312-macosx_15_0_universal2.whl", hash = "sha256:bccb1540a49cde77edc7ce7d9d075c1dbeb2414751bc0048c7a11e1b597a4c2e"},
+    {file = "debugpy-1.8.19-cp312-cp312-manylinux_2_34_x86_64.whl", hash = "sha256:e9c68d9a382ec754dc05ed1d1b4ed5bd824b9f7c1a8cd1083adb84b3c93501de"},
+    {file = "debugpy-1.8.19-cp312-cp312-win32.whl", hash = "sha256:6599cab8a783d1496ae9984c52cb13b7c4a3bd06a8e6c33446832a5d97ce0bee"},
+    {file = "debugpy-1.8.19-cp312-cp312-win_amd64.whl", hash = "sha256:66e3d2fd8f2035a8f111eb127fa508469dfa40928a89b460b41fd988684dc83d"},
+    {file = "debugpy-1.8.19-cp313-cp313-macosx_15_0_universal2.whl", hash = "sha256:91e35db2672a0abaf325f4868fcac9c1674a0d9ad9bb8a8c849c03a5ebba3e6d"},
+    {file = "debugpy-1.8.19-cp313-cp313-manylinux_2_34_x86_64.whl", hash = "sha256:85016a73ab84dea1c1f1dcd88ec692993bcbe4532d1b49ecb5f3c688ae50c606"},
+    {file = "debugpy-1.8.19-cp313-cp313-win32.whl", hash = "sha256:b605f17e89ba0ecee994391194285fada89cee111cfcd29d6f2ee11cbdc40976"},
+    {file = "debugpy-1.8.19-cp313-cp313-win_amd64.whl", hash = "sha256:c30639998a9f9cd9699b4b621942c0179a6527f083c72351f95c6ab1728d5b73"},
+    {file = "debugpy-1.8.19-cp314-cp314-macosx_15_0_universal2.whl", hash = "sha256:1e8c4d1bd230067bf1bbcdbd6032e5a57068638eb28b9153d008ecde288152af"},
+    {file = "debugpy-1.8.19-cp314-cp314-manylinux_2_34_x86_64.whl", hash = "sha256:d40c016c1f538dbf1762936e3aeb43a89b965069d9f60f9e39d35d9d25e6b809"},
+    {file = "debugpy-1.8.19-cp314-cp314-win32.whl", hash = "sha256:0601708223fe1cd0e27c6cce67a899d92c7d68e73690211e6788a4b0e1903f5b"},
+    {file = "debugpy-1.8.19-cp314-cp314-win_amd64.whl", hash = "sha256:8e19a725f5d486f20e53a1dde2ab8bb2c9607c40c00a42ab646def962b41125f"},
+    {file = "debugpy-1.8.19-cp38-cp38-macosx_15_0_x86_64.whl", hash = "sha256:d9b6f633fd2865af2afba2beb0c1819b6ecd4aed1c8f90f5d1bbca3272306b10"},
+    {file = "debugpy-1.8.19-cp38-cp38-manylinux_2_34_x86_64.whl", hash = "sha256:a21bfdea088f713df05fa246ba0520f6ba44dd7eaec224742f51987a6979a648"},
+    {file = "debugpy-1.8.19-cp38-cp38-win32.whl", hash = "sha256:b1cb98e5325da3059ca24445fca48314bfddfdf65ce1b59ff07055e723f06bd2"},
+    {file = "debugpy-1.8.19-cp38-cp38-win_amd64.whl", hash = "sha256:c9b9bf440141a36836bdbe4320a2b126bb38aafa85e1aed05d7bfbb0e2a278bf"},
+    {file = "debugpy-1.8.19-cp39-cp39-macosx_15_0_x86_64.whl", hash = "sha256:c047177ab2d286451f242b855b650d313198c4a987140d4b35218b2855a64a4a"},
+    {file = "debugpy-1.8.19-cp39-cp39-manylinux_2_34_x86_64.whl", hash = "sha256:4468de0c30012d367944f0eab4ecb8371736e8ef9522a465f61214f344c11183"},
+    {file = "debugpy-1.8.19-cp39-cp39-win32.whl", hash = "sha256:7b62c0f015120ede25e5124a5f9d8a424e1208e3d96a36c89958f046ee21fff6"},
+    {file = "debugpy-1.8.19-cp39-cp39-win_amd64.whl", hash = "sha256:76f566baaf7f3e06adbe67ffedccd2ee911d1e486f55931939ce3f0fe1090774"},
+    {file = "debugpy-1.8.19-py2.py3-none-any.whl", hash = "sha256:360ffd231a780abbc414ba0f005dad409e71c78637efe8f2bd75837132a41d38"},
+    {file = "debugpy-1.8.19.tar.gz", hash = "sha256:eea7e5987445ab0b5ed258093722d5ecb8bb72217c5c9b1e21f64efe23ddebdb"},
+]
+
+[[package]]
+name = "deprecation"
+version = "2.1.0"
+description = "A library to handle automated deprecations"
+optional = false
+python-versions = "*"
+groups = ["examples"]
+files = [
+    {file = "deprecation-2.1.0-py2.py3-none-any.whl", hash = "sha256:a10811591210e1fb0e768a8c25517cabeabcba6f0bf96564f8ff45189f90b14a"},
+    {file = "deprecation-2.1.0.tar.gz", hash = "sha256:72b3bde64e5d778694b0cf68178aed03d15e15477116add3fb773e581f9518ff"},
+]
+
+[package.dependencies]
+packaging = "*"
+
+[[package]]
+name = "distro"
+version = "1.9.0"
+description = "Distro - an OS platform information API"
+optional = false
+python-versions = ">=3.6"
+groups = ["examples"]
+markers = "sys_platform == \"linux\""
+files = [
+    {file = "distro-1.9.0-py3-none-any.whl", hash = "sha256:7bffd925d65168f85027d8da9af6bddab658135b840670a223589bc0c8ef02b2"},
+    {file = "distro-1.9.0.tar.gz", hash = "sha256:2fa77c6fd8940f116ee1d6b94a2f90b13b5ea8d019b98bc8bafdcabcdd9bdbed"},
+]
+
+[[package]]
+name = "docutils"
+version = "0.21.2"
+description = "Docutils -- Python Documentation Utilities"
+optional = false
+python-versions = ">=3.9"
+groups = ["docs"]
+files = [
+    {file = "docutils-0.21.2-py3-none-any.whl", hash = "sha256:dafca5b9e384f0e419294eb4d2ff9fa826435bf15f15b7bd45723e8ad76811b2"},
+    {file = "docutils-0.21.2.tar.gz", hash = "sha256:3a6b18732edf182daa3cd12775bbb338cf5691468f91eeeb109deff6ebfa986f"},
+]
+
+[[package]]
+name = "exceptiongroup"
+version = "1.3.1"
+description = "Backport of PEP 654 (exception groups)"
+optional = false
+python-versions = ">=3.7"
+groups = ["test"]
+markers = "python_version == \"3.10\""
+files = [
+    {file = "exceptiongroup-1.3.1-py3-none-any.whl", hash = "sha256:a7a39a3bd276781e98394987d3a5701d0c4edffb633bb7a5144577f82c773598"},
+    {file = "exceptiongroup-1.3.1.tar.gz", hash = "sha256:8b412432c6055b0b7d14c310000ae93352ed6754f70fa8f7c34141f91c4e3219"},
+]
+
+[package.dependencies]
+typing-extensions = {version = ">=4.6.0", markers = "python_version < \"3.13\""}
+
+[package.extras]
+test = ["pytest (>=6)"]
+
+[[package]]
+name = "extra-streamlit-components"
+version = "0.1.81"
+description = "An all-in-one place, to find complex or just natively unavailable components on streamlit."
+optional = false
+python-versions = ">=3.6"
+groups = ["examples"]
+files = [
+    {file = "extra_streamlit_components-0.1.81-py3-none-any.whl", hash = "sha256:11a4651dbd03cac04edfbb8711757b1d10e3cdf280b8fa3a43f970d05e684619"},
+    {file = "extra_streamlit_components-0.1.81.tar.gz", hash = "sha256:eb9beb7bacfe8b3d238f1888a21c78ac6cfa569341be484bca08c3ea0b15f20d"},
+]
+
+[package.dependencies]
+streamlit = ">=1.40.1"
+
+[[package]]
+name = "flake8"
+version = "5.0.4"
+description = "the modular source code checker: pep8 pyflakes and co"
+optional = false
+python-versions = ">=3.6.1"
+groups = ["lint"]
+markers = "python_version < \"3.13\" and python_version != \"3.12\""
+files = [
+    {file = "flake8-5.0.4-py2.py3-none-any.whl", hash = "sha256:7a1cf6b73744f5806ab95e526f6f0d8c01c66d7bbe349562d22dfca20610b248"},
+    {file = "flake8-5.0.4.tar.gz", hash = "sha256:6fbe320aad8d6b95cec8b8e47bc933004678dc63095be98528b7bdd2a9f510db"},
+]
+
+[package.dependencies]
+mccabe = ">=0.7.0,<0.8.0"
+pycodestyle = ">=2.9.0,<2.10.0"
+pyflakes = ">=2.5.0,<2.6.0"
+
+[[package]]
+name = "flake8"
+version = "6.1.0"
+description = "the modular source code checker: pep8 pyflakes and co"
+optional = false
+python-versions = ">=3.8.1"
+groups = ["lint"]
+markers = "python_version >= \"3.12\""
+files = [
+    {file = "flake8-6.1.0-py2.py3-none-any.whl", hash = "sha256:ffdfce58ea94c6580c77888a86506937f9a1a227dfcd15f245d694ae20a6b6e5"},
+    {file = "flake8-6.1.0.tar.gz", hash = "sha256:d5b3857f07c030bdb5bf41c7f53799571d75c4491748a3adcd47de929e34cd23"},
+]
+
+[package.dependencies]
+mccabe = ">=0.7.0,<0.8.0"
+pycodestyle = ">=2.11.0,<2.12.0"
+pyflakes = ">=3.1.0,<3.2.0"
+
+[[package]]
+name = "flake8-black"
+version = "0.4.0"
+description = "flake8 plugin to call black as a code style validator"
+optional = false
+python-versions = ">=3.9"
+groups = ["lint"]
+files = [
+    {file = "flake8_black-0.4.0-py3-none-any.whl", hash = "sha256:288762d0c9ea065782d87eeecbcc20c69079d17fe1d0f0445f0eb0b0ffb80c39"},
+    {file = "flake8_black-0.4.0.tar.gz", hash = "sha256:bf226868f695dee48d55ff6d7747e900709bfd6f605b7a378c70e711e3fc26cb"},
+]
+
+[package.dependencies]
+black = ">=22.1.0"
+flake8 = ">=3"
+tomli = {version = "*", markers = "python_version < \"3.11\""}
+
+[package.extras]
+develop = ["build", "twine"]
+
+[[package]]
+name = "flake8-docstrings"
+version = "1.7.0"
+description = "Extension for flake8 which uses pydocstyle to check docstrings"
+optional = false
+python-versions = ">=3.7"
+groups = ["lint"]
+files = [
+    {file = "flake8_docstrings-1.7.0-py2.py3-none-any.whl", hash = "sha256:51f2344026da083fc084166a9353f5082b01f72901df422f74b4d953ae88ac75"},
+    {file = "flake8_docstrings-1.7.0.tar.gz", hash = "sha256:4c8cc748dc16e6869728699e5d0d685da9a10b0ea718e090b1ba088e67a941af"},
+]
+
+[package.dependencies]
+flake8 = ">=3"
+pydocstyle = ">=2.1"
+
+[[package]]
+name = "flake8-import-order"
+version = "0.18.2"
+description = "Flake8 and pylama plugin that checks the ordering of import statements."
+optional = false
+python-versions = "*"
+groups = ["lint"]
+files = [
+    {file = "flake8-import-order-0.18.2.tar.gz", hash = "sha256:e23941f892da3e0c09d711babbb0c73bc735242e9b216b726616758a920d900e"},
+    {file = "flake8_import_order-0.18.2-py2.py3-none-any.whl", hash = "sha256:82ed59f1083b629b030ee9d3928d9e06b6213eb196fe745b3a7d4af2168130df"},
+]
+
+[package.dependencies]
+pycodestyle = "*"
+setuptools = "*"
+
+[[package]]
+name = "gitdb"
+version = "4.0.12"
+description = "Git Object Database"
+optional = false
+python-versions = ">=3.7"
+groups = ["main", "examples"]
+files = [
+    {file = "gitdb-4.0.12-py3-none-any.whl", hash = "sha256:67073e15955400952c6565cc3e707c554a4eea2e428946f7a4c162fab9bd9bcf"},
+    {file = "gitdb-4.0.12.tar.gz", hash = "sha256:5ef71f855d191a3326fcfbc0d5da835f26b13fbcba60c32c21091c349ffdb571"},
+]
+
+[package.dependencies]
+smmap = ">=3.0.1,<6"
+
+[[package]]
+name = "gitpython"
+version = "3.1.46"
+description = "GitPython is a Python library used to interact with Git repositories"
+optional = false
+python-versions = ">=3.7"
+groups = ["main", "examples"]
+files = [
+    {file = "gitpython-3.1.46-py3-none-any.whl", hash = "sha256:79812ed143d9d25b6d176a10bb511de0f9c67b1fa641d82097b0ab90398a2058"},
+    {file = "gitpython-3.1.46.tar.gz", hash = "sha256:400124c7d0ef4ea03f7310ac2fbf7151e09ff97f2a3288d64a440c584a29c37f"},
+]
+
+[package.dependencies]
+gitdb = ">=4.0.1,<5"
+
+[package.extras]
+doc = ["sphinx (>=7.1.2,<7.2)", "sphinx-autodoc-typehints", "sphinx_rtd_theme"]
+test = ["coverage[toml]", "ddt (>=1.1.1,!=1.4.3)", "mock ; python_version < \"3.8\"", "mypy (==1.18.2) ; python_version >= \"3.9\"", "pre-commit", "pytest (>=7.3.1)", "pytest-cov", "pytest-instafail", "pytest-mock", "pytest-sugar", "typing-extensions ; python_version < \"3.11\""]
+
+[[package]]
+name = "grpcio"
+version = "1.76.0"
+description = "HTTP/2-based RPC framework"
+optional = false
+python-versions = ">=3.9"
+groups = ["main"]
+files = [
+    {file = "grpcio-1.76.0-cp310-cp310-linux_armv7l.whl", hash = "sha256:65a20de41e85648e00305c1bb09a3598f840422e522277641145a32d42dcefcc"},
+    {file = "grpcio-1.76.0-cp310-cp310-macosx_11_0_universal2.whl", hash = "sha256:40ad3afe81676fd9ec6d9d406eda00933f218038433980aa19d401490e46ecde"},
+    {file = "grpcio-1.76.0-cp310-cp310-manylinux2014_aarch64.manylinux_2_17_aarch64.whl", hash = "sha256:035d90bc79eaa4bed83f524331d55e35820725c9fbb00ffa1904d5550ed7ede3"},
+    {file = "grpcio-1.76.0-cp310-cp310-manylinux2014_i686.manylinux_2_17_i686.whl", hash = "sha256:4215d3a102bd95e2e11b5395c78562967959824156af11fa93d18fdd18050990"},
+    {file = "grpcio-1.76.0-cp310-cp310-manylinux2014_x86_64.manylinux_2_17_x86_64.whl", hash = "sha256:49ce47231818806067aea3324d4bf13825b658ad662d3b25fada0bdad9b8a6af"},
+    {file = "grpcio-1.76.0-cp310-cp310-musllinux_1_2_aarch64.whl", hash = "sha256:8cc3309d8e08fd79089e13ed4819d0af72aa935dd8f435a195fd152796752ff2"},
+    {file = "grpcio-1.76.0-cp310-cp310-musllinux_1_2_i686.whl", hash = "sha256:971fd5a1d6e62e00d945423a567e42eb1fa678ba89072832185ca836a94daaa6"},
+    {file = "grpcio-1.76.0-cp310-cp310-musllinux_1_2_x86_64.whl", hash = "sha256:9d9adda641db7207e800a7f089068f6f645959f2df27e870ee81d44701dd9db3"},
+    {file = "grpcio-1.76.0-cp310-cp310-win32.whl", hash = "sha256:063065249d9e7e0782d03d2bca50787f53bd0fb89a67de9a7b521c4a01f1989b"},
+    {file = "grpcio-1.76.0-cp310-cp310-win_amd64.whl", hash = "sha256:a6ae758eb08088d36812dd5d9af7a9859c05b1e0f714470ea243694b49278e7b"},
+    {file = "grpcio-1.76.0-cp311-cp311-linux_armv7l.whl", hash = "sha256:2e1743fbd7f5fa713a1b0a8ac8ebabf0ec980b5d8809ec358d488e273b9cf02a"},
+    {file = "grpcio-1.76.0-cp311-cp311-macosx_11_0_universal2.whl", hash = "sha256:a8c2cf1209497cf659a667d7dea88985e834c24b7c3b605e6254cbb5076d985c"},
+    {file = "grpcio-1.76.0-cp311-cp311-manylinux2014_aarch64.manylinux_2_17_aarch64.whl", hash = "sha256:08caea849a9d3c71a542827d6df9d5a69067b0a1efbea8a855633ff5d9571465"},
+    {file = "grpcio-1.76.0-cp311-cp311-manylinux2014_i686.manylinux_2_17_i686.whl", hash = "sha256:f0e34c2079d47ae9f6188211db9e777c619a21d4faba6977774e8fa43b085e48"},
+    {file = "grpcio-1.76.0-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.whl", hash = "sha256:8843114c0cfce61b40ad48df65abcfc00d4dba82eae8718fab5352390848c5da"},
+    {file = "grpcio-1.76.0-cp311-cp311-musllinux_1_2_aarch64.whl", hash = "sha256:8eddfb4d203a237da6f3cc8a540dad0517d274b5a1e9e636fd8d2c79b5c1d397"},
+    {file = "grpcio-1.76.0-cp311-cp311-musllinux_1_2_i686.whl", hash = "sha256:32483fe2aab2c3794101c2a159070584e5db11d0aa091b2c0ea9c4fc43d0d749"},
+    {file = "grpcio-1.76.0-cp311-cp311-musllinux_1_2_x86_64.whl", hash = "sha256:dcfe41187da8992c5f40aa8c5ec086fa3672834d2be57a32384c08d5a05b4c00"},
+    {file = "grpcio-1.76.0-cp311-cp311-win32.whl", hash = "sha256:2107b0c024d1b35f4083f11245c0e23846ae64d02f40b2b226684840260ed054"},
+    {file = "grpcio-1.76.0-cp311-cp311-win_amd64.whl", hash = "sha256:522175aba7af9113c48ec10cc471b9b9bd4f6ceb36aeb4544a8e2c80ed9d252d"},
+    {file = "grpcio-1.76.0-cp312-cp312-linux_armv7l.whl", hash = "sha256:81fd9652b37b36f16138611c7e884eb82e0cec137c40d3ef7c3f9b3ed00f6ed8"},
+    {file = "grpcio-1.76.0-cp312-cp312-macosx_11_0_universal2.whl", hash = "sha256:04bbe1bfe3a68bbfd4e52402ab7d4eb59d72d02647ae2042204326cf4bbad280"},
+    {file = "grpcio-1.76.0-cp312-cp312-manylinux2014_aarch64.manylinux_2_17_aarch64.whl", hash = "sha256:d388087771c837cdb6515539f43b9d4bf0b0f23593a24054ac16f7a960be16f4"},
+    {file = "grpcio-1.76.0-cp312-cp312-manylinux2014_i686.manylinux_2_17_i686.whl", hash = "sha256:9f8f757bebaaea112c00dba718fc0d3260052ce714e25804a03f93f5d1c6cc11"},
+    {file = "grpcio-1.76.0-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl", hash = "sha256:980a846182ce88c4f2f7e2c22c56aefd515daeb36149d1c897f83cf57999e0b6"},
+    {file = "grpcio-1.76.0-cp312-cp312-musllinux_1_2_aarch64.whl", hash = "sha256:f92f88e6c033db65a5ae3d97905c8fea9c725b63e28d5a75cb73b49bda5024d8"},
+    {file = "grpcio-1.76.0-cp312-cp312-musllinux_1_2_i686.whl", hash = "sha256:4baf3cbe2f0be3289eb68ac8ae771156971848bb8aaff60bad42005539431980"},
+    {file = "grpcio-1.76.0-cp312-cp312-musllinux_1_2_x86_64.whl", hash = "sha256:615ba64c208aaceb5ec83bfdce7728b80bfeb8be97562944836a7a0a9647d882"},
+    {file = "grpcio-1.76.0-cp312-cp312-win32.whl", hash = "sha256:45d59a649a82df5718fd9527ce775fd66d1af35e6d31abdcdc906a49c6822958"},
+    {file = "grpcio-1.76.0-cp312-cp312-win_amd64.whl", hash = "sha256:c088e7a90b6017307f423efbb9d1ba97a22aa2170876223f9709e9d1de0b5347"},
+    {file = "grpcio-1.76.0-cp313-cp313-linux_armv7l.whl", hash = "sha256:26ef06c73eb53267c2b319f43e6634c7556ea37672029241a056629af27c10e2"},
+    {file = "grpcio-1.76.0-cp313-cp313-macosx_11_0_universal2.whl", hash = "sha256:45e0111e73f43f735d70786557dc38141185072d7ff8dc1829d6a77ac1471468"},
+    {file = "grpcio-1.76.0-cp313-cp313-manylinux2014_aarch64.manylinux_2_17_aarch64.whl", hash = "sha256:83d57312a58dcfe2a3a0f9d1389b299438909a02db60e2f2ea2ae2d8034909d3"},
+    {file = "grpcio-1.76.0-cp313-cp313-manylinux2014_i686.manylinux_2_17_i686.whl", hash = "sha256:3e2a27c89eb9ac3d81ec8835e12414d73536c6e620355d65102503064a4ed6eb"},
+    {file = "grpcio-1.76.0-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.whl", hash = "sha256:61f69297cba3950a524f61c7c8ee12e55c486cb5f7db47ff9dcee33da6f0d3ae"},
+    {file = "grpcio-1.76.0-cp313-cp313-musllinux_1_2_aarch64.whl", hash = "sha256:6a15c17af8839b6801d554263c546c69c4d7718ad4321e3166175b37eaacca77"},
+    {file = "grpcio-1.76.0-cp313-cp313-musllinux_1_2_i686.whl", hash = "sha256:25a18e9810fbc7e7f03ec2516addc116a957f8cbb8cbc95ccc80faa072743d03"},
+    {file = "grpcio-1.76.0-cp313-cp313-musllinux_1_2_x86_64.whl", hash = "sha256:931091142fd8cc14edccc0845a79248bc155425eee9a98b2db2ea4f00a235a42"},
+    {file = "grpcio-1.76.0-cp313-cp313-win32.whl", hash = "sha256:5e8571632780e08526f118f74170ad8d50fb0a48c23a746bef2a6ebade3abd6f"},
+    {file = "grpcio-1.76.0-cp313-cp313-win_amd64.whl", hash = "sha256:f9f7bd5faab55f47231ad8dba7787866b69f5e93bc306e3915606779bbfb4ba8"},
+    {file = "grpcio-1.76.0-cp314-cp314-linux_armv7l.whl", hash = "sha256:ff8a59ea85a1f2191a0ffcc61298c571bc566332f82e5f5be1b83c9d8e668a62"},
+    {file = "grpcio-1.76.0-cp314-cp314-macosx_11_0_universal2.whl", hash = "sha256:06c3d6b076e7b593905d04fdba6a0525711b3466f43b3400266f04ff735de0cd"},
+    {file = "grpcio-1.76.0-cp314-cp314-manylinux2014_aarch64.manylinux_2_17_aarch64.whl", hash = "sha256:fd5ef5932f6475c436c4a55e4336ebbe47bd3272be04964a03d316bbf4afbcbc"},
+    {file = "grpcio-1.76.0-cp314-cp314-manylinux2014_i686.manylinux_2_17_i686.whl", hash = "sha256:b331680e46239e090f5b3cead313cc772f6caa7d0fc8de349337563125361a4a"},
+    {file = "grpcio-1.76.0-cp314-cp314-manylinux2014_x86_64.manylinux_2_17_x86_64.whl", hash = "sha256:2229ae655ec4e8999599469559e97630185fdd53ae1e8997d147b7c9b2b72cba"},
+    {file = "grpcio-1.76.0-cp314-cp314-musllinux_1_2_aarch64.whl", hash = "sha256:490fa6d203992c47c7b9e4a9d39003a0c2bcc1c9aa3c058730884bbbb0ee9f09"},
+    {file = "grpcio-1.76.0-cp314-cp314-musllinux_1_2_i686.whl", hash = "sha256:479496325ce554792dba6548fae3df31a72cef7bad71ca2e12b0e58f9b336bfc"},
+    {file = "grpcio-1.76.0-cp314-cp314-musllinux_1_2_x86_64.whl", hash = "sha256:1c9b93f79f48b03ada57ea24725d83a30284a012ec27eab2cf7e50a550cbbbcc"},
+    {file = "grpcio-1.76.0-cp314-cp314-win32.whl", hash = "sha256:747fa73efa9b8b1488a95d0ba1039c8e2dca0f741612d80415b1e1c560febf4e"},
+    {file = "grpcio-1.76.0-cp314-cp314-win_amd64.whl", hash = "sha256:922fa70ba549fce362d2e2871ab542082d66e2aaf0c19480ea453905b01f384e"},
+    {file = "grpcio-1.76.0-cp39-cp39-linux_armv7l.whl", hash = "sha256:8ebe63ee5f8fa4296b1b8cfc743f870d10e902ca18afc65c68cf46fd39bb0783"},
+    {file = "grpcio-1.76.0-cp39-cp39-macosx_11_0_universal2.whl", hash = "sha256:3bf0f392c0b806905ed174dcd8bdd5e418a40d5567a05615a030a5aeddea692d"},
+    {file = "grpcio-1.76.0-cp39-cp39-manylinux2014_aarch64.manylinux_2_17_aarch64.whl", hash = "sha256:0b7604868b38c1bfd5cf72d768aedd7db41d78cb6a4a18585e33fb0f9f2363fd"},
+    {file = "grpcio-1.76.0-cp39-cp39-manylinux2014_i686.manylinux_2_17_i686.whl", hash = "sha256:e6d1db20594d9daba22f90da738b1a0441a7427552cc6e2e3d1297aeddc00378"},
+    {file = "grpcio-1.76.0-cp39-cp39-manylinux2014_x86_64.manylinux_2_17_x86_64.whl", hash = "sha256:d099566accf23d21037f18a2a63d323075bebace807742e4b0ac210971d4dd70"},
+    {file = "grpcio-1.76.0-cp39-cp39-musllinux_1_2_aarch64.whl", hash = "sha256:ebea5cc3aa8ea72e04df9913492f9a96d9348db876f9dda3ad729cfedf7ac416"},
+    {file = "grpcio-1.76.0-cp39-cp39-musllinux_1_2_i686.whl", hash = "sha256:0c37db8606c258e2ee0c56b78c62fc9dee0e901b5dbdcf816c2dd4ad652b8b0c"},
+    {file = "grpcio-1.76.0-cp39-cp39-musllinux_1_2_x86_64.whl", hash = "sha256:ebebf83299b0cb1721a8859ea98f3a77811e35dce7609c5c963b9ad90728f886"},
+    {file = "grpcio-1.76.0-cp39-cp39-win32.whl", hash = "sha256:0aaa82d0813fd4c8e589fac9b65d7dd88702555f702fb10417f96e2a2a6d4c0f"},
+    {file = "grpcio-1.76.0-cp39-cp39-win_amd64.whl", hash = "sha256:acab0277c40eff7143c2323190ea57b9ee5fd353d8190ee9652369fae735668a"},
+    {file = "grpcio-1.76.0.tar.gz", hash = "sha256:7be78388d6da1a25c0d5ec506523db58b18be22d9c37d8d3a32c08be4987bd73"},
+]
+
+[package.dependencies]
+typing-extensions = ">=4.12,<5.0"
+
+[package.extras]
+protobuf = ["grpcio-tools (>=1.76.0)"]
+
+[[package]]
+name = "hightime"
+version = "1.0.0"
+description = "Hightime Python API"
+optional = false
+python-versions = "<4.0,>=3.9"
+groups = ["main", "examples", "test"]
+files = [
+    {file = "hightime-1.0.0-py3-none-any.whl", hash = "sha256:ba86d42976c36451b14e11c736e61f296f9f00dbb79c8488e18d70c6b2dbb395"},
+    {file = "hightime-1.0.0.tar.gz", hash = "sha256:480d2a03e2c3ed44916d2406d40ab6d10a276ed7f101619fc3fcc1e00c46aacf"},
+]
+
+[[package]]
+name = "idna"
+version = "3.11"
+description = "Internationalized Domain Names in Applications (IDNA)"
+optional = false
+python-versions = ">=3.8"
+groups = ["main", "docs", "examples"]
+files = [
+    {file = "idna-3.11-py3-none-any.whl", hash = "sha256:771a87f49d9defaf64091e6e6fe9c18d4833f140bd19464795bc32d966ca37ea"},
+    {file = "idna-3.11.tar.gz", hash = "sha256:795dafcc9c04ed0c1fb032c2aa73654d8e8c5023a7df64a53f39190ada629902"},
+]
+
+[package.extras]
+all = ["flake8 (>=7.1.1)", "mypy (>=1.11.2)", "pytest (>=8.3.2)", "ruff (>=0.6.2)"]
+
+[[package]]
+name = "imagesize"
+version = "1.4.1"
+description = "Getting image size from png/jpeg/jpeg2000/gif file"
+optional = false
+python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
+groups = ["docs"]
+files = [
+    {file = "imagesize-1.4.1-py2.py3-none-any.whl", hash = "sha256:0d8d18d08f840c19d0ee7ca1fd82490fdc3729b7ac93f49870406ddde8ef8d8b"},
+    {file = "imagesize-1.4.1.tar.gz", hash = "sha256:69150444affb9cb0d5cc5a92b3676f0b2fb7cd9ae39e947a5e11a36b4497cd4a"},
+]
+
+[[package]]
+name = "iniconfig"
+version = "2.3.0"
+description = "brain-dead simple config-ini parsing"
+optional = false
+python-versions = ">=3.10"
+groups = ["test"]
+files = [
+    {file = "iniconfig-2.3.0-py3-none-any.whl", hash = "sha256:f631c04d2c48c52b84d0d0549c99ff3859c98df65b3101406327ecc7d53fbf12"},
+    {file = "iniconfig-2.3.0.tar.gz", hash = "sha256:c76315c77db068650d49c5b56314774a7804df16fee4402c1f19d6d15d8c4730"},
+]
+
+[[package]]
+name = "isort"
+version = "7.0.0"
+description = "A Python utility / library to sort Python imports."
+optional = false
+python-versions = ">=3.10.0"
+groups = ["lint"]
+files = [
+    {file = "isort-7.0.0-py3-none-any.whl", hash = "sha256:1bcabac8bc3c36c7fb7b98a76c8abb18e0f841a3ba81decac7691008592499c1"},
+    {file = "isort-7.0.0.tar.gz", hash = "sha256:5513527951aadb3ac4292a41a16cbc50dd1642432f5e8c20057d414bdafb4187"},
+]
+
+[package.extras]
+colors = ["colorama"]
+plugins = ["setuptools"]
+
+[[package]]
+name = "jinja2"
+version = "3.1.6"
+description = "A very fast and expressive template engine."
+optional = false
+python-versions = ">=3.7"
+groups = ["main", "docs", "examples"]
+files = [
+    {file = "jinja2-3.1.6-py3-none-any.whl", hash = "sha256:85ece4451f492d0c13c5dd7c13a64681a86afae63a5f347908daf103ce6d2f67"},
+    {file = "jinja2-3.1.6.tar.gz", hash = "sha256:0137fb05990d35f1275a587e9aee6d56da821fc83491a0fb838183be43f66d6d"},
+]
+
+[package.dependencies]
+MarkupSafe = ">=2.0"
+
+[package.extras]
+i18n = ["Babel (>=2.7)"]
+
+[[package]]
+name = "jsonschema"
+version = "4.25.1"
+description = "An implementation of JSON Schema validation for Python"
+optional = false
+python-versions = ">=3.9"
+groups = ["main", "examples"]
+files = [
+    {file = "jsonschema-4.25.1-py3-none-any.whl", hash = "sha256:3fba0169e345c7175110351d456342c364814cfcf3b964ba4587f22915230a63"},
+    {file = "jsonschema-4.25.1.tar.gz", hash = "sha256:e4a9655ce0da0c0b67a085847e00a3a51449e1157f4f75e9fb5aa545e122eb85"},
+]
+
+[package.dependencies]
+attrs = ">=22.2.0"
+jsonschema-specifications = ">=2023.03.6"
+referencing = ">=0.28.4"
+rpds-py = ">=0.7.1"
+
+[package.extras]
+format = ["fqdn", "idna", "isoduration", "jsonpointer (>1.13)", "rfc3339-validator", "rfc3987", "uri-template", "webcolors (>=1.11)"]
+format-nongpl = ["fqdn", "idna", "isoduration", "jsonpointer (>1.13)", "rfc3339-validator", "rfc3986-validator (>0.1.0)", "rfc3987-syntax (>=1.1.0)", "uri-template", "webcolors (>=24.6.0)"]
+
+[[package]]
+name = "jsonschema-specifications"
+version = "2025.9.1"
+description = "The JSON Schema meta-schemas and vocabularies, exposed as a Registry"
+optional = false
+python-versions = ">=3.9"
+groups = ["main", "examples"]
+files = [
+    {file = "jsonschema_specifications-2025.9.1-py3-none-any.whl", hash = "sha256:98802fee3a11ee76ecaca44429fda8a41bff98b00a0f2838151b113f210cc6fe"},
+    {file = "jsonschema_specifications-2025.9.1.tar.gz", hash = "sha256:b540987f239e745613c7a9176f3edb72b832a4ac465cf02712288397832b5e8d"},
+]
+
+[package.dependencies]
+referencing = ">=0.31.0"
+
+[[package]]
+name = "librt"
+version = "0.7.7"
+description = "Mypyc runtime library"
+optional = false
+python-versions = ">=3.9"
+groups = ["lint"]
+markers = "platform_python_implementation != \"PyPy\""
+files = [
+    {file = "librt-0.7.7-cp310-cp310-macosx_10_9_x86_64.whl", hash = "sha256:e4836c5645f40fbdc275e5670819bde5ab5f2e882290d304e3c6ddab1576a6d0"},
+    {file = "librt-0.7.7-cp310-cp310-macosx_11_0_arm64.whl", hash = "sha256:6ae8aec43117a645a31e5f60e9e3a0797492e747823b9bda6972d521b436b4e8"},
+    {file = "librt-0.7.7-cp310-cp310-manylinux1_i686.manylinux_2_28_i686.manylinux_2_5_i686.whl", hash = "sha256:aea05f701ccd2a76b34f0daf47ca5068176ff553510b614770c90d76ac88df06"},
+    {file = "librt-0.7.7-cp310-cp310-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:7b16ccaeff0ed4355dfb76fe1ea7a5d6d03b5ad27f295f77ee0557bc20a72495"},
+    {file = "librt-0.7.7-cp310-cp310-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:c48c7e150c095d5e3cea7452347ba26094be905d6099d24f9319a8b475fcd3e0"},
+    {file = "librt-0.7.7-cp310-cp310-musllinux_1_2_aarch64.whl", hash = "sha256:4dcee2f921a8632636d1c37f1bbdb8841d15666d119aa61e5399c5268e7ce02e"},
+    {file = "librt-0.7.7-cp310-cp310-musllinux_1_2_i686.whl", hash = "sha256:14ef0f4ac3728ffd85bfc58e2f2f48fb4ef4fa871876f13a73a7381d10a9f77c"},
+    {file = "librt-0.7.7-cp310-cp310-musllinux_1_2_x86_64.whl", hash = "sha256:e4ab69fa37f8090f2d971a5d2bc606c7401170dbdae083c393d6cbf439cb45b8"},
+    {file = "librt-0.7.7-cp310-cp310-win32.whl", hash = "sha256:4bf3cc46d553693382d2abf5f5bd493d71bb0f50a7c0beab18aa13a5545c8900"},
+    {file = "librt-0.7.7-cp310-cp310-win_amd64.whl", hash = "sha256:f0c8fe5aeadd8a0e5b0598f8a6ee3533135ca50fd3f20f130f9d72baf5c6ac58"},
+    {file = "librt-0.7.7-cp311-cp311-macosx_10_9_x86_64.whl", hash = "sha256:a487b71fbf8a9edb72a8c7a456dda0184642d99cd007bc819c0b7ab93676a8ee"},
+    {file = "librt-0.7.7-cp311-cp311-macosx_11_0_arm64.whl", hash = "sha256:f4d4efb218264ecf0f8516196c9e2d1a0679d9fb3bb15df1155a35220062eba8"},
+    {file = "librt-0.7.7-cp311-cp311-manylinux1_i686.manylinux_2_28_i686.manylinux_2_5_i686.whl", hash = "sha256:b8bb331aad734b059c4b450cd0a225652f16889e286b2345af5e2c3c625c3d85"},
+    {file = "librt-0.7.7-cp311-cp311-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:467dbd7443bda08338fc8ad701ed38cef48194017554f4c798b0a237904b3f99"},
+    {file = "librt-0.7.7-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:50d1d1ee813d2d1a3baf2873634ba506b263032418d16287c92ec1cc9c1a00cb"},
+    {file = "librt-0.7.7-cp311-cp311-musllinux_1_2_aarch64.whl", hash = "sha256:c7e5070cf3ec92d98f57574da0224f8c73faf1ddd6d8afa0b8c9f6e86997bc74"},
+    {file = "librt-0.7.7-cp311-cp311-musllinux_1_2_i686.whl", hash = "sha256:bdb9f3d865b2dafe7f9ad7f30ef563c80d0ddd2fdc8cc9b8e4f242f475e34d75"},
+    {file = "librt-0.7.7-cp311-cp311-musllinux_1_2_x86_64.whl", hash = "sha256:8185c8497d45164e256376f9da5aed2bb26ff636c798c9dabe313b90e9f25b28"},
+    {file = "librt-0.7.7-cp311-cp311-win32.whl", hash = "sha256:44d63ce643f34a903f09ff7ca355aae019a3730c7afd6a3c037d569beeb5d151"},
+    {file = "librt-0.7.7-cp311-cp311-win_amd64.whl", hash = "sha256:7d13cc340b3b82134f8038a2bfe7137093693dcad8ba5773da18f95ad6b77a8a"},
+    {file = "librt-0.7.7-cp311-cp311-win_arm64.whl", hash = "sha256:983de36b5a83fe9222f4f7dcd071f9b1ac6f3f17c0af0238dadfb8229588f890"},
+    {file = "librt-0.7.7-cp312-cp312-macosx_10_13_x86_64.whl", hash = "sha256:2a85a1fc4ed11ea0eb0a632459ce004a2d14afc085a50ae3463cd3dfe1ce43fc"},
+    {file = "librt-0.7.7-cp312-cp312-macosx_11_0_arm64.whl", hash = "sha256:c87654e29a35938baead1c4559858f346f4a2a7588574a14d784f300ffba0efd"},
+    {file = "librt-0.7.7-cp312-cp312-manylinux1_i686.manylinux_2_28_i686.manylinux_2_5_i686.whl", hash = "sha256:c9faaebb1c6212c20afd8043cd6ed9de0a47d77f91a6b5b48f4e46ed470703fe"},
+    {file = "librt-0.7.7-cp312-cp312-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:1908c3e5a5ef86b23391448b47759298f87f997c3bd153a770828f58c2bb4630"},
+    {file = "librt-0.7.7-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:dbc4900e95a98fc0729523be9d93a8fedebb026f32ed9ffc08acd82e3e181503"},
+    {file = "librt-0.7.7-cp312-cp312-musllinux_1_2_aarch64.whl", hash = "sha256:a7ea4e1fbd253e5c68ea0fe63d08577f9d288a73f17d82f652ebc61fa48d878d"},
+    {file = "librt-0.7.7-cp312-cp312-musllinux_1_2_i686.whl", hash = "sha256:ef7699b7a5a244b1119f85c5bbc13f152cd38240cbb2baa19b769433bae98e50"},
+    {file = "librt-0.7.7-cp312-cp312-musllinux_1_2_x86_64.whl", hash = "sha256:955c62571de0b181d9e9e0a0303c8bc90d47670a5eff54cf71bf5da61d1899cf"},
+    {file = "librt-0.7.7-cp312-cp312-win32.whl", hash = "sha256:1bcd79be209313b270b0e1a51c67ae1af28adad0e0c7e84c3ad4b5cb57aaa75b"},
+    {file = "librt-0.7.7-cp312-cp312-win_amd64.whl", hash = "sha256:4353ee891a1834567e0302d4bd5e60f531912179578c36f3d0430f8c5e16b456"},
+    {file = "librt-0.7.7-cp312-cp312-win_arm64.whl", hash = "sha256:a76f1d679beccccdf8c1958e732a1dfcd6e749f8821ee59d7bec009ac308c029"},
+    {file = "librt-0.7.7-cp313-cp313-macosx_10_13_x86_64.whl", hash = "sha256:8f4a0b0a3c86ba9193a8e23bb18f100d647bf192390ae195d84dfa0a10fb6244"},
+    {file = "librt-0.7.7-cp313-cp313-macosx_11_0_arm64.whl", hash = "sha256:5335890fea9f9e6c4fdf8683061b9ccdcbe47c6dc03ab8e9b68c10acf78be78d"},
+    {file = "librt-0.7.7-cp313-cp313-manylinux1_i686.manylinux_2_28_i686.manylinux_2_5_i686.whl", hash = "sha256:9b4346b1225be26def3ccc6c965751c74868f0578cbcba293c8ae9168483d811"},
+    {file = "librt-0.7.7-cp313-cp313-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:a10b8eebdaca6e9fdbaf88b5aefc0e324b763a5f40b1266532590d5afb268a4c"},
+    {file = "librt-0.7.7-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:067be973d90d9e319e6eb4ee2a9b9307f0ecd648b8a9002fa237289a4a07a9e7"},
+    {file = "librt-0.7.7-cp313-cp313-musllinux_1_2_aarch64.whl", hash = "sha256:23d2299ed007812cccc1ecef018db7d922733382561230de1f3954db28433977"},
+    {file = "librt-0.7.7-cp313-cp313-musllinux_1_2_i686.whl", hash = "sha256:6b6f8ea465524aa4c7420c7cc4ca7d46fe00981de8debc67b1cc2e9957bb5b9d"},
+    {file = "librt-0.7.7-cp313-cp313-musllinux_1_2_x86_64.whl", hash = "sha256:f8df32a99cc46eb0ee90afd9ada113ae2cafe7e8d673686cf03ec53e49635439"},
+    {file = "librt-0.7.7-cp313-cp313-win32.whl", hash = "sha256:86f86b3b785487c7760247bcdac0b11aa8bf13245a13ed05206286135877564b"},
+    {file = "librt-0.7.7-cp313-cp313-win_amd64.whl", hash = "sha256:4862cb2c702b1f905c0503b72d9d4daf65a7fdf5a9e84560e563471e57a56949"},
+    {file = "librt-0.7.7-cp313-cp313-win_arm64.whl", hash = "sha256:0996c83b1cb43c00e8c87835a284f9057bc647abd42b5871e5f941d30010c832"},
+    {file = "librt-0.7.7-cp314-cp314-macosx_10_13_x86_64.whl", hash = "sha256:23daa1ab0512bafdd677eb1bfc9611d8ffbe2e328895671e64cb34166bc1b8c8"},
+    {file = "librt-0.7.7-cp314-cp314-macosx_11_0_arm64.whl", hash = "sha256:558a9e5a6f3cc1e20b3168fb1dc802d0d8fa40731f6e9932dcc52bbcfbd37111"},
+    {file = "librt-0.7.7-cp314-cp314-manylinux1_i686.manylinux_2_28_i686.manylinux_2_5_i686.whl", hash = "sha256:2567cb48dc03e5b246927ab35cbb343376e24501260a9b5e30b8e255dca0d1d2"},
+    {file = "librt-0.7.7-cp314-cp314-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:6066c638cdf85ff92fc6f932d2d73c93a0e03492cdfa8778e6d58c489a3d7259"},
+    {file = "librt-0.7.7-cp314-cp314-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:a609849aca463074c17de9cda173c276eb8fee9e441053529e7b9e249dc8b8ee"},
+    {file = "librt-0.7.7-cp314-cp314-musllinux_1_2_aarch64.whl", hash = "sha256:add4e0a000858fe9bb39ed55f31085506a5c38363e6eb4a1e5943a10c2bfc3d1"},
+    {file = "librt-0.7.7-cp314-cp314-musllinux_1_2_i686.whl", hash = "sha256:a3bfe73a32bd0bdb9a87d586b05a23c0a1729205d79df66dee65bb2e40d671ba"},
+    {file = "librt-0.7.7-cp314-cp314-musllinux_1_2_x86_64.whl", hash = "sha256:0ecce0544d3db91a40f8b57ae26928c02130a997b540f908cefd4d279d6c5848"},
+    {file = "librt-0.7.7-cp314-cp314-win32.whl", hash = "sha256:8f7a74cf3a80f0c3b0ec75b0c650b2f0a894a2cec57ef75f6f72c1e82cdac61d"},
+    {file = "librt-0.7.7-cp314-cp314-win_amd64.whl", hash = "sha256:3d1fe2e8df3268dd6734dba33ededae72ad5c3a859b9577bc00b715759c5aaab"},
+    {file = "librt-0.7.7-cp314-cp314-win_arm64.whl", hash = "sha256:2987cf827011907d3dfd109f1be0d61e173d68b1270107bb0e89f2fca7f2ed6b"},
+    {file = "librt-0.7.7-cp314-cp314t-macosx_10_13_x86_64.whl", hash = "sha256:8e92c8de62b40bfce91d5e12c6e8b15434da268979b1af1a6589463549d491e6"},
+    {file = "librt-0.7.7-cp314-cp314t-macosx_11_0_arm64.whl", hash = "sha256:f683dcd49e2494a7535e30f779aa1ad6e3732a019d80abe1309ea91ccd3230e3"},
+    {file = "librt-0.7.7-cp314-cp314t-manylinux1_i686.manylinux_2_28_i686.manylinux_2_5_i686.whl", hash = "sha256:9b15e5d17812d4d629ff576699954f74e2cc24a02a4fc401882dd94f81daba45"},
+    {file = "librt-0.7.7-cp314-cp314t-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:c084841b879c4d9b9fa34e5d5263994f21aea7fd9c6add29194dbb41a6210536"},
+    {file = "librt-0.7.7-cp314-cp314t-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:10c8fb9966f84737115513fecbaf257f9553d067a7dd45a69c2c7e5339e6a8dc"},
+    {file = "librt-0.7.7-cp314-cp314t-musllinux_1_2_aarch64.whl", hash = "sha256:9b5fb1ecb2c35362eab2dbd354fd1efa5a8440d3e73a68be11921042a0edc0ff"},
+    {file = "librt-0.7.7-cp314-cp314t-musllinux_1_2_i686.whl", hash = "sha256:d1454899909d63cc9199a89fcc4f81bdd9004aef577d4ffc022e600c412d57f3"},
+    {file = "librt-0.7.7-cp314-cp314t-musllinux_1_2_x86_64.whl", hash = "sha256:7ef28f2e7a016b29792fe0a2dd04dec75725b32a1264e390c366103f834a9c3a"},
+    {file = "librt-0.7.7-cp314-cp314t-win32.whl", hash = "sha256:5e419e0db70991b6ba037b70c1d5bbe92b20ddf82f31ad01d77a347ed9781398"},
+    {file = "librt-0.7.7-cp314-cp314t-win_amd64.whl", hash = "sha256:d6b7d93657332c817b8d674ef6bf1ab7796b4f7ce05e420fd45bd258a72ac804"},
+    {file = "librt-0.7.7-cp314-cp314t-win_arm64.whl", hash = "sha256:142c2cd91794b79fd0ce113bd658993b7ede0fe93057668c2f98a45ca00b7e91"},
+    {file = "librt-0.7.7-cp39-cp39-macosx_10_9_x86_64.whl", hash = "sha256:c8ffe3431d98cc043a14e88b21288b5ec7ee12cb01260e94385887f285ef9389"},
+    {file = "librt-0.7.7-cp39-cp39-macosx_11_0_arm64.whl", hash = "sha256:e40d20ae1722d6b8ea6acf4597e789604649dcd9c295eb7361a28225bc2e9e12"},
+    {file = "librt-0.7.7-cp39-cp39-manylinux1_i686.manylinux_2_28_i686.manylinux_2_5_i686.whl", hash = "sha256:f2cb63c49bc96847c3bb8dca350970e4dcd19936f391cfdfd057dcb37c4fa97e"},
+    {file = "librt-0.7.7-cp39-cp39-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:8f2f8dcf5ab9f80fb970c6fd780b398efb2f50c1962485eb8d3ab07788595a48"},
+    {file = "librt-0.7.7-cp39-cp39-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:a1f5cc41a570269d1be7a676655875e3a53de4992a9fa38efb7983e97cf73d7c"},
+    {file = "librt-0.7.7-cp39-cp39-musllinux_1_2_aarch64.whl", hash = "sha256:ff1fb2dfef035549565a4124998fadcb7a3d4957131ddf004a56edeb029626b3"},
+    {file = "librt-0.7.7-cp39-cp39-musllinux_1_2_i686.whl", hash = "sha256:ab2a2a9cd7d044e1a11ca64a86ad3361d318176924bbe5152fbc69f99be20b8c"},
+    {file = "librt-0.7.7-cp39-cp39-musllinux_1_2_x86_64.whl", hash = "sha256:ad3fc2d859a709baf9dd9607bb72f599b1cfb8a39eafd41307d0c3c4766763cb"},
+    {file = "librt-0.7.7-cp39-cp39-win32.whl", hash = "sha256:f83c971eb9d2358b6a18da51dc0ae00556ac7c73104dde16e9e14c15aaf685ca"},
+    {file = "librt-0.7.7-cp39-cp39-win_amd64.whl", hash = "sha256:264720fc288c86039c091a4ad63419a5d7cabbf1c1c9933336a957ed2483e570"},
+    {file = "librt-0.7.7.tar.gz", hash = "sha256:81d957b069fed1890953c3b9c3895c7689960f233eea9a1d9607f71ce7f00b2c"},
+]
+
+[[package]]
+name = "m2r2"
+version = "0.3.4"
+description = "Markdown and reStructuredText in a single file."
+optional = false
+python-versions = ">=3.7"
+groups = ["docs"]
+files = [
+    {file = "m2r2-0.3.4-py3-none-any.whl", hash = "sha256:1a445514af8a229496bfb1380c52da8dd38313e48600359ee92b2c9d2e4df34a"},
+    {file = "m2r2-0.3.4.tar.gz", hash = "sha256:e278f5f337e9aa7b2080fcc3e94b051bda9615b02e36c6fb3f23ff019872f043"},
+]
+
+[package.dependencies]
+docutils = ">=0.19"
+mistune = "0.8.4"
+
+[[package]]
+name = "markdown-it-py"
+version = "4.0.0"
+description = "Python port of markdown-it. Markdown parsing, done right!"
+optional = false
+python-versions = ">=3.10"
+groups = ["lint"]
+files = [
+    {file = "markdown_it_py-4.0.0-py3-none-any.whl", hash = "sha256:87327c59b172c5011896038353a81343b6754500a08cd7a4973bb48c6d578147"},
+    {file = "markdown_it_py-4.0.0.tar.gz", hash = "sha256:cb0a2b4aa34f932c007117b194e945bd74e0ec24133ceb5bac59009cda1cb9f3"},
+]
+
+[package.dependencies]
+mdurl = ">=0.1,<1.0"
+
+[package.extras]
+benchmarking = ["psutil", "pytest", "pytest-benchmark"]
+compare = ["commonmark (>=0.9,<1.0)", "markdown (>=3.4,<4.0)", "markdown-it-pyrs", "mistletoe (>=1.0,<2.0)", "mistune (>=3.0,<4.0)", "panflute (>=2.3,<3.0)"]
+linkify = ["linkify-it-py (>=1,<3)"]
+plugins = ["mdit-py-plugins (>=0.5.0)"]
+profiling = ["gprof2dot"]
+rtd = ["ipykernel", "jupyter_sphinx", "mdit-py-plugins (>=0.5.0)", "myst-parser", "pyyaml", "sphinx", "sphinx-book-theme (>=1.0,<2.0)", "sphinx-copybutton", "sphinx-design"]
+testing = ["coverage", "pytest", "pytest-cov", "pytest-regressions", "requests"]
+
+[[package]]
+name = "markupsafe"
+version = "3.0.3"
+description = "Safely add untrusted strings to HTML/XML markup."
+optional = false
+python-versions = ">=3.9"
+groups = ["main", "docs", "examples"]
+files = [
+    {file = "markupsafe-3.0.3-cp310-cp310-macosx_10_9_x86_64.whl", hash = "sha256:2f981d352f04553a7171b8e44369f2af4055f888dfb147d55e42d29e29e74559"},
+    {file = "markupsafe-3.0.3-cp310-cp310-macosx_11_0_arm64.whl", hash = "sha256:e1c1493fb6e50ab01d20a22826e57520f1284df32f2d8601fdd90b6304601419"},
+    {file = "markupsafe-3.0.3-cp310-cp310-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:1ba88449deb3de88bd40044603fafffb7bc2b055d626a330323a9ed736661695"},
+    {file = "markupsafe-3.0.3-cp310-cp310-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:f42d0984e947b8adf7dd6dde396e720934d12c506ce84eea8476409563607591"},
+    {file = "markupsafe-3.0.3-cp310-cp310-manylinux_2_31_riscv64.manylinux_2_39_riscv64.whl", hash = "sha256:c0c0b3ade1c0b13b936d7970b1d37a57acde9199dc2aecc4c336773e1d86049c"},
+    {file = "markupsafe-3.0.3-cp310-cp310-musllinux_1_2_aarch64.whl", hash = "sha256:0303439a41979d9e74d18ff5e2dd8c43ed6c6001fd40e5bf2e43f7bd9bbc523f"},
+    {file = "markupsafe-3.0.3-cp310-cp310-musllinux_1_2_riscv64.whl", hash = "sha256:d2ee202e79d8ed691ceebae8e0486bd9a2cd4794cec4824e1c99b6f5009502f6"},
+    {file = "markupsafe-3.0.3-cp310-cp310-musllinux_1_2_x86_64.whl", hash = "sha256:177b5253b2834fe3678cb4a5f0059808258584c559193998be2601324fdeafb1"},
+    {file = "markupsafe-3.0.3-cp310-cp310-win32.whl", hash = "sha256:2a15a08b17dd94c53a1da0438822d70ebcd13f8c3a95abe3a9ef9f11a94830aa"},
+    {file = "markupsafe-3.0.3-cp310-cp310-win_amd64.whl", hash = "sha256:c4ffb7ebf07cfe8931028e3e4c85f0357459a3f9f9490886198848f4fa002ec8"},
+    {file = "markupsafe-3.0.3-cp310-cp310-win_arm64.whl", hash = "sha256:e2103a929dfa2fcaf9bb4e7c091983a49c9ac3b19c9061b6d5427dd7d14d81a1"},
+    {file = "markupsafe-3.0.3-cp311-cp311-macosx_10_9_x86_64.whl", hash = "sha256:1cc7ea17a6824959616c525620e387f6dd30fec8cb44f649e31712db02123dad"},
+    {file = "markupsafe-3.0.3-cp311-cp311-macosx_11_0_arm64.whl", hash = "sha256:4bd4cd07944443f5a265608cc6aab442e4f74dff8088b0dfc8238647b8f6ae9a"},
+    {file = "markupsafe-3.0.3-cp311-cp311-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:6b5420a1d9450023228968e7e6a9ce57f65d148ab56d2313fcd589eee96a7a50"},
+    {file = "markupsafe-3.0.3-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:0bf2a864d67e76e5c9a34dc26ec616a66b9888e25e7b9460e1c76d3293bd9dbf"},
+    {file = "markupsafe-3.0.3-cp311-cp311-manylinux_2_31_riscv64.manylinux_2_39_riscv64.whl", hash = "sha256:bc51efed119bc9cfdf792cdeaa4d67e8f6fcccab66ed4bfdd6bde3e59bfcbb2f"},
+    {file = "markupsafe-3.0.3-cp311-cp311-musllinux_1_2_aarch64.whl", hash = "sha256:068f375c472b3e7acbe2d5318dea141359e6900156b5b2ba06a30b169086b91a"},
+    {file = "markupsafe-3.0.3-cp311-cp311-musllinux_1_2_riscv64.whl", hash = "sha256:7be7b61bb172e1ed687f1754f8e7484f1c8019780f6f6b0786e76bb01c2ae115"},
+    {file = "markupsafe-3.0.3-cp311-cp311-musllinux_1_2_x86_64.whl", hash = "sha256:f9e130248f4462aaa8e2552d547f36ddadbeaa573879158d721bbd33dfe4743a"},
+    {file = "markupsafe-3.0.3-cp311-cp311-win32.whl", hash = "sha256:0db14f5dafddbb6d9208827849fad01f1a2609380add406671a26386cdf15a19"},
+    {file = "markupsafe-3.0.3-cp311-cp311-win_amd64.whl", hash = "sha256:de8a88e63464af587c950061a5e6a67d3632e36df62b986892331d4620a35c01"},
+    {file = "markupsafe-3.0.3-cp311-cp311-win_arm64.whl", hash = "sha256:3b562dd9e9ea93f13d53989d23a7e775fdfd1066c33494ff43f5418bc8c58a5c"},
+    {file = "markupsafe-3.0.3-cp312-cp312-macosx_10_13_x86_64.whl", hash = "sha256:d53197da72cc091b024dd97249dfc7794d6a56530370992a5e1a08983ad9230e"},
+    {file = "markupsafe-3.0.3-cp312-cp312-macosx_11_0_arm64.whl", hash = "sha256:1872df69a4de6aead3491198eaf13810b565bdbeec3ae2dc8780f14458ec73ce"},
+    {file = "markupsafe-3.0.3-cp312-cp312-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:3a7e8ae81ae39e62a41ec302f972ba6ae23a5c5396c8e60113e9066ef893da0d"},
+    {file = "markupsafe-3.0.3-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:d6dd0be5b5b189d31db7cda48b91d7e0a9795f31430b7f271219ab30f1d3ac9d"},
+    {file = "markupsafe-3.0.3-cp312-cp312-manylinux_2_31_riscv64.manylinux_2_39_riscv64.whl", hash = "sha256:94c6f0bb423f739146aec64595853541634bde58b2135f27f61c1ffd1cd4d16a"},
+    {file = "markupsafe-3.0.3-cp312-cp312-musllinux_1_2_aarch64.whl", hash = "sha256:be8813b57049a7dc738189df53d69395eba14fb99345e0a5994914a3864c8a4b"},
+    {file = "markupsafe-3.0.3-cp312-cp312-musllinux_1_2_riscv64.whl", hash = "sha256:83891d0e9fb81a825d9a6d61e3f07550ca70a076484292a70fde82c4b807286f"},
+    {file = "markupsafe-3.0.3-cp312-cp312-musllinux_1_2_x86_64.whl", hash = "sha256:77f0643abe7495da77fb436f50f8dab76dbc6e5fd25d39589a0f1fe6548bfa2b"},
+    {file = "markupsafe-3.0.3-cp312-cp312-win32.whl", hash = "sha256:d88b440e37a16e651bda4c7c2b930eb586fd15ca7406cb39e211fcff3bf3017d"},
+    {file = "markupsafe-3.0.3-cp312-cp312-win_amd64.whl", hash = "sha256:26a5784ded40c9e318cfc2bdb30fe164bdb8665ded9cd64d500a34fb42067b1c"},
+    {file = "markupsafe-3.0.3-cp312-cp312-win_arm64.whl", hash = "sha256:35add3b638a5d900e807944a078b51922212fb3dedb01633a8defc4b01a3c85f"},
+    {file = "markupsafe-3.0.3-cp313-cp313-macosx_10_13_x86_64.whl", hash = "sha256:e1cf1972137e83c5d4c136c43ced9ac51d0e124706ee1c8aa8532c1287fa8795"},
+    {file = "markupsafe-3.0.3-cp313-cp313-macosx_11_0_arm64.whl", hash = "sha256:116bb52f642a37c115f517494ea5feb03889e04df47eeff5b130b1808ce7c219"},
+    {file = "markupsafe-3.0.3-cp313-cp313-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:133a43e73a802c5562be9bbcd03d090aa5a1fe899db609c29e8c8d815c5f6de6"},
+    {file = "markupsafe-3.0.3-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:ccfcd093f13f0f0b7fdd0f198b90053bf7b2f02a3927a30e63f3ccc9df56b676"},
+    {file = "markupsafe-3.0.3-cp313-cp313-manylinux_2_31_riscv64.manylinux_2_39_riscv64.whl", hash = "sha256:509fa21c6deb7a7a273d629cf5ec029bc209d1a51178615ddf718f5918992ab9"},
+    {file = "markupsafe-3.0.3-cp313-cp313-musllinux_1_2_aarch64.whl", hash = "sha256:a4afe79fb3de0b7097d81da19090f4df4f8d3a2b3adaa8764138aac2e44f3af1"},
+    {file = "markupsafe-3.0.3-cp313-cp313-musllinux_1_2_riscv64.whl", hash = "sha256:795e7751525cae078558e679d646ae45574b47ed6e7771863fcc079a6171a0fc"},
+    {file = "markupsafe-3.0.3-cp313-cp313-musllinux_1_2_x86_64.whl", hash = "sha256:8485f406a96febb5140bfeca44a73e3ce5116b2501ac54fe953e488fb1d03b12"},
+    {file = "markupsafe-3.0.3-cp313-cp313-win32.whl", hash = "sha256:bdd37121970bfd8be76c5fb069c7751683bdf373db1ed6c010162b2a130248ed"},
+    {file = "markupsafe-3.0.3-cp313-cp313-win_amd64.whl", hash = "sha256:9a1abfdc021a164803f4d485104931fb8f8c1efd55bc6b748d2f5774e78b62c5"},
+    {file = "markupsafe-3.0.3-cp313-cp313-win_arm64.whl", hash = "sha256:7e68f88e5b8799aa49c85cd116c932a1ac15caaa3f5db09087854d218359e485"},
+    {file = "markupsafe-3.0.3-cp313-cp313t-macosx_10_13_x86_64.whl", hash = "sha256:218551f6df4868a8d527e3062d0fb968682fe92054e89978594c28e642c43a73"},
+    {file = "markupsafe-3.0.3-cp313-cp313t-macosx_11_0_arm64.whl", hash = "sha256:3524b778fe5cfb3452a09d31e7b5adefeea8c5be1d43c4f810ba09f2ceb29d37"},
+    {file = "markupsafe-3.0.3-cp313-cp313t-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:4e885a3d1efa2eadc93c894a21770e4bc67899e3543680313b09f139e149ab19"},
+    {file = "markupsafe-3.0.3-cp313-cp313t-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:8709b08f4a89aa7586de0aadc8da56180242ee0ada3999749b183aa23df95025"},
+    {file = "markupsafe-3.0.3-cp313-cp313t-manylinux_2_31_riscv64.manylinux_2_39_riscv64.whl", hash = "sha256:b8512a91625c9b3da6f127803b166b629725e68af71f8184ae7e7d54686a56d6"},
+    {file = "markupsafe-3.0.3-cp313-cp313t-musllinux_1_2_aarch64.whl", hash = "sha256:9b79b7a16f7fedff2495d684f2b59b0457c3b493778c9eed31111be64d58279f"},
+    {file = "markupsafe-3.0.3-cp313-cp313t-musllinux_1_2_riscv64.whl", hash = "sha256:12c63dfb4a98206f045aa9563db46507995f7ef6d83b2f68eda65c307c6829eb"},
+    {file = "markupsafe-3.0.3-cp313-cp313t-musllinux_1_2_x86_64.whl", hash = "sha256:8f71bc33915be5186016f675cd83a1e08523649b0e33efdb898db577ef5bb009"},
+    {file = "markupsafe-3.0.3-cp313-cp313t-win32.whl", hash = "sha256:69c0b73548bc525c8cb9a251cddf1931d1db4d2258e9599c28c07ef3580ef354"},
+    {file = "markupsafe-3.0.3-cp313-cp313t-win_amd64.whl", hash = "sha256:1b4b79e8ebf6b55351f0d91fe80f893b4743f104bff22e90697db1590e47a218"},
+    {file = "markupsafe-3.0.3-cp313-cp313t-win_arm64.whl", hash = "sha256:ad2cf8aa28b8c020ab2fc8287b0f823d0a7d8630784c31e9ee5edea20f406287"},
+    {file = "markupsafe-3.0.3-cp314-cp314-macosx_10_13_x86_64.whl", hash = "sha256:eaa9599de571d72e2daf60164784109f19978b327a3910d3e9de8c97b5b70cfe"},
+    {file = "markupsafe-3.0.3-cp314-cp314-macosx_11_0_arm64.whl", hash = "sha256:c47a551199eb8eb2121d4f0f15ae0f923d31350ab9280078d1e5f12b249e0026"},
+    {file = "markupsafe-3.0.3-cp314-cp314-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:f34c41761022dd093b4b6896d4810782ffbabe30f2d443ff5f083e0cbbb8c737"},
+    {file = "markupsafe-3.0.3-cp314-cp314-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:457a69a9577064c05a97c41f4e65148652db078a3a509039e64d3467b9e7ef97"},
+    {file = "markupsafe-3.0.3-cp314-cp314-manylinux_2_31_riscv64.manylinux_2_39_riscv64.whl", hash = "sha256:e8afc3f2ccfa24215f8cb28dcf43f0113ac3c37c2f0f0806d8c70e4228c5cf4d"},
+    {file = "markupsafe-3.0.3-cp314-cp314-musllinux_1_2_aarch64.whl", hash = "sha256:ec15a59cf5af7be74194f7ab02d0f59a62bdcf1a537677ce67a2537c9b87fcda"},
+    {file = "markupsafe-3.0.3-cp314-cp314-musllinux_1_2_riscv64.whl", hash = "sha256:0eb9ff8191e8498cca014656ae6b8d61f39da5f95b488805da4bb029cccbfbaf"},
+    {file = "markupsafe-3.0.3-cp314-cp314-musllinux_1_2_x86_64.whl", hash = "sha256:2713baf880df847f2bece4230d4d094280f4e67b1e813eec43b4c0e144a34ffe"},
+    {file = "markupsafe-3.0.3-cp314-cp314-win32.whl", hash = "sha256:729586769a26dbceff69f7a7dbbf59ab6572b99d94576a5592625d5b411576b9"},
+    {file = "markupsafe-3.0.3-cp314-cp314-win_amd64.whl", hash = "sha256:bdc919ead48f234740ad807933cdf545180bfbe9342c2bb451556db2ed958581"},
+    {file = "markupsafe-3.0.3-cp314-cp314-win_arm64.whl", hash = "sha256:5a7d5dc5140555cf21a6fefbdbf8723f06fcd2f63ef108f2854de715e4422cb4"},
+    {file = "markupsafe-3.0.3-cp314-cp314t-macosx_10_13_x86_64.whl", hash = "sha256:1353ef0c1b138e1907ae78e2f6c63ff67501122006b0f9abad68fda5f4ffc6ab"},
+    {file = "markupsafe-3.0.3-cp314-cp314t-macosx_11_0_arm64.whl", hash = "sha256:1085e7fbddd3be5f89cc898938f42c0b3c711fdcb37d75221de2666af647c175"},
+    {file = "markupsafe-3.0.3-cp314-cp314t-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:1b52b4fb9df4eb9ae465f8d0c228a00624de2334f216f178a995ccdcf82c4634"},
+    {file = "markupsafe-3.0.3-cp314-cp314t-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:fed51ac40f757d41b7c48425901843666a6677e3e8eb0abcff09e4ba6e664f50"},
+    {file = "markupsafe-3.0.3-cp314-cp314t-manylinux_2_31_riscv64.manylinux_2_39_riscv64.whl", hash = "sha256:f190daf01f13c72eac4efd5c430a8de82489d9cff23c364c3ea822545032993e"},
+    {file = "markupsafe-3.0.3-cp314-cp314t-musllinux_1_2_aarch64.whl", hash = "sha256:e56b7d45a839a697b5eb268c82a71bd8c7f6c94d6fd50c3d577fa39a9f1409f5"},
+    {file = "markupsafe-3.0.3-cp314-cp314t-musllinux_1_2_riscv64.whl", hash = "sha256:f3e98bb3798ead92273dc0e5fd0f31ade220f59a266ffd8a4f6065e0a3ce0523"},
+    {file = "markupsafe-3.0.3-cp314-cp314t-musllinux_1_2_x86_64.whl", hash = "sha256:5678211cb9333a6468fb8d8be0305520aa073f50d17f089b5b4b477ea6e67fdc"},
+    {file = "markupsafe-3.0.3-cp314-cp314t-win32.whl", hash = "sha256:915c04ba3851909ce68ccc2b8e2cd691618c4dc4c4232fb7982bca3f41fd8c3d"},
+    {file = "markupsafe-3.0.3-cp314-cp314t-win_amd64.whl", hash = "sha256:4faffd047e07c38848ce017e8725090413cd80cbc23d86e55c587bf979e579c9"},
+    {file = "markupsafe-3.0.3-cp314-cp314t-win_arm64.whl", hash = "sha256:32001d6a8fc98c8cb5c947787c5d08b0a50663d139f1305bac5885d98d9b40fa"},
+    {file = "markupsafe-3.0.3-cp39-cp39-macosx_10_9_x86_64.whl", hash = "sha256:15d939a21d546304880945ca1ecb8a039db6b4dc49b2c5a400387cdae6a62e26"},
+    {file = "markupsafe-3.0.3-cp39-cp39-macosx_11_0_arm64.whl", hash = "sha256:f71a396b3bf33ecaa1626c255855702aca4d3d9fea5e051b41ac59a9c1c41edc"},
+    {file = "markupsafe-3.0.3-cp39-cp39-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:0f4b68347f8c5eab4a13419215bdfd7f8c9b19f2b25520968adfad23eb0ce60c"},
+    {file = "markupsafe-3.0.3-cp39-cp39-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:e8fc20152abba6b83724d7ff268c249fa196d8259ff481f3b1476383f8f24e42"},
+    {file = "markupsafe-3.0.3-cp39-cp39-manylinux_2_31_riscv64.manylinux_2_39_riscv64.whl", hash = "sha256:949b8d66bc381ee8b007cd945914c721d9aba8e27f71959d750a46f7c282b20b"},
+    {file = "markupsafe-3.0.3-cp39-cp39-musllinux_1_2_aarch64.whl", hash = "sha256:3537e01efc9d4dccdf77221fb1cb3b8e1a38d5428920e0657ce299b20324d758"},
+    {file = "markupsafe-3.0.3-cp39-cp39-musllinux_1_2_riscv64.whl", hash = "sha256:591ae9f2a647529ca990bc681daebdd52c8791ff06c2bfa05b65163e28102ef2"},
+    {file = "markupsafe-3.0.3-cp39-cp39-musllinux_1_2_x86_64.whl", hash = "sha256:a320721ab5a1aba0a233739394eb907f8c8da5c98c9181d1161e77a0c8e36f2d"},
+    {file = "markupsafe-3.0.3-cp39-cp39-win32.whl", hash = "sha256:df2449253ef108a379b8b5d6b43f4b1a8e81a061d6537becd5582fba5f9196d7"},
+    {file = "markupsafe-3.0.3-cp39-cp39-win_amd64.whl", hash = "sha256:7c3fb7d25180895632e5d3148dbdc29ea38ccb7fd210aa27acbd1201a1902c6e"},
+    {file = "markupsafe-3.0.3-cp39-cp39-win_arm64.whl", hash = "sha256:38664109c14ffc9e7437e86b4dceb442b0096dfe3541d7864d9cbe1da4cf36c8"},
+    {file = "markupsafe-3.0.3.tar.gz", hash = "sha256:722695808f4b6457b320fdc131280796bdceb04ab50fe1795cd540799ebe1698"},
+]
+
+[[package]]
+name = "mccabe"
+version = "0.7.0"
+description = "McCabe checker, plugin for flake8"
+optional = false
+python-versions = ">=3.6"
+groups = ["lint"]
+files = [
+    {file = "mccabe-0.7.0-py2.py3-none-any.whl", hash = "sha256:6c2d30ab6be0e4a46919781807b4f0d834ebdd6c6e3dca0bda5a15f863427b6e"},
+    {file = "mccabe-0.7.0.tar.gz", hash = "sha256:348e0240c33b60bbdf4e523192ef919f28cb2c3d7d5c7794f74009290f236325"},
+]
+
+[[package]]
+name = "mdurl"
+version = "0.1.2"
+description = "Markdown URL utilities"
+optional = false
+python-versions = ">=3.7"
+groups = ["lint"]
+files = [
+    {file = "mdurl-0.1.2-py3-none-any.whl", hash = "sha256:84008a41e51615a49fc9966191ff91509e3c40b939176e643fd50a5c2196b8f8"},
+    {file = "mdurl-0.1.2.tar.gz", hash = "sha256:bb413d29f5eea38f31dd4754dd7377d4465116fb207585f97bf925588687c1ba"},
+]
+
+[[package]]
+name = "mistune"
+version = "0.8.4"
+description = "The fastest markdown parser in pure Python"
+optional = false
+python-versions = "*"
+groups = ["docs"]
+files = [
+    {file = "mistune-0.8.4-py2.py3-none-any.whl", hash = "sha256:88a1051873018da288eee8538d476dffe1262495144b33ecb586c4ab266bb8d4"},
+    {file = "mistune-0.8.4.tar.gz", hash = "sha256:59a3429db53c50b5c6bcc8a07f8848cb00d7dc8bdb431a4ab41920d201d4756e"},
+]
+
+[[package]]
+name = "mypy"
+version = "1.19.1"
+description = "Optional static typing for Python"
+optional = false
+python-versions = ">=3.9"
+groups = ["lint"]
+files = [
+    {file = "mypy-1.19.1-cp310-cp310-macosx_10_9_x86_64.whl", hash = "sha256:5f05aa3d375b385734388e844bc01733bd33c644ab48e9684faa54e5389775ec"},
+    {file = "mypy-1.19.1-cp310-cp310-macosx_11_0_arm64.whl", hash = "sha256:022ea7279374af1a5d78dfcab853fe6a536eebfda4b59deab53cd21f6cd9f00b"},
+    {file = "mypy-1.19.1-cp310-cp310-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:ee4c11e460685c3e0c64a4c5de82ae143622410950d6be863303a1c4ba0e36d6"},
+    {file = "mypy-1.19.1-cp310-cp310-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:de759aafbae8763283b2ee5869c7255391fbc4de3ff171f8f030b5ec48381b74"},
+    {file = "mypy-1.19.1-cp310-cp310-musllinux_1_2_x86_64.whl", hash = "sha256:ab43590f9cd5108f41aacf9fca31841142c786827a74ab7cc8a2eacb634e09a1"},
+    {file = "mypy-1.19.1-cp310-cp310-win_amd64.whl", hash = "sha256:2899753e2f61e571b3971747e302d5f420c3fd09650e1951e99f823bc3089dac"},
+    {file = "mypy-1.19.1-cp311-cp311-macosx_10_9_x86_64.whl", hash = "sha256:d8dfc6ab58ca7dda47d9237349157500468e404b17213d44fc1cb77bce532288"},
+    {file = "mypy-1.19.1-cp311-cp311-macosx_11_0_arm64.whl", hash = "sha256:e3f276d8493c3c97930e354b2595a44a21348b320d859fb4a2b9f66da9ed27ab"},
+    {file = "mypy-1.19.1-cp311-cp311-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:2abb24cf3f17864770d18d673c85235ba52456b36a06b6afc1e07c1fdcd3d0e6"},
+    {file = "mypy-1.19.1-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:a009ffa5a621762d0c926a078c2d639104becab69e79538a494bcccb62cc0331"},
+    {file = "mypy-1.19.1-cp311-cp311-musllinux_1_2_x86_64.whl", hash = "sha256:f7cee03c9a2e2ee26ec07479f38ea9c884e301d42c6d43a19d20fb014e3ba925"},
+    {file = "mypy-1.19.1-cp311-cp311-win_amd64.whl", hash = "sha256:4b84a7a18f41e167f7995200a1d07a4a6810e89d29859df936f1c3923d263042"},
+    {file = "mypy-1.19.1-cp312-cp312-macosx_10_13_x86_64.whl", hash = "sha256:a8174a03289288c1f6c46d55cef02379b478bfbc8e358e02047487cad44c6ca1"},
+    {file = "mypy-1.19.1-cp312-cp312-macosx_11_0_arm64.whl", hash = "sha256:ffcebe56eb09ff0c0885e750036a095e23793ba6c2e894e7e63f6d89ad51f22e"},
+    {file = "mypy-1.19.1-cp312-cp312-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:b64d987153888790bcdb03a6473d321820597ab8dd9243b27a92153c4fa50fd2"},
+    {file = "mypy-1.19.1-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:c35d298c2c4bba75feb2195655dfea8124d855dfd7343bf8b8c055421eaf0cf8"},
+    {file = "mypy-1.19.1-cp312-cp312-musllinux_1_2_x86_64.whl", hash = "sha256:34c81968774648ab5ac09c29a375fdede03ba253f8f8287847bd480782f73a6a"},
+    {file = "mypy-1.19.1-cp312-cp312-win_amd64.whl", hash = "sha256:b10e7c2cd7870ba4ad9b2d8a6102eb5ffc1f16ca35e3de6bfa390c1113029d13"},
+    {file = "mypy-1.19.1-cp313-cp313-macosx_10_13_x86_64.whl", hash = "sha256:e3157c7594ff2ef1634ee058aafc56a82db665c9438fd41b390f3bde1ab12250"},
+    {file = "mypy-1.19.1-cp313-cp313-macosx_11_0_arm64.whl", hash = "sha256:bdb12f69bcc02700c2b47e070238f42cb87f18c0bc1fc4cdb4fb2bc5fd7a3b8b"},
+    {file = "mypy-1.19.1-cp313-cp313-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:f859fb09d9583a985be9a493d5cfc5515b56b08f7447759a0c5deaf68d80506e"},
+    {file = "mypy-1.19.1-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:c9a6538e0415310aad77cb94004ca6482330fece18036b5f360b62c45814c4ef"},
+    {file = "mypy-1.19.1-cp313-cp313-musllinux_1_2_x86_64.whl", hash = "sha256:da4869fc5e7f62a88f3fe0b5c919d1d9f7ea3cef92d3689de2823fd27e40aa75"},
+    {file = "mypy-1.19.1-cp313-cp313-win_amd64.whl", hash = "sha256:016f2246209095e8eda7538944daa1d60e1e8134d98983b9fc1e92c1fc0cb8dd"},
+    {file = "mypy-1.19.1-cp314-cp314-macosx_10_15_x86_64.whl", hash = "sha256:06e6170bd5836770e8104c8fdd58e5e725cfeb309f0a6c681a811f557e97eac1"},
+    {file = "mypy-1.19.1-cp314-cp314-macosx_11_0_arm64.whl", hash = "sha256:804bd67b8054a85447c8954215a906d6eff9cabeabe493fb6334b24f4bfff718"},
+    {file = "mypy-1.19.1-cp314-cp314-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:21761006a7f497cb0d4de3d8ef4ca70532256688b0523eee02baf9eec895e27b"},
+    {file = "mypy-1.19.1-cp314-cp314-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:28902ee51f12e0f19e1e16fbe2f8f06b6637f482c459dd393efddd0ec7f82045"},
+    {file = "mypy-1.19.1-cp314-cp314-musllinux_1_2_x86_64.whl", hash = "sha256:481daf36a4c443332e2ae9c137dfee878fcea781a2e3f895d54bd3002a900957"},
+    {file = "mypy-1.19.1-cp314-cp314-win_amd64.whl", hash = "sha256:8bb5c6f6d043655e055be9b542aa5f3bdd30e4f3589163e85f93f3640060509f"},
+    {file = "mypy-1.19.1-cp39-cp39-macosx_10_9_x86_64.whl", hash = "sha256:7bcfc336a03a1aaa26dfce9fff3e287a3ba99872a157561cbfcebe67c13308e3"},
+    {file = "mypy-1.19.1-cp39-cp39-macosx_11_0_arm64.whl", hash = "sha256:b7951a701c07ea584c4fe327834b92a30825514c868b1f69c30445093fdd9d5a"},
+    {file = "mypy-1.19.1-cp39-cp39-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:b13cfdd6c87fc3efb69ea4ec18ef79c74c3f98b4e5498ca9b85ab3b2c2329a67"},
+    {file = "mypy-1.19.1-cp39-cp39-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:4f28f99c824ecebcdaa2e55d82953e38ff60ee5ec938476796636b86afa3956e"},
+    {file = "mypy-1.19.1-cp39-cp39-musllinux_1_2_x86_64.whl", hash = "sha256:c608937067d2fc5a4dd1a5ce92fd9e1398691b8c5d012d66e1ddd430e9244376"},
+    {file = "mypy-1.19.1-cp39-cp39-win_amd64.whl", hash = "sha256:409088884802d511ee52ca067707b90c883426bd95514e8cfda8281dc2effe24"},
+    {file = "mypy-1.19.1-py3-none-any.whl", hash = "sha256:f1235f5ea01b7db5468d53ece6aaddf1ad0b88d9e7462b86ef96fe04995d7247"},
+    {file = "mypy-1.19.1.tar.gz", hash = "sha256:19d88bb05303fe63f71dd2c6270daca27cb9401c4ca8255fe50d1d920e0eb9ba"},
+]
+
+[package.dependencies]
+librt = {version = ">=0.6.2", markers = "platform_python_implementation != \"PyPy\""}
+mypy_extensions = ">=1.0.0"
+pathspec = ">=0.9.0"
+tomli = {version = ">=1.1.0", markers = "python_version < \"3.11\""}
+typing_extensions = ">=4.6.0"
+
+[package.extras]
+dmypy = ["psutil (>=4.0)"]
+faster-cache = ["orjson"]
+install-types = ["pip"]
+mypyc = ["setuptools (>=50)"]
+reports = ["lxml"]
+
+[[package]]
+name = "mypy-extensions"
+version = "1.1.0"
+description = "Type system extensions for programs checked with the mypy type checker."
+optional = false
+python-versions = ">=3.8"
+groups = ["lint"]
+files = [
+    {file = "mypy_extensions-1.1.0-py3-none-any.whl", hash = "sha256:1be4cccdb0f2482337c4743e60421de3a356cd97508abadd57d47403e94f5505"},
+    {file = "mypy_extensions-1.1.0.tar.gz", hash = "sha256:52e68efc3284861e772bbcd66823fde5ae21fd2fdb51c62a211403730b916558"},
+]
+
+[[package]]
+name = "narwhals"
+version = "2.14.0"
+description = "Extremely lightweight compatibility layer between dataframe libraries"
+optional = false
+python-versions = ">=3.9"
+groups = ["main", "examples"]
+files = [
+    {file = "narwhals-2.14.0-py3-none-any.whl", hash = "sha256:b56796c9a00179bd757d15282c540024e1d5c910b19b8c9944d836566c030acf"},
+    {file = "narwhals-2.14.0.tar.gz", hash = "sha256:98be155c3599db4d5c211e565c3190c398c87e7bf5b3cdb157dece67641946e0"},
+]
+
+[package.extras]
+cudf = ["cudf (>=24.10.0)"]
+dask = ["dask[dataframe] (>=2024.8)"]
+duckdb = ["duckdb (>=1.1)"]
+ibis = ["ibis-framework (>=6.0.0)", "packaging", "pyarrow-hotfix", "rich"]
+modin = ["modin"]
+pandas = ["pandas (>=1.1.3)"]
+polars = ["polars (>=0.20.4)"]
+pyarrow = ["pyarrow (>=13.0.0)"]
+pyspark = ["pyspark (>=3.5.0)"]
+pyspark-connect = ["pyspark[connect] (>=3.5.0)"]
+sqlframe = ["sqlframe (>=3.22.0,!=3.39.3)"]
+
+[[package]]
+name = "ni-grpc-extensions"
+version = "1.1.0"
+description = "gRPC Extensions"
+optional = false
+python-versions = "<4.0,>=3.10"
+groups = ["main"]
+files = [
+    {file = "ni_grpc_extensions-1.1.0-py3-none-any.whl", hash = "sha256:db0357acd244854f4acccf202c89fe6462b4283d264ed639f4e248e6cc86bc9b"},
+    {file = "ni_grpc_extensions-1.1.0.tar.gz", hash = "sha256:028ea33e5c5234bc050bf5dc99f5b61611531de8f012293e9d4c6985b7b37afb"},
+]
+
+[package.dependencies]
+grpcio = ">=1.49.0,<2.0"
+traceloggingdynamic = {version = ">=1.0", markers = "sys_platform == \"win32\""}
+
+[[package]]
+name = "ni-measurementlink-discovery-v1-client"
+version = "1.1.0"
+description = "gRPC Client for NI Discovery Service"
+optional = false
+python-versions = "<4.0,>=3.10"
+groups = ["main"]
+files = [
+    {file = "ni_measurementlink_discovery_v1_client-1.1.0-py3-none-any.whl", hash = "sha256:366dcc3b93627ed1ede488955637e0768b29cb7a375e59ac1020f4c53892d00c"},
+    {file = "ni_measurementlink_discovery_v1_client-1.1.0.tar.gz", hash = "sha256:831b6145cf8def0021cb00579b08a2ad1da5a19fdeedea4522a3cb4a30978c48"},
+]
+
+[package.dependencies]
+grpcio = ">=1.49.0,<2.0"
+ni-grpc-extensions = ">=1.1.0"
+ni-measurementlink-discovery-v1-proto = ">=1.1.0"
+pywin32 = {version = ">=303", markers = "sys_platform == \"win32\""}
+
+[[package]]
+name = "ni-measurementlink-discovery-v1-proto"
+version = "1.1.0"
+description = "Protobuf data types for NI discovery gRPC APIs"
+optional = false
+python-versions = "<4.0,>=3.10"
+groups = ["main"]
+files = [
+    {file = "ni_measurementlink_discovery_v1_proto-1.1.0-py3-none-any.whl", hash = "sha256:6a3061ca858d3ee887987dc5130074fc439ce6c2b26fe6b3f9401da023461d43"},
+    {file = "ni_measurementlink_discovery_v1_proto-1.1.0.tar.gz", hash = "sha256:f9a9b4572ac5d169fad21ab56e2639abdb77979cf0dc3a88cdb71b2c783d009c"},
+]
+
+[package.dependencies]
+protobuf = ">=4.21"
+
+[[package]]
+name = "ni-panels-v1-proto"
+version = "1.0.0"
+description = "Protobuf generated code for the ni.panels.v1 gRPC API"
+optional = false
+python-versions = "<4.0,>=3.10"
+groups = ["main"]
+files = [
+    {file = "ni_panels_v1_proto-1.0.0-py3-none-any.whl", hash = "sha256:800e2ee60c587a0bfdbbcf10ec12f7558ac7d0d022d19c4bad183ed691c58bb7"},
+    {file = "ni_panels_v1_proto-1.0.0.tar.gz", hash = "sha256:75f9fb184ffd05d3951244331d6f12c8f90f98cb45691cd8085e1acee6311932"},
+]
+
+[package.dependencies]
+grpcio = ">=1.49.0,<2.0"
+protobuf = ">=4.21"
+
+[[package]]
+name = "ni-protobuf-types"
+version = "1.1.0"
+description = "Protobuf data types for NI gRPC APIs"
+optional = false
+python-versions = "<4.0,>=3.10"
+groups = ["main"]
+files = [
+    {file = "ni_protobuf_types-1.1.0-py3-none-any.whl", hash = "sha256:0c21c096cf8577483dade081c571305fe8d4cc759ce2c780e7437129a375942c"},
+    {file = "ni_protobuf_types-1.1.0.tar.gz", hash = "sha256:98f0583405e219f6e128133c2f6c033f03cd83ebd3ce8098ad74ab99b8a253c1"},
+]
+
+[package.dependencies]
+nitypes = ">=1.1.0dev1"
+protobuf = ">=4.21"
+
+[[package]]
+name = "ni-python-styleguide"
+version = "0.4.8"
+description = "NI's internal and external Python linter rules and plugins"
+optional = false
+python-versions = "<4.0,>=3.7"
+groups = ["lint"]
+files = [
+    {file = "ni_python_styleguide-0.4.8-py3-none-any.whl", hash = "sha256:dbbf0fc3692f7d71008ae9cd0d01c93dbf21085e0de2f0068dcd16addb573546"},
+    {file = "ni_python_styleguide-0.4.8.tar.gz", hash = "sha256:f3434d14cc9838613171fe26faccc396a4a8b2f960e139fc92de9bf636f8ba51"},
+]
+
+[package.dependencies]
+black = ">=23.1,<26.0"
+click = ">=7.1.2"
+flake8 = [
+    {version = ">=6.1,<7.0", markers = "python_version >= \"3.12\" and python_version < \"4.0\""},
+    {version = ">=5.0,<6.0", markers = "python_version >= \"3.7\" and python_version < \"3.12\""},
+]
+flake8-black = ">=0.2.1"
+flake8-docstrings = ">=1.5.0"
+flake8-import-order = ">=0.18.1,<0.19.0"
+isort = ">=5.10"
+pathspec = ">=0.11.1"
+pep8-naming = ">=0.11.1"
+pycodestyle = [
+    {version = ">=2.11,<3.0", markers = "python_version >= \"3.12\" and python_version < \"4.0\""},
+    {version = ">=2.9,<3.0", markers = "python_version >= \"3.7\" and python_version < \"3.12\""},
+]
+toml = ">=0.10.1"
+
+[[package]]
+name = "nidaqmx"
+version = "1.4.0"
+description = "NI-DAQmx Python API"
+optional = false
+python-versions = "<4.0,>=3.9"
+groups = ["examples"]
+files = [
+    {file = "nidaqmx-1.4.0-py3-none-any.whl", hash = "sha256:6efdeb099de40194f865dd5b2585f456c38c6d5c2f8d94483a355bcd956804aa"},
+    {file = "nidaqmx-1.4.0.tar.gz", hash = "sha256:29e3d2584d4976bce28c71861dc2fcfc76d0ece702fdccf0c7914b4f90976f42"},
+]
+
+[package.dependencies]
+click = ">=8.0.0"
+deprecation = ">=2.1"
+distro = {version = ">=1.9.0", markers = "sys_platform == \"linux\""}
+hightime = ">=0.2.2"
+nitypes = ">=1.0.1"
+numpy = [
+    {version = ">=1.22", markers = "python_version >= \"3.9\" and python_version < \"3.13\""},
+    {version = ">=2.1", markers = "python_version >= \"3.13\" and python_version < \"4.0\""},
+]
+python-decouple = ">=3.8"
+requests = ">=2.25.0"
+typing_extensions = ">=4.0.0"
+tzlocal = ">=5.0,<6.0"
+
+[package.extras]
+grpc = ["grpcio (>=1.49.0,<2.0)", "ni-grpcdevice-v1-proto (>=1.0.0)", "ni-protobuf-types (>=1.0.0)", "protobuf (>=4.21)"]
+
+[[package]]
+name = "niscope"
+version = "1.4.9"
+description = "NI-SCOPE Python API"
+optional = false
+python-versions = ">=3.9"
+groups = ["examples"]
+files = [
+    {file = "niscope-1.4.9-py3-none-any.whl", hash = "sha256:0b03f1e665ef22ba614defc476149500bc6ddf20e64534476d7496b4f58b30c0"},
+    {file = "niscope-1.4.9.tar.gz", hash = "sha256:e85493c9d3f707fac1b280352ea2c1cacd71fd733d6faf9a22a05853492fe87a"},
+]
+
+[package.dependencies]
+hightime = ">=0.2.0"
+nitclk = "*"
+
+[package.extras]
+grpc = ["grpcio (>=1.59.0,<2.0)", "protobuf (>=4.21.6)"]
+
+[[package]]
+name = "nitclk"
+version = "1.4.9"
+description = "NI-TClk Python API"
+optional = false
+python-versions = ">=3.9"
+groups = ["examples"]
+files = [
+    {file = "nitclk-1.4.9-py3-none-any.whl", hash = "sha256:fa62a03fd8a820246f0adebb59f95249ad086dd407dab9102204338343833b45"},
+    {file = "nitclk-1.4.9.tar.gz", hash = "sha256:86835d4c8f08411433bd7c6dce26a346eef5120e476510bebdbaeb2700582cf5"},
+]
+
+[package.dependencies]
+hightime = ">=0.2.0"
+
+[[package]]
+name = "nitypes"
+version = "1.1.0.dev1"
+description = "Data types for NI Python APIs"
+optional = false
+python-versions = "<4.0,>=3.9"
+groups = ["main", "examples"]
+files = [
+    {file = "nitypes-1.1.0.dev1-py3-none-any.whl", hash = "sha256:d98ad6e3f8b92db76b5c1c584431fa27d3e74cce6e20464e43ee0117b02fe089"},
+    {file = "nitypes-1.1.0.dev1.tar.gz", hash = "sha256:50b23e00cc6960996656c4c9ef0ca71dd267fc5c9ca481077b682c29190aa2d3"},
+]
+
+[package.dependencies]
+hightime = ">=0.2.2"
+numpy = [
+    {version = ">=1.22", markers = "python_version >= \"3.9\" and python_version < \"3.13\""},
+    {version = ">=2.1", markers = "python_version >= \"3.13\" and python_version < \"4.0\""},
+]
+typing-extensions = ">=4.13.2"
+
+[[package]]
+name = "nodeenv"
+version = "1.10.0"
+description = "Node.js virtual environment builder"
+optional = false
+python-versions = "!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*,!=3.4.*,!=3.5.*,!=3.6.*,>=2.7"
+groups = ["lint"]
+files = [
+    {file = "nodeenv-1.10.0-py2.py3-none-any.whl", hash = "sha256:5bb13e3eed2923615535339b3c620e76779af4cb4c6a90deccc9e36b274d3827"},
+    {file = "nodeenv-1.10.0.tar.gz", hash = "sha256:996c191ad80897d076bdfba80a41994c2b47c68e224c542b48feba42ba00f8bb"},
+]
+
+[[package]]
+name = "nodejs-wheel-binaries"
+version = "24.12.0"
+description = "unoffical Node.js package"
+optional = false
+python-versions = ">=3.7"
+groups = ["lint"]
+files = [
+    {file = "nodejs_wheel_binaries-24.12.0-py2.py3-none-macosx_13_0_arm64.whl", hash = "sha256:7564ddea0a87eff34e9b3ef71764cc2a476a8f09a5cccfddc4691148b0a47338"},
+    {file = "nodejs_wheel_binaries-24.12.0-py2.py3-none-macosx_13_0_x86_64.whl", hash = "sha256:8ff929c4669e64613ceb07f5bbd758d528c3563820c75d5de3249eb452c0c0ab"},
+    {file = "nodejs_wheel_binaries-24.12.0-py2.py3-none-manylinux_2_28_aarch64.whl", hash = "sha256:6ebacefa8891bc456ad3655e6bce0af7e20ba08662f79d9109986faeb703fd6f"},
+    {file = "nodejs_wheel_binaries-24.12.0-py2.py3-none-manylinux_2_28_x86_64.whl", hash = "sha256:3292649a03682ccbfa47f7b04d3e4240e8c46ef04dc941b708f20e4e6a764f75"},
+    {file = "nodejs_wheel_binaries-24.12.0-py2.py3-none-musllinux_1_2_aarch64.whl", hash = "sha256:7fb83df312955ea355ba7f8cbd7055c477249a131d3cb43b60e4aeb8f8c730b1"},
+    {file = "nodejs_wheel_binaries-24.12.0-py2.py3-none-musllinux_1_2_x86_64.whl", hash = "sha256:2473c819448fedd7b036dde236b09f3c8bbf39fbbd0c1068790a0498800f498b"},
+    {file = "nodejs_wheel_binaries-24.12.0-py2.py3-none-win_amd64.whl", hash = "sha256:2090d59f75a68079fabc9b86b14df8238b9aecb9577966dc142ce2a23a32e9bb"},
+    {file = "nodejs_wheel_binaries-24.12.0-py2.py3-none-win_arm64.whl", hash = "sha256:d0c2273b667dd7e3f55e369c0085957b702144b1b04bfceb7ce2411e58333757"},
+    {file = "nodejs_wheel_binaries-24.12.0.tar.gz", hash = "sha256:f1b50aa25375e264697dec04b232474906b997c2630c8f499f4caf3692938435"},
+]
+
+[[package]]
+name = "numpy"
+version = "2.2.6"
+description = "Fundamental package for array computing in Python"
+optional = false
+python-versions = ">=3.10"
+groups = ["main", "dev", "examples"]
+markers = "python_version == \"3.10\""
+files = [
+    {file = "numpy-2.2.6-cp310-cp310-macosx_10_9_x86_64.whl", hash = "sha256:b412caa66f72040e6d268491a59f2c43bf03eb6c96dd8f0307829feb7fa2b6fb"},
+    {file = "numpy-2.2.6-cp310-cp310-macosx_11_0_arm64.whl", hash = "sha256:8e41fd67c52b86603a91c1a505ebaef50b3314de0213461c7a6e99c9a3beff90"},
+    {file = "numpy-2.2.6-cp310-cp310-macosx_14_0_arm64.whl", hash = "sha256:37e990a01ae6ec7fe7fa1c26c55ecb672dd98b19c3d0e1d1f326fa13cb38d163"},
+    {file = "numpy-2.2.6-cp310-cp310-macosx_14_0_x86_64.whl", hash = "sha256:5a6429d4be8ca66d889b7cf70f536a397dc45ba6faeb5f8c5427935d9592e9cf"},
+    {file = "numpy-2.2.6-cp310-cp310-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:efd28d4e9cd7d7a8d39074a4d44c63eda73401580c5c76acda2ce969e0a38e83"},
+    {file = "numpy-2.2.6-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:fc7b73d02efb0e18c000e9ad8b83480dfcd5dfd11065997ed4c6747470ae8915"},
+    {file = "numpy-2.2.6-cp310-cp310-musllinux_1_2_aarch64.whl", hash = "sha256:74d4531beb257d2c3f4b261bfb0fc09e0f9ebb8842d82a7b4209415896adc680"},
+    {file = "numpy-2.2.6-cp310-cp310-musllinux_1_2_x86_64.whl", hash = "sha256:8fc377d995680230e83241d8a96def29f204b5782f371c532579b4f20607a289"},
+    {file = "numpy-2.2.6-cp310-cp310-win32.whl", hash = "sha256:b093dd74e50a8cba3e873868d9e93a85b78e0daf2e98c6797566ad8044e8363d"},
+    {file = "numpy-2.2.6-cp310-cp310-win_amd64.whl", hash = "sha256:f0fd6321b839904e15c46e0d257fdd101dd7f530fe03fd6359c1ea63738703f3"},
+    {file = "numpy-2.2.6-cp311-cp311-macosx_10_9_x86_64.whl", hash = "sha256:f9f1adb22318e121c5c69a09142811a201ef17ab257a1e66ca3025065b7f53ae"},
+    {file = "numpy-2.2.6-cp311-cp311-macosx_11_0_arm64.whl", hash = "sha256:c820a93b0255bc360f53eca31a0e676fd1101f673dda8da93454a12e23fc5f7a"},
+    {file = "numpy-2.2.6-cp311-cp311-macosx_14_0_arm64.whl", hash = "sha256:3d70692235e759f260c3d837193090014aebdf026dfd167834bcba43e30c2a42"},
+    {file = "numpy-2.2.6-cp311-cp311-macosx_14_0_x86_64.whl", hash = "sha256:481b49095335f8eed42e39e8041327c05b0f6f4780488f61286ed3c01368d491"},
+    {file = "numpy-2.2.6-cp311-cp311-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:b64d8d4d17135e00c8e346e0a738deb17e754230d7e0810ac5012750bbd85a5a"},
+    {file = "numpy-2.2.6-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:ba10f8411898fc418a521833e014a77d3ca01c15b0c6cdcce6a0d2897e6dbbdf"},
+    {file = "numpy-2.2.6-cp311-cp311-musllinux_1_2_aarch64.whl", hash = "sha256:bd48227a919f1bafbdda0583705e547892342c26fb127219d60a5c36882609d1"},
+    {file = "numpy-2.2.6-cp311-cp311-musllinux_1_2_x86_64.whl", hash = "sha256:9551a499bf125c1d4f9e250377c1ee2eddd02e01eac6644c080162c0c51778ab"},
+    {file = "numpy-2.2.6-cp311-cp311-win32.whl", hash = "sha256:0678000bb9ac1475cd454c6b8c799206af8107e310843532b04d49649c717a47"},
+    {file = "numpy-2.2.6-cp311-cp311-win_amd64.whl", hash = "sha256:e8213002e427c69c45a52bbd94163084025f533a55a59d6f9c5b820774ef3303"},
+    {file = "numpy-2.2.6-cp312-cp312-macosx_10_13_x86_64.whl", hash = "sha256:41c5a21f4a04fa86436124d388f6ed60a9343a6f767fced1a8a71c3fbca038ff"},
+    {file = "numpy-2.2.6-cp312-cp312-macosx_11_0_arm64.whl", hash = "sha256:de749064336d37e340f640b05f24e9e3dd678c57318c7289d222a8a2f543e90c"},
+    {file = "numpy-2.2.6-cp312-cp312-macosx_14_0_arm64.whl", hash = "sha256:894b3a42502226a1cac872f840030665f33326fc3dac8e57c607905773cdcde3"},
+    {file = "numpy-2.2.6-cp312-cp312-macosx_14_0_x86_64.whl", hash = "sha256:71594f7c51a18e728451bb50cc60a3ce4e6538822731b2933209a1f3614e9282"},
+    {file = "numpy-2.2.6-cp312-cp312-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:f2618db89be1b4e05f7a1a847a9c1c0abd63e63a1607d892dd54668dd92faf87"},
+    {file = "numpy-2.2.6-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:fd83c01228a688733f1ded5201c678f0c53ecc1006ffbc404db9f7a899ac6249"},
+    {file = "numpy-2.2.6-cp312-cp312-musllinux_1_2_aarch64.whl", hash = "sha256:37c0ca431f82cd5fa716eca9506aefcabc247fb27ba69c5062a6d3ade8cf8f49"},
+    {file = "numpy-2.2.6-cp312-cp312-musllinux_1_2_x86_64.whl", hash = "sha256:fe27749d33bb772c80dcd84ae7e8df2adc920ae8297400dabec45f0dedb3f6de"},
+    {file = "numpy-2.2.6-cp312-cp312-win32.whl", hash = "sha256:4eeaae00d789f66c7a25ac5f34b71a7035bb474e679f410e5e1a94deb24cf2d4"},
+    {file = "numpy-2.2.6-cp312-cp312-win_amd64.whl", hash = "sha256:c1f9540be57940698ed329904db803cf7a402f3fc200bfe599334c9bd84a40b2"},
+    {file = "numpy-2.2.6-cp313-cp313-macosx_10_13_x86_64.whl", hash = "sha256:0811bb762109d9708cca4d0b13c4f67146e3c3b7cf8d34018c722adb2d957c84"},
+    {file = "numpy-2.2.6-cp313-cp313-macosx_11_0_arm64.whl", hash = "sha256:287cc3162b6f01463ccd86be154f284d0893d2b3ed7292439ea97eafa8170e0b"},
+    {file = "numpy-2.2.6-cp313-cp313-macosx_14_0_arm64.whl", hash = "sha256:f1372f041402e37e5e633e586f62aa53de2eac8d98cbfb822806ce4bbefcb74d"},
+    {file = "numpy-2.2.6-cp313-cp313-macosx_14_0_x86_64.whl", hash = "sha256:55a4d33fa519660d69614a9fad433be87e5252f4b03850642f88993f7b2ca566"},
+    {file = "numpy-2.2.6-cp313-cp313-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:f92729c95468a2f4f15e9bb94c432a9229d0d50de67304399627a943201baa2f"},
+    {file = "numpy-2.2.6-cp313-cp313-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:1bc23a79bfabc5d056d106f9befb8d50c31ced2fbc70eedb8155aec74a45798f"},
+    {file = "numpy-2.2.6-cp313-cp313-musllinux_1_2_aarch64.whl", hash = "sha256:e3143e4451880bed956e706a3220b4e5cf6172ef05fcc397f6f36a550b1dd868"},
+    {file = "numpy-2.2.6-cp313-cp313-musllinux_1_2_x86_64.whl", hash = "sha256:b4f13750ce79751586ae2eb824ba7e1e8dba64784086c98cdbbcc6a42112ce0d"},
+    {file = "numpy-2.2.6-cp313-cp313-win32.whl", hash = "sha256:5beb72339d9d4fa36522fc63802f469b13cdbe4fdab4a288f0c441b74272ebfd"},
+    {file = "numpy-2.2.6-cp313-cp313-win_amd64.whl", hash = "sha256:b0544343a702fa80c95ad5d3d608ea3599dd54d4632df855e4c8d24eb6ecfa1c"},
+    {file = "numpy-2.2.6-cp313-cp313t-macosx_10_13_x86_64.whl", hash = "sha256:0bca768cd85ae743b2affdc762d617eddf3bcf8724435498a1e80132d04879e6"},
+    {file = "numpy-2.2.6-cp313-cp313t-macosx_11_0_arm64.whl", hash = "sha256:fc0c5673685c508a142ca65209b4e79ed6740a4ed6b2267dbba90f34b0b3cfda"},
+    {file = "numpy-2.2.6-cp313-cp313t-macosx_14_0_arm64.whl", hash = "sha256:5bd4fc3ac8926b3819797a7c0e2631eb889b4118a9898c84f585a54d475b7e40"},
+    {file = "numpy-2.2.6-cp313-cp313t-macosx_14_0_x86_64.whl", hash = "sha256:fee4236c876c4e8369388054d02d0e9bb84821feb1a64dd59e137e6511a551f8"},
+    {file = "numpy-2.2.6-cp313-cp313t-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:e1dda9c7e08dc141e0247a5b8f49cf05984955246a327d4c48bda16821947b2f"},
+    {file = "numpy-2.2.6-cp313-cp313t-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:f447e6acb680fd307f40d3da4852208af94afdfab89cf850986c3ca00562f4fa"},
+    {file = "numpy-2.2.6-cp313-cp313t-musllinux_1_2_aarch64.whl", hash = "sha256:389d771b1623ec92636b0786bc4ae56abafad4a4c513d36a55dce14bd9ce8571"},
+    {file = "numpy-2.2.6-cp313-cp313t-musllinux_1_2_x86_64.whl", hash = "sha256:8e9ace4a37db23421249ed236fdcdd457d671e25146786dfc96835cd951aa7c1"},
+    {file = "numpy-2.2.6-cp313-cp313t-win32.whl", hash = "sha256:038613e9fb8c72b0a41f025a7e4c3f0b7a1b5d768ece4796b674c8f3fe13efff"},
+    {file = "numpy-2.2.6-cp313-cp313t-win_amd64.whl", hash = "sha256:6031dd6dfecc0cf9f668681a37648373bddd6421fff6c66ec1624eed0180ee06"},
+    {file = "numpy-2.2.6-pp310-pypy310_pp73-macosx_10_15_x86_64.whl", hash = "sha256:0b605b275d7bd0c640cad4e5d30fa701a8d59302e127e5f79138ad62762c3e3d"},
+    {file = "numpy-2.2.6-pp310-pypy310_pp73-macosx_14_0_x86_64.whl", hash = "sha256:7befc596a7dc9da8a337f79802ee8adb30a552a94f792b9c9d18c840055907db"},
+    {file = "numpy-2.2.6-pp310-pypy310_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:ce47521a4754c8f4593837384bd3424880629f718d87c5d44f8ed763edd63543"},
+    {file = "numpy-2.2.6-pp310-pypy310_pp73-win_amd64.whl", hash = "sha256:d042d24c90c41b54fd506da306759e06e568864df8ec17ccc17e9e884634fd00"},
+    {file = "numpy-2.2.6.tar.gz", hash = "sha256:e29554e2bef54a90aa5cc07da6ce955accb83f21ab5de01a62c8478897b264fd"},
+]
+
+[[package]]
+name = "numpy"
+version = "2.4.1"
+description = "Fundamental package for array computing in Python"
+optional = false
+python-versions = ">=3.11"
+groups = ["main", "dev", "examples"]
+markers = "python_version >= \"3.11\""
+files = [
+    {file = "numpy-2.4.1-cp311-cp311-macosx_10_9_x86_64.whl", hash = "sha256:0cce2a669e3c8ba02ee563c7835f92c153cf02edff1ae05e1823f1dde21b16a5"},
+    {file = "numpy-2.4.1-cp311-cp311-macosx_11_0_arm64.whl", hash = "sha256:899d2c18024984814ac7e83f8f49d8e8180e2fbe1b2e252f2e7f1d06bea92425"},
+    {file = "numpy-2.4.1-cp311-cp311-macosx_14_0_arm64.whl", hash = "sha256:09aa8a87e45b55a1c2c205d42e2808849ece5c484b2aab11fecabec3841cafba"},
+    {file = "numpy-2.4.1-cp311-cp311-macosx_14_0_x86_64.whl", hash = "sha256:edee228f76ee2dab4579fad6f51f6a305de09d444280109e0f75df247ff21501"},
+    {file = "numpy-2.4.1-cp311-cp311-manylinux_2_27_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:a92f227dbcdc9e4c3e193add1a189a9909947d4f8504c576f4a732fd0b54240a"},
+    {file = "numpy-2.4.1-cp311-cp311-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:538bf4ec353709c765ff75ae616c34d3c3dca1a68312727e8f2676ea644f8509"},
+    {file = "numpy-2.4.1-cp311-cp311-musllinux_1_2_aarch64.whl", hash = "sha256:ac08c63cb7779b85e9d5318e6c3518b424bc1f364ac4cb2c6136f12e5ff2dccc"},
+    {file = "numpy-2.4.1-cp311-cp311-musllinux_1_2_x86_64.whl", hash = "sha256:4f9c360ecef085e5841c539a9a12b883dff005fbd7ce46722f5e9cef52634d82"},
+    {file = "numpy-2.4.1-cp311-cp311-win32.whl", hash = "sha256:0f118ce6b972080ba0758c6087c3617b5ba243d806268623dc34216d69099ba0"},
+    {file = "numpy-2.4.1-cp311-cp311-win_amd64.whl", hash = "sha256:18e14c4d09d55eef39a6ab5b08406e84bc6869c1e34eef45564804f90b7e0574"},
+    {file = "numpy-2.4.1-cp311-cp311-win_arm64.whl", hash = "sha256:6461de5113088b399d655d45c3897fa188766415d0f568f175ab071c8873bd73"},
+    {file = "numpy-2.4.1-cp312-cp312-macosx_10_13_x86_64.whl", hash = "sha256:d3703409aac693fa82c0aee023a1ae06a6e9d065dba10f5e8e80f642f1e9d0a2"},
+    {file = "numpy-2.4.1-cp312-cp312-macosx_11_0_arm64.whl", hash = "sha256:7211b95ca365519d3596a1d8688a95874cc94219d417504d9ecb2df99fa7bfa8"},
+    {file = "numpy-2.4.1-cp312-cp312-macosx_14_0_arm64.whl", hash = "sha256:5adf01965456a664fc727ed69cc71848f28d063217c63e1a0e200a118d5eec9a"},
+    {file = "numpy-2.4.1-cp312-cp312-macosx_14_0_x86_64.whl", hash = "sha256:26f0bcd9c79a00e339565b303badc74d3ea2bd6d52191eeca5f95936cad107d0"},
+    {file = "numpy-2.4.1-cp312-cp312-manylinux_2_27_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:0093e85df2960d7e4049664b26afc58b03236e967fb942354deef3208857a04c"},
+    {file = "numpy-2.4.1-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:7ad270f438cbdd402c364980317fb6b117d9ec5e226fff5b4148dd9aa9fc6e02"},
+    {file = "numpy-2.4.1-cp312-cp312-musllinux_1_2_aarch64.whl", hash = "sha256:297c72b1b98100c2e8f873d5d35fb551fce7040ade83d67dd51d38c8d42a2162"},
+    {file = "numpy-2.4.1-cp312-cp312-musllinux_1_2_x86_64.whl", hash = "sha256:cf6470d91d34bf669f61d515499859fa7a4c2f7c36434afb70e82df7217933f9"},
+    {file = "numpy-2.4.1-cp312-cp312-win32.whl", hash = "sha256:b6bcf39112e956594b3331316d90c90c90fb961e39696bda97b89462f5f3943f"},
+    {file = "numpy-2.4.1-cp312-cp312-win_amd64.whl", hash = "sha256:e1a27bb1b2dee45a2a53f5ca6ff2d1a7f135287883a1689e930d44d1ff296c87"},
+    {file = "numpy-2.4.1-cp312-cp312-win_arm64.whl", hash = "sha256:0e6e8f9d9ecf95399982019c01223dc130542960a12edfa8edd1122dfa66a8a8"},
+    {file = "numpy-2.4.1-cp313-cp313-macosx_10_13_x86_64.whl", hash = "sha256:d797454e37570cfd61143b73b8debd623c3c0952959adb817dd310a483d58a1b"},
+    {file = "numpy-2.4.1-cp313-cp313-macosx_11_0_arm64.whl", hash = "sha256:82c55962006156aeef1629b953fd359064aa47e4d82cfc8e67f0918f7da3344f"},
+    {file = "numpy-2.4.1-cp313-cp313-macosx_14_0_arm64.whl", hash = "sha256:71abbea030f2cfc3092a0ff9f8c8fdefdc5e0bf7d9d9c99663538bb0ecdac0b9"},
+    {file = "numpy-2.4.1-cp313-cp313-macosx_14_0_x86_64.whl", hash = "sha256:5b55aa56165b17aaf15520beb9cbd33c9039810e0d9643dd4379e44294c7303e"},
+    {file = "numpy-2.4.1-cp313-cp313-manylinux_2_27_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:c0faba4a331195bfa96f93dd9dfaa10b2c7aa8cda3a02b7fd635e588fe821bf5"},
+    {file = "numpy-2.4.1-cp313-cp313-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:d3e3087f53e2b4428766b54932644d148613c5a595150533ae7f00dab2f319a8"},
+    {file = "numpy-2.4.1-cp313-cp313-musllinux_1_2_aarch64.whl", hash = "sha256:49e792ec351315e16da54b543db06ca8a86985ab682602d90c60ef4ff4db2a9c"},
+    {file = "numpy-2.4.1-cp313-cp313-musllinux_1_2_x86_64.whl", hash = "sha256:79e9e06c4c2379db47f3f6fc7a8652e7498251789bf8ff5bd43bf478ef314ca2"},
+    {file = "numpy-2.4.1-cp313-cp313-win32.whl", hash = "sha256:3d1a100e48cb266090a031397863ff8a30050ceefd798f686ff92c67a486753d"},
+    {file = "numpy-2.4.1-cp313-cp313-win_amd64.whl", hash = "sha256:92a0e65272fd60bfa0d9278e0484c2f52fe03b97aedc02b357f33fe752c52ffb"},
+    {file = "numpy-2.4.1-cp313-cp313-win_arm64.whl", hash = "sha256:20d4649c773f66cc2fc36f663e091f57c3b7655f936a4c681b4250855d1da8f5"},
+    {file = "numpy-2.4.1-cp313-cp313t-macosx_11_0_arm64.whl", hash = "sha256:f93bc6892fe7b0663e5ffa83b61aab510aacffd58c16e012bb9352d489d90cb7"},
+    {file = "numpy-2.4.1-cp313-cp313t-macosx_14_0_arm64.whl", hash = "sha256:178de8f87948163d98a4c9ab5bee4ce6519ca918926ec8df195af582de28544d"},
+    {file = "numpy-2.4.1-cp313-cp313t-macosx_14_0_x86_64.whl", hash = "sha256:98b35775e03ab7f868908b524fc0a84d38932d8daf7b7e1c3c3a1b6c7a2c9f15"},
+    {file = "numpy-2.4.1-cp313-cp313t-manylinux_2_27_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:941c2a93313d030f219f3a71fd3d91a728b82979a5e8034eb2e60d394a2b83f9"},
+    {file = "numpy-2.4.1-cp313-cp313t-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:529050522e983e00a6c1c6b67411083630de8b57f65e853d7b03d9281b8694d2"},
+    {file = "numpy-2.4.1-cp313-cp313t-musllinux_1_2_aarch64.whl", hash = "sha256:2302dc0224c1cbc49bb94f7064f3f923a971bfae45c33870dcbff63a2a550505"},
+    {file = "numpy-2.4.1-cp313-cp313t-musllinux_1_2_x86_64.whl", hash = "sha256:9171a42fcad32dcf3fa86f0a4faa5e9f8facefdb276f54b8b390d90447cff4e2"},
+    {file = "numpy-2.4.1-cp313-cp313t-win32.whl", hash = "sha256:382ad67d99ef49024f11d1ce5dcb5ad8432446e4246a4b014418ba3a1175a1f4"},
+    {file = "numpy-2.4.1-cp313-cp313t-win_amd64.whl", hash = "sha256:62fea415f83ad8fdb6c20840578e5fbaf5ddd65e0ec6c3c47eda0f69da172510"},
+    {file = "numpy-2.4.1-cp313-cp313t-win_arm64.whl", hash = "sha256:a7870e8c5fc11aef57d6fea4b4085e537a3a60ad2cdd14322ed531fdca68d261"},
+    {file = "numpy-2.4.1-cp314-cp314-macosx_10_15_x86_64.whl", hash = "sha256:3869ea1ee1a1edc16c29bbe3a2f2a4e515cc3a44d43903ad41e0cacdbaf733dc"},
+    {file = "numpy-2.4.1-cp314-cp314-macosx_11_0_arm64.whl", hash = "sha256:e867df947d427cdd7a60e3e271729090b0f0df80f5f10ab7dd436f40811699c3"},
+    {file = "numpy-2.4.1-cp314-cp314-macosx_14_0_arm64.whl", hash = "sha256:e3bd2cb07841166420d2fa7146c96ce00cb3410664cbc1a6be028e456c4ee220"},
+    {file = "numpy-2.4.1-cp314-cp314-macosx_14_0_x86_64.whl", hash = "sha256:f0a90aba7d521e6954670550e561a4cb925713bd944445dbe9e729b71f6cabee"},
+    {file = "numpy-2.4.1-cp314-cp314-manylinux_2_27_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:5d558123217a83b2d1ba316b986e9248a1ed1971ad495963d555ccd75dcb1556"},
+    {file = "numpy-2.4.1-cp314-cp314-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:2f44de05659b67d20499cbc96d49f2650769afcb398b79b324bb6e297bfe3844"},
+    {file = "numpy-2.4.1-cp314-cp314-musllinux_1_2_aarch64.whl", hash = "sha256:69e7419c9012c4aaf695109564e3387f1259f001b4326dfa55907b098af082d3"},
+    {file = "numpy-2.4.1-cp314-cp314-musllinux_1_2_x86_64.whl", hash = "sha256:2ffd257026eb1b34352e749d7cc1678b5eeec3e329ad8c9965a797e08ccba205"},
+    {file = "numpy-2.4.1-cp314-cp314-win32.whl", hash = "sha256:727c6c3275ddefa0dc078524a85e064c057b4f4e71ca5ca29a19163c607be745"},
+    {file = "numpy-2.4.1-cp314-cp314-win_amd64.whl", hash = "sha256:7d5d7999df434a038d75a748275cd6c0094b0ecdb0837342b332a82defc4dc4d"},
+    {file = "numpy-2.4.1-cp314-cp314-win_arm64.whl", hash = "sha256:ce9ce141a505053b3c7bce3216071f3bf5c182b8b28930f14cd24d43932cd2df"},
+    {file = "numpy-2.4.1-cp314-cp314t-macosx_11_0_arm64.whl", hash = "sha256:4e53170557d37ae404bf8d542ca5b7c629d6efa1117dac6a83e394142ea0a43f"},
+    {file = "numpy-2.4.1-cp314-cp314t-macosx_14_0_arm64.whl", hash = "sha256:a73044b752f5d34d4232f25f18160a1cc418ea4507f5f11e299d8ac36875f8a0"},
+    {file = "numpy-2.4.1-cp314-cp314t-macosx_14_0_x86_64.whl", hash = "sha256:fb1461c99de4d040666ca0444057b06541e5642f800b71c56e6ea92d6a853a0c"},
+    {file = "numpy-2.4.1-cp314-cp314t-manylinux_2_27_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:423797bdab2eeefbe608d7c1ec7b2b4fd3c58d51460f1ee26c7500a1d9c9ee93"},
+    {file = "numpy-2.4.1-cp314-cp314t-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:52b5f61bdb323b566b528899cc7db2ba5d1015bda7ea811a8bcf3c89c331fa42"},
+    {file = "numpy-2.4.1-cp314-cp314t-musllinux_1_2_aarch64.whl", hash = "sha256:42d7dd5fa36d16d52a84f821eb96031836fd405ee6955dd732f2023724d0aa01"},
+    {file = "numpy-2.4.1-cp314-cp314t-musllinux_1_2_x86_64.whl", hash = "sha256:e7b6b5e28bbd47b7532698e5db2fe1db693d84b58c254e4389d99a27bb9b8f6b"},
+    {file = "numpy-2.4.1-cp314-cp314t-win32.whl", hash = "sha256:5de60946f14ebe15e713a6f22850c2372fa72f4ff9a432ab44aa90edcadaa65a"},
+    {file = "numpy-2.4.1-cp314-cp314t-win_amd64.whl", hash = "sha256:8f085da926c0d491ffff3096f91078cc97ea67e7e6b65e490bc8dcda65663be2"},
+    {file = "numpy-2.4.1-cp314-cp314t-win_arm64.whl", hash = "sha256:6436cffb4f2bf26c974344439439c95e152c9a527013f26b3577be6c2ca64295"},
+    {file = "numpy-2.4.1-pp311-pypy311_pp73-macosx_10_15_x86_64.whl", hash = "sha256:8ad35f20be147a204e28b6a0575fbf3540c5e5f802634d4258d55b1ff5facce1"},
+    {file = "numpy-2.4.1-pp311-pypy311_pp73-macosx_11_0_arm64.whl", hash = "sha256:8097529164c0f3e32bb89412a0905d9100bf434d9692d9fc275e18dcf53c9344"},
+    {file = "numpy-2.4.1-pp311-pypy311_pp73-macosx_14_0_arm64.whl", hash = "sha256:ea66d2b41ca4a1630aae5507ee0a71647d3124d1741980138aa8f28f44dac36e"},
+    {file = "numpy-2.4.1-pp311-pypy311_pp73-macosx_14_0_x86_64.whl", hash = "sha256:d3f8f0df9f4b8be57b3bf74a1d087fec68f927a2fab68231fdb442bf2c12e426"},
+    {file = "numpy-2.4.1-pp311-pypy311_pp73-manylinux_2_27_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:2023ef86243690c2791fd6353e5b4848eedaa88ca8a2d129f462049f6d484696"},
+    {file = "numpy-2.4.1-pp311-pypy311_pp73-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:8361ea4220d763e54cff2fbe7d8c93526b744f7cd9ddab47afeff7e14e8503be"},
+    {file = "numpy-2.4.1-pp311-pypy311_pp73-win_amd64.whl", hash = "sha256:4f1b68ff47680c2925f8063402a693ede215f0257f02596b1318ecdfb1d79e33"},
+    {file = "numpy-2.4.1.tar.gz", hash = "sha256:a1ceafc5042451a858231588a104093474c6a5c57dcc724841f5c888d237d690"},
+]
+
+[[package]]
+name = "packaging"
+version = "25.0"
+description = "Core utilities for Python packages"
+optional = false
+python-versions = ">=3.8"
+groups = ["main", "docs", "examples", "lint", "test"]
+files = [
+    {file = "packaging-25.0-py3-none-any.whl", hash = "sha256:29572ef2b1f17581046b3a2227d5c611fb25ec70ca1ba8554b24b0e69331a484"},
+    {file = "packaging-25.0.tar.gz", hash = "sha256:d443872c98d677bf60f6a1f2f8c1cb748e8fe762d2bf9d3148b5599295b0fc4f"},
+]
+
+[[package]]
+name = "pandas"
+version = "2.3.3"
+description = "Powerful data structures for data analysis, time series, and statistics"
+optional = false
+python-versions = ">=3.9"
+groups = ["main", "examples"]
+files = [
+    {file = "pandas-2.3.3-cp310-cp310-macosx_10_9_x86_64.whl", hash = "sha256:376c6446ae31770764215a6c937f72d917f214b43560603cd60da6408f183b6c"},
+    {file = "pandas-2.3.3-cp310-cp310-macosx_11_0_arm64.whl", hash = "sha256:e19d192383eab2f4ceb30b412b22ea30690c9e618f78870357ae1d682912015a"},
+    {file = "pandas-2.3.3-cp310-cp310-manylinux_2_24_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:5caf26f64126b6c7aec964f74266f435afef1c1b13da3b0636c7518a1fa3e2b1"},
+    {file = "pandas-2.3.3-cp310-cp310-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:dd7478f1463441ae4ca7308a70e90b33470fa593429f9d4c578dd00d1fa78838"},
+    {file = "pandas-2.3.3-cp310-cp310-musllinux_1_2_aarch64.whl", hash = "sha256:4793891684806ae50d1288c9bae9330293ab4e083ccd1c5e383c34549c6e4250"},
+    {file = "pandas-2.3.3-cp310-cp310-musllinux_1_2_x86_64.whl", hash = "sha256:28083c648d9a99a5dd035ec125d42439c6c1c525098c58af0fc38dd1a7a1b3d4"},
+    {file = "pandas-2.3.3-cp310-cp310-win_amd64.whl", hash = "sha256:503cf027cf9940d2ceaa1a93cfb5f8c8c7e6e90720a2850378f0b3f3b1e06826"},
+    {file = "pandas-2.3.3-cp311-cp311-macosx_10_9_x86_64.whl", hash = "sha256:602b8615ebcc4a0c1751e71840428ddebeb142ec02c786e8ad6b1ce3c8dec523"},
+    {file = "pandas-2.3.3-cp311-cp311-macosx_11_0_arm64.whl", hash = "sha256:8fe25fc7b623b0ef6b5009149627e34d2a4657e880948ec3c840e9402e5c1b45"},
+    {file = "pandas-2.3.3-cp311-cp311-manylinux_2_24_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:b468d3dad6ff947df92dcb32ede5b7bd41a9b3cceef0a30ed925f6d01fb8fa66"},
+    {file = "pandas-2.3.3-cp311-cp311-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:b98560e98cb334799c0b07ca7967ac361a47326e9b4e5a7dfb5ab2b1c9d35a1b"},
+    {file = "pandas-2.3.3-cp311-cp311-musllinux_1_2_aarch64.whl", hash = "sha256:1d37b5848ba49824e5c30bedb9c830ab9b7751fd049bc7914533e01c65f79791"},
+    {file = "pandas-2.3.3-cp311-cp311-musllinux_1_2_x86_64.whl", hash = "sha256:db4301b2d1f926ae677a751eb2bd0e8c5f5319c9cb3f88b0becbbb0b07b34151"},
+    {file = "pandas-2.3.3-cp311-cp311-win_amd64.whl", hash = "sha256:f086f6fe114e19d92014a1966f43a3e62285109afe874f067f5abbdcbb10e59c"},
+    {file = "pandas-2.3.3-cp312-cp312-macosx_10_13_x86_64.whl", hash = "sha256:6d21f6d74eb1725c2efaa71a2bfc661a0689579b58e9c0ca58a739ff0b002b53"},
+    {file = "pandas-2.3.3-cp312-cp312-macosx_11_0_arm64.whl", hash = "sha256:3fd2f887589c7aa868e02632612ba39acb0b8948faf5cc58f0850e165bd46f35"},
+    {file = "pandas-2.3.3-cp312-cp312-manylinux_2_24_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:ecaf1e12bdc03c86ad4a7ea848d66c685cb6851d807a26aa245ca3d2017a1908"},
+    {file = "pandas-2.3.3-cp312-cp312-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:b3d11d2fda7eb164ef27ffc14b4fcab16a80e1ce67e9f57e19ec0afaf715ba89"},
+    {file = "pandas-2.3.3-cp312-cp312-musllinux_1_2_aarch64.whl", hash = "sha256:a68e15f780eddf2b07d242e17a04aa187a7ee12b40b930bfdd78070556550e98"},
+    {file = "pandas-2.3.3-cp312-cp312-musllinux_1_2_x86_64.whl", hash = "sha256:371a4ab48e950033bcf52b6527eccb564f52dc826c02afd9a1bc0ab731bba084"},
+    {file = "pandas-2.3.3-cp312-cp312-win_amd64.whl", hash = "sha256:a16dcec078a01eeef8ee61bf64074b4e524a2a3f4b3be9326420cabe59c4778b"},
+    {file = "pandas-2.3.3-cp313-cp313-macosx_10_13_x86_64.whl", hash = "sha256:56851a737e3470de7fa88e6131f41281ed440d29a9268dcbf0002da5ac366713"},
+    {file = "pandas-2.3.3-cp313-cp313-macosx_11_0_arm64.whl", hash = "sha256:bdcd9d1167f4885211e401b3036c0c8d9e274eee67ea8d0758a256d60704cfe8"},
+    {file = "pandas-2.3.3-cp313-cp313-manylinux_2_24_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:e32e7cc9af0f1cc15548288a51a3b681cc2a219faa838e995f7dc53dbab1062d"},
+    {file = "pandas-2.3.3-cp313-cp313-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:318d77e0e42a628c04dc56bcef4b40de67918f7041c2b061af1da41dcff670ac"},
+    {file = "pandas-2.3.3-cp313-cp313-musllinux_1_2_aarch64.whl", hash = "sha256:4e0a175408804d566144e170d0476b15d78458795bb18f1304fb94160cabf40c"},
+    {file = "pandas-2.3.3-cp313-cp313-musllinux_1_2_x86_64.whl", hash = "sha256:93c2d9ab0fc11822b5eece72ec9587e172f63cff87c00b062f6e37448ced4493"},
+    {file = "pandas-2.3.3-cp313-cp313-win_amd64.whl", hash = "sha256:f8bfc0e12dc78f777f323f55c58649591b2cd0c43534e8355c51d3fede5f4dee"},
+    {file = "pandas-2.3.3-cp313-cp313t-macosx_10_13_x86_64.whl", hash = "sha256:75ea25f9529fdec2d2e93a42c523962261e567d250b0013b16210e1d40d7c2e5"},
+    {file = "pandas-2.3.3-cp313-cp313t-macosx_11_0_arm64.whl", hash = "sha256:74ecdf1d301e812db96a465a525952f4dde225fdb6d8e5a521d47e1f42041e21"},
+    {file = "pandas-2.3.3-cp313-cp313t-manylinux_2_24_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:6435cb949cb34ec11cc9860246ccb2fdc9ecd742c12d3304989017d53f039a78"},
+    {file = "pandas-2.3.3-cp313-cp313t-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:900f47d8f20860de523a1ac881c4c36d65efcb2eb850e6948140fa781736e110"},
+    {file = "pandas-2.3.3-cp313-cp313t-musllinux_1_2_aarch64.whl", hash = "sha256:a45c765238e2ed7d7c608fc5bc4a6f88b642f2f01e70c0c23d2224dd21829d86"},
+    {file = "pandas-2.3.3-cp313-cp313t-musllinux_1_2_x86_64.whl", hash = "sha256:c4fc4c21971a1a9f4bdb4c73978c7f7256caa3e62b323f70d6cb80db583350bc"},
+    {file = "pandas-2.3.3-cp314-cp314-macosx_10_13_x86_64.whl", hash = "sha256:ee15f284898e7b246df8087fc82b87b01686f98ee67d85a17b7ab44143a3a9a0"},
+    {file = "pandas-2.3.3-cp314-cp314-macosx_11_0_arm64.whl", hash = "sha256:1611aedd912e1ff81ff41c745822980c49ce4a7907537be8692c8dbc31924593"},
+    {file = "pandas-2.3.3-cp314-cp314-manylinux_2_24_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:6d2cefc361461662ac48810cb14365a365ce864afe85ef1f447ff5a1e99ea81c"},
+    {file = "pandas-2.3.3-cp314-cp314-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:ee67acbbf05014ea6c763beb097e03cd629961c8a632075eeb34247120abcb4b"},
+    {file = "pandas-2.3.3-cp314-cp314-musllinux_1_2_aarch64.whl", hash = "sha256:c46467899aaa4da076d5abc11084634e2d197e9460643dd455ac3db5856b24d6"},
+    {file = "pandas-2.3.3-cp314-cp314-musllinux_1_2_x86_64.whl", hash = "sha256:6253c72c6a1d990a410bc7de641d34053364ef8bcd3126f7e7450125887dffe3"},
+    {file = "pandas-2.3.3-cp314-cp314-win_amd64.whl", hash = "sha256:1b07204a219b3b7350abaae088f451860223a52cfb8a6c53358e7948735158e5"},
+    {file = "pandas-2.3.3-cp314-cp314t-macosx_10_13_x86_64.whl", hash = "sha256:2462b1a365b6109d275250baaae7b760fd25c726aaca0054649286bcfbb3e8ec"},
+    {file = "pandas-2.3.3-cp314-cp314t-macosx_11_0_arm64.whl", hash = "sha256:0242fe9a49aa8b4d78a4fa03acb397a58833ef6199e9aa40a95f027bb3a1b6e7"},
+    {file = "pandas-2.3.3-cp314-cp314t-manylinux_2_24_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:a21d830e78df0a515db2b3d2f5570610f5e6bd2e27749770e8bb7b524b89b450"},
+    {file = "pandas-2.3.3-cp314-cp314t-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:2e3ebdb170b5ef78f19bfb71b0dc5dc58775032361fa188e814959b74d726dd5"},
+    {file = "pandas-2.3.3-cp314-cp314t-musllinux_1_2_aarch64.whl", hash = "sha256:d051c0e065b94b7a3cea50eb1ec32e912cd96dba41647eb24104b6c6c14c5788"},
+    {file = "pandas-2.3.3-cp314-cp314t-musllinux_1_2_x86_64.whl", hash = "sha256:3869faf4bd07b3b66a9f462417d0ca3a9df29a9f6abd5d0d0dbab15dac7abe87"},
+    {file = "pandas-2.3.3-cp39-cp39-macosx_10_9_x86_64.whl", hash = "sha256:c503ba5216814e295f40711470446bc3fd00f0faea8a086cbc688808e26f92a2"},
+    {file = "pandas-2.3.3-cp39-cp39-macosx_11_0_arm64.whl", hash = "sha256:a637c5cdfa04b6d6e2ecedcb81fc52ffb0fd78ce2ebccc9ea964df9f658de8c8"},
+    {file = "pandas-2.3.3-cp39-cp39-manylinux_2_24_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:854d00d556406bffe66a4c0802f334c9ad5a96b4f1f868adf036a21b11ef13ff"},
+    {file = "pandas-2.3.3-cp39-cp39-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:bf1f8a81d04ca90e32a0aceb819d34dbd378a98bf923b6398b9a3ec0bf44de29"},
+    {file = "pandas-2.3.3-cp39-cp39-musllinux_1_2_aarch64.whl", hash = "sha256:23ebd657a4d38268c7dfbdf089fbc31ea709d82e4923c5ffd4fbd5747133ce73"},
+    {file = "pandas-2.3.3-cp39-cp39-musllinux_1_2_x86_64.whl", hash = "sha256:5554c929ccc317d41a5e3d1234f3be588248e61f08a74dd17c9eabb535777dc9"},
+    {file = "pandas-2.3.3-cp39-cp39-win_amd64.whl", hash = "sha256:d3e28b3e83862ccf4d85ff19cf8c20b2ae7e503881711ff2d534dc8f761131aa"},
+    {file = "pandas-2.3.3.tar.gz", hash = "sha256:e05e1af93b977f7eafa636d043f9f94c7ee3ac81af99c13508215942e64c993b"},
+]
+
+[package.dependencies]
+numpy = [
+    {version = ">=1.26.0", markers = "python_version >= \"3.12\""},
+    {version = ">=1.22.4", markers = "python_version < \"3.11\""},
+    {version = ">=1.23.2", markers = "python_version == \"3.11\""},
+]
+python-dateutil = ">=2.8.2"
+pytz = ">=2020.1"
+tzdata = ">=2022.7"
+
+[package.extras]
+all = ["PyQt5 (>=5.15.9)", "SQLAlchemy (>=2.0.0)", "adbc-driver-postgresql (>=0.8.0)", "adbc-driver-sqlite (>=0.8.0)", "beautifulsoup4 (>=4.11.2)", "bottleneck (>=1.3.6)", "dataframe-api-compat (>=0.1.7)", "fastparquet (>=2022.12.0)", "fsspec (>=2022.11.0)", "gcsfs (>=2022.11.0)", "html5lib (>=1.1)", "hypothesis (>=6.46.1)", "jinja2 (>=3.1.2)", "lxml (>=4.9.2)", "matplotlib (>=3.6.3)", "numba (>=0.56.4)", "numexpr (>=2.8.4)", "odfpy (>=1.4.1)", "openpyxl (>=3.1.0)", "pandas-gbq (>=0.19.0)", "psycopg2 (>=2.9.6)", "pyarrow (>=10.0.1)", "pymysql (>=1.0.2)", "pyreadstat (>=1.2.0)", "pytest (>=7.3.2)", "pytest-xdist (>=2.2.0)", "python-calamine (>=0.1.7)", "pyxlsb (>=1.0.10)", "qtpy (>=2.3.0)", "s3fs (>=2022.11.0)", "scipy (>=1.10.0)", "tables (>=3.8.0)", "tabulate (>=0.9.0)", "xarray (>=2022.12.0)", "xlrd (>=2.0.1)", "xlsxwriter (>=3.0.5)", "zstandard (>=0.19.0)"]
+aws = ["s3fs (>=2022.11.0)"]
+clipboard = ["PyQt5 (>=5.15.9)", "qtpy (>=2.3.0)"]
+compression = ["zstandard (>=0.19.0)"]
+computation = ["scipy (>=1.10.0)", "xarray (>=2022.12.0)"]
+consortium-standard = ["dataframe-api-compat (>=0.1.7)"]
+excel = ["odfpy (>=1.4.1)", "openpyxl (>=3.1.0)", "python-calamine (>=0.1.7)", "pyxlsb (>=1.0.10)", "xlrd (>=2.0.1)", "xlsxwriter (>=3.0.5)"]
+feather = ["pyarrow (>=10.0.1)"]
+fss = ["fsspec (>=2022.11.0)"]
+gcp = ["gcsfs (>=2022.11.0)", "pandas-gbq (>=0.19.0)"]
+hdf5 = ["tables (>=3.8.0)"]
+html = ["beautifulsoup4 (>=4.11.2)", "html5lib (>=1.1)", "lxml (>=4.9.2)"]
+mysql = ["SQLAlchemy (>=2.0.0)", "pymysql (>=1.0.2)"]
+output-formatting = ["jinja2 (>=3.1.2)", "tabulate (>=0.9.0)"]
+parquet = ["pyarrow (>=10.0.1)"]
+performance = ["bottleneck (>=1.3.6)", "numba (>=0.56.4)", "numexpr (>=2.8.4)"]
+plot = ["matplotlib (>=3.6.3)"]
+postgresql = ["SQLAlchemy (>=2.0.0)", "adbc-driver-postgresql (>=0.8.0)", "psycopg2 (>=2.9.6)"]
+pyarrow = ["pyarrow (>=10.0.1)"]
+spss = ["pyreadstat (>=1.2.0)"]
+sql-other = ["SQLAlchemy (>=2.0.0)", "adbc-driver-postgresql (>=0.8.0)", "adbc-driver-sqlite (>=0.8.0)"]
+test = ["hypothesis (>=6.46.1)", "pytest (>=7.3.2)", "pytest-xdist (>=2.2.0)"]
+xml = ["lxml (>=4.9.2)"]
+
+[[package]]
+name = "pathspec"
+version = "0.12.1"
+description = "Utility library for gitignore style pattern matching of file paths."
+optional = false
+python-versions = ">=3.8"
+groups = ["lint"]
+files = [
+    {file = "pathspec-0.12.1-py3-none-any.whl", hash = "sha256:a0d503e138a4c123b27490a4f7beda6a01c6f288df0e4a8b79c7eb0dc7b4cc08"},
+    {file = "pathspec-0.12.1.tar.gz", hash = "sha256:a482d51503a1ab33b1c67a6c3813a26953dbdc71c31dacaef9a838c4e29f5712"},
+]
+
+[[package]]
+name = "pep8-naming"
+version = "0.15.1"
+description = "Check PEP-8 naming conventions, plugin for flake8"
+optional = false
+python-versions = ">=3.9"
+groups = ["lint"]
+files = [
+    {file = "pep8_naming-0.15.1-py3-none-any.whl", hash = "sha256:eb63925e7fd9e028c7f7ee7b1e413ec03d1ee5de0e627012102ee0222c273c86"},
+    {file = "pep8_naming-0.15.1.tar.gz", hash = "sha256:f6f4a499aba2deeda93c1f26ccc02f3da32b035c8b2db9696b730ef2c9639d29"},
+]
+
+[package.dependencies]
+flake8 = ">=5.0.0"
+
+[[package]]
+name = "pillow"
+version = "12.1.0"
+description = "Python Imaging Library (fork)"
+optional = false
+python-versions = ">=3.10"
+groups = ["main", "examples"]
+files = [
+    {file = "pillow-12.1.0-cp310-cp310-macosx_10_10_x86_64.whl", hash = "sha256:fb125d860738a09d363a88daa0f59c4533529a90e564785e20fe875b200b6dbd"},
+    {file = "pillow-12.1.0-cp310-cp310-macosx_11_0_arm64.whl", hash = "sha256:cad302dc10fac357d3467a74a9561c90609768a6f73a1923b0fd851b6486f8b0"},
+    {file = "pillow-12.1.0-cp310-cp310-manylinux2014_aarch64.manylinux_2_17_aarch64.whl", hash = "sha256:a40905599d8079e09f25027423aed94f2823adaf2868940de991e53a449e14a8"},
+    {file = "pillow-12.1.0-cp310-cp310-manylinux2014_x86_64.manylinux_2_17_x86_64.whl", hash = "sha256:92a7fe4225365c5e3a8e598982269c6d6698d3e783b3b1ae979e7819f9cd55c1"},
+    {file = "pillow-12.1.0-cp310-cp310-manylinux_2_27_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:f10c98f49227ed8383d28174ee95155a675c4ed7f85e2e573b04414f7e371bda"},
+    {file = "pillow-12.1.0-cp310-cp310-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:8637e29d13f478bc4f153d8daa9ffb16455f0a6cb287da1b432fdad2bfbd66c7"},
+    {file = "pillow-12.1.0-cp310-cp310-musllinux_1_2_aarch64.whl", hash = "sha256:21e686a21078b0f9cb8c8a961d99e6a4ddb88e0fc5ea6e130172ddddc2e5221a"},
+    {file = "pillow-12.1.0-cp310-cp310-musllinux_1_2_x86_64.whl", hash = "sha256:2415373395a831f53933c23ce051021e79c8cd7979822d8cc478547a3f4da8ef"},
+    {file = "pillow-12.1.0-cp310-cp310-win32.whl", hash = "sha256:e75d3dba8fc1ddfec0cd752108f93b83b4f8d6ab40e524a95d35f016b9683b09"},
+    {file = "pillow-12.1.0-cp310-cp310-win_amd64.whl", hash = "sha256:64efdf00c09e31efd754448a383ea241f55a994fd079866b92d2bbff598aad91"},
+    {file = "pillow-12.1.0-cp310-cp310-win_arm64.whl", hash = "sha256:f188028b5af6b8fb2e9a76ac0f841a575bd1bd396e46ef0840d9b88a48fdbcea"},
+    {file = "pillow-12.1.0-cp311-cp311-macosx_10_10_x86_64.whl", hash = "sha256:a83e0850cb8f5ac975291ebfc4170ba481f41a28065277f7f735c202cd8e0af3"},
+    {file = "pillow-12.1.0-cp311-cp311-macosx_11_0_arm64.whl", hash = "sha256:b6e53e82ec2db0717eabb276aa56cf4e500c9a7cec2c2e189b55c24f65a3e8c0"},
+    {file = "pillow-12.1.0-cp311-cp311-manylinux2014_aarch64.manylinux_2_17_aarch64.whl", hash = "sha256:40a8e3b9e8773876d6e30daed22f016509e3987bab61b3b7fe309d7019a87451"},
+    {file = "pillow-12.1.0-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.whl", hash = "sha256:800429ac32c9b72909c671aaf17ecd13110f823ddb7db4dfef412a5587c2c24e"},
+    {file = "pillow-12.1.0-cp311-cp311-manylinux_2_27_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:0b022eaaf709541b391ee069f0022ee5b36c709df71986e3f7be312e46f42c84"},
+    {file = "pillow-12.1.0-cp311-cp311-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:1f345e7bc9d7f368887c712aa5054558bad44d2a301ddf9248599f4161abc7c0"},
+    {file = "pillow-12.1.0-cp311-cp311-musllinux_1_2_aarch64.whl", hash = "sha256:d70347c8a5b7ccd803ec0c85c8709f036e6348f1e6a5bf048ecd9c64d3550b8b"},
+    {file = "pillow-12.1.0-cp311-cp311-musllinux_1_2_x86_64.whl", hash = "sha256:1fcc52d86ce7a34fd17cb04e87cfdb164648a3662a6f20565910a99653d66c18"},
+    {file = "pillow-12.1.0-cp311-cp311-win32.whl", hash = "sha256:3ffaa2f0659e2f740473bcf03c702c39a8d4b2b7ffc629052028764324842c64"},
+    {file = "pillow-12.1.0-cp311-cp311-win_amd64.whl", hash = "sha256:806f3987ffe10e867bab0ddad45df1148a2b98221798457fa097ad85d6e8bc75"},
+    {file = "pillow-12.1.0-cp311-cp311-win_arm64.whl", hash = "sha256:9f5fefaca968e700ad1a4a9de98bf0869a94e397fe3524c4c9450c1445252304"},
+    {file = "pillow-12.1.0-cp312-cp312-macosx_10_13_x86_64.whl", hash = "sha256:a332ac4ccb84b6dde65dbace8431f3af08874bf9770719d32a635c4ef411b18b"},
+    {file = "pillow-12.1.0-cp312-cp312-macosx_11_0_arm64.whl", hash = "sha256:907bfa8a9cb790748a9aa4513e37c88c59660da3bcfffbd24a7d9e6abf224551"},
+    {file = "pillow-12.1.0-cp312-cp312-manylinux2014_aarch64.manylinux_2_17_aarch64.whl", hash = "sha256:efdc140e7b63b8f739d09a99033aa430accce485ff78e6d311973a67b6bf3208"},
+    {file = "pillow-12.1.0-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl", hash = "sha256:bef9768cab184e7ae6e559c032e95ba8d07b3023c289f79a2bd36e8bf85605a5"},
+    {file = "pillow-12.1.0-cp312-cp312-manylinux_2_27_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:742aea052cf5ab5034a53c3846165bc3ce88d7c38e954120db0ab867ca242661"},
+    {file = "pillow-12.1.0-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:a6dfc2af5b082b635af6e08e0d1f9f1c4e04d17d4e2ca0ef96131e85eda6eb17"},
+    {file = "pillow-12.1.0-cp312-cp312-musllinux_1_2_aarch64.whl", hash = "sha256:609e89d9f90b581c8d16358c9087df76024cf058fa693dd3e1e1620823f39670"},
+    {file = "pillow-12.1.0-cp312-cp312-musllinux_1_2_x86_64.whl", hash = "sha256:43b4899cfd091a9693a1278c4982f3e50f7fb7cff5153b05174b4afc9593b616"},
+    {file = "pillow-12.1.0-cp312-cp312-win32.whl", hash = "sha256:aa0c9cc0b82b14766a99fbe6084409972266e82f459821cd26997a488a7261a7"},
+    {file = "pillow-12.1.0-cp312-cp312-win_amd64.whl", hash = "sha256:d70534cea9e7966169ad29a903b99fc507e932069a881d0965a1a84bb57f6c6d"},
+    {file = "pillow-12.1.0-cp312-cp312-win_arm64.whl", hash = "sha256:65b80c1ee7e14a87d6a068dd3b0aea268ffcabfe0498d38661b00c5b4b22e74c"},
+    {file = "pillow-12.1.0-cp313-cp313-ios_13_0_arm64_iphoneos.whl", hash = "sha256:7b5dd7cbae20285cdb597b10eb5a2c13aa9de6cde9bb64a3c1317427b1db1ae1"},
+    {file = "pillow-12.1.0-cp313-cp313-ios_13_0_arm64_iphonesimulator.whl", hash = "sha256:29a4cef9cb672363926f0470afc516dbf7305a14d8c54f7abbb5c199cd8f8179"},
+    {file = "pillow-12.1.0-cp313-cp313-ios_13_0_x86_64_iphonesimulator.whl", hash = "sha256:681088909d7e8fa9e31b9799aaa59ba5234c58e5e4f1951b4c4d1082a2e980e0"},
+    {file = "pillow-12.1.0-cp313-cp313-macosx_10_13_x86_64.whl", hash = "sha256:983976c2ab753166dc66d36af6e8ec15bb511e4a25856e2227e5f7e00a160587"},
+    {file = "pillow-12.1.0-cp313-cp313-macosx_11_0_arm64.whl", hash = "sha256:db44d5c160a90df2d24a24760bbd37607d53da0b34fb546c4c232af7192298ac"},
+    {file = "pillow-12.1.0-cp313-cp313-manylinux2014_aarch64.manylinux_2_17_aarch64.whl", hash = "sha256:6b7a9d1db5dad90e2991645874f708e87d9a3c370c243c2d7684d28f7e133e6b"},
+    {file = "pillow-12.1.0-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.whl", hash = "sha256:6258f3260986990ba2fa8a874f8b6e808cf5abb51a94015ca3dc3c68aa4f30ea"},
+    {file = "pillow-12.1.0-cp313-cp313-manylinux_2_27_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:e115c15e3bc727b1ca3e641a909f77f8ca72a64fff150f666fcc85e57701c26c"},
+    {file = "pillow-12.1.0-cp313-cp313-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:6741e6f3074a35e47c77b23a4e4f2d90db3ed905cb1c5e6e0d49bff2045632bc"},
+    {file = "pillow-12.1.0-cp313-cp313-musllinux_1_2_aarch64.whl", hash = "sha256:935b9d1aed48fcfb3f838caac506f38e29621b44ccc4f8a64d575cb1b2a88644"},
+    {file = "pillow-12.1.0-cp313-cp313-musllinux_1_2_x86_64.whl", hash = "sha256:5fee4c04aad8932da9f8f710af2c1a15a83582cfb884152a9caa79d4efcdbf9c"},
+    {file = "pillow-12.1.0-cp313-cp313-win32.whl", hash = "sha256:a786bf667724d84aa29b5db1c61b7bfdde380202aaca12c3461afd6b71743171"},
+    {file = "pillow-12.1.0-cp313-cp313-win_amd64.whl", hash = "sha256:461f9dfdafa394c59cd6d818bdfdbab4028b83b02caadaff0ffd433faf4c9a7a"},
+    {file = "pillow-12.1.0-cp313-cp313-win_arm64.whl", hash = "sha256:9212d6b86917a2300669511ed094a9406888362e085f2431a7da985a6b124f45"},
+    {file = "pillow-12.1.0-cp313-cp313t-macosx_10_13_x86_64.whl", hash = "sha256:00162e9ca6d22b7c3ee8e61faa3c3253cd19b6a37f126cad04f2f88b306f557d"},
+    {file = "pillow-12.1.0-cp313-cp313t-macosx_11_0_arm64.whl", hash = "sha256:7d6daa89a00b58c37cb1747ec9fb7ac3bc5ffd5949f5888657dfddde6d1312e0"},
+    {file = "pillow-12.1.0-cp313-cp313t-manylinux2014_aarch64.manylinux_2_17_aarch64.whl", hash = "sha256:e2479c7f02f9d505682dc47df8c0ea1fc5e264c4d1629a5d63fe3e2334b89554"},
+    {file = "pillow-12.1.0-cp313-cp313t-manylinux2014_x86_64.manylinux_2_17_x86_64.whl", hash = "sha256:f188d580bd870cda1e15183790d1cc2fa78f666e76077d103edf048eed9c356e"},
+    {file = "pillow-12.1.0-cp313-cp313t-manylinux_2_27_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:0fde7ec5538ab5095cc02df38ee99b0443ff0e1c847a045554cf5f9af1f4aa82"},
+    {file = "pillow-12.1.0-cp313-cp313t-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:0ed07dca4a8464bada6139ab38f5382f83e5f111698caf3191cb8dbf27d908b4"},
+    {file = "pillow-12.1.0-cp313-cp313t-musllinux_1_2_aarch64.whl", hash = "sha256:f45bd71d1fa5e5749587613037b172e0b3b23159d1c00ef2fc920da6f470e6f0"},
+    {file = "pillow-12.1.0-cp313-cp313t-musllinux_1_2_x86_64.whl", hash = "sha256:277518bf4fe74aa91489e1b20577473b19ee70fb97c374aa50830b279f25841b"},
+    {file = "pillow-12.1.0-cp313-cp313t-win32.whl", hash = "sha256:7315f9137087c4e0ee73a761b163fc9aa3b19f5f606a7fc08d83fd3e4379af65"},
+    {file = "pillow-12.1.0-cp313-cp313t-win_amd64.whl", hash = "sha256:0ddedfaa8b5f0b4ffbc2fa87b556dc59f6bb4ecb14a53b33f9189713ae8053c0"},
+    {file = "pillow-12.1.0-cp313-cp313t-win_arm64.whl", hash = "sha256:80941e6d573197a0c28f394753de529bb436b1ca990ed6e765cf42426abc39f8"},
+    {file = "pillow-12.1.0-cp314-cp314-ios_13_0_arm64_iphoneos.whl", hash = "sha256:5cb7bc1966d031aec37ddb9dcf15c2da5b2e9f7cc3ca7c54473a20a927e1eb91"},
+    {file = "pillow-12.1.0-cp314-cp314-ios_13_0_arm64_iphonesimulator.whl", hash = "sha256:97e9993d5ed946aba26baf9c1e8cf18adbab584b99f452ee72f7ee8acb882796"},
+    {file = "pillow-12.1.0-cp314-cp314-ios_13_0_x86_64_iphonesimulator.whl", hash = "sha256:414b9a78e14ffeb98128863314e62c3f24b8a86081066625700b7985b3f529bd"},
+    {file = "pillow-12.1.0-cp314-cp314-macosx_10_15_x86_64.whl", hash = "sha256:e6bdb408f7c9dd2a5ff2b14a3b0bb6d4deb29fb9961e6eb3ae2031ae9a5cec13"},
+    {file = "pillow-12.1.0-cp314-cp314-macosx_11_0_arm64.whl", hash = "sha256:3413c2ae377550f5487991d444428f1a8ae92784aac79caa8b1e3b89b175f77e"},
+    {file = "pillow-12.1.0-cp314-cp314-manylinux2014_aarch64.manylinux_2_17_aarch64.whl", hash = "sha256:e5dcbe95016e88437ecf33544ba5db21ef1b8dd6e1b434a2cb2a3d605299e643"},
+    {file = "pillow-12.1.0-cp314-cp314-manylinux2014_x86_64.manylinux_2_17_x86_64.whl", hash = "sha256:d0a7735df32ccbcc98b98a1ac785cc4b19b580be1bdf0aeb5c03223220ea09d5"},
+    {file = "pillow-12.1.0-cp314-cp314-manylinux_2_27_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:0c27407a2d1b96774cbc4a7594129cc027339fd800cd081e44497722ea1179de"},
+    {file = "pillow-12.1.0-cp314-cp314-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:15c794d74303828eaa957ff8070846d0efe8c630901a1c753fdc63850e19ecd9"},
+    {file = "pillow-12.1.0-cp314-cp314-musllinux_1_2_aarch64.whl", hash = "sha256:c990547452ee2800d8506c4150280757f88532f3de2a58e3022e9b179107862a"},
+    {file = "pillow-12.1.0-cp314-cp314-musllinux_1_2_x86_64.whl", hash = "sha256:b63e13dd27da389ed9475b3d28510f0f954bca0041e8e551b2a4eb1eab56a39a"},
+    {file = "pillow-12.1.0-cp314-cp314-win32.whl", hash = "sha256:1a949604f73eb07a8adab38c4fe50791f9919344398bdc8ac6b307f755fc7030"},
+    {file = "pillow-12.1.0-cp314-cp314-win_amd64.whl", hash = "sha256:4f9f6a650743f0ddee5593ac9e954ba1bdbc5e150bc066586d4f26127853ab94"},
+    {file = "pillow-12.1.0-cp314-cp314-win_arm64.whl", hash = "sha256:808b99604f7873c800c4840f55ff389936ef1948e4e87645eaf3fccbc8477ac4"},
+    {file = "pillow-12.1.0-cp314-cp314t-macosx_10_15_x86_64.whl", hash = "sha256:bc11908616c8a283cf7d664f77411a5ed2a02009b0097ff8abbba5e79128ccf2"},
+    {file = "pillow-12.1.0-cp314-cp314t-macosx_11_0_arm64.whl", hash = "sha256:896866d2d436563fa2a43a9d72f417874f16b5545955c54a64941e87c1376c61"},
+    {file = "pillow-12.1.0-cp314-cp314t-manylinux2014_aarch64.manylinux_2_17_aarch64.whl", hash = "sha256:8e178e3e99d3c0ea8fc64b88447f7cac8ccf058af422a6cedc690d0eadd98c51"},
+    {file = "pillow-12.1.0-cp314-cp314t-manylinux2014_x86_64.manylinux_2_17_x86_64.whl", hash = "sha256:079af2fb0c599c2ec144ba2c02766d1b55498e373b3ac64687e43849fbbef5bc"},
+    {file = "pillow-12.1.0-cp314-cp314t-manylinux_2_27_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:bdec5e43377761c5dbca620efb69a77f6855c5a379e32ac5b158f54c84212b14"},
+    {file = "pillow-12.1.0-cp314-cp314t-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:565c986f4b45c020f5421a4cea13ef294dde9509a8577f29b2fc5edc7587fff8"},
+    {file = "pillow-12.1.0-cp314-cp314t-musllinux_1_2_aarch64.whl", hash = "sha256:43aca0a55ce1eefc0aefa6253661cb54571857b1a7b2964bd8a1e3ef4b729924"},
+    {file = "pillow-12.1.0-cp314-cp314t-musllinux_1_2_x86_64.whl", hash = "sha256:0deedf2ea233722476b3a81e8cdfbad786f7adbed5d848469fa59fe52396e4ef"},
+    {file = "pillow-12.1.0-cp314-cp314t-win32.whl", hash = "sha256:b17fbdbe01c196e7e159aacb889e091f28e61020a8abeac07b68079b6e626988"},
+    {file = "pillow-12.1.0-cp314-cp314t-win_amd64.whl", hash = "sha256:27b9baecb428899db6c0de572d6d305cfaf38ca1596b5c0542a5182e3e74e8c6"},
+    {file = "pillow-12.1.0-cp314-cp314t-win_arm64.whl", hash = "sha256:f61333d817698bdcdd0f9d7793e365ac3d2a21c1f1eb02b32ad6aefb8d8ea831"},
+    {file = "pillow-12.1.0-pp311-pypy311_pp73-macosx_10_15_x86_64.whl", hash = "sha256:ca94b6aac0d7af2a10ba08c0f888b3d5114439b6b3ef39968378723622fed377"},
+    {file = "pillow-12.1.0-pp311-pypy311_pp73-macosx_11_0_arm64.whl", hash = "sha256:351889afef0f485b84078ea40fe33727a0492b9af3904661b0abbafee0355b72"},
+    {file = "pillow-12.1.0-pp311-pypy311_pp73-manylinux2014_aarch64.manylinux_2_17_aarch64.whl", hash = "sha256:bb0984b30e973f7e2884362b7d23d0a348c7143ee559f38ef3eaab640144204c"},
+    {file = "pillow-12.1.0-pp311-pypy311_pp73-manylinux2014_x86_64.manylinux_2_17_x86_64.whl", hash = "sha256:84cabc7095dd535ca934d57e9ce2a72ffd216e435a84acb06b2277b1de2689bd"},
+    {file = "pillow-12.1.0-pp311-pypy311_pp73-manylinux_2_27_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:53d8b764726d3af1a138dd353116f774e3862ec7e3794e0c8781e30db0f35dfc"},
+    {file = "pillow-12.1.0-pp311-pypy311_pp73-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:5da841d81b1a05ef940a8567da92decaa15bc4d7dedb540a8c219ad83d91808a"},
+    {file = "pillow-12.1.0-pp311-pypy311_pp73-win_amd64.whl", hash = "sha256:75af0b4c229ac519b155028fa1be632d812a519abba9b46b20e50c6caa184f19"},
+    {file = "pillow-12.1.0.tar.gz", hash = "sha256:5c5ae0a06e9ea030ab786b0251b32c7e4ce10e58d983c0d5c56029455180b5b9"},
+]
+
+[package.extras]
+docs = ["furo", "olefile", "sphinx (>=8.2)", "sphinx-autobuild", "sphinx-copybutton", "sphinx-inline-tabs", "sphinxext-opengraph"]
+fpx = ["olefile"]
+mic = ["olefile"]
+test-arrow = ["arro3-compute", "arro3-core", "nanoarrow", "pyarrow"]
+tests = ["check-manifest", "coverage (>=7.4.2)", "defusedxml", "markdown2", "olefile", "packaging", "pyroma (>=5)", "pytest", "pytest-cov", "pytest-timeout", "pytest-xdist", "trove-classifiers (>=2024.10.12)"]
+xmp = ["defusedxml"]
+
+[[package]]
+name = "platformdirs"
+version = "4.5.1"
+description = "A small Python package for determining appropriate platform-specific dirs, e.g. a `user data dir`."
+optional = false
+python-versions = ">=3.10"
+groups = ["lint"]
+files = [
+    {file = "platformdirs-4.5.1-py3-none-any.whl", hash = "sha256:d03afa3963c806a9bed9d5125c8f4cb2fdaf74a55ab60e5d59b3fde758104d31"},
+    {file = "platformdirs-4.5.1.tar.gz", hash = "sha256:61d5cdcc6065745cdd94f0f878977f8de9437be93de97c1c12f853c9c0cdcbda"},
+]
+
+[package.extras]
+docs = ["furo (>=2025.9.25)", "proselint (>=0.14)", "sphinx (>=8.2.3)", "sphinx-autodoc-typehints (>=3.2)"]
+test = ["appdirs (==1.4.4)", "covdefaults (>=2.3)", "pytest (>=8.4.2)", "pytest-cov (>=7)", "pytest-mock (>=3.15.1)"]
+type = ["mypy (>=1.18.2)"]
+
+[[package]]
+name = "pluggy"
+version = "1.6.0"
+description = "plugin and hook calling mechanisms for python"
+optional = false
+python-versions = ">=3.9"
+groups = ["test"]
+files = [
+    {file = "pluggy-1.6.0-py3-none-any.whl", hash = "sha256:e920276dd6813095e9377c0bc5566d94c932c33b27a3e3945d8389c374dd4746"},
+    {file = "pluggy-1.6.0.tar.gz", hash = "sha256:7dcc130b76258d33b90f61b658791dede3486c3e6bfb003ee5c9bfb396dd22f3"},
+]
+
+[package.extras]
+dev = ["pre-commit", "tox"]
+testing = ["coverage", "pytest", "pytest-benchmark"]
+
+[[package]]
+name = "prettytable"
+version = "3.17.0"
+description = "A simple Python library for easily displaying tabular data in a visually appealing ASCII table format"
+optional = false
+python-versions = ">=3.10"
+groups = ["examples"]
+files = [
+    {file = "prettytable-3.17.0-py3-none-any.whl", hash = "sha256:aad69b294ddbe3e1f95ef8886a060ed1666a0b83018bbf56295f6f226c43d287"},
+    {file = "prettytable-3.17.0.tar.gz", hash = "sha256:59f2590776527f3c9e8cf9fe7b66dd215837cca96a9c39567414cbc632e8ddb0"},
+]
+
+[package.dependencies]
+wcwidth = "*"
+
+[package.extras]
+tests = ["pytest", "pytest-cov", "pytest-lazy-fixtures"]
+
+[[package]]
+name = "protobuf"
+version = "6.33.5"
+description = ""
+optional = false
+python-versions = ">=3.9"
+groups = ["main", "examples"]
+files = [
+    {file = "protobuf-6.33.5-cp310-abi3-win32.whl", hash = "sha256:d71b040839446bac0f4d162e758bea99c8251161dae9d0983a3b88dee345153b"},
+    {file = "protobuf-6.33.5-cp310-abi3-win_amd64.whl", hash = "sha256:3093804752167bcab3998bec9f1048baae6e29505adaf1afd14a37bddede533c"},
+    {file = "protobuf-6.33.5-cp39-abi3-macosx_10_9_universal2.whl", hash = "sha256:a5cb85982d95d906df1e2210e58f8e4f1e3cdc088e52c921a041f9c9a0386de5"},
+    {file = "protobuf-6.33.5-cp39-abi3-manylinux2014_aarch64.whl", hash = "sha256:9b71e0281f36f179d00cbcb119cb19dec4d14a81393e5ea220f64b286173e190"},
+    {file = "protobuf-6.33.5-cp39-abi3-manylinux2014_s390x.whl", hash = "sha256:8afa18e1d6d20af15b417e728e9f60f3aa108ee76f23c3b2c07a2c3b546d3afd"},
+    {file = "protobuf-6.33.5-cp39-abi3-manylinux2014_x86_64.whl", hash = "sha256:cbf16ba3350fb7b889fca858fb215967792dc125b35c7976ca4818bee3521cf0"},
+    {file = "protobuf-6.33.5-cp39-cp39-win32.whl", hash = "sha256:a3157e62729aafb8df6da2c03aa5c0937c7266c626ce11a278b6eb7963c4e37c"},
+    {file = "protobuf-6.33.5-cp39-cp39-win_amd64.whl", hash = "sha256:8f04fa32763dcdb4973d537d6b54e615cc61108c7cb38fe59310c3192d29510a"},
+    {file = "protobuf-6.33.5-py3-none-any.whl", hash = "sha256:69915a973dd0f60f31a08b8318b73eab2bd6a392c79184b3612226b0a3f8ec02"},
+    {file = "protobuf-6.33.5.tar.gz", hash = "sha256:6ddcac2a081f8b7b9642c09406bc6a4290128fce5f471cddd165960bb9119e5c"},
+]
+
+[[package]]
+name = "pyarrow"
+version = "22.0.0"
+description = "Python library for Apache Arrow"
+optional = false
+python-versions = ">=3.10"
+groups = ["main", "examples"]
+files = [
+    {file = "pyarrow-22.0.0-cp310-cp310-macosx_12_0_arm64.whl", hash = "sha256:77718810bd3066158db1e95a63c160ad7ce08c6b0710bc656055033e39cdad88"},
+    {file = "pyarrow-22.0.0-cp310-cp310-macosx_12_0_x86_64.whl", hash = "sha256:44d2d26cda26d18f7af7db71453b7b783788322d756e81730acb98f24eb90ace"},
+    {file = "pyarrow-22.0.0-cp310-cp310-manylinux_2_28_aarch64.whl", hash = "sha256:b9d71701ce97c95480fecb0039ec5bb889e75f110da72005743451339262f4ce"},
+    {file = "pyarrow-22.0.0-cp310-cp310-manylinux_2_28_x86_64.whl", hash = "sha256:710624ab925dc2b05a6229d47f6f0dac1c1155e6ed559be7109f684eba048a48"},
+    {file = "pyarrow-22.0.0-cp310-cp310-musllinux_1_2_aarch64.whl", hash = "sha256:f963ba8c3b0199f9d6b794c90ec77545e05eadc83973897a4523c9e8d84e9340"},
+    {file = "pyarrow-22.0.0-cp310-cp310-musllinux_1_2_x86_64.whl", hash = "sha256:bd0d42297ace400d8febe55f13fdf46e86754842b860c978dfec16f081e5c653"},
+    {file = "pyarrow-22.0.0-cp310-cp310-win_amd64.whl", hash = "sha256:00626d9dc0f5ef3a75fe63fd68b9c7c8302d2b5bbc7f74ecaedba83447a24f84"},
+    {file = "pyarrow-22.0.0-cp311-cp311-macosx_12_0_arm64.whl", hash = "sha256:3e294c5eadfb93d78b0763e859a0c16d4051fc1c5231ae8956d61cb0b5666f5a"},
+    {file = "pyarrow-22.0.0-cp311-cp311-macosx_12_0_x86_64.whl", hash = "sha256:69763ab2445f632d90b504a815a2a033f74332997052b721002298ed6de40f2e"},
+    {file = "pyarrow-22.0.0-cp311-cp311-manylinux_2_28_aarch64.whl", hash = "sha256:b41f37cabfe2463232684de44bad753d6be08a7a072f6a83447eeaf0e4d2a215"},
+    {file = "pyarrow-22.0.0-cp311-cp311-manylinux_2_28_x86_64.whl", hash = "sha256:35ad0f0378c9359b3f297299c3309778bb03b8612f987399a0333a560b43862d"},
+    {file = "pyarrow-22.0.0-cp311-cp311-musllinux_1_2_aarch64.whl", hash = "sha256:8382ad21458075c2e66a82a29d650f963ce51c7708c7c0ff313a8c206c4fd5e8"},
+    {file = "pyarrow-22.0.0-cp311-cp311-musllinux_1_2_x86_64.whl", hash = "sha256:1a812a5b727bc09c3d7ea072c4eebf657c2f7066155506ba31ebf4792f88f016"},
+    {file = "pyarrow-22.0.0-cp311-cp311-win_amd64.whl", hash = "sha256:ec5d40dd494882704fb876c16fa7261a69791e784ae34e6b5992e977bd2e238c"},
+    {file = "pyarrow-22.0.0-cp312-cp312-macosx_12_0_arm64.whl", hash = "sha256:bea79263d55c24a32b0d79c00a1c58bb2ee5f0757ed95656b01c0fb310c5af3d"},
+    {file = "pyarrow-22.0.0-cp312-cp312-macosx_12_0_x86_64.whl", hash = "sha256:12fe549c9b10ac98c91cf791d2945e878875d95508e1a5d14091a7aaa66d9cf8"},
+    {file = "pyarrow-22.0.0-cp312-cp312-manylinux_2_28_aarch64.whl", hash = "sha256:334f900ff08ce0423407af97e6c26ad5d4e3b0763645559ece6fbf3747d6a8f5"},
+    {file = "pyarrow-22.0.0-cp312-cp312-manylinux_2_28_x86_64.whl", hash = "sha256:c6c791b09c57ed76a18b03f2631753a4960eefbbca80f846da8baefc6491fcfe"},
+    {file = "pyarrow-22.0.0-cp312-cp312-musllinux_1_2_aarch64.whl", hash = "sha256:c3200cb41cdbc65156e5f8c908d739b0dfed57e890329413da2748d1a2cd1a4e"},
+    {file = "pyarrow-22.0.0-cp312-cp312-musllinux_1_2_x86_64.whl", hash = "sha256:ac93252226cf288753d8b46280f4edf3433bf9508b6977f8dd8526b521a1bbb9"},
+    {file = "pyarrow-22.0.0-cp312-cp312-win_amd64.whl", hash = "sha256:44729980b6c50a5f2bfcc2668d36c569ce17f8b17bccaf470c4313dcbbf13c9d"},
+    {file = "pyarrow-22.0.0-cp313-cp313-macosx_12_0_arm64.whl", hash = "sha256:e6e95176209257803a8b3d0394f21604e796dadb643d2f7ca21b66c9c0b30c9a"},
+    {file = "pyarrow-22.0.0-cp313-cp313-macosx_12_0_x86_64.whl", hash = "sha256:001ea83a58024818826a9e3f89bf9310a114f7e26dfe404a4c32686f97bd7901"},
+    {file = "pyarrow-22.0.0-cp313-cp313-manylinux_2_28_aarch64.whl", hash = "sha256:ce20fe000754f477c8a9125543f1936ea5b8867c5406757c224d745ed033e691"},
+    {file = "pyarrow-22.0.0-cp313-cp313-manylinux_2_28_x86_64.whl", hash = "sha256:e0a15757fccb38c410947df156f9749ae4a3c89b2393741a50521f39a8cf202a"},
+    {file = "pyarrow-22.0.0-cp313-cp313-musllinux_1_2_aarch64.whl", hash = "sha256:cedb9dd9358e4ea1d9bce3665ce0797f6adf97ff142c8e25b46ba9cdd508e9b6"},
+    {file = "pyarrow-22.0.0-cp313-cp313-musllinux_1_2_x86_64.whl", hash = "sha256:252be4a05f9d9185bb8c18e83764ebcfea7185076c07a7a662253af3a8c07941"},
+    {file = "pyarrow-22.0.0-cp313-cp313-win_amd64.whl", hash = "sha256:a4893d31e5ef780b6edcaf63122df0f8d321088bb0dee4c8c06eccb1ca28d145"},
+    {file = "pyarrow-22.0.0-cp313-cp313t-macosx_12_0_arm64.whl", hash = "sha256:f7fe3dbe871294ba70d789be16b6e7e52b418311e166e0e3cba9522f0f437fb1"},
+    {file = "pyarrow-22.0.0-cp313-cp313t-macosx_12_0_x86_64.whl", hash = "sha256:ba95112d15fd4f1105fb2402c4eab9068f0554435e9b7085924bcfaac2cc306f"},
+    {file = "pyarrow-22.0.0-cp313-cp313t-manylinux_2_28_aarch64.whl", hash = "sha256:c064e28361c05d72eed8e744c9605cbd6d2bb7481a511c74071fd9b24bc65d7d"},
+    {file = "pyarrow-22.0.0-cp313-cp313t-manylinux_2_28_x86_64.whl", hash = "sha256:6f9762274496c244d951c819348afbcf212714902742225f649cf02823a6a10f"},
+    {file = "pyarrow-22.0.0-cp313-cp313t-musllinux_1_2_aarch64.whl", hash = "sha256:a9d9ffdc2ab696f6b15b4d1f7cec6658e1d788124418cb30030afbae31c64746"},
+    {file = "pyarrow-22.0.0-cp313-cp313t-musllinux_1_2_x86_64.whl", hash = "sha256:ec1a15968a9d80da01e1d30349b2b0d7cc91e96588ee324ce1b5228175043e95"},
+    {file = "pyarrow-22.0.0-cp313-cp313t-win_amd64.whl", hash = "sha256:bba208d9c7decf9961998edf5c65e3ea4355d5818dd6cd0f6809bec1afb951cc"},
+    {file = "pyarrow-22.0.0-cp314-cp314-macosx_12_0_arm64.whl", hash = "sha256:9bddc2cade6561f6820d4cd73f99a0243532ad506bc510a75a5a65a522b2d74d"},
+    {file = "pyarrow-22.0.0-cp314-cp314-macosx_12_0_x86_64.whl", hash = "sha256:e70ff90c64419709d38c8932ea9fe1cc98415c4f87ea8da81719e43f02534bc9"},
+    {file = "pyarrow-22.0.0-cp314-cp314-manylinux_2_28_aarch64.whl", hash = "sha256:92843c305330aa94a36e706c16209cd4df274693e777ca47112617db7d0ef3d7"},
+    {file = "pyarrow-22.0.0-cp314-cp314-manylinux_2_28_x86_64.whl", hash = "sha256:6dda1ddac033d27421c20d7a7943eec60be44e0db4e079f33cc5af3b8280ccde"},
+    {file = "pyarrow-22.0.0-cp314-cp314-musllinux_1_2_aarch64.whl", hash = "sha256:84378110dd9a6c06323b41b56e129c504d157d1a983ce8f5443761eb5256bafc"},
+    {file = "pyarrow-22.0.0-cp314-cp314-musllinux_1_2_x86_64.whl", hash = "sha256:854794239111d2b88b40b6ef92aa478024d1e5074f364033e73e21e3f76b25e0"},
+    {file = "pyarrow-22.0.0-cp314-cp314-win_amd64.whl", hash = "sha256:b883fe6fd85adad7932b3271c38ac289c65b7337c2c132e9569f9d3940620730"},
+    {file = "pyarrow-22.0.0-cp314-cp314t-macosx_12_0_arm64.whl", hash = "sha256:7a820d8ae11facf32585507c11f04e3f38343c1e784c9b5a8b1da5c930547fe2"},
+    {file = "pyarrow-22.0.0-cp314-cp314t-macosx_12_0_x86_64.whl", hash = "sha256:c6ec3675d98915bf1ec8b3c7986422682f7232ea76cad276f4c8abd5b7319b70"},
+    {file = "pyarrow-22.0.0-cp314-cp314t-manylinux_2_28_aarch64.whl", hash = "sha256:3e739edd001b04f654b166204fc7a9de896cf6007eaff33409ee9e50ceaff754"},
+    {file = "pyarrow-22.0.0-cp314-cp314t-manylinux_2_28_x86_64.whl", hash = "sha256:7388ac685cab5b279a41dfe0a6ccd99e4dbf322edfb63e02fc0443bf24134e91"},
+    {file = "pyarrow-22.0.0-cp314-cp314t-musllinux_1_2_aarch64.whl", hash = "sha256:f633074f36dbc33d5c05b5dc75371e5660f1dbf9c8b1d95669def05e5425989c"},
+    {file = "pyarrow-22.0.0-cp314-cp314t-musllinux_1_2_x86_64.whl", hash = "sha256:4c19236ae2402a8663a2c8f21f1870a03cc57f0bef7e4b6eb3238cc82944de80"},
+    {file = "pyarrow-22.0.0-cp314-cp314t-win_amd64.whl", hash = "sha256:0c34fe18094686194f204a3b1787a27456897d8a2d62caf84b61e8dfbc0252ae"},
+    {file = "pyarrow-22.0.0.tar.gz", hash = "sha256:3d600dc583260d845c7d8a6db540339dd883081925da2bd1c5cb808f720b3cd9"},
+]
+
+[[package]]
+name = "pycodestyle"
+version = "2.9.1"
+description = "Python style guide checker"
+optional = false
+python-versions = ">=3.6"
+groups = ["lint"]
+markers = "python_version < \"3.13\" and python_version != \"3.12\""
+files = [
+    {file = "pycodestyle-2.9.1-py2.py3-none-any.whl", hash = "sha256:d1735fc58b418fd7c5f658d28d943854f8a849b01a5d0a1e6f3f3fdd0166804b"},
+    {file = "pycodestyle-2.9.1.tar.gz", hash = "sha256:2c9607871d58c76354b697b42f5d57e1ada7d261c261efac224b664affdc5785"},
+]
+
+[[package]]
+name = "pycodestyle"
+version = "2.11.1"
+description = "Python style guide checker"
+optional = false
+python-versions = ">=3.8"
+groups = ["lint"]
+markers = "python_version >= \"3.12\""
+files = [
+    {file = "pycodestyle-2.11.1-py2.py3-none-any.whl", hash = "sha256:44fe31000b2d866f2e41841b18528a505fbd7fef9017b04eff4e2648a0fadc67"},
+    {file = "pycodestyle-2.11.1.tar.gz", hash = "sha256:41ba0e7afc9752dfb53ced5489e89f8186be00e599e712660695b7a75ff2663f"},
+]
+
+[[package]]
+name = "pydeck"
+version = "0.9.1"
+description = "Widget for deck.gl maps"
+optional = false
+python-versions = ">=3.8"
+groups = ["main", "examples"]
+files = [
+    {file = "pydeck-0.9.1-py2.py3-none-any.whl", hash = "sha256:b3f75ba0d273fc917094fa61224f3f6076ca8752b93d46faf3bcfd9f9d59b038"},
+    {file = "pydeck-0.9.1.tar.gz", hash = "sha256:f74475ae637951d63f2ee58326757f8d4f9cd9f2a457cf42950715003e2cb605"},
+]
+
+[package.dependencies]
+jinja2 = ">=2.10.1"
+numpy = ">=1.16.4"
+
+[package.extras]
+carto = ["pydeck-carto"]
+jupyter = ["ipykernel (>=5.1.2) ; python_version >= \"3.4\"", "ipython (>=5.8.0) ; python_version < \"3.4\"", "ipywidgets (>=7,<8)", "traitlets (>=4.3.2)"]
+
+[[package]]
+name = "pydocstyle"
+version = "6.3.0"
+description = "Python docstring style checker"
+optional = false
+python-versions = ">=3.6"
+groups = ["lint"]
+files = [
+    {file = "pydocstyle-6.3.0-py3-none-any.whl", hash = "sha256:118762d452a49d6b05e194ef344a55822987a462831ade91ec5c06fd2169d019"},
+    {file = "pydocstyle-6.3.0.tar.gz", hash = "sha256:7ce43f0c0ac87b07494eb9c0b462c0b73e6ff276807f204d6b53edc72b7e44e1"},
+]
+
+[package.dependencies]
+snowballstemmer = ">=2.2.0"
+
+[package.extras]
+toml = ["tomli (>=1.2.3) ; python_version < \"3.11\""]
+
+[[package]]
+name = "pyecharts"
+version = "2.0.9"
+description = "Python options, make charting easier"
+optional = false
+python-versions = "*"
+groups = ["examples"]
+files = [
+    {file = "pyecharts-2.0.9-py3-none-any.whl", hash = "sha256:c2adada56931c29669bcf3a972137231625136337f874dbd617ccd752f1477b8"},
+    {file = "pyecharts-2.0.9.tar.gz", hash = "sha256:7b4e8620809c22e32a19d613542f47ea6efa02f1189e00f91134cb5225e8f3ec"},
+]
+
+[package.dependencies]
+jinja2 = "*"
+prettytable = "*"
+simplejson = "*"
+
+[package.extras]
+images = ["PIL"]
+phantomjs = ["snapshot-phantomjs"]
+pyppeteer = ["snapshot-pyppeteer"]
+selenium = ["snapshot-selenium"]
+
+[[package]]
+name = "pyflakes"
+version = "2.5.0"
+description = "passive checker of Python programs"
+optional = false
+python-versions = ">=3.6"
+groups = ["lint"]
+markers = "python_version < \"3.13\" and python_version != \"3.12\""
+files = [
+    {file = "pyflakes-2.5.0-py2.py3-none-any.whl", hash = "sha256:4579f67d887f804e67edb544428f264b7b24f435b263c4614f384135cea553d2"},
+    {file = "pyflakes-2.5.0.tar.gz", hash = "sha256:491feb020dca48ccc562a8c0cbe8df07ee13078df59813b83959cbdada312ea3"},
+]
+
+[[package]]
+name = "pyflakes"
+version = "3.1.0"
+description = "passive checker of Python programs"
+optional = false
+python-versions = ">=3.8"
+groups = ["lint"]
+markers = "python_version >= \"3.12\""
+files = [
+    {file = "pyflakes-3.1.0-py2.py3-none-any.whl", hash = "sha256:4132f6d49cb4dae6819e5379898f2b8cce3c5f23994194c24b77d5da2e36f774"},
+    {file = "pyflakes-3.1.0.tar.gz", hash = "sha256:a0aae034c444db0071aa077972ba4768d40c830d9539fd45bf4cd3f8f6992efc"},
+]
+
+[[package]]
+name = "pygments"
+version = "2.19.2"
+description = "Pygments is a syntax highlighting package written in Python."
+optional = false
+python-versions = ">=3.8"
+groups = ["docs", "lint", "test"]
+files = [
+    {file = "pygments-2.19.2-py3-none-any.whl", hash = "sha256:86540386c03d588bb81d44bc3928634ff26449851e99741617ecb9037ee5ec0b"},
+    {file = "pygments-2.19.2.tar.gz", hash = "sha256:636cb2477cec7f8952536970bc533bc43743542f70392ae026374600add5b887"},
+]
+
+[package.extras]
+windows-terminal = ["colorama (>=0.4.6)"]
+
+[[package]]
+name = "pyright"
+version = "1.1.408"
+description = "Command line wrapper for pyright"
+optional = false
+python-versions = ">=3.7"
+groups = ["lint"]
+files = [
+    {file = "pyright-1.1.408-py3-none-any.whl", hash = "sha256:090b32865f4fdb1e0e6cd82bf5618480d48eecd2eb2e70f960982a3d9a4c17c1"},
+    {file = "pyright-1.1.408.tar.gz", hash = "sha256:f28f2321f96852fa50b5829ea492f6adb0e6954568d1caa3f3af3a5f555eb684"},
+]
+
+[package.dependencies]
+nodeenv = ">=1.6.0"
+nodejs-wheel-binaries = {version = "*", optional = true, markers = "extra == \"nodejs\""}
+typing-extensions = ">=4.1"
+
+[package.extras]
+all = ["nodejs-wheel-binaries", "twine (>=3.4.1)"]
+dev = ["twine (>=3.4.1)"]
+nodejs = ["nodejs-wheel-binaries"]
+
+[[package]]
+name = "pytest"
+version = "9.0.3"
+description = "pytest: simple powerful testing with Python"
+optional = false
+python-versions = ">=3.10"
+groups = ["test"]
+files = [
+    {file = "pytest-9.0.3-py3-none-any.whl", hash = "sha256:2c5efc453d45394fdd706ade797c0a81091eccd1d6e4bccfcd476e2b8e0ab5d9"},
+    {file = "pytest-9.0.3.tar.gz", hash = "sha256:b86ada508af81d19edeb213c681b1d48246c1a91d304c6c81a427674c17eb91c"},
+]
+
+[package.dependencies]
+colorama = {version = ">=0.4", markers = "sys_platform == \"win32\""}
+exceptiongroup = {version = ">=1", markers = "python_version < \"3.11\""}
+iniconfig = ">=1.0.1"
+packaging = ">=22"
+pluggy = ">=1.5,<2"
+pygments = ">=2.7.2"
+tomli = {version = ">=1", markers = "python_version < \"3.11\""}
+
+[package.extras]
+dev = ["argcomplete", "attrs (>=19.2)", "hypothesis (>=3.56)", "mock", "requests", "setuptools", "xmlschema"]
+
+[[package]]
+name = "pytest-cov"
+version = "7.0.0"
+description = "Pytest plugin for measuring coverage."
+optional = false
+python-versions = ">=3.9"
+groups = ["test"]
+files = [
+    {file = "pytest_cov-7.0.0-py3-none-any.whl", hash = "sha256:3b8e9558b16cc1479da72058bdecf8073661c7f57f7d3c5f22a1c23507f2d861"},
+    {file = "pytest_cov-7.0.0.tar.gz", hash = "sha256:33c97eda2e049a0c5298e91f519302a1334c26ac65c1a483d6206fd458361af1"},
+]
+
+[package.dependencies]
+coverage = {version = ">=7.10.6", extras = ["toml"]}
+pluggy = ">=1.2"
+pytest = ">=7"
+
+[package.extras]
+testing = ["process-tests", "pytest-xdist", "virtualenv"]
+
+[[package]]
+name = "pytest-mock"
+version = "3.15.1"
+description = "Thin-wrapper around the mock package for easier use with pytest"
+optional = false
+python-versions = ">=3.9"
+groups = ["test"]
+files = [
+    {file = "pytest_mock-3.15.1-py3-none-any.whl", hash = "sha256:0a25e2eb88fe5168d535041d09a4529a188176ae608a6d249ee65abc0949630d"},
+    {file = "pytest_mock-3.15.1.tar.gz", hash = "sha256:1849a238f6f396da19762269de72cb1814ab44416fa73a8686deac10b0d87a0f"},
+]
+
+[package.dependencies]
+pytest = ">=6.2.5"
+
+[package.extras]
+dev = ["pre-commit", "pytest-asyncio", "tox"]
+
+[[package]]
+name = "python-dateutil"
+version = "2.9.0.post0"
+description = "Extensions to the standard Python datetime module"
+optional = false
+python-versions = "!=3.0.*,!=3.1.*,!=3.2.*,>=2.7"
+groups = ["main", "examples"]
+files = [
+    {file = "python-dateutil-2.9.0.post0.tar.gz", hash = "sha256:37dd54208da7e1cd875388217d5e00ebd4179249f90fb72437e91a35459a0ad3"},
+    {file = "python_dateutil-2.9.0.post0-py2.py3-none-any.whl", hash = "sha256:a8b2bc7bffae282281c8140a97d3aa9c14da0b136dfe83f850eea9a5f7470427"},
+]
+
+[package.dependencies]
+six = ">=1.5"
+
+[[package]]
+name = "python-decouple"
+version = "3.8"
+description = "Strict separation of settings from code."
+optional = false
+python-versions = "*"
+groups = ["examples"]
+files = [
+    {file = "python-decouple-3.8.tar.gz", hash = "sha256:ba6e2657d4f376ecc46f77a3a615e058d93ba5e465c01bbe57289bfb7cce680f"},
+    {file = "python_decouple-3.8-py3-none-any.whl", hash = "sha256:d0d45340815b25f4de59c974b855bb38d03151d81b037d9e3f463b0c9f8cbd66"},
+]
+
+[[package]]
+name = "pytokens"
+version = "0.3.0"
+description = "A Fast, spec compliant Python 3.14+ tokenizer that runs on older Pythons."
+optional = false
+python-versions = ">=3.8"
+groups = ["lint"]
+files = [
+    {file = "pytokens-0.3.0-py3-none-any.whl", hash = "sha256:95b2b5eaf832e469d141a378872480ede3f251a5a5041b8ec6e581d3ac71bbf3"},
+    {file = "pytokens-0.3.0.tar.gz", hash = "sha256:2f932b14ed08de5fcf0b391ace2642f858f1394c0857202959000b68ed7a458a"},
+]
+
+[package.extras]
+dev = ["black", "build", "mypy", "pytest", "pytest-cov", "setuptools", "tox", "twine", "wheel"]
+
+[[package]]
+name = "pytz"
+version = "2025.2"
+description = "World timezone definitions, modern and historical"
+optional = false
+python-versions = "*"
+groups = ["main", "examples"]
+files = [
+    {file = "pytz-2025.2-py2.py3-none-any.whl", hash = "sha256:5ddf76296dd8c44c26eb8f4b6f35488f3ccbf6fbbd7adee0b7262d43f0ec2f00"},
+    {file = "pytz-2025.2.tar.gz", hash = "sha256:360b9e3dbb49a209c21ad61809c7fb453643e048b38924c765813546746e81c3"},
+]
+
+[[package]]
+name = "pywin32"
+version = "311"
+description = "Python for Window Extensions"
+optional = false
+python-versions = "*"
+groups = ["main"]
+markers = "sys_platform == \"win32\""
+files = [
+    {file = "pywin32-311-cp310-cp310-win32.whl", hash = "sha256:d03ff496d2a0cd4a5893504789d4a15399133fe82517455e78bad62efbb7f0a3"},
+    {file = "pywin32-311-cp310-cp310-win_amd64.whl", hash = "sha256:797c2772017851984b97180b0bebe4b620bb86328e8a884bb626156295a63b3b"},
+    {file = "pywin32-311-cp310-cp310-win_arm64.whl", hash = "sha256:0502d1facf1fed4839a9a51ccbcc63d952cf318f78ffc00a7e78528ac27d7a2b"},
+    {file = "pywin32-311-cp311-cp311-win32.whl", hash = "sha256:184eb5e436dea364dcd3d2316d577d625c0351bf237c4e9a5fabbcfa5a58b151"},
+    {file = "pywin32-311-cp311-cp311-win_amd64.whl", hash = "sha256:3ce80b34b22b17ccbd937a6e78e7225d80c52f5ab9940fe0506a1a16f3dab503"},
+    {file = "pywin32-311-cp311-cp311-win_arm64.whl", hash = "sha256:a733f1388e1a842abb67ffa8e7aad0e70ac519e09b0f6a784e65a136ec7cefd2"},
+    {file = "pywin32-311-cp312-cp312-win32.whl", hash = "sha256:750ec6e621af2b948540032557b10a2d43b0cee2ae9758c54154d711cc852d31"},
+    {file = "pywin32-311-cp312-cp312-win_amd64.whl", hash = "sha256:b8c095edad5c211ff31c05223658e71bf7116daa0ecf3ad85f3201ea3190d067"},
+    {file = "pywin32-311-cp312-cp312-win_arm64.whl", hash = "sha256:e286f46a9a39c4a18b319c28f59b61de793654af2f395c102b4f819e584b5852"},
+    {file = "pywin32-311-cp313-cp313-win32.whl", hash = "sha256:f95ba5a847cba10dd8c4d8fefa9f2a6cf283b8b88ed6178fa8a6c1ab16054d0d"},
+    {file = "pywin32-311-cp313-cp313-win_amd64.whl", hash = "sha256:718a38f7e5b058e76aee1c56ddd06908116d35147e133427e59a3983f703a20d"},
+    {file = "pywin32-311-cp313-cp313-win_arm64.whl", hash = "sha256:7b4075d959648406202d92a2310cb990fea19b535c7f4a78d3f5e10b926eeb8a"},
+    {file = "pywin32-311-cp314-cp314-win32.whl", hash = "sha256:b7a2c10b93f8986666d0c803ee19b5990885872a7de910fc460f9b0c2fbf92ee"},
+    {file = "pywin32-311-cp314-cp314-win_amd64.whl", hash = "sha256:3aca44c046bd2ed8c90de9cb8427f581c479e594e99b5c0bb19b29c10fd6cb87"},
+    {file = "pywin32-311-cp314-cp314-win_arm64.whl", hash = "sha256:a508e2d9025764a8270f93111a970e1d0fbfc33f4153b388bb649b7eec4f9b42"},
+    {file = "pywin32-311-cp38-cp38-win32.whl", hash = "sha256:6c6f2969607b5023b0d9ce2541f8d2cbb01c4f46bc87456017cf63b73f1e2d8c"},
+    {file = "pywin32-311-cp38-cp38-win_amd64.whl", hash = "sha256:c8015b09fb9a5e188f83b7b04de91ddca4658cee2ae6f3bc483f0b21a77ef6cd"},
+    {file = "pywin32-311-cp39-cp39-win32.whl", hash = "sha256:aba8f82d551a942cb20d4a83413ccbac30790b50efb89a75e4f586ac0bb8056b"},
+    {file = "pywin32-311-cp39-cp39-win_amd64.whl", hash = "sha256:e0c4cfb0621281fe40387df582097fd796e80430597cb9944f0ae70447bacd91"},
+    {file = "pywin32-311-cp39-cp39-win_arm64.whl", hash = "sha256:62ea666235135fee79bb154e695f3ff67370afefd71bd7fea7512fc70ef31e3d"},
+]
+
+[[package]]
+name = "pyyaml"
+version = "6.0.3"
+description = "YAML parser and emitter for Python"
+optional = false
+python-versions = ">=3.8"
+groups = ["docs", "lint"]
+files = [
+    {file = "PyYAML-6.0.3-cp38-cp38-macosx_10_13_x86_64.whl", hash = "sha256:c2514fceb77bc5e7a2f7adfaa1feb2fb311607c9cb518dbc378688ec73d8292f"},
+    {file = "PyYAML-6.0.3-cp38-cp38-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:9c57bb8c96f6d1808c030b1687b9b5fb476abaa47f0db9c0101f5e9f394e97f4"},
+    {file = "PyYAML-6.0.3-cp38-cp38-manylinux2014_s390x.manylinux_2_17_s390x.manylinux_2_28_s390x.whl", hash = "sha256:efd7b85f94a6f21e4932043973a7ba2613b059c4a000551892ac9f1d11f5baf3"},
+    {file = "PyYAML-6.0.3-cp38-cp38-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:22ba7cfcad58ef3ecddc7ed1db3409af68d023b7f940da23c6c2a1890976eda6"},
+    {file = "PyYAML-6.0.3-cp38-cp38-musllinux_1_2_x86_64.whl", hash = "sha256:6344df0d5755a2c9a276d4473ae6b90647e216ab4757f8426893b5dd2ac3f369"},
+    {file = "PyYAML-6.0.3-cp38-cp38-win32.whl", hash = "sha256:3ff07ec89bae51176c0549bc4c63aa6202991da2d9a6129d7aef7f1407d3f295"},
+    {file = "PyYAML-6.0.3-cp38-cp38-win_amd64.whl", hash = "sha256:5cf4e27da7e3fbed4d6c3d8e797387aaad68102272f8f9752883bc32d61cb87b"},
+    {file = "pyyaml-6.0.3-cp310-cp310-macosx_10_13_x86_64.whl", hash = "sha256:214ed4befebe12df36bcc8bc2b64b396ca31be9304b8f59e25c11cf94a4c033b"},
+    {file = "pyyaml-6.0.3-cp310-cp310-macosx_11_0_arm64.whl", hash = "sha256:02ea2dfa234451bbb8772601d7b8e426c2bfa197136796224e50e35a78777956"},
+    {file = "pyyaml-6.0.3-cp310-cp310-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:b30236e45cf30d2b8e7b3e85881719e98507abed1011bf463a8fa23e9c3e98a8"},
+    {file = "pyyaml-6.0.3-cp310-cp310-manylinux2014_s390x.manylinux_2_17_s390x.manylinux_2_28_s390x.whl", hash = "sha256:66291b10affd76d76f54fad28e22e51719ef9ba22b29e1d7d03d6777a9174198"},
+    {file = "pyyaml-6.0.3-cp310-cp310-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:9c7708761fccb9397fe64bbc0395abcae8c4bf7b0eac081e12b809bf47700d0b"},
+    {file = "pyyaml-6.0.3-cp310-cp310-musllinux_1_2_aarch64.whl", hash = "sha256:418cf3f2111bc80e0933b2cd8cd04f286338bb88bdc7bc8e6dd775ebde60b5e0"},
+    {file = "pyyaml-6.0.3-cp310-cp310-musllinux_1_2_x86_64.whl", hash = "sha256:5e0b74767e5f8c593e8c9b5912019159ed0533c70051e9cce3e8b6aa699fcd69"},
+    {file = "pyyaml-6.0.3-cp310-cp310-win32.whl", hash = "sha256:28c8d926f98f432f88adc23edf2e6d4921ac26fb084b028c733d01868d19007e"},
+    {file = "pyyaml-6.0.3-cp310-cp310-win_amd64.whl", hash = "sha256:bdb2c67c6c1390b63c6ff89f210c8fd09d9a1217a465701eac7316313c915e4c"},
+    {file = "pyyaml-6.0.3-cp311-cp311-macosx_10_13_x86_64.whl", hash = "sha256:44edc647873928551a01e7a563d7452ccdebee747728c1080d881d68af7b997e"},
+    {file = "pyyaml-6.0.3-cp311-cp311-macosx_11_0_arm64.whl", hash = "sha256:652cb6edd41e718550aad172851962662ff2681490a8a711af6a4d288dd96824"},
+    {file = "pyyaml-6.0.3-cp311-cp311-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:10892704fc220243f5305762e276552a0395f7beb4dbf9b14ec8fd43b57f126c"},
+    {file = "pyyaml-6.0.3-cp311-cp311-manylinux2014_s390x.manylinux_2_17_s390x.manylinux_2_28_s390x.whl", hash = "sha256:850774a7879607d3a6f50d36d04f00ee69e7fc816450e5f7e58d7f17f1ae5c00"},
+    {file = "pyyaml-6.0.3-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:b8bb0864c5a28024fac8a632c443c87c5aa6f215c0b126c449ae1a150412f31d"},
+    {file = "pyyaml-6.0.3-cp311-cp311-musllinux_1_2_aarch64.whl", hash = "sha256:1d37d57ad971609cf3c53ba6a7e365e40660e3be0e5175fa9f2365a379d6095a"},
+    {file = "pyyaml-6.0.3-cp311-cp311-musllinux_1_2_x86_64.whl", hash = "sha256:37503bfbfc9d2c40b344d06b2199cf0e96e97957ab1c1b546fd4f87e53e5d3e4"},
+    {file = "pyyaml-6.0.3-cp311-cp311-win32.whl", hash = "sha256:8098f252adfa6c80ab48096053f512f2321f0b998f98150cea9bd23d83e1467b"},
+    {file = "pyyaml-6.0.3-cp311-cp311-win_amd64.whl", hash = "sha256:9f3bfb4965eb874431221a3ff3fdcddc7e74e3b07799e0e84ca4a0f867d449bf"},
+    {file = "pyyaml-6.0.3-cp312-cp312-macosx_10_13_x86_64.whl", hash = "sha256:7f047e29dcae44602496db43be01ad42fc6f1cc0d8cd6c83d342306c32270196"},
+    {file = "pyyaml-6.0.3-cp312-cp312-macosx_11_0_arm64.whl", hash = "sha256:fc09d0aa354569bc501d4e787133afc08552722d3ab34836a80547331bb5d4a0"},
+    {file = "pyyaml-6.0.3-cp312-cp312-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:9149cad251584d5fb4981be1ecde53a1ca46c891a79788c0df828d2f166bda28"},
+    {file = "pyyaml-6.0.3-cp312-cp312-manylinux2014_s390x.manylinux_2_17_s390x.manylinux_2_28_s390x.whl", hash = "sha256:5fdec68f91a0c6739b380c83b951e2c72ac0197ace422360e6d5a959d8d97b2c"},
+    {file = "pyyaml-6.0.3-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:ba1cc08a7ccde2d2ec775841541641e4548226580ab850948cbfda66a1befcdc"},
+    {file = "pyyaml-6.0.3-cp312-cp312-musllinux_1_2_aarch64.whl", hash = "sha256:8dc52c23056b9ddd46818a57b78404882310fb473d63f17b07d5c40421e47f8e"},
+    {file = "pyyaml-6.0.3-cp312-cp312-musllinux_1_2_x86_64.whl", hash = "sha256:41715c910c881bc081f1e8872880d3c650acf13dfa8214bad49ed4cede7c34ea"},
+    {file = "pyyaml-6.0.3-cp312-cp312-win32.whl", hash = "sha256:96b533f0e99f6579b3d4d4995707cf36df9100d67e0c8303a0c55b27b5f99bc5"},
+    {file = "pyyaml-6.0.3-cp312-cp312-win_amd64.whl", hash = "sha256:5fcd34e47f6e0b794d17de1b4ff496c00986e1c83f7ab2fb8fcfe9616ff7477b"},
+    {file = "pyyaml-6.0.3-cp312-cp312-win_arm64.whl", hash = "sha256:64386e5e707d03a7e172c0701abfb7e10f0fb753ee1d773128192742712a98fd"},
+    {file = "pyyaml-6.0.3-cp313-cp313-macosx_10_13_x86_64.whl", hash = "sha256:8da9669d359f02c0b91ccc01cac4a67f16afec0dac22c2ad09f46bee0697eba8"},
+    {file = "pyyaml-6.0.3-cp313-cp313-macosx_11_0_arm64.whl", hash = "sha256:2283a07e2c21a2aa78d9c4442724ec1eb15f5e42a723b99cb3d822d48f5f7ad1"},
+    {file = "pyyaml-6.0.3-cp313-cp313-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:ee2922902c45ae8ccada2c5b501ab86c36525b883eff4255313a253a3160861c"},
+    {file = "pyyaml-6.0.3-cp313-cp313-manylinux2014_s390x.manylinux_2_17_s390x.manylinux_2_28_s390x.whl", hash = "sha256:a33284e20b78bd4a18c8c2282d549d10bc8408a2a7ff57653c0cf0b9be0afce5"},
+    {file = "pyyaml-6.0.3-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:0f29edc409a6392443abf94b9cf89ce99889a1dd5376d94316ae5145dfedd5d6"},
+    {file = "pyyaml-6.0.3-cp313-cp313-musllinux_1_2_aarch64.whl", hash = "sha256:f7057c9a337546edc7973c0d3ba84ddcdf0daa14533c2065749c9075001090e6"},
+    {file = "pyyaml-6.0.3-cp313-cp313-musllinux_1_2_x86_64.whl", hash = "sha256:eda16858a3cab07b80edaf74336ece1f986ba330fdb8ee0d6c0d68fe82bc96be"},
+    {file = "pyyaml-6.0.3-cp313-cp313-win32.whl", hash = "sha256:d0eae10f8159e8fdad514efdc92d74fd8d682c933a6dd088030f3834bc8e6b26"},
+    {file = "pyyaml-6.0.3-cp313-cp313-win_amd64.whl", hash = "sha256:79005a0d97d5ddabfeeea4cf676af11e647e41d81c9a7722a193022accdb6b7c"},
+    {file = "pyyaml-6.0.3-cp313-cp313-win_arm64.whl", hash = "sha256:5498cd1645aa724a7c71c8f378eb29ebe23da2fc0d7a08071d89469bf1d2defb"},
+    {file = "pyyaml-6.0.3-cp314-cp314-macosx_10_13_x86_64.whl", hash = "sha256:8d1fab6bb153a416f9aeb4b8763bc0f22a5586065f86f7664fc23339fc1c1fac"},
+    {file = "pyyaml-6.0.3-cp314-cp314-macosx_11_0_arm64.whl", hash = "sha256:34d5fcd24b8445fadc33f9cf348c1047101756fd760b4dacb5c3e99755703310"},
+    {file = "pyyaml-6.0.3-cp314-cp314-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:501a031947e3a9025ed4405a168e6ef5ae3126c59f90ce0cd6f2bfc477be31b7"},
+    {file = "pyyaml-6.0.3-cp314-cp314-manylinux2014_s390x.manylinux_2_17_s390x.manylinux_2_28_s390x.whl", hash = "sha256:b3bc83488de33889877a0f2543ade9f70c67d66d9ebb4ac959502e12de895788"},
+    {file = "pyyaml-6.0.3-cp314-cp314-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:c458b6d084f9b935061bc36216e8a69a7e293a2f1e68bf956dcd9e6cbcd143f5"},
+    {file = "pyyaml-6.0.3-cp314-cp314-musllinux_1_2_aarch64.whl", hash = "sha256:7c6610def4f163542a622a73fb39f534f8c101d690126992300bf3207eab9764"},
+    {file = "pyyaml-6.0.3-cp314-cp314-musllinux_1_2_x86_64.whl", hash = "sha256:5190d403f121660ce8d1d2c1bb2ef1bd05b5f68533fc5c2ea899bd15f4399b35"},
+    {file = "pyyaml-6.0.3-cp314-cp314-win_amd64.whl", hash = "sha256:4a2e8cebe2ff6ab7d1050ecd59c25d4c8bd7e6f400f5f82b96557ac0abafd0ac"},
+    {file = "pyyaml-6.0.3-cp314-cp314-win_arm64.whl", hash = "sha256:93dda82c9c22deb0a405ea4dc5f2d0cda384168e466364dec6255b293923b2f3"},
+    {file = "pyyaml-6.0.3-cp314-cp314t-macosx_10_13_x86_64.whl", hash = "sha256:02893d100e99e03eda1c8fd5c441d8c60103fd175728e23e431db1b589cf5ab3"},
+    {file = "pyyaml-6.0.3-cp314-cp314t-macosx_11_0_arm64.whl", hash = "sha256:c1ff362665ae507275af2853520967820d9124984e0f7466736aea23d8611fba"},
+    {file = "pyyaml-6.0.3-cp314-cp314t-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:6adc77889b628398debc7b65c073bcb99c4a0237b248cacaf3fe8a557563ef6c"},
+    {file = "pyyaml-6.0.3-cp314-cp314t-manylinux2014_s390x.manylinux_2_17_s390x.manylinux_2_28_s390x.whl", hash = "sha256:a80cb027f6b349846a3bf6d73b5e95e782175e52f22108cfa17876aaeff93702"},
+    {file = "pyyaml-6.0.3-cp314-cp314t-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:00c4bdeba853cc34e7dd471f16b4114f4162dc03e6b7afcc2128711f0eca823c"},
+    {file = "pyyaml-6.0.3-cp314-cp314t-musllinux_1_2_aarch64.whl", hash = "sha256:66e1674c3ef6f541c35191caae2d429b967b99e02040f5ba928632d9a7f0f065"},
+    {file = "pyyaml-6.0.3-cp314-cp314t-musllinux_1_2_x86_64.whl", hash = "sha256:16249ee61e95f858e83976573de0f5b2893b3677ba71c9dd36b9cf8be9ac6d65"},
+    {file = "pyyaml-6.0.3-cp314-cp314t-win_amd64.whl", hash = "sha256:4ad1906908f2f5ae4e5a8ddfce73c320c2a1429ec52eafd27138b7f1cbe341c9"},
+    {file = "pyyaml-6.0.3-cp314-cp314t-win_arm64.whl", hash = "sha256:ebc55a14a21cb14062aa4162f906cd962b28e2e9ea38f9b4391244cd8de4ae0b"},
+    {file = "pyyaml-6.0.3-cp39-cp39-macosx_10_13_x86_64.whl", hash = "sha256:b865addae83924361678b652338317d1bd7e79b1f4596f96b96c77a5a34b34da"},
+    {file = "pyyaml-6.0.3-cp39-cp39-macosx_11_0_arm64.whl", hash = "sha256:c3355370a2c156cffb25e876646f149d5d68f5e0a3ce86a5084dd0b64a994917"},
+    {file = "pyyaml-6.0.3-cp39-cp39-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:3c5677e12444c15717b902a5798264fa7909e41153cdf9ef7ad571b704a63dd9"},
+    {file = "pyyaml-6.0.3-cp39-cp39-manylinux2014_s390x.manylinux_2_17_s390x.manylinux_2_28_s390x.whl", hash = "sha256:5ed875a24292240029e4483f9d4a4b8a1ae08843b9c54f43fcc11e404532a8a5"},
+    {file = "pyyaml-6.0.3-cp39-cp39-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:0150219816b6a1fa26fb4699fb7daa9caf09eb1999f3b70fb6e786805e80375a"},
+    {file = "pyyaml-6.0.3-cp39-cp39-musllinux_1_2_aarch64.whl", hash = "sha256:fa160448684b4e94d80416c0fa4aac48967a969efe22931448d853ada8baf926"},
+    {file = "pyyaml-6.0.3-cp39-cp39-musllinux_1_2_x86_64.whl", hash = "sha256:27c0abcb4a5dac13684a37f76e701e054692a9b2d3064b70f5e4eb54810553d7"},
+    {file = "pyyaml-6.0.3-cp39-cp39-win32.whl", hash = "sha256:1ebe39cb5fc479422b83de611d14e2c0d3bb2a18bbcb01f229ab3cfbd8fee7a0"},
+    {file = "pyyaml-6.0.3-cp39-cp39-win_amd64.whl", hash = "sha256:2e71d11abed7344e42a8849600193d15b6def118602c4c176f748e4583246007"},
+    {file = "pyyaml-6.0.3.tar.gz", hash = "sha256:d76623373421df22fb4cf8817020cbb7ef15c725b9d5e45f17e189bfc384190f"},
+]
+
+[[package]]
+name = "referencing"
+version = "0.37.0"
+description = "JSON Referencing + Python"
+optional = false
+python-versions = ">=3.10"
+groups = ["main", "examples"]
+files = [
+    {file = "referencing-0.37.0-py3-none-any.whl", hash = "sha256:381329a9f99628c9069361716891d34ad94af76e461dcb0335825aecc7692231"},
+    {file = "referencing-0.37.0.tar.gz", hash = "sha256:44aefc3142c5b842538163acb373e24cce6632bd54bdb01b21ad5863489f50d8"},
+]
+
+[package.dependencies]
+attrs = ">=22.2.0"
+rpds-py = ">=0.7.0"
+typing-extensions = {version = ">=4.4.0", markers = "python_version < \"3.13\""}
+
+[[package]]
+name = "requests"
+version = "2.32.5"
+description = "Python HTTP for Humans."
+optional = false
+python-versions = ">=3.9"
+groups = ["main", "docs", "examples"]
+files = [
+    {file = "requests-2.32.5-py3-none-any.whl", hash = "sha256:2462f94637a34fd532264295e186976db0f5d453d1cdd31473c85a6a161affb6"},
+    {file = "requests-2.32.5.tar.gz", hash = "sha256:dbba0bac56e100853db0ea71b82b4dfd5fe2bf6d3754a8893c3af500cec7d7cf"},
+]
+
+[package.dependencies]
+certifi = ">=2017.4.17"
+charset_normalizer = ">=2,<4"
+idna = ">=2.5,<4"
+urllib3 = ">=1.21.1,<3"
+
+[package.extras]
+socks = ["PySocks (>=1.5.6,!=1.5.7)"]
+use-chardet-on-py3 = ["chardet (>=3.0.2,<6)"]
+
+[[package]]
+name = "rich"
+version = "14.2.0"
+description = "Render rich text, tables, progress bars, syntax highlighting, markdown and more to the terminal"
+optional = false
+python-versions = ">=3.8.0"
+groups = ["lint"]
+files = [
+    {file = "rich-14.2.0-py3-none-any.whl", hash = "sha256:76bc51fe2e57d2b1be1f96c524b890b816e334ab4c1e45888799bfaab0021edd"},
+    {file = "rich-14.2.0.tar.gz", hash = "sha256:73ff50c7c0c1c77c8243079283f4edb376f0f6442433aecb8ce7e6d0b92d1fe4"},
+]
+
+[package.dependencies]
+markdown-it-py = ">=2.2.0"
+pygments = ">=2.13.0,<3.0.0"
+
+[package.extras]
+jupyter = ["ipywidgets (>=7.5.1,<9)"]
+
+[[package]]
+name = "roman-numerals"
+version = "4.1.0"
+description = "Manipulate well-formed Roman numerals"
+optional = false
+python-versions = ">=3.10"
+groups = ["docs"]
+markers = "python_version >= \"3.11\""
+files = [
+    {file = "roman_numerals-4.1.0-py3-none-any.whl", hash = "sha256:647ba99caddc2cc1e55a51e4360689115551bf4476d90e8162cf8c345fe233c7"},
+    {file = "roman_numerals-4.1.0.tar.gz", hash = "sha256:1af8b147eb1405d5839e78aeb93131690495fe9da5c91856cb33ad55a7f1e5b2"},
+]
+
+[[package]]
+name = "roman-numerals-py"
+version = "4.1.0"
+description = "This package is deprecated, switch to roman-numerals."
+optional = false
+python-versions = ">=3.10"
+groups = ["docs"]
+markers = "python_version >= \"3.11\""
+files = [
+    {file = "roman_numerals_py-4.1.0-py3-none-any.whl", hash = "sha256:553114c1167141c1283a51743759723ecd05604a1b6b507225e91dc1a6df0780"},
+    {file = "roman_numerals_py-4.1.0.tar.gz", hash = "sha256:f5d7b2b4ca52dd855ef7ab8eb3590f428c0b1ea480736ce32b01fef2a5f8daf9"},
+]
+
+[package.dependencies]
+roman-numerals = "4.1.0"
+
+[[package]]
+name = "rpds-py"
+version = "0.30.0"
+description = "Python bindings to Rust's persistent data structures (rpds)"
+optional = false
+python-versions = ">=3.10"
+groups = ["main", "examples"]
+files = [
+    {file = "rpds_py-0.30.0-cp310-cp310-macosx_10_12_x86_64.whl", hash = "sha256:679ae98e00c0e8d68a7fda324e16b90fd5260945b45d3b824c892cec9eea3288"},
+    {file = "rpds_py-0.30.0-cp310-cp310-macosx_11_0_arm64.whl", hash = "sha256:4cc2206b76b4f576934f0ed374b10d7ca5f457858b157ca52064bdfc26b9fc00"},
+    {file = "rpds_py-0.30.0-cp310-cp310-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:389a2d49eded1896c3d48b0136ead37c48e221b391c052fba3f4055c367f60a6"},
+    {file = "rpds_py-0.30.0-cp310-cp310-manylinux_2_17_armv7l.manylinux2014_armv7l.whl", hash = "sha256:32c8528634e1bf7121f3de08fa85b138f4e0dc47657866630611b03967f041d7"},
+    {file = "rpds_py-0.30.0-cp310-cp310-manylinux_2_17_ppc64le.manylinux2014_ppc64le.whl", hash = "sha256:f207f69853edd6f6700b86efb84999651baf3789e78a466431df1331608e5324"},
+    {file = "rpds_py-0.30.0-cp310-cp310-manylinux_2_17_s390x.manylinux2014_s390x.whl", hash = "sha256:67b02ec25ba7a9e8fa74c63b6ca44cf5707f2fbfadae3ee8e7494297d56aa9df"},
+    {file = "rpds_py-0.30.0-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:0c0e95f6819a19965ff420f65578bacb0b00f251fefe2c8b23347c37174271f3"},
+    {file = "rpds_py-0.30.0-cp310-cp310-manylinux_2_31_riscv64.whl", hash = "sha256:a452763cc5198f2f98898eb98f7569649fe5da666c2dc6b5ddb10fde5a574221"},
+    {file = "rpds_py-0.30.0-cp310-cp310-manylinux_2_5_i686.manylinux1_i686.whl", hash = "sha256:e0b65193a413ccc930671c55153a03ee57cecb49e6227204b04fae512eb657a7"},
+    {file = "rpds_py-0.30.0-cp310-cp310-musllinux_1_2_aarch64.whl", hash = "sha256:858738e9c32147f78b3ac24dc0edb6610000e56dc0f700fd5f651d0a0f0eb9ff"},
+    {file = "rpds_py-0.30.0-cp310-cp310-musllinux_1_2_i686.whl", hash = "sha256:da279aa314f00acbb803da1e76fa18666778e8a8f83484fba94526da5de2cba7"},
+    {file = "rpds_py-0.30.0-cp310-cp310-musllinux_1_2_x86_64.whl", hash = "sha256:7c64d38fb49b6cdeda16ab49e35fe0da2e1e9b34bc38bd78386530f218b37139"},
+    {file = "rpds_py-0.30.0-cp310-cp310-win32.whl", hash = "sha256:6de2a32a1665b93233cde140ff8b3467bdb9e2af2b91079f0333a0974d12d464"},
+    {file = "rpds_py-0.30.0-cp310-cp310-win_amd64.whl", hash = "sha256:1726859cd0de969f88dc8673bdd954185b9104e05806be64bcd87badbe313169"},
+    {file = "rpds_py-0.30.0-cp311-cp311-macosx_10_12_x86_64.whl", hash = "sha256:a2bffea6a4ca9f01b3f8e548302470306689684e61602aa3d141e34da06cf425"},
+    {file = "rpds_py-0.30.0-cp311-cp311-macosx_11_0_arm64.whl", hash = "sha256:dc4f992dfe1e2bc3ebc7444f6c7051b4bc13cd8e33e43511e8ffd13bf407010d"},
+    {file = "rpds_py-0.30.0-cp311-cp311-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:422c3cb9856d80b09d30d2eb255d0754b23e090034e1deb4083f8004bd0761e4"},
+    {file = "rpds_py-0.30.0-cp311-cp311-manylinux_2_17_armv7l.manylinux2014_armv7l.whl", hash = "sha256:07ae8a593e1c3c6b82ca3292efbe73c30b61332fd612e05abee07c79359f292f"},
+    {file = "rpds_py-0.30.0-cp311-cp311-manylinux_2_17_ppc64le.manylinux2014_ppc64le.whl", hash = "sha256:12f90dd7557b6bd57f40abe7747e81e0c0b119bef015ea7726e69fe550e394a4"},
+    {file = "rpds_py-0.30.0-cp311-cp311-manylinux_2_17_s390x.manylinux2014_s390x.whl", hash = "sha256:99b47d6ad9a6da00bec6aabe5a6279ecd3c06a329d4aa4771034a21e335c3a97"},
+    {file = "rpds_py-0.30.0-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:33f559f3104504506a44bb666b93a33f5d33133765b0c216a5bf2f1e1503af89"},
+    {file = "rpds_py-0.30.0-cp311-cp311-manylinux_2_31_riscv64.whl", hash = "sha256:946fe926af6e44f3697abbc305ea168c2c31d3e3ef1058cf68f379bf0335a78d"},
+    {file = "rpds_py-0.30.0-cp311-cp311-manylinux_2_5_i686.manylinux1_i686.whl", hash = "sha256:495aeca4b93d465efde585977365187149e75383ad2684f81519f504f5c13038"},
+    {file = "rpds_py-0.30.0-cp311-cp311-musllinux_1_2_aarch64.whl", hash = "sha256:d9a0ca5da0386dee0655b4ccdf46119df60e0f10da268d04fe7cc87886872ba7"},
+    {file = "rpds_py-0.30.0-cp311-cp311-musllinux_1_2_i686.whl", hash = "sha256:8d6d1cc13664ec13c1b84241204ff3b12f9bb82464b8ad6e7a5d3486975c2eed"},
+    {file = "rpds_py-0.30.0-cp311-cp311-musllinux_1_2_x86_64.whl", hash = "sha256:3896fa1be39912cf0757753826bc8bdc8ca331a28a7c4ae46b7a21280b06bb85"},
+    {file = "rpds_py-0.30.0-cp311-cp311-win32.whl", hash = "sha256:55f66022632205940f1827effeff17c4fa7ae1953d2b74a8581baaefb7d16f8c"},
+    {file = "rpds_py-0.30.0-cp311-cp311-win_amd64.whl", hash = "sha256:a51033ff701fca756439d641c0ad09a41d9242fa69121c7d8769604a0a629825"},
+    {file = "rpds_py-0.30.0-cp311-cp311-win_arm64.whl", hash = "sha256:47b0ef6231c58f506ef0b74d44e330405caa8428e770fec25329ed2cb971a229"},
+    {file = "rpds_py-0.30.0-cp312-cp312-macosx_10_12_x86_64.whl", hash = "sha256:a161f20d9a43006833cd7068375a94d035714d73a172b681d8881820600abfad"},
+    {file = "rpds_py-0.30.0-cp312-cp312-macosx_11_0_arm64.whl", hash = "sha256:6abc8880d9d036ecaafe709079969f56e876fcf107f7a8e9920ba6d5a3878d05"},
+    {file = "rpds_py-0.30.0-cp312-cp312-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:ca28829ae5f5d569bb62a79512c842a03a12576375d5ece7d2cadf8abe96ec28"},
+    {file = "rpds_py-0.30.0-cp312-cp312-manylinux_2_17_armv7l.manylinux2014_armv7l.whl", hash = "sha256:a1010ed9524c73b94d15919ca4d41d8780980e1765babf85f9a2f90d247153dd"},
+    {file = "rpds_py-0.30.0-cp312-cp312-manylinux_2_17_ppc64le.manylinux2014_ppc64le.whl", hash = "sha256:f8d1736cfb49381ba528cd5baa46f82fdc65c06e843dab24dd70b63d09121b3f"},
+    {file = "rpds_py-0.30.0-cp312-cp312-manylinux_2_17_s390x.manylinux2014_s390x.whl", hash = "sha256:d948b135c4693daff7bc2dcfc4ec57237a29bd37e60c2fabf5aff2bbacf3e2f1"},
+    {file = "rpds_py-0.30.0-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:47f236970bccb2233267d89173d3ad2703cd36a0e2a6e92d0560d333871a3d23"},
+    {file = "rpds_py-0.30.0-cp312-cp312-manylinux_2_31_riscv64.whl", hash = "sha256:2e6ecb5a5bcacf59c3f912155044479af1d0b6681280048b338b28e364aca1f6"},
+    {file = "rpds_py-0.30.0-cp312-cp312-manylinux_2_5_i686.manylinux1_i686.whl", hash = "sha256:a8fa71a2e078c527c3e9dc9fc5a98c9db40bcc8a92b4e8858e36d329f8684b51"},
+    {file = "rpds_py-0.30.0-cp312-cp312-musllinux_1_2_aarch64.whl", hash = "sha256:73c67f2db7bc334e518d097c6d1e6fed021bbc9b7d678d6cc433478365d1d5f5"},
+    {file = "rpds_py-0.30.0-cp312-cp312-musllinux_1_2_i686.whl", hash = "sha256:5ba103fb455be00f3b1c2076c9d4264bfcb037c976167a6047ed82f23153f02e"},
+    {file = "rpds_py-0.30.0-cp312-cp312-musllinux_1_2_x86_64.whl", hash = "sha256:7cee9c752c0364588353e627da8a7e808a66873672bcb5f52890c33fd965b394"},
+    {file = "rpds_py-0.30.0-cp312-cp312-win32.whl", hash = "sha256:1ab5b83dbcf55acc8b08fc62b796ef672c457b17dbd7820a11d6c52c06839bdf"},
+    {file = "rpds_py-0.30.0-cp312-cp312-win_amd64.whl", hash = "sha256:a090322ca841abd453d43456ac34db46e8b05fd9b3b4ac0c78bcde8b089f959b"},
+    {file = "rpds_py-0.30.0-cp312-cp312-win_arm64.whl", hash = "sha256:669b1805bd639dd2989b281be2cfd951c6121b65e729d9b843e9639ef1fd555e"},
+    {file = "rpds_py-0.30.0-cp313-cp313-macosx_10_12_x86_64.whl", hash = "sha256:f83424d738204d9770830d35290ff3273fbb02b41f919870479fab14b9d303b2"},
+    {file = "rpds_py-0.30.0-cp313-cp313-macosx_11_0_arm64.whl", hash = "sha256:e7536cd91353c5273434b4e003cbda89034d67e7710eab8761fd918ec6c69cf8"},
+    {file = "rpds_py-0.30.0-cp313-cp313-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:2771c6c15973347f50fece41fc447c054b7ac2ae0502388ce3b6738cd366e3d4"},
+    {file = "rpds_py-0.30.0-cp313-cp313-manylinux_2_17_armv7l.manylinux2014_armv7l.whl", hash = "sha256:0a59119fc6e3f460315fe9d08149f8102aa322299deaa5cab5b40092345c2136"},
+    {file = "rpds_py-0.30.0-cp313-cp313-manylinux_2_17_ppc64le.manylinux2014_ppc64le.whl", hash = "sha256:76fec018282b4ead0364022e3c54b60bf368b9d926877957a8624b58419169b7"},
+    {file = "rpds_py-0.30.0-cp313-cp313-manylinux_2_17_s390x.manylinux2014_s390x.whl", hash = "sha256:692bef75a5525db97318e8cd061542b5a79812d711ea03dbc1f6f8dbb0c5f0d2"},
+    {file = "rpds_py-0.30.0-cp313-cp313-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:9027da1ce107104c50c81383cae773ef5c24d296dd11c99e2629dbd7967a20c6"},
+    {file = "rpds_py-0.30.0-cp313-cp313-manylinux_2_31_riscv64.whl", hash = "sha256:9cf69cdda1f5968a30a359aba2f7f9aa648a9ce4b580d6826437f2b291cfc86e"},
+    {file = "rpds_py-0.30.0-cp313-cp313-manylinux_2_5_i686.manylinux1_i686.whl", hash = "sha256:a4796a717bf12b9da9d3ad002519a86063dcac8988b030e405704ef7d74d2d9d"},
+    {file = "rpds_py-0.30.0-cp313-cp313-musllinux_1_2_aarch64.whl", hash = "sha256:5d4c2aa7c50ad4728a094ebd5eb46c452e9cb7edbfdb18f9e1221f597a73e1e7"},
+    {file = "rpds_py-0.30.0-cp313-cp313-musllinux_1_2_i686.whl", hash = "sha256:ba81a9203d07805435eb06f536d95a266c21e5b2dfbf6517748ca40c98d19e31"},
+    {file = "rpds_py-0.30.0-cp313-cp313-musllinux_1_2_x86_64.whl", hash = "sha256:945dccface01af02675628334f7cf49c2af4c1c904748efc5cf7bbdf0b579f95"},
+    {file = "rpds_py-0.30.0-cp313-cp313-win32.whl", hash = "sha256:b40fb160a2db369a194cb27943582b38f79fc4887291417685f3ad693c5a1d5d"},
+    {file = "rpds_py-0.30.0-cp313-cp313-win_amd64.whl", hash = "sha256:806f36b1b605e2d6a72716f321f20036b9489d29c51c91f4dd29a3e3afb73b15"},
+    {file = "rpds_py-0.30.0-cp313-cp313-win_arm64.whl", hash = "sha256:d96c2086587c7c30d44f31f42eae4eac89b60dabbac18c7669be3700f13c3ce1"},
+    {file = "rpds_py-0.30.0-cp313-cp313t-macosx_10_12_x86_64.whl", hash = "sha256:eb0b93f2e5c2189ee831ee43f156ed34e2a89a78a66b98cadad955972548be5a"},
+    {file = "rpds_py-0.30.0-cp313-cp313t-macosx_11_0_arm64.whl", hash = "sha256:922e10f31f303c7c920da8981051ff6d8c1a56207dbdf330d9047f6d30b70e5e"},
+    {file = "rpds_py-0.30.0-cp313-cp313t-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:cdc62c8286ba9bf7f47befdcea13ea0e26bf294bda99758fd90535cbaf408000"},
+    {file = "rpds_py-0.30.0-cp313-cp313t-manylinux_2_17_armv7l.manylinux2014_armv7l.whl", hash = "sha256:47f9a91efc418b54fb8190a6b4aa7813a23fb79c51f4bb84e418f5476c38b8db"},
+    {file = "rpds_py-0.30.0-cp313-cp313t-manylinux_2_17_ppc64le.manylinux2014_ppc64le.whl", hash = "sha256:1f3587eb9b17f3789ad50824084fa6f81921bbf9a795826570bda82cb3ed91f2"},
+    {file = "rpds_py-0.30.0-cp313-cp313t-manylinux_2_17_s390x.manylinux2014_s390x.whl", hash = "sha256:39c02563fc592411c2c61d26b6c5fe1e51eaa44a75aa2c8735ca88b0d9599daa"},
+    {file = "rpds_py-0.30.0-cp313-cp313t-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:51a1234d8febafdfd33a42d97da7a43f5dcb120c1060e352a3fbc0c6d36e2083"},
+    {file = "rpds_py-0.30.0-cp313-cp313t-manylinux_2_31_riscv64.whl", hash = "sha256:eb2c4071ab598733724c08221091e8d80e89064cd472819285a9ab0f24bcedb9"},
+    {file = "rpds_py-0.30.0-cp313-cp313t-manylinux_2_5_i686.manylinux1_i686.whl", hash = "sha256:6bdfdb946967d816e6adf9a3d8201bfad269c67efe6cefd7093ef959683c8de0"},
+    {file = "rpds_py-0.30.0-cp313-cp313t-musllinux_1_2_aarch64.whl", hash = "sha256:c77afbd5f5250bf27bf516c7c4a016813eb2d3e116139aed0096940c5982da94"},
+    {file = "rpds_py-0.30.0-cp313-cp313t-musllinux_1_2_i686.whl", hash = "sha256:61046904275472a76c8c90c9ccee9013d70a6d0f73eecefd38c1ae7c39045a08"},
+    {file = "rpds_py-0.30.0-cp313-cp313t-musllinux_1_2_x86_64.whl", hash = "sha256:4c5f36a861bc4b7da6516dbdf302c55313afa09b81931e8280361a4f6c9a2d27"},
+    {file = "rpds_py-0.30.0-cp313-cp313t-win32.whl", hash = "sha256:3d4a69de7a3e50ffc214ae16d79d8fbb0922972da0356dcf4d0fdca2878559c6"},
+    {file = "rpds_py-0.30.0-cp313-cp313t-win_amd64.whl", hash = "sha256:f14fc5df50a716f7ece6a80b6c78bb35ea2ca47c499e422aa4463455dd96d56d"},
+    {file = "rpds_py-0.30.0-cp314-cp314-macosx_10_12_x86_64.whl", hash = "sha256:68f19c879420aa08f61203801423f6cd5ac5f0ac4ac82a2368a9fcd6a9a075e0"},
+    {file = "rpds_py-0.30.0-cp314-cp314-macosx_11_0_arm64.whl", hash = "sha256:ec7c4490c672c1a0389d319b3a9cfcd098dcdc4783991553c332a15acf7249be"},
+    {file = "rpds_py-0.30.0-cp314-cp314-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:f251c812357a3fed308d684a5079ddfb9d933860fc6de89f2b7ab00da481e65f"},
+    {file = "rpds_py-0.30.0-cp314-cp314-manylinux_2_17_armv7l.manylinux2014_armv7l.whl", hash = "sha256:ac98b175585ecf4c0348fd7b29c3864bda53b805c773cbf7bfdaffc8070c976f"},
+    {file = "rpds_py-0.30.0-cp314-cp314-manylinux_2_17_ppc64le.manylinux2014_ppc64le.whl", hash = "sha256:3e62880792319dbeb7eb866547f2e35973289e7d5696c6e295476448f5b63c87"},
+    {file = "rpds_py-0.30.0-cp314-cp314-manylinux_2_17_s390x.manylinux2014_s390x.whl", hash = "sha256:4e7fc54e0900ab35d041b0601431b0a0eb495f0851a0639b6ef90f7741b39a18"},
+    {file = "rpds_py-0.30.0-cp314-cp314-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:47e77dc9822d3ad616c3d5759ea5631a75e5809d5a28707744ef79d7a1bcfcad"},
+    {file = "rpds_py-0.30.0-cp314-cp314-manylinux_2_31_riscv64.whl", hash = "sha256:b4dc1a6ff022ff85ecafef7979a2c6eb423430e05f1165d6688234e62ba99a07"},
+    {file = "rpds_py-0.30.0-cp314-cp314-manylinux_2_5_i686.manylinux1_i686.whl", hash = "sha256:4559c972db3a360808309e06a74628b95eaccbf961c335c8fe0d590cf587456f"},
+    {file = "rpds_py-0.30.0-cp314-cp314-musllinux_1_2_aarch64.whl", hash = "sha256:0ed177ed9bded28f8deb6ab40c183cd1192aa0de40c12f38be4d59cd33cb5c65"},
+    {file = "rpds_py-0.30.0-cp314-cp314-musllinux_1_2_i686.whl", hash = "sha256:ad1fa8db769b76ea911cb4e10f049d80bf518c104f15b3edb2371cc65375c46f"},
+    {file = "rpds_py-0.30.0-cp314-cp314-musllinux_1_2_x86_64.whl", hash = "sha256:46e83c697b1f1c72b50e5ee5adb4353eef7406fb3f2043d64c33f20ad1c2fc53"},
+    {file = "rpds_py-0.30.0-cp314-cp314-win32.whl", hash = "sha256:ee454b2a007d57363c2dfd5b6ca4a5d7e2c518938f8ed3b706e37e5d470801ed"},
+    {file = "rpds_py-0.30.0-cp314-cp314-win_amd64.whl", hash = "sha256:95f0802447ac2d10bcc69f6dc28fe95fdf17940367b21d34e34c737870758950"},
+    {file = "rpds_py-0.30.0-cp314-cp314-win_arm64.whl", hash = "sha256:613aa4771c99f03346e54c3f038e4cc574ac09a3ddfb0e8878487335e96dead6"},
+    {file = "rpds_py-0.30.0-cp314-cp314t-macosx_10_12_x86_64.whl", hash = "sha256:7e6ecfcb62edfd632e56983964e6884851786443739dbfe3582947e87274f7cb"},
+    {file = "rpds_py-0.30.0-cp314-cp314t-macosx_11_0_arm64.whl", hash = "sha256:a1d0bc22a7cdc173fedebb73ef81e07faef93692b8c1ad3733b67e31e1b6e1b8"},
+    {file = "rpds_py-0.30.0-cp314-cp314t-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:0d08f00679177226c4cb8c5265012eea897c8ca3b93f429e546600c971bcbae7"},
+    {file = "rpds_py-0.30.0-cp314-cp314t-manylinux_2_17_armv7l.manylinux2014_armv7l.whl", hash = "sha256:5965af57d5848192c13534f90f9dd16464f3c37aaf166cc1da1cae1fd5a34898"},
+    {file = "rpds_py-0.30.0-cp314-cp314t-manylinux_2_17_ppc64le.manylinux2014_ppc64le.whl", hash = "sha256:9a4e86e34e9ab6b667c27f3211ca48f73dba7cd3d90f8d5b11be56e5dbc3fb4e"},
+    {file = "rpds_py-0.30.0-cp314-cp314t-manylinux_2_17_s390x.manylinux2014_s390x.whl", hash = "sha256:e5d3e6b26f2c785d65cc25ef1e5267ccbe1b069c5c21b8cc724efee290554419"},
+    {file = "rpds_py-0.30.0-cp314-cp314t-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:626a7433c34566535b6e56a1b39a7b17ba961e97ce3b80ec62e6f1312c025551"},
+    {file = "rpds_py-0.30.0-cp314-cp314t-manylinux_2_31_riscv64.whl", hash = "sha256:acd7eb3f4471577b9b5a41baf02a978e8bdeb08b4b355273994f8b87032000a8"},
+    {file = "rpds_py-0.30.0-cp314-cp314t-manylinux_2_5_i686.manylinux1_i686.whl", hash = "sha256:fe5fa731a1fa8a0a56b0977413f8cacac1768dad38d16b3a296712709476fbd5"},
+    {file = "rpds_py-0.30.0-cp314-cp314t-musllinux_1_2_aarch64.whl", hash = "sha256:74a3243a411126362712ee1524dfc90c650a503502f135d54d1b352bd01f2404"},
+    {file = "rpds_py-0.30.0-cp314-cp314t-musllinux_1_2_i686.whl", hash = "sha256:3e8eeb0544f2eb0d2581774be4c3410356eba189529a6b3e36bbbf9696175856"},
+    {file = "rpds_py-0.30.0-cp314-cp314t-musllinux_1_2_x86_64.whl", hash = "sha256:dbd936cde57abfee19ab3213cf9c26be06d60750e60a8e4dd85d1ab12c8b1f40"},
+    {file = "rpds_py-0.30.0-cp314-cp314t-win32.whl", hash = "sha256:dc824125c72246d924f7f796b4f63c1e9dc810c7d9e2355864b3c3a73d59ade0"},
+    {file = "rpds_py-0.30.0-cp314-cp314t-win_amd64.whl", hash = "sha256:27f4b0e92de5bfbc6f86e43959e6edd1425c33b5e69aab0984a72047f2bcf1e3"},
+    {file = "rpds_py-0.30.0-pp311-pypy311_pp73-macosx_10_12_x86_64.whl", hash = "sha256:c2262bdba0ad4fc6fb5545660673925c2d2a5d9e2e0fb603aad545427be0fc58"},
+    {file = "rpds_py-0.30.0-pp311-pypy311_pp73-macosx_11_0_arm64.whl", hash = "sha256:ee6af14263f25eedc3bb918a3c04245106a42dfd4f5c2285ea6f997b1fc3f89a"},
+    {file = "rpds_py-0.30.0-pp311-pypy311_pp73-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:3adbb8179ce342d235c31ab8ec511e66c73faa27a47e076ccc92421add53e2bb"},
+    {file = "rpds_py-0.30.0-pp311-pypy311_pp73-manylinux_2_17_armv7l.manylinux2014_armv7l.whl", hash = "sha256:250fa00e9543ac9b97ac258bd37367ff5256666122c2d0f2bc97577c60a1818c"},
+    {file = "rpds_py-0.30.0-pp311-pypy311_pp73-manylinux_2_17_ppc64le.manylinux2014_ppc64le.whl", hash = "sha256:9854cf4f488b3d57b9aaeb105f06d78e5529d3145b1e4a41750167e8c213c6d3"},
+    {file = "rpds_py-0.30.0-pp311-pypy311_pp73-manylinux_2_17_s390x.manylinux2014_s390x.whl", hash = "sha256:993914b8e560023bc0a8bf742c5f303551992dcb85e247b1e5c7f4a7d145bda5"},
+    {file = "rpds_py-0.30.0-pp311-pypy311_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:58edca431fb9b29950807e301826586e5bbf24163677732429770a697ffe6738"},
+    {file = "rpds_py-0.30.0-pp311-pypy311_pp73-manylinux_2_31_riscv64.whl", hash = "sha256:dea5b552272a944763b34394d04577cf0f9bd013207bc32323b5a89a53cf9c2f"},
+    {file = "rpds_py-0.30.0-pp311-pypy311_pp73-manylinux_2_5_i686.manylinux1_i686.whl", hash = "sha256:ba3af48635eb83d03f6c9735dfb21785303e73d22ad03d489e88adae6eab8877"},
+    {file = "rpds_py-0.30.0-pp311-pypy311_pp73-musllinux_1_2_aarch64.whl", hash = "sha256:dff13836529b921e22f15cb099751209a60009731a68519630a24d61f0b1b30a"},
+    {file = "rpds_py-0.30.0-pp311-pypy311_pp73-musllinux_1_2_i686.whl", hash = "sha256:1b151685b23929ab7beec71080a8889d4d6d9fa9a983d213f07121205d48e2c4"},
+    {file = "rpds_py-0.30.0-pp311-pypy311_pp73-musllinux_1_2_x86_64.whl", hash = "sha256:ac37f9f516c51e5753f27dfdef11a88330f04de2d564be3991384b2f3535d02e"},
+    {file = "rpds_py-0.30.0.tar.gz", hash = "sha256:dd8ff7cf90014af0c0f787eea34794ebf6415242ee1d6fa91eaba725cc441e84"},
+]
+
+[[package]]
+name = "setuptools"
+version = "80.9.0"
+description = "Easily download, build, install, upgrade, and uninstall Python packages"
+optional = false
+python-versions = ">=3.9"
+groups = ["lint"]
+files = [
+    {file = "setuptools-80.9.0-py3-none-any.whl", hash = "sha256:062d34222ad13e0cc312a4c02d73f059e86a4acbfbdea8f8f76b28c99f306922"},
+    {file = "setuptools-80.9.0.tar.gz", hash = "sha256:f36b47402ecde768dbfafc46e8e4207b4360c654f1f3bb84475f0a28628fb19c"},
+]
+
+[package.extras]
+check = ["pytest-checkdocs (>=2.4)", "pytest-ruff (>=0.2.1) ; sys_platform != \"cygwin\"", "ruff (>=0.8.0) ; sys_platform != \"cygwin\""]
+core = ["importlib_metadata (>=6) ; python_version < \"3.10\"", "jaraco.functools (>=4)", "jaraco.text (>=3.7)", "more_itertools", "more_itertools (>=8.8)", "packaging (>=24.2)", "platformdirs (>=4.2.2)", "tomli (>=2.0.1) ; python_version < \"3.11\"", "wheel (>=0.43.0)"]
+cover = ["pytest-cov"]
+doc = ["furo", "jaraco.packaging (>=9.3)", "jaraco.tidelift (>=1.4)", "pygments-github-lexers (==0.0.5)", "pyproject-hooks (!=1.1)", "rst.linker (>=1.9)", "sphinx (>=3.5)", "sphinx-favicon", "sphinx-inline-tabs", "sphinx-lint", "sphinx-notfound-page (>=1,<2)", "sphinx-reredirects", "sphinxcontrib-towncrier", "towncrier (<24.7)"]
+enabler = ["pytest-enabler (>=2.2)"]
+test = ["build[virtualenv] (>=1.0.3)", "filelock (>=3.4.0)", "ini2toml[lite] (>=0.14)", "jaraco.develop (>=7.21) ; python_version >= \"3.9\" and sys_platform != \"cygwin\"", "jaraco.envs (>=2.2)", "jaraco.path (>=3.7.2)", "jaraco.test (>=5.5)", "packaging (>=24.2)", "pip (>=19.1)", "pyproject-hooks (!=1.1)", "pytest (>=6,!=8.1.*)", "pytest-home (>=0.5)", "pytest-perf ; sys_platform != \"cygwin\"", "pytest-subprocess", "pytest-timeout", "pytest-xdist (>=3)", "tomli-w (>=1.0.0)", "virtualenv (>=13.0.0)", "wheel (>=0.44.0)"]
+type = ["importlib_metadata (>=7.0.2) ; python_version < \"3.10\"", "jaraco.develop (>=7.21) ; sys_platform != \"cygwin\"", "mypy (==1.14.*)", "pytest-mypy"]
+
+[[package]]
+name = "simplejson"
+version = "3.20.2"
+description = "Simple, fast, extensible JSON encoder/decoder for Python"
+optional = false
+python-versions = "!=3.0.*,!=3.1.*,!=3.2.*,>=2.5"
+groups = ["examples"]
+files = [
+    {file = "simplejson-3.20.2-cp27-cp27m-manylinux1_i686.whl", hash = "sha256:11847093fd36e3f5a4f595ff0506286c54885f8ad2d921dfb64a85bce67f72c4"},
+    {file = "simplejson-3.20.2-cp27-cp27m-manylinux1_x86_64.whl", hash = "sha256:4d291911d23b1ab8eb3241204dd54e3ec60ddcd74dfcb576939d3df327205865"},
+    {file = "simplejson-3.20.2-cp27-cp27m-manylinux2010_i686.whl", hash = "sha256:da6d16d7108d366bbbf1c1f3274662294859c03266e80dd899fc432598115ea4"},
+    {file = "simplejson-3.20.2-cp27-cp27m-manylinux2010_x86_64.whl", hash = "sha256:9ddf9a07694c5bbb4856271cbc4247cc6cf48f224a7d128a280482a2f78bae3d"},
+    {file = "simplejson-3.20.2-cp27-cp27mu-manylinux1_i686.whl", hash = "sha256:3a0d2337e490e6ab42d65a082e69473717f5cc75c3c3fb530504d3681c4cb40c"},
+    {file = "simplejson-3.20.2-cp27-cp27mu-manylinux1_x86_64.whl", hash = "sha256:8ba88696351ed26a8648f8378a1431223f02438f8036f006d23b4f5b572778fa"},
+    {file = "simplejson-3.20.2-cp27-cp27mu-manylinux2010_i686.whl", hash = "sha256:00bcd408a4430af99d1f8b2b103bb2f5133bb688596a511fcfa7db865fbb845e"},
+    {file = "simplejson-3.20.2-cp27-cp27mu-manylinux2010_x86_64.whl", hash = "sha256:4fc62feb76f590ccaff6f903f52a01c58ba6423171aa117b96508afda9c210f0"},
+    {file = "simplejson-3.20.2-cp310-cp310-macosx_10_9_universal2.whl", hash = "sha256:6d7286dc11af60a2f76eafb0c2acde2d997e87890e37e24590bb513bec9f1bc5"},
+    {file = "simplejson-3.20.2-cp310-cp310-macosx_10_9_x86_64.whl", hash = "sha256:c01379b4861c3b0aa40cba8d44f2b448f5743999aa68aaa5d3ef7049d4a28a2d"},
+    {file = "simplejson-3.20.2-cp310-cp310-macosx_11_0_arm64.whl", hash = "sha256:a16b029ca25645b3bc44e84a4f941efa51bf93c180b31bd704ce6349d1fc77c1"},
+    {file = "simplejson-3.20.2-cp310-cp310-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:3e22a5fb7b1437ffb057e02e1936a3bfb19084ae9d221ec5e9f4cf85f69946b6"},
+    {file = "simplejson-3.20.2-cp310-cp310-manylinux_2_17_ppc64le.manylinux2014_ppc64le.whl", hash = "sha256:d8b6ff02fc7b8555c906c24735908854819b0d0dc85883d453e23ca4c0445d01"},
+    {file = "simplejson-3.20.2-cp310-cp310-manylinux_2_5_i686.manylinux1_i686.manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:2bfc1c396ad972ba4431130b42307b2321dba14d988580c1ac421ec6a6b7cee3"},
+    {file = "simplejson-3.20.2-cp310-cp310-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:3a97249ee1aee005d891b5a211faf58092a309f3d9d440bc269043b08f662eda"},
+    {file = "simplejson-3.20.2-cp310-cp310-musllinux_1_2_aarch64.whl", hash = "sha256:f1036be00b5edaddbddbb89c0f80ed229714a941cfd21e51386dc69c237201c2"},
+    {file = "simplejson-3.20.2-cp310-cp310-musllinux_1_2_i686.whl", hash = "sha256:5d6f5bacb8cdee64946b45f2680afa3f54cd38e62471ceda89f777693aeca4e4"},
+    {file = "simplejson-3.20.2-cp310-cp310-musllinux_1_2_ppc64le.whl", hash = "sha256:8db6841fb796ec5af632f677abf21c6425a1ebea0d9ac3ef1a340b8dc69f52b8"},
+    {file = "simplejson-3.20.2-cp310-cp310-musllinux_1_2_x86_64.whl", hash = "sha256:c0a341f7cc2aae82ee2b31f8a827fd2e51d09626f8b3accc441a6907c88aedb7"},
+    {file = "simplejson-3.20.2-cp310-cp310-win32.whl", hash = "sha256:27f9c01a6bc581d32ab026f515226864576da05ef322d7fc141cd8a15a95ce53"},
+    {file = "simplejson-3.20.2-cp310-cp310-win_amd64.whl", hash = "sha256:c0a63ec98a4547ff366871bf832a7367ee43d047bcec0b07b66c794e2137b476"},
+    {file = "simplejson-3.20.2-cp311-cp311-macosx_10_9_universal2.whl", hash = "sha256:06190b33cd7849efc413a5738d3da00b90e4a5382fd3d584c841ac20fb828c6f"},
+    {file = "simplejson-3.20.2-cp311-cp311-macosx_10_9_x86_64.whl", hash = "sha256:4ad4eac7d858947a30d2c404e61f16b84d16be79eb6fb316341885bdde864fa8"},
+    {file = "simplejson-3.20.2-cp311-cp311-macosx_11_0_arm64.whl", hash = "sha256:b392e11c6165d4a0fde41754a0e13e1d88a5ad782b245a973dd4b2bdb4e5076a"},
+    {file = "simplejson-3.20.2-cp311-cp311-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:51eccc4e353eed3c50e0ea2326173acdc05e58f0c110405920b989d481287e51"},
+    {file = "simplejson-3.20.2-cp311-cp311-manylinux_2_17_ppc64le.manylinux2014_ppc64le.whl", hash = "sha256:306e83d7c331ad833d2d43c76a67f476c4b80c4a13334f6e34bb110e6105b3bd"},
+    {file = "simplejson-3.20.2-cp311-cp311-manylinux_2_5_i686.manylinux1_i686.manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:f820a6ac2ef0bc338ae4963f4f82ccebdb0824fe9caf6d660670c578abe01013"},
+    {file = "simplejson-3.20.2-cp311-cp311-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:21e7a066528a5451433eb3418184f05682ea0493d14e9aae690499b7e1eb6b81"},
+    {file = "simplejson-3.20.2-cp311-cp311-musllinux_1_2_aarch64.whl", hash = "sha256:438680ddde57ea87161a4824e8de04387b328ad51cfdf1eaf723623a3014b7aa"},
+    {file = "simplejson-3.20.2-cp311-cp311-musllinux_1_2_i686.whl", hash = "sha256:cac78470ae68b8d8c41b6fca97f5bf8e024ca80d5878c7724e024540f5cdaadb"},
+    {file = "simplejson-3.20.2-cp311-cp311-musllinux_1_2_ppc64le.whl", hash = "sha256:7524e19c2da5ef281860a3d74668050c6986be15c9dd99966034ba47c68828c2"},
+    {file = "simplejson-3.20.2-cp311-cp311-musllinux_1_2_x86_64.whl", hash = "sha256:0e9b6d845a603b2eef3394eb5e21edb8626cd9ae9a8361d14e267eb969dbe413"},
+    {file = "simplejson-3.20.2-cp311-cp311-win32.whl", hash = "sha256:47d8927e5ac927fdd34c99cc617938abb3624b06ff86e8e219740a86507eb961"},
+    {file = "simplejson-3.20.2-cp311-cp311-win_amd64.whl", hash = "sha256:ba4edf3be8e97e4713d06c3d302cba1ff5c49d16e9d24c209884ac1b8455520c"},
+    {file = "simplejson-3.20.2-cp312-cp312-macosx_10_9_universal2.whl", hash = "sha256:4376d5acae0d1e91e78baeba4ee3cf22fbf6509d81539d01b94e0951d28ec2b6"},
+    {file = "simplejson-3.20.2-cp312-cp312-macosx_10_9_x86_64.whl", hash = "sha256:f8fe6de652fcddae6dec8f281cc1e77e4e8f3575249e1800090aab48f73b4259"},
+    {file = "simplejson-3.20.2-cp312-cp312-macosx_11_0_arm64.whl", hash = "sha256:25ca2663d99328d51e5a138f22018e54c9162438d831e26cfc3458688616eca8"},
+    {file = "simplejson-3.20.2-cp312-cp312-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:12a6b2816b6cab6c3fd273d43b1948bc9acf708272074c8858f579c394f4cbc9"},
+    {file = "simplejson-3.20.2-cp312-cp312-manylinux_2_17_ppc64le.manylinux2014_ppc64le.whl", hash = "sha256:ac20dc3fcdfc7b8415bfc3d7d51beccd8695c3f4acb7f74e3a3b538e76672868"},
+    {file = "simplejson-3.20.2-cp312-cp312-manylinux_2_5_i686.manylinux1_i686.manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:db0804d04564e70862ef807f3e1ace2cc212ef0e22deb1b3d6f80c45e5882c6b"},
+    {file = "simplejson-3.20.2-cp312-cp312-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:979ce23ea663895ae39106946ef3d78527822d918a136dbc77b9e2b7f006237e"},
+    {file = "simplejson-3.20.2-cp312-cp312-musllinux_1_2_aarch64.whl", hash = "sha256:a2ba921b047bb029805726800819675249ef25d2f65fd0edb90639c5b1c3033c"},
+    {file = "simplejson-3.20.2-cp312-cp312-musllinux_1_2_i686.whl", hash = "sha256:12d3d4dc33770069b780cc8f5abef909fe4a3f071f18f55f6d896a370fd0f970"},
+    {file = "simplejson-3.20.2-cp312-cp312-musllinux_1_2_ppc64le.whl", hash = "sha256:aff032a59a201b3683a34be1169e71ddda683d9c3b43b261599c12055349251e"},
+    {file = "simplejson-3.20.2-cp312-cp312-musllinux_1_2_x86_64.whl", hash = "sha256:30e590e133b06773f0dc9c3f82e567463df40598b660b5adf53eb1c488202544"},
+    {file = "simplejson-3.20.2-cp312-cp312-win32.whl", hash = "sha256:8d7be7c99939cc58e7c5bcf6bb52a842a58e6c65e1e9cdd2a94b697b24cddb54"},
+    {file = "simplejson-3.20.2-cp312-cp312-win_amd64.whl", hash = "sha256:2c0b4a67e75b945489052af6590e7dca0ed473ead5d0f3aad61fa584afe814ab"},
+    {file = "simplejson-3.20.2-cp313-cp313-macosx_10_13_universal2.whl", hash = "sha256:90d311ba8fcd733a3677e0be21804827226a57144130ba01c3c6a325e887dd86"},
+    {file = "simplejson-3.20.2-cp313-cp313-macosx_10_13_x86_64.whl", hash = "sha256:feed6806f614bdf7f5cb6d0123cb0c1c5f40407ef103aa935cffaa694e2e0c74"},
+    {file = "simplejson-3.20.2-cp313-cp313-macosx_11_0_arm64.whl", hash = "sha256:6b1d8d7c3e1a205c49e1aee6ba907dcb8ccea83651e6c3e2cb2062f1e52b0726"},
+    {file = "simplejson-3.20.2-cp313-cp313-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:552f55745044a24c3cb7ec67e54234be56d5d6d0e054f2e4cf4fb3e297429be5"},
+    {file = "simplejson-3.20.2-cp313-cp313-manylinux_2_17_ppc64le.manylinux2014_ppc64le.whl", hash = "sha256:c2da97ac65165d66b0570c9e545786f0ac7b5de5854d3711a16cacbcaa8c472d"},
+    {file = "simplejson-3.20.2-cp313-cp313-manylinux_2_5_i686.manylinux1_i686.manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:f59a12966daa356bf68927fca5a67bebac0033cd18b96de9c2d426cd11756cd0"},
+    {file = "simplejson-3.20.2-cp313-cp313-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:133ae2098a8e162c71da97cdab1f383afdd91373b7ff5fe65169b04167da976b"},
+    {file = "simplejson-3.20.2-cp313-cp313-musllinux_1_2_aarch64.whl", hash = "sha256:7977640af7b7d5e6a852d26622057d428706a550f7f5083e7c4dd010a84d941f"},
+    {file = "simplejson-3.20.2-cp313-cp313-musllinux_1_2_i686.whl", hash = "sha256:b530ad6d55e71fa9e93e1109cf8182f427a6355848a4ffa09f69cc44e1512522"},
+    {file = "simplejson-3.20.2-cp313-cp313-musllinux_1_2_ppc64le.whl", hash = "sha256:bd96a7d981bf64f0e42345584768da4435c05b24fd3c364663f5fbc8fabf82e3"},
+    {file = "simplejson-3.20.2-cp313-cp313-musllinux_1_2_x86_64.whl", hash = "sha256:f28ee755fadb426ba2e464d6fcf25d3f152a05eb6b38e0b4f790352f5540c769"},
+    {file = "simplejson-3.20.2-cp313-cp313-win32.whl", hash = "sha256:472785b52e48e3eed9b78b95e26a256f59bb1ee38339be3075dad799e2e1e661"},
+    {file = "simplejson-3.20.2-cp313-cp313-win_amd64.whl", hash = "sha256:a1a85013eb33e4820286139540accbe2c98d2da894b2dcefd280209db508e608"},
+    {file = "simplejson-3.20.2-cp36-cp36m-macosx_10_9_x86_64.whl", hash = "sha256:a135941a50795c934bdc9acc74e172b126e3694fe26de3c0c1bc0b33ea17e6ce"},
+    {file = "simplejson-3.20.2-cp36-cp36m-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:25ba488decb18738f5d6bd082018409689ed8e74bc6c4d33a0b81af6edf1c9f4"},
+    {file = "simplejson-3.20.2-cp36-cp36m-manylinux_2_17_ppc64le.manylinux2014_ppc64le.whl", hash = "sha256:d81f8e982923d5e9841622ff6568be89756428f98a82c16e4158ac32b92a3787"},
+    {file = "simplejson-3.20.2-cp36-cp36m-manylinux_2_5_i686.manylinux1_i686.manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:cdad497ccb1edc5020bef209e9c3e062a923e8e6fca5b8a39f0fb34380c8a66c"},
+    {file = "simplejson-3.20.2-cp36-cp36m-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:4a3f1db97bcd9fb592928159af7a405b18df7e847cbcc5682a209c5b2ad5d6b1"},
+    {file = "simplejson-3.20.2-cp36-cp36m-musllinux_1_2_aarch64.whl", hash = "sha256:215b65b0dc2c432ab79c430aa4f1e595f37b07a83c1e4c4928d7e22e6b49a748"},
+    {file = "simplejson-3.20.2-cp36-cp36m-musllinux_1_2_i686.whl", hash = "sha256:ece4863171ba53f086a3bfd87f02ec3d6abc586f413babfc6cf4de4d84894620"},
+    {file = "simplejson-3.20.2-cp36-cp36m-musllinux_1_2_ppc64le.whl", hash = "sha256:4a76d7c47d959afe6c41c88005f3041f583a4b9a1783cf341887a3628a77baa0"},
+    {file = "simplejson-3.20.2-cp36-cp36m-musllinux_1_2_x86_64.whl", hash = "sha256:e9b0523582a57d9ea74f83ecefdffe18b2b0a907df1a9cef06955883341930d8"},
+    {file = "simplejson-3.20.2-cp36-cp36m-win32.whl", hash = "sha256:16366591c8e08a4ac76b81d76a3fc97bf2bcc234c9c097b48d32ea6bfe2be2fe"},
+    {file = "simplejson-3.20.2-cp36-cp36m-win_amd64.whl", hash = "sha256:732cf4c4ac1a258b4e9334e1e40a38303689f432497d3caeb491428b7547e782"},
+    {file = "simplejson-3.20.2-cp37-cp37m-macosx_10_9_x86_64.whl", hash = "sha256:6c3a98e21e5f098e4f982ef302ebb1e681ff16a5d530cfce36296bea58fe2396"},
+    {file = "simplejson-3.20.2-cp37-cp37m-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:10cf9ca1363dc3711c72f4ec7c1caed2bbd9aaa29a8d9122e31106022dc175c6"},
+    {file = "simplejson-3.20.2-cp37-cp37m-manylinux_2_17_ppc64le.manylinux2014_ppc64le.whl", hash = "sha256:106762f8aedf3fc3364649bfe8dc9a40bf5104f872a4d2d86bae001b1af30d30"},
+    {file = "simplejson-3.20.2-cp37-cp37m-manylinux_2_5_i686.manylinux1_i686.manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:b21659898b7496322e99674739193f81052e588afa8b31b6a1c7733d8829b925"},
+    {file = "simplejson-3.20.2-cp37-cp37m-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:78fa1db6a02bca88829f2b2057c76a1d2dc2fccb8c5ff1199e352f213e9ec719"},
+    {file = "simplejson-3.20.2-cp37-cp37m-musllinux_1_2_aarch64.whl", hash = "sha256:156139d94b660448ec8a4ea89f77ec476597f752c2ff66432d3656704c66b40e"},
+    {file = "simplejson-3.20.2-cp37-cp37m-musllinux_1_2_i686.whl", hash = "sha256:b2620ac40be04dff08854baf6f4df10272f67079f61ed1b6274c0e840f2e2ae1"},
+    {file = "simplejson-3.20.2-cp37-cp37m-musllinux_1_2_ppc64le.whl", hash = "sha256:9ccef5b5d3e3ac5d9da0a0ca1d2de8cf2b0fb56b06aa0ab79325fa4bcc5a1d60"},
+    {file = "simplejson-3.20.2-cp37-cp37m-musllinux_1_2_x86_64.whl", hash = "sha256:f526304c2cc9fd8b8d18afacb75bc171650f83a7097b2c92ad6a431b5d7c1b72"},
+    {file = "simplejson-3.20.2-cp37-cp37m-win32.whl", hash = "sha256:e0f661105398121dd48d9987a2a8f7825b8297b3b2a7fe5b0d247370396119d5"},
+    {file = "simplejson-3.20.2-cp37-cp37m-win_amd64.whl", hash = "sha256:dab98625b3d6821e77ea59c4d0e71059f8063825a0885b50ed410e5c8bd5cb66"},
+    {file = "simplejson-3.20.2-cp38-cp38-macosx_10_9_universal2.whl", hash = "sha256:b8205f113082e7d8f667d6cd37d019a7ee5ef30b48463f9de48e1853726c6127"},
+    {file = "simplejson-3.20.2-cp38-cp38-macosx_10_9_x86_64.whl", hash = "sha256:fc8da64929ef0ff16448b602394a76fd9968a39afff0692e5ab53669df1f047f"},
+    {file = "simplejson-3.20.2-cp38-cp38-macosx_11_0_arm64.whl", hash = "sha256:bfe704864b5fead4f21c8d448a89ee101c9b0fc92a5f40b674111da9272b3a90"},
+    {file = "simplejson-3.20.2-cp38-cp38-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:40ca7cbe7d2f423b97ed4e70989ef357f027a7e487606628c11b79667639dc84"},
+    {file = "simplejson-3.20.2-cp38-cp38-manylinux_2_17_ppc64le.manylinux2014_ppc64le.whl", hash = "sha256:0cec1868b237fe9fb2d466d6ce0c7b772e005aadeeda582d867f6f1ec9710cad"},
+    {file = "simplejson-3.20.2-cp38-cp38-manylinux_2_5_i686.manylinux1_i686.manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:792debfba68d8dd61085ffb332d72b9f5b38269cda0c99f92c7a054382f55246"},
+    {file = "simplejson-3.20.2-cp38-cp38-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:e022b2c4c54cb4855e555f64aa3377e3e5ca912c372fa9e3edcc90ebbad93dce"},
+    {file = "simplejson-3.20.2-cp38-cp38-musllinux_1_2_aarch64.whl", hash = "sha256:5de26f11d5aca575d3825dddc65f69fdcba18f6ca2b4db5cef16f41f969cef15"},
+    {file = "simplejson-3.20.2-cp38-cp38-musllinux_1_2_i686.whl", hash = "sha256:e2162b2a43614727ec3df75baeda8881ab129824aa1b49410d4b6c64f55a45b4"},
+    {file = "simplejson-3.20.2-cp38-cp38-musllinux_1_2_ppc64le.whl", hash = "sha256:e11a1d6b2f7e72ca546bdb4e6374b237ebae9220e764051b867111df83acbd13"},
+    {file = "simplejson-3.20.2-cp38-cp38-musllinux_1_2_x86_64.whl", hash = "sha256:daf7cd18fe99eb427fa6ddb6b437cfde65125a96dc27b93a8969b6fe90a1dbea"},
+    {file = "simplejson-3.20.2-cp38-cp38-win32.whl", hash = "sha256:da795ea5f440052f4f497b496010e2c4e05940d449ea7b5c417794ec1be55d01"},
+    {file = "simplejson-3.20.2-cp38-cp38-win_amd64.whl", hash = "sha256:6a4b5e7864f952fcce4244a70166797d7b8fd6069b4286d3e8403c14b88656b6"},
+    {file = "simplejson-3.20.2-cp39-cp39-macosx_10_9_universal2.whl", hash = "sha256:b3bf76512ccb07d47944ebdca44c65b781612d38b9098566b4bb40f713fc4047"},
+    {file = "simplejson-3.20.2-cp39-cp39-macosx_10_9_x86_64.whl", hash = "sha256:214e26acf2dfb9ff3314e65c4e168a6b125bced0e2d99a65ea7b0f169db1e562"},
+    {file = "simplejson-3.20.2-cp39-cp39-macosx_11_0_arm64.whl", hash = "sha256:2fb1259ca9c385b0395bad59cdbf79535a5a84fb1988f339a49bfbc57455a35a"},
+    {file = "simplejson-3.20.2-cp39-cp39-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:c34e028a2ba8553a208ded1da5fa8501833875078c4c00a50dffc33622057881"},
+    {file = "simplejson-3.20.2-cp39-cp39-manylinux_2_17_ppc64le.manylinux2014_ppc64le.whl", hash = "sha256:b538f9d9e503b0dd43af60496780cb50755e4d8e5b34e5647b887675c1ae9fee"},
+    {file = "simplejson-3.20.2-cp39-cp39-manylinux_2_5_i686.manylinux1_i686.manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:ab998e416ded6c58f549a22b6a8847e75a9e1ef98eb9fbb2863e1f9e61a4105b"},
+    {file = "simplejson-3.20.2-cp39-cp39-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:6a8f1c307edf5fbf0c6db3396c5d3471409c4a40c7a2a466fbc762f20d46601a"},
+    {file = "simplejson-3.20.2-cp39-cp39-musllinux_1_2_aarch64.whl", hash = "sha256:5a7bbac80bdb82a44303f5630baee140aee208e5a4618e8b9fde3fc400a42671"},
+    {file = "simplejson-3.20.2-cp39-cp39-musllinux_1_2_i686.whl", hash = "sha256:5ef70ec8fe1569872e5a3e4720c1e1dcb823879a3c78bc02589eb88fab920b1f"},
+    {file = "simplejson-3.20.2-cp39-cp39-musllinux_1_2_ppc64le.whl", hash = "sha256:cb11c09c99253a74c36925d461c86ea25f0140f3b98ff678322734ddc0f038d7"},
+    {file = "simplejson-3.20.2-cp39-cp39-musllinux_1_2_x86_64.whl", hash = "sha256:66f7c78c6ef776f8bd9afaad455e88b8197a51e95617bcc44b50dd974a7825ba"},
+    {file = "simplejson-3.20.2-cp39-cp39-win32.whl", hash = "sha256:619ada86bfe3a5aa02b8222ca6bfc5aa3e1075c1fb5b3263d24ba579382df472"},
+    {file = "simplejson-3.20.2-cp39-cp39-win_amd64.whl", hash = "sha256:44a6235e09ca5cc41aa5870a952489c06aa4aee3361ae46daa947d8398e57502"},
+    {file = "simplejson-3.20.2-py3-none-any.whl", hash = "sha256:3b6bb7fb96efd673eac2e4235200bfffdc2353ad12c54117e1e4e2fc485ac017"},
+    {file = "simplejson-3.20.2.tar.gz", hash = "sha256:5fe7a6ce14d1c300d80d08695b7f7e633de6cd72c80644021874d985b3393649"},
+]
+
+[[package]]
+name = "six"
+version = "1.17.0"
+description = "Python 2 and 3 compatibility utilities"
+optional = false
+python-versions = "!=3.0.*,!=3.1.*,!=3.2.*,>=2.7"
+groups = ["main", "examples"]
+files = [
+    {file = "six-1.17.0-py2.py3-none-any.whl", hash = "sha256:4721f391ed90541fddacab5acf947aa0d3dc7d27b2e1e8eda2be8970586c3274"},
+    {file = "six-1.17.0.tar.gz", hash = "sha256:ff70335d468e7eb6ec65b95b99d3a2836546063f63acc5171de367e834932a81"},
+]
+
+[[package]]
+name = "smmap"
+version = "5.0.2"
+description = "A pure Python implementation of a sliding window memory map manager"
+optional = false
+python-versions = ">=3.7"
+groups = ["main", "examples"]
+files = [
+    {file = "smmap-5.0.2-py3-none-any.whl", hash = "sha256:b30115f0def7d7531d22a0fb6502488d879e75b260a9db4d0819cfb25403af5e"},
+    {file = "smmap-5.0.2.tar.gz", hash = "sha256:26ea65a03958fa0c8a1c7e8c7a58fdc77221b8910f6be2131affade476898ad5"},
+]
+
+[[package]]
+name = "snowballstemmer"
+version = "3.0.1"
+description = "This package provides 32 stemmers for 30 languages generated from Snowball algorithms."
+optional = false
+python-versions = "!=3.0.*,!=3.1.*,!=3.2.*"
+groups = ["docs", "lint"]
+files = [
+    {file = "snowballstemmer-3.0.1-py3-none-any.whl", hash = "sha256:6cd7b3897da8d6c9ffb968a6781fa6532dce9c3618a4b127d920dab764a19064"},
+    {file = "snowballstemmer-3.0.1.tar.gz", hash = "sha256:6d5eeeec8e9f84d4d56b847692bacf79bc2c8e90c7f80ca4444ff8b6f2e52895"},
+]
+
+[[package]]
+name = "sphinx"
+version = "8.1.3"
+description = "Python documentation generator"
+optional = false
+python-versions = ">=3.10"
+groups = ["docs"]
+markers = "python_version == \"3.10\""
+files = [
+    {file = "sphinx-8.1.3-py3-none-any.whl", hash = "sha256:09719015511837b76bf6e03e42eb7595ac8c2e41eeb9c29c5b755c6b677992a2"},
+    {file = "sphinx-8.1.3.tar.gz", hash = "sha256:43c1911eecb0d3e161ad78611bc905d1ad0e523e4ddc202a58a821773dc4c927"},
+]
+
+[package.dependencies]
+alabaster = ">=0.7.14"
+babel = ">=2.13"
+colorama = {version = ">=0.4.6", markers = "sys_platform == \"win32\""}
+docutils = ">=0.20,<0.22"
+imagesize = ">=1.3"
+Jinja2 = ">=3.1"
+packaging = ">=23.0"
+Pygments = ">=2.17"
+requests = ">=2.30.0"
+snowballstemmer = ">=2.2"
+sphinxcontrib-applehelp = ">=1.0.7"
+sphinxcontrib-devhelp = ">=1.0.6"
+sphinxcontrib-htmlhelp = ">=2.0.6"
+sphinxcontrib-jsmath = ">=1.0.1"
+sphinxcontrib-qthelp = ">=1.0.6"
+sphinxcontrib-serializinghtml = ">=1.1.9"
+tomli = {version = ">=2", markers = "python_version < \"3.11\""}
+
+[package.extras]
+docs = ["sphinxcontrib-websupport"]
+lint = ["flake8 (>=6.0)", "mypy (==1.11.1)", "pyright (==1.1.384)", "pytest (>=6.0)", "ruff (==0.6.9)", "sphinx-lint (>=0.9)", "tomli (>=2)", "types-Pillow (==10.2.0.20240822)", "types-Pygments (==2.18.0.20240506)", "types-colorama (==0.4.15.20240311)", "types-defusedxml (==0.7.0.20240218)", "types-docutils (==0.21.0.20241005)", "types-requests (==2.32.0.20240914)", "types-urllib3 (==1.26.25.14)"]
+test = ["cython (>=3.0)", "defusedxml (>=0.7.1)", "pytest (>=8.0)", "setuptools (>=70.0)", "typing_extensions (>=4.9)"]
+
+[[package]]
+name = "sphinx"
+version = "8.2.3"
+description = "Python documentation generator"
+optional = false
+python-versions = ">=3.11"
+groups = ["docs"]
+markers = "python_version >= \"3.11\""
+files = [
+    {file = "sphinx-8.2.3-py3-none-any.whl", hash = "sha256:4405915165f13521d875a8c29c8970800a0141c14cc5416a38feca4ea5d9b9c3"},
+    {file = "sphinx-8.2.3.tar.gz", hash = "sha256:398ad29dee7f63a75888314e9424d40f52ce5a6a87ae88e7071e80af296ec348"},
+]
+
+[package.dependencies]
+alabaster = ">=0.7.14"
+babel = ">=2.13"
+colorama = {version = ">=0.4.6", markers = "sys_platform == \"win32\""}
+docutils = ">=0.20,<0.22"
+imagesize = ">=1.3"
+Jinja2 = ">=3.1"
+packaging = ">=23.0"
+Pygments = ">=2.17"
+requests = ">=2.30.0"
+roman-numerals-py = ">=1.0.0"
+snowballstemmer = ">=2.2"
+sphinxcontrib-applehelp = ">=1.0.7"
+sphinxcontrib-devhelp = ">=1.0.6"
+sphinxcontrib-htmlhelp = ">=2.0.6"
+sphinxcontrib-jsmath = ">=1.0.1"
+sphinxcontrib-qthelp = ">=1.0.6"
+sphinxcontrib-serializinghtml = ">=1.1.9"
+
+[package.extras]
+docs = ["sphinxcontrib-websupport"]
+lint = ["betterproto (==2.0.0b6)", "mypy (==1.15.0)", "pypi-attestations (==0.0.21)", "pyright (==1.1.395)", "pytest (>=8.0)", "ruff (==0.9.9)", "sphinx-lint (>=0.9)", "types-Pillow (==10.2.0.20240822)", "types-Pygments (==2.19.0.20250219)", "types-colorama (==0.4.15.20240311)", "types-defusedxml (==0.7.0.20240218)", "types-docutils (==0.21.0.20241128)", "types-requests (==2.32.0.20241016)", "types-urllib3 (==1.26.25.14)"]
+test = ["cython (>=3.0)", "defusedxml (>=0.7.1)", "pytest (>=8.0)", "pytest-xdist[psutil] (>=3.4)", "setuptools (>=70.0)", "typing_extensions (>=4.9)"]
+
+[[package]]
+name = "sphinx-autoapi"
+version = "3.6.1"
+description = "Sphinx API documentation generator"
+optional = false
+python-versions = ">=3.9"
+groups = ["docs"]
+files = [
+    {file = "sphinx_autoapi-3.6.1-py3-none-any.whl", hash = "sha256:6b7af0d5650f6eac1f4b85c1eb9f9a4911160ec7138bdc4451c77a5e94d5832c"},
+    {file = "sphinx_autoapi-3.6.1.tar.gz", hash = "sha256:1ff2992b7d5e39ccf92413098a376e0f91e7b4ca532c4f3e71298dbc8a4a9900"},
+]
+
+[package.dependencies]
+astroid = [
+    {version = ">=4.0,<5.0", markers = "python_version >= \"3.12\""},
+    {version = ">=3.0,<4.0", markers = "python_version < \"3.12\""},
+]
+Jinja2 = "*"
+PyYAML = "*"
+sphinx = ">=7.4.0"
+
+[[package]]
+name = "sphinx-rtd-theme"
+version = "3.1.0"
+description = "Read the Docs theme for Sphinx"
+optional = false
+python-versions = ">=3.8"
+groups = ["docs"]
+files = [
+    {file = "sphinx_rtd_theme-3.1.0-py2.py3-none-any.whl", hash = "sha256:1785824ae8e6632060490f67cf3a72d404a85d2d9fc26bce3619944de5682b89"},
+    {file = "sphinx_rtd_theme-3.1.0.tar.gz", hash = "sha256:b44276f2c276e909239a4f6c955aa667aaafeb78597923b1c60babc76db78e4c"},
+]
+
+[package.dependencies]
+docutils = ">0.18,<0.23"
+sphinx = ">=6,<10"
+sphinxcontrib-jquery = ">=4,<5"
+
+[package.extras]
+dev = ["bump2version", "transifex-client", "twine", "wheel"]
+
+[[package]]
+name = "sphinxcontrib-applehelp"
+version = "2.0.0"
+description = "sphinxcontrib-applehelp is a Sphinx extension which outputs Apple help books"
+optional = false
+python-versions = ">=3.9"
+groups = ["docs"]
+files = [
+    {file = "sphinxcontrib_applehelp-2.0.0-py3-none-any.whl", hash = "sha256:4cd3f0ec4ac5dd9c17ec65e9ab272c9b867ea77425228e68ecf08d6b28ddbdb5"},
+    {file = "sphinxcontrib_applehelp-2.0.0.tar.gz", hash = "sha256:2f29ef331735ce958efa4734873f084941970894c6090408b079c61b2e1c06d1"},
+]
+
+[package.extras]
+lint = ["mypy", "ruff (==0.5.5)", "types-docutils"]
+standalone = ["Sphinx (>=5)"]
+test = ["pytest"]
+
+[[package]]
+name = "sphinxcontrib-devhelp"
+version = "2.0.0"
+description = "sphinxcontrib-devhelp is a sphinx extension which outputs Devhelp documents"
+optional = false
+python-versions = ">=3.9"
+groups = ["docs"]
+files = [
+    {file = "sphinxcontrib_devhelp-2.0.0-py3-none-any.whl", hash = "sha256:aefb8b83854e4b0998877524d1029fd3e6879210422ee3780459e28a1f03a8a2"},
+    {file = "sphinxcontrib_devhelp-2.0.0.tar.gz", hash = "sha256:411f5d96d445d1d73bb5d52133377b4248ec79db5c793ce7dbe59e074b4dd1ad"},
+]
+
+[package.extras]
+lint = ["mypy", "ruff (==0.5.5)", "types-docutils"]
+standalone = ["Sphinx (>=5)"]
+test = ["pytest"]
+
+[[package]]
+name = "sphinxcontrib-htmlhelp"
+version = "2.1.0"
+description = "sphinxcontrib-htmlhelp is a sphinx extension which renders HTML help files"
+optional = false
+python-versions = ">=3.9"
+groups = ["docs"]
+files = [
+    {file = "sphinxcontrib_htmlhelp-2.1.0-py3-none-any.whl", hash = "sha256:166759820b47002d22914d64a075ce08f4c46818e17cfc9470a9786b759b19f8"},
+    {file = "sphinxcontrib_htmlhelp-2.1.0.tar.gz", hash = "sha256:c9e2916ace8aad64cc13a0d233ee22317f2b9025b9cf3295249fa985cc7082e9"},
+]
+
+[package.extras]
+lint = ["mypy", "ruff (==0.5.5)", "types-docutils"]
+standalone = ["Sphinx (>=5)"]
+test = ["html5lib", "pytest"]
+
+[[package]]
+name = "sphinxcontrib-jquery"
+version = "4.1"
+description = "Extension to include jQuery on newer Sphinx releases"
+optional = false
+python-versions = ">=2.7"
+groups = ["docs"]
+files = [
+    {file = "sphinxcontrib-jquery-4.1.tar.gz", hash = "sha256:1620739f04e36a2c779f1a131a2dfd49b2fd07351bf1968ced074365933abc7a"},
+    {file = "sphinxcontrib_jquery-4.1-py2.py3-none-any.whl", hash = "sha256:f936030d7d0147dd026a4f2b5a57343d233f1fc7b363f68b3d4f1cb0993878ae"},
+]
+
+[package.dependencies]
+Sphinx = ">=1.8"
+
+[[package]]
+name = "sphinxcontrib-jsmath"
+version = "1.0.1"
+description = "A sphinx extension which renders display math in HTML via JavaScript"
+optional = false
+python-versions = ">=3.5"
+groups = ["docs"]
+files = [
+    {file = "sphinxcontrib-jsmath-1.0.1.tar.gz", hash = "sha256:a9925e4a4587247ed2191a22df5f6970656cb8ca2bd6284309578f2153e0c4b8"},
+    {file = "sphinxcontrib_jsmath-1.0.1-py2.py3-none-any.whl", hash = "sha256:2ec2eaebfb78f3f2078e73666b1415417a116cc848b72e5172e596c871103178"},
+]
+
+[package.extras]
+test = ["flake8", "mypy", "pytest"]
+
+[[package]]
+name = "sphinxcontrib-qthelp"
+version = "2.0.0"
+description = "sphinxcontrib-qthelp is a sphinx extension which outputs QtHelp documents"
+optional = false
+python-versions = ">=3.9"
+groups = ["docs"]
+files = [
+    {file = "sphinxcontrib_qthelp-2.0.0-py3-none-any.whl", hash = "sha256:b18a828cdba941ccd6ee8445dbe72ffa3ef8cbe7505d8cd1fa0d42d3f2d5f3eb"},
+    {file = "sphinxcontrib_qthelp-2.0.0.tar.gz", hash = "sha256:4fe7d0ac8fc171045be623aba3e2a8f613f8682731f9153bb2e40ece16b9bbab"},
+]
+
+[package.extras]
+lint = ["mypy", "ruff (==0.5.5)", "types-docutils"]
+standalone = ["Sphinx (>=5)"]
+test = ["defusedxml (>=0.7.1)", "pytest"]
+
+[[package]]
+name = "sphinxcontrib-serializinghtml"
+version = "2.0.0"
+description = "sphinxcontrib-serializinghtml is a sphinx extension which outputs \"serialized\" HTML files (json and pickle)"
+optional = false
+python-versions = ">=3.9"
+groups = ["docs"]
+files = [
+    {file = "sphinxcontrib_serializinghtml-2.0.0-py3-none-any.whl", hash = "sha256:6e2cb0eef194e10c27ec0023bfeb25badbbb5868244cf5bc5bdc04e4464bf331"},
+    {file = "sphinxcontrib_serializinghtml-2.0.0.tar.gz", hash = "sha256:e9d912827f872c029017a53f0ef2180b327c3f7fd23c87229f7a8e8b70031d4d"},
+]
+
+[package.extras]
+lint = ["mypy", "ruff (==0.5.5)", "types-docutils"]
+standalone = ["Sphinx (>=5)"]
+test = ["pytest"]
+
+[[package]]
+name = "stevedore"
+version = "5.6.0"
+description = "Manage dynamic plugins for Python applications"
+optional = false
+python-versions = ">=3.10"
+groups = ["lint"]
+files = [
+    {file = "stevedore-5.6.0-py3-none-any.whl", hash = "sha256:4a36dccefd7aeea0c70135526cecb7766c4c84c473b1af68db23d541b6dc1820"},
+    {file = "stevedore-5.6.0.tar.gz", hash = "sha256:f22d15c6ead40c5bbfa9ca54aa7e7b4a07d59b36ae03ed12ced1a54cf0b51945"},
+]
+
+[[package]]
+name = "streamlit"
+version = "1.53.1"
+description = "A faster way to build and share data apps"
+optional = false
+python-versions = ">=3.10"
+groups = ["main", "examples"]
+files = [
+    {file = "streamlit-1.53.1-py3-none-any.whl", hash = "sha256:9534d151feea485b69200dd36448f95f418c511e8c81186ceb57133bdf1443f7"},
+    {file = "streamlit-1.53.1.tar.gz", hash = "sha256:ae656af3b68b4bb2d669fa977606096f2021bcbaa14a454a290f8e0a37bab277"},
+]
+
+[package.dependencies]
+altair = ">=4.0,<5.4.0 || >5.4.0,<5.4.1 || >5.4.1,<7"
+blinker = ">=1.5.0,<2"
+cachetools = ">=5.5,<7"
+click = ">=7.0,<9"
+gitpython = ">=3.0.7,<3.1.19 || >3.1.19,<4"
+numpy = ">=1.23,<3"
+packaging = ">=20"
+pandas = ">=1.4.0,<3"
+pillow = ">=7.1.0,<13"
+protobuf = ">=3.20,<7"
+pyarrow = ">=7.0"
+pydeck = ">=0.8.0b4,<1"
+requests = ">=2.27,<3"
+tenacity = ">=8.1.0,<10"
+toml = ">=0.10.1,<2"
+tornado = ">=6.0.3,<6.5.0 || >6.5.0,<7"
+typing-extensions = ">=4.10.0,<5"
+watchdog = {version = ">=2.1.5,<7", markers = "platform_system != \"Darwin\""}
+
+[package.extras]
+all = ["rich (>=11.0.0)", "streamlit[auth,charts,pdf,performance,snowflake,sql]"]
+auth = ["Authlib (>=1.3.2)"]
+charts = ["graphviz (>=0.19.0)", "matplotlib (>=3.0.0)", "orjson (>=3.5.0)", "plotly (>=4.0.0)"]
+pdf = ["streamlit-pdf (>=1.0.0)"]
+performance = ["httptools (>=0.6.3)", "orjson (>=3.5.0)", "uvloop (>=0.15.2) ; sys_platform != \"win32\" and sys_platform != \"cygwin\" and platform_python_implementation != \"PyPy\""]
+snowflake = ["snowflake-connector-python (>=3.3.0) ; python_version < \"3.12\"", "snowflake-snowpark-python[modin] (>=1.17.0) ; python_version < \"3.12\""]
+sql = ["SQLAlchemy (>=2.0.0)"]
+starlette = ["anyio (>=4.0.0)", "itsdangerous (>=2.1.2)", "python-multipart (>=0.0.10)", "starlette (>=0.40.0)", "uvicorn (>=0.30.0)", "websockets (>=12.0.0)"]
+
+[[package]]
+name = "streamlit-echarts"
+version = "0.4.0"
+description = "Echarts custom component for Streamlit"
+optional = false
+python-versions = ">=3.6"
+groups = ["examples"]
+files = [
+    {file = "streamlit-echarts-0.4.0.tar.gz", hash = "sha256:33cc5329b99ddce8b64ce6c4607733e02db575c379af6394a8c78ae5df14934d"},
+    {file = "streamlit_echarts-0.4.0-py3-none-any.whl", hash = "sha256:aa86679da0e7680ee43b7a6def31439273a686a8d71de522c55655047e80ec9b"},
+]
+
+[package.dependencies]
+pyecharts = ">=1.9"
+simplejson = ">=3.0"
+streamlit = ">=0.63"
+
+[[package]]
+name = "tenacity"
+version = "9.1.2"
+description = "Retry code until it succeeds"
+optional = false
+python-versions = ">=3.9"
+groups = ["main", "examples"]
+files = [
+    {file = "tenacity-9.1.2-py3-none-any.whl", hash = "sha256:f77bf36710d8b73a50b2dd155c97b870017ad21afe6ab300326b0371b3b05138"},
+    {file = "tenacity-9.1.2.tar.gz", hash = "sha256:1169d376c297e7de388d18b4481760d478b0e99a777cad3a9c86e556f4b697cb"},
+]
+
+[package.extras]
+doc = ["reno", "sphinx"]
+test = ["pytest", "tornado (>=4.5)", "typeguard"]
+
+[[package]]
+name = "toml"
+version = "0.10.2"
+description = "Python Library for Tom's Obvious, Minimal Language"
+optional = false
+python-versions = ">=2.6, !=3.0.*, !=3.1.*, !=3.2.*"
+groups = ["main", "docs", "examples", "lint"]
+files = [
+    {file = "toml-0.10.2-py2.py3-none-any.whl", hash = "sha256:806143ae5bfb6a3c6e736a764057db0e6a0e05e338b5630894a5f779cabb4f9b"},
+    {file = "toml-0.10.2.tar.gz", hash = "sha256:b3bda1d108d5dd99f4a20d24d9c348e91c4db7ab1b749200bded2f839ccbe68f"},
+]
+
+[[package]]
+name = "tomli"
+version = "2.3.0"
+description = "A lil' TOML parser"
+optional = false
+python-versions = ">=3.8"
+groups = ["docs", "lint", "test"]
+markers = "python_version == \"3.10\""
+files = [
+    {file = "tomli-2.3.0-cp311-cp311-macosx_10_9_x86_64.whl", hash = "sha256:88bd15eb972f3664f5ed4b57c1634a97153b4bac4479dcb6a495f41921eb7f45"},
+    {file = "tomli-2.3.0-cp311-cp311-macosx_11_0_arm64.whl", hash = "sha256:883b1c0d6398a6a9d29b508c331fa56adbcdff647f6ace4dfca0f50e90dfd0ba"},
+    {file = "tomli-2.3.0-cp311-cp311-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:d1381caf13ab9f300e30dd8feadb3de072aeb86f1d34a8569453ff32a7dea4bf"},
+    {file = "tomli-2.3.0-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:a0e285d2649b78c0d9027570d4da3425bdb49830a6156121360b3f8511ea3441"},
+    {file = "tomli-2.3.0-cp311-cp311-musllinux_1_2_aarch64.whl", hash = "sha256:0a154a9ae14bfcf5d8917a59b51ffd5a3ac1fd149b71b47a3a104ca4edcfa845"},
+    {file = "tomli-2.3.0-cp311-cp311-musllinux_1_2_x86_64.whl", hash = "sha256:74bf8464ff93e413514fefd2be591c3b0b23231a77f901db1eb30d6f712fc42c"},
+    {file = "tomli-2.3.0-cp311-cp311-win32.whl", hash = "sha256:00b5f5d95bbfc7d12f91ad8c593a1659b6387b43f054104cda404be6bda62456"},
+    {file = "tomli-2.3.0-cp311-cp311-win_amd64.whl", hash = "sha256:4dc4ce8483a5d429ab602f111a93a6ab1ed425eae3122032db7e9acf449451be"},
+    {file = "tomli-2.3.0-cp312-cp312-macosx_10_13_x86_64.whl", hash = "sha256:d7d86942e56ded512a594786a5ba0a5e521d02529b3826e7761a05138341a2ac"},
+    {file = "tomli-2.3.0-cp312-cp312-macosx_11_0_arm64.whl", hash = "sha256:73ee0b47d4dad1c5e996e3cd33b8a76a50167ae5f96a2607cbe8cc773506ab22"},
+    {file = "tomli-2.3.0-cp312-cp312-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:792262b94d5d0a466afb5bc63c7daa9d75520110971ee269152083270998316f"},
+    {file = "tomli-2.3.0-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:4f195fe57ecceac95a66a75ac24d9d5fbc98ef0962e09b2eddec5d39375aae52"},
+    {file = "tomli-2.3.0-cp312-cp312-musllinux_1_2_aarch64.whl", hash = "sha256:e31d432427dcbf4d86958c184b9bfd1e96b5b71f8eb17e6d02531f434fd335b8"},
+    {file = "tomli-2.3.0-cp312-cp312-musllinux_1_2_x86_64.whl", hash = "sha256:7b0882799624980785240ab732537fcfc372601015c00f7fc367c55308c186f6"},
+    {file = "tomli-2.3.0-cp312-cp312-win32.whl", hash = "sha256:ff72b71b5d10d22ecb084d345fc26f42b5143c5533db5e2eaba7d2d335358876"},
+    {file = "tomli-2.3.0-cp312-cp312-win_amd64.whl", hash = "sha256:1cb4ed918939151a03f33d4242ccd0aa5f11b3547d0cf30f7c74a408a5b99878"},
+    {file = "tomli-2.3.0-cp313-cp313-macosx_10_13_x86_64.whl", hash = "sha256:5192f562738228945d7b13d4930baffda67b69425a7f0da96d360b0a3888136b"},
+    {file = "tomli-2.3.0-cp313-cp313-macosx_11_0_arm64.whl", hash = "sha256:be71c93a63d738597996be9528f4abe628d1adf5e6eb11607bc8fe1a510b5dae"},
+    {file = "tomli-2.3.0-cp313-cp313-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:c4665508bcbac83a31ff8ab08f424b665200c0e1e645d2bd9ab3d3e557b6185b"},
+    {file = "tomli-2.3.0-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:4021923f97266babc6ccab9f5068642a0095faa0a51a246a6a02fccbb3514eaf"},
+    {file = "tomli-2.3.0-cp313-cp313-musllinux_1_2_aarch64.whl", hash = "sha256:a4ea38c40145a357d513bffad0ed869f13c1773716cf71ccaa83b0fa0cc4e42f"},
+    {file = "tomli-2.3.0-cp313-cp313-musllinux_1_2_x86_64.whl", hash = "sha256:ad805ea85eda330dbad64c7ea7a4556259665bdf9d2672f5dccc740eb9d3ca05"},
+    {file = "tomli-2.3.0-cp313-cp313-win32.whl", hash = "sha256:97d5eec30149fd3294270e889b4234023f2c69747e555a27bd708828353ab606"},
+    {file = "tomli-2.3.0-cp313-cp313-win_amd64.whl", hash = "sha256:0c95ca56fbe89e065c6ead5b593ee64b84a26fca063b5d71a1122bf26e533999"},
+    {file = "tomli-2.3.0-cp314-cp314-macosx_10_13_x86_64.whl", hash = "sha256:cebc6fe843e0733ee827a282aca4999b596241195f43b4cc371d64fc6639da9e"},
+    {file = "tomli-2.3.0-cp314-cp314-macosx_11_0_arm64.whl", hash = "sha256:4c2ef0244c75aba9355561272009d934953817c49f47d768070c3c94355c2aa3"},
+    {file = "tomli-2.3.0-cp314-cp314-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:c22a8bf253bacc0cf11f35ad9808b6cb75ada2631c2d97c971122583b129afbc"},
+    {file = "tomli-2.3.0-cp314-cp314-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:0eea8cc5c5e9f89c9b90c4896a8deefc74f518db5927d0e0e8d4a80953d774d0"},
+    {file = "tomli-2.3.0-cp314-cp314-musllinux_1_2_aarch64.whl", hash = "sha256:b74a0e59ec5d15127acdabd75ea17726ac4c5178ae51b85bfe39c4f8a278e879"},
+    {file = "tomli-2.3.0-cp314-cp314-musllinux_1_2_x86_64.whl", hash = "sha256:b5870b50c9db823c595983571d1296a6ff3e1b88f734a4c8f6fc6188397de005"},
+    {file = "tomli-2.3.0-cp314-cp314-win32.whl", hash = "sha256:feb0dacc61170ed7ab602d3d972a58f14ee3ee60494292d384649a3dc38ef463"},
+    {file = "tomli-2.3.0-cp314-cp314-win_amd64.whl", hash = "sha256:b273fcbd7fc64dc3600c098e39136522650c49bca95df2d11cf3b626422392c8"},
+    {file = "tomli-2.3.0-cp314-cp314t-macosx_10_13_x86_64.whl", hash = "sha256:940d56ee0410fa17ee1f12b817b37a4d4e4dc4d27340863cc67236c74f582e77"},
+    {file = "tomli-2.3.0-cp314-cp314t-macosx_11_0_arm64.whl", hash = "sha256:f85209946d1fe94416debbb88d00eb92ce9cd5266775424ff81bc959e001acaf"},
+    {file = "tomli-2.3.0-cp314-cp314t-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:a56212bdcce682e56b0aaf79e869ba5d15a6163f88d5451cbde388d48b13f530"},
+    {file = "tomli-2.3.0-cp314-cp314t-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:c5f3ffd1e098dfc032d4d3af5c0ac64f6d286d98bc148698356847b80fa4de1b"},
+    {file = "tomli-2.3.0-cp314-cp314t-musllinux_1_2_aarch64.whl", hash = "sha256:5e01decd096b1530d97d5d85cb4dff4af2d8347bd35686654a004f8dea20fc67"},
+    {file = "tomli-2.3.0-cp314-cp314t-musllinux_1_2_x86_64.whl", hash = "sha256:8a35dd0e643bb2610f156cca8db95d213a90015c11fee76c946aa62b7ae7e02f"},
+    {file = "tomli-2.3.0-cp314-cp314t-win32.whl", hash = "sha256:a1f7f282fe248311650081faafa5f4732bdbfef5d45fe3f2e702fbc6f2d496e0"},
+    {file = "tomli-2.3.0-cp314-cp314t-win_amd64.whl", hash = "sha256:70a251f8d4ba2d9ac2542eecf008b3c8a9fc5c3f9f02c56a9d7952612be2fdba"},
+    {file = "tomli-2.3.0-py3-none-any.whl", hash = "sha256:e95b1af3c5b07d9e643909b5abbec77cd9f1217e6d0bca72b0234736b9fb1f1b"},
+    {file = "tomli-2.3.0.tar.gz", hash = "sha256:64be704a875d2a59753d80ee8a533c3fe183e3f06807ff7dc2232938ccb01549"},
+]
+
+[[package]]
+name = "tornado"
+version = "6.5.4"
+description = "Tornado is a Python web framework and asynchronous networking library, originally developed at FriendFeed."
+optional = false
+python-versions = ">=3.9"
+groups = ["main", "examples"]
+files = [
+    {file = "tornado-6.5.4-cp39-abi3-macosx_10_9_universal2.whl", hash = "sha256:d6241c1a16b1c9e4cc28148b1cda97dd1c6cb4fb7068ac1bedc610768dff0ba9"},
+    {file = "tornado-6.5.4-cp39-abi3-macosx_10_9_x86_64.whl", hash = "sha256:2d50f63dda1d2cac3ae1fa23d254e16b5e38153758470e9956cbc3d813d40843"},
+    {file = "tornado-6.5.4-cp39-abi3-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:d1cf66105dc6acb5af613c054955b8137e34a03698aa53272dbda4afe252be17"},
+    {file = "tornado-6.5.4-cp39-abi3-manylinux_2_5_i686.manylinux1_i686.manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:50ff0a58b0dc97939d29da29cd624da010e7f804746621c78d14b80238669335"},
+    {file = "tornado-6.5.4-cp39-abi3-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:e5fb5e04efa54cf0baabdd10061eb4148e0be137166146fff835745f59ab9f7f"},
+    {file = "tornado-6.5.4-cp39-abi3-musllinux_1_2_aarch64.whl", hash = "sha256:9c86b1643b33a4cd415f8d0fe53045f913bf07b4a3ef646b735a6a86047dda84"},
+    {file = "tornado-6.5.4-cp39-abi3-musllinux_1_2_i686.whl", hash = "sha256:6eb82872335a53dd063a4f10917b3efd28270b56a33db69009606a0312660a6f"},
+    {file = "tornado-6.5.4-cp39-abi3-musllinux_1_2_x86_64.whl", hash = "sha256:6076d5dda368c9328ff41ab5d9dd3608e695e8225d1cd0fd1e006f05da3635a8"},
+    {file = "tornado-6.5.4-cp39-abi3-win32.whl", hash = "sha256:1768110f2411d5cd281bac0a090f707223ce77fd110424361092859e089b38d1"},
+    {file = "tornado-6.5.4-cp39-abi3-win_amd64.whl", hash = "sha256:fa07d31e0cd85c60713f2b995da613588aa03e1303d75705dca6af8babc18ddc"},
+    {file = "tornado-6.5.4-cp39-abi3-win_arm64.whl", hash = "sha256:053e6e16701eb6cbe641f308f4c1a9541f91b6261991160391bfc342e8a551a1"},
+    {file = "tornado-6.5.4.tar.gz", hash = "sha256:a22fa9047405d03260b483980635f0b041989d8bcc9a313f8fe18b411d84b1d7"},
+]
+
+[[package]]
+name = "traceloggingdynamic"
+version = "1.0.1"
+description = "Generates Event Tracing for Windows events using TraceLogging"
+optional = false
+python-versions = ">=3.6"
+groups = ["main"]
+markers = "sys_platform == \"win32\""
+files = [
+    {file = "traceloggingdynamic-1.0.1-py3-none-any.whl", hash = "sha256:0e19da491a8960725b3622366487ae35f49d8f595bb2e4e5ce1795eb5928db7c"},
+    {file = "traceloggingdynamic-1.0.1.tar.gz", hash = "sha256:d9dd4b291dd04c15e34181eed06f73fdf4ffa7b1f895b78217163def48ab1a52"},
+]
+
+[[package]]
+name = "types-grpcio"
+version = "1.0.0.20251009"
+description = "Typing stubs for grpcio"
+optional = false
+python-versions = ">=3.9"
+groups = ["dev"]
+files = [
+    {file = "types_grpcio-1.0.0.20251009-py3-none-any.whl", hash = "sha256:112ac4312a5b0a273a4c414f7f2c7668f342990d9c6ab0f647391c36331f95ed"},
+    {file = "types_grpcio-1.0.0.20251009.tar.gz", hash = "sha256:a8f615ea7a47b31f10da028ab5258d4f1611fbd70719ca450fc0ab3fb9c62b63"},
+]
+
+[[package]]
+name = "types-protobuf"
+version = "6.32.1.20251210"
+description = "Typing stubs for protobuf"
+optional = false
+python-versions = ">=3.9"
+groups = ["dev"]
+files = [
+    {file = "types_protobuf-6.32.1.20251210-py3-none-any.whl", hash = "sha256:2641f78f3696822a048cfb8d0ff42ccd85c25f12f871fbebe86da63793692140"},
+    {file = "types_protobuf-6.32.1.20251210.tar.gz", hash = "sha256:c698bb3f020274b1a2798ae09dc773728ce3f75209a35187bd11916ebfde6763"},
+]
+
+[[package]]
+name = "typing-extensions"
+version = "4.15.0"
+description = "Backported and Experimental Type Hints for Python 3.9+"
+optional = false
+python-versions = ">=3.9"
+groups = ["main", "docs", "examples", "lint", "test"]
+files = [
+    {file = "typing_extensions-4.15.0-py3-none-any.whl", hash = "sha256:f0fa19c6845758ab08074a0cfa8b7aecb71c999ca73d62883bc25cc018c4e548"},
+    {file = "typing_extensions-4.15.0.tar.gz", hash = "sha256:0cea48d173cc12fa28ecabc3b837ea3cf6f38c6d1136f85cbaaf598984861466"},
+]
+markers = {docs = "python_version == \"3.10\"", test = "python_version == \"3.10\""}
+
+[[package]]
+name = "tzdata"
+version = "2025.3"
+description = "Provider of IANA time zone data"
+optional = false
+python-versions = ">=2"
+groups = ["main", "examples"]
+files = [
+    {file = "tzdata-2025.3-py2.py3-none-any.whl", hash = "sha256:06a47e5700f3081aab02b2e513160914ff0694bce9947d6b76ebd6bf57cfc5d1"},
+    {file = "tzdata-2025.3.tar.gz", hash = "sha256:de39c2ca5dc7b0344f2eba86f49d614019d29f060fc4ebc8a417896a620b56a7"},
+]
+
+[[package]]
+name = "tzlocal"
+version = "5.3.1"
+description = "tzinfo object for the local timezone"
+optional = false
+python-versions = ">=3.9"
+groups = ["examples"]
+files = [
+    {file = "tzlocal-5.3.1-py3-none-any.whl", hash = "sha256:eb1a66c3ef5847adf7a834f1be0800581b683b5608e74f86ecbcef8ab91bb85d"},
+    {file = "tzlocal-5.3.1.tar.gz", hash = "sha256:cceffc7edecefea1f595541dbd6e990cb1ea3d19bf01b2809f362a03dd7921fd"},
+]
+
+[package.dependencies]
+tzdata = {version = "*", markers = "platform_system == \"Windows\""}
+
+[package.extras]
+devenv = ["check-manifest", "pytest (>=4.3)", "pytest-cov", "pytest-mock (>=3.3)", "zest.releaser"]
+
+[[package]]
+name = "urllib3"
+version = "2.6.3"
+description = "HTTP library with thread-safe connection pooling, file post, and more."
+optional = false
+python-versions = ">=3.9"
+groups = ["main", "docs", "examples"]
+files = [
+    {file = "urllib3-2.6.3-py3-none-any.whl", hash = "sha256:bf272323e553dfb2e87d9bfd225ca7b0f467b919d7bbd355436d3fd37cb0acd4"},
+    {file = "urllib3-2.6.3.tar.gz", hash = "sha256:1b62b6884944a57dbe321509ab94fd4d3b307075e0c2eae991ac71ee15ad38ed"},
+]
+
+[package.extras]
+brotli = ["brotli (>=1.2.0) ; platform_python_implementation == \"CPython\"", "brotlicffi (>=1.2.0.0) ; platform_python_implementation != \"CPython\""]
+h2 = ["h2 (>=4,<5)"]
+socks = ["pysocks (>=1.5.6,!=1.5.7,<2.0)"]
+zstd = ["backports-zstd (>=1.0.0) ; python_version < \"3.14\""]
+
+[[package]]
+name = "watchdog"
+version = "6.0.0"
+description = "Filesystem events monitoring"
+optional = false
+python-versions = ">=3.9"
+groups = ["main", "examples"]
+markers = "platform_system != \"Darwin\""
+files = [
+    {file = "watchdog-6.0.0-cp310-cp310-macosx_10_9_universal2.whl", hash = "sha256:d1cdb490583ebd691c012b3d6dae011000fe42edb7a82ece80965b42abd61f26"},
+    {file = "watchdog-6.0.0-cp310-cp310-macosx_10_9_x86_64.whl", hash = "sha256:bc64ab3bdb6a04d69d4023b29422170b74681784ffb9463ed4870cf2f3e66112"},
+    {file = "watchdog-6.0.0-cp310-cp310-macosx_11_0_arm64.whl", hash = "sha256:c897ac1b55c5a1461e16dae288d22bb2e412ba9807df8397a635d88f671d36c3"},
+    {file = "watchdog-6.0.0-cp311-cp311-macosx_10_9_universal2.whl", hash = "sha256:6eb11feb5a0d452ee41f824e271ca311a09e250441c262ca2fd7ebcf2461a06c"},
+    {file = "watchdog-6.0.0-cp311-cp311-macosx_10_9_x86_64.whl", hash = "sha256:ef810fbf7b781a5a593894e4f439773830bdecb885e6880d957d5b9382a960d2"},
+    {file = "watchdog-6.0.0-cp311-cp311-macosx_11_0_arm64.whl", hash = "sha256:afd0fe1b2270917c5e23c2a65ce50c2a4abb63daafb0d419fde368e272a76b7c"},
+    {file = "watchdog-6.0.0-cp312-cp312-macosx_10_13_universal2.whl", hash = "sha256:bdd4e6f14b8b18c334febb9c4425a878a2ac20efd1e0b231978e7b150f92a948"},
+    {file = "watchdog-6.0.0-cp312-cp312-macosx_10_13_x86_64.whl", hash = "sha256:c7c15dda13c4eb00d6fb6fc508b3c0ed88b9d5d374056b239c4ad1611125c860"},
+    {file = "watchdog-6.0.0-cp312-cp312-macosx_11_0_arm64.whl", hash = "sha256:6f10cb2d5902447c7d0da897e2c6768bca89174d0c6e1e30abec5421af97a5b0"},
+    {file = "watchdog-6.0.0-cp313-cp313-macosx_10_13_universal2.whl", hash = "sha256:490ab2ef84f11129844c23fb14ecf30ef3d8a6abafd3754a6f75ca1e6654136c"},
+    {file = "watchdog-6.0.0-cp313-cp313-macosx_10_13_x86_64.whl", hash = "sha256:76aae96b00ae814b181bb25b1b98076d5fc84e8a53cd8885a318b42b6d3a5134"},
+    {file = "watchdog-6.0.0-cp313-cp313-macosx_11_0_arm64.whl", hash = "sha256:a175f755fc2279e0b7312c0035d52e27211a5bc39719dd529625b1930917345b"},
+    {file = "watchdog-6.0.0-cp39-cp39-macosx_10_9_universal2.whl", hash = "sha256:e6f0e77c9417e7cd62af82529b10563db3423625c5fce018430b249bf977f9e8"},
+    {file = "watchdog-6.0.0-cp39-cp39-macosx_10_9_x86_64.whl", hash = "sha256:90c8e78f3b94014f7aaae121e6b909674df5b46ec24d6bebc45c44c56729af2a"},
+    {file = "watchdog-6.0.0-cp39-cp39-macosx_11_0_arm64.whl", hash = "sha256:e7631a77ffb1f7d2eefa4445ebbee491c720a5661ddf6df3498ebecae5ed375c"},
+    {file = "watchdog-6.0.0-pp310-pypy310_pp73-macosx_10_15_x86_64.whl", hash = "sha256:c7ac31a19f4545dd92fc25d200694098f42c9a8e391bc00bdd362c5736dbf881"},
+    {file = "watchdog-6.0.0-pp310-pypy310_pp73-macosx_11_0_arm64.whl", hash = "sha256:9513f27a1a582d9808cf21a07dae516f0fab1cf2d7683a742c498b93eedabb11"},
+    {file = "watchdog-6.0.0-pp39-pypy39_pp73-macosx_10_15_x86_64.whl", hash = "sha256:7a0e56874cfbc4b9b05c60c8a1926fedf56324bb08cfbc188969777940aef3aa"},
+    {file = "watchdog-6.0.0-pp39-pypy39_pp73-macosx_11_0_arm64.whl", hash = "sha256:e6439e374fc012255b4ec786ae3c4bc838cd7309a540e5fe0952d03687d8804e"},
+    {file = "watchdog-6.0.0-py3-none-manylinux2014_aarch64.whl", hash = "sha256:7607498efa04a3542ae3e05e64da8202e58159aa1fa4acddf7678d34a35d4f13"},
+    {file = "watchdog-6.0.0-py3-none-manylinux2014_armv7l.whl", hash = "sha256:9041567ee8953024c83343288ccc458fd0a2d811d6a0fd68c4c22609e3490379"},
+    {file = "watchdog-6.0.0-py3-none-manylinux2014_i686.whl", hash = "sha256:82dc3e3143c7e38ec49d61af98d6558288c415eac98486a5c581726e0737c00e"},
+    {file = "watchdog-6.0.0-py3-none-manylinux2014_ppc64.whl", hash = "sha256:212ac9b8bf1161dc91bd09c048048a95ca3a4c4f5e5d4a7d1b1a7d5752a7f96f"},
+    {file = "watchdog-6.0.0-py3-none-manylinux2014_ppc64le.whl", hash = "sha256:e3df4cbb9a450c6d49318f6d14f4bbc80d763fa587ba46ec86f99f9e6876bb26"},
+    {file = "watchdog-6.0.0-py3-none-manylinux2014_s390x.whl", hash = "sha256:2cce7cfc2008eb51feb6aab51251fd79b85d9894e98ba847408f662b3395ca3c"},
+    {file = "watchdog-6.0.0-py3-none-manylinux2014_x86_64.whl", hash = "sha256:20ffe5b202af80ab4266dcd3e91aae72bf2da48c0d33bdb15c66658e685e94e2"},
+    {file = "watchdog-6.0.0-py3-none-win32.whl", hash = "sha256:07df1fdd701c5d4c8e55ef6cf55b8f0120fe1aef7ef39a1c6fc6bc2e606d517a"},
+    {file = "watchdog-6.0.0-py3-none-win_amd64.whl", hash = "sha256:cbafb470cf848d93b5d013e2ecb245d4aa1c8fd0504e863ccefa32445359d680"},
+    {file = "watchdog-6.0.0-py3-none-win_ia64.whl", hash = "sha256:a1914259fa9e1454315171103c6a30961236f508b9b623eae470268bbcc6a22f"},
+    {file = "watchdog-6.0.0.tar.gz", hash = "sha256:9ddf7c82fda3ae8e24decda1338ede66e1c99883db93711d8fb941eaa2d8c282"},
+]
+
+[package.extras]
+watchmedo = ["PyYAML (>=3.10)"]
+
+[[package]]
+name = "wcwidth"
+version = "0.2.14"
+description = "Measures the displayed width of unicode strings in a terminal"
+optional = false
+python-versions = ">=3.6"
+groups = ["examples"]
+files = [
+    {file = "wcwidth-0.2.14-py2.py3-none-any.whl", hash = "sha256:a7bb560c8aee30f9957e5f9895805edd20602f2d7f720186dfd906e82b4982e1"},
+    {file = "wcwidth-0.2.14.tar.gz", hash = "sha256:4d478375d31bc5395a3c55c40ccdf3354688364cd61c4f6adacaa9215d0b3605"},
+]
+
+[metadata]
+lock-version = "2.1"
+python-versions = ">=3.10,<4.0"
+content-hash = "c2f2d0941e069a9c971a6a282167f5a029e956f8a92142c26274b15d611324ad"
+````
+
+<!--NI_OSS_SOURCE repo=nipanel-python path=poetry.toml sha256=ab9805d8c59ec531486a127a4ad51adf2eb61c352b456eedf24185b33661829e bytes=34 -->
+## FILE: poetry.toml
+
+- repository: `ni/nipanel-python`
+- source_path: `poetry.toml`
+- sha256: `ab9805d8c59ec531486a127a4ad51adf2eb61c352b456eedf24185b33661829e`
+- bytes: 34
+
+````toml
+[virtualenvs]
+in-project = true
+````
+
+<!--NI_OSS_SOURCE repo=nipanel-python path=pyproject.toml sha256=07ea81fc9a1c978b58c4e2e0321f8acf72547e76c032e010427dd8d3b4ac1643 bytes=3765 -->
+## FILE: pyproject.toml
+
+- repository: `ni/nipanel-python`
+- source_path: `pyproject.toml`
+- sha256: `07ea81fc9a1c978b58c4e2e0321f8acf72547e76c032e010427dd8d3b4ac1643`
+- bytes: 3765
+
+````toml
+[project]
+name = "nipanel"
+version = "1.1.0.dev0"
+license = "MIT"
+description = "NI Panel client for Python"
+authors = [{name = "NI", email = "opensource@ni.com"}]
+maintainers = [
+  {name = "Mike Prosser", email = "mike.prosser@emerson.com"},
+  {name = "Johann Scholtz", email = "johann.scholtz@emerson.com"},
+]
+readme = "README.md"
+keywords = ["nipanel", "panels"]
+classifiers = [
+  "Development Status :: 5 - Production/Stable",
+  "Intended Audience :: Developers",
+  "Intended Audience :: Manufacturing",
+  "Intended Audience :: Science/Research",
+  "License :: OSI Approved :: MIT License",
+  "Operating System :: Microsoft :: Windows",
+  "Operating System :: POSIX",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Programming Language :: Python :: Implementation :: CPython",
+]
+requires-python = ">=3.10"
+dynamic = ["dependencies"]
+
+[project.urls]
+repository = "https://github.com/ni/nipanel-python"
+
+[tool.poetry]
+packages = [{ include = "nipanel", from = "src" }]
+requires-poetry = '>=2.1,<3.0'
+
+[tool.poetry.dependencies]
+python = ">=3.10,<4.0"
+grpcio = {version=">=1.49.0,<2.0"}
+protobuf = {version=">=4.21"}
+typing-extensions = ">=4.13.2"
+streamlit = ">=1.24"
+nitypes = { version=">=1.0.1" }
+numpy = ">=1.22"
+debugpy = ">=1.8.1"
+ni-grpc-extensions = { version = ">=1.1.0" }
+ni-measurementlink-discovery-v1-client = { version = ">=1.1.0" }
+ni-protobuf-types = { version = ">=1.1.0" }
+ni-panels-v1-proto = { version = ">=1.0.0" }
+
+[tool.poetry.group.dev.dependencies]
+types-grpcio = ">=1.0"
+types-protobuf = ">=4.21"
+numpy = [
+  { version = ">=1.22", python = ">=3.10,<3.12" },
+  { version = ">=1.26", python = ">=3.12,<3.13" },
+  { version = ">=2.1", python = "^3.13" },
+]
+
+[tool.poetry.group.lint.dependencies]
+bandit = { version = ">=1.7", extras = ["toml"] }
+ni-python-styleguide = ">=0.4.1"
+mypy = ">=1.0"
+pyright = { version = ">=1.1.400", extras = ["nodejs"] }
+
+[tool.poetry.group.test.dependencies]
+pytest = ">=7.2"
+pytest-cov = ">=4.0"
+pytest-mock = ">=3.0"
+# Use a prerelease version of hightime for testing.
+hightime = { version = ">=0.2.2", allow-prereleases = true }
+
+[tool.poetry.group.docs]
+optional = true
+
+[tool.poetry.group.docs.dependencies]
+# The latest Sphinx requires a recent Python version.
+Sphinx = [
+  { version = ">=8.1", python = ">=3.10,<3.11" },
+  { version = ">=8.2", python = "^3.11" },
+]
+sphinx-rtd-theme = ">=1.0.0"
+sphinx-autoapi = ">=1.8.4"
+m2r2 = ">=0.3.2"
+toml = ">=0.10.2"
+
+[tool.poetry.group.examples]
+optional = true
+
+[tool.poetry.group.examples.dependencies]
+streamlit-echarts = ">=0.4.0"
+extra-streamlit-components = "^0.1.80"
+nidaqmx = { version = ">=1.4.0" }
+niscope = "^1.4.9"
+
+[build-system]
+requires = ["poetry-core>=2.1.0,<3.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.ni-python-styleguide]
+extend_exclude = ".tox,docs"
+application-import-names = "nipanel,tests"
+
+[tool.black]
+extend-exclude = '\.tox/|docs/'
+line-length = 100
+
+[tool.mypy]
+files = "examples/,src/nipanel/,tests/"
+namespace_packages = true
+strict = true
+
+[[tool.mypy.overrides]]
+module = [
+  "hightime.*",
+  "grpc.framework.foundation.*",
+  "streamlit_echarts.*",
+  # https://github.com/ni/nidaqmx-python/issues/209 - Support type annotations
+  "nidaqmx.*",
+  "niscope.*",
+]
+ignore_missing_imports = true
+
+[tool.bandit]
+skips = [
+  "B101", # assert_used
+]
+
+[tool.pytest.ini_options]
+addopts = "--doctest-modules --strict-markers"
+testpaths = ["src/nipanel", "tests"]
+
+[tool.pyright]
+include = ["examples/", "src/", "tests/"]
+````
+
+<!--NI_OSS_SOURCE repo=nipanel-python path=README.md sha256=5fa6123548679c8b434bfa91e4655afdb8aa5d238b9a898557507019005ec506 bytes=1001 -->
+## FILE: README.md
+
+- repository: `ni/nipanel-python`
+- source_path: `README.md`
+- sha256: `5fa6123548679c8b434bfa91e4655afdb8aa5d238b9a898557507019005ec506`
+- bytes: 1001
+
+````markdown
+# Table of Contents
+
+- [Table of Contents](#table-of-contents)
+- [About](#about)
+  - [Operating System Support](#operating-system-support)
+  - [Python Version Support](#python-version-support)
+  - [Installation](#installation)
+
+# About
+
+`nipanel` is a Python package that provides support for creating and controlling measurement and visualization panels.
+
+NI created and supports this package.
+
+## Operating System Support
+
+`nipanel` supports Windows and Linux operating systems.
+
+## Python Version Support
+
+`nipanel` supports CPython 3.10+.
+
+## Installation
+
+As a prerequisite to using the `nipanel` module, you must install InstrumentStudio 2026 Q1
+or later on your system. You can download and install this software using
+[NI Package Manager](https://www.ni.com/en/support/downloads/software-products/download.package-manager.html).
+
+You can directly install the `nipanel` package using `pip` or by listing it as a
+dependency in your project's `pyproject.toml` file.
+````
+
+<!--NI_OSS_SOURCE repo=nipanel-python path=SECURITY.md sha256=902fdb6117cc80678811544ea01d98ec9e3afdde21c15b3940883623f71efb11 bytes=1330 -->
+## FILE: SECURITY.md
+
+- repository: `ni/nipanel-python`
+- source_path: `SECURITY.md`
+- sha256: `902fdb6117cc80678811544ea01d98ec9e3afdde21c15b3940883623f71efb11`
+- bytes: 1330
+
+````markdown
+<!-- Begin NI SECURITY.md V1.0 -->
+
+# Security
+
+NI views the security of our software products as an important part of our commitment to our users.  This includes source code repositories managed through the [NI](https://github.com/ni) GitHub organization.
+
+## Reporting Security Issues
+
+We encourage you to report security vulnerabilities to us privately so we can follow the principle of [Coordinated Vulnerability Disclosure (CVD)](https://vuls.cert.org/confluence/display/CVD).  This allows us time to thoroughly investigate security issues and publicly disclose them when appropriate.
+
+**Please do not report security vulnerabilities through public GitHub issues.**
+
+Instead, please report them by sending an email to [security@ni.com](mailto:security@ni.com) with sufficient details about the type of issue, the impact of the issue, and how to reproduce the issue.  You may use the [NI PGP key](https://www.ni.com/en/support/security/pgp.html) to encrypt any sensitive communications you send to us. When you notify us of a potential security issue, our remediation process includes acknowledging receipt and coordinating any necessary response activities with you. 
+
+## Learn More
+
+To learn more about NI Security, please see [https://ni.com/security](https://ni.com/security)
+
+<!-- End NI SECURITY.md -->
+````
+
+<!--NI_OSS_SOURCE repo=nipanel-python path=src/nipanel/__init__.py sha256=cd1ae843711d489660a3941c17663def1aef4d7c001708d44552a1faed912335 bytes=628 -->
+## FILE: src/nipanel/__init__.py
+
+- repository: `ni/nipanel-python`
+- source_path: `src/nipanel/__init__.py`
+- sha256: `cd1ae843711d489660a3941c17663def1aef4d7c001708d44552a1faed912335`
+- bytes: 628
+
+````python
+"""The NI Panel."""
+
+from importlib.metadata import version
+
+from nipanel._panel_value_accessor import PanelValueAccessor
+from nipanel._streamlit_panel import StreamlitPanel
+from nipanel._streamlit_panel_initializer import (
+    create_streamlit_panel,
+    get_streamlit_panel_accessor,
+)
+
+__all__ = [
+    "create_streamlit_panel",
+    "get_streamlit_panel_accessor",
+    "PanelValueAccessor",
+    "StreamlitPanel",
+]
+
+# Hide that it was defined in a helper file
+PanelValueAccessor.__module__ = __name__
+StreamlitPanel.__module__ = __name__
+
+__version__ = version(__name__)
+"""nipanel version string."""
+````
+
+<!--NI_OSS_SOURCE repo=nipanel-python path=src/nipanel/_convert.py sha256=e133eccd2cb87393878b27f078f24bd4b0549b4ae2478330029267f25a99389f bytes=7068 -->
+## FILE: src/nipanel/_convert.py
+
+- repository: `ni/nipanel-python`
+- source_path: `src/nipanel/_convert.py`
+- sha256: `e133eccd2cb87393878b27f078f24bd4b0549b4ae2478330029267f25a99389f`
+- bytes: 7068
+
+````python
+"""Functions to convert between different data formats."""
+
+from __future__ import annotations
+
+import enum
+import logging
+from collections.abc import Collection
+from typing import Any, Iterable
+
+from google.protobuf import any_pb2
+from nitypes.vector import Vector
+from nitypes.waveform import AnalogWaveform, ComplexWaveform
+
+from nipanel.converters import Converter
+from nipanel.converters.builtin import (
+    BoolConverter,
+    BytesConverter,
+    DTDateTimeConverter,
+    DTTimeDeltaConverter,
+    FloatConverter,
+    IntConverter,
+    StrConverter,
+)
+from nipanel.converters.protobuf_types import (
+    BTDateTimeConverter,
+    BTTimeDeltaConverter,
+    BoolCollectionConverter,
+    BytesCollectionConverter,
+    DigitalWaveformConverter,
+    Double2DArrayConverter,
+    DoubleAnalogWaveformConverter,
+    DoubleComplexWaveformConverter,
+    DoubleSpectrumConverter,
+    FloatCollectionConverter,
+    HTDateTimeConverter,
+    HTTimeDeltaConverter,
+    Int16AnalogWaveformConverter,
+    Int16ComplexWaveformConverter,
+    IntCollectionConverter,
+    ScalarConverter,
+    StrCollectionConverter,
+    VectorConverter,
+)
+
+_logger = logging.getLogger(__name__)
+
+# FFV -- consider adding a RegisterConverter mechanism
+_CONVERTIBLE_TYPES: list[Converter[Any, Any]] = [
+    # Built-in Types
+    BoolConverter(),
+    BytesConverter(),
+    FloatConverter(),
+    IntConverter(),
+    StrConverter(),
+    DTDateTimeConverter(),
+    DTTimeDeltaConverter(),
+    # Protobuf Types
+    BTDateTimeConverter(),
+    BTTimeDeltaConverter(),
+    BoolCollectionConverter(),
+    BytesCollectionConverter(),
+    DigitalWaveformConverter(),
+    Double2DArrayConverter(),
+    DoubleAnalogWaveformConverter(),
+    DoubleComplexWaveformConverter(),
+    DoubleSpectrumConverter(),
+    FloatCollectionConverter(),
+    HTDateTimeConverter(),
+    HTTimeDeltaConverter(),
+    Int16AnalogWaveformConverter(),
+    Int16ComplexWaveformConverter(),
+    IntCollectionConverter(),
+    StrCollectionConverter(),
+    ScalarConverter(),
+    VectorConverter(),
+]
+
+_CONVERTER_FOR_PYTHON_TYPE = {entry.python_typename: entry for entry in _CONVERTIBLE_TYPES}
+_CONVERTER_FOR_GRPC_TYPE = {entry.protobuf_typename: entry for entry in _CONVERTIBLE_TYPES}
+_SUPPORTED_PYTHON_TYPES = _CONVERTER_FOR_PYTHON_TYPE.keys()
+
+_SKIPPED_COLLECTIONS = (
+    str,  # Handled by StrConverter
+    bytes,  # Handled by BytesConverter
+    dict,  # Unsupported data type
+    enum.Enum,  # Handled by IntConverter
+    Vector,  # Handled by VectorConverter
+)
+
+
+def to_any(python_value: object) -> any_pb2.Any:
+    """Convert a Python object to a protobuf Any."""
+    best_matching_type = _get_best_matching_type(python_value)
+    converter = _CONVERTER_FOR_PYTHON_TYPE[best_matching_type]
+    return converter.to_protobuf_any(python_value)
+
+
+def _get_best_matching_type(python_value: object) -> str:
+    underlying_parents = type(python_value).mro()  # This covers enum.IntEnum and similar
+    additional_info_string = _get_additional_type_info_string(python_value)
+
+    container_types = []
+    value_is_collection = _is_collection_for_convert(python_value)
+    # Variable to use when traversing down through collection types.
+    working_python_value = python_value
+    while value_is_collection:
+        # Assume Sized -- Generators not supported, callers must use list(), set(), ... as desired
+        if not isinstance(working_python_value, Collection):
+            raise TypeError()
+        if len(working_python_value) == 0:
+            underlying_parents = type(None).mro()
+            value_is_collection = False
+        else:
+            # Assume homogenous -- collections of mixed-types not supported
+            visitor = iter(working_python_value)
+
+            # Store off the first element. If it's a container, we'll need it in the next while
+            # loop iteration.
+            working_python_value = next(visitor)
+            underlying_parents = type(working_python_value).mro()
+
+            # If this element is a collection, we want to continue traversing. Once we find a
+            # non-collection, underlying_parents will refer to the candidates for the non-
+            # collection type.
+            value_is_collection = _is_collection_for_convert(working_python_value)
+        container_types.append(Collection)
+
+    best_matching_type = None
+    candidates = _get_candidate_strings(underlying_parents)
+    for candidate in candidates:
+        python_typename = _create_python_typename(
+            candidate, container_types, additional_info_string
+        )
+        if python_typename not in _SUPPORTED_PYTHON_TYPES:
+            continue
+        best_matching_type = python_typename
+        break
+
+    if not best_matching_type:
+        payload_type = underlying_parents[0]
+        raise TypeError(
+            f"Unsupported type: ({container_types}, {payload_type}) with parents "
+            f"{underlying_parents}.\n\nSupported types are: {_SUPPORTED_PYTHON_TYPES}"
+            f"\n\nAdditional type info: {additional_info_string}"
+        )
+    _logger.debug(f"Best matching type for '{repr(python_value)}' resolved to {best_matching_type}")
+    return best_matching_type
+
+
+def from_any(protobuf_any: any_pb2.Any) -> object:
+    """Convert a protobuf Any to a Python object."""
+    if not isinstance(protobuf_any, any_pb2.Any):
+        raise ValueError(f"Unexpected type: {type(protobuf_any)}")
+
+    underlying_typename = protobuf_any.TypeName()
+    _logger.debug(f"Unpacking type '{underlying_typename}'")
+
+    converter = _CONVERTER_FOR_GRPC_TYPE[underlying_typename]
+    return converter.to_python(protobuf_any)
+
+
+def is_supported_type(value: object) -> bool:
+    """Check if a given Python value can be converted to protobuf Any."""
+    try:
+        _get_best_matching_type(value)
+        return True
+    except TypeError:
+        return False
+
+
+def _get_candidate_strings(candidates: Iterable[type]) -> list[str]:
+    candidate_names = []
+    for candidate in candidates:
+        candidate_names.append(f"{candidate.__module__}.{candidate.__name__}")
+    return candidate_names
+
+
+def _create_python_typename(
+    candidate_name: str, container_types: Iterable[type], additional_info: str
+) -> str:
+    name = candidate_name
+    if additional_info:
+        name = f"{name}[{additional_info}]"
+    for container_type in container_types:
+        name = f"{container_type.__module__}.{container_type.__name__}[{name}]"
+    return name
+
+
+def _get_additional_type_info_string(python_value: object) -> str:
+    if isinstance(python_value, AnalogWaveform):
+        return str(python_value.dtype)
+    elif isinstance(python_value, ComplexWaveform):
+        return str(python_value.dtype)
+    else:
+        return ""
+
+
+def _is_collection_for_convert(python_value: object) -> bool:
+    return isinstance(python_value, Collection) and not isinstance(
+        python_value, _SKIPPED_COLLECTIONS
+    )
+````
+
+<!--NI_OSS_SOURCE repo=nipanel-python path=src/nipanel/_panel_client.py sha256=92a7f5ee6bc772402eb7609b20b96fe72a29f306d4a3f926e772de0eb528250f bytes=5543 -->
+## FILE: src/nipanel/_panel_client.py
+
+- repository: `ni/nipanel-python`
+- source_path: `src/nipanel/_panel_client.py`
+- sha256: `92a7f5ee6bc772402eb7609b20b96fe72a29f306d4a3f926e772de0eb528250f`
+- bytes: 5543
+
+````python
+from __future__ import annotations
+
+import logging
+import pathlib
+import threading
+from typing import Callable, TypeVar
+
+import grpc
+from google.protobuf.any_pb2 import Any
+from ni.measurementlink.discovery.v1.client import DiscoveryClient
+from ni.panels.v1.panel_service_pb2 import (
+    EnumeratePanelsRequest,
+    GetValueRequest,
+    SetValueRequest,
+    StartPanelRequest,
+    StopPanelRequest,
+    TryGetValueRequest,
+)
+from ni.panels.v1.panel_service_pb2_grpc import PanelServiceStub
+from ni.panels.v1.streamlit_panel_configuration_pb2 import StreamlitPanelConfiguration
+from ni_grpc_extensions.channelpool import GrpcChannelPool
+from typing_extensions import ParamSpec
+
+from nipanel._convert import (
+    from_any,
+    to_any,
+)
+
+_P = ParamSpec("_P")
+_T = TypeVar("_T")
+
+_logger = logging.getLogger(__name__)
+
+PANEL_SERVICE = "ni.panels.v1.PanelService"
+
+
+class _PanelClient:
+    def __init__(
+        self,
+        *,
+        discovery_client: DiscoveryClient | None = None,
+        grpc_channel_pool: GrpcChannelPool | None = None,
+        grpc_channel: grpc.Channel | None = None,
+    ) -> None:
+        self._initialization_lock = threading.Lock()
+        self._discovery_client = discovery_client
+        self._grpc_channel_pool = grpc_channel_pool
+        self._grpc_channel = grpc_channel
+        self._stub: PanelServiceStub | None = None
+
+    def start_streamlit_panel(
+        self, panel_id: str, panel_script_path: pathlib.Path, python_interpreter_path: pathlib.Path
+    ) -> str:
+
+        panel_script_url = panel_script_path.absolute().as_uri()
+        python_interpreter_url = python_interpreter_path.absolute().as_uri()
+        streamlit_panel_configuration = StreamlitPanelConfiguration(
+            panel_script_url=panel_script_url, python_interpreter_url=python_interpreter_url
+        )
+        panel_configuration_any = Any()
+        panel_configuration_any.Pack(streamlit_panel_configuration)
+        start_panel_request = StartPanelRequest(
+            panel_id=panel_id, panel_configuration=panel_configuration_any
+        )
+        response = self._invoke_with_retry(self._get_stub().StartPanel, start_panel_request)
+        return response.panel_url
+
+    def stop_panel(self, panel_id: str, reset: bool) -> None:
+        stop_panel_request = StopPanelRequest(panel_id=panel_id, reset=reset)
+        self._invoke_with_retry(self._get_stub().StopPanel, stop_panel_request)
+
+    def enumerate_panels(self) -> dict[str, tuple[str, list[str]]]:
+        enumerate_panels_request = EnumeratePanelsRequest()
+        response = self._invoke_with_retry(
+            self._get_stub().EnumeratePanels, enumerate_panels_request
+        )
+        return {
+            panel.panel_id: (panel.panel_url, list(panel.value_ids)) for panel in response.panels
+        }
+
+    def set_value(self, panel_id: str, value_id: str, value: object, notify: bool) -> None:
+        new_any = to_any(value)
+        set_value_request = SetValueRequest(
+            panel_id=panel_id, value_id=value_id, value=new_any, notify=notify
+        )
+        self._invoke_with_retry(self._get_stub().SetValue, set_value_request)
+
+    def get_value(self, panel_id: str, value_id: str) -> object:
+        get_value_request = GetValueRequest(panel_id=panel_id, value_id=value_id)
+        response = self._invoke_with_retry(self._get_stub().GetValue, get_value_request)
+        return from_any(response.value)
+
+    def try_get_value(self, panel_id: str, value_id: str) -> object | None:
+        try_get_value_request = TryGetValueRequest(panel_id=panel_id, value_id=value_id)
+        response = self._invoke_with_retry(self._get_stub().TryGetValue, try_get_value_request)
+        if response.HasField("value"):
+            return from_any(response.value)
+        else:
+            return None
+
+    def _get_stub(self) -> PanelServiceStub:
+        if self._stub is None:
+            if self._grpc_channel is not None:
+                self._stub = PanelServiceStub(self._grpc_channel)
+            else:
+                with self._initialization_lock:
+                    if self._grpc_channel_pool is None:
+                        _logger.debug("Creating unshared GrpcChannelPool.")
+                        self._grpc_channel_pool = GrpcChannelPool()
+                    if self._discovery_client is None:
+                        _logger.debug("Creating unshared DiscoveryClient.")
+                        self._discovery_client = DiscoveryClient(
+                            grpc_channel_pool=self._grpc_channel_pool
+                        )
+
+                    service_location = self._discovery_client.resolve_service(
+                        provided_interface=PANEL_SERVICE
+                    )
+                    channel = self._grpc_channel_pool.get_channel(service_location.insecure_address)
+                    self._stub = PanelServiceStub(channel)
+        return self._stub
+
+    def _invoke_with_retry(
+        self, method: Callable[_P, _T], *args: _P.args, **kwargs: _P.kwargs
+    ) -> _T:
+        """Invoke a gRPC method with retry logic."""
+        try:
+            return method(*args, **kwargs)
+        except grpc.RpcError as e:
+            if e.code() == grpc.StatusCode.UNAVAILABLE or e.code() == grpc.StatusCode.UNKNOWN:
+                # if the service is unavailable, we can retry the connection
+                self._stub = None
+                return method(*args, **kwargs)
+            raise
+````
+
+<!--NI_OSS_SOURCE repo=nipanel-python path=src/nipanel/_panel_value_accessor.py sha256=d97979df652ad0a0767fbb5d1510a8e79abccdd8f6ebbb08a147b6608ce0b1d9 bytes=4911 -->
+## FILE: src/nipanel/_panel_value_accessor.py
+
+- repository: `ni/nipanel-python`
+- source_path: `src/nipanel/_panel_value_accessor.py`
+- sha256: `d97979df652ad0a0767fbb5d1510a8e79abccdd8f6ebbb08a147b6608ce0b1d9`
+- bytes: 4911
+
+````python
+from __future__ import annotations
+
+import collections
+import enum
+from abc import ABC
+from typing import TypeVar, overload
+
+import grpc
+import hightime as ht
+import nitypes.bintime as bt
+from ni.measurementlink.discovery.v1.client import DiscoveryClient
+from ni_grpc_extensions.channelpool import GrpcChannelPool
+from nitypes.time import convert_datetime, convert_timedelta
+
+from nipanel._panel_client import _PanelClient
+
+_T = TypeVar("_T")
+
+
+class PanelValueAccessor(ABC):
+    """This class allows you to access values for a panel's controls."""
+
+    __slots__ = [
+        "_panel_client",
+        "_panel_id",
+        "_notify_on_set_value",
+        "_last_values",
+        "__weakref__",
+    ]
+
+    def __init__(
+        self,
+        *,
+        panel_id: str,
+        notify_on_set_value: bool = True,
+        discovery_client: DiscoveryClient | None = None,
+        grpc_channel_pool: GrpcChannelPool | None = None,
+        grpc_channel: grpc.Channel | None = None,
+    ) -> None:
+        """Initialize the accessor."""
+        self._panel_client = _PanelClient(
+            discovery_client=discovery_client,
+            grpc_channel_pool=grpc_channel_pool,
+            grpc_channel=grpc_channel,
+        )
+        self._panel_id = panel_id
+        self._notify_on_set_value = notify_on_set_value
+        self._last_values: collections.defaultdict[str, object] = collections.defaultdict(
+            lambda: object()
+        )
+
+    @property
+    def panel_id(self) -> str:
+        """Read-only accessor for the panel ID."""
+        return self._panel_id
+
+    @overload
+    def get_value(self, value_id: str) -> object: ...
+
+    @overload
+    def get_value(self, value_id: str, default_value: _T) -> _T: ...
+
+    def get_value(self, value_id: str, default_value: _T | None = None) -> _T | object:
+        """Get the value for a control on the panel with an optional default value.
+
+        Args:
+            value_id: The id of the value
+            default_value: The default value to return if the value is not set
+
+        Returns:
+            The value, or the default value if not set. The returned value will
+            have the same type as default_value, if one was provided.
+
+        Raises:
+            KeyError: If the value is not set and no default value is provided
+        """
+        value = self._panel_client.try_get_value(self._panel_id, value_id)
+        if value is None:
+            if default_value is not None:
+                return default_value
+            raise KeyError(f"Value with id '{value_id}' not found on panel '{self._panel_id}'.")
+
+        if default_value is not None and not isinstance(value, type(default_value)):
+            if isinstance(default_value, enum.Enum):
+                enum_type = type(default_value)
+                return enum_type(value)
+
+            # The grpc converter always converts PrecisionTimestamp into ht.datetime, so
+            # we need to handle the case where they provide a bt.DateTime default by
+            # converting to bintime.
+            if isinstance(default_value, bt.DateTime) and isinstance(value, ht.datetime):
+                return convert_datetime(bt.DateTime, value)
+
+            # The grpc converter always converts PrecisionDuration into ht.timedelta, so
+            # we need to handle the case where they provide a bt.TimeDelta default by
+            # converting to bintime.
+            if isinstance(default_value, bt.TimeDelta) and isinstance(value, ht.timedelta):
+                return convert_timedelta(bt.TimeDelta, value)
+
+            # lists are allowed to not match, since sets and tuples are converted to lists
+            if not isinstance(value, list):
+                raise TypeError(
+                    f"Value type {type(value).__name__} does not match default value type {type(default_value).__name__}."
+                )
+
+        return value
+
+    def set_value(self, value_id: str, value: object) -> None:
+        """Set the value for a control on the panel.
+
+        Args:
+            value_id: The id of the value
+            value: The value
+        """
+        if isinstance(value, enum.Enum):
+            value = value.value
+
+        self._panel_client.set_value(
+            self._panel_id, value_id, value, notify=self._notify_on_set_value
+        )
+        self._last_values[value_id] = value
+
+    def set_value_if_changed(self, value_id: str, value: object) -> None:
+        """Set the value for a control on the panel only if it has changed since the last call.
+
+        This method helps reduce unnecessary updates when the value hasn't changed.
+
+        Args:
+            value_id: The id of the value
+            value: The value to set
+        """
+        if value != self._last_values[value_id]:
+            self.set_value(value_id, value)
+````
+
+<!--NI_OSS_SOURCE repo=nipanel-python path=src/nipanel/_streamlit_panel.py sha256=a6d27b2de1b11dbab9631b8d15ac059fc5125d95690e1671c77673ff8d3f26aa bytes=3818 -->
+## FILE: src/nipanel/_streamlit_panel.py
+
+- repository: `ni/nipanel-python`
+- source_path: `src/nipanel/_streamlit_panel.py`
+- sha256: `a6d27b2de1b11dbab9631b8d15ac059fc5125d95690e1671c77673ff8d3f26aa`
+- bytes: 3818
+
+````python
+from __future__ import annotations
+
+import sys
+from pathlib import Path
+from typing import final
+
+import grpc
+from ni.measurementlink.discovery.v1.client import DiscoveryClient
+from ni_grpc_extensions.channelpool import GrpcChannelPool
+
+from nipanel._panel_value_accessor import PanelValueAccessor
+
+
+@final
+class StreamlitPanel(PanelValueAccessor):
+    """This class allows you to open a Streamlit panel and specify values for its controls."""
+
+    __slots__ = ["_panel_script_path", "_panel_url"]
+
+    def __init__(
+        self,
+        panel_id: str,
+        panel_script_path: Path,
+        *,
+        discovery_client: DiscoveryClient | None = None,
+        grpc_channel_pool: GrpcChannelPool | None = None,
+        grpc_channel: grpc.Channel | None = None,
+    ) -> None:
+        """Create a panel using a Streamlit script for the user interface.
+
+        Args:
+            panel_id: A unique identifier for the panel.
+            panel_script_path: The file path of the Streamlit script.
+            discovery_client: An optional DiscoveryClient for service discovery.
+            grpc_channel_pool: An optional GrpcChannelPool for managing gRPC channels.
+            grpc_channel: An optional gRPC channel to use for communication with the panel service.
+
+        Returns:
+            A new StreamlitPanel instance.
+        """
+        super().__init__(
+            panel_id=panel_id,
+            discovery_client=discovery_client,
+            grpc_channel_pool=grpc_channel_pool,
+            grpc_channel=grpc_channel,
+        )
+        self._panel_script_path = panel_script_path
+        python_path = self._get_python_path()
+        self._panel_url = self._panel_client.start_streamlit_panel(
+            panel_id, panel_script_path, python_path
+        )
+
+    @property
+    def panel_script_path(self) -> Path:
+        """Read-only accessor for the streamlit script file path."""
+        return self._panel_script_path
+
+    @property
+    def panel_url(self) -> str:
+        """Read-only accessor for the panel's streamlit webpage URL."""
+        return self._panel_url
+
+    def _get_python_path(self) -> Path:
+        """Get the Python interpreter path for the panel that ensures the same environment."""
+        if sys.executable is None or sys.executable == "":
+            raise RuntimeError("Python environment not found")
+        if getattr(sys, "frozen", False):
+            raise RuntimeError("Panel cannot be used in a frozen application (e.g., PyInstaller).")
+
+        if sys.prefix != sys.base_prefix:
+            # If we're in a virtual environment, build the path to the Python executable
+            # On Linux: .venv/bin/python, On Windows: .venv\Scripts\python.exe
+            if sys.platform.startswith("win"):
+                python_executable = "python.exe"
+                bin_dir = "Scripts"
+            else:
+                python_executable = "python"
+                bin_dir = "bin"
+
+            # Construct path to the Python in the virtual environment based on sys.prefix
+            python_path = Path(sys.prefix) / bin_dir / python_executable
+
+            # Fall back to sys.executable if the constructed path doesn't exist
+            if not python_path.exists():
+                python_path = Path(sys.executable).resolve()
+        else:
+            # If not in a .venv environment, use sys.executable
+            python_path = Path(sys.executable).resolve()
+
+        if python_path.is_relative_to(Path(sys.prefix)) is False:
+            # Ensure the Python path is within the current environment
+            raise RuntimeError(
+                f"Python path '{python_path}' does not match the current environment prefix '{sys.prefix}'."
+            )
+
+        return python_path
+````
+
+<!--NI_OSS_SOURCE repo=nipanel-python path=src/nipanel/_streamlit_panel_initializer.py sha256=266a901b3b2d4065678f1d1638392531bbb3d1ce5c17bb7d9ff5d8510879f01d bytes=4073 -->
+## FILE: src/nipanel/_streamlit_panel_initializer.py
+
+- repository: `ni/nipanel-python`
+- source_path: `src/nipanel/_streamlit_panel_initializer.py`
+- sha256: `266a901b3b2d4065678f1d1638392531bbb3d1ce5c17bb7d9ff5d8510879f01d`
+- bytes: 4073
+
+````python
+from pathlib import Path
+from typing import cast
+
+import streamlit as st
+
+from nipanel._convert import is_supported_type
+from nipanel._panel_value_accessor import PanelValueAccessor
+from nipanel._streamlit_panel import StreamlitPanel
+from nipanel.streamlit_refresh import initialize_refresh_component
+
+PANEL_ACCESSOR_KEY = "StreamlitPanelValueAccessor"
+
+
+def create_streamlit_panel(streamlit_script_path: Path, panel_id: str = "") -> StreamlitPanel:
+    """Create a Streamlit panel with the specified script path.
+
+    This function initializes a Streamlit panel using the provided script path. By default, it
+    derives the panel ID from the script's path, which it expects to be a valid Streamlit script.
+    For example, if the value for streamlit_script_path is "c:/example/some_example.py", then the
+    panel's ID becomes "some_example". Alternatively, you can specify a custom panel_id.
+
+    Use this function when you want to create a new panel instance to use in a Streamlit
+    application. Do not call this function from within a Streamlit script.
+
+    Args:
+        streamlit_script_path: The file path of the Streamlit script to be used for the panel.
+        panel_id: Optional custom panel ID. If not provided, it will be derived from the script
+            path.
+
+    Returns:
+        A StreamlitPanel instance initialized with the given panel ID.
+    """
+    if st.get_option("server.baseUrlPath") != "":
+        raise RuntimeError(
+            "nipanel.create_panel() should not be called from a Streamlit script. Call nipanel.get_panel_accessor() instead."
+        )
+    if not isinstance(streamlit_script_path, Path):
+        raise TypeError("The provided script path must be a pathlib.Path instance.")
+
+    if streamlit_script_path.suffix != ".py":
+        raise ValueError(
+            "The provided script path must be a valid Streamlit script ending with '.py'."
+        )
+
+    if not panel_id:
+        panel_id = streamlit_script_path.stem
+
+    return StreamlitPanel(panel_id, streamlit_script_path)
+
+
+def get_streamlit_panel_accessor() -> PanelValueAccessor:
+    """Initialize and return the Streamlit panel value accessor.
+
+    This function retrieves the Streamlit panel value accessor for the current Streamlit script.
+    This function should only be called from within a Streamlit script. The accessor will be cached
+    in the Streamlit session state to ensure that it is reused across reruns of the script.
+
+    Returns:
+        A PanelValueAccessor instance for the current panel.
+    """
+    if st.get_option("server.baseUrlPath") == "":
+        raise RuntimeError(
+            "nipanel.get_panel_accessor() should only be called from a Streamlit script. Call nipanel.create_panel() instead."
+        )
+
+    if PANEL_ACCESSOR_KEY not in st.session_state:
+        st.session_state[PANEL_ACCESSOR_KEY] = _initialize_panel_from_base_path()
+
+    panel = cast(PanelValueAccessor, st.session_state[PANEL_ACCESSOR_KEY])
+    _sync_session_state(panel)
+    refresh_component = initialize_refresh_component(panel.panel_id)
+    refresh_component()
+    return panel
+
+
+def _initialize_panel_from_base_path() -> PanelValueAccessor:
+    """Validate and parse the Streamlit base URL path and return a PanelValueAccessor."""
+    base_url_path = st.get_option("server.baseUrlPath")
+    if not base_url_path.startswith("/"):
+        raise ValueError("Invalid or missing Streamlit server.baseUrlPath option.")
+    panel_id = base_url_path.split("/")[-1]
+    if not panel_id:
+        raise ValueError(f"Panel ID is empty in baseUrlPath: '{base_url_path}'")
+    return PanelValueAccessor(
+        panel_id=panel_id,
+        notify_on_set_value=False,
+    )
+
+
+def _sync_session_state(panel: PanelValueAccessor) -> None:
+    """Automatically read keyed control values from the session state."""
+    for key in st.session_state.keys():
+        value = st.session_state[key]
+        if is_supported_type(value):
+            panel.set_value_if_changed(str(key), value)
+````
+
+<!--NI_OSS_SOURCE repo=nipanel-python path=src/nipanel/controls/__init__.py sha256=2b9face48ea294809abd6fff1cac864c0e4f584abdb17a625721b99bb6e892d5 bytes=206 -->
+## FILE: src/nipanel/controls/__init__.py
+
+- repository: `ni/nipanel-python`
+- source_path: `src/nipanel/controls/__init__.py`
+- sha256: `2b9face48ea294809abd6fff1cac864c0e4f584abdb17a625721b99bb6e892d5`
+- bytes: 206
+
+````python
+"""Controls for nipanel."""
+
+from nipanel.controls._enum_selectbox import enum_selectbox
+from nipanel.controls._flag_checkboxes import flag_checkboxes
+
+__all__ = ["enum_selectbox", "flag_checkboxes"]
+````
+
+<!--NI_OSS_SOURCE repo=nipanel-python path=src/nipanel/controls/_enum_selectbox.py sha256=c5826475fd2789ba9b7b04d7c1b9e1961fe30f0d1854eed9484494e94d5913db bytes=1687 -->
+## FILE: src/nipanel/controls/_enum_selectbox.py
+
+- repository: `ni/nipanel-python`
+- source_path: `src/nipanel/controls/_enum_selectbox.py`
+- sha256: `c5826475fd2789ba9b7b04d7c1b9e1961fe30f0d1854eed9484494e94d5913db`
+- bytes: 1687
+
+````python
+"""A selectbox that allows selecting an Enum value."""
+
+from enum import Enum
+from typing import Any, Callable, TypeVar
+
+import streamlit as st
+
+from nipanel._panel_value_accessor import PanelValueAccessor
+
+TEnumType = TypeVar("TEnumType", bound=Enum)
+
+
+def enum_selectbox(
+    panel: PanelValueAccessor,
+    label: str,
+    value: TEnumType,
+    key: str,
+    disabled: bool = False,
+    format_func: Callable[[Any], str] = lambda x: x[0],
+) -> TEnumType:
+    """Create a selectbox for an Enum.
+
+    The selectbox will display the names of all the enum values, and when a value is selected,
+    that value will be stored in the panel under the specified key.
+
+    Args:
+        panel: The panel
+        label: Label to display for the selectbox
+        value: The default enum value to select (also determines the specific enum type)
+        key: Key to use for storing the enum value in the panel
+
+    Returns:
+        The selected enum value of the same specific enum subclass as the input value
+    """
+    enum_class = type(value)
+    if not issubclass(enum_class, Enum):
+        raise TypeError(f"Expected an Enum type, got {type(value)}")
+
+    options = [(e.name, e.value) for e in enum_class]
+
+    default_index = 0
+    if value is not None:
+        for i, (name, _) in enumerate(options):
+            if name == value.name:
+                default_index = i
+                break
+
+    box_tuple = st.selectbox(
+        label, options=options, format_func=format_func, index=default_index, disabled=disabled
+    )
+    enum_value = enum_class[box_tuple[0]]
+    panel.set_value_if_changed(key, enum_value)
+    return enum_value
+````
+
+<!--NI_OSS_SOURCE repo=nipanel-python path=src/nipanel/controls/_flag_checkboxes.py sha256=b593459593f820ae8a8d2c51f4b5ce6597dc734ad8ef93bc228642a8b55a263e bytes=2700 -->
+## FILE: src/nipanel/controls/_flag_checkboxes.py
+
+- repository: `ni/nipanel-python`
+- source_path: `src/nipanel/controls/_flag_checkboxes.py`
+- sha256: `b593459593f820ae8a8d2c51f4b5ce6597dc734ad8ef93bc228642a8b55a263e`
+- bytes: 2700
+
+````python
+"""A set of checkboxes for selecting Flag enum values."""
+
+from enum import Flag
+from typing import TypeVar, Callable, Optional
+
+import streamlit as st
+
+from nipanel._panel_value_accessor import PanelValueAccessor
+
+TFlagType = TypeVar("TFlagType", bound=Flag)
+
+
+def flag_checkboxes(
+    panel: PanelValueAccessor,
+    label: str,
+    value: TFlagType,
+    key: str,
+    disabled_values: Optional[TFlagType] = None,
+    label_formatter: Callable[[Flag], str] = lambda x: str(x.name),
+) -> TFlagType:
+    """Create a set of checkboxes for a Flag enum.
+
+    This will display a checkbox for each individual flag value in the enum. When checkboxes
+    are selected or deselected, the combined Flag value will be stored in the panel under
+    the specified key.
+
+    Args:
+        panel: The panel
+        label: Label to display above the checkboxes
+        value: The default Flag enum value (also determines the specific Flag enum type)
+        key: Key to use for storing the Flag value in the panel
+        disabled_values: A Flag enum value indicating which flags should be disabled.
+                         If None or flag_type(0), no checkboxes are disabled.
+        label_formatter: Function that formats the flag to a string for display. Default
+                         uses flag.name.
+
+    Returns:
+        The selected Flag enum value with all selected flags combined
+    """
+    flag_type = type(value)
+    if not issubclass(flag_type, Flag):
+        raise TypeError(f"Expected a Flag enum type, got {type(value)}")
+
+    st.markdown(f"<small>{label}:</small>", unsafe_allow_html=True)
+
+    # Get all individual flag values (skip composite values and zero value)
+    flag_values = [
+        flag for flag in flag_type if flag.value & (flag.value - 1) == 0 and flag.value != 0
+    ]
+
+    # Create a container for flag checkboxes
+    flag_container = st.container(border=True)
+
+    # Use the provided value as the initial state for selected flags
+    selected_flags = value
+
+    # Create a checkbox for each flag
+    for flag in flag_values:
+        is_selected = bool(selected_flags & flag)
+
+        is_disabled = False
+        if disabled_values is not None:
+            is_disabled = bool(disabled_values & flag)
+
+        if flag_container.checkbox(
+            label=label_formatter(flag),
+            value=is_selected,
+            key=f"{key}_{flag.name}",
+            disabled=is_disabled,
+        ):
+            selected_flags |= flag
+        else:
+            selected_flags &= ~flag
+
+    # Store the selected flags in the panel
+    panel.set_value_if_changed(key, selected_flags)
+    return selected_flags
+````
+
+<!--NI_OSS_SOURCE repo=nipanel-python path=src/nipanel/converters/__init__.py sha256=138d06646aab93582a2b11647430856b904e6c121f176d1c4c51e675259008e2 bytes=4136 -->
+## FILE: src/nipanel/converters/__init__.py
+
+- repository: `ni/nipanel-python`
+- source_path: `src/nipanel/converters/__init__.py`
+- sha256: `138d06646aab93582a2b11647430856b904e6c121f176d1c4c51e675259008e2`
+- bytes: 4136
+
+````python
+"""Functions and classes to convert types between Python and protobuf."""
+
+from __future__ import annotations
+
+from abc import ABC, abstractmethod
+from collections.abc import Collection
+from typing import Generic, Type, TypeVar
+
+from google.protobuf import any_pb2
+from google.protobuf.message import Message
+
+_TItemType = TypeVar("_TItemType")
+_TPythonType = TypeVar("_TPythonType")
+_TProtobufType = TypeVar("_TProtobufType", bound=Message)
+
+
+class Converter(Generic[_TPythonType, _TProtobufType], ABC):
+    """A class that defines how to convert between Python objects and protobuf Any messages."""
+
+    @property
+    @abstractmethod
+    def python_type(self) -> type:
+        """The Python type that this converter handles."""
+
+    @property
+    def python_typename(self) -> str:
+        """The Python type name that this converter handles."""
+        return f"{self.python_type.__module__}.{self.python_type.__name__}"
+
+    @property
+    @abstractmethod
+    def protobuf_message(self) -> Type[_TProtobufType]:
+        """The type-specific protobuf message for the Python type."""
+
+    @property
+    def protobuf_typename(self) -> str:
+        """The protobuf name for the type."""
+        return self.protobuf_message.DESCRIPTOR.full_name  # type: ignore[no-any-return]
+
+    def to_protobuf_any(self, python_value: _TPythonType) -> any_pb2.Any:
+        """Convert the Python object to its type-specific message and pack it as any_pb2.Any."""
+        message = self.to_protobuf_message(python_value)
+        as_any = any_pb2.Any()
+        as_any.Pack(message)
+        return as_any
+
+    @abstractmethod
+    def to_protobuf_message(self, python_value: _TPythonType) -> _TProtobufType:
+        """Convert the Python object to its type-specific message."""
+
+    def to_python(self, protobuf_value: any_pb2.Any) -> _TPythonType:
+        """Convert the protobuf Any message to its matching Python type."""
+        protobuf_message = self.protobuf_message()
+        did_unpack = protobuf_value.Unpack(protobuf_message)
+        if not did_unpack:
+            raise ValueError(f"Failed to unpack Any with type '{protobuf_value.TypeName()}'")
+        return self.to_python_value(protobuf_message)
+
+    @abstractmethod
+    def to_python_value(self, protobuf_message: _TProtobufType) -> _TPythonType:
+        """Convert the protobuf wrapper message to its matching Python type."""
+
+
+class CollectionConverter(
+    Generic[_TItemType, _TProtobufType],
+    Converter[Collection[_TItemType], _TProtobufType],
+    ABC,
+):
+    """A converter between a collection of Python objects and protobuf Any messages."""
+
+    @property
+    @abstractmethod
+    def item_type(self) -> type:
+        """The Python item type that this converter handles."""
+
+    @property
+    def python_type(self) -> type:
+        """The Python type that this converter handles."""
+        return Collection
+
+    @property
+    def python_typename(self) -> str:
+        """The Python type name that this converter handles."""
+        return "{}[{}]".format(
+            f"{Collection.__module__}.{Collection.__name__}",
+            f"{self.item_type.__module__}.{self.item_type.__name__}",
+        )
+
+
+class CollectionConverter2D(
+    Generic[_TItemType, _TProtobufType],
+    Converter[Collection[Collection[_TItemType]], _TProtobufType],
+    ABC,
+):
+    """A converter between a 2D collection of Python objects and protobuf Any messages."""
+
+    @property
+    @abstractmethod
+    def item_type(self) -> type:
+        """The Python item type that this converter handles."""
+
+    @property
+    def python_type(self) -> type:
+        """The Python type that this converter handles."""
+        return Collection
+
+    @property
+    def python_typename(self) -> str:
+        """The Python type name that this converter handles."""
+        return "{}[{}[{}]]".format(
+            f"{Collection.__module__}.{Collection.__name__}",
+            f"{Collection.__module__}.{Collection.__name__}",
+            f"{self.item_type.__module__}.{self.item_type.__name__}",
+        )
+````
+
+<!--NI_OSS_SOURCE repo=nipanel-python path=src/nipanel/converters/builtin.py sha256=ede40ea18af4228128994628424386e4dd414466c87f95cfe6e99a2e1b17121e bytes=6432 -->
+## FILE: src/nipanel/converters/builtin.py
+
+- repository: `ni/nipanel-python`
+- source_path: `src/nipanel/converters/builtin.py`
+- sha256: `ede40ea18af4228128994628424386e4dd414466c87f95cfe6e99a2e1b17121e`
+- bytes: 6432
+
+````python
+"""Classes to convert between builtin Python scalars and containers."""
+
+import datetime as dt
+from typing import Type
+
+from google.protobuf import duration_pb2, timestamp_pb2, wrappers_pb2
+
+from nipanel.converters import Converter
+
+
+class BoolConverter(Converter[bool, wrappers_pb2.BoolValue]):
+    """A converter for boolean types."""
+
+    @property
+    def python_type(self) -> type:
+        """The Python type that this converter handles."""
+        return bool
+
+    @property
+    def protobuf_message(self) -> Type[wrappers_pb2.BoolValue]:
+        """The type-specific protobuf message for the Python type."""
+        return wrappers_pb2.BoolValue
+
+    def to_protobuf_message(self, python_value: bool) -> wrappers_pb2.BoolValue:
+        """Convert the Python bool to a protobuf wrappers_pb2.BoolValue."""
+        return self.protobuf_message(value=python_value)
+
+    def to_python_value(self, protobuf_message: wrappers_pb2.BoolValue) -> bool:
+        """Convert the protobuf message to a Python bool."""
+        return protobuf_message.value
+
+
+class BytesConverter(Converter[bytes, wrappers_pb2.BytesValue]):
+    """A converter for byte string types."""
+
+    @property
+    def python_type(self) -> type:
+        """The Python type that this converter handles."""
+        return bytes
+
+    @property
+    def protobuf_message(self) -> Type[wrappers_pb2.BytesValue]:
+        """The type-specific protobuf message for the Python type."""
+        return wrappers_pb2.BytesValue
+
+    def to_protobuf_message(self, python_value: bytes) -> wrappers_pb2.BytesValue:
+        """Convert the Python bytes string to a protobuf wrappers_pb2.BytesValue."""
+        return self.protobuf_message(value=python_value)
+
+    def to_python_value(self, protobuf_message: wrappers_pb2.BytesValue) -> bytes:
+        """Convert the protobuf message to a Python bytes string."""
+        return protobuf_message.value
+
+
+class FloatConverter(Converter[float, wrappers_pb2.DoubleValue]):
+    """A converter for floating point types."""
+
+    @property
+    def python_type(self) -> type:
+        """The Python type that this converter handles."""
+        return float
+
+    @property
+    def protobuf_message(self) -> Type[wrappers_pb2.DoubleValue]:
+        """The type-specific protobuf message for the Python type."""
+        return wrappers_pb2.DoubleValue
+
+    def to_protobuf_message(self, python_value: float) -> wrappers_pb2.DoubleValue:
+        """Convert the Python float to a protobuf wrappers_pb2.DoubleValue."""
+        return self.protobuf_message(value=python_value)
+
+    def to_python_value(self, protobuf_message: wrappers_pb2.DoubleValue) -> float:
+        """Convert the protobuf message to a Python float."""
+        return protobuf_message.value
+
+
+class IntConverter(Converter[int, wrappers_pb2.Int64Value]):
+    """A converter for integer types."""
+
+    @property
+    def python_type(self) -> type:
+        """The Python type that this converter handles."""
+        return int
+
+    @property
+    def protobuf_message(self) -> Type[wrappers_pb2.Int64Value]:
+        """The type-specific protobuf message for the Python type."""
+        return wrappers_pb2.Int64Value
+
+    def to_protobuf_message(self, python_value: int) -> wrappers_pb2.Int64Value:
+        """Convert the Python int to a protobuf wrappers_pb2.Int64Value."""
+        return self.protobuf_message(value=python_value)
+
+    def to_python_value(self, protobuf_message: wrappers_pb2.Int64Value) -> int:
+        """Convert the protobuf message to a Python int."""
+        return protobuf_message.value
+
+
+class StrConverter(Converter[str, wrappers_pb2.StringValue]):
+    """A converter for text string types."""
+
+    @property
+    def python_type(self) -> type:
+        """The Python type that this converter handles."""
+        return str
+
+    @property
+    def protobuf_message(self) -> Type[wrappers_pb2.StringValue]:
+        """The type-specific protobuf message for the Python type."""
+        return wrappers_pb2.StringValue
+
+    def to_protobuf_message(self, python_value: str) -> wrappers_pb2.StringValue:
+        """Convert the Python str to a protobuf wrappers_pb2.StringValue."""
+        return self.protobuf_message(value=python_value)
+
+    def to_python_value(self, protobuf_message: wrappers_pb2.StringValue) -> str:
+        """Convert the protobuf message to a Python string."""
+        return protobuf_message.value
+
+
+class DTDateTimeConverter(Converter[dt.datetime, timestamp_pb2.Timestamp]):
+    """A converter for datetime.datetime types."""
+
+    @property
+    def python_type(self) -> type:
+        """The Python type that this converter handles."""
+        return dt.datetime
+
+    @property
+    def protobuf_message(self) -> Type[timestamp_pb2.Timestamp]:
+        """The type-specific protobuf message for the Python type."""
+        return timestamp_pb2.Timestamp
+
+    def to_protobuf_message(self, python_value: dt.datetime) -> timestamp_pb2.Timestamp:
+        """Convert the Python dt.datetime to a protobuf timestamp_pb2.Timestamp."""
+        ts = self.protobuf_message()
+        ts.FromDatetime(python_value)
+        return ts
+
+    def to_python_value(self, protobuf_message: timestamp_pb2.Timestamp) -> dt.datetime:
+        """Convert the protobuf timestamp_pb2.Timestamp to a Python dt.datetime."""
+        return protobuf_message.ToDatetime()
+
+
+class DTTimeDeltaConverter(Converter[dt.timedelta, duration_pb2.Duration]):
+    """A converter for datetime.timedelta types."""
+
+    @property
+    def python_type(self) -> type:
+        """The Python type that this converter handles."""
+        return dt.timedelta
+
+    @property
+    def protobuf_message(self) -> Type[duration_pb2.Duration]:
+        """The type-specific protobuf message for the Python type."""
+        return duration_pb2.Duration
+
+    def to_protobuf_message(self, python_value: dt.timedelta) -> duration_pb2.Duration:
+        """Convert the Python dt.timedelta to a protobuf duration_pb2.Duration."""
+        dur = self.protobuf_message()
+        dur.FromTimedelta(python_value)
+        return dur
+
+    def to_python_value(self, protobuf_message: duration_pb2.Duration) -> dt.timedelta:
+        """Convert the protobuf timestamp_pb2.Timestamp to a Python dt.timedelta."""
+        return protobuf_message.ToTimedelta()
+````
+
+<!--NI_OSS_SOURCE repo=nipanel-python path=src/nipanel/converters/protobuf_types.py sha256=51c663956860f5e878e1a7120cead1abfd7481d931315ebbd10071413f4762a0 bytes=23517 -->
+## FILE: src/nipanel/converters/protobuf_types.py
+
+- repository: `ni/nipanel-python`
+- source_path: `src/nipanel/converters/protobuf_types.py`
+- sha256: `51c663956860f5e878e1a7120cead1abfd7481d931315ebbd10071413f4762a0`
+- bytes: 23517
+
+````python
+"""Classes to convert between measurement specific protobuf types and containers."""
+
+from __future__ import annotations
+
+from collections.abc import Collection
+from typing import Any, Type, Union
+
+import hightime as ht
+import nitypes.bintime as bt
+import numpy as np
+from ni.protobuf.types import (
+    array_pb2,
+    precision_duration_pb2,
+    precision_duration_conversion,
+    precision_timestamp_pb2,
+    precision_timestamp_conversion,
+    scalar_conversion,
+    scalar_pb2,
+    vector_pb2,
+    vector_conversion,
+    waveform_conversion,
+    waveform_pb2,
+)
+from nitypes.complex import ComplexInt32Base
+from nitypes.scalar import Scalar
+from nitypes.vector import Vector
+from nitypes.waveform import AnalogWaveform, ComplexWaveform, DigitalWaveform, Spectrum
+from typing_extensions import TypeAlias
+
+from nipanel.converters import Converter, CollectionConverter, CollectionConverter2D
+
+_AnyScalarType: TypeAlias = Union[bool, int, float, str]
+
+
+class BoolCollectionConverter(CollectionConverter[bool, array_pb2.BoolArray]):
+    """A converter for a Collection of bools."""
+
+    @property
+    def item_type(self) -> type:
+        """The Python type that this converter handles."""
+        return bool
+
+    @property
+    def protobuf_message(self) -> Type[array_pb2.BoolArray]:
+        """The type-specific protobuf message for the Python type."""
+        return array_pb2.BoolArray
+
+    def to_protobuf_message(self, python_value: Collection[bool]) -> array_pb2.BoolArray:
+        """Convert the collection of bools to array_pb2.BoolArray."""
+        return self.protobuf_message(values=python_value)
+
+    def to_python_value(self, protobuf_message: array_pb2.BoolArray) -> Collection[bool]:
+        """Convert the protobuf message to a Python collection of bools."""
+        return list(protobuf_message.values)
+
+
+class BytesCollectionConverter(CollectionConverter[bytes, array_pb2.BytesArray]):
+    """A converter for a Collection of byte strings."""
+
+    @property
+    def item_type(self) -> type:
+        """The Python type that this converter handles."""
+        return bytes
+
+    @property
+    def protobuf_message(self) -> Type[array_pb2.BytesArray]:
+        """The type-specific protobuf message for the Python type."""
+        return array_pb2.BytesArray
+
+    def to_protobuf_message(self, python_value: Collection[bytes]) -> array_pb2.BytesArray:
+        """Convert the collection of byte strings to array_pb2.BytesArray."""
+        return self.protobuf_message(values=python_value)
+
+    def to_python_value(self, protobuf_message: array_pb2.BytesArray) -> Collection[bytes]:
+        """Convert the protobuf message to a Python collection of byte strings."""
+        return list(protobuf_message.values)
+
+
+class FloatCollectionConverter(CollectionConverter[float, array_pb2.DoubleArray]):
+    """A converter for a Collection of floats."""
+
+    @property
+    def item_type(self) -> type:
+        """The Python type that this converter handles."""
+        return float
+
+    @property
+    def protobuf_message(self) -> Type[array_pb2.DoubleArray]:
+        """The type-specific protobuf message for the Python type."""
+        return array_pb2.DoubleArray
+
+    def to_protobuf_message(self, python_value: Collection[float]) -> array_pb2.DoubleArray:
+        """Convert the collection of floats to array_pb2.DoubleArray."""
+        return self.protobuf_message(values=python_value)
+
+    def to_python_value(self, protobuf_message: array_pb2.DoubleArray) -> Collection[float]:
+        """Convert the protobuf message to a Python collection of floats."""
+        return list(protobuf_message.values)
+
+
+class IntCollectionConverter(CollectionConverter[int, array_pb2.SInt64Array]):
+    """A converter for a Collection of integers."""
+
+    @property
+    def item_type(self) -> type:
+        """The Python type that this converter handles."""
+        return int
+
+    @property
+    def protobuf_message(self) -> Type[array_pb2.SInt64Array]:
+        """The type-specific protobuf message for the Python type."""
+        return array_pb2.SInt64Array
+
+    def to_protobuf_message(self, python_value: Collection[int]) -> array_pb2.SInt64Array:
+        """Convert the collection of integers to array_pb2.SInt64Array."""
+        return self.protobuf_message(values=python_value)
+
+    def to_python_value(self, protobuf_message: array_pb2.SInt64Array) -> Collection[int]:
+        """Convert the protobuf message to a Python collection of integers."""
+        return list(protobuf_message.values)
+
+
+class StrCollectionConverter(CollectionConverter[str, array_pb2.StringArray]):
+    """A converter for a Collection of strings."""
+
+    @property
+    def item_type(self) -> type:
+        """The Python type that this converter handles."""
+        return str
+
+    @property
+    def protobuf_message(self) -> Type[array_pb2.StringArray]:
+        """The type-specific protobuf message for the Python type."""
+        return array_pb2.StringArray
+
+    def to_protobuf_message(self, python_value: Collection[str]) -> array_pb2.StringArray:
+        """Convert the collection of strings to array_pb2.StringCollection."""
+        return self.protobuf_message(values=python_value)
+
+    def to_python_value(self, protobuf_message: array_pb2.StringArray) -> Collection[str]:
+        """Convert the protobuf message to a Python collection of strings."""
+        return list(protobuf_message.values)
+
+
+class Double2DArrayConverter(CollectionConverter2D[float, array_pb2.Double2DArray]):
+    """A converter between Collection[Collection[float]] and Double2DArray."""
+
+    @property
+    def item_type(self) -> type:
+        """The Python item type that this converter handles."""
+        return float
+
+    @property
+    def protobuf_message(self) -> Type[array_pb2.Double2DArray]:
+        """The type-specific protobuf message for the Python type."""
+        return array_pb2.Double2DArray
+
+    def to_protobuf_message(
+        self, python_value: Collection[Collection[float]]
+    ) -> array_pb2.Double2DArray:
+        """Convert the Python Collection[Collection[float]] to a protobuf Double2DArray."""
+        rows = len(python_value)
+        if rows:
+            visitor = iter(python_value)
+            first_subcollection = next(visitor)
+            columns = len(first_subcollection)
+        else:
+            columns = 0
+        if not all(len(subcollection) == columns for subcollection in python_value):
+            raise ValueError("All subcollections must have the same length.")
+
+        # Create a flat list in row major order.
+        flat_list = [item for subcollection in python_value for item in subcollection]
+        return array_pb2.Double2DArray(rows=rows, columns=columns, data=flat_list)
+
+    def to_python_value(
+        self, protobuf_message: array_pb2.Double2DArray
+    ) -> Collection[Collection[float]]:
+        """Convert the protobuf Double2DArray to a Python Collection[Collection[float]]."""
+        if not protobuf_message.data:
+            return []
+        if len(protobuf_message.data) % protobuf_message.columns != 0:
+            raise ValueError("The length of the data list must be divisible by num columns.")
+
+        # Convert from a flat list in row major order into a list of lists.
+        list_of_lists = []
+        for i in range(0, len(protobuf_message.data), protobuf_message.columns):
+            row = protobuf_message.data[i : i + protobuf_message.columns]
+            list_of_lists.append(row)
+
+        return list_of_lists
+
+
+class DoubleAnalogWaveformConverter(
+    Converter[AnalogWaveform[np.float64], waveform_pb2.DoubleAnalogWaveform]
+):
+    """A converter for AnalogWaveform types with double-precision data."""
+
+    @property
+    def python_type(self) -> type:
+        """The Python type that this converter handles."""
+        return AnalogWaveform
+
+    @property
+    def python_typename(self) -> str:
+        """The Python type name that this converter handles."""
+        base_typename = super().python_typename
+        return f"{base_typename}[float64]"
+
+    @property
+    def protobuf_message(self) -> Type[waveform_pb2.DoubleAnalogWaveform]:
+        """The type-specific protobuf message for the Python type."""
+        return waveform_pb2.DoubleAnalogWaveform
+
+    def to_protobuf_message(
+        self, python_value: AnalogWaveform[np.float64]
+    ) -> waveform_pb2.DoubleAnalogWaveform:
+        """Convert the Python AnalogWaveform to a protobuf DoubleAnalogWaveform."""
+        return waveform_conversion.float64_analog_waveform_to_protobuf(python_value)
+
+    def to_python_value(
+        self, protobuf_message: waveform_pb2.DoubleAnalogWaveform
+    ) -> AnalogWaveform[np.float64]:
+        """Convert the protobuf DoubleAnalogWaveform to a Python AnalogWaveform."""
+        return waveform_conversion.float64_analog_waveform_from_protobuf(protobuf_message)
+
+
+class Int16AnalogWaveformConverter(
+    Converter[AnalogWaveform[np.int16], waveform_pb2.I16AnalogWaveform]
+):
+    """A converter for AnalogWaveform types with 16-bit integer data."""
+
+    @property
+    def python_type(self) -> type:
+        """The Python type that this converter handles."""
+        return AnalogWaveform
+
+    @property
+    def python_typename(self) -> str:
+        """The Python type name that this converter handles."""
+        base_typename = super().python_typename
+        return f"{base_typename}[int16]"
+
+    @property
+    def protobuf_message(self) -> Type[waveform_pb2.I16AnalogWaveform]:
+        """The type-specific protobuf message for the Python type."""
+        return waveform_pb2.I16AnalogWaveform
+
+    def to_protobuf_message(
+        self, python_value: AnalogWaveform[np.int16]
+    ) -> waveform_pb2.I16AnalogWaveform:
+        """Convert the Python AnalogWaveform to a protobuf Int16AnalogWaveformConverter."""
+        return waveform_conversion.int16_analog_waveform_to_protobuf(python_value)
+
+    def to_python_value(
+        self, protobuf_message: waveform_pb2.I16AnalogWaveform
+    ) -> AnalogWaveform[np.int16]:
+        """Convert the protobuf Int16AnalogWaveformConverter to a Python AnalogWaveform."""
+        return waveform_conversion.int16_analog_waveform_from_protobuf(protobuf_message)
+
+
+class DoubleComplexWaveformConverter(
+    Converter[ComplexWaveform[np.complex128], waveform_pb2.DoubleComplexWaveform]
+):
+    """A converter for complex waveform types with 64-bit real and imaginary data."""
+
+    @property
+    def python_type(self) -> type:
+        """The Python type that this converter handles."""
+        return ComplexWaveform
+
+    @property
+    def python_typename(self) -> str:
+        """The Python type name that this converter handles."""
+        base_typename = super().python_typename
+        return f"{base_typename}[complex128]"
+
+    @property
+    def protobuf_message(self) -> Type[waveform_pb2.DoubleComplexWaveform]:
+        """The type-specific protobuf message for the Python type."""
+        return waveform_pb2.DoubleComplexWaveform
+
+    def to_protobuf_message(
+        self, python_value: ComplexWaveform[np.complex128]
+    ) -> waveform_pb2.DoubleComplexWaveform:
+        """Convert the Python ComplexWaveform to a protobuf DoubleComplexWaveform."""
+        return waveform_conversion.float64_complex_waveform_to_protobuf(python_value)
+
+    def to_python_value(
+        self, protobuf_message: waveform_pb2.DoubleComplexWaveform
+    ) -> ComplexWaveform[np.complex128]:
+        """Convert the protobuf DoubleComplexWaveform to a Python ComplexWaveform."""
+        return waveform_conversion.float64_complex_waveform_from_protobuf(protobuf_message)
+
+
+class Int16ComplexWaveformConverter(
+    Converter[ComplexWaveform[ComplexInt32Base], waveform_pb2.I16ComplexWaveform]
+):
+    """A converter for complex waveform types with 16-bit real and imaginary data."""
+
+    @property
+    def python_type(self) -> type:
+        """The Python type that this converter handles."""
+        return ComplexWaveform
+
+    @property
+    def python_typename(self) -> str:
+        """The Python type name that this converter handles."""
+        base_typename = super().python_typename
+        # Use the string representation of ComplexInt32DType
+        return f"{base_typename}[[('real', '<i2'), ('imag', '<i2')]]"
+
+    @property
+    def protobuf_message(self) -> Type[waveform_pb2.I16ComplexWaveform]:
+        """The type-specific protobuf message for the Python type."""
+        return waveform_pb2.I16ComplexWaveform
+
+    def to_protobuf_message(
+        self, python_value: ComplexWaveform[ComplexInt32Base]
+    ) -> waveform_pb2.I16ComplexWaveform:
+        """Convert the Python ComplexWaveform to a protobuf I16ComplexWaveform."""
+        return waveform_conversion.int16_complex_waveform_to_protobuf(python_value)
+
+    def to_python_value(
+        self, protobuf_message: waveform_pb2.I16ComplexWaveform
+    ) -> ComplexWaveform[ComplexInt32Base]:
+        """Convert the protobuf I16ComplexWaveform to a Python ComplexWaveform."""
+        return waveform_conversion.int16_complex_waveform_from_protobuf(protobuf_message)
+
+
+class DigitalWaveformConverter(Converter[DigitalWaveform[Any], waveform_pb2.DigitalWaveform]):
+    """A converter for digital waveform types."""
+
+    @property
+    def python_type(self) -> type:
+        """The Python type that this converter handles."""
+        return DigitalWaveform
+
+    @property
+    def protobuf_message(self) -> Type[waveform_pb2.DigitalWaveform]:
+        """The type-specific protobuf message for the Python type."""
+        return waveform_pb2.DigitalWaveform
+
+    def to_protobuf_message(
+        self, python_value: DigitalWaveform[Any]
+    ) -> waveform_pb2.DigitalWaveform:
+        """Convert the Python DigitalWaveform to a protobuf DigitalWaveform."""
+        return waveform_conversion.digital_waveform_to_protobuf(python_value)
+
+    def to_python_value(
+        self, protobuf_message: waveform_pb2.DigitalWaveform
+    ) -> DigitalWaveform[Any]:
+        """Convert the protobuf DigitalWaveform to a Python DigitalWaveform."""
+        return waveform_conversion.digital_waveform_from_protobuf(protobuf_message)
+
+
+class DoubleSpectrumConverter(Converter[Spectrum[np.float64], waveform_pb2.DoubleSpectrum]):
+    """A converter for spectrums with float64 data."""
+
+    @property
+    def python_type(self) -> type:
+        """The Python type that this converter handles."""
+        return Spectrum
+
+    @property
+    def protobuf_message(self) -> Type[waveform_pb2.DoubleSpectrum]:
+        """The type-specific protobuf message for the Python type."""
+        return waveform_pb2.DoubleSpectrum
+
+    def to_protobuf_message(
+        self, python_value: Spectrum[np.float64]
+    ) -> waveform_pb2.DoubleSpectrum:
+        """Convert the Python Spectrum to a protobuf DoubleSpectrum."""
+        return waveform_conversion.float64_spectrum_to_protobuf(python_value)
+
+    def to_python_value(
+        self, protobuf_message: waveform_pb2.DoubleSpectrum
+    ) -> Spectrum[np.float64]:
+        """Convert the protobuf DoubleSpectrum to a Python Spectrum."""
+        return waveform_conversion.float64_spectrum_from_protobuf(protobuf_message)
+
+
+class BTDateTimeConverter(Converter[bt.DateTime, precision_timestamp_pb2.PrecisionTimestamp]):
+    """A converter for bintime.DateTime types.
+
+    .. note:: The nipanel package will always convert PrecisionTimestamp messages to
+        hightime.datetime objects using HTDateTimeConverter. To use bintime.DateTime
+        values in a panel, you must pass a bintime.DateTime value for the default_value
+        parameter of the get_value() method on the panel.
+    """
+
+    @property
+    def python_type(self) -> type:
+        """The Python type that this converter handles."""
+        return bt.DateTime
+
+    @property
+    def protobuf_message(self) -> Type[precision_timestamp_pb2.PrecisionTimestamp]:
+        """The type-specific protobuf message for the Python type."""
+        return precision_timestamp_pb2.PrecisionTimestamp
+
+    @property
+    def protobuf_typename(self) -> str:
+        """The protobuf name for the type."""
+        # Override the base class here because there can only be one converter that
+        # converts PrecisionTimestamp objects. Since there are two converters that convert
+        # to PrecisionTimestamp, we have to choose one to handle conversion from protobuf.
+        # For the purposes of nipanel, we'll convert PrecisionTimestamp messages to
+        # hightime.datetime. See HTDateTimeConverter.
+        return "PrecisionTimestamp_Placeholder"
+
+    def to_protobuf_message(
+        self, python_value: bt.DateTime
+    ) -> precision_timestamp_pb2.PrecisionTimestamp:
+        """Convert the Python DateTime to a protobuf PrecisionTimestamp."""
+        return precision_timestamp_conversion.bintime_datetime_to_protobuf(python_value)
+
+    def to_python_value(
+        self, protobuf_message: precision_timestamp_pb2.PrecisionTimestamp
+    ) -> bt.DateTime:
+        """Convert the protobuf PrecisionTimestamp to a Python DateTime."""
+        return precision_timestamp_conversion.bintime_datetime_from_protobuf(protobuf_message)
+
+
+class BTTimeDeltaConverter(Converter[bt.TimeDelta, precision_duration_pb2.PrecisionDuration]):
+    """A converter for bintime.TimeDelta types.
+
+    .. note:: The nipanel package will always convert PrecisionDuration messages to
+        hightime.timedelta objects using HTTimeDeltaConverter. To use bintime.TimeDelta
+        values in a panel, you must pass a bintime.TimeDelta value for the default_value
+        parameter of the get_value() method on the panel.
+    """
+
+    @property
+    def python_type(self) -> type:
+        """The Python type that this converter handles."""
+        return bt.TimeDelta
+
+    @property
+    def protobuf_message(self) -> Type[precision_duration_pb2.PrecisionDuration]:
+        """The type-specific protobuf message for the Python type."""
+        return precision_duration_pb2.PrecisionDuration
+
+    @property
+    def protobuf_typename(self) -> str:
+        """The protobuf name for the type."""
+        # Override the base class here because there can only be one converter that
+        # converts PrecisionDuration objects. Since there are two converters that convert
+        # to PrecisionDuration, we have to choose one to handle conversion from protobuf.
+        # For the purposes of nipanel, we'll convert PrecisionDuration messages to
+        # hightime.timedelta. See HTTimeDeltaConverter.
+        return "PrecisionDuration_Placeholder"
+
+    def to_protobuf_message(
+        self, python_value: bt.TimeDelta
+    ) -> precision_duration_pb2.PrecisionDuration:
+        """Convert the Python TimeDelta to a protobuf PrecisionDuration."""
+        return precision_duration_conversion.bintime_timedelta_to_protobuf(python_value)
+
+    def to_python_value(
+        self, protobuf_message: precision_duration_pb2.PrecisionDuration
+    ) -> bt.TimeDelta:
+        """Convert the protobuf PrecisionDuration to a Python TimeDelta."""
+        return precision_duration_conversion.bintime_timedelta_from_protobuf(protobuf_message)
+
+
+class HTDateTimeConverter(Converter[ht.datetime, precision_timestamp_pb2.PrecisionTimestamp]):
+    """A converter for hightime.datetime objects."""
+
+    @property
+    def python_type(self) -> type:
+        """The Python type that this converter handles."""
+        return ht.datetime
+
+    @property
+    def protobuf_message(self) -> Type[precision_timestamp_pb2.PrecisionTimestamp]:
+        """The type-specific protobuf message for the Python type."""
+        return precision_timestamp_pb2.PrecisionTimestamp
+
+    def to_protobuf_message(
+        self, python_value: ht.datetime
+    ) -> precision_timestamp_pb2.PrecisionTimestamp:
+        """Convert the Python DateTime to a protobuf PrecisionTimestamp."""
+        return precision_timestamp_conversion.hightime_datetime_to_protobuf(python_value)
+
+    def to_python_value(
+        self, protobuf_message: precision_timestamp_pb2.PrecisionTimestamp
+    ) -> ht.datetime:
+        """Convert the protobuf PrecisionTimestamp to a Python DateTime."""
+        return precision_timestamp_conversion.hightime_datetime_from_protobuf(protobuf_message)
+
+
+class HTTimeDeltaConverter(Converter[ht.timedelta, precision_duration_pb2.PrecisionDuration]):
+    """A converter for hightime.timedelta objects."""
+
+    @property
+    def python_type(self) -> type:
+        """The Python type that this converter handles."""
+        return ht.timedelta
+
+    @property
+    def protobuf_message(self) -> Type[precision_duration_pb2.PrecisionDuration]:
+        """The type-specific protobuf message for the Python type."""
+        return precision_duration_pb2.PrecisionDuration
+
+    def to_protobuf_message(
+        self, python_value: ht.timedelta
+    ) -> precision_duration_pb2.PrecisionDuration:
+        """Convert the Python timedelta to a protobuf PrecisionDuration."""
+        return precision_duration_conversion.hightime_timedelta_to_protobuf(python_value)
+
+    def to_python_value(
+        self, protobuf_message: precision_duration_pb2.PrecisionDuration
+    ) -> ht.timedelta:
+        """Convert the protobuf PrecisionDuration to a Python timedelta."""
+        return precision_duration_conversion.hightime_timedelta_from_protobuf(protobuf_message)
+
+
+class ScalarConverter(Converter[Scalar[_AnyScalarType], scalar_pb2.Scalar]):
+    """A converter for Scalar objects."""
+
+    @property
+    def python_type(self) -> type:
+        """The Python type that this converter handles."""
+        return Scalar
+
+    @property
+    def protobuf_message(self) -> Type[scalar_pb2.Scalar]:
+        """The type-specific protobuf message for the Python type."""
+        return scalar_pb2.Scalar
+
+    def to_protobuf_message(self, python_value: Scalar[_AnyScalarType]) -> scalar_pb2.Scalar:
+        """Convert the Python Scalar to a protobuf scalar_pb2.Scalar."""
+        return scalar_conversion.scalar_to_protobuf(python_value)
+
+    def to_python_value(self, protobuf_message: scalar_pb2.Scalar) -> Scalar[_AnyScalarType]:
+        """Convert the protobuf message to a Python Scalar."""
+        return scalar_conversion.scalar_from_protobuf(protobuf_message)
+
+
+class VectorConverter(Converter[Vector[_AnyScalarType], vector_pb2.Vector]):
+    """A converter for Vector objects."""
+
+    @property
+    def python_type(self) -> type:
+        """The Python type that this converter handles."""
+        return Vector
+
+    @property
+    def protobuf_message(self) -> Type[vector_pb2.Vector]:
+        """The type-specific protobuf message for the Python type."""
+        return vector_pb2.Vector
+
+    def to_protobuf_message(self, python_value: Vector[Any]) -> vector_pb2.Vector:
+        """Convert the Python Vector to a protobuf vector_pb2.Vector."""
+        return vector_conversion.vector_to_protobuf(python_value)
+
+    def to_python_value(self, protobuf_message: vector_pb2.Vector) -> Vector[_AnyScalarType]:
+        """Convert the protobuf message to a Python Vector."""
+        return vector_conversion.vector_from_protobuf(protobuf_message)
+````
+
+<!--NI_OSS_SOURCE repo=nipanel-python path=src/nipanel/streamlit_refresh/__init__.py sha256=ddab76d586cea805bc6c31891829ecaece0874ff1ff2fd86bdc282f59b420c2c bytes=1520 -->
+## FILE: src/nipanel/streamlit_refresh/__init__.py
+
+- repository: `ni/nipanel-python`
+- source_path: `src/nipanel/streamlit_refresh/__init__.py`
+- sha256: `ddab76d586cea805bc6c31891829ecaece0874ff1ff2fd86bdc282f59b420c2c`
+- bytes: 1520
+
+````python
+"""Initializes a refresh component for Streamlit."""
+
+from __future__ import annotations
+
+import threading
+
+from ni.measurementlink.discovery.v1.client import DiscoveryClient
+from ni_grpc_extensions.channelpool import GrpcChannelPool
+from streamlit.components.v1 import declare_component
+from streamlit.components.v1.custom_component import CustomComponent
+
+
+_grpc_client_lock = threading.RLock()
+_panel_service_proxy_location: str | None = None
+
+
+def initialize_refresh_component(panel_id: str) -> CustomComponent:
+    """Initialize a refresh component to the Streamlit app."""
+    proxy_base_address = _get_or_resolve_proxy()
+    component_url = f"http://{proxy_base_address}/panel-service/refresh/{panel_id}"
+    _refresh_component_func = declare_component(
+        "panelRefreshComponent",
+        url=component_url,
+    )
+
+    return _refresh_component_func
+
+
+def _get_or_resolve_proxy() -> str:
+    with _grpc_client_lock:
+        global _panel_service_proxy_location
+        if _panel_service_proxy_location is None:
+            with GrpcChannelPool() as grpc_channel_pool:
+                discovery_client = DiscoveryClient(grpc_channel_pool=grpc_channel_pool)
+                service_location = discovery_client.resolve_service(
+                    provided_interface="ni.http1.proxy",
+                    service_class="",
+                )
+                _panel_service_proxy_location = service_location.insecure_address
+
+        return _panel_service_proxy_location
+````
+
+<!--NI_OSS_SOURCE repo=nipanel-python path=tests/__init__.py sha256=aa788da7c64944d892c5ff5dae953189cc9f4a06438368f4a5d0f9be85df47e1 bytes=40 -->
+## FILE: tests/__init__.py
+
+- repository: `ni/nipanel-python`
+- source_path: `tests/__init__.py`
+- sha256: `aa788da7c64944d892c5ff5dae953189cc9f4a06438368f4a5d0f9be85df47e1`
+- bytes: 40
+
+````python
+"""Tests for the `nipanel` package."""
+````
+
+<!--NI_OSS_SOURCE repo=nipanel-python path=tests/acceptance/__init__.py sha256=81601539e509b5223ea4108e856017e2da3180ce3cf975603e233117a47a6772 bytes=41 -->
+## FILE: tests/acceptance/__init__.py
+
+- repository: `ni/nipanel-python`
+- source_path: `tests/acceptance/__init__.py`
+- sha256: `81601539e509b5223ea4108e856017e2da3180ce3cf975603e233117a47a6772`
+- bytes: 41
+
+````python
+"""Acceptance tests for the project."""
+````
+
+<!--NI_OSS_SOURCE repo=nipanel-python path=tests/conftest.py sha256=8b273c4ae3eeebb883fafc51392a8f5e42a310c83694e7767ca1f23fbf0a7691 bytes=1480 -->
+## FILE: tests/conftest.py
+
+- repository: `ni/nipanel-python`
+- source_path: `tests/conftest.py`
+- sha256: `8b273c4ae3eeebb883fafc51392a8f5e42a310c83694e7767ca1f23fbf0a7691`
+- bytes: 1480
+
+````python
+"""Fixtures for testing."""
+
+from collections.abc import Generator
+from concurrent.futures import ThreadPoolExecutor
+from typing import cast
+
+import grpc
+import pytest
+from grpc.framework.foundation import logging_pool
+from ni.panels.v1.panel_service_pb2_grpc import PanelServiceStub
+
+from tests.utils._fake_python_panel_service import FakePythonPanelService
+
+
+@pytest.fixture
+def fake_python_panel_service() -> Generator[FakePythonPanelService]:
+    """Fixture to create a FakePythonPanelServicer for testing."""
+    with logging_pool.pool(max_workers=10) as thread_pool:
+        # _LoggingPool is not a ThreadPoolExecutor, but it's duck-typing compatible with one.
+        thread_pool = cast(ThreadPoolExecutor, thread_pool)
+        service = FakePythonPanelService()
+        service.start(thread_pool)
+        yield service
+        service.stop()
+
+
+@pytest.fixture
+def fake_panel_channel(
+    fake_python_panel_service: FakePythonPanelService,
+) -> Generator[grpc.Channel]:
+    """Fixture to get a channel to the FakePythonPanelService."""
+    service = fake_python_panel_service
+    channel = grpc.insecure_channel(f"localhost:{service.port}")
+    yield channel
+    channel.close()
+
+
+@pytest.fixture
+def python_panel_service_stub(
+    fake_panel_channel: grpc.Channel,
+) -> Generator[PanelServiceStub]:
+    """Fixture to get a PanelServiceStub, attached to a FakePythonPanelService."""
+    yield PanelServiceStub(fake_panel_channel)
+````
+
+<!--NI_OSS_SOURCE repo=nipanel-python path=tests/integration/__init__.py sha256=5f38282b48c242b837572c2af9b3468d917d1e55a016dde9a1641540e29f6bb0 bytes=42 -->
+## FILE: tests/integration/__init__.py
+
+- repository: `ni/nipanel-python`
+- source_path: `tests/integration/__init__.py`
+- sha256: `5f38282b48c242b837572c2af9b3468d917d1e55a016dde9a1641540e29f6bb0`
+- bytes: 42
+
+````python
+"""Integration tests for the package."""
+````
+
+<!--NI_OSS_SOURCE repo=nipanel-python path=tests/types.py sha256=33cce25a1b8431bf3f23b2bc33f14ca41ced752ddd9a2c8f9c2aedb6effc7b4e bytes=1572 -->
+## FILE: tests/types.py
+
+- repository: `ni/nipanel-python`
+- source_path: `tests/types.py`
+- sha256: `33cce25a1b8431bf3f23b2bc33f14ca41ced752ddd9a2c8f9c2aedb6effc7b4e`
+- bytes: 1572
+
+````python
+"""Types that exercise conversion to and from protobuf."""
+
+import enum
+import sys
+
+if sys.version_info >= (3, 11):
+    from enum import StrEnum
+else:
+
+    class StrEnum(str, enum.Enum):
+        """Example of a mixin string enum."""
+
+        pass
+
+
+class MyIntFlags(enum.IntFlag):
+    """Example of an IntFlag enum."""
+
+    VALUE1 = 1
+    VALUE2 = 2
+    VALUE4 = 4
+
+
+class MyIntableFlags(enum.Flag):
+    """Example of a simple flag with int values."""
+
+    VALUE8 = 8
+    VALUE16 = 16
+    VALUE32 = 32
+
+
+class MyIntEnum(enum.IntEnum):
+    """Example of an IntEnum enum."""
+
+    VALUE10 = 10
+    VALUE20 = 20
+    VALUE30 = 30
+
+
+class MixinIntEnum(int, enum.Enum):
+    """Example of an IntEnum using a mixin."""
+
+    VALUE11 = 11
+    VALUE22 = 22
+    VALUE33 = 33
+
+
+class MyStrEnum(StrEnum):
+    """Example of a StrEnum enum."""
+
+    VALUE1 = "value1"
+    VALUE2 = "value2"
+    VALUE3 = "value3"
+
+
+class MixinStrEnum(str, enum.Enum):
+    """Example of a StrEnum using a mixin."""
+
+    VALUE11 = "value11"
+    VALUE22 = "value22"
+    VALUE33 = "value33"
+
+
+class MyIntableEnum(enum.Enum):
+    """Example of a simple enum with int values."""
+
+    VALUE100 = 100
+    VALUE200 = 200
+    VALUE300 = 300
+
+
+class MyStringableEnum(StrEnum):
+    """Example of a simple enum with str values."""
+
+    VALUE1 = "value10"
+    VALUE2 = "value20"
+    VALUE3 = "value30"
+
+
+class MyMixedEnum(enum.Enum):
+    """Example of an enum with mixed values."""
+
+    VALUE1 = "value1"
+    VALUE2 = 2
+    VALUE3 = 3.0
+````
+
+<!--NI_OSS_SOURCE repo=nipanel-python path=tests/unit/__init__.py sha256=a905389e063e2a373169f6ba996bd9987465f2047647435988b637e6a7524a3b bytes=35 -->
+## FILE: tests/unit/__init__.py
+
+- repository: `ni/nipanel-python`
+- source_path: `tests/unit/__init__.py`
+- sha256: `a905389e063e2a373169f6ba996bd9987465f2047647435988b637e6a7524a3b`
+- bytes: 35
+
+````python
+"""Unit tests for the package."""
+````
+
+<!--NI_OSS_SOURCE repo=nipanel-python path=tests/unit/test_convert.py sha256=99d399fddb35f6f57d6a9441d41897f5225dae940db68c1c1d6978ac10cbcc86 bytes=27598 -->
+## FILE: tests/unit/test_convert.py
+
+- repository: `ni/nipanel-python`
+- source_path: `tests/unit/test_convert.py`
+- sha256: `99d399fddb35f6f57d6a9441d41897f5225dae940db68c1c1d6978ac10cbcc86`
+- bytes: 27598
+
+````python
+import datetime as dt
+from typing import Any, Collection, Union
+
+import hightime as ht
+import nitypes.bintime as bt
+import numpy as np
+import pytest
+from google.protobuf import any_pb2, duration_pb2, timestamp_pb2, wrappers_pb2
+from google.protobuf.message import Message
+from ni.protobuf.types import (
+    array_pb2,
+    attribute_value_pb2,
+    precision_duration_pb2,
+    precision_timestamp_pb2,
+    scalar_pb2,
+    vector_pb2,
+    waveform_pb2,
+)
+from nitypes.complex import ComplexInt32DType
+from nitypes.scalar import Scalar
+from nitypes.time import convert_datetime, convert_timedelta
+from nitypes.vector import Vector
+from nitypes.waveform import AnalogWaveform, ComplexWaveform, DigitalWaveform, Spectrum
+from typing_extensions import TypeAlias
+
+import nipanel._convert
+import tests.types
+
+_AnyWrappersPb2: TypeAlias = Union[
+    wrappers_pb2.BoolValue,
+    wrappers_pb2.BytesValue,
+    wrappers_pb2.DoubleValue,
+    wrappers_pb2.Int64Value,
+    wrappers_pb2.StringValue,
+]
+
+_AnyPanelPbTypes: TypeAlias = Union[
+    array_pb2.BoolArray,
+    array_pb2.BytesArray,
+    array_pb2.DoubleArray,
+    array_pb2.SInt64Array,
+    array_pb2.StringArray,
+]
+
+_BT_EPSILON = ht.timedelta(yoctoseconds=54210)
+
+
+# ========================================================
+# _get_best_matching_type() tests
+# ========================================================
+@pytest.mark.parametrize(
+    "python_object, expected_type_string",
+    [
+        (False, "builtins.bool"),
+        (b"mystr", "builtins.bytes"),
+        (456.2, "builtins.float"),
+        (123, "builtins.int"),
+        ("mystr", "builtins.str"),
+        (tests.types.MyIntFlags.VALUE1, "builtins.int"),
+        (tests.types.MyIntEnum.VALUE10, "builtins.int"),
+        (tests.types.MixinIntEnum.VALUE11, "builtins.int"),
+        (tests.types.MyStrEnum.VALUE1, "builtins.str"),
+        (tests.types.MixinStrEnum.VALUE11, "builtins.str"),
+        (dt.datetime.now(), "datetime.datetime"),
+        (dt.timedelta(days=1), "datetime.timedelta"),
+        (bt.DateTime.now(tz=dt.timezone.utc), "nitypes.bintime.DateTime"),
+        (bt.TimeDelta(seconds=1), "nitypes.bintime.TimeDelta"),
+        (ht.datetime.now(), "hightime.datetime"),
+        (ht.timedelta(days=1), "hightime.timedelta"),
+        ([False, False], "collections.abc.Collection[builtins.bool]"),
+        ([b"mystr", b"mystr"], "collections.abc.Collection[builtins.bytes]"),
+        ([456.2, 1.0], "collections.abc.Collection[builtins.float]"),
+        ([123, 456], "collections.abc.Collection[builtins.int]"),
+        (["mystr", "mystr"], "collections.abc.Collection[builtins.str]"),
+        ((False, False), "collections.abc.Collection[builtins.bool]"),
+        ((b"mystr", b"mystr"), "collections.abc.Collection[builtins.bytes]"),
+        ((456.2, 1.0), "collections.abc.Collection[builtins.float]"),
+        ((123, 456), "collections.abc.Collection[builtins.int]"),
+        (("mystr", "mystr"), "collections.abc.Collection[builtins.str]"),
+        ((False, False), "collections.abc.Collection[builtins.bool]"),
+        ((b"mystr", b"mystr"), "collections.abc.Collection[builtins.bytes]"),
+        ((456.2, 1.0), "collections.abc.Collection[builtins.float]"),
+        ((123, 456), "collections.abc.Collection[builtins.int]"),
+        (("mystr", "mystr"), "collections.abc.Collection[builtins.str]"),
+        (set([False, True]), "collections.abc.Collection[builtins.bool]"),
+        (set([b"mystr", b"mystr2"]), "collections.abc.Collection[builtins.bytes]"),
+        (set([456.2, 1.0]), "collections.abc.Collection[builtins.float]"),
+        (set([123, 456]), "collections.abc.Collection[builtins.int]"),
+        (set(["mystr", "mystr2"]), "collections.abc.Collection[builtins.str]"),
+        (frozenset([False, True]), "collections.abc.Collection[builtins.bool]"),
+        (frozenset([b"mystr", b"mystr2"]), "collections.abc.Collection[builtins.bytes]"),
+        (frozenset([456.2, 1.0]), "collections.abc.Collection[builtins.float]"),
+        (frozenset([123, 456]), "collections.abc.Collection[builtins.int]"),
+        (frozenset(["mystr", "mystr2"]), "collections.abc.Collection[builtins.str]"),
+        (
+            [[1.0, 2.0], [1.0, 2.0]],
+            "collections.abc.Collection[collections.abc.Collection[builtins.float]]",
+        ),
+        (
+            [(1.0, 2.0), (3.0, 4.0)],
+            "collections.abc.Collection[collections.abc.Collection[builtins.float]]",
+        ),
+        (
+            [set([1.0, 2.0]), set([3.0, 4.0])],
+            "collections.abc.Collection[collections.abc.Collection[builtins.float]]",
+        ),
+        (
+            [frozenset([1.0, 2.0]), frozenset([3.0, 4.0])],
+            "collections.abc.Collection[collections.abc.Collection[builtins.float]]",
+        ),
+        (
+            ([1.0, 2.0], [3.0, 4.0]),
+            "collections.abc.Collection[collections.abc.Collection[builtins.float]]",
+        ),
+        (
+            ((1.0, 2.0), (3.0, 4.0)),
+            "collections.abc.Collection[collections.abc.Collection[builtins.float]]",
+        ),
+        (
+            (set([1.0, 2.0]), set([3.0, 4.0])),
+            "collections.abc.Collection[collections.abc.Collection[builtins.float]]",
+        ),
+        (
+            (frozenset([1.0, 2.0]), frozenset([3.0, 4.0])),
+            "collections.abc.Collection[collections.abc.Collection[builtins.float]]",
+        ),
+        (
+            set([(1.0, 2.0), (3.0, 4.0)]),
+            "collections.abc.Collection[collections.abc.Collection[builtins.float]]",
+        ),
+        (
+            set([frozenset([1.0, 2.0]), frozenset([3.0, 4.0])]),
+            "collections.abc.Collection[collections.abc.Collection[builtins.float]]",
+        ),
+        (
+            frozenset([(1.0, 2.0), (3.0, 4.0)]),
+            "collections.abc.Collection[collections.abc.Collection[builtins.float]]",
+        ),
+        (
+            frozenset([frozenset([1.0, 2.0]), frozenset([3.0, 4.0])]),
+            "collections.abc.Collection[collections.abc.Collection[builtins.float]]",
+        ),
+        (AnalogWaveform(0, np.int16), "nitypes.waveform.AnalogWaveform[int16]"),
+        (AnalogWaveform(0, np.float64), "nitypes.waveform.AnalogWaveform[float64]"),
+        (ComplexWaveform(0, np.complex128), "nitypes.waveform.ComplexWaveform[complex128]"),
+        (
+            ComplexWaveform(0, ComplexInt32DType),
+            "nitypes.waveform.ComplexWaveform[[('real', '<i2'), ('imag', '<i2')]]",
+        ),
+        (DigitalWaveform(10, 2, np.bool, False), "nitypes.waveform.DigitalWaveform"),
+        (Spectrum(10, np.float64), "nitypes.waveform.Spectrum"),
+        (Scalar("one"), "nitypes.scalar.Scalar"),
+        (Vector([1, 2, 3]), "nitypes.vector.Vector"),
+    ],
+)
+def test___various_python_objects___get_best_matching_type___returns_correct_type_string(
+    python_object: object, expected_type_string: str
+) -> None:
+    type_string = nipanel._convert._get_best_matching_type(python_object)
+    assert type_string == expected_type_string
+
+
+# ========================================================
+# Built-in Types: Python to Protobuf
+# ========================================================
+@pytest.mark.parametrize(
+    "proto_type, default_value, expected_value",
+    [
+        (wrappers_pb2.BoolValue, False, True),
+        (wrappers_pb2.BytesValue, b"", b"mystr"),
+        (wrappers_pb2.DoubleValue, 0.0, 456.2),
+        (wrappers_pb2.Int64Value, 0, 123),
+        (wrappers_pb2.StringValue, "", "mystr"),
+    ],
+)
+def test___python_builtin_scalar___to_any___valid_wrapperpb2_value(
+    proto_type: type[_AnyWrappersPb2], default_value: Any, expected_value: Any
+) -> None:
+    result = nipanel._convert.to_any(expected_value)
+    unpack_dest = proto_type(value=default_value)
+    _assert_any_and_unpack(result, unpack_dest)
+
+    assert isinstance(unpack_dest, proto_type)
+    assert unpack_dest.value == expected_value
+
+
+def test___python_datetime_datetime___to_any___valid_timestamppb2_value() -> None:
+    expected_value = dt.datetime.now()
+    result = nipanel._convert.to_any(expected_value)
+    unpack_dest = timestamp_pb2.Timestamp()
+    _assert_any_and_unpack(result, unpack_dest)
+
+    assert isinstance(unpack_dest, timestamp_pb2.Timestamp)
+    assert unpack_dest.ToDatetime() == expected_value
+
+
+def test___python_datetime_timedelta___to_any___valid_durationpb2_value() -> None:
+    expected_value = dt.timedelta(days=1, seconds=2, microseconds=3)
+    result = nipanel._convert.to_any(expected_value)
+    unpack_dest = duration_pb2.Duration()
+    _assert_any_and_unpack(result, unpack_dest)
+
+    assert isinstance(unpack_dest, duration_pb2.Duration)
+    assert unpack_dest.ToTimedelta() == expected_value
+
+
+def test___none_value___to_any___raises_type_error() -> None:
+    """Test that passing None to to_any() raises a TypeError."""
+    with pytest.raises(TypeError):
+        nipanel._convert.to_any(None)
+
+
+# ========================================================
+# Built-in Types: Protobuf to Python
+# ========================================================
+@pytest.mark.parametrize(
+    "proto_type, expected_value",
+    [
+        (wrappers_pb2.BoolValue, True),
+        (wrappers_pb2.BytesValue, b"mystr"),
+        (wrappers_pb2.DoubleValue, 456.2),
+        (wrappers_pb2.Int64Value, 123),
+        (wrappers_pb2.StringValue, "mystr"),
+    ],
+)
+def test___wrapperpb2_value___from_any___valid_python_value(
+    proto_type: type[_AnyWrappersPb2], expected_value: Any
+) -> None:
+    pb_value = proto_type(value=expected_value)
+    packed_any = _pack_into_any(pb_value)
+
+    result = nipanel._convert.from_any(packed_any)
+
+    assert isinstance(result, type(expected_value))
+    assert result == expected_value
+
+
+def test___timestamppb2_timestamp___from_any___valid_python_value() -> None:
+    expected_value = dt.datetime.now()
+    pb_value = timestamp_pb2.Timestamp()
+    pb_value.FromDatetime(expected_value)
+    packed_any = _pack_into_any(pb_value)
+
+    result = nipanel._convert.from_any(packed_any)
+
+    assert isinstance(result, dt.datetime)
+    assert result == expected_value
+
+
+def test___durationpb2_timestamp___from_any___valid_python_value() -> None:
+    expected_value = dt.timedelta(weeks=1, hours=2, minutes=3)
+    pb_value = duration_pb2.Duration()
+    pb_value.FromTimedelta(expected_value)
+    packed_any = _pack_into_any(pb_value)
+
+    result = nipanel._convert.from_any(packed_any)
+
+    assert isinstance(result, dt.timedelta)
+    assert result == expected_value
+
+
+# ========================================================
+# Protobuf Types: Python to Protobuf
+# ========================================================
+@pytest.mark.parametrize(
+    "proto_type, default_value, expected_value",
+    [
+        (array_pb2.BoolArray, [False, False, False], [True, True, True]),
+        (array_pb2.BytesArray, [b"", b"", b""], [b"a", b"b", b"c"]),
+        (array_pb2.DoubleArray, [0.0, 0.0, 0.0], [1.0, 2.0, 3.0]),
+        (array_pb2.SInt64Array, [0, 0, 0], [1, 2, 3]),
+        (array_pb2.StringArray, ["", "", ""], ["a", "b", "c"]),
+    ],
+)
+def test___python_collection___to_any___valid_array_proto(
+    proto_type: type[_AnyPanelPbTypes], default_value: Any, expected_value: Any
+) -> None:
+    result = nipanel._convert.to_any(expected_value)
+    unpack_dest = proto_type(values=default_value)
+    _assert_any_and_unpack(result, unpack_dest)
+
+    assert isinstance(unpack_dest, proto_type)
+    assert unpack_dest.values == expected_value
+
+
+def test___python_scalar_object___to_any___valid_scalar_proto() -> None:
+    scalar_obj = Scalar(1.0, "amps")
+    result = nipanel._convert.to_any(scalar_obj)
+    unpack_dest = scalar_pb2.Scalar()
+    _assert_any_and_unpack(result, unpack_dest)
+
+    assert isinstance(unpack_dest, scalar_pb2.Scalar)
+    assert unpack_dest.double_value == 1.0
+    assert unpack_dest.attributes["NI_UnitDescription"].string_value == "amps"
+
+
+def test___python_vector_object___to_any___valid_vector_proto() -> None:
+    vector_obj = Vector([1.0, 2.0, 3.0], "amps")
+    result = nipanel._convert.to_any(vector_obj)
+    unpack_dest = vector_pb2.Vector()
+    _assert_any_and_unpack(result, unpack_dest)
+
+    assert isinstance(unpack_dest, vector_pb2.Vector)
+    assert list(unpack_dest.double_array.values) == [1.0, 2.0, 3.0]
+    assert unpack_dest.attributes["NI_UnitDescription"].string_value == "amps"
+
+
+def test___python_float64_analog_waveform___to_any___valid_double_analog_waveform_proto() -> None:
+    wfm_obj = AnalogWaveform(3, np.float64)
+    result = nipanel._convert.to_any(wfm_obj)
+    unpack_dest = waveform_pb2.DoubleAnalogWaveform()
+    _assert_any_and_unpack(result, unpack_dest)
+
+    assert isinstance(unpack_dest, waveform_pb2.DoubleAnalogWaveform)
+    assert list(unpack_dest.y_data) == [0.0, 0.0, 0.0]
+
+
+def test___python_int16_analog_waveform___to_any___valid_i16_analog_waveform_proto() -> None:
+    wfm_obj = AnalogWaveform(3, np.int16)
+    result = nipanel._convert.to_any(wfm_obj)
+    unpack_dest = waveform_pb2.I16AnalogWaveform()
+    _assert_any_and_unpack(result, unpack_dest)
+
+    assert isinstance(unpack_dest, waveform_pb2.I16AnalogWaveform)
+    assert list(unpack_dest.y_data) == [0, 0, 0]
+
+
+def test___python_float64_complex_waveform___to_any___valid_double_complex_waveform_proto() -> None:
+    wfm_obj = ComplexWaveform(2, np.complex128)
+    result = nipanel._convert.to_any(wfm_obj)
+    unpack_dest = waveform_pb2.DoubleComplexWaveform()
+    _assert_any_and_unpack(result, unpack_dest)
+
+    assert isinstance(unpack_dest, waveform_pb2.DoubleComplexWaveform)
+    assert list(unpack_dest.y_data) == [0.0, 0.0, 0.0, 0.0]
+
+
+def test___python_int16_complex_waveform___to_any___valid_i16_complex_waveform_proto() -> None:
+    wfm_obj = ComplexWaveform(2, ComplexInt32DType)
+    result = nipanel._convert.to_any(wfm_obj)
+    unpack_dest = waveform_pb2.I16ComplexWaveform()
+    _assert_any_and_unpack(result, unpack_dest)
+
+    assert isinstance(unpack_dest, waveform_pb2.I16ComplexWaveform)
+    assert list(unpack_dest.y_data) == [0, 0, 0, 0]
+
+
+def test___python_bool_digital_waveform___to_any___valid_digital_waveform_proto() -> None:
+    data = np.array([[0, 1, 0], [1, 0, 1]], dtype=np.bool)
+    wfm_obj = DigitalWaveform.from_lines(data, signal_count=3)
+
+    result = nipanel._convert.to_any(wfm_obj)
+    unpack_dest = waveform_pb2.DigitalWaveform()
+    _assert_any_and_unpack(result, unpack_dest)
+
+    assert isinstance(unpack_dest, waveform_pb2.DigitalWaveform)
+    assert unpack_dest.y_data == b"\x00\x01\x00\x01\x00\x01"
+    assert unpack_dest.signal_count == 3
+
+
+def test___python_uint8_digital_waveform___to_any___valid_digital_waveform_proto() -> None:
+    data = np.array([[0, 1, 3], [7, 5, 1]], dtype=np.uint8)
+    wfm_obj = DigitalWaveform.from_lines(data, signal_count=3)
+
+    result = nipanel._convert.to_any(wfm_obj)
+    unpack_dest = waveform_pb2.DigitalWaveform()
+    _assert_any_and_unpack(result, unpack_dest)
+
+    assert isinstance(unpack_dest, waveform_pb2.DigitalWaveform)
+    assert unpack_dest.y_data == b"\x00\x01\x03\x07\x05\x01"
+    assert unpack_dest.signal_count == 3
+
+
+def test___python_float64_spectrum___to_any___valid_double_spectrum_proto() -> None:
+    spectrum = Spectrum.from_array_1d(np.array([1.0, 2.0, 3.0]))
+    spectrum.start_frequency = 100.0
+    spectrum.frequency_increment = 10.0
+
+    result = nipanel._convert.to_any(spectrum)
+    unpack_dest = waveform_pb2.DoubleSpectrum()
+    _assert_any_and_unpack(result, unpack_dest)
+
+    assert isinstance(unpack_dest, waveform_pb2.DoubleSpectrum)
+    assert list(unpack_dest.data) == [1.0, 2.0, 3.0]
+    assert unpack_dest.start_frequency == 100.0
+    assert unpack_dest.frequency_increment == 10.0
+
+
+def test___python_bintime_datetime__to_any___valid_precision_timestamp_proto() -> None:
+    python_value = bt.DateTime(year=2020, month=1, day=10, second=45, tzinfo=dt.timezone.utc)
+
+    result = nipanel._convert.to_any(python_value)
+    unpack_dest = precision_timestamp_pb2.PrecisionTimestamp()
+    _assert_any_and_unpack(result, unpack_dest)
+
+    expected_tuple = python_value.to_tuple()
+    assert unpack_dest.seconds == expected_tuple.whole_seconds
+    assert unpack_dest.fractional_seconds == expected_tuple.fractional_seconds
+
+
+def test___python_bintime_timedelta__to_any___valid_precision_duration_proto() -> None:
+    python_value = bt.TimeDelta(seconds=12.345)
+
+    result = nipanel._convert.to_any(python_value)
+    unpack_dest = precision_duration_pb2.PrecisionDuration()
+    _assert_any_and_unpack(result, unpack_dest)
+
+    expected_tuple = python_value.to_tuple()
+    assert unpack_dest.seconds == expected_tuple.whole_seconds
+    assert unpack_dest.fractional_seconds == expected_tuple.fractional_seconds
+
+
+def test___python_hightime_datetime__to_any___valid_precision_timestamp_proto() -> None:
+    python_value = ht.datetime(year=2020, month=1, day=10, second=45, tzinfo=dt.timezone.utc)
+
+    result = nipanel._convert.to_any(python_value)
+    unpack_dest = precision_timestamp_pb2.PrecisionTimestamp()
+    _assert_any_and_unpack(result, unpack_dest)
+
+    expected_bt_datetime = convert_datetime(bt.DateTime, python_value)
+    expected_tuple = expected_bt_datetime.to_tuple()
+    assert unpack_dest.seconds == expected_tuple.whole_seconds
+    assert unpack_dest.fractional_seconds == expected_tuple.fractional_seconds
+
+
+def test___python_hightime_timedelta__to_any___valid_precision_duration_proto() -> None:
+    python_value = ht.timedelta(days=10, seconds=45, picoseconds=60)
+
+    result = nipanel._convert.to_any(python_value)
+    unpack_dest = precision_duration_pb2.PrecisionDuration()
+    _assert_any_and_unpack(result, unpack_dest)
+
+    expected_bt_timedelta = convert_timedelta(bt.TimeDelta, python_value)
+    expected_tuple = expected_bt_timedelta.to_tuple()
+    assert unpack_dest.seconds == expected_tuple.whole_seconds
+    assert unpack_dest.fractional_seconds == expected_tuple.fractional_seconds
+
+
+@pytest.mark.parametrize(
+    "python_value",
+    [
+        # lists of collections
+        ([[1.0, 2.0], [3.0, 4.0]]),
+        ([(1.0, 2.0), (3.0, 4.0)]),
+        ([set([1.0, 2.0]), set([3.0, 4.0])]),
+        ([frozenset([1.0, 2.0]), frozenset([3.0, 4.0])]),
+        # tuples of collections
+        (([1.0, 2.0], [3.0, 4.0])),
+        (((1.0, 2.0), (3.0, 4.0))),
+        ((set([1.0, 2.0]), set([3.0, 4.0]))),
+        ((frozenset([1.0, 2.0]), frozenset([3.0, 4.0]))),
+    ],
+)
+def test___python_2dcollection_of_float___to_any___valid_double2darray(
+    python_value: Collection[Collection[float]],
+) -> None:
+    expected_data = [1.0, 2.0, 3.0, 4.0]
+    expected_rows = 2
+    expected_columns = 2
+    result = nipanel._convert.to_any(python_value)
+    unpack_dest = array_pb2.Double2DArray()
+    _assert_any_and_unpack(result, unpack_dest)
+
+    assert isinstance(unpack_dest, array_pb2.Double2DArray)
+    assert unpack_dest.rows == expected_rows
+    assert unpack_dest.columns == expected_columns
+    assert unpack_dest.data == expected_data
+
+
+@pytest.mark.parametrize(
+    "python_value",
+    [
+        (set([(1.0, 2.0), (3.0, 4.0)])),
+        (set([frozenset([1.0, 2.0]), frozenset([3.0, 4.0])])),
+        (frozenset([(1.0, 2.0), (3.0, 4.0)])),
+        (frozenset([frozenset([1.0, 2.0]), frozenset([3.0, 4.0])])),
+    ],
+)
+def test___python_set_of_collection_of_float___to_any___valid_double2darray(
+    python_value: Collection[Collection[float]],
+) -> None:
+    expected_data = [1.0, 2.0, 3.0, 4.0]
+    expected_rows = 2
+    expected_columns = 2
+    result = nipanel._convert.to_any(python_value)
+    unpack_dest = array_pb2.Double2DArray()
+    _assert_any_and_unpack(result, unpack_dest)
+
+    assert isinstance(unpack_dest, array_pb2.Double2DArray)
+    assert unpack_dest.rows == expected_rows
+    assert unpack_dest.columns == expected_columns
+    # Sets and frozensets don't maintain order, so sort before comparing.
+    assert sorted(unpack_dest.data) == sorted(expected_data)
+
+
+# ========================================================
+# Protobuf Types: Protobuf to Python
+# ========================================================
+@pytest.mark.parametrize(
+    "proto_type, expected_value",
+    [
+        (array_pb2.BoolArray, [True, True, True]),
+        (array_pb2.BytesArray, [b"a", b"b", b"c"]),
+        (array_pb2.DoubleArray, [1.0, 2.0, 3.0]),
+        (array_pb2.SInt64Array, [1, 2, 3]),
+        (array_pb2.StringArray, ["a", "b", "c"]),
+    ],
+)
+def test___array_proto___from_any___valid_python_collection(
+    proto_type: type[_AnyPanelPbTypes], expected_value: Any
+) -> None:
+    pb_value = proto_type(values=expected_value)
+    packed_any = _pack_into_any(pb_value)
+
+    result = nipanel._convert.from_any(packed_any)
+
+    assert isinstance(result, type(expected_value))
+    assert result == expected_value
+
+
+def test___scalar_proto___from_any___valid_python_scalar() -> None:
+    attrs = {"NI_UnitDescription": attribute_value_pb2.AttributeValue(string_value="amps")}
+    pb_value = scalar_pb2.Scalar(attributes=attrs, double_value=1.0)
+    packed_any = _pack_into_any(pb_value)
+
+    result = nipanel._convert.from_any(packed_any)
+
+    assert isinstance(result, Scalar)
+    assert result.value == 1.0
+    assert result.units == "amps"
+
+
+def test___vector_proto___from_any___valid_python_vector() -> None:
+    attrs = {"NI_UnitDescription": attribute_value_pb2.AttributeValue(string_value="amps")}
+    pb_value = vector_pb2.Vector(
+        attributes=attrs,
+        double_array=array_pb2.DoubleArray(values=[1.0, 2.0, 3.0]),
+    )
+    packed_any = _pack_into_any(pb_value)
+
+    result = nipanel._convert.from_any(packed_any)
+
+    assert isinstance(result, Vector)
+    assert list(result) == [1.0, 2.0, 3.0]
+    assert result.units == "amps"
+
+
+def test___double_analog_waveform_proto___from_any___valid_python_float64_analog_waveform() -> None:
+    pb_value = waveform_pb2.DoubleAnalogWaveform(y_data=[0.0, 0.0, 0.0])
+    packed_any = _pack_into_any(pb_value)
+
+    result = nipanel._convert.from_any(packed_any)
+
+    assert isinstance(result, AnalogWaveform)
+    assert result.sample_count == result.capacity == len(result.raw_data) == 3
+    assert result.dtype == np.float64
+
+
+def test___i16_analog_waveform_proto___from_any___valid_python_int16_analog_waveform() -> None:
+    pb_value = waveform_pb2.I16AnalogWaveform(y_data=[0, 0, 0])
+    packed_any = _pack_into_any(pb_value)
+
+    result = nipanel._convert.from_any(packed_any)
+
+    assert isinstance(result, AnalogWaveform)
+    assert result.sample_count == result.capacity == len(result.raw_data) == 3
+    assert result.dtype == np.int16
+
+
+def test___double_complex_waveform_proto___from_any___valid_python_float64_complex_waveform() -> (
+    None
+):
+    pb_value = waveform_pb2.DoubleComplexWaveform(y_data=[0.0, 0.0, 0.0, 0.0])
+    packed_any = _pack_into_any(pb_value)
+
+    result = nipanel._convert.from_any(packed_any)
+
+    assert isinstance(result, ComplexWaveform)
+    assert result.sample_count == result.capacity == len(result.raw_data) == 2
+    assert result.dtype == np.complex128
+
+
+def test___i16_complex_waveform_proto___from_any___valid_python_int16_complex_waveform() -> None:
+    pb_value = waveform_pb2.I16ComplexWaveform(y_data=[0, 0, 0, 0])
+    packed_any = _pack_into_any(pb_value)
+
+    result = nipanel._convert.from_any(packed_any)
+
+    assert isinstance(result, ComplexWaveform)
+    assert result.sample_count == result.capacity == len(result.raw_data) == 2
+    assert result.dtype == ComplexInt32DType
+
+
+def test___digital_waveform_proto___from_any___valid_python_bool_digital_waveform() -> None:
+    data = np.array([[0, 1, 0], [1, 0, 1]], dtype=np.bool)
+    pb_value = waveform_pb2.DigitalWaveform(y_data=data.tobytes(), signal_count=3)
+    packed_any = _pack_into_any(pb_value)
+
+    result = nipanel._convert.from_any(packed_any)
+
+    assert isinstance(result, DigitalWaveform)
+    assert np.array_equal(result.data, data)
+    assert result.signal_count == 3
+
+
+def test___digital_waveform_proto___from_any___valid_python_uint8_digital_waveform() -> None:
+    data = np.array([[0, 1, 0], [1, 0, 1]], dtype=np.uint8)
+    pb_value = waveform_pb2.DigitalWaveform(y_data=data.tobytes(), signal_count=3)
+    packed_any = _pack_into_any(pb_value)
+
+    result = nipanel._convert.from_any(packed_any)
+
+    assert isinstance(result, DigitalWaveform)
+    assert np.array_equal(result.data, data)
+    assert result.signal_count == 3
+
+
+def test___double_spectrum_proto___from_any___valid_python_spectrum() -> None:
+    pb_value = waveform_pb2.DoubleSpectrum(
+        data=[1.0, 2.0, 3.0],
+        start_frequency=100.0,
+        frequency_increment=10.0,
+    )
+    packed_any = _pack_into_any(pb_value)
+
+    result = nipanel._convert.from_any(packed_any)
+
+    assert isinstance(result, Spectrum)
+    assert list(result.data) == [1.0, 2.0, 3.0]
+    assert result.start_frequency == 100.0
+    assert result.frequency_increment == 10.0
+
+
+def test___precision_timestamp_proto__from_any___valid_hightime_datetime() -> None:
+    expected_ht_dt = ht.datetime(year=2020, month=1, day=10, second=45, tzinfo=dt.timezone.utc)
+    expected_bt_dt = convert_datetime(bt.DateTime, expected_ht_dt)
+    expected_tuple = expected_bt_dt.to_tuple()
+    pb_value = precision_timestamp_pb2.PrecisionTimestamp(
+        seconds=expected_tuple.whole_seconds,
+        fractional_seconds=expected_tuple.fractional_seconds,
+    )
+    packed_any = _pack_into_any(pb_value)
+
+    result = nipanel._convert.from_any(packed_any)
+
+    assert isinstance(result, ht.datetime)
+    assert abs(result - expected_ht_dt) <= _BT_EPSILON
+
+
+def test___precision_duration_proto__from_any___valid_hightime_timedelta() -> None:
+    expected_ht_td = ht.timedelta(days=1, seconds=25, microseconds=17)
+    expected_bt_td = convert_timedelta(bt.TimeDelta, expected_ht_td)
+    expected_tuple = expected_bt_td.to_tuple()
+    pb_value = precision_duration_pb2.PrecisionDuration(
+        seconds=expected_tuple.whole_seconds,
+        fractional_seconds=expected_tuple.fractional_seconds,
+    )
+    packed_any = _pack_into_any(pb_value)
+
+    result = nipanel._convert.from_any(packed_any)
+
+    assert isinstance(result, ht.timedelta)
+    assert abs(result - expected_ht_td) <= _BT_EPSILON
+
+
+def test___double2darray___from_any___valid_python_2dcollection() -> None:
+    pb_value = array_pb2.Double2DArray(data=[1.0, 2.0, 3.0, 4.0], rows=2, columns=2)
+    packed_any = _pack_into_any(pb_value)
+
+    result = nipanel._convert.from_any(packed_any)
+
+    expected_value = [[1.0, 2.0], [3.0, 4.0]]
+    assert isinstance(result, type(expected_value))
+    assert result == expected_value
+
+
+# ========================================================
+# Pack/Unpack Helpers
+# ========================================================
+def _assert_any_and_unpack(packed_message: any_pb2.Any, unpack_destination: Message) -> None:
+    assert isinstance(packed_message, any_pb2.Any)
+    assert packed_message.Unpack(unpack_destination)
+
+
+def _pack_into_any(proto_value: Message) -> any_pb2.Any:
+    as_any = any_pb2.Any()
+    as_any.Pack(proto_value)
+    return as_any
+````
+
+<!--NI_OSS_SOURCE repo=nipanel-python path=tests/unit/test_panel_client.py sha256=587dd9c11b226d45da104958ee61ca6ff95eb404594ae0aef39b305cc0ec451e bytes=2961 -->
+## FILE: tests/unit/test_panel_client.py
+
+- repository: `ni/nipanel-python`
+- source_path: `tests/unit/test_panel_client.py`
+- sha256: `587dd9c11b226d45da104958ee61ca6ff95eb404594ae0aef39b305cc0ec451e`
+- bytes: 2961
+
+````python
+from pathlib import Path
+
+import grpc
+import pytest
+
+from nipanel._panel_client import _PanelClient
+
+
+def test___enumerate_is_empty(fake_panel_channel: grpc.Channel) -> None:
+    client = _PanelClient(grpc_channel=fake_panel_channel)
+
+    assert client.enumerate_panels() == {}
+
+
+def test___start_panels___enumerate_has_panels(fake_panel_channel: grpc.Channel) -> None:
+    client = _PanelClient(grpc_channel=fake_panel_channel)
+
+    client.start_streamlit_panel("panel1", Path("uri1"), Path("python.exe"))
+    client.start_streamlit_panel("panel2", Path("uri2"), Path("python.exe"))
+
+    assert client.enumerate_panels() == {
+        "panel1": ("http://localhost:50051/panel1", []),
+        "panel2": ("http://localhost:50051/panel2", []),
+    }
+
+
+def test___start_panels___stop_panel_1_with_reset___enumerate_has_panel_2(
+    fake_panel_channel: grpc.Channel,
+) -> None:
+    client = _PanelClient(grpc_channel=fake_panel_channel)
+    client.start_streamlit_panel("panel1", Path("uri1"), Path("python.exe"))
+    client.start_streamlit_panel("panel2", Path("uri2"), Path("python.exe"))
+
+    client.stop_panel("panel1", reset=True)
+
+    assert client.enumerate_panels() == {
+        "panel2": ("http://localhost:50051/panel2", []),
+    }
+
+
+def test___start_panels___stop_panel_1_without_reset___enumerate_has_both_panels(
+    fake_panel_channel: grpc.Channel,
+) -> None:
+    client = _PanelClient(grpc_channel=fake_panel_channel)
+    client.start_streamlit_panel("panel1", Path("uri1"), Path("python.exe"))
+    client.start_streamlit_panel("panel2", Path("uri2"), Path("python.exe"))
+
+    client.stop_panel("panel1", reset=False)
+
+    assert client.enumerate_panels() == {
+        "panel1": ("", []),
+        "panel2": ("http://localhost:50051/panel2", []),
+    }
+
+
+def test___get_unset_value___raises_exception(fake_panel_channel: grpc.Channel) -> None:
+    client = _PanelClient(grpc_channel=fake_panel_channel)
+
+    with pytest.raises(grpc.RpcError) as exc_info:
+        client.get_value("panel1", "unset_id")
+
+    assert exc_info.value.code() == grpc.StatusCode.NOT_FOUND
+
+
+def test___try_get_unset_value___returns_none(fake_panel_channel: grpc.Channel) -> None:
+    client = _PanelClient(grpc_channel=fake_panel_channel)
+
+    response = client.try_get_value("panel1", "unset_id")
+
+    assert response is None
+
+
+def test___set_value___enumerate_panels_shows_value(
+    fake_panel_channel: grpc.Channel,
+) -> None:
+    client = _PanelClient(grpc_channel=fake_panel_channel)
+
+    client.set_value("panel1", "val1", "value1", notify=False)
+
+    assert client.enumerate_panels() == {"panel1": ("", ["val1"])}
+
+
+def test___set_value___gets_value(fake_panel_channel: grpc.Channel) -> None:
+    client = _PanelClient(grpc_channel=fake_panel_channel)
+
+    client.set_value("panel1", "val1", "value1", notify=False)
+
+    assert client.try_get_value("panel1", "val1") == "value1"
+````
+
+<!--NI_OSS_SOURCE repo=nipanel-python path=tests/unit/test_panel_value_accessor.py sha256=c419ffd83cd4d4992c64c01de8b3c81188baf5ff1017ba62ef9d56890e839c82 bytes=4577 -->
+## FILE: tests/unit/test_panel_value_accessor.py
+
+- repository: `ni/nipanel-python`
+- source_path: `tests/unit/test_panel_value_accessor.py`
+- sha256: `c419ffd83cd4d4992c64c01de8b3c81188baf5ff1017ba62ef9d56890e839c82`
+- bytes: 4577
+
+````python
+import grpc
+
+from nipanel import PanelValueAccessor
+from tests.types import MyIntEnum
+from tests.utils._fake_python_panel_service import FakePythonPanelService
+
+
+def test___no_previous_value___set_value_if_changed___sets_value(
+    fake_panel_channel: grpc.Channel,
+) -> None:
+    accessor = PanelValueAccessor(panel_id="panel_id", grpc_channel=fake_panel_channel)
+
+    accessor.set_value_if_changed("test_id", "test_value")
+
+    assert accessor.get_value("test_id") == "test_value"
+
+
+def test___set_value_if_changed___set_same_value___does_not_set_value_again(
+    fake_panel_channel: grpc.Channel,
+    fake_python_panel_service: FakePythonPanelService,
+) -> None:
+    accessor = PanelValueAccessor(panel_id="panel_id", grpc_channel=fake_panel_channel)
+    accessor.set_value_if_changed("test_id", "test_value")
+    initial_set_count = fake_python_panel_service.servicer.set_count
+
+    accessor.set_value_if_changed("test_id", "test_value")
+
+    assert fake_python_panel_service.servicer.set_count == initial_set_count
+    assert accessor.get_value("test_id") == "test_value"
+
+
+def test___set_value_if_changed___set_different_value___sets_new_value(
+    fake_panel_channel: grpc.Channel,
+) -> None:
+    accessor = PanelValueAccessor(panel_id="panel_id", grpc_channel=fake_panel_channel)
+    accessor.set_value_if_changed("test_id", "test_value")
+
+    accessor.set_value_if_changed("test_id", "new_value")
+
+    assert accessor.get_value("test_id") == "new_value"
+
+
+def test___set_value_if_changed___different_value_ids___tracks_separately(
+    fake_panel_channel: grpc.Channel,
+) -> None:
+    accessor = PanelValueAccessor(panel_id="panel_id", grpc_channel=fake_panel_channel)
+    accessor.set_value_if_changed("id1", "value1")
+    accessor.set_value_if_changed("id2", "value2")
+
+    accessor.set_value_if_changed("id1", "value1")
+    accessor.set_value_if_changed("id2", "new_value2")
+
+    assert accessor.get_value("id1") == "value1"
+    assert accessor.get_value("id2") == "new_value2"
+
+
+def test___set_value_if_changed_with_list_value___set_same_value___does_not_set_value_again(
+    fake_panel_channel: grpc.Channel,
+    fake_python_panel_service: FakePythonPanelService,
+) -> None:
+    accessor = PanelValueAccessor(panel_id="panel_id", grpc_channel=fake_panel_channel)
+    accessor.set_value_if_changed("test_id", [1, 2, 3])
+    initial_set_count = fake_python_panel_service.servicer.set_count
+
+    accessor.set_value_if_changed("test_id", [1, 2, 3])
+
+    assert fake_python_panel_service.servicer.set_count == initial_set_count
+    assert accessor.get_value("test_id") == [1, 2, 3]
+
+
+def test___set_value_if_changed_with_list_value___set_different_value___sets_new_value(
+    fake_panel_channel: grpc.Channel,
+    fake_python_panel_service: FakePythonPanelService,
+) -> None:
+    accessor = PanelValueAccessor(panel_id="panel_id", grpc_channel=fake_panel_channel)
+    accessor.set_value_if_changed("test_id", [1, 2, 3])
+    initial_set_count = fake_python_panel_service.servicer.set_count
+
+    accessor.set_value_if_changed("test_id", [1, 2, 4])
+
+    assert fake_python_panel_service.servicer.set_count > initial_set_count
+    assert accessor.get_value("test_id") == [1, 2, 4]
+
+
+def test___set_value_if_changed_with_enum_value___set_same_value___does_not_set_value_again(
+    fake_panel_channel: grpc.Channel,
+    fake_python_panel_service: FakePythonPanelService,
+) -> None:
+    accessor = PanelValueAccessor(panel_id="panel_id", grpc_channel=fake_panel_channel)
+    accessor.set_value_if_changed("test_id", MyIntEnum.VALUE20)
+    initial_set_count = fake_python_panel_service.servicer.set_count
+
+    accessor.set_value_if_changed("test_id", MyIntEnum.VALUE20)
+
+    assert fake_python_panel_service.servicer.set_count == initial_set_count
+    assert accessor.get_value("test_id") == 20  # Enums are stored as their values
+
+
+def test___set_value_if_changed_with_enum_value___set_different_value___sets_new_value(
+    fake_panel_channel: grpc.Channel,
+    fake_python_panel_service: FakePythonPanelService,
+) -> None:
+    accessor = PanelValueAccessor(panel_id="panel_id", grpc_channel=fake_panel_channel)
+    accessor.set_value_if_changed("test_id", MyIntEnum.VALUE20)
+    initial_set_count = fake_python_panel_service.servicer.set_count
+
+    accessor.set_value_if_changed("test_id", MyIntEnum.VALUE30)
+
+    assert fake_python_panel_service.servicer.set_count > initial_set_count
+    assert accessor.get_value("test_id") == 30  # New enum value should be set
+````
+
+<!--NI_OSS_SOURCE repo=nipanel-python path=tests/unit/test_protobuf_type_conversion.py sha256=fe080e2a77b86afb4ceffff35330a7ae3a186147abc634ebe8fb1127f3c921fd bytes=5814 -->
+## FILE: tests/unit/test_protobuf_type_conversion.py
+
+- repository: `ni/nipanel-python`
+- source_path: `tests/unit/test_protobuf_type_conversion.py`
+- sha256: `fe080e2a77b86afb4ceffff35330a7ae3a186147abc634ebe8fb1127f3c921fd`
+- bytes: 5814
+
+````python
+import pytest
+from ni.protobuf.types import array_pb2, attribute_value_pb2, scalar_pb2, vector_pb2
+from nitypes.scalar import Scalar
+from nitypes.vector import Vector
+from typing_extensions import Mapping
+
+from nipanel.converters.protobuf_types import (
+    Double2DArrayConverter,
+    ScalarConverter,
+    VectorConverter,
+)
+
+
+# ========================================================
+# list[list[float]] to Double2DArray
+# Other collection types are tested in test_convert.py
+# ========================================================
+@pytest.mark.parametrize(
+    "list_of_lists, expected_data, expected_rows, expected_columns",
+    [
+        ([[1.0, 2.0], [3.0, 4.0], [5.0, 6.0]], [1.0, 2.0, 3.0, 4.0, 5.0, 6.0], 3, 2),
+        ([[1.0, 2.0, 3.0], [4.0, 5.0, 6.0]], [1.0, 2.0, 3.0, 4.0, 5.0, 6.0], 2, 3),
+    ],
+)
+def test___list_of_lists___convert___valid_double2darray(
+    list_of_lists: list[list[float]],
+    expected_data: list[float],
+    expected_rows: int,
+    expected_columns: int,
+) -> None:
+    converter = Double2DArrayConverter()
+    result = converter.to_protobuf_message(list_of_lists)
+
+    assert result.data == expected_data
+    assert result.rows == expected_rows
+    assert result.columns == expected_columns
+
+
+def test___list_of_lists_inconsistent_column_length___convert___throws_value_error() -> None:
+    converter = Double2DArrayConverter()
+
+    with pytest.raises(ValueError):
+        _ = converter.to_protobuf_message([[1.0, 2.0], [3.0, 4.0, 5.0]])
+
+
+# ========================================================
+# Double2DArray to list[list[float]]
+# Other collection types are tested in test_convert.py
+# ========================================================
+@pytest.mark.parametrize(
+    "double2darray, expected_data",
+    [
+        (
+            array_pb2.Double2DArray(rows=3, columns=2, data=[1.0, 2.0, 3.0, 4.0, 5.0, 6.0]),
+            [[1.0, 2.0], [3.0, 4.0], [5.0, 6.0]],
+        ),
+        (
+            array_pb2.Double2DArray(rows=2, columns=3, data=[1.0, 2.0, 3.0, 4.0, 5.0, 6.0]),
+            [[1.0, 2.0, 3.0], [4.0, 5.0, 6.0]],
+        ),
+    ],
+)
+def test___double2darray___convert___valid_list_of_lists(
+    double2darray: array_pb2.Double2DArray, expected_data: list[list[float]]
+) -> None:
+    converter = Double2DArrayConverter()
+    list_of_lists = converter.to_python_value(double2darray)
+
+    assert list_of_lists == expected_data
+
+
+def test___double2darray_invalid_num_columns___convert___throws_value_error() -> None:
+    double2darray = array_pb2.Double2DArray(rows=1, columns=2, data=[1.0, 2.0, 3.0])
+    converter = Double2DArrayConverter()
+
+    with pytest.raises(ValueError):
+        _ = converter.to_python_value(double2darray)
+
+
+def test___double2darray_empty_data___convert___returns_empty_list() -> None:
+    double2darray = array_pb2.Double2DArray(rows=0, columns=0, data=[])
+    converter = Double2DArrayConverter()
+
+    list_of_lists = converter.to_python_value(double2darray)
+
+    assert not list_of_lists
+
+
+# ========================================================
+# Scalar: Protobuf to Python
+# ========================================================
+def test___string_scalar_protobuf___convert___valid_str_scalar() -> None:
+    attrs = _units_to_attribute_map("volts")
+    protobuf_value = scalar_pb2.Scalar(attributes=attrs)
+    protobuf_value.string_value = "value"
+
+    converter = ScalarConverter()
+    python_value = converter.to_python_value(protobuf_value)
+
+    assert isinstance(python_value.value, str)
+    assert python_value.value == "value"
+    assert python_value.units == "volts"
+
+
+# ========================================================
+# Scalar: Python to Protobuf
+# ========================================================
+def test___str_scalar___convert___valid_string_scalar_protobuf() -> None:
+    python_value = Scalar("value", "volts")
+
+    converter = ScalarConverter()
+    protobuf_value = converter.to_protobuf_message(python_value)
+
+    assert protobuf_value.WhichOneof("value") == "string_value"
+    assert protobuf_value.string_value == "value"
+    assert protobuf_value.attributes["NI_UnitDescription"].string_value == "volts"
+
+
+# ========================================================
+# Vector: Protobuf to Python
+# ========================================================
+def test___string_vector_protobuf___convert___valid_str_vector() -> None:
+    attrs = _units_to_attribute_map("volts")
+    protobuf_value = vector_pb2.Vector(
+        attributes=attrs,
+        string_array=array_pb2.StringArray(values=["one", "two", "three"]),
+    )
+
+    converter = VectorConverter()
+    python_value = converter.to_python_value(protobuf_value)
+
+    assert isinstance(python_value, Vector)
+    assert list(python_value) == ["one", "two", "three"]
+    assert python_value.units == "volts"
+
+
+# ========================================================
+# Vector: Python to Protobuf
+# ========================================================
+def test___str_vector___convert___valid_string_vector_protobuf() -> None:
+    python_value = Vector(["one", "two", "three"], "volts")
+
+    converter = VectorConverter()
+    protobuf_value = converter.to_protobuf_message(python_value)
+
+    assert isinstance(protobuf_value, vector_pb2.Vector)
+    assert protobuf_value.WhichOneof("value") == "string_array"
+    assert list(protobuf_value.string_array.values) == ["one", "two", "three"]
+    assert protobuf_value.attributes["NI_UnitDescription"].string_value == "volts"
+
+
+def _units_to_attribute_map(units: str) -> Mapping[str, attribute_value_pb2.AttributeValue]:
+    value = attribute_value_pb2.AttributeValue(string_value=units)
+    return {"NI_UnitDescription": value}
+````
+
+<!--NI_OSS_SOURCE repo=nipanel-python path=tests/unit/test_python_panel_service_stub.py sha256=72c90ce249317cf831da179f4a4af0cab17a068d6f3d471162e428e2dafad76e bytes=4246 -->
+## FILE: tests/unit/test_python_panel_service_stub.py
+
+- repository: `ni/nipanel-python`
+- source_path: `tests/unit/test_python_panel_service_stub.py`
+- sha256: `72c90ce249317cf831da179f4a4af0cab17a068d6f3d471162e428e2dafad76e`
+- bytes: 4246
+
+````python
+import pytest
+from google.protobuf.any_pb2 import Any
+from google.protobuf.wrappers_pb2 import StringValue
+from ni.panels.v1.panel_service_pb2 import (
+    StartPanelRequest,
+    StopPanelRequest,
+    EnumeratePanelsRequest,
+    GetValueRequest,
+    TryGetValueRequest,
+    SetValueRequest,
+)
+from ni.panels.v1.panel_service_pb2_grpc import PanelServiceStub
+from ni.panels.v1.streamlit_panel_configuration_pb2 import StreamlitPanelConfiguration
+
+
+def test___start_panel___gets_response(python_panel_service_stub: PanelServiceStub) -> None:
+    configuration = StreamlitPanelConfiguration(panel_script_url="file:///path/to/panel.py")
+    configuration_any = Any()
+    configuration_any.Pack(configuration)
+    request = StartPanelRequest(panel_id="test_panel", panel_configuration=configuration_any)
+    response = python_panel_service_stub.StartPanel(request)
+
+    assert response.panel_url == "http://localhost:50051/test_panel"
+
+
+def test___start_panel___stop_panel___gets_response(
+    python_panel_service_stub: PanelServiceStub,
+) -> None:
+    configuration = StreamlitPanelConfiguration(panel_script_url="file:///path/to/panel.py")
+    configuration_any = Any()
+    configuration_any.Pack(configuration)
+    start_request = StartPanelRequest(panel_id="test_panel", panel_configuration=configuration_any)
+    python_panel_service_stub.StartPanel(start_request)
+
+    stop_request = StopPanelRequest(panel_id="test_panel", reset=False)
+    response = python_panel_service_stub.StopPanel(stop_request)
+
+    assert response is not None  # Ensure response is returned
+
+
+def test___enumerate_panels___gets_response(
+    python_panel_service_stub: PanelServiceStub,
+) -> None:
+    request = EnumeratePanelsRequest()
+    response = python_panel_service_stub.EnumeratePanels(request)
+
+    assert response is not None  # Ensure response is returned
+
+
+def test___set_value___gets_response(
+    python_panel_service_stub: PanelServiceStub,
+) -> None:
+    test_value = Any()
+    test_value.Pack(StringValue(value="test_value"))
+    request = SetValueRequest(panel_id="test_panel", value_id="test_value", value=test_value)
+    response = python_panel_service_stub.SetValue(request)
+
+    assert response is not None  # Ensure response is returned
+
+
+def test___set_value___get_value___gets_response(
+    python_panel_service_stub: PanelServiceStub,
+) -> None:
+    test_value = Any()
+    test_value.Pack(StringValue(value="test_value"))
+    set_request = SetValueRequest(panel_id="test_panel", value_id="test_value", value=test_value)
+    python_panel_service_stub.SetValue(set_request)
+
+    request = GetValueRequest(panel_id="test_panel", value_id="test_value")
+    response = python_panel_service_stub.GetValue(request)
+
+    assert response is not None  # Ensure response is returned
+    assert response.value == test_value  # Ensure the value is correct
+
+
+def test___no_value___get_value___raises_exception(
+    python_panel_service_stub: PanelServiceStub,
+) -> None:
+    request = GetValueRequest(panel_id="test_panel", value_id="test_value")
+    with pytest.raises(Exception):
+        python_panel_service_stub.GetValue(request)
+
+
+def test___set_value___try_get_value___gets_response(
+    python_panel_service_stub: PanelServiceStub,
+) -> None:
+    test_value = Any()
+    test_value.Pack(StringValue(value="test_value"))
+    set_request = SetValueRequest(panel_id="test_panel", value_id="test_value", value=test_value)
+    python_panel_service_stub.SetValue(set_request)
+
+    request = TryGetValueRequest(panel_id="test_panel", value_id="test_value")
+    response = python_panel_service_stub.TryGetValue(request)
+
+    assert response is not None  # Ensure response is returned
+    assert response.value == test_value  # Ensure the value is correct
+
+
+def test___no_value___try_get_value___gets_no_value(
+    python_panel_service_stub: PanelServiceStub,
+) -> None:
+    request = TryGetValueRequest(panel_id="test_panel", value_id="test_value")
+    response = python_panel_service_stub.TryGetValue(request)
+
+    assert response is not None  # Ensure response is returned
+    assert response.HasField("value") is False  # Ensure no value is returned
+````
+
+<!--NI_OSS_SOURCE repo=nipanel-python path=tests/unit/test_streamlit_panel.py sha256=625523d15b52829dc5512d138b727d9130124910811991d322e190f63c565c8d bytes=19379 -->
+## FILE: tests/unit/test_streamlit_panel.py
+
+- repository: `ni/nipanel-python`
+- source_path: `tests/unit/test_streamlit_panel.py`
+- sha256: `625523d15b52829dc5512d138b727d9130124910811991d322e190f63c565c8d`
+- bytes: 19379
+
+````python
+import datetime as dt
+import enum
+from pathlib import Path
+
+import grpc
+import pytest
+from typing_extensions import assert_type
+
+import tests.types as test_types
+from nipanel import PanelValueAccessor, StreamlitPanel
+from tests.utils._fake_python_panel_service import FakePythonPanelService
+
+PATH_TO_SCRIPT = Path("path/to/script")
+
+
+def test___panel___has_panel_id_and_panel_script_path(fake_panel_channel: grpc.Channel) -> None:
+    panel = StreamlitPanel("my_panel", PATH_TO_SCRIPT, grpc_channel=fake_panel_channel)
+    assert panel.panel_id == "my_panel"
+    assert panel.panel_script_path == PATH_TO_SCRIPT
+
+
+def test___different_panels___have_different_panel_ids_and_panel_script_paths(
+    fake_panel_channel: grpc.Channel,
+) -> None:
+    panel1 = StreamlitPanel("panel1", Path("path/to/script1"), grpc_channel=fake_panel_channel)
+    panel2 = StreamlitPanel("panel2", Path("path/to/script2"), grpc_channel=fake_panel_channel)
+
+    assert panel1.panel_id == "panel1"
+    assert panel2.panel_id == "panel2"
+    assert panel1._panel_script_path == Path("path/to/script1")
+    assert panel2._panel_script_path == Path("path/to/script2")
+    assert panel1._panel_client != panel2._panel_client
+
+
+def test___panel___set_value___gets_same_value(
+    fake_panel_channel: grpc.Channel,
+) -> None:
+    panel = StreamlitPanel("my_panel", PATH_TO_SCRIPT, grpc_channel=fake_panel_channel)
+
+    value_id = "test_id"
+    string_value = "test_value"
+    panel.set_value(value_id, string_value)
+
+    assert panel.get_value(value_id) == string_value
+
+
+def test___panel___panel_set_value___accessor_gets_same_value(
+    fake_panel_channel: grpc.Channel,
+) -> None:
+    panel = StreamlitPanel("my_panel", PATH_TO_SCRIPT, grpc_channel=fake_panel_channel)
+    accessor = PanelValueAccessor(panel_id="my_panel", grpc_channel=fake_panel_channel)
+
+    value_id = "test_id"
+    string_value = "test_value"
+    panel.set_value(value_id, string_value)
+
+    assert accessor.get_value(value_id) == string_value
+
+
+def test___panel___accessor_set_value___panel_gets_same_value(
+    fake_panel_channel: grpc.Channel,
+) -> None:
+    panel = StreamlitPanel("my_panel", PATH_TO_SCRIPT, grpc_channel=fake_panel_channel)
+    accessor = PanelValueAccessor(panel_id="my_panel", grpc_channel=fake_panel_channel)
+
+    value_id = "test_id"
+    string_value = "test_value"
+    accessor.set_value(value_id, string_value)
+
+    assert panel.get_value(value_id) == string_value
+
+
+def test___panel___set_value___notifies(
+    fake_python_panel_service: FakePythonPanelService,
+    fake_panel_channel: grpc.Channel,
+) -> None:
+    service = fake_python_panel_service
+    panel = StreamlitPanel("my_panel", PATH_TO_SCRIPT, grpc_channel=fake_panel_channel)
+    assert service.servicer.notification_count == 0
+
+    panel.set_value("value_id", "string_value")
+
+    assert service.servicer.notification_count == 1
+
+
+def test___accessor___set_value___does_not_notify(
+    fake_python_panel_service: FakePythonPanelService,
+    fake_panel_channel: grpc.Channel,
+) -> None:
+    service = fake_python_panel_service
+    accessor = PanelValueAccessor(
+        panel_id="my_panel", grpc_channel=fake_panel_channel, notify_on_set_value=False
+    )
+    assert service.servicer.notification_count == 0
+
+    accessor.set_value("value_id", "string_value")
+
+    assert service.servicer.notification_count == 0
+
+
+def test___first_start_will_fail___start_panel___panel_is_functional(
+    fake_python_panel_service: FakePythonPanelService,
+    fake_panel_channel: grpc.Channel,
+) -> None:
+    """Test that panel.start_panel() will automatically retry once."""
+    service = fake_python_panel_service
+    # Simulate a failure on the first attempt
+    service.servicer.fail_next_start_panel()
+
+    panel = StreamlitPanel("my_panel", PATH_TO_SCRIPT, grpc_channel=fake_panel_channel)
+
+    value_id = "test_id"
+    string_value = "test_value"
+    panel.set_value(value_id, string_value)
+    assert panel.get_value(value_id) == string_value
+    assert panel._panel_client.enumerate_panels() == {
+        "my_panel": ("http://localhost:50051/my_panel", [value_id])
+    }
+
+
+def test___panel___set_value___sets_value(
+    fake_panel_channel: grpc.Channel,
+) -> None:
+    panel = StreamlitPanel("my_panel", PATH_TO_SCRIPT, grpc_channel=fake_panel_channel)
+
+    value_id = "test_id"
+    string_value = "test_value"
+    panel.set_value(value_id, string_value)
+
+    assert panel._panel_client.enumerate_panels() == {
+        "my_panel": ("http://localhost:50051/my_panel", [value_id])
+    }
+
+
+def test___panel___get_unset_value_with_no_default___raises_exception(
+    fake_panel_channel: grpc.Channel,
+) -> None:
+    """Test that get_value() raises an exception for an unset value."""
+    panel = StreamlitPanel("my_panel", PATH_TO_SCRIPT, grpc_channel=fake_panel_channel)
+
+    value_id = "test_id"
+    with pytest.raises(KeyError):
+        panel.get_value(value_id)
+
+
+def test___panel___set_value___gets_value(
+    fake_panel_channel: grpc.Channel,
+) -> None:
+    panel = StreamlitPanel("my_panel", PATH_TO_SCRIPT, grpc_channel=fake_panel_channel)
+
+    value_id = "test_id"
+    string_value = "test_value"
+    panel.set_value(value_id, string_value)
+
+    assert panel.get_value(value_id) == string_value
+
+
+def test___panel___set_value___get_value_ignores_default(
+    fake_panel_channel: grpc.Channel,
+) -> None:
+    panel = StreamlitPanel("my_panel", PATH_TO_SCRIPT, grpc_channel=fake_panel_channel)
+
+    value_id = "test_id"
+    string_value = "test_value"
+    panel.set_value(value_id, string_value)
+
+    assert panel.get_value(value_id, "default") == string_value
+
+
+def test___no_set_value___get_value_returns_default(
+    fake_panel_channel: grpc.Channel,
+) -> None:
+    panel = StreamlitPanel("my_panel", PATH_TO_SCRIPT, grpc_channel=fake_panel_channel)
+
+    assert panel.get_value("missing_string", "default") == "default"
+    assert panel.get_value("missing_int", 123) == 123
+    assert panel.get_value("missing_float", 1.23) == 1.23
+    assert panel.get_value("missing_bool", True) is True
+    assert panel.get_value("missing_list", [1, 2, 3]) == [1, 2, 3]
+    assert_type(panel.get_value("missing_string", "default"), str)
+    assert_type(panel.get_value("missing_int", 123), int)
+    assert_type(panel.get_value("missing_float", 1.23), float)
+    assert_type(panel.get_value("missing_bool", True), bool)
+    assert_type(panel.get_value("missing_list", [1, 2, 3]), list[int])
+
+
+def test___set_string_type___get_value_with_string_default___returns_string_type(
+    fake_panel_channel: grpc.Channel,
+) -> None:
+    panel = StreamlitPanel("my_panel", PATH_TO_SCRIPT, grpc_channel=fake_panel_channel)
+    value_id = "test_id"
+    string_value = "test_value"
+    panel.set_value(value_id, string_value)
+
+    value = panel.get_value(value_id, "")
+
+    assert_type(value, str)
+    assert value == string_value
+
+
+def test___set_int_type___get_value_with_int_default___returns_int_type(
+    fake_panel_channel: grpc.Channel,
+) -> None:
+    panel = StreamlitPanel("my_panel", PATH_TO_SCRIPT, grpc_channel=fake_panel_channel)
+    value_id = "test_id"
+    int_value = 10
+    panel.set_value(value_id, int_value)
+
+    value = panel.get_value(value_id, 0)
+
+    assert_type(value, int)
+    assert value == int_value
+
+
+def test___set_bool_type___get_value_with_bool_default___returns_bool_type(
+    fake_panel_channel: grpc.Channel,
+) -> None:
+    panel = StreamlitPanel("my_panel", PATH_TO_SCRIPT, grpc_channel=fake_panel_channel)
+    value_id = "test_id"
+    bool_value = True
+    panel.set_value(value_id, bool_value)
+
+    value = panel.get_value(value_id, False)
+
+    assert_type(value, bool)
+    assert value is bool_value
+
+
+def test___set_string_type___get_value_with_int_default___raises_exception(
+    fake_panel_channel: grpc.Channel,
+) -> None:
+    panel = StreamlitPanel("my_panel", PATH_TO_SCRIPT, grpc_channel=fake_panel_channel)
+    value_id = "test_id"
+    string_value = "test_value"
+    panel.set_value(value_id, string_value)
+
+    with pytest.raises(TypeError):
+        panel.get_value(value_id, 0)
+
+
+def test___set_int_type___get_value_with_bool_default___raises_exception(
+    fake_panel_channel: grpc.Channel,
+) -> None:
+    panel = StreamlitPanel("my_panel", PATH_TO_SCRIPT, grpc_channel=fake_panel_channel)
+    value_id = "test_id"
+    int_value = 10
+    panel.set_value(value_id, int_value)
+
+    with pytest.raises(TypeError):
+        panel.get_value(value_id, False)
+
+
+def test___set_string_enum_type___get_value_with_int_enum_default___raises_exception(
+    fake_panel_channel: grpc.Channel,
+) -> None:
+    panel = StreamlitPanel("my_panel", PATH_TO_SCRIPT, grpc_channel=fake_panel_channel)
+    value_id = "test_id"
+    panel.set_value(value_id, test_types.MyStrEnum.VALUE3)
+
+    with pytest.raises(ValueError):
+        panel.get_value(value_id, test_types.MyIntEnum.VALUE10)
+
+
+@pytest.mark.parametrize(
+    "value_payload",
+    [
+        "firstname bunchanumbers",
+        42,
+        3.14,
+        True,
+        b"robotext",
+        dt.datetime.now(),
+    ],
+)
+def test___builtin_scalar_type___set_value___gets_same_value(
+    fake_panel_channel: grpc.Channel,
+    value_payload: object,
+) -> None:
+    """Test that set_value() and get_value() work for builtin scalar types."""
+    panel = StreamlitPanel("my_panel", PATH_TO_SCRIPT, grpc_channel=fake_panel_channel)
+
+    value_id = "test_id"
+    panel.set_value(value_id, value_payload)
+
+    assert panel.get_value(value_id) == value_payload
+
+
+@pytest.mark.parametrize(
+    "value_payload",
+    [
+        test_types.MyIntFlags.VALUE1 | test_types.MyIntFlags.VALUE4,
+        test_types.MyIntableFlags.VALUE16 | test_types.MyIntableFlags.VALUE32,
+        test_types.MyIntEnum.VALUE20,
+        test_types.MyIntableEnum.VALUE200,
+        test_types.MyStrEnum.VALUE3,
+        test_types.MyStringableEnum.VALUE2,
+        test_types.MixinIntEnum.VALUE33,
+        test_types.MixinStrEnum.VALUE11,
+        test_types.MyMixedEnum.VALUE2,
+    ],
+)
+def test___enum_type___set_value___gets_same_value(
+    fake_panel_channel: grpc.Channel,
+    value_payload: enum.Enum,
+) -> None:
+    """Test that set_value() and get_value() work for enum types."""
+    panel = StreamlitPanel("my_panel", PATH_TO_SCRIPT, grpc_channel=fake_panel_channel)
+
+    value_id = "test_id"
+    panel.set_value(value_id, value_payload)
+
+    # without providing a default value, get_value will return the raw value, not the enum
+    assert panel.get_value(value_id) == value_payload.value
+
+
+@pytest.mark.parametrize(
+    "value_payload",
+    [
+        lambda x: x + 1,
+        [1, "string"],
+        ["string", []],
+        (42, "hello", 3.14, b"bytes"),
+        set([1, "mixed", True]),
+        (i for i in range(5)),
+        {
+            "key1": [1, 2, 3],
+            "key2": {"nested": True, "values": [4.5, 6.7]},
+        },
+    ],
+)
+def test___unsupported_type___set_value___raises(
+    fake_panel_channel: grpc.Channel,
+    value_payload: object,
+) -> None:
+    """Test that set_value() raises for unsupported types."""
+    panel = StreamlitPanel("my_panel", PATH_TO_SCRIPT, grpc_channel=fake_panel_channel)
+
+    value_id = "test_id"
+    with pytest.raises(TypeError):
+        panel.set_value(value_id, value_payload)
+
+
+@pytest.mark.parametrize(
+    "value_payload",
+    [
+        # Bool
+        list(x % 2 == 0 for x in range(0, 10)),
+        set(x % 2 == 0 for x in range(10, 20)),
+        frozenset(x % 2 == 0 for x in range(20, 30)),
+        tuple(x % 2 == 0 for x in range(30, 40)),
+        # Bytes
+        list(bytes(x) for x in range(0, 10)),
+        set(bytes(x) for x in range(10, 20)),
+        frozenset(bytes(x) for x in range(20, 30)),
+        tuple(bytes(x) for x in range(30, 40)),
+        # Float
+        list(float(x) for x in range(0, 10)),
+        set(float(x) for x in range(10, 20)),
+        frozenset(float(x) for x in range(20, 30)),
+        tuple(float(x) for x in range(30, 40)),
+        # Integer
+        list(range(0, 10)),
+        set(range(10, 20)),
+        frozenset(range(20, 30)),
+        tuple(range(30, 40)),
+        # String
+        list(str(x) for x in range(0, 10)),
+        set(str(x) for x in range(10, 20)),
+        frozenset(str(x) for x in range(20, 30)),
+        tuple(str(x) for x in range(30, 40)),
+        # Enum canaries
+        list(x for x in test_types.MixinIntEnum),
+        set(x for x in test_types.MixinIntEnum),
+        frozenset(x for x in test_types.MixinIntEnum),
+        tuple(x for x in test_types.MixinIntEnum),
+        list(x for x in test_types.MixinStrEnum),
+        set(x for x in test_types.MixinStrEnum),
+        frozenset(x for x in test_types.MixinStrEnum),
+        tuple(x for x in test_types.MixinStrEnum),
+    ],
+)
+def test___sequence_of_builtin_type___set_value___gets_same_value(
+    fake_panel_channel: grpc.Channel,
+    value_payload: object,
+) -> None:
+    panel = StreamlitPanel("my_panel", PATH_TO_SCRIPT, grpc_channel=fake_panel_channel)
+
+    value_id = "test_id"
+    panel.set_value(value_id, value_payload)
+
+    received_value = panel.get_value(value_id)
+    assert list(received_value) == list(value_payload)  # type: ignore [call-overload]
+
+
+def test___set_int_enum_value___get_value___returns_int_enum(
+    fake_panel_channel: grpc.Channel,
+) -> None:
+    panel = StreamlitPanel("my_panel", PATH_TO_SCRIPT, grpc_channel=fake_panel_channel)
+    value_id = "test_id"
+    enum_value = test_types.MyIntEnum.VALUE20
+    panel.set_value(value_id, enum_value)
+
+    retrieved_value = panel.get_value(value_id, test_types.MyIntEnum.VALUE10)
+
+    assert_type(retrieved_value, test_types.MyIntEnum)
+    assert retrieved_value is test_types.MyIntEnum.VALUE20
+    assert retrieved_value.value == enum_value.value
+    assert retrieved_value.name == enum_value.name
+
+
+def test___set_intable_enum_value___get_value___returns_intable_enum(
+    fake_panel_channel: grpc.Channel,
+) -> None:
+    panel = StreamlitPanel("my_panel", PATH_TO_SCRIPT, grpc_channel=fake_panel_channel)
+    value_id = "test_id"
+    enum_value = test_types.MyIntableEnum.VALUE200
+    panel.set_value(value_id, enum_value)
+
+    retrieved_value = panel.get_value(value_id, test_types.MyIntableEnum.VALUE100)
+
+    assert_type(retrieved_value, test_types.MyIntableEnum)
+    assert retrieved_value is test_types.MyIntableEnum.VALUE200
+    assert retrieved_value.value == enum_value.value
+    assert retrieved_value.name == enum_value.name
+
+
+def test___set_string_enum_value___get_value___returns_string_enum(
+    fake_panel_channel: grpc.Channel,
+) -> None:
+    panel = StreamlitPanel("my_panel", PATH_TO_SCRIPT, grpc_channel=fake_panel_channel)
+    value_id = "test_id"
+    enum_value = test_types.MyStrEnum.VALUE3
+    panel.set_value(value_id, enum_value)
+
+    retrieved_value = panel.get_value(value_id, test_types.MyStrEnum.VALUE1)
+
+    assert_type(retrieved_value, test_types.MyStrEnum)
+    assert retrieved_value is test_types.MyStrEnum.VALUE3
+    assert retrieved_value.value == enum_value.value
+    assert retrieved_value.name == enum_value.name
+
+
+def test___set_stringable_enum_value___get_value___returns_stringable_enum(
+    fake_panel_channel: grpc.Channel,
+) -> None:
+    panel = StreamlitPanel("my_panel", PATH_TO_SCRIPT, grpc_channel=fake_panel_channel)
+    value_id = "test_id"
+    enum_value = test_types.MyStringableEnum.VALUE3
+    panel.set_value(value_id, enum_value)
+
+    retrieved_value = panel.get_value(value_id, test_types.MyStringableEnum.VALUE1)
+
+    assert_type(retrieved_value, test_types.MyStringableEnum)
+    assert retrieved_value is test_types.MyStringableEnum.VALUE3
+    assert retrieved_value.value == enum_value.value
+    assert retrieved_value.name == enum_value.name
+
+
+def test___set_mixed_enum_value___get_value___returns_mixed_enum(
+    fake_panel_channel: grpc.Channel,
+) -> None:
+    panel = StreamlitPanel("my_panel", PATH_TO_SCRIPT, grpc_channel=fake_panel_channel)
+    value_id = "test_id"
+    enum_value = test_types.MyMixedEnum.VALUE2
+    panel.set_value(value_id, enum_value)
+
+    retrieved_value = panel.get_value(value_id, test_types.MyMixedEnum.VALUE1)
+
+    assert_type(retrieved_value, test_types.MyMixedEnum)
+    assert retrieved_value is test_types.MyMixedEnum.VALUE2
+    assert retrieved_value.value == enum_value.value
+    assert retrieved_value.name == enum_value.name
+
+
+def test___set_int_flags_value___get_value___returns_int_flags(
+    fake_panel_channel: grpc.Channel,
+) -> None:
+    panel = StreamlitPanel("my_panel", PATH_TO_SCRIPT, grpc_channel=fake_panel_channel)
+    value_id = "test_id"
+    flags_value = test_types.MyIntFlags.VALUE1 | test_types.MyIntFlags.VALUE4
+    panel.set_value(value_id, flags_value)
+
+    retrieved_value = panel.get_value(value_id, test_types.MyIntFlags.VALUE2)
+
+    assert_type(retrieved_value, test_types.MyIntFlags)
+    assert retrieved_value == (test_types.MyIntFlags.VALUE1 | test_types.MyIntFlags.VALUE4)
+    assert retrieved_value.value == flags_value.value
+
+
+def test___set_intable_flags_value___get_value___returns_intable_flags(
+    fake_panel_channel: grpc.Channel,
+) -> None:
+    panel = StreamlitPanel("my_panel", PATH_TO_SCRIPT, grpc_channel=fake_panel_channel)
+    value_id = "test_id"
+    flags_value = test_types.MyIntableFlags.VALUE16 | test_types.MyIntableFlags.VALUE32
+    panel.set_value(value_id, flags_value)
+
+    retrieved_value = panel.get_value(value_id, test_types.MyIntableFlags.VALUE8)
+
+    assert_type(retrieved_value, test_types.MyIntableFlags)
+    assert retrieved_value is test_types.MyIntableFlags.VALUE16 | test_types.MyIntableFlags.VALUE32
+    assert retrieved_value.value == flags_value.value
+    assert retrieved_value.name == flags_value.name
+
+
+def test___panel___panel_is_running_and_in_memory(
+    fake_panel_channel: grpc.Channel,
+) -> None:
+    panel = StreamlitPanel("my_panel", PATH_TO_SCRIPT, grpc_channel=fake_panel_channel)
+
+    assert is_panel_in_memory(panel)
+    assert is_panel_running(panel)
+
+
+def test___panel___python_interpreter_url_is_in_venv(
+    fake_python_panel_service: FakePythonPanelService,
+    fake_panel_channel: grpc.Channel,
+) -> None:
+    StreamlitPanel("my_panel", PATH_TO_SCRIPT, grpc_channel=fake_panel_channel)
+
+    assert fake_python_panel_service.servicer.python_interpreter_url.startswith("file:///")
+    assert ".venv" in fake_python_panel_service.servicer.python_interpreter_url
+
+
+def test___panel___python_script_url_starts_with_file(
+    fake_python_panel_service: FakePythonPanelService,
+    fake_panel_channel: grpc.Channel,
+) -> None:
+    StreamlitPanel("my_panel", PATH_TO_SCRIPT, grpc_channel=fake_panel_channel)
+
+    assert fake_python_panel_service.servicer.python_script_url.startswith("file:///")
+
+
+def is_panel_in_memory(panel: StreamlitPanel) -> bool:
+    return panel.panel_id in panel._panel_client.enumerate_panels().keys()
+
+
+def is_panel_running(panel: StreamlitPanel) -> bool:
+    return panel._panel_client.enumerate_panels()[panel.panel_id][0] != ""
+````
+
+<!--NI_OSS_SOURCE repo=nipanel-python path=tests/unit/test_waveform_conversion.py sha256=4a273c928a5218c5f93a3eff8a63d709434c04c6562c7933f5bfc91f17d2b5fa bytes=13011 -->
+## FILE: tests/unit/test_waveform_conversion.py
+
+- repository: `ni/nipanel-python`
+- source_path: `tests/unit/test_waveform_conversion.py`
+- sha256: `4a273c928a5218c5f93a3eff8a63d709434c04c6562c7933f5bfc91f17d2b5fa`
+- bytes: 13011
+
+````python
+import datetime as dt
+from collections.abc import MutableMapping
+from typing import Any, Union
+
+import nitypes.bintime as bt
+import numpy as np
+from ni.protobuf.types import (
+    precision_timestamp_conversion,
+    precision_timestamp_pb2,
+    waveform_pb2,
+)
+from nitypes.complex import ComplexInt32DType
+from nitypes.waveform import (
+    AnalogWaveform,
+    ComplexWaveform,
+    DigitalWaveform,
+    NumericWaveform,
+    SampleIntervalMode,
+    Spectrum,
+    Timing,
+)
+
+from nipanel.converters.protobuf_types import (
+    DigitalWaveformConverter,
+    DoubleAnalogWaveformConverter,
+    DoubleComplexWaveformConverter,
+    DoubleSpectrumConverter,
+    Int16AnalogWaveformConverter,
+    Int16ComplexWaveformConverter,
+)
+
+EXPECTED_SAMPLE_INTERVAL = 0.1
+EXPECTED_T0_DT = dt.datetime(2000, 12, 1, tzinfo=dt.timezone.utc)
+EXPECTED_T0_BT = bt.DateTime(EXPECTED_T0_DT)
+EXPECTED_UNITS = "Volts"
+EXPECTED_CHANNEL_NAME = "Dev1/ch0"
+EXPECTED_ATTRIBUTES = {
+    "NI_ChannelName": waveform_pb2.WaveformAttributeValue(string_value=EXPECTED_CHANNEL_NAME),
+    "NI_UnitDescription": waveform_pb2.WaveformAttributeValue(string_value=EXPECTED_UNITS),
+}
+
+
+# ========================================================
+# AnalogWaveform to protobuf
+# ========================================================
+def test___double_analog_waveform___convert___valid_protobuf() -> None:
+    analog_waveform = AnalogWaveform.from_array_1d(np.array([1.0, 2.0, 3.0]), dtype=np.float64)
+    _set_python_attributes(analog_waveform)
+    _set_python_timing(analog_waveform)
+
+    converter = DoubleAnalogWaveformConverter()
+    analog_waveform_proto = converter.to_protobuf_message(analog_waveform)
+
+    assert list(analog_waveform_proto.y_data) == [1.0, 2.0, 3.0]
+    assert analog_waveform_proto.dt == EXPECTED_SAMPLE_INTERVAL
+    assert analog_waveform_proto.t0 == _get_t0_pt()
+    _check_protobuf_attributes(analog_waveform_proto.attributes)
+
+
+def test___int16_analog_waveform___convert___valid_protobuf() -> None:
+    analog_waveform = AnalogWaveform.from_array_1d(np.array([1, 2, 3]), dtype=np.int16)
+    _set_python_attributes(analog_waveform)
+    _set_python_timing(analog_waveform)
+
+    converter = Int16AnalogWaveformConverter()
+    analog_waveform_proto = converter.to_protobuf_message(analog_waveform)
+
+    assert list(analog_waveform_proto.y_data) == [1, 2, 3]
+    assert analog_waveform_proto.dt == EXPECTED_SAMPLE_INTERVAL
+    assert analog_waveform_proto.t0 == _get_t0_pt()
+    _check_protobuf_attributes(analog_waveform_proto.attributes)
+
+
+# ========================================================
+# AnalogWaveform from protobuf
+# ========================================================
+def test___double_analog_waveform___convert___valid_python_object() -> None:
+    analog_waveform_proto = waveform_pb2.DoubleAnalogWaveform(
+        t0=_get_t0_pt(),
+        dt=EXPECTED_SAMPLE_INTERVAL,
+        y_data=[1.0, 2.0, 3.0],
+        attributes=EXPECTED_ATTRIBUTES,
+    )
+
+    converter = DoubleAnalogWaveformConverter()
+    analog_waveform = converter.to_python_value(analog_waveform_proto)
+
+    assert list(analog_waveform.scaled_data) == [1.0, 2.0, 3.0]
+    _check_python_timing(analog_waveform)
+    _check_python_attributes(analog_waveform)
+
+
+def test___int16_analog_wfm___convert___valid_python_object() -> None:
+    analog_waveform_proto = waveform_pb2.I16AnalogWaveform(
+        t0=_get_t0_pt(),
+        dt=EXPECTED_SAMPLE_INTERVAL,
+        y_data=[1, 2, 3],
+        attributes=EXPECTED_ATTRIBUTES,
+    )
+
+    converter = Int16AnalogWaveformConverter()
+    analog_waveform = converter.to_python_value(analog_waveform_proto)
+
+    assert list(analog_waveform.scaled_data) == [1, 2, 3]
+    _check_python_timing(analog_waveform)
+    _check_python_attributes(analog_waveform)
+
+
+# ========================================================
+# ComplexWaveform to protobuf
+# ========================================================
+def test___double_complex_waveform___convert___valid_protobuf() -> None:
+    complex_waveform = ComplexWaveform.from_array_1d([1.5 + 2.5j, 3.5 + 4.5j], np.complex128)
+    _set_python_attributes(complex_waveform)
+    _set_python_timing(complex_waveform)
+
+    converter = DoubleComplexWaveformConverter()
+    complex_waveform_proto = converter.to_protobuf_message(complex_waveform)
+
+    assert list(complex_waveform_proto.y_data) == [1.5, 2.5, 3.5, 4.5]
+    assert complex_waveform_proto.dt == EXPECTED_SAMPLE_INTERVAL
+    assert complex_waveform_proto.t0 == _get_t0_pt()
+    _check_protobuf_attributes(complex_waveform_proto.attributes)
+
+
+def test___int16_complex_waveform___convert___valid_protobuf() -> None:
+    complex_waveform = ComplexWaveform.from_array_1d([(1, 2), (3, 4)], ComplexInt32DType)
+    _set_python_attributes(complex_waveform)
+    _set_python_timing(complex_waveform)
+
+    converter = Int16ComplexWaveformConverter()
+    complex_waveform_proto = converter.to_protobuf_message(complex_waveform)
+
+    assert list(complex_waveform_proto.y_data) == [1, 2, 3, 4]
+    assert complex_waveform_proto.dt == EXPECTED_SAMPLE_INTERVAL
+    assert complex_waveform_proto.t0 == _get_t0_pt()
+    _check_protobuf_attributes(complex_waveform_proto.attributes)
+
+
+# ========================================================
+# ComplexWaveform from protobuf
+# ========================================================
+def test___double_complex_waveform___convert___valid_python_object() -> None:
+    complex_waveform_proto = waveform_pb2.DoubleComplexWaveform(
+        t0=_get_t0_pt(),
+        dt=EXPECTED_SAMPLE_INTERVAL,
+        y_data=[1.0, 2.0, 3.0, 4.0],
+        attributes=EXPECTED_ATTRIBUTES,
+    )
+
+    converter = DoubleComplexWaveformConverter()
+    complex_waveform = converter.to_python_value(complex_waveform_proto)
+
+    assert list(complex_waveform.scaled_data) == [1.0 + 2.0j, 3.0 + 4.0j]
+    _check_python_timing(complex_waveform)
+    _check_python_attributes(complex_waveform)
+
+
+def test___int16_complex_wfm___convert___valid_python_object() -> None:
+    complex_waveform_proto = waveform_pb2.I16ComplexWaveform(
+        t0=_get_t0_pt(),
+        dt=EXPECTED_SAMPLE_INTERVAL,
+        y_data=[1, 2, 3, 4],
+        attributes=EXPECTED_ATTRIBUTES,
+    )
+
+    converter = Int16ComplexWaveformConverter()
+    complex_waveform = converter.to_python_value(complex_waveform_proto)
+
+    expected_raw_data = np.array([(1, 2), (3, 4)], ComplexInt32DType)
+    assert np.array_equal(complex_waveform.raw_data, expected_raw_data)
+    _check_python_timing(complex_waveform)
+    _check_python_attributes(complex_waveform)
+
+
+# ========================================================
+# DigitalWaveform to protobuf
+# ========================================================
+def test___bool_digital_waveform___convert___valid_protobuf() -> None:
+    data = np.array([[0, 1, 0], [1, 0, 1]], dtype=np.bool)
+    digital_waveform = DigitalWaveform.from_lines(data, signal_count=3)
+    _set_python_attributes(digital_waveform)
+    _set_python_timing(digital_waveform)
+
+    converter = DigitalWaveformConverter()
+    digital_waveform_proto = converter.to_protobuf_message(digital_waveform)
+
+    assert digital_waveform_proto.y_data == b"\x00\x01\x00\x01\x00\x01"
+    assert digital_waveform_proto.dt == EXPECTED_SAMPLE_INTERVAL
+    assert digital_waveform_proto.t0 == _get_t0_pt()
+    _check_protobuf_attributes(digital_waveform_proto.attributes, check_units=False)
+
+
+def test___uint8_digital_waveform___convert___valid_protobuf() -> None:
+    data = np.array([[0, 1, 3], [7, 5, 1]], dtype=np.uint8)
+    digital_waveform = DigitalWaveform.from_lines(data, signal_count=3)
+    _set_python_attributes(digital_waveform)
+    _set_python_timing(digital_waveform)
+
+    converter = DigitalWaveformConverter()
+    digital_waveform_proto = converter.to_protobuf_message(digital_waveform)
+
+    assert digital_waveform_proto.y_data == b"\x00\x01\x03\x07\x05\x01"
+    assert digital_waveform_proto.dt == EXPECTED_SAMPLE_INTERVAL
+    assert digital_waveform_proto.t0 == _get_t0_pt()
+    _check_protobuf_attributes(digital_waveform_proto.attributes, check_units=False)
+
+
+# ========================================================
+# DigitalWaveform from protobuf
+# ========================================================
+def test___bool_digital_waveform___convert___valid_python_object() -> None:
+    data = np.array([[0, 1, 0], [1, 0, 1]], dtype=np.bool)
+    digital_waveform_proto = waveform_pb2.DigitalWaveform(
+        t0=_get_t0_pt(),
+        dt=EXPECTED_SAMPLE_INTERVAL,
+        signal_count=3,
+        y_data=data.tobytes(),
+        attributes=EXPECTED_ATTRIBUTES,
+    )
+
+    converter = DigitalWaveformConverter()
+    digital_waveform = converter.to_python_value(digital_waveform_proto)
+
+    assert np.array_equal(digital_waveform.data, data)
+    _check_python_timing(digital_waveform)
+    _check_python_attributes(digital_waveform)
+
+
+def test___uint8_digital_waveform___convert___valid_python_object() -> None:
+    data = np.array([[0, 1], [2, 3], [4, 5], [6, 7]], dtype=np.uint8)
+    digital_waveform_proto = waveform_pb2.DigitalWaveform(
+        t0=_get_t0_pt(),
+        dt=EXPECTED_SAMPLE_INTERVAL,
+        signal_count=2,
+        y_data=data.tobytes(),
+        attributes=EXPECTED_ATTRIBUTES,
+    )
+
+    converter = DigitalWaveformConverter()
+    digital_waveform = converter.to_python_value(digital_waveform_proto)
+
+    assert np.array_equal(digital_waveform.data, data)
+    _check_python_timing(digital_waveform)
+    _check_python_attributes(digital_waveform)
+
+
+# ========================================================
+# Spectrum to protobuf
+# ========================================================
+def test___float64_spectrum___convert___valid_protobuf() -> None:
+    spectrum = Spectrum.from_array_1d(np.array([1.0, 2.0, 3.0]))
+    spectrum.start_frequency = 100.0
+    spectrum.frequency_increment = 10.0
+    _set_python_attributes(spectrum)
+
+    converter = DoubleSpectrumConverter()
+    spectrum_proto = converter.to_protobuf_message(spectrum)
+
+    assert list(spectrum_proto.data) == [1.0, 2.0, 3.0]
+    assert spectrum_proto.start_frequency == 100.0
+    assert spectrum_proto.frequency_increment == 10.0
+    _check_protobuf_attributes(spectrum_proto.attributes)
+
+
+# ========================================================
+# Spectrum from protobuf
+# ========================================================
+def test___double_spectrum___convert___valid_python_object() -> None:
+    spectrum_proto = waveform_pb2.DoubleSpectrum(
+        data=[1.0, 2.0, 3.0],
+        start_frequency=100.0,
+        frequency_increment=10.0,
+        attributes=EXPECTED_ATTRIBUTES,
+    )
+
+    converter = DoubleSpectrumConverter()
+    spectrum = converter.to_python_value(spectrum_proto)
+
+    assert list(spectrum.data) == [1.0, 2.0, 3.0]
+    assert spectrum.start_frequency == 100.0
+    assert spectrum.frequency_increment == 10.0
+    _check_python_attributes(spectrum)
+
+
+# ========================================================
+# Helpers
+# ========================================================
+def _get_t0_pt() -> precision_timestamp_pb2.PrecisionTimestamp:
+    return precision_timestamp_conversion.bintime_datetime_to_protobuf(EXPECTED_T0_BT)
+
+
+def _set_python_attributes(
+    waveform: Union[NumericWaveform[Any, Any], DigitalWaveform[Any], Spectrum[Any]],
+) -> None:
+    waveform.channel_name = EXPECTED_CHANNEL_NAME
+    if isinstance(waveform, NumericWaveform) or isinstance(waveform, Spectrum):
+        waveform.units = EXPECTED_UNITS
+
+
+def _check_python_attributes(
+    waveform: Union[NumericWaveform[Any, Any], DigitalWaveform[Any], Spectrum[Any]],
+) -> None:
+    assert waveform.channel_name == EXPECTED_CHANNEL_NAME
+    if isinstance(waveform, NumericWaveform) or isinstance(waveform, Spectrum):
+        assert waveform.units == EXPECTED_UNITS
+
+
+def _check_protobuf_attributes(
+    attributes: MutableMapping[str, waveform_pb2.WaveformAttributeValue],
+    check_units: bool = True,
+) -> None:
+    assert attributes["NI_ChannelName"].string_value == EXPECTED_CHANNEL_NAME
+    if check_units:
+        assert attributes["NI_UnitDescription"].string_value == EXPECTED_UNITS
+
+
+def _set_python_timing(waveform: Union[NumericWaveform[Any, Any], DigitalWaveform[Any]]) -> None:
+    waveform.timing = Timing.create_with_regular_interval(
+        sample_interval=dt.timedelta(milliseconds=EXPECTED_SAMPLE_INTERVAL * 1000),
+        timestamp=EXPECTED_T0_DT,
+    )
+
+
+def _check_python_timing(waveform: Union[NumericWaveform[Any, Any], DigitalWaveform[Any]]) -> None:
+    assert waveform.timing.start_time == EXPECTED_T0_DT
+    assert waveform.timing.sample_interval == dt.timedelta(seconds=EXPECTED_SAMPLE_INTERVAL)
+    assert waveform.timing.sample_interval_mode == SampleIntervalMode.REGULAR
+````
+
+<!--NI_OSS_SOURCE repo=nipanel-python path=tests/utils/__init__.py sha256=87723e12dac17d9dbe99d0b542c47e4972ba92a0326d5e49b6e195ddd981e352 bytes=37 -->
+## FILE: tests/utils/__init__.py
+
+- repository: `ni/nipanel-python`
+- source_path: `tests/utils/__init__.py`
+- sha256: `87723e12dac17d9dbe99d0b542c47e4972ba92a0326d5e49b6e195ddd981e352`
+- bytes: 37
+
+````python
+"""Test Utilities for the Panel."""
+````
+
+<!--NI_OSS_SOURCE repo=nipanel-python path=tests/utils/_fake_python_panel_service.py sha256=503be95e2a016fc41248722d263d282a815591bed9ad30ed3df523e339148a75 bytes=1300 -->
+## FILE: tests/utils/_fake_python_panel_service.py
+
+- repository: `ni/nipanel-python`
+- source_path: `tests/utils/_fake_python_panel_service.py`
+- sha256: `503be95e2a016fc41248722d263d282a815591bed9ad30ed3df523e339148a75`
+- bytes: 1300
+
+````python
+from concurrent import futures
+
+import grpc
+from ni.panels.v1.panel_service_pb2_grpc import (
+    add_PanelServiceServicer_to_server,
+)
+
+from tests.utils._fake_python_panel_servicer import FakePythonPanelServicer
+
+
+class FakePythonPanelService:
+    """Encapsulates a fake PythonPanelService with a gRPC server for testing."""
+
+    def __init__(self) -> None:
+        """Initialize the fake PythonPanelService."""
+        self._server: grpc.Server
+        self._port: int
+        self._servicer = FakePythonPanelServicer()
+
+    def start(self, thread_pool: futures.ThreadPoolExecutor) -> None:
+        """Start the gRPC server and return the port it is bound to."""
+        self._server = grpc.server(thread_pool)
+        add_PanelServiceServicer_to_server(self._servicer, self._server)
+        self._port = self._server.add_insecure_port("[::1]:0")
+        self._server.start()
+
+    def stop(self) -> None:
+        """Stop the gRPC server."""
+        if self._server:
+            self._server.stop(None)
+
+    @property
+    def servicer(self) -> FakePythonPanelServicer:
+        """Get the servicer instance."""
+        return self._servicer
+
+    @property
+    def port(self) -> int:
+        """Get the port the server is bound to."""
+        return self._port
+````
+
+<!--NI_OSS_SOURCE repo=nipanel-python path=tests/utils/_fake_python_panel_servicer.py sha256=d72043693240a9a2f41b4c2d2c80973c46ad6a253f22252df95c22e273fa943a bytes=5883 -->
+## FILE: tests/utils/_fake_python_panel_servicer.py
+
+- repository: `ni/nipanel-python`
+- source_path: `tests/utils/_fake_python_panel_servicer.py`
+- sha256: `d72043693240a9a2f41b4c2d2c80973c46ad6a253f22252df95c22e273fa943a`
+- bytes: 5883
+
+````python
+from typing import Any
+
+import grpc
+from ni.panels.v1.panel_service_pb2 import (
+    StartPanelRequest,
+    StartPanelResponse,
+    StopPanelRequest,
+    StopPanelResponse,
+    EnumeratePanelsRequest,
+    EnumeratePanelsResponse,
+    PanelInformation,
+    GetValueRequest,
+    GetValueResponse,
+    TryGetValueRequest,
+    TryGetValueResponse,
+    SetValueRequest,
+    SetValueResponse,
+)
+from ni.panels.v1.panel_service_pb2_grpc import PanelServiceServicer
+from ni.panels.v1.streamlit_panel_configuration_pb2 import StreamlitPanelConfiguration
+
+
+class FakePythonPanelServicer(PanelServiceServicer):
+    """Fake implementation of the PanelServiceServicer for testing."""
+
+    def __init__(self) -> None:
+        """Initialize the fake PythonPanelServicer."""
+        self._panel_ids: list[str] = []
+        self._panel_is_running: dict[str, bool] = {}
+        self._panel_value_ids: dict[str, dict[str, Any]] = {}
+        self._fail_next_start_panel = False
+        self._set_count: int = 0
+        self._notification_count: int = 0
+        self._python_interpreter_url: str = ""
+        self._python_script_url: str = ""
+
+    def StartPanel(  # noqa: N802
+        self, request: StartPanelRequest, context: Any
+    ) -> StartPanelResponse:
+        """Trivial implementation for testing."""
+        streamlit_panel_configuration = StreamlitPanelConfiguration()
+        request.panel_configuration.Unpack(streamlit_panel_configuration)
+        self._python_interpreter_url = streamlit_panel_configuration.python_interpreter_url
+        self._python_script_url = streamlit_panel_configuration.panel_script_url
+        if self._fail_next_start_panel:
+            self._fail_next_start_panel = False
+            context.abort(grpc.StatusCode.UNAVAILABLE, "Simulated failure")
+        self._start_panel(request.panel_id)
+        return StartPanelResponse(panel_url=self._get_panel_uri(request.panel_id))
+
+    def StopPanel(self, request: StopPanelRequest, context: Any) -> StopPanelResponse:  # noqa: N802
+        """Trivial implementation for testing."""
+        self._stop_panel(request.reset, request.panel_id)
+        return StopPanelResponse()
+
+    def EnumeratePanels(  # noqa: N802
+        self, request: EnumeratePanelsRequest, context: Any
+    ) -> EnumeratePanelsResponse:
+        """Trivial implementation for testing."""
+        response = EnumeratePanelsResponse()
+        for panel_id in self._panel_ids:
+            panel = PanelInformation(
+                panel_id=panel_id,
+                panel_url=self._get_panel_uri(panel_id),
+                value_ids=self._panel_value_ids[panel_id],
+            )
+            response.panels.append(panel)
+        return response
+
+    def GetValue(self, request: GetValueRequest, context: Any) -> GetValueResponse:  # noqa: N802
+        """Trivial implementation for testing."""
+        if request.value_id not in self._panel_value_ids.get(request.panel_id, {}):
+            context.abort(grpc.StatusCode.NOT_FOUND, "Value ID not found in panel")
+        value = self._panel_value_ids[request.panel_id][request.value_id]
+        return GetValueResponse(value=value)
+
+    def TryGetValue(  # noqa: N802
+        self, request: TryGetValueRequest, context: Any
+    ) -> TryGetValueResponse:
+        """Trivial implementation for testing."""
+        if request.value_id not in self._panel_value_ids.get(request.panel_id, {}):
+            return TryGetValueResponse()
+        value = self._panel_value_ids[request.panel_id][request.value_id]
+        return TryGetValueResponse(value=value)
+
+    def SetValue(self, request: SetValueRequest, context: Any) -> SetValueResponse:  # noqa: N802
+        """Trivial implementation for testing."""
+        self._init_panel(request.panel_id)
+        self._panel_value_ids[request.panel_id][request.value_id] = request.value
+        self._set_count += 1
+        if request.notify:
+            self._notification_count += 1
+        return SetValueResponse()
+
+    def fail_next_start_panel(self) -> None:
+        """Set whether the StartPanel method should fail the next time it is called."""
+        self._fail_next_start_panel = True
+
+    @property
+    def set_count(self) -> int:
+        """Get the total number of times SetValue was called."""
+        return self._set_count
+
+    @property
+    def notification_count(self) -> int:
+        """Get the number of notifications sent from SetValue."""
+        return self._notification_count
+
+    @property
+    def python_interpreter_url(self) -> str:
+        """Get the Python interpreter url."""
+        return self._python_interpreter_url
+
+    @property
+    def python_script_url(self) -> str:
+        """Get the Python script url."""
+        return self._python_script_url
+
+    def _init_panel(self, panel_id: str) -> None:
+        if panel_id not in self._panel_ids:
+            self._panel_ids.append(panel_id)
+            self._panel_is_running[panel_id] = False
+            self._panel_value_ids[panel_id] = {}
+
+    def _start_panel(self, panel_id: str) -> None:
+        if panel_id not in self._panel_ids:
+            self._panel_ids.append(panel_id)
+            self._panel_is_running[panel_id] = True
+            self._panel_value_ids[panel_id] = {}
+        else:
+            self._panel_is_running[panel_id] = True
+
+    def _stop_panel(self, reset: bool, panel_id: str) -> None:
+        if reset:
+            self._panel_ids.remove(panel_id)
+            self._panel_is_running.pop(panel_id)
+            self._panel_value_ids.pop(panel_id)
+        else:
+            self._panel_is_running[panel_id] = False
+
+    def _get_panel_uri(self, panel_id: str) -> str:
+        if not self._panel_is_running.get(panel_id, False):
+            return ""
+        return f"http://localhost:50051/{panel_id}"
+````
