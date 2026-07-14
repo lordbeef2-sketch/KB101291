@@ -1,0 +1,114 @@
+# NOMAGIC ATTACHMENT: delete_in_instance_table.png
+
+- attachment_id: `298094000`
+- space_key: `UAF2P`
+- parent_page_id: `298093965`
+- parent_page_title: (2026x) View
+- media_type: `image/png`
+- reported_bytes: 375
+- download_url: https://docs.nomagic.com/download/attachments/298093965/delete_in_instance_table.png?version=1&modificationDate=1774856439348&api=v2
+- payload_kind: `metadata-only`
+- downloaded_sha256: not-downloaded
+
+## PAYLOAD STATUS
+
+Binary or image attachment is inventoried by official metadata; no binary bytes are embedded in this Markdown-only corpus.
+
+
+## EXACT ATTACHMENT METADATA
+
+````json
+{
+  "id": "298094000",
+  "type": "attachment",
+  "status": "current",
+  "title": "delete_in_instance_table.png",
+  "version": {
+    "by": {
+      "type": "known",
+      "username": "ingabe",
+      "userKey": "ff80808151f3008c0152c05ba1a40003",
+      "profilePicture": {
+        "path": "/download/attachments/7415957/user-avatar",
+        "width": 48,
+        "height": 48,
+        "isDefault": false
+      },
+      "displayName": "Inga A.",
+      "_links": {
+        "self": "https://docs.nomagic.com/rest/api/user?key=ff80808151f3008c0152c05ba1a40003"
+      },
+      "_expandable": {
+        "status": ""
+      }
+    },
+    "when": "2026-03-30T09:40:39.348+02:00",
+    "message": "",
+    "number": 1,
+    "minorEdit": false,
+    "hidden": false,
+    "_links": {
+      "self": "https://docs.nomagic.com/rest/experimental/content/298094000/version/1"
+    },
+    "_expandable": {
+      "content": "/rest/api/content/298094000"
+    }
+  },
+  "position": -1,
+  "container": {
+    "id": "298093965",
+    "type": "page",
+    "status": "current",
+    "title": "(2026x) View",
+    "position": 5,
+    "extensions": {
+      "position": 5
+    },
+    "_links": {
+      "webui": "/spaces/UAF2P/pages/298093965/2026x+View",
+      "edit": "/pages/resumedraft.action?draftId=298093965",
+      "tinyui": "/x/jY3EEQ",
+      "self": "https://docs.nomagic.com/rest/api/content/298093965"
+    },
+    "_expandable": {
+      "container": "/rest/api/space/UAF2P",
+      "metadata": "",
+      "operations": "",
+      "children": "/rest/api/content/298093965/child",
+      "restrictions": "/rest/api/content/298093965/restriction/byOperation",
+      "history": "/rest/api/content/298093965/history",
+      "ancestors": "",
+      "body": "",
+      "version": "",
+      "descendants": "/rest/api/content/298093965/descendant",
+      "space": "/rest/api/space/UAF2P",
+      "relevantViewRestrictions": "/rest/api/content/298093965/restriction/relevantViewRestrictions"
+    }
+  },
+  "metadata": {
+    "mediaType": "image/png"
+  },
+  "extensions": {
+    "mediaType": "image/png",
+    "fileSize": 375,
+    "comment": ""
+  },
+  "_links": {
+    "download": "/download/attachments/298093965/delete_in_instance_table.png?version=1&modificationDate=1774856439348&api=v2",
+    "thumbnail": "/download/thumbnails/298093965/delete_in_instance_table.png?api=v2",
+    "webui": "/spaces/UAF2P/pages/298093965/2026x+View?preview=%2F298093965%2F298094000%2Fdelete_in_instance_table.png",
+    "self": "https://docs.nomagic.com/rest/api/content/298094000"
+  },
+  "_expandable": {
+    "operations": "",
+    "children": "/rest/api/content/298094000/child",
+    "restrictions": "/rest/api/content/298094000/restriction/byOperation",
+    "history": "/rest/api/content/298094000/history",
+    "ancestors": "",
+    "body": "",
+    "descendants": "/rest/api/content/298094000/descendant",
+    "space": "/rest/api/space/UAF2P",
+    "relevantViewRestrictions": "/rest/api/content/298094000/restriction/relevantViewRestrictions"
+  }
+}
+````

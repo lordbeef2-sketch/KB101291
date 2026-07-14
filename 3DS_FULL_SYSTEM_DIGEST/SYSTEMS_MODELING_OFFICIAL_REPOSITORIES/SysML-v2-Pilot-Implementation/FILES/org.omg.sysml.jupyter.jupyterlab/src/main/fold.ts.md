@@ -1,0 +1,134 @@
+# OFFICIAL REPOSITORY FILE: SysML-v2-Pilot-Implementation/org.omg.sysml.jupyter.jupyterlab/src/main/fold.ts
+
+- repository: `SysML-v2-Pilot-Implementation`
+- source_path: `org.omg.sysml.jupyter.jupyterlab/src/main/fold.ts`
+- source_url: https://github.com/Systems-Modeling/SysML-v2-Pilot-Implementation/blob/fa709f28dfd49dfdb7ee83e4e19da2f57e0eb3aa/org.omg.sysml.jupyter.jupyterlab/src/main/fold.ts
+- source_bytes: 4314
+- source_sha256: `f8b066e0ead6dd385a4899d792ba639f1c2db20c6cde371157b3c6af85b8b40e`
+- decoded_as: `utf-8`
+
+
+## EXACT SOURCE
+
+````typescript
+/*
+ * SysML 2 Pilot Implementation
+ * Copyright (c) 2020-2025 Mgnite Inc.
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the Eclipse Public License as published by
+ * the Eclipse Foundation, version 2 of the License.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * Eclipse Public License for more details.
+ * You should have received a copy of the Eclipse Public License
+ * along with this program.  If not, see <https://www.eclipse.org/legal/epl-2.0/>.
+ *
+ * @license EPL-2.0 <http://spdx.org/licenses/EPL-2.0>
+ */
+
+import { IEditorExtensionFactory } from "@jupyterlab/codemirror";
+import { EditorState, Extension } from '@codemirror/state';
+import { foldService, syntaxTree, language } from '@codemirror/language';
+import { SyntaxNode } from '@lezer/common';
+
+function isInStringCommentOrVariable(state: EditorState, pos: number): boolean {
+    const tree = syntaxTree(state);
+    let node: SyntaxNode | null = tree.resolveInner(pos, 1);
+    
+    while (node) {
+        const nodeType = node.type.name;
+        // Check if we're in a string, comment, or other non-code context
+        // Note that 'variableName' correesponds to a quoted name
+        if (nodeType === 'String' || 
+            nodeType === 'Comment' || 
+            nodeType === 'BlockComment' ||
+            nodeType === 'LineComment' ||
+            nodeType === 'variableName' ||
+            nodeType.toLowerCase().includes('string') ||
+            nodeType.toLowerCase().includes('comment')) {
+            return true;
+        }
+        node = node.parent;
+    }
+    return false;
+}
+
+function findMatchingCloseBrace(state: EditorState, openPos: number): number | null {
+    const docLength = state.doc.length;
+    let nest = 1;
+    let pos = openPos + 1;
+    
+    while (pos < docLength && nest > 0) {
+        const char = state.sliceDoc(pos, pos + 1);
+        // Skip if we're in a string, comment, or variable
+        if (!isInStringCommentOrVariable(state, pos)) {
+            if (char === '{') {
+                nest++;
+            } else if (char === '}') {
+                nest--;
+                if (nest === 0) {
+                    return pos;
+                }
+            }
+        }
+        pos++;
+    }
+    
+    return null;
+}
+
+function computeFoldRange(state: EditorState, lineStart: number, lineEnd: number) {
+    // Check the language first
+    const lang = state.facet(language);
+    if (!lang || lang.name !== 'sysml') return null;
+
+    const lineText = state.sliceDoc(lineStart, lineEnd);
+    
+    for (let i = 0; i < lineText.length; i++) {
+        const char = lineText[i];
+        if (char === '{') {
+            const absolutePos = lineStart + i;
+            
+            // Check if this brace is in a string, comment, or variable
+            if (isInStringCommentOrVariable(state, absolutePos)) {
+                continue;
+            }
+            
+            // Find the matching closing brace
+            const closePos = findMatchingCloseBrace(state, absolutePos);
+            if (closePos === null) {
+                return null;
+            }
+            
+            // Check if the fold spans multiple lines
+            const openLine = state.doc.lineAt(absolutePos);
+            const closeLine = state.doc.lineAt(closePos);
+            
+            if (openLine.number === closeLine.number) {
+                /* Do not fold the same line */
+                return null;
+            }
+            
+            return { from: absolutePos, to: closePos };
+        }
+    }
+    
+    return null;
+}
+
+export function sysmlFoldServiceSelection(options: IEditorExtensionFactory.IOptions): Extension {
+    const mimeType = options.model.mimeType;
+    if (mimeType === 'text/x-sysml'
+        // In the newly created notebook, the first cell is initialized as 'text/plain'
+        // We check the language in the foldService as well to avoid misapplication.
+        || mimeType === 'text/plain') {
+        return [ foldService.of(computeFoldRange) ];
+    } else {
+        return [];
+    }
+}
+
+````

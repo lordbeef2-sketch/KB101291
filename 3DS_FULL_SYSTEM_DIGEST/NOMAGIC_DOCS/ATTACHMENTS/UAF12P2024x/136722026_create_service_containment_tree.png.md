@@ -1,0 +1,114 @@
+# NOMAGIC ATTACHMENT: create_service_containment_tree.png
+
+- attachment_id: `136722026`
+- space_key: `UAF12P2024x`
+- parent_page_id: `136722016`
+- parent_page_title: Working with Services Connectivity diagram
+- media_type: `image/png`
+- reported_bytes: 21908
+- download_url: https://docs.nomagic.com/download/attachments/136722016/create_service_containment_tree.png?version=1&modificationDate=1695284996027&api=v2
+- payload_kind: `metadata-only`
+- downloaded_sha256: not-downloaded
+
+## PAYLOAD STATUS
+
+Binary or image attachment is inventoried by official metadata; no binary bytes are embedded in this Markdown-only corpus.
+
+
+## EXACT ATTACHMENT METADATA
+
+````json
+{
+  "id": "136722026",
+  "type": "attachment",
+  "status": "current",
+  "title": "create_service_containment_tree.png",
+  "version": {
+    "by": {
+      "type": "known",
+      "username": "agnpal",
+      "userKey": "ff80808151426f0e0151af8b0d360002",
+      "profilePicture": {
+        "path": "/download/attachments/6598412/user-avatar",
+        "width": 48,
+        "height": 48,
+        "isDefault": false
+      },
+      "displayName": "Agne P.",
+      "_links": {
+        "self": "https://docs.nomagic.com/rest/api/user?key=ff80808151426f0e0151af8b0d360002"
+      },
+      "_expandable": {
+        "status": ""
+      }
+    },
+    "when": "2023-09-21T10:29:56.027+02:00",
+    "message": "",
+    "number": 1,
+    "minorEdit": false,
+    "hidden": false,
+    "_links": {
+      "self": "https://docs.nomagic.com/rest/experimental/content/136722026/version/1"
+    },
+    "_expandable": {
+      "content": "/rest/api/content/136722026"
+    }
+  },
+  "position": -1,
+  "container": {
+    "id": "136722016",
+    "type": "page",
+    "status": "current",
+    "title": "Working with Services Connectivity diagram",
+    "position": 3,
+    "extensions": {
+      "position": 3
+    },
+    "_links": {
+      "webui": "/spaces/UAF12P2024x/pages/136722016/Working+with+Services+Connectivity+diagram",
+      "edit": "/pages/resumedraft.action?draftId=136722016",
+      "tinyui": "/x/YDYmC",
+      "self": "https://docs.nomagic.com/rest/api/content/136722016"
+    },
+    "_expandable": {
+      "container": "/rest/api/space/UAF12P2024x",
+      "metadata": "",
+      "operations": "",
+      "children": "/rest/api/content/136722016/child",
+      "restrictions": "/rest/api/content/136722016/restriction/byOperation",
+      "history": "/rest/api/content/136722016/history",
+      "ancestors": "",
+      "body": "",
+      "version": "",
+      "descendants": "/rest/api/content/136722016/descendant",
+      "space": "/rest/api/space/UAF12P2024x",
+      "relevantViewRestrictions": "/rest/api/content/136722016/restriction/relevantViewRestrictions"
+    }
+  },
+  "metadata": {
+    "mediaType": "image/png"
+  },
+  "extensions": {
+    "mediaType": "image/png",
+    "fileSize": 21908,
+    "comment": ""
+  },
+  "_links": {
+    "download": "/download/attachments/136722016/create_service_containment_tree.png?version=1&modificationDate=1695284996027&api=v2",
+    "thumbnail": "/download/thumbnails/136722016/create_service_containment_tree.png?api=v2",
+    "webui": "/spaces/UAF12P2024x/pages/136722016/Working+with+Services+Connectivity+diagram?preview=%2F136722016%2F136722026%2Fcreate_service_containment_tree.png",
+    "self": "https://docs.nomagic.com/rest/api/content/136722026"
+  },
+  "_expandable": {
+    "operations": "",
+    "children": "/rest/api/content/136722026/child",
+    "restrictions": "/rest/api/content/136722026/restriction/byOperation",
+    "history": "/rest/api/content/136722026/history",
+    "ancestors": "",
+    "body": "",
+    "descendants": "/rest/api/content/136722026/descendant",
+    "space": "/rest/api/space/UAF12P2024x",
+    "relevantViewRestrictions": "/rest/api/content/136722026/restriction/relevantViewRestrictions"
+  }
+}
+````

@@ -1,0 +1,114 @@
+# NOMAGIC ATTACHMENT: delete_user.png
+
+- attachment_id: `191925167`
+- space_key: `MCS2024xR2`
+- parent_page_id: `191925137`
+- parent_page_title: Assigning users to resources
+- media_type: `image/png`
+- reported_bytes: 429
+- download_url: https://docs.nomagic.com/download/attachments/191925137/delete_user.png?version=1&modificationDate=1728049830747&api=v2
+- payload_kind: `metadata-only`
+- downloaded_sha256: not-downloaded
+
+## PAYLOAD STATUS
+
+Binary or image attachment is inventoried by official metadata; no binary bytes are embedded in this Markdown-only corpus.
+
+
+## EXACT ATTACHMENT METADATA
+
+````json
+{
+  "id": "191925167",
+  "type": "attachment",
+  "status": "current",
+  "title": "delete_user.png",
+  "version": {
+    "by": {
+      "type": "known",
+      "username": "ingabe",
+      "userKey": "ff80808151f3008c0152c05ba1a40003",
+      "profilePicture": {
+        "path": "/download/attachments/7415957/user-avatar",
+        "width": 48,
+        "height": 48,
+        "isDefault": false
+      },
+      "displayName": "Inga A.",
+      "_links": {
+        "self": "https://docs.nomagic.com/rest/api/user?key=ff80808151f3008c0152c05ba1a40003"
+      },
+      "_expandable": {
+        "status": ""
+      }
+    },
+    "when": "2024-10-04T15:50:30.747+02:00",
+    "message": "",
+    "number": 1,
+    "minorEdit": false,
+    "hidden": false,
+    "_links": {
+      "self": "https://docs.nomagic.com/rest/experimental/content/191925167/version/1"
+    },
+    "_expandable": {
+      "content": "/rest/api/content/191925167"
+    }
+  },
+  "position": -1,
+  "container": {
+    "id": "191925137",
+    "type": "page",
+    "status": "current",
+    "title": "Assigning users to resources",
+    "position": 2,
+    "extensions": {
+      "position": 2
+    },
+    "_links": {
+      "webui": "/spaces/MCS2024xR2/pages/191925137/Assigning+users+to+resources",
+      "edit": "/pages/resumedraft.action?draftId=191925137",
+      "tinyui": "/x/kYtwCw",
+      "self": "https://docs.nomagic.com/rest/api/content/191925137"
+    },
+    "_expandable": {
+      "container": "/rest/api/space/MCS2024xR2",
+      "metadata": "",
+      "operations": "",
+      "children": "/rest/api/content/191925137/child",
+      "restrictions": "/rest/api/content/191925137/restriction/byOperation",
+      "history": "/rest/api/content/191925137/history",
+      "ancestors": "",
+      "body": "",
+      "version": "",
+      "descendants": "/rest/api/content/191925137/descendant",
+      "space": "/rest/api/space/MCS2024xR2",
+      "relevantViewRestrictions": "/rest/api/content/191925137/restriction/relevantViewRestrictions"
+    }
+  },
+  "metadata": {
+    "mediaType": "image/png"
+  },
+  "extensions": {
+    "mediaType": "image/png",
+    "fileSize": 429,
+    "comment": ""
+  },
+  "_links": {
+    "download": "/download/attachments/191925137/delete_user.png?version=1&modificationDate=1728049830747&api=v2",
+    "thumbnail": "/download/thumbnails/191925137/delete_user.png?api=v2",
+    "webui": "/spaces/MCS2024xR2/pages/191925137/Assigning+users+to+resources?preview=%2F191925137%2F191925167%2Fdelete_user.png",
+    "self": "https://docs.nomagic.com/rest/api/content/191925167"
+  },
+  "_expandable": {
+    "operations": "",
+    "children": "/rest/api/content/191925167/child",
+    "restrictions": "/rest/api/content/191925167/restriction/byOperation",
+    "history": "/rest/api/content/191925167/history",
+    "ancestors": "",
+    "body": "",
+    "descendants": "/rest/api/content/191925167/descendant",
+    "space": "/rest/api/space/MCS2024xR2",
+    "relevantViewRestrictions": "/rest/api/content/191925167/restriction/relevantViewRestrictions"
+  }
+}
+````

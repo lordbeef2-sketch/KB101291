@@ -1,0 +1,307 @@
+# JAVA OPENAPI: RtfImporter (2026x Refresh1 API)
+
+- source_url: https://jdocs.nomagic.com/2026xRefresh1/com/nomagic/reportwizard/tools/importer/template/RtfImporter.html
+- source_path: `com/nomagic/reportwizard/tools/importer/template/RtfImporter.html`
+- source_sha256: `3eca582d3516a2a6a2e37b66550ff9597fe1be398dc630c9edc1c7e6765e3b35`
+- captured_utc: `2026-07-14T16:46:15.834011+00:00`
+
+## NORMALIZED JAVADOC CONTENT
+
+======== START OF CLASS DATA ========
+
+Package [com.nomagic.reportwizard.tools.importer.template](package-summary.html)
+
+## Class RtfImporter
+
+[java.lang.Object](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html)
+[com.nomagic.reportwizard.tools.importer.template.AbstractImporter](AbstractImporter.html)
+com.nomagic.reportwizard.tools.importer.template.RtfImporter
+
+All Implemented Interfaces:
+`[IImporter](IImporter.html)`
+
+@OpenApiAllpublic classRtfImporter
+extends [AbstractImporter](AbstractImporter.html)
+
+Imports Rtf content at runtime.
+
+Since:
+Jan 22, 2009
+
+=========== FIELD SUMMARY =========== 
+Field Summary
+Fields inherited from class com.nomagic.reportwizard.tools.importer.template.[AbstractImporter](AbstractImporter.html)
+`[log](AbstractImporter.html#log), [reader](AbstractImporter.html#reader)`
+ ======== CONSTRUCTOR SUMMARY ======== 
+Constructor Summary
+Constructors
+Constructor
+Description
+`[RtfImporter](#%3Cinit%3E(java.lang.String,java.lang.String))([String](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html) templateFileName,
+ [String](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html) section)`
+the constructor.
+ ========== METHOD SUMMARY =========== 
+Method Summary
+All MethodsInstance MethodsConcrete Methods
+Modifier and Type
+Method
+Description
+`protected [String](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html)`
+`[getDocumentBody](#getDocumentBody(java.io.File))([File](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/File.html) file)`
+Get the HTML Body.
+`protected [String](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html)`
+`[getDocumentSection](#getDocumentSection(java.io.File,java.lang.String))([File](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/File.html) file,
+ [String](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html) section)`
+Get a Section in an Html document.
+`[ITool.RetainedString](../../../../magicreport/engine/ITool.RetainedString.html)`
+`[postFormat](#postFormat(java.io.StringWriter))([StringWriter](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/StringWriter.html) writer)`
+Apply necessary document dependent formatting.
+Methods inherited from class com.nomagic.reportwizard.tools.importer.template.[AbstractImporter](AbstractImporter.html)
+`[getReader](AbstractImporter.html#getReader())`
+Methods inherited from class java.lang.[Object](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html)
+`[clone](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html#clone()), [equals](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html#equals(java.lang.Object)), [finalize](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html#finalize()), [getClass](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html#getClass()), [hashCode](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html#hashCode()), [notify](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html#notify()), [notifyAll](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html#notifyAll()), [toString](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html#toString()), [wait](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html#wait()), [wait](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html#wait(long)), [wait](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html#wait(long,int))`
+
+========= CONSTRUCTOR DETAIL ======== 
+Constructor Details
+RtfImporter
+public RtfImporter([String](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html) templateFileName,
+ [String](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html) section)
+the constructor.
+Parameters:
+`templateFileName` - the template file
+`section` - the section
+ ============ METHOD DETAIL ========== 
+Method Details
+postFormat
+public [ITool.RetainedString](../../../../magicreport/engine/ITool.RetainedString.html) postFormat([StringWriter](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/StringWriter.html) writer)
+Description copied from class: `[AbstractImporter](AbstractImporter.html#postFormat(java.io.StringWriter))`
+Apply necessary document dependent formatting.
+Specified by:
+`[postFormat](IImporter.html#postFormat(java.io.StringWriter))` in interface `[IImporter](IImporter.html)`
+Overrides:
+`[postFormat](AbstractImporter.html#postFormat(java.io.StringWriter))` in class `[AbstractImporter](AbstractImporter.html)`
+Parameters:
+`writer` - the writer to post format
+Returns:
+the final output.
+getDocumentBody
+protected [String](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html) getDocumentBody([File](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/File.html) file)
+ throws [IOException](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/IOException.html)
+Description copied from class: `[AbstractImporter](AbstractImporter.html#getDocumentBody(java.io.File))`
+Get the HTML Body.
+Specified by:
+`[getDocumentBody](AbstractImporter.html#getDocumentBody(java.io.File))` in class `[AbstractImporter](AbstractImporter.html)`
+Parameters:
+`file` - holding the document
+Returns:
+the Text
+Throws:
+`[IOException](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/IOException.html)` - if reading the file failed
+getDocumentSection
+protected [String](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html) getDocumentSection([File](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/File.html) file,
+ [String](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html) section)
+ throws [IOException](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/IOException.html)
+Description copied from class: `[AbstractImporter](AbstractImporter.html#getDocumentSection(java.io.File,java.lang.String))`
+Get a Section in an Html document.
+Overrides:
+`[getDocumentSection](AbstractImporter.html#getDocumentSection(java.io.File,java.lang.String))` in class `[AbstractImporter](AbstractImporter.html)`
+Parameters:
+`file` - holding the document.
+`section` - the section name
+Returns:
+the section text
+Throws:
+`[IOException](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/IOException.html)` - if reading the section failed
+
+========= END OF CLASS DATA =========
+
+## EXACT JAVADOC MAIN HTML
+
+````html
+<main role="main">
+<!-- ======== START OF CLASS DATA ======== -->
+<div class="header">
+<div class="sub-title"><span class="package-label-in-type">Package</span> <a href="package-summary.html">com.nomagic.reportwizard.tools.importer.template</a></div>
+<h1 class="title" title="Class RtfImporter">Class RtfImporter</h1>
+</div>
+<div class="inheritance" title="Inheritance Tree"><a class="external-link" href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang">java.lang.Object</a>
+<div class="inheritance"><a href="AbstractImporter.html" title="class in com.nomagic.reportwizard.tools.importer.template">com.nomagic.reportwizard.tools.importer.template.AbstractImporter</a>
+<div class="inheritance">com.nomagic.reportwizard.tools.importer.template.RtfImporter</div>
+</div>
+</div>
+<section class="class-description" id="class-description">
+<dl class="notes">
+<dt>All Implemented Interfaces:</dt>
+<dd><code><a href="IImporter.html" title="interface in com.nomagic.reportwizard.tools.importer.template">IImporter</a></code></dd>
+</dl>
+<hr/>
+<div class="type-signature"><span class="annotations">@OpenApiAll
+</span><span class="modifiers">public class </span><span class="element-name type-name-label">RtfImporter</span>
+<span class="extends-implements">extends <a href="AbstractImporter.html" title="class in com.nomagic.reportwizard.tools.importer.template">AbstractImporter</a></span></div>
+<div class="block">Imports Rtf content at runtime.</div>
+<dl class="notes">
+<dt>Since:</dt>
+<dd>Jan 22, 2009</dd>
+</dl>
+</section>
+<section class="summary">
+<ul class="summary-list">
+<!-- =========== FIELD SUMMARY =========== -->
+<li>
+<section class="field-summary" id="field-summary">
+<h2>Field Summary</h2>
+<div class="inherited-list">
+<h3 id="fields-inherited-from-class-com.nomagic.reportwizard.tools.importer.template.AbstractImporter">Fields inherited from class com.nomagic.reportwizard.tools.importer.template.<a href="AbstractImporter.html" title="class in com.nomagic.reportwizard.tools.importer.template">AbstractImporter</a></h3>
+<code><a href="AbstractImporter.html#log">log</a>, <a href="AbstractImporter.html#reader">reader</a></code></div>
+</section>
+</li>
+<!-- ======== CONSTRUCTOR SUMMARY ======== -->
+<li>
+<section class="constructor-summary" id="constructor-summary">
+<h2>Constructor Summary</h2>
+<div class="caption"><span>Constructors</span></div>
+<div class="summary-table two-column-summary">
+<div class="table-header col-first">Constructor</div>
+<div class="table-header col-last">Description</div>
+<div class="col-constructor-name even-row-color"><code><a class="member-name-link" href="#%3Cinit%3E(java.lang.String,java.lang.String)">RtfImporter</a><wbr/>(<a class="external-link" href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang">String</a> templateFileName,
+ <a class="external-link" href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang">String</a> section)</code></div>
+<div class="col-last even-row-color">
+<div class="block">the constructor.</div>
+</div>
+</div>
+</section>
+</li>
+<!-- ========== METHOD SUMMARY =========== -->
+<li>
+<section class="method-summary" id="method-summary">
+<h2>Method Summary</h2>
+<div id="method-summary-table">
+<div aria-orientation="horizontal" class="table-tabs" role="tablist"><button aria-controls="method-summary-table.tabpanel" aria-selected="true" class="active-table-tab" id="method-summary-table-tab0" onclick="show('method-summary-table', 'method-summary-table', 3)" onkeydown="switchTab(event)" role="tab" tabindex="0">All Methods</button><button aria-controls="method-summary-table.tabpanel" aria-selected="false" class="table-tab" id="method-summary-table-tab2" onclick="show('method-summary-table', 'method-summary-table-tab2', 3)" onkeydown="switchTab(event)" role="tab" tabindex="-1">Instance Methods</button><button aria-controls="method-summary-table.tabpanel" aria-selected="false" class="table-tab" id="method-summary-table-tab4" onclick="show('method-summary-table', 'method-summary-table-tab4', 3)" onkeydown="switchTab(event)" role="tab" tabindex="-1">Concrete Methods</button></div>
+<div aria-labelledby="method-summary-table-tab0" id="method-summary-table.tabpanel" role="tabpanel">
+<div class="summary-table three-column-summary">
+<div class="table-header col-first">Modifier and Type</div>
+<div class="table-header col-second">Method</div>
+<div class="table-header col-last">Description</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>protected <a class="external-link" href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang">String</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a class="member-name-link" href="#getDocumentBody(java.io.File)">getDocumentBody</a><wbr/>(<a class="external-link" href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/File.html" title="class or interface in java.io">File</a> file)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Get the HTML Body.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>protected <a class="external-link" href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang">String</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a class="member-name-link" href="#getDocumentSection(java.io.File,java.lang.String)">getDocumentSection</a><wbr/>(<a class="external-link" href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/File.html" title="class or interface in java.io">File</a> file,
+ <a class="external-link" href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang">String</a> section)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Get a Section in an Html document.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../../../../magicreport/engine/ITool.RetainedString.html" title="class in com.nomagic.magicreport.engine">ITool.RetainedString</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a class="member-name-link" href="#postFormat(java.io.StringWriter)">postFormat</a><wbr/>(<a class="external-link" href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/StringWriter.html" title="class or interface in java.io">StringWriter</a> writer)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Apply necessary document dependent formatting.</div>
+</div>
+</div>
+</div>
+</div>
+<div class="inherited-list">
+<h3 id="methods-inherited-from-class-com.nomagic.reportwizard.tools.importer.template.AbstractImporter">Methods inherited from class com.nomagic.reportwizard.tools.importer.template.<a href="AbstractImporter.html" title="class in com.nomagic.reportwizard.tools.importer.template">AbstractImporter</a></h3>
+<code><a href="AbstractImporter.html#getReader()">getReader</a></code></div>
+<div class="inherited-list">
+<h3 id="methods-inherited-from-class-java.lang.Object">Methods inherited from class java.lang.<a class="external-link" href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang">Object</a></h3>
+<code><a class="external-link" href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html#clone()" title="class or interface in java.lang">clone</a>, <a class="external-link" href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html#equals(java.lang.Object)" title="class or interface in java.lang">equals</a>, <a class="external-link" href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html#finalize()" title="class or interface in java.lang">finalize</a>, <a class="external-link" href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html#getClass()" title="class or interface in java.lang">getClass</a>, <a class="external-link" href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html#hashCode()" title="class or interface in java.lang">hashCode</a>, <a class="external-link" href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html#notify()" title="class or interface in java.lang">notify</a>, <a class="external-link" href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html#notifyAll()" title="class or interface in java.lang">notifyAll</a>, <a class="external-link" href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html#toString()" title="class or interface in java.lang">toString</a>, <a class="external-link" href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html#wait()" title="class or interface in java.lang">wait</a>, <a class="external-link" href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html#wait(long)" title="class or interface in java.lang">wait</a>, <a class="external-link" href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html#wait(long,int)" title="class or interface in java.lang">wait</a></code></div>
+</section>
+</li>
+</ul>
+</section>
+<section class="details">
+<ul class="details-list">
+<!-- ========= CONSTRUCTOR DETAIL ======== -->
+<li>
+<section class="constructor-details" id="constructor-detail">
+<h2>Constructor Details</h2>
+<ul class="member-list">
+<li>
+<section class="detail" id="&lt;init&gt;(java.lang.String,java.lang.String)">
+<h3>RtfImporter</h3>
+<div class="member-signature"><span class="modifiers">public</span> <span class="element-name">RtfImporter</span><wbr/><span class="parameters">(<a class="external-link" href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang">String</a> templateFileName,
+ <a class="external-link" href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang">String</a> section)</span></div>
+<div class="block">the constructor.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>templateFileName</code> - the template file</dd>
+<dd><code>section</code> - the section</dd>
+</dl>
+</section>
+</li>
+</ul>
+</section>
+</li>
+<!-- ============ METHOD DETAIL ========== -->
+<li>
+<section class="method-details" id="method-detail">
+<h2>Method Details</h2>
+<ul class="member-list">
+<li>
+<section class="detail" id="postFormat(java.io.StringWriter)">
+<h3>postFormat</h3>
+<div class="member-signature"><span class="modifiers">public</span> <span class="return-type"><a href="../../../../magicreport/engine/ITool.RetainedString.html" title="class in com.nomagic.magicreport.engine">ITool.RetainedString</a></span> <span class="element-name">postFormat</span><wbr/><span class="parameters">(<a class="external-link" href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/StringWriter.html" title="class or interface in java.io">StringWriter</a> writer)</span></div>
+<div class="block"><span class="description-from-type-label">Description copied from class: <code><a href="AbstractImporter.html#postFormat(java.io.StringWriter)">AbstractImporter</a></code></span></div>
+<div class="block">Apply necessary document dependent formatting.</div>
+<dl class="notes">
+<dt>Specified by:</dt>
+<dd><code><a href="IImporter.html#postFormat(java.io.StringWriter)">postFormat</a></code> in interface <code><a href="IImporter.html" title="interface in com.nomagic.reportwizard.tools.importer.template">IImporter</a></code></dd>
+<dt>Overrides:</dt>
+<dd><code><a href="AbstractImporter.html#postFormat(java.io.StringWriter)">postFormat</a></code> in class <code><a href="AbstractImporter.html" title="class in com.nomagic.reportwizard.tools.importer.template">AbstractImporter</a></code></dd>
+<dt>Parameters:</dt>
+<dd><code>writer</code> - the writer to post format</dd>
+<dt>Returns:</dt>
+<dd>the final output.</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="getDocumentBody(java.io.File)">
+<h3>getDocumentBody</h3>
+<div class="member-signature"><span class="modifiers">protected</span> <span class="return-type"><a class="external-link" href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang">String</a></span> <span class="element-name">getDocumentBody</span><wbr/><span class="parameters">(<a class="external-link" href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/File.html" title="class or interface in java.io">File</a> file)</span>
+                          throws <span class="exceptions"><a class="external-link" href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/IOException.html" title="class or interface in java.io">IOException</a></span></div>
+<div class="block"><span class="description-from-type-label">Description copied from class: <code><a href="AbstractImporter.html#getDocumentBody(java.io.File)">AbstractImporter</a></code></span></div>
+<div class="block">Get the HTML Body.</div>
+<dl class="notes">
+<dt>Specified by:</dt>
+<dd><code><a href="AbstractImporter.html#getDocumentBody(java.io.File)">getDocumentBody</a></code> in class <code><a href="AbstractImporter.html" title="class in com.nomagic.reportwizard.tools.importer.template">AbstractImporter</a></code></dd>
+<dt>Parameters:</dt>
+<dd><code>file</code> - holding the document</dd>
+<dt>Returns:</dt>
+<dd>the Text</dd>
+<dt>Throws:</dt>
+<dd><code><a class="external-link" href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/IOException.html" title="class or interface in java.io">IOException</a></code> - if reading the file failed</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="getDocumentSection(java.io.File,java.lang.String)">
+<h3>getDocumentSection</h3>
+<div class="member-signature"><span class="modifiers">protected</span> <span class="return-type"><a class="external-link" href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang">String</a></span> <span class="element-name">getDocumentSection</span><wbr/><span class="parameters">(<a class="external-link" href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/File.html" title="class or interface in java.io">File</a> file,
+ <a class="external-link" href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang">String</a> section)</span>
+                             throws <span class="exceptions"><a class="external-link" href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/IOException.html" title="class or interface in java.io">IOException</a></span></div>
+<div class="block"><span class="description-from-type-label">Description copied from class: <code><a href="AbstractImporter.html#getDocumentSection(java.io.File,java.lang.String)">AbstractImporter</a></code></span></div>
+<div class="block">Get a Section in an Html document.</div>
+<dl class="notes">
+<dt>Overrides:</dt>
+<dd><code><a href="AbstractImporter.html#getDocumentSection(java.io.File,java.lang.String)">getDocumentSection</a></code> in class <code><a href="AbstractImporter.html" title="class in com.nomagic.reportwizard.tools.importer.template">AbstractImporter</a></code></dd>
+<dt>Parameters:</dt>
+<dd><code>file</code> - holding the document.</dd>
+<dd><code>section</code> - the section name</dd>
+<dt>Returns:</dt>
+<dd>the section text</dd>
+<dt>Throws:</dt>
+<dd><code><a class="external-link" href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/IOException.html" title="class or interface in java.io">IOException</a></code> - if reading the section failed</dd>
+</dl>
+</section>
+</li>
+</ul>
+</section>
+</li>
+</ul>
+</section>
+<!-- ========= END OF CLASS DATA ========= -->
+</main>
+````

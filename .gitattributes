@@ -1,1 +1,2 @@
 *.md text eol=lf
+3DS_FULL_SYSTEM_DIGEST/** -text

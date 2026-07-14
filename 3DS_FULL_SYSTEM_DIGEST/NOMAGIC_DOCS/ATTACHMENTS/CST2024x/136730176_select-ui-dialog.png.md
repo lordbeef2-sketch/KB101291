@@ -1,0 +1,114 @@
+# NOMAGIC ATTACHMENT: select-ui-dialog.png
+
+- attachment_id: `136730176`
+- space_key: `CST2024x`
+- parent_page_id: `136730156`
+- parent_page_title: Creating User Interface mockups for the stopwatch model
+- media_type: `image/png`
+- reported_bytes: 55254
+- download_url: https://docs.nomagic.com/download/attachments/136730156/select-ui-dialog.png?version=1&modificationDate=1695362388701&api=v2
+- payload_kind: `metadata-only`
+- downloaded_sha256: not-downloaded
+
+## PAYLOAD STATUS
+
+Binary or image attachment is inventoried by official metadata; no binary bytes are embedded in this Markdown-only corpus.
+
+
+## EXACT ATTACHMENT METADATA
+
+````json
+{
+  "id": "136730176",
+  "type": "attachment",
+  "status": "current",
+  "title": "select-ui-dialog.png",
+  "version": {
+    "by": {
+      "type": "known",
+      "username": "ingabe",
+      "userKey": "ff80808151f3008c0152c05ba1a40003",
+      "profilePicture": {
+        "path": "/download/attachments/7415957/user-avatar",
+        "width": 48,
+        "height": 48,
+        "isDefault": false
+      },
+      "displayName": "Inga A.",
+      "_links": {
+        "self": "https://docs.nomagic.com/rest/api/user?key=ff80808151f3008c0152c05ba1a40003"
+      },
+      "_expandable": {
+        "status": ""
+      }
+    },
+    "when": "2023-09-22T07:59:48.701+02:00",
+    "message": "",
+    "number": 1,
+    "minorEdit": false,
+    "hidden": false,
+    "_links": {
+      "self": "https://docs.nomagic.com/rest/experimental/content/136730176/version/1"
+    },
+    "_expandable": {
+      "content": "/rest/api/content/136730176"
+    }
+  },
+  "position": -1,
+  "container": {
+    "id": "136730156",
+    "type": "page",
+    "status": "current",
+    "title": "Creating User Interface mockups for the stopwatch model",
+    "position": 2,
+    "extensions": {
+      "position": 2
+    },
+    "_links": {
+      "webui": "/spaces/CST2024x/pages/136730156/Creating+User+Interface+mockups+for+the+stopwatch+model",
+      "edit": "/pages/resumedraft.action?draftId=136730156",
+      "tinyui": "/x/LFYmC",
+      "self": "https://docs.nomagic.com/rest/api/content/136730156"
+    },
+    "_expandable": {
+      "container": "/rest/api/space/CST2024x",
+      "metadata": "",
+      "operations": "",
+      "children": "/rest/api/content/136730156/child",
+      "restrictions": "/rest/api/content/136730156/restriction/byOperation",
+      "history": "/rest/api/content/136730156/history",
+      "ancestors": "",
+      "body": "",
+      "version": "",
+      "descendants": "/rest/api/content/136730156/descendant",
+      "space": "/rest/api/space/CST2024x",
+      "relevantViewRestrictions": "/rest/api/content/136730156/restriction/relevantViewRestrictions"
+    }
+  },
+  "metadata": {
+    "mediaType": "image/png"
+  },
+  "extensions": {
+    "mediaType": "image/png",
+    "fileSize": 55254,
+    "comment": ""
+  },
+  "_links": {
+    "download": "/download/attachments/136730156/select-ui-dialog.png?version=1&modificationDate=1695362388701&api=v2",
+    "thumbnail": "/download/thumbnails/136730156/select-ui-dialog.png?api=v2",
+    "webui": "/spaces/CST2024x/pages/136730156/Creating+User+Interface+mockups+for+the+stopwatch+model?preview=%2F136730156%2F136730176%2Fselect-ui-dialog.png",
+    "self": "https://docs.nomagic.com/rest/api/content/136730176"
+  },
+  "_expandable": {
+    "operations": "",
+    "children": "/rest/api/content/136730176/child",
+    "restrictions": "/rest/api/content/136730176/restriction/byOperation",
+    "history": "/rest/api/content/136730176/history",
+    "ancestors": "",
+    "body": "",
+    "descendants": "/rest/api/content/136730176/descendant",
+    "space": "/rest/api/space/CST2024x",
+    "relevantViewRestrictions": "/rest/api/content/136730176/restriction/relevantViewRestrictions"
+  }
+}
+````

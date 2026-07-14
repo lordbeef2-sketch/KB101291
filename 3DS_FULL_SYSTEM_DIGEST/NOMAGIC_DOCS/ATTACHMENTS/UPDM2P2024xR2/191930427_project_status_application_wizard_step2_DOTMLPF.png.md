@@ -1,0 +1,114 @@
+# NOMAGIC ATTACHMENT: project_status_application_wizard_step2_DOTMLPF.png
+
+- attachment_id: `191930427`
+- space_key: `UPDM2P2024xR2`
+- parent_page_id: `191930425`
+- parent_page_title: Project Status Application Wizard
+- media_type: `image/png`
+- reported_bytes: 74793
+- download_url: https://docs.nomagic.com/download/attachments/191930425/project_status_application_wizard_step2_DOTMLPF.png?version=1&modificationDate=1728280298140&api=v2
+- payload_kind: `metadata-only`
+- downloaded_sha256: not-downloaded
+
+## PAYLOAD STATUS
+
+Binary or image attachment is inventoried by official metadata; no binary bytes are embedded in this Markdown-only corpus.
+
+
+## EXACT ATTACHMENT METADATA
+
+````json
+{
+  "id": "191930427",
+  "type": "attachment",
+  "status": "current",
+  "title": "project_status_application_wizard_step2_DOTMLPF.png",
+  "version": {
+    "by": {
+      "type": "known",
+      "username": "agnpal",
+      "userKey": "ff80808151426f0e0151af8b0d360002",
+      "profilePicture": {
+        "path": "/download/attachments/6598412/user-avatar",
+        "width": 48,
+        "height": 48,
+        "isDefault": false
+      },
+      "displayName": "Agne P.",
+      "_links": {
+        "self": "https://docs.nomagic.com/rest/api/user?key=ff80808151426f0e0151af8b0d360002"
+      },
+      "_expandable": {
+        "status": ""
+      }
+    },
+    "when": "2024-10-07T07:51:38.140+02:00",
+    "message": "",
+    "number": 1,
+    "minorEdit": false,
+    "hidden": false,
+    "_links": {
+      "self": "https://docs.nomagic.com/rest/experimental/content/191930427/version/1"
+    },
+    "_expandable": {
+      "content": "/rest/api/content/191930427"
+    }
+  },
+  "position": -1,
+  "container": {
+    "id": "191930425",
+    "type": "page",
+    "status": "current",
+    "title": "Project Status Application Wizard",
+    "position": 12,
+    "extensions": {
+      "position": 12
+    },
+    "_links": {
+      "webui": "/spaces/UPDM2P2024xR2/pages/191930425/Project+Status+Application+Wizard",
+      "edit": "/pages/resumedraft.action?draftId=191930425",
+      "tinyui": "/x/OaBwCw",
+      "self": "https://docs.nomagic.com/rest/api/content/191930425"
+    },
+    "_expandable": {
+      "container": "/rest/api/space/UPDM2P2024xR2",
+      "metadata": "",
+      "operations": "",
+      "children": "/rest/api/content/191930425/child",
+      "restrictions": "/rest/api/content/191930425/restriction/byOperation",
+      "history": "/rest/api/content/191930425/history",
+      "ancestors": "",
+      "body": "",
+      "version": "",
+      "descendants": "/rest/api/content/191930425/descendant",
+      "space": "/rest/api/space/UPDM2P2024xR2",
+      "relevantViewRestrictions": "/rest/api/content/191930425/restriction/relevantViewRestrictions"
+    }
+  },
+  "metadata": {
+    "mediaType": "image/png"
+  },
+  "extensions": {
+    "mediaType": "image/png",
+    "fileSize": 74793,
+    "comment": ""
+  },
+  "_links": {
+    "download": "/download/attachments/191930425/project_status_application_wizard_step2_DOTMLPF.png?version=1&modificationDate=1728280298140&api=v2",
+    "thumbnail": "/download/thumbnails/191930425/project_status_application_wizard_step2_DOTMLPF.png?api=v2",
+    "webui": "/spaces/UPDM2P2024xR2/pages/191930425/Project+Status+Application+Wizard?preview=%2F191930425%2F191930427%2Fproject_status_application_wizard_step2_DOTMLPF.png",
+    "self": "https://docs.nomagic.com/rest/api/content/191930427"
+  },
+  "_expandable": {
+    "operations": "",
+    "children": "/rest/api/content/191930427/child",
+    "restrictions": "/rest/api/content/191930427/restriction/byOperation",
+    "history": "/rest/api/content/191930427/history",
+    "ancestors": "",
+    "body": "",
+    "descendants": "/rest/api/content/191930427/descendant",
+    "space": "/rest/api/space/UPDM2P2024xR2",
+    "relevantViewRestrictions": "/rest/api/content/191930427/restriction/relevantViewRestrictions"
+  }
+}
+````

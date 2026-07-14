@@ -1,0 +1,114 @@
+# NOMAGIC ATTACHMENT: Dependency_Management-Example2.png
+
+- attachment_id: `137990148`
+- space_key: `MAF2024x`
+- parent_page_id: `137990147`
+- parent_page_title: Dependency Management
+- media_type: `image/png`
+- reported_bytes: 73489
+- download_url: https://docs.nomagic.com/download/attachments/137990147/Dependency_Management-Example2.png?version=1&modificationDate=1695383599359&api=v2
+- payload_kind: `metadata-only`
+- downloaded_sha256: not-downloaded
+
+## PAYLOAD STATUS
+
+Binary or image attachment is inventoried by official metadata; no binary bytes are embedded in this Markdown-only corpus.
+
+
+## EXACT ATTACHMENT METADATA
+
+````json
+{
+  "id": "137990148",
+  "type": "attachment",
+  "status": "current",
+  "title": "Dependency_Management-Example2.png",
+  "version": {
+    "by": {
+      "type": "known",
+      "username": "agnpal",
+      "userKey": "ff80808151426f0e0151af8b0d360002",
+      "profilePicture": {
+        "path": "/download/attachments/6598412/user-avatar",
+        "width": 48,
+        "height": 48,
+        "isDefault": false
+      },
+      "displayName": "Agne P.",
+      "_links": {
+        "self": "https://docs.nomagic.com/rest/api/user?key=ff80808151426f0e0151af8b0d360002"
+      },
+      "_expandable": {
+        "status": ""
+      }
+    },
+    "when": "2023-09-22T13:53:19.359+02:00",
+    "message": "",
+    "number": 1,
+    "minorEdit": false,
+    "hidden": false,
+    "_links": {
+      "self": "https://docs.nomagic.com/rest/experimental/content/137990148/version/1"
+    },
+    "_expandable": {
+      "content": "/rest/api/content/137990148"
+    }
+  },
+  "position": -1,
+  "container": {
+    "id": "137990147",
+    "type": "page",
+    "status": "current",
+    "title": "Dependency Management",
+    "position": 1,
+    "extensions": {
+      "position": 1
+    },
+    "_links": {
+      "webui": "/spaces/MAF2024x/pages/137990147/Dependency+Management",
+      "edit": "/pages/resumedraft.action?draftId=137990147",
+      "tinyui": "/x/A5A5C",
+      "self": "https://docs.nomagic.com/rest/api/content/137990147"
+    },
+    "_expandable": {
+      "container": "/rest/api/space/MAF2024x",
+      "metadata": "",
+      "operations": "",
+      "children": "/rest/api/content/137990147/child",
+      "restrictions": "/rest/api/content/137990147/restriction/byOperation",
+      "history": "/rest/api/content/137990147/history",
+      "ancestors": "",
+      "body": "",
+      "version": "",
+      "descendants": "/rest/api/content/137990147/descendant",
+      "space": "/rest/api/space/MAF2024x",
+      "relevantViewRestrictions": "/rest/api/content/137990147/restriction/relevantViewRestrictions"
+    }
+  },
+  "metadata": {
+    "mediaType": "image/png"
+  },
+  "extensions": {
+    "mediaType": "image/png",
+    "fileSize": 73489,
+    "comment": ""
+  },
+  "_links": {
+    "download": "/download/attachments/137990147/Dependency_Management-Example2.png?version=1&modificationDate=1695383599359&api=v2",
+    "thumbnail": "/download/thumbnails/137990147/Dependency_Management-Example2.png?api=v2",
+    "webui": "/spaces/MAF2024x/pages/137990147/Dependency+Management?preview=%2F137990147%2F137990148%2FDependency_Management-Example2.png",
+    "self": "https://docs.nomagic.com/rest/api/content/137990148"
+  },
+  "_expandable": {
+    "operations": "",
+    "children": "/rest/api/content/137990148/child",
+    "restrictions": "/rest/api/content/137990148/restriction/byOperation",
+    "history": "/rest/api/content/137990148/history",
+    "ancestors": "",
+    "body": "",
+    "descendants": "/rest/api/content/137990148/descendant",
+    "space": "/rest/api/space/MAF2024x",
+    "relevantViewRestrictions": "/rest/api/content/137990148/restriction/relevantViewRestrictions"
+  }
+}
+````

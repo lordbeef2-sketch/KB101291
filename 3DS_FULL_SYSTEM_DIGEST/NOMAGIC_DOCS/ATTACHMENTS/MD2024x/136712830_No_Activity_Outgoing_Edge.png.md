@@ -1,0 +1,114 @@
+# NOMAGIC ATTACHMENT: No_Activity_Outgoing_Edge.png
+
+- attachment_id: `136712830`
+- space_key: `MD2024x`
+- parent_page_id: `136712829`
+- parent_page_title: No Activity Outgoing Edge
+- media_type: `image/png`
+- reported_bytes: 8739
+- download_url: https://docs.nomagic.com/download/attachments/136712829/No_Activity_Outgoing_Edge.png?version=1&modificationDate=1695226499049&api=v2
+- payload_kind: `metadata-only`
+- downloaded_sha256: not-downloaded
+
+## PAYLOAD STATUS
+
+Binary or image attachment is inventoried by official metadata; no binary bytes are embedded in this Markdown-only corpus.
+
+
+## EXACT ATTACHMENT METADATA
+
+````json
+{
+  "id": "136712830",
+  "type": "attachment",
+  "status": "current",
+  "title": "No_Activity_Outgoing_Edge.png",
+  "version": {
+    "by": {
+      "type": "known",
+      "username": "kbe12",
+      "userKey": "2c9f81f87674fd7d017a0928ba470000",
+      "profilePicture": {
+        "path": "/images/icons/profilepics/default.svg",
+        "width": 48,
+        "height": 48,
+        "isDefault": true
+      },
+      "displayName": "Kristina B.",
+      "_links": {
+        "self": "https://docs.nomagic.com/rest/api/user?key=2c9f81f87674fd7d017a0928ba470000"
+      },
+      "_expandable": {
+        "status": ""
+      }
+    },
+    "when": "2023-09-20T18:14:59.049+02:00",
+    "message": "",
+    "number": 1,
+    "minorEdit": true,
+    "hidden": false,
+    "_links": {
+      "self": "https://docs.nomagic.com/rest/experimental/content/136712830/version/1"
+    },
+    "_expandable": {
+      "content": "/rest/api/content/136712830"
+    }
+  },
+  "position": -1,
+  "container": {
+    "id": "136712829",
+    "type": "page",
+    "status": "current",
+    "title": "No Activity Outgoing Edge",
+    "position": -1,
+    "extensions": {
+      "position": "none"
+    },
+    "_links": {
+      "webui": "/spaces/MD2024x/pages/136712829/No+Activity+Outgoing+Edge",
+      "edit": "/pages/resumedraft.action?draftId=136712829",
+      "tinyui": "/x/fRImC",
+      "self": "https://docs.nomagic.com/rest/api/content/136712829"
+    },
+    "_expandable": {
+      "container": "/rest/api/space/MD2024x",
+      "metadata": "",
+      "operations": "",
+      "children": "/rest/api/content/136712829/child",
+      "restrictions": "/rest/api/content/136712829/restriction/byOperation",
+      "history": "/rest/api/content/136712829/history",
+      "ancestors": "",
+      "body": "",
+      "version": "",
+      "descendants": "/rest/api/content/136712829/descendant",
+      "space": "/rest/api/space/MD2024x",
+      "relevantViewRestrictions": "/rest/api/content/136712829/restriction/relevantViewRestrictions"
+    }
+  },
+  "metadata": {
+    "mediaType": "image/png"
+  },
+  "extensions": {
+    "mediaType": "image/png",
+    "fileSize": 8739,
+    "comment": ""
+  },
+  "_links": {
+    "download": "/download/attachments/136712829/No_Activity_Outgoing_Edge.png?version=1&modificationDate=1695226499049&api=v2",
+    "thumbnail": "/download/thumbnails/136712829/No_Activity_Outgoing_Edge.png?api=v2",
+    "webui": "/spaces/MD2024x/pages/136712829/No+Activity+Outgoing+Edge?preview=%2F136712829%2F136712830%2FNo_Activity_Outgoing_Edge.png",
+    "self": "https://docs.nomagic.com/rest/api/content/136712830"
+  },
+  "_expandable": {
+    "operations": "",
+    "children": "/rest/api/content/136712830/child",
+    "restrictions": "/rest/api/content/136712830/restriction/byOperation",
+    "history": "/rest/api/content/136712830/history",
+    "ancestors": "",
+    "body": "",
+    "descendants": "/rest/api/content/136712830/descendant",
+    "space": "/rest/api/space/MD2024x",
+    "relevantViewRestrictions": "/rest/api/content/136712830/restriction/relevantViewRestrictions"
+  }
+}
+````

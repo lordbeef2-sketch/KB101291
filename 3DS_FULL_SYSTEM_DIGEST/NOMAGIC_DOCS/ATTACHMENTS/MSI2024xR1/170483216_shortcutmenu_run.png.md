@@ -1,0 +1,114 @@
+# NOMAGIC ATTACHMENT: shortcutmenu_run.png
+
+- attachment_id: `170483216`
+- space_key: `MSI2024xR1`
+- parent_page_id: `170483202`
+- parent_page_title: Executing the StopWatch class
+- media_type: `image/png`
+- reported_bytes: 22984
+- download_url: https://docs.nomagic.com/download/attachments/170483202/shortcutmenu_run.png?version=1&modificationDate=1715178160125&api=v2
+- payload_kind: `metadata-only`
+- downloaded_sha256: not-downloaded
+
+## PAYLOAD STATUS
+
+Binary or image attachment is inventoried by official metadata; no binary bytes are embedded in this Markdown-only corpus.
+
+
+## EXACT ATTACHMENT METADATA
+
+````json
+{
+  "id": "170483216",
+  "type": "attachment",
+  "status": "current",
+  "title": "shortcutmenu_run.png",
+  "version": {
+    "by": {
+      "type": "known",
+      "username": "8acad0e54bbfc3ed014beebdb63b0005",
+      "userKey": "8acad0e54bbfc3ed014beebdb63b0005",
+      "profilePicture": {
+        "path": "/images/icons/profilepics/default.svg",
+        "width": 48,
+        "height": 48,
+        "isDefault": true
+      },
+      "displayName": "user-1438d",
+      "_links": {
+        "self": "https://docs.nomagic.com/rest/api/user?key=8acad0e54bbfc3ed014beebdb63b0005"
+      },
+      "_expandable": {
+        "status": ""
+      }
+    },
+    "when": "2024-05-08T16:22:40.125+02:00",
+    "message": "",
+    "number": 1,
+    "minorEdit": false,
+    "hidden": false,
+    "_links": {
+      "self": "https://docs.nomagic.com/rest/experimental/content/170483216/version/1"
+    },
+    "_expandable": {
+      "content": "/rest/api/content/170483216"
+    }
+  },
+  "position": -1,
+  "container": {
+    "id": "170483202",
+    "type": "page",
+    "status": "current",
+    "title": "Executing the StopWatch class",
+    "position": 1,
+    "extensions": {
+      "position": 1
+    },
+    "_links": {
+      "webui": "/spaces/MSI2024xR1/pages/170483202/Executing+the+StopWatch+class",
+      "edit": "/pages/resumedraft.action?draftId=170483202",
+      "tinyui": "/x/Al4pCg",
+      "self": "https://docs.nomagic.com/rest/api/content/170483202"
+    },
+    "_expandable": {
+      "container": "/rest/api/space/MSI2024xR1",
+      "metadata": "",
+      "operations": "",
+      "children": "/rest/api/content/170483202/child",
+      "restrictions": "/rest/api/content/170483202/restriction/byOperation",
+      "history": "/rest/api/content/170483202/history",
+      "ancestors": "",
+      "body": "",
+      "version": "",
+      "descendants": "/rest/api/content/170483202/descendant",
+      "space": "/rest/api/space/MSI2024xR1",
+      "relevantViewRestrictions": "/rest/api/content/170483202/restriction/relevantViewRestrictions"
+    }
+  },
+  "metadata": {
+    "mediaType": "image/png"
+  },
+  "extensions": {
+    "mediaType": "image/png",
+    "fileSize": 22984,
+    "comment": ""
+  },
+  "_links": {
+    "download": "/download/attachments/170483202/shortcutmenu_run.png?version=1&modificationDate=1715178160125&api=v2",
+    "thumbnail": "/download/thumbnails/170483202/shortcutmenu_run.png?api=v2",
+    "webui": "/spaces/MSI2024xR1/pages/170483202/Executing+the+StopWatch+class?preview=%2F170483202%2F170483216%2Fshortcutmenu_run.png",
+    "self": "https://docs.nomagic.com/rest/api/content/170483216"
+  },
+  "_expandable": {
+    "operations": "",
+    "children": "/rest/api/content/170483216/child",
+    "restrictions": "/rest/api/content/170483216/restriction/byOperation",
+    "history": "/rest/api/content/170483216/history",
+    "ancestors": "",
+    "body": "",
+    "descendants": "/rest/api/content/170483216/descendant",
+    "space": "/rest/api/space/MSI2024xR1",
+    "relevantViewRestrictions": "/rest/api/content/170483216/restriction/relevantViewRestrictions"
+  }
+}
+````

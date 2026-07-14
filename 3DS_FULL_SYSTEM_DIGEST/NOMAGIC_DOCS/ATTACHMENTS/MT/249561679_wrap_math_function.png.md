@@ -1,0 +1,114 @@
+# NOMAGIC ATTACHMENT: wrap_math_function.png
+
+- attachment_id: `249561679`
+- space_key: `MT`
+- parent_page_id: `249561675`
+- parent_page_title: Wrapping MATLAB functions
+- media_type: `image/png`
+- reported_bytes: 33611
+- download_url: https://docs.nomagic.com/download/attachments/249561675/wrap_math_function.png?version=1&modificationDate=1755511698330&api=v2
+- payload_kind: `metadata-only`
+- downloaded_sha256: not-downloaded
+
+## PAYLOAD STATUS
+
+Binary or image attachment is inventoried by official metadata; no binary bytes are embedded in this Markdown-only corpus.
+
+
+## EXACT ATTACHMENT METADATA
+
+````json
+{
+  "id": "249561679",
+  "type": "attachment",
+  "status": "current",
+  "title": "wrap_math_function.png",
+  "version": {
+    "by": {
+      "type": "known",
+      "username": "ingabe",
+      "userKey": "ff80808151f3008c0152c05ba1a40003",
+      "profilePicture": {
+        "path": "/download/attachments/7415957/user-avatar",
+        "width": 48,
+        "height": 48,
+        "isDefault": false
+      },
+      "displayName": "Inga A.",
+      "_links": {
+        "self": "https://docs.nomagic.com/rest/api/user?key=ff80808151f3008c0152c05ba1a40003"
+      },
+      "_expandable": {
+        "status": ""
+      }
+    },
+    "when": "2025-08-18T12:08:18.330+02:00",
+    "message": "",
+    "number": 1,
+    "minorEdit": false,
+    "hidden": false,
+    "_links": {
+      "self": "https://docs.nomagic.com/rest/experimental/content/249561679/version/1"
+    },
+    "_expandable": {
+      "content": "/rest/api/content/249561679"
+    }
+  },
+  "position": -1,
+  "container": {
+    "id": "249561675",
+    "type": "page",
+    "status": "current",
+    "title": "Wrapping MATLAB functions",
+    "position": 8,
+    "extensions": {
+      "position": 8
+    },
+    "_links": {
+      "webui": "/spaces/MT/pages/249561675/Wrapping+MATLAB+functions",
+      "edit": "/pages/resumedraft.action?draftId=249561675",
+      "tinyui": "/x/SwLgDg",
+      "self": "https://docs.nomagic.com/rest/api/content/249561675"
+    },
+    "_expandable": {
+      "container": "/rest/api/space/MT",
+      "metadata": "",
+      "operations": "",
+      "children": "/rest/api/content/249561675/child",
+      "restrictions": "/rest/api/content/249561675/restriction/byOperation",
+      "history": "/rest/api/content/249561675/history",
+      "ancestors": "",
+      "body": "",
+      "version": "",
+      "descendants": "/rest/api/content/249561675/descendant",
+      "space": "/rest/api/space/MT",
+      "relevantViewRestrictions": "/rest/api/content/249561675/restriction/relevantViewRestrictions"
+    }
+  },
+  "metadata": {
+    "mediaType": "image/png"
+  },
+  "extensions": {
+    "mediaType": "image/png",
+    "fileSize": 33611,
+    "comment": ""
+  },
+  "_links": {
+    "download": "/download/attachments/249561675/wrap_math_function.png?version=1&modificationDate=1755511698330&api=v2",
+    "thumbnail": "/download/thumbnails/249561675/wrap_math_function.png?api=v2",
+    "webui": "/spaces/MT/pages/249561675/Wrapping+MATLAB+functions?preview=%2F249561675%2F249561679%2Fwrap_math_function.png",
+    "self": "https://docs.nomagic.com/rest/api/content/249561679"
+  },
+  "_expandable": {
+    "operations": "",
+    "children": "/rest/api/content/249561679/child",
+    "restrictions": "/rest/api/content/249561679/restriction/byOperation",
+    "history": "/rest/api/content/249561679/history",
+    "ancestors": "",
+    "body": "",
+    "descendants": "/rest/api/content/249561679/descendant",
+    "space": "/rest/api/space/MT",
+    "relevantViewRestrictions": "/rest/api/content/249561679/restriction/relevantViewRestrictions"
+  }
+}
+````

@@ -1,0 +1,154 @@
+# OFFICIAL REPOSITORY FILE: SysML-v2-Pilot-Implementation/org.omg.sysml.jupyter.kernel/src/main/java/org/omg/sysml/jupyter/kernel/SysMLKernel.java
+
+- repository: `SysML-v2-Pilot-Implementation`
+- source_path: `org.omg.sysml.jupyter.kernel/src/main/java/org/omg/sysml/jupyter/kernel/SysMLKernel.java`
+- source_url: https://github.com/Systems-Modeling/SysML-v2-Pilot-Implementation/blob/fa709f28dfd49dfdb7ee83e4e19da2f57e0eb3aa/org.omg.sysml.jupyter.kernel/src/main/java/org/omg/sysml/jupyter/kernel/SysMLKernel.java
+- source_bytes: 5787
+- source_sha256: `566a7b5d5fc4af6ca05bb6f85b47f10b21853f8c6de69f82ad0286e0e144f17a`
+- decoded_as: `utf-8`
+
+
+## EXACT SOURCE
+
+````java
+/*
+ * SysML 2 Pilot Implementation
+ * Copyright (C) 2020  California Institute of Technology ("Caltech")
+ * Copyright (C) 2021 Model Driven Solutions, Inc.
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the Eclipse Public License as published by
+ * the Eclipse Foundation, version 2 of the License.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * Eclipse Public License for more details.
+ * You should have received a copy of the Eclipse Public License
+ * along with this program.  If not, see <https://www.eclipse.org/legal/epl-2.0/>.
+ *
+ * @license EPL-2.0 <http://spdx.org/licenses/EPL-2.0>
+ */
+
+package org.omg.sysml.jupyter.kernel;
+
+import io.github.spencerpark.jupyter.kernel.BaseKernel;
+import io.github.spencerpark.jupyter.kernel.LanguageInfo;
+import io.github.spencerpark.jupyter.kernel.display.DisplayData;
+import io.github.spencerpark.jupyter.kernel.magic.LineMagicParseContext;
+import io.github.spencerpark.jupyter.kernel.magic.registry.Magics;
+import org.omg.sysml.interactive.SysMLInteractive;
+import org.omg.sysml.interactive.SysMLInteractiveResult;
+import org.omg.sysml.jupyter.kernel.magic.*;
+
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
+import java.util.ServiceLoader;
+
+public class SysMLKernel extends BaseKernel {
+
+    private final LanguageInfo languageInfo = new LanguageInfo.Builder("SysML").version("1.0.0").mimetype("text/x-sysml").fileExtension(".sysml").pygments("java").codemirror("sysml").build();
+
+    private final SysMLInteractive interactive;
+    private final Magics magics;
+    private final MyMagicParser magicParser;
+
+    public Magics getMagics() {
+        return magics;
+    }
+
+    public SysMLKernel() {
+        this.interactive = SysMLInteractive.getInstance();
+        Optional<String> libraryPath = Optional.ofNullable(System.getenv(ISysML.LIBRARY_PATH_KEY));
+        // Replace with Optional#or in Java 9+
+        if (!libraryPath.isPresent()) {
+            libraryPath = Arrays.stream(System.getProperty("java.class.path", "")
+            		.split(File.pathSeparator))
+            		.filter(path -> !path.isEmpty())
+            		.map(path -> Paths.get(path))
+            		.map(path -> !path.toFile().isDirectory() ? path.getParent() : path)
+            		.map(path -> path.resolve("sysml.library"))
+            		.filter(Files::exists)
+            		.map(Path::normalize)
+            		.map(Path::toString)
+            		.findFirst();
+        }
+        libraryPath.ifPresent(path -> Arrays.stream(path.split(File.pathSeparator)).forEach(interactive::loadLibrary));
+
+        Optional.ofNullable(System.getenv(ISysML.API_BASE_PATH_KEY)).ifPresent(interactive::setApiBasePath);
+
+        Optional.ofNullable(System.getenv(ISysML.GRAPHVIZ_PATH_KEY)).ifPresent(interactive::setGraphVizPath);
+
+        this.magics = new Magics();
+        this.magics.registerMagics(Help.class);
+        this.magics.registerMagics(Eval.class);
+        this.magics.registerMagics(Listing.class);
+        this.magics.registerMagics(Show.class);
+        this.magics.registerMagics(Publish.class);
+        this.magics.registerMagics(Viz.class);
+        this.magics.registerMagics(View.class);
+        this.magics.registerMagics(Export.class);
+        this.magics.registerMagics(Projects.class);
+        this.magics.registerMagics(Load.class);
+        this.magics.registerMagics(Repo.class);
+
+		ServiceLoader.load(IMagicCommandRegistrator.class).forEach(reg -> {
+			try {
+				reg.registerMagicCommand(this.magics);
+			} catch (Exception e) {
+				// Given there is no available logging mechanism and an exception thrown by the
+				// registrator would cause the Jupyter kernel not to start up correctly, errors
+				// are logged to the standard err output, but otherwise ignored.
+				System.err.printf("Error while running the command registrator %s: %s", reg.getClass().getTypeName(),
+						e.getMessage());
+			}
+		});
+
+        this.magicParser = new MyMagicParser();
+    }
+
+    @Override
+    public DisplayData eval(String expr) throws Exception {
+        List<LineMagicParseContext> contexts = magicParser.parseLineMagics(expr);
+        if (!contexts.isEmpty()) {
+            LineMagicParseContext ctx = contexts.get(0);
+            Object result = magics.applyLineMagic(ctx.getMagicCall().getName(), ctx.getMagicCall().getArgs());
+            if (result instanceof DisplayData) {
+                return (DisplayData) result;
+            } else if (result instanceof String) {
+                return new DisplayData((String) result);
+            } else {
+                throw new IllegalArgumentException("Invalid magic command:" + contexts);
+            }
+        }
+
+        SysMLInteractiveResult result = interactive.process(expr);
+        if (!result.getSyntaxErrors().isEmpty()) {
+            result.getSyntaxErrors().forEach(System.err::println);
+        }
+        else {
+            result.getSemanticErrors().forEach(System.err::println);
+            result.getWarnings().forEach(System.out::println);
+        }
+        if (result.getException() != null) {
+            throw result.getException();
+        }
+        return new DisplayData(result.hasErrors()? "": result.formatRootElement());
+    }
+
+    @Override
+    public LanguageInfo getLanguageInfo() {
+        return languageInfo;
+    }
+
+    public SysMLInteractive getInteractive() {
+        return interactive;
+    }
+}
+
+````

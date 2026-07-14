@@ -1,0 +1,197 @@
+# JAVA OPENAPI: SequenceLifelineView (2024x API)
+
+- source_url: https://jdocs.nomagic.com/2024xRefresh2/com/nomagic/magicdraw/uml/symbols/shapes/SequenceLifelineView.html
+- source_path: `com/nomagic/magicdraw/uml/symbols/shapes/SequenceLifelineView.html`
+- source_sha256: `c2bf92ef57fa88c7dda9dae9142885d5d2344c8199f2f958cc67b62789cc45b4`
+- captured_utc: `2026-07-14T16:55:57.292481+00:00`
+
+## NORMALIZED JAVADOC CONTENT
+
+======== START OF CLASS DATA ========
+
+Package [com.nomagic.magicdraw.uml.symbols.shapes](package-summary.html)
+
+## Class SequenceLifelineView
+
+[java.lang.Object](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html)
+com.nomagic.magicdraw.uml.MDElementImpl
+[com.nomagic.magicdraw.uml.symbols.PresentationElement](../PresentationElement.html)
+[com.nomagic.magicdraw.uml.symbols.paths.PathConnector](../paths/PathConnector.html)
+[com.nomagic.magicdraw.uml.symbols.shapes.ShapeElement](ShapeElement.html)
+com.nomagic.magicdraw.uml.symbols.shapes.ContainerShapeView
+com.nomagic.magicdraw.uml.symbols.shapes.AbstractHeaderShapeView
+com.nomagic.magicdraw.uml.symbols.shapes.HeaderShapeView
+com.nomagic.magicdraw.uml.symbols.shapes.TypedElementView
+com.nomagic.magicdraw.uml.symbols.shapes.BaseLifelineView
+com.nomagic.magicdraw.uml.symbols.shapes.SequenceLifelineView
+
+All Implemented Interfaces:
+`[BaseElement](../../BaseElement.html)`, `com.nomagic.magicdraw.uml.CompartmentSupport`, `[MDElement](../../MDElement.html)`, `[ModelElementProvider](../../ModelElementProvider.html)`, `com.nomagic.magicdraw.uml.symbols.CompartmentContainer`, `com.nomagic.magicdraw.uml.symbols.CompartmentOwner`, `com.nomagic.magicdraw.uml.symbols.manipulators.centerlines.CenterlineableShape`, `com.nomagic.magicdraw.uml.symbols.shapes.OwnerNameLabelOwner`, `com.nomagic.magicdraw.uml.symbols.shapes.QualifiedNameLabelOwner`, `[StereotypesDisplayModeOwner](StereotypesDisplayModeOwner.html)`, `com.nomagic.magicdraw.uml.symbols.SuspendShapeAutoResizeModeProvider`, `com.nomagic.magicdraw.uml.symbols.Wrapable`, `[NameOwner](../../../utils/NameOwner.html)`, `[PropertyChangeListener](https://docs.oracle.com/en/java/javase/17/docs/api/java.desktop/java/beans/PropertyChangeListener.html)`, `[Cloneable](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Cloneable.html)`, `[Comparable](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Comparable.html)`, `[EventListener](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/EventListener.html)`
+
+@OpenApipublic classSequenceLifelineView
+extends com.nomagic.magicdraw.uml.symbols.shapes.BaseLifelineView
+
+Creates lifeline "head" in sequence diagram.
+
+=========== FIELD SUMMARY =========== 
+Field Summary
+Fields inherited from class com.nomagic.magicdraw.uml.symbols.shapes.HeaderShapeView
+`SECONDARY_IMAGE_AND_STEREOTYPE_DISPLAY_MODE_DO_NOT_DISPLAY, SECONDARY_IMAGE_AND_STEREOTYPE_DISPLAY_MODE_IMAGE_AND_STEREOTYPES, SECONDARY_IMAGE_AND_STEREOTYPE_DISPLAY_MODE_STEREOTYPES, SECONDARY_IMAGE_AND_STEREOTYPE_DISPLAY_MODES`
+Fields inherited from class com.nomagic.magicdraw.uml.symbols.shapes.ContainerShapeView
+`CONTAINER_SHAPE_INSETS, SHAPE_DISTANCE_FROM_EDGE`
+Fields inherited from class com.nomagic.magicdraw.uml.symbols.[PresentationElement](../PresentationElement.html)
+`[DASHED_STROKE](../PresentationElement.html#DASHED_STROKE), [DOTTED_STROKE](../PresentationElement.html#DOTTED_STROKE), [SOLID_STROKE](../PresentationElement.html#SOLID_STROKE)`
+Fields inherited from interface com.nomagic.magicdraw.uml.symbols.shapes.OwnerNameLabelOwner
+`OWNER_DISPLAY_MODE_OLD, OWNER_DISPLAY_MODE_STD, OWNER_DISPLAY_MODES`
+Fields inherited from interface com.nomagic.magicdraw.uml.symbols.shapes.QualifiedNameLabelOwner
+`QNAME_DISPLAY_MODE_ABOVE_NAME, QNAME_DISPLAY_MODE_BELOW_NAME, QNAME_DISPLAY_MODE_DO_NOT_DISPLAY, QNAME_DISPLAY_MODE_MERGE_WITH_NAME, QNAME_DISPLAY_MODES`
+Fields inherited from interface com.nomagic.magicdraw.uml.symbols.shapes.[StereotypesDisplayModeOwner](StereotypesDisplayModeOwner.html)
+`[DSL_STEREOTYPE_DISPLAY_MODE_ALL](StereotypesDisplayModeOwner.html#DSL_STEREOTYPE_DISPLAY_MODE_ALL), [DSL_STEREOTYPE_DISPLAY_MODE_LAST](StereotypesDisplayModeOwner.html#DSL_STEREOTYPE_DISPLAY_MODE_LAST), [DSL_STEREOTYPE_DISPLAY_MODE_NONE](StereotypesDisplayModeOwner.html#DSL_STEREOTYPE_DISPLAY_MODE_NONE), [DSL_STEREOTYPE_DISPLAY_MODES](StereotypesDisplayModeOwner.html#DSL_STEREOTYPE_DISPLAY_MODES), [STEREOTYPE_DISPLAY_MODE_DO_NOT_DISPLAY_STEREOTYPES](StereotypesDisplayModeOwner.html#STEREOTYPE_DISPLAY_MODE_DO_NOT_DISPLAY_STEREOTYPES), [STEREOTYPE_DISPLAY_MODE_ICON](StereotypesDisplayModeOwner.html#STEREOTYPE_DISPLAY_MODE_ICON), [STEREOTYPE_DISPLAY_MODE_SHAPE_IMAGE](StereotypesDisplayModeOwner.html#STEREOTYPE_DISPLAY_MODE_SHAPE_IMAGE), [STEREOTYPE_DISPLAY_MODE_SHAPE_IMAGE_AND_TEXT](StereotypesDisplayModeOwner.html#STEREOTYPE_DISPLAY_MODE_SHAPE_IMAGE_AND_TEXT), [STEREOTYPE_DISPLAY_MODE_TEXT](StereotypesDisplayModeOwner.html#STEREOTYPE_DISPLAY_MODE_TEXT), [STEREOTYPE_DISPLAY_MODE_TEXT_AND_ICON](StereotypesDisplayModeOwner.html#STEREOTYPE_DISPLAY_MODE_TEXT_AND_ICON), [STEREOTYPES_DISPLAY_MODES](StereotypesDisplayModeOwner.html#STEREOTYPES_DISPLAY_MODES), [STEREOTYPES_DISPLAY_MODES_SIMPLE](StereotypesDisplayModeOwner.html#STEREOTYPES_DISPLAY_MODES_SIMPLE)`
+ ========== METHOD SUMMARY =========== 
+Method Summary
+Methods inherited from class com.nomagic.magicdraw.uml.symbols.shapes.BaseLifelineView
+`checkShowsProxy, getClassifier, getElement, getLifeline, getMetaClassifiersQPropertyName, getOwnerDisplayMode, internalGetNestedPath, internalSetNestedPath, setOwnerDisplayMode, sSetClassifiers, sSetOwnerDisplayMode, updateName`
+Methods inherited from class com.nomagic.magicdraw.uml.symbols.shapes.TypedElementView
+`addBreakPoints, doActualShapeDrawing, getClassifiers, getDefaultDimension, getSeparatorDistanceFromRightSide, getStereotypesToDisplay, getTypeClass, isActive, isDrawUnderLine, isShowClass, isShowFullType, selfSpecificHeaderShapeDraw, setDrawUnderLine, setShowClass, setShowFullType, sSetShowClass, sSetShowFullType`
+Methods inherited from class com.nomagic.magicdraw.uml.symbols.shapes.HeaderShapeView
+`addCompartment, addCompartment, addPresentationElement, applyCompartmentsStyle, areBoxCompartmentsSuppressed, askDeleteDataConfirmation, autosizeShapesOnEdge, canAddChild, canHideBorder, childrenBoundsForReshape, createBoundsShape, createCompartmentElements, createStateForUpdateOperation, dispose, doInternalLayoutAdditionCompartment, doInternalLayoutChildren, getAdditionalCompartment, getAdditionalCompartmentContainer, getAdditionalCompartmentInsets, getAdditionalCompartmentToLayout, getAdditionalRenderersToNotify, getBooleanCompartmentPropertyValue, getChildrenBoundsForPreferredBounds, getChildrenInsets, getCollections, getCompartmentByID, getCompartmentIDs, getCompartments, getCompartmentStyleDelegate, getConfiguredPreferredSizeForAutosize, getConstraintAndTaggedValueAlignment, getConstraintTextMode, getDefaultElementStereotypeToHeader, getDSLStereotypesDisplayMode, getElementNumberDisplayMode, getElementPropertiesCompartmentView, getHeaderMaxYForShrinkableShape, getHeaderVerticalPositionForLayout, getMainCompartmentContainer, getName, getPreferredDimensionForAutosize, getQNameDisplayMode, getSecondaryImageAndStereotypeDisplayMode, getStereotypeLabel, getStereotypesDisplayMode, hasManipulatedChildrenIncludingIndirect, internalAddIndirectManipulatedChildrenRect, internalBeforeUpdate, internalGetHeaderInsets, internalGetIndirectManipulatedChildrenRect, internalGetSelfManipulationPreferredSize, internalLayoutChildren, internalPostSpecificUpdate, internalSetCollections, isBorderVisible, isChildLayoutable, isChildMovable, isMakePreferredSizeAfterPropertiesChange, isShowDerivedSign, isShowElementProperties, isShowIcon, isShowNumberTagName, isShowRakeIcon, isShowRakeSymbol, isShowTaggedValues, isShowType, isWrapEnabled, makePreferredSizeAfterPropertiesChange, makePreferredSizeAfterPropertiesChange, onChildEdgeChange, paintSelf, preferredSizeIgnoringOrientation, propertyChange, recursiveAutosize, removeCompartment, removeCompartment, removePresentationElement, setCollections, setCompartmentSuppressed, setConstraintAndTaggedValueAlignment, setConstraints, setConstraintTextMode, setDSLStereotypesDisplayMode, setElementNumberDisplayMode, setHeaderObject, setMakePreferredSizeAfterPropertiesChange, setQNameDisplayMode, setReshapeMode, setSecondaryImageAndStereotypeDisplayMode, setShowConstraints, setShowDerivedSign, setShowElementProperties, setShowIcon, setShowNumberTagName, setShowTaggedValues, setShowType, setStereotype, setStereotypesDisplayMode, setTaggedValues, setVisibleElements, setWrapEnabled, sSetCompartmentSuppressed, sSetConstraintAndTaggedValueAlignment, sSetConstraintTextMode, sSetDSLStereotypesDisplayMode, sSetElement, sSetElementNumberDisplayMode, sSetName, sSetQNameDisplayMode, sSetSecondaryImageAndStereotypeDisplayMode, sSetShowConstraints, sSetShowDerivedSign, sSetShowElementProperties, sSetShowIcon, sSetShowNumberTagName, sSetShowTaggedValues, sSetShowType, sSetStereotypesDisplayMode, sSetWrapEnabled, updateBorderVisibility, updateChildrenVisibility, updateCompartmentsVisibility`
+Methods inherited from class com.nomagic.magicdraw.uml.symbols.shapes.AbstractHeaderShapeView
+`addExtraChildrenPrefSizePadding, autosizeAndResizeParent, calculateMinY, calculateOvalShapePreferredSize, correctChildrenVector, coversPoint, editName, getAdditionalHeaderHeightForPreferredBounds, getHeaderBoundsForPreferredBounds, getHeaderDistanceFromTopForOvalShape, getHeaderInsets, getHeaderObject, getHeaderVerticalPosition, getNameLabel, getOvalShapeAvailableWidth, getPreferredBounds, getPresentationElementAt, getProxyPresentationElementsStream, internalGetHeaderBoundsForPreferredBounds, internalPostUpdatePresentationElement, internalPreSpecificUpdate, internalUpdatePresentationElement, invalidate, isContentHidden, isHeaderOrientationVertical, isOvalShape, isParentShowsProxy, minimumDimension, minimumDimensionForShrinking, minimumSizeForShrinkingIgnoringOrientation, minimumSizeIgnoringOrientation, paintChildren, preferredDimension, setHeaderVerticalPosition, setName, setTextEditable, sSetAutosize, sSetHeaderVerticalPosition, switchWidthHeightIfVerticalOrientation`
+Methods inherited from class com.nomagic.magicdraw.uml.symbols.shapes.ContainerShapeView
+`addPresentationElement, addPresentationElementWithoutResize, adjustChildBoundsForMoving, calculateAutosizeDimension, calculateAutosizeDimension, canMoveChildOutside, clearShowsProxy, constructLayoutHelper, getChildrenBounds, getChildrenOnBorderBounds, getContainerBounds, getDefaultChildrenInsets, getLayoutHelper, getLayoutHelperClone, getManipulatedElementAt, getManipulationPreferredDimension, getPresentationElementIndex, getPresentationElements, getRemovableChildren, hasManipulatedShapesNotOnEdge, hasManipulatedShapesOnEdge, hasManipulatedShapesOnEdge, internalGetChildAt, internalGetManipulatedChildrenRect, internalSetChildren, isCanChildrenChangeEdge, isCanMoveChildren, layoutChildren, moveChild, moveChildren, needAdjustToPreferred, paintChildrenBackground, removePresentationElement, sAddPresentationElement, setBounds, setBounds, setCanMoveChildren, setDummyResizeMode, setFillColor, setFillColorForChildren, setLayoutHelper, setPresentationElements, showPathElements, simpleSetBounds, simpleSetBounds, sRemovePresentationElement, sSetPresentationElements`
+Methods inherited from class com.nomagic.magicdraw.uml.symbols.paths.[PathConnector](../paths/PathConnector.html)
+`[getConnectedPathElementCount](../paths/PathConnector.html#getConnectedPathElementCount()), [getConnectedPathElements](../paths/PathConnector.html#getConnectedPathElements()), [getConnectedPathElements](../paths/PathConnector.html#getConnectedPathElements(boolean)), [getConnectedPathElements](../paths/PathConnector.html#getConnectedPathElements(boolean,boolean))`
+Methods inherited from class com.nomagic.magicdraw.uml.symbols.[PresentationElement](../PresentationElement.html)
+`[addProperty](../PresentationElement.html#addProperty(com.nomagic.magicdraw.properties.Property)), [collectSubManipulatedElements](../PresentationElement.html#collectSubManipulatedElements(java.util.List)), [editName](../PresentationElement.html#editName(java.awt.event.KeyEvent)), [getBoundsShape](../PresentationElement.html#getBoundsShape(com.nomagic.magicdraw.uml.symbols.ConverterToShape)), [getDiagramPresentationElement](../PresentationElement.html#getDiagramPresentationElement()), [getDiagramSurface](../PresentationElement.html#getDiagramSurface()), [getManipulatedParent](../PresentationElement.html#getManipulatedParent()), [getManipulatedPresentationElements](../PresentationElement.html#getManipulatedPresentationElements()), [getObjectParent](../PresentationElement.html#getObjectParent()), [getParent](../PresentationElement.html#getParent()), [getPreferredSize](../PresentationElement.html#getPreferredSize()), [getPresentationElementStroke](../PresentationElement.html#getPresentationElementStroke()), [getPresentationElementStroke](../PresentationElement.html#getPresentationElementStroke(int)), [getProperty](../PresentationElement.html#getProperty(java.lang.String)), [getPropertyManager](../PresentationElement.html#getPropertyManager()), [getSelected](../PresentationElement.html#getSelected()), [getStroke](../PresentationElement.html#getStroke(float,int,int,float,float%5B%5D,float)), [getStroke](../PresentationElement.html#getStroke(int)), [getStroke](../PresentationElement.html#getStroke(int,int)), [getStroke](../PresentationElement.html#getStroke(int,int,int)), [getStroke](../PresentationElement.html#getStroke(int,int,int,int)), [getStroke](../PresentationElement.html#getStroke(java.awt.BasicStroke,int)), [hasManipulatedPresentationElements](../PresentationElement.html#hasManipulatedPresentationElements()), [isSelected](../PresentationElement.html#isSelected()), [onFind](../PresentationElement.html#onFind()), [onFind](../PresentationElement.html#onFind(boolean)), [setAllSelected](../PresentationElement.html#setAllSelected(boolean)), [setSelected](../PresentationElement.html#setSelected(boolean)), [setSelected](../PresentationElement.html#setSelected(java.util.List)), [useParentProperties](../PresentationElement.html#useParentProperties())`
+Methods inherited from class com.nomagic.magicdraw.uml.MDElementImpl
+`accept, addPropertyChangeListener, canAdd, canAddChild, canBeDeleted, canDeleteChild, compareTo, createSortKeys, getClassType, getCommandForAppending, getID, getProject, getProjectProvider, getResourceID, getSortKeys, hasListeners, isEditable, removeAllParents, removeAllPropertyChangeListeners, removePropertyChangeListener, setID, setProjectProvider, sGetID`
+Methods inherited from class java.lang.[Object](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html)
+`[equals](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#equals(java.lang.Object)), [finalize](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#finalize()), [getClass](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#getClass()), [hashCode](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#hashCode()), [notify](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#notify()), [notifyAll](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#notifyAll()), [wait](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#wait()), [wait](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#wait(long)), [wait](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#wait(long,int))`
+Methods inherited from interface com.nomagic.magicdraw.uml.[BaseElement](../../BaseElement.html)
+`[canAdd](../../BaseElement.html#canAdd(com.nomagic.magicdraw.uml.BaseElement))`
+Methods inherited from interface com.nomagic.magicdraw.uml.symbols.manipulators.centerlines.CenterlineableShape
+`getAbstractDiagramPresentationElement, getCenterlinePoint, getCenterlinePointX, getCenterlinePointY`
+Methods inherited from interface com.nomagic.magicdraw.uml.symbols.CompartmentOwner
+`asSymbol`
+Methods inherited from interface com.nomagic.magicdraw.uml.CompartmentSupport
+`setVisibleElements`
+
+========= END OF CLASS DATA =========
+
+## EXACT JAVADOC MAIN HTML
+
+````html
+<main role="main">
+<!-- ======== START OF CLASS DATA ======== -->
+<div class="header">
+<div class="sub-title"><span class="package-label-in-type">Package</span> <a href="package-summary.html">com.nomagic.magicdraw.uml.symbols.shapes</a></div>
+<h1 class="title" title="Class SequenceLifelineView">Class SequenceLifelineView</h1>
+</div>
+<div class="inheritance" title="Inheritance Tree"><a class="external-link" href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang">java.lang.Object</a>
+<div class="inheritance">com.nomagic.magicdraw.uml.MDElementImpl
+<div class="inheritance"><a href="../PresentationElement.html" title="class in com.nomagic.magicdraw.uml.symbols">com.nomagic.magicdraw.uml.symbols.PresentationElement</a>
+<div class="inheritance"><a href="../paths/PathConnector.html" title="class in com.nomagic.magicdraw.uml.symbols.paths">com.nomagic.magicdraw.uml.symbols.paths.PathConnector</a>
+<div class="inheritance"><a href="ShapeElement.html" title="class in com.nomagic.magicdraw.uml.symbols.shapes">com.nomagic.magicdraw.uml.symbols.shapes.ShapeElement</a>
+<div class="inheritance">com.nomagic.magicdraw.uml.symbols.shapes.ContainerShapeView
+<div class="inheritance">com.nomagic.magicdraw.uml.symbols.shapes.AbstractHeaderShapeView
+<div class="inheritance">com.nomagic.magicdraw.uml.symbols.shapes.HeaderShapeView
+<div class="inheritance">com.nomagic.magicdraw.uml.symbols.shapes.TypedElementView
+<div class="inheritance">com.nomagic.magicdraw.uml.symbols.shapes.BaseLifelineView
+<div class="inheritance">com.nomagic.magicdraw.uml.symbols.shapes.SequenceLifelineView</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<section class="class-description" id="class-description">
+<dl class="notes">
+<dt>All Implemented Interfaces:</dt>
+<dd><code><a href="../../BaseElement.html" title="interface in com.nomagic.magicdraw.uml">BaseElement</a></code>, <code>com.nomagic.magicdraw.uml.CompartmentSupport</code>, <code><a href="../../MDElement.html" title="interface in com.nomagic.magicdraw.uml">MDElement</a></code>, <code><a href="../../ModelElementProvider.html" title="interface in com.nomagic.magicdraw.uml">ModelElementProvider</a></code>, <code>com.nomagic.magicdraw.uml.symbols.CompartmentContainer</code>, <code>com.nomagic.magicdraw.uml.symbols.CompartmentOwner</code>, <code>com.nomagic.magicdraw.uml.symbols.manipulators.centerlines.CenterlineableShape</code>, <code>com.nomagic.magicdraw.uml.symbols.shapes.OwnerNameLabelOwner</code>, <code>com.nomagic.magicdraw.uml.symbols.shapes.QualifiedNameLabelOwner</code>, <code><a href="StereotypesDisplayModeOwner.html" title="interface in com.nomagic.magicdraw.uml.symbols.shapes">StereotypesDisplayModeOwner</a></code>, <code>com.nomagic.magicdraw.uml.symbols.SuspendShapeAutoResizeModeProvider</code>, <code>com.nomagic.magicdraw.uml.symbols.Wrapable</code>, <code><a href="../../../utils/NameOwner.html" title="interface in com.nomagic.magicdraw.utils">NameOwner</a></code>, <code><a class="external-link" href="https://docs.oracle.com/en/java/javase/17/docs/api/java.desktop/java/beans/PropertyChangeListener.html" title="class or interface in java.beans">PropertyChangeListener</a></code>, <code><a class="external-link" href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Cloneable.html" title="class or interface in java.lang">Cloneable</a></code>, <code><a class="external-link" href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Comparable.html" title="class or interface in java.lang">Comparable</a></code>, <code><a class="external-link" href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/EventListener.html" title="class or interface in java.util">EventListener</a></code></dd>
+</dl>
+<hr/>
+<div class="type-signature"><span class="annotations">@OpenApi
+</span><span class="modifiers">public class </span><span class="element-name type-name-label">SequenceLifelineView</span>
+<span class="extends-implements">extends com.nomagic.magicdraw.uml.symbols.shapes.BaseLifelineView</span></div>
+<div class="block">Creates lifeline "head" in sequence diagram.</div>
+</section>
+<section class="summary">
+<ul class="summary-list">
+<!-- =========== FIELD SUMMARY =========== -->
+<li>
+<section class="field-summary" id="field-summary">
+<h2>Field Summary</h2>
+<div class="inherited-list">
+<h3 id="fields-inherited-from-class-com.nomagic.magicdraw.uml.symbols.shapes.HeaderShapeView">Fields inherited from class com.nomagic.magicdraw.uml.symbols.shapes.HeaderShapeView</h3>
+<code>SECONDARY_IMAGE_AND_STEREOTYPE_DISPLAY_MODE_DO_NOT_DISPLAY, SECONDARY_IMAGE_AND_STEREOTYPE_DISPLAY_MODE_IMAGE_AND_STEREOTYPES, SECONDARY_IMAGE_AND_STEREOTYPE_DISPLAY_MODE_STEREOTYPES, SECONDARY_IMAGE_AND_STEREOTYPE_DISPLAY_MODES</code></div>
+<div class="inherited-list">
+<h3 id="fields-inherited-from-class-com.nomagic.magicdraw.uml.symbols.shapes.ContainerShapeView">Fields inherited from class com.nomagic.magicdraw.uml.symbols.shapes.ContainerShapeView</h3>
+<code>CONTAINER_SHAPE_INSETS, SHAPE_DISTANCE_FROM_EDGE</code></div>
+<div class="inherited-list">
+<h3 id="fields-inherited-from-class-com.nomagic.magicdraw.uml.symbols.PresentationElement">Fields inherited from class com.nomagic.magicdraw.uml.symbols.<a href="../PresentationElement.html" title="class in com.nomagic.magicdraw.uml.symbols">PresentationElement</a></h3>
+<code><a href="../PresentationElement.html#DASHED_STROKE">DASHED_STROKE</a>, <a href="../PresentationElement.html#DOTTED_STROKE">DOTTED_STROKE</a>, <a href="../PresentationElement.html#SOLID_STROKE">SOLID_STROKE</a></code></div>
+<div class="inherited-list">
+<h3 id="fields-inherited-from-class-com.nomagic.magicdraw.uml.symbols.shapes.OwnerNameLabelOwner">Fields inherited from interface com.nomagic.magicdraw.uml.symbols.shapes.OwnerNameLabelOwner</h3>
+<code>OWNER_DISPLAY_MODE_OLD, OWNER_DISPLAY_MODE_STD, OWNER_DISPLAY_MODES</code></div>
+<div class="inherited-list">
+<h3 id="fields-inherited-from-class-com.nomagic.magicdraw.uml.symbols.shapes.QualifiedNameLabelOwner">Fields inherited from interface com.nomagic.magicdraw.uml.symbols.shapes.QualifiedNameLabelOwner</h3>
+<code>QNAME_DISPLAY_MODE_ABOVE_NAME, QNAME_DISPLAY_MODE_BELOW_NAME, QNAME_DISPLAY_MODE_DO_NOT_DISPLAY, QNAME_DISPLAY_MODE_MERGE_WITH_NAME, QNAME_DISPLAY_MODES</code></div>
+<div class="inherited-list">
+<h3 id="fields-inherited-from-class-com.nomagic.magicdraw.uml.symbols.shapes.StereotypesDisplayModeOwner">Fields inherited from interface com.nomagic.magicdraw.uml.symbols.shapes.<a href="StereotypesDisplayModeOwner.html" title="interface in com.nomagic.magicdraw.uml.symbols.shapes">StereotypesDisplayModeOwner</a></h3>
+<code><a href="StereotypesDisplayModeOwner.html#DSL_STEREOTYPE_DISPLAY_MODE_ALL">DSL_STEREOTYPE_DISPLAY_MODE_ALL</a>, <a href="StereotypesDisplayModeOwner.html#DSL_STEREOTYPE_DISPLAY_MODE_LAST">DSL_STEREOTYPE_DISPLAY_MODE_LAST</a>, <a href="StereotypesDisplayModeOwner.html#DSL_STEREOTYPE_DISPLAY_MODE_NONE">DSL_STEREOTYPE_DISPLAY_MODE_NONE</a>, <a href="StereotypesDisplayModeOwner.html#DSL_STEREOTYPE_DISPLAY_MODES">DSL_STEREOTYPE_DISPLAY_MODES</a>, <a href="StereotypesDisplayModeOwner.html#STEREOTYPE_DISPLAY_MODE_DO_NOT_DISPLAY_STEREOTYPES">STEREOTYPE_DISPLAY_MODE_DO_NOT_DISPLAY_STEREOTYPES</a>, <a href="StereotypesDisplayModeOwner.html#STEREOTYPE_DISPLAY_MODE_ICON">STEREOTYPE_DISPLAY_MODE_ICON</a>, <a href="StereotypesDisplayModeOwner.html#STEREOTYPE_DISPLAY_MODE_SHAPE_IMAGE">STEREOTYPE_DISPLAY_MODE_SHAPE_IMAGE</a>, <a href="StereotypesDisplayModeOwner.html#STEREOTYPE_DISPLAY_MODE_SHAPE_IMAGE_AND_TEXT">STEREOTYPE_DISPLAY_MODE_SHAPE_IMAGE_AND_TEXT</a>, <a href="StereotypesDisplayModeOwner.html#STEREOTYPE_DISPLAY_MODE_TEXT">STEREOTYPE_DISPLAY_MODE_TEXT</a>, <a href="StereotypesDisplayModeOwner.html#STEREOTYPE_DISPLAY_MODE_TEXT_AND_ICON">STEREOTYPE_DISPLAY_MODE_TEXT_AND_ICON</a>, <a href="StereotypesDisplayModeOwner.html#STEREOTYPES_DISPLAY_MODES">STEREOTYPES_DISPLAY_MODES</a>, <a href="StereotypesDisplayModeOwner.html#STEREOTYPES_DISPLAY_MODES_SIMPLE">STEREOTYPES_DISPLAY_MODES_SIMPLE</a></code></div>
+</section>
+</li>
+<!-- ========== METHOD SUMMARY =========== -->
+<li>
+<section class="method-summary" id="method-summary">
+<h2>Method Summary</h2>
+<div class="inherited-list">
+<h3 id="methods-inherited-from-class-com.nomagic.magicdraw.uml.symbols.shapes.BaseLifelineView">Methods inherited from class com.nomagic.magicdraw.uml.symbols.shapes.BaseLifelineView</h3>
+<code>checkShowsProxy, getClassifier, getElement, getLifeline, getMetaClassifiersQPropertyName, getOwnerDisplayMode, internalGetNestedPath, internalSetNestedPath, setOwnerDisplayMode, sSetClassifiers, sSetOwnerDisplayMode, updateName</code></div>
+<div class="inherited-list">
+<h3 id="methods-inherited-from-class-com.nomagic.magicdraw.uml.symbols.shapes.TypedElementView">Methods inherited from class com.nomagic.magicdraw.uml.symbols.shapes.TypedElementView</h3>
+<code>addBreakPoints, doActualShapeDrawing, getClassifiers, getDefaultDimension, getSeparatorDistanceFromRightSide, getStereotypesToDisplay, getTypeClass, isActive, isDrawUnderLine, isShowClass, isShowFullType, selfSpecificHeaderShapeDraw, setDrawUnderLine, setShowClass, setShowFullType, sSetShowClass, sSetShowFullType</code></div>
+<div class="inherited-list">
+<h3 id="methods-inherited-from-class-com.nomagic.magicdraw.uml.symbols.shapes.HeaderShapeView">Methods inherited from class com.nomagic.magicdraw.uml.symbols.shapes.HeaderShapeView</h3>
+<code>addCompartment, addCompartment, addPresentationElement, applyCompartmentsStyle, areBoxCompartmentsSuppressed, askDeleteDataConfirmation, autosizeShapesOnEdge, canAddChild, canHideBorder, childrenBoundsForReshape, createBoundsShape, createCompartmentElements, createStateForUpdateOperation, dispose, doInternalLayoutAdditionCompartment, doInternalLayoutChildren, getAdditionalCompartment, getAdditionalCompartmentContainer, getAdditionalCompartmentInsets, getAdditionalCompartmentToLayout, getAdditionalRenderersToNotify, getBooleanCompartmentPropertyValue, getChildrenBoundsForPreferredBounds, getChildrenInsets, getCollections, getCompartmentByID, getCompartmentIDs, getCompartments, getCompartmentStyleDelegate, getConfiguredPreferredSizeForAutosize, getConstraintAndTaggedValueAlignment, getConstraintTextMode, getDefaultElementStereotypeToHeader, getDSLStereotypesDisplayMode, getElementNumberDisplayMode, getElementPropertiesCompartmentView, getHeaderMaxYForShrinkableShape, getHeaderVerticalPositionForLayout, getMainCompartmentContainer, getName, getPreferredDimensionForAutosize, getQNameDisplayMode, getSecondaryImageAndStereotypeDisplayMode, getStereotypeLabel, getStereotypesDisplayMode, hasManipulatedChildrenIncludingIndirect, internalAddIndirectManipulatedChildrenRect, internalBeforeUpdate, internalGetHeaderInsets, internalGetIndirectManipulatedChildrenRect, internalGetSelfManipulationPreferredSize, internalLayoutChildren, internalPostSpecificUpdate, internalSetCollections, isBorderVisible, isChildLayoutable, isChildMovable, isMakePreferredSizeAfterPropertiesChange, isShowDerivedSign, isShowElementProperties, isShowIcon, isShowNumberTagName, isShowRakeIcon, isShowRakeSymbol, isShowTaggedValues, isShowType, isWrapEnabled, makePreferredSizeAfterPropertiesChange, makePreferredSizeAfterPropertiesChange, onChildEdgeChange, paintSelf, preferredSizeIgnoringOrientation, propertyChange, recursiveAutosize, removeCompartment, removeCompartment, removePresentationElement, setCollections, setCompartmentSuppressed, setConstraintAndTaggedValueAlignment, setConstraints, setConstraintTextMode, setDSLStereotypesDisplayMode, setElementNumberDisplayMode, setHeaderObject, setMakePreferredSizeAfterPropertiesChange, setQNameDisplayMode, setReshapeMode, setSecondaryImageAndStereotypeDisplayMode, setShowConstraints, setShowDerivedSign, setShowElementProperties, setShowIcon, setShowNumberTagName, setShowTaggedValues, setShowType, setStereotype, setStereotypesDisplayMode, setTaggedValues, setVisibleElements, setWrapEnabled, sSetCompartmentSuppressed, sSetConstraintAndTaggedValueAlignment, sSetConstraintTextMode, sSetDSLStereotypesDisplayMode, sSetElement, sSetElementNumberDisplayMode, sSetName, sSetQNameDisplayMode, sSetSecondaryImageAndStereotypeDisplayMode, sSetShowConstraints, sSetShowDerivedSign, sSetShowElementProperties, sSetShowIcon, sSetShowNumberTagName, sSetShowTaggedValues, sSetShowType, sSetStereotypesDisplayMode, sSetWrapEnabled, updateBorderVisibility, updateChildrenVisibility, updateCompartmentsVisibility</code></div>
+<div class="inherited-list">
+<h3 id="methods-inherited-from-class-com.nomagic.magicdraw.uml.symbols.shapes.AbstractHeaderShapeView">Methods inherited from class com.nomagic.magicdraw.uml.symbols.shapes.AbstractHeaderShapeView</h3>
+<code>addExtraChildrenPrefSizePadding, autosizeAndResizeParent, calculateMinY, calculateOvalShapePreferredSize, correctChildrenVector, coversPoint, editName, getAdditionalHeaderHeightForPreferredBounds, getHeaderBoundsForPreferredBounds, getHeaderDistanceFromTopForOvalShape, getHeaderInsets, getHeaderObject, getHeaderVerticalPosition, getNameLabel, getOvalShapeAvailableWidth, getPreferredBounds, getPresentationElementAt, getProxyPresentationElementsStream, internalGetHeaderBoundsForPreferredBounds, internalPostUpdatePresentationElement, internalPreSpecificUpdate, internalUpdatePresentationElement, invalidate, isContentHidden, isHeaderOrientationVertical, isOvalShape, isParentShowsProxy, minimumDimension, minimumDimensionForShrinking, minimumSizeForShrinkingIgnoringOrientation, minimumSizeIgnoringOrientation, paintChildren, preferredDimension, setHeaderVerticalPosition, setName, setTextEditable, sSetAutosize, sSetHeaderVerticalPosition, switchWidthHeightIfVerticalOrientation</code></div>
+<div class="inherited-list">
+<h3 id="methods-inherited-from-class-com.nomagic.magicdraw.uml.symbols.shapes.ContainerShapeView">Methods inherited from class com.nomagic.magicdraw.uml.symbols.shapes.ContainerShapeView</h3>
+<code>addPresentationElement, addPresentationElementWithoutResize, adjustChildBoundsForMoving, calculateAutosizeDimension, calculateAutosizeDimension, canMoveChildOutside, clearShowsProxy, constructLayoutHelper, getChildrenBounds, getChildrenOnBorderBounds, getContainerBounds, getDefaultChildrenInsets, getLayoutHelper, getLayoutHelperClone, getManipulatedElementAt, getManipulationPreferredDimension, getPresentationElementIndex, getPresentationElements, getRemovableChildren, hasManipulatedShapesNotOnEdge, hasManipulatedShapesOnEdge, hasManipulatedShapesOnEdge, internalGetChildAt, internalGetManipulatedChildrenRect, internalSetChildren, isCanChildrenChangeEdge, isCanMoveChildren, layoutChildren, moveChild, moveChildren, needAdjustToPreferred, paintChildrenBackground, removePresentationElement, sAddPresentationElement, setBounds, setBounds, setCanMoveChildren, setDummyResizeMode, setFillColor, setFillColorForChildren, setLayoutHelper, setPresentationElements, showPathElements, simpleSetBounds, simpleSetBounds, sRemovePresentationElement, sSetPresentationElements</code></div>
+<div class="inherited-list">
+<h3 id="methods-inherited-from-class-com.nomagic.magicdraw.uml.symbols.paths.PathConnector">Methods inherited from class com.nomagic.magicdraw.uml.symbols.paths.<a href="../paths/PathConnector.html" title="class in com.nomagic.magicdraw.uml.symbols.paths">PathConnector</a></h3>
+<code><a href="../paths/PathConnector.html#getConnectedPathElementCount()">getConnectedPathElementCount</a>, <a href="../paths/PathConnector.html#getConnectedPathElements()">getConnectedPathElements</a>, <a href="../paths/PathConnector.html#getConnectedPathElements(boolean)">getConnectedPathElements</a>, <a href="../paths/PathConnector.html#getConnectedPathElements(boolean,boolean)">getConnectedPathElements</a></code></div>
+<div class="inherited-list">
+<h3 id="methods-inherited-from-class-com.nomagic.magicdraw.uml.symbols.PresentationElement">Methods inherited from class com.nomagic.magicdraw.uml.symbols.<a href="../PresentationElement.html" title="class in com.nomagic.magicdraw.uml.symbols">PresentationElement</a></h3>
+<code><a href="../PresentationElement.html#addProperty(com.nomagic.magicdraw.properties.Property)">addProperty</a>, <a href="../PresentationElement.html#collectSubManipulatedElements(java.util.List)">collectSubManipulatedElements</a>, <a href="../PresentationElement.html#editName(java.awt.event.KeyEvent)">editName</a>, <a href="../PresentationElement.html#getBoundsShape(com.nomagic.magicdraw.uml.symbols.ConverterToShape)">getBoundsShape</a>, <a href="../PresentationElement.html#getDiagramPresentationElement()">getDiagramPresentationElement</a>, <a href="../PresentationElement.html#getDiagramSurface()">getDiagramSurface</a>, <a href="../PresentationElement.html#getManipulatedParent()">getManipulatedParent</a>, <a href="../PresentationElement.html#getManipulatedPresentationElements()">getManipulatedPresentationElements</a>, <a href="../PresentationElement.html#getObjectParent()">getObjectParent</a>, <a href="../PresentationElement.html#getParent()">getParent</a>, <a href="../PresentationElement.html#getPreferredSize()">getPreferredSize</a>, <a href="../PresentationElement.html#getPresentationElementStroke()">getPresentationElementStroke</a>, <a href="../PresentationElement.html#getPresentationElementStroke(int)">getPresentationElementStroke</a>, <a href="../PresentationElement.html#getProperty(java.lang.String)">getProperty</a>, <a href="../PresentationElement.html#getPropertyManager()">getPropertyManager</a>, <a href="../PresentationElement.html#getSelected()">getSelected</a>, <a href="../PresentationElement.html#getStroke(float,int,int,float,float%5B%5D,float)">getStroke</a>, <a href="../PresentationElement.html#getStroke(int)">getStroke</a>, <a href="../PresentationElement.html#getStroke(int,int)">getStroke</a>, <a href="../PresentationElement.html#getStroke(int,int,int)">getStroke</a>, <a href="../PresentationElement.html#getStroke(int,int,int,int)">getStroke</a>, <a href="../PresentationElement.html#getStroke(java.awt.BasicStroke,int)">getStroke</a>, <a href="../PresentationElement.html#hasManipulatedPresentationElements()">hasManipulatedPresentationElements</a>, <a href="../PresentationElement.html#isSelected()">isSelected</a>, <a href="../PresentationElement.html#onFind()">onFind</a>, <a href="../PresentationElement.html#onFind(boolean)">onFind</a>, <a href="../PresentationElement.html#setAllSelected(boolean)">setAllSelected</a>, <a href="../PresentationElement.html#setSelected(boolean)">setSelected</a>, <a href="../PresentationElement.html#setSelected(java.util.List)">setSelected</a>, <a href="../PresentationElement.html#useParentProperties()">useParentProperties</a></code></div>
+<div class="inherited-list">
+<h3 id="methods-inherited-from-class-com.nomagic.magicdraw.uml.MDElementImpl">Methods inherited from class com.nomagic.magicdraw.uml.MDElementImpl</h3>
+<code>accept, addPropertyChangeListener, canAdd, canAddChild, canBeDeleted, canDeleteChild, compareTo, createSortKeys, getClassType, getCommandForAppending, getID, getProject, getProjectProvider, getResourceID, getSortKeys, hasListeners, isEditable, removeAllParents, removeAllPropertyChangeListeners, removePropertyChangeListener, setID, setProjectProvider, sGetID</code></div>
+<div class="inherited-list">
+<h3 id="methods-inherited-from-class-java.lang.Object">Methods inherited from class java.lang.<a class="external-link" href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang">Object</a></h3>
+<code><a class="external-link" href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#equals(java.lang.Object)" title="class or interface in java.lang">equals</a>, <a class="external-link" href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#finalize()" title="class or interface in java.lang">finalize</a>, <a class="external-link" href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#getClass()" title="class or interface in java.lang">getClass</a>, <a class="external-link" href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#hashCode()" title="class or interface in java.lang">hashCode</a>, <a class="external-link" href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#notify()" title="class or interface in java.lang">notify</a>, <a class="external-link" href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#notifyAll()" title="class or interface in java.lang">notifyAll</a>, <a class="external-link" href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#wait()" title="class or interface in java.lang">wait</a>, <a class="external-link" href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#wait(long)" title="class or interface in java.lang">wait</a>, <a class="external-link" href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#wait(long,int)" title="class or interface in java.lang">wait</a></code></div>
+<div class="inherited-list">
+<h3 id="methods-inherited-from-class-com.nomagic.magicdraw.uml.BaseElement">Methods inherited from interface com.nomagic.magicdraw.uml.<a href="../../BaseElement.html" title="interface in com.nomagic.magicdraw.uml">BaseElement</a></h3>
+<code><a href="../../BaseElement.html#canAdd(com.nomagic.magicdraw.uml.BaseElement)">canAdd</a></code></div>
+<div class="inherited-list">
+<h3 id="methods-inherited-from-class-com.nomagic.magicdraw.uml.symbols.manipulators.centerlines.CenterlineableShape">Methods inherited from interface com.nomagic.magicdraw.uml.symbols.manipulators.centerlines.CenterlineableShape</h3>
+<code>getAbstractDiagramPresentationElement, getCenterlinePoint, getCenterlinePointX, getCenterlinePointY</code></div>
+<div class="inherited-list">
+<h3 id="methods-inherited-from-class-com.nomagic.magicdraw.uml.symbols.CompartmentOwner">Methods inherited from interface com.nomagic.magicdraw.uml.symbols.CompartmentOwner</h3>
+<code>asSymbol</code></div>
+<div class="inherited-list">
+<h3 id="methods-inherited-from-class-com.nomagic.magicdraw.uml.CompartmentSupport">Methods inherited from interface com.nomagic.magicdraw.uml.CompartmentSupport</h3>
+<code>setVisibleElements</code></div>
+</section>
+</li>
+</ul>
+</section>
+<!-- ========= END OF CLASS DATA ========= -->
+</main>
+````

@@ -1,0 +1,234 @@
+# OFFICIAL REPOSITORY FILE: SysML-v2-Pilot-Implementation/org.omg.sysml.plantuml/src/org/omg/sysml/plantuml/VComposite.java
+
+- repository: `SysML-v2-Pilot-Implementation`
+- source_path: `org.omg.sysml.plantuml/src/org/omg/sysml/plantuml/VComposite.java`
+- source_url: https://github.com/Systems-Modeling/SysML-v2-Pilot-Implementation/blob/fa709f28dfd49dfdb7ee83e4e19da2f57e0eb3aa/org.omg.sysml.plantuml/src/org/omg/sysml/plantuml/VComposite.java
+- source_bytes: 7038
+- source_sha256: `603b81cd11658a072c75d9729763a57cad4f464326fecc233bc7b32f965c2f55`
+- decoded_as: `utf-8`
+
+
+## EXACT SOURCE
+
+````java
+/*****************************************************************************
+ * SysML 2 Pilot Implementation, PlantUML Visualization
+ * Copyright (c) 2020-2024 Mgnite Inc.
+ * Copyright (c) 2023 Model Driven Solutions, Inc.
+ *    
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the Eclipse Public License as published by
+ * the Eclipse Foundation, version 2 of the License.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * Eclipse Public License for more details.
+ *
+ * You should have received a copy of theEclipse Public License
+ * along with this program.  If not, see <https://www.eclipse.org/legal/epl-2.0/>.
+ *
+ * @license EPL-2.0 <http://spdx.org/licenses/EPL-2.0>
+ * 
+ * Contributors:
+ *  Hisashi Miyashita, Mgnite Inc.
+ *  Ed Seidewitz, MDS
+ * 
+ *****************************************************************************/
+
+package org.omg.sysml.plantuml;
+
+import java.util.List;
+import java.util.Set;
+
+import org.omg.sysml.lang.sysml.Connector;
+import org.omg.sysml.lang.sysml.Element;
+import org.omg.sysml.lang.sysml.Feature;
+import org.omg.sysml.lang.sysml.FeatureDirectionKind;
+import org.omg.sysml.lang.sysml.PartDefinition;
+import org.omg.sysml.lang.sysml.PartUsage;
+import org.omg.sysml.lang.sysml.PortUsage;
+import org.omg.sysml.lang.sysml.ReferenceUsage;
+import org.omg.sysml.lang.sysml.Succession;
+import org.omg.sysml.lang.sysml.Type;
+import org.omg.sysml.lang.sysml.Usage;
+import org.omg.sysml.plantuml.SysML2PlantUMLStyle.StyleStereotypeSwitch;
+import org.omg.sysml.plantuml.SysML2PlantUMLStyle.StyleSwitch;
+import org.omg.sysml.util.TypeUtil;
+
+public class VComposite extends VMixed {
+    private static final SysML2PlantUMLStyle style
+    = new SysML2PlantUMLStyle
+    ("VComposite",
+      null,
+     "skinparam ranksep 10\n"
+     + "skinparam rectangle {\n backgroundColor<<block>> LightGreen\n}\n",
+     new StyleSwitch(null, new StyleStereotypeSwitch() {
+         @Override
+         public String casePartUsage(PartUsage object) {
+             /* Do not show stereotype for PartUsages */
+             return " ";
+         }
+     }));
+
+    @Override 
+    protected SysML2PlantUMLStyle getStyle() {
+        return style;
+    }
+
+    private String getFeatureText(Feature f) {
+        VComposite v = new VComposite(this);
+        v.addFeatureText(f);
+        return v.getString();
+    }
+
+
+	@Override
+    public String caseUsage(Usage f) {
+        String featureText = getFeatureText(f);
+        if (featureText.isEmpty()) return "";
+        int id = addPUMLLine(f, "rec usage ", featureText);
+        addFeatureValueBindings(id, f);
+
+        VComposite vc = new VComposite(this);
+        vc.traverse(f);
+        vc.closeBlock();
+        addSpecializations(id, f);
+
+        return "";
+    }
+
+	@Override
+    public String casePartDefinition(PartDefinition pd) {
+        addType(pd, "rec def ");
+
+        VComposite vc = new VComposite(this);
+        vc.traverse(pd);
+        vc.closeBlock();
+
+        return "";
+    }
+
+    @Override
+    public String caseSuccession(Succession su) {
+        return "";
+    }
+
+    private Feature getEndFeature(Feature f) {
+        while (!f.isEnd()) {
+            Element e = f.getOwner();
+            if (!(e instanceof Feature)) return null;
+            f = (Feature) e;
+        }
+        return f;
+    }
+
+    private boolean isPortOut(int id) {
+        Set<Element> paths = getVPath().getPaths(id);
+        if (paths == null) return false;
+        for (Element path: paths) {
+            if (!(path instanceof Feature)) continue;
+            Feature f = getEndFeature((Feature) path);
+            if (f == null) continue;
+            Type t = f.getOwningType();
+            if (t instanceof Connector) {
+                Connector c = (Connector) t;
+                List<Feature> fs = TypeUtil.getOwnedEndFeaturesOf(c);
+                /* 
+                   Currently we regard the first connector end as a source end, but it might be changed.
+                   We can check it by extracting the sources of the relationship, but it does not work with ItemFlowEnd
+                   and is not efficient.  So we will use the current solution for the time being.
+                   if (rel.getSource().contains(path)) return true;
+                 */
+                if (f.equals(fs.get(0))) return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public String casePortUsage(PortUsage pu) {
+        String name = extractTitleName(pu);
+        if (name == null) return "";
+
+        VComposite vc = new VComposite(this);
+        vc.traverse(pu);
+        String ret = vc.getString();
+
+        int id;
+        if (ret.isEmpty()) {
+            int pt = getCurrentLength();
+            id = addPUMLLine(pu, "", name);
+            if (isPortOut(id)) {
+                insert(pt, "portout ");
+            } else {
+                insert(pt, "portin ");
+            }
+            append('\n');
+        } else {
+            id = addPUMLLine(pu, "rec usage ", name);
+            vc.closeBlock();
+        }
+        addFeatureValueBindings(id, pu);
+
+        return "";
+    }
+
+    private void addTypeSimple(Type typ) {
+        if (typ instanceof Feature) {
+            Feature f = (Feature) typ;
+            FeatureDirectionKind fdk = f.getDirection();
+            if (fdk != null) {
+                String name = extractTitleName(f);
+                if (name == null) return;
+
+                VComposite vc = new VComposite(this);
+                vc.traverse(f);
+                String ret = vc.getString();
+
+                int id;
+                if (ret.isEmpty() && !isEmpty()) {
+                    if (fdk == FeatureDirectionKind.OUT) {
+                        id = addPUMLLine(f, "portout ", name);
+                    } else {
+                        id = addPUMLLine(f, "portin ", name);
+                    }
+                } else {
+                    id = addPUMLLine(f, "rec usage ", name);
+                    vc.closeBlock();
+                }
+                addFeatureValueBindings(id, f);
+            } else {
+                if (!addType(typ, "usage ")) return;
+            }
+
+        } else if (typ instanceof Usage) {
+            if (!addType(typ, "usage ")) return;
+        } else {
+            if (!addType(typ, "def ")) return;
+        }
+        append('\n');
+    }
+
+    @Override
+    public String caseReferenceUsage(ReferenceUsage ru) {
+        addTypeSimple(ru);
+        return "";
+    }
+
+    @Override
+    public String caseType(Type typ) {
+        addTypeSimple(typ);
+        return "";
+    }
+
+    private VComposite(Visitor vt) {
+        super(vt);
+    }
+
+    public VComposite() {
+        super();
+    }
+}
+
+````

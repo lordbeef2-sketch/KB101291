@@ -1,0 +1,35 @@
+# OFFICIAL REPOSITORY FILE: SysML-v2-Pilot-Implementation/tool-support/syntax-highlighting/jetbrains/SysML.xml
+
+- repository: `SysML-v2-Pilot-Implementation`
+- source_path: `tool-support/syntax-highlighting/jetbrains/SysML.xml`
+- source_url: https://github.com/Systems-Modeling/SysML-v2-Pilot-Implementation/blob/fa709f28dfd49dfdb7ee83e4e19da2f57e0eb3aa/tool-support/syntax-highlighting/jetbrains/SysML.xml
+- source_bytes: 1782
+- source_sha256: `6f538acff6c2d9e6b9940e623e23c706f748fc40a7f65ac9deaa1894d7d59f7e`
+- decoded_as: `utf-8`
+
+
+## EXACT SOURCE
+
+````xml
+<filetype binary="false" description="OMG Systems Modeling Language" name="SysML">
+  <highlighting>
+    <options>
+      <option name="LINE_COMMENT" value="//" />
+      <option name="COMMENT_START" value="/*" />
+      <option name="COMMENT_END" value="*/" />
+      <option name="HEX_PREFIX" value="" />
+      <option name="NUM_POSTFIXES" value="" />
+      <option name="HAS_BRACES" value="true" />
+      <option name="HAS_BRACKETS" value="true" />
+      <option name="HAS_PARENS" value="true" />
+      <option name="HAS_STRING_ESCAPES" value="true" />
+    </options>
+    <keywords keywords="about;abstract;accept;action;actor;after;alias;all;allocate;allocation;analysis;and;as;assert;assign;assume;at;attribute;bind;binding;by;calc;case;comment;concern;connect;connection;constant;constraint;crosses;decide;def;default;defined;dependency;derived;do;doc;else;end;entry;enum;event;exhibit;exit;expose;false;filter;first;flow;for;fork;frame;from;hastype;if;implies;import;in;include;individual;inout;interface;istype;item;join;language;library;locale;loop;merge;message;meta;metadata;new;nonunique;not;null;objective;occurrence;of;or;ordered;out;package;parallel;part;perform;port;private;protected;public;redefines;ref;references;render;rendering;rep;require;requirement;return;satisfy;send;snapshot;specializes;stakeholder;standard;state;subject;subsets;succession;terminate;then;timeslice;to;transition;true;until;use;variant;variation;verification;verify;via;view;viewpoint;when;while;xor" ignore_case="false" />
+    <keywords2 keywords="!=;!==;#;$;%;&amp;;*;**;+;-;-&gt;;..;.?;/;:;::;::&gt;;:=;:&gt;;:&gt;&gt;;&lt;;&lt;=;=;==;===;=&gt;;&gt;;&gt;=;?;??;@;@@;^;|;~" />
+  </highlighting>
+  <extensionMap>
+    <mapping ext="sysml" />
+  </extensionMap>
+</filetype>
+
+````

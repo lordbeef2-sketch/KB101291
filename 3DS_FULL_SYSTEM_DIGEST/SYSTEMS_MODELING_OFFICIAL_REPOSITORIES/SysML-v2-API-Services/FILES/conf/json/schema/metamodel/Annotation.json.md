@@ -1,0 +1,336 @@
+# OFFICIAL REPOSITORY FILE: SysML-v2-API-Services/conf/json/schema/metamodel/Annotation.json
+
+- repository: `SysML-v2-API-Services`
+- source_path: `conf/json/schema/metamodel/Annotation.json`
+- source_url: https://github.com/Systems-Modeling/SysML-v2-API-Services/blob/0af711b14bbcea7b240bb0a3a65817ae68302092/conf/json/schema/metamodel/Annotation.json
+- source_bytes: 7691
+- source_sha256: `f47786e03c64dfbca1fe4e1e13c89ef63940d6c3d77161af5a757d71ff501382`
+- decoded_as: `utf-8`
+
+
+## EXACT SOURCE
+
+````json
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://www.omg.org/spec/SysML/20250201/Annotation",
+  "title": "Annotation",
+  "type": "object",
+  "properties": {
+    "@id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "@type": {
+      "type": "string",
+      "const": "Annotation"
+    },
+    "aliasIds": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "annotatedElement": {
+      "$ref": "https://www.omg.org/spec/SysML/20250201/Identified",
+      "$comment": "https://www.omg.org/spec/SysML/20250201/Element"
+    },
+    "annotatingElement": {
+      "$ref": "https://www.omg.org/spec/SysML/20250201/Identified",
+      "$comment": "https://www.omg.org/spec/SysML/20250201/AnnotatingElement"
+    },
+    "declaredName": {
+      "oneOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "declaredShortName": {
+      "oneOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "documentation": {
+      "type": "array",
+      "items": {
+        "$ref": "https://www.omg.org/spec/SysML/20250201/Identified",
+        "$comment": "https://www.omg.org/spec/SysML/20250201/Documentation"
+      }
+    },
+    "elementId": {
+      "oneOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "isImplied": {
+      "oneOf": [
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "isImpliedIncluded": {
+      "oneOf": [
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "isLibraryElement": {
+      "oneOf": [
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "name": {
+      "oneOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "ownedAnnotatingElement": {
+      "oneOf": [
+        {
+          "$ref": "https://www.omg.org/spec/SysML/20250201/Identified",
+          "$comment": "https://www.omg.org/spec/SysML/20250201/AnnotatingElement"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "ownedAnnotation": {
+      "type": "array",
+      "items": {
+        "$ref": "https://www.omg.org/spec/SysML/20250201/Identified",
+        "$comment": "https://www.omg.org/spec/SysML/20250201/Annotation"
+      }
+    },
+    "ownedElement": {
+      "type": "array",
+      "items": {
+        "$ref": "https://www.omg.org/spec/SysML/20250201/Identified",
+        "$comment": "https://www.omg.org/spec/SysML/20250201/Element"
+      }
+    },
+    "ownedRelatedElement": {
+      "type": "array",
+      "items": {
+        "$ref": "https://www.omg.org/spec/SysML/20250201/Identified",
+        "$comment": "https://www.omg.org/spec/SysML/20250201/Element"
+      }
+    },
+    "ownedRelationship": {
+      "type": "array",
+      "items": {
+        "$ref": "https://www.omg.org/spec/SysML/20250201/Identified",
+        "$comment": "https://www.omg.org/spec/SysML/20250201/Relationship"
+      }
+    },
+    "owner": {
+      "oneOf": [
+        {
+          "$ref": "https://www.omg.org/spec/SysML/20250201/Identified",
+          "$comment": "https://www.omg.org/spec/SysML/20250201/Element"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "owningAnnotatedElement": {
+      "oneOf": [
+        {
+          "$ref": "https://www.omg.org/spec/SysML/20250201/Identified",
+          "$comment": "https://www.omg.org/spec/SysML/20250201/Element"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "owningAnnotatingElement": {
+      "oneOf": [
+        {
+          "$ref": "https://www.omg.org/spec/SysML/20250201/Identified",
+          "$comment": "https://www.omg.org/spec/SysML/20250201/AnnotatingElement"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "owningMembership": {
+      "oneOf": [
+        {
+          "$ref": "https://www.omg.org/spec/SysML/20250201/Identified",
+          "$comment": "https://www.omg.org/spec/SysML/20250201/OwningMembership"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "owningNamespace": {
+      "oneOf": [
+        {
+          "$ref": "https://www.omg.org/spec/SysML/20250201/Identified",
+          "$comment": "https://www.omg.org/spec/SysML/20250201/Namespace"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "owningRelatedElement": {
+      "oneOf": [
+        {
+          "$ref": "https://www.omg.org/spec/SysML/20250201/Identified",
+          "$comment": "https://www.omg.org/spec/SysML/20250201/Element"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "owningRelationship": {
+      "oneOf": [
+        {
+          "$ref": "https://www.omg.org/spec/SysML/20250201/Identified",
+          "$comment": "https://www.omg.org/spec/SysML/20250201/Relationship"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "qualifiedName": {
+      "oneOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "relatedElement": {
+      "type": "array",
+      "items": {
+        "$ref": "https://www.omg.org/spec/SysML/20250201/Identified",
+        "$comment": "https://www.omg.org/spec/SysML/20250201/Element"
+      }
+    },
+    "shortName": {
+      "oneOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "source": {
+      "type": "array",
+      "items": {
+        "$ref": "https://www.omg.org/spec/SysML/20250201/Identified",
+        "$comment": "https://www.omg.org/spec/SysML/20250201/Element"
+      }
+    },
+    "target": {
+      "type": "array",
+      "items": {
+        "$ref": "https://www.omg.org/spec/SysML/20250201/Identified",
+        "$comment": "https://www.omg.org/spec/SysML/20250201/Element"
+      }
+    },
+    "textualRepresentation": {
+      "type": "array",
+      "items": {
+        "$ref": "https://www.omg.org/spec/SysML/20250201/Identified",
+        "$comment": "https://www.omg.org/spec/SysML/20250201/TextualRepresentation"
+      }
+    }
+  },
+  "required": [
+    "@id",
+    "@type",
+    "aliasIds",
+    "annotatedElement",
+    "annotatingElement",
+    "declaredName",
+    "declaredShortName",
+    "documentation",
+    "elementId",
+    "isImplied",
+    "isImpliedIncluded",
+    "isLibraryElement",
+    "name",
+    "ownedAnnotatingElement",
+    "ownedAnnotation",
+    "ownedElement",
+    "ownedRelatedElement",
+    "ownedRelationship",
+    "owner",
+    "owningAnnotatedElement",
+    "owningAnnotatingElement",
+    "owningMembership",
+    "owningNamespace",
+    "owningRelatedElement",
+    "owningRelationship",
+    "qualifiedName",
+    "relatedElement",
+    "shortName",
+    "source",
+    "target",
+    "textualRepresentation"
+  ],
+  "additionalProperties": false,
+  "$defs": {
+    "Identified": {
+      "$id": "https://www.omg.org/spec/SysML/20250201/Identified",
+      "title": "Identified",
+      "type": "object",
+      "properties": {
+        "@id": {
+          "type": "string",
+          "format": "uuid"
+        }
+      },
+      "required": [
+        "@id"
+      ],
+      "additionalProperties": false
+    }
+  }
+}
+````

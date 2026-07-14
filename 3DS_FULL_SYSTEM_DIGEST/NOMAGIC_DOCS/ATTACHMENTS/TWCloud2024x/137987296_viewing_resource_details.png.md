@@ -1,0 +1,114 @@
+# NOMAGIC ATTACHMENT: viewing_resource_details.png
+
+- attachment_id: `137987296`
+- space_key: `TWCloud2024x`
+- parent_page_id: `137987293`
+- parent_page_title: Viewing and editing resource details
+- media_type: `image/png`
+- reported_bytes: 119292
+- download_url: https://docs.nomagic.com/download/attachments/137987293/viewing_resource_details.png?version=1&modificationDate=1695376309516&api=v2
+- payload_kind: `metadata-only`
+- downloaded_sha256: not-downloaded
+
+## PAYLOAD STATUS
+
+Binary or image attachment is inventoried by official metadata; no binary bytes are embedded in this Markdown-only corpus.
+
+
+## EXACT ATTACHMENT METADATA
+
+````json
+{
+  "id": "137987296",
+  "type": "attachment",
+  "status": "current",
+  "title": "viewing_resource_details.png",
+  "version": {
+    "by": {
+      "type": "known",
+      "username": "ingabe",
+      "userKey": "ff80808151f3008c0152c05ba1a40003",
+      "profilePicture": {
+        "path": "/download/attachments/7415957/user-avatar",
+        "width": 48,
+        "height": 48,
+        "isDefault": false
+      },
+      "displayName": "Inga A.",
+      "_links": {
+        "self": "https://docs.nomagic.com/rest/api/user?key=ff80808151f3008c0152c05ba1a40003"
+      },
+      "_expandable": {
+        "status": ""
+      }
+    },
+    "when": "2023-09-22T11:51:49.516+02:00",
+    "message": "",
+    "number": 1,
+    "minorEdit": false,
+    "hidden": false,
+    "_links": {
+      "self": "https://docs.nomagic.com/rest/experimental/content/137987296/version/1"
+    },
+    "_expandable": {
+      "content": "/rest/api/content/137987296"
+    }
+  },
+  "position": -1,
+  "container": {
+    "id": "137987293",
+    "type": "page",
+    "status": "current",
+    "title": "Viewing and editing resource details",
+    "position": 1,
+    "extensions": {
+      "position": 1
+    },
+    "_links": {
+      "webui": "/spaces/TWCloud2024x/pages/137987293/Viewing+and+editing+resource+details",
+      "edit": "/pages/resumedraft.action?draftId=137987293",
+      "tinyui": "/x/3YQ5C",
+      "self": "https://docs.nomagic.com/rest/api/content/137987293"
+    },
+    "_expandable": {
+      "container": "/rest/api/space/TWCloud2024x",
+      "metadata": "",
+      "operations": "",
+      "children": "/rest/api/content/137987293/child",
+      "restrictions": "/rest/api/content/137987293/restriction/byOperation",
+      "history": "/rest/api/content/137987293/history",
+      "ancestors": "",
+      "body": "",
+      "version": "",
+      "descendants": "/rest/api/content/137987293/descendant",
+      "space": "/rest/api/space/TWCloud2024x",
+      "relevantViewRestrictions": "/rest/api/content/137987293/restriction/relevantViewRestrictions"
+    }
+  },
+  "metadata": {
+    "mediaType": "image/png"
+  },
+  "extensions": {
+    "mediaType": "image/png",
+    "fileSize": 119292,
+    "comment": ""
+  },
+  "_links": {
+    "download": "/download/attachments/137987293/viewing_resource_details.png?version=1&modificationDate=1695376309516&api=v2",
+    "thumbnail": "/download/thumbnails/137987293/viewing_resource_details.png?api=v2",
+    "webui": "/spaces/TWCloud2024x/pages/137987293/Viewing+and+editing+resource+details?preview=%2F137987293%2F137987296%2Fviewing_resource_details.png",
+    "self": "https://docs.nomagic.com/rest/api/content/137987296"
+  },
+  "_expandable": {
+    "operations": "",
+    "children": "/rest/api/content/137987296/child",
+    "restrictions": "/rest/api/content/137987296/restriction/byOperation",
+    "history": "/rest/api/content/137987296/history",
+    "ancestors": "",
+    "body": "",
+    "descendants": "/rest/api/content/137987296/descendant",
+    "space": "/rest/api/space/TWCloud2024x",
+    "relevantViewRestrictions": "/rest/api/content/137987296/restriction/relevantViewRestrictions"
+  }
+}
+````

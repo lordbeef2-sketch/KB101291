@@ -1,0 +1,6199 @@
+# NOMAGIC DOCUMENTATION SPACE: Cameo DataHub 2024x
+
+<!--NOMAGIC_SPACE key=CDH2024x chunk=1 -->
+
+<!--NOMAGIC_PAGE id=136715818 space=CDH2024x version=13 -->
+## PAGE 00001: 2024x Version News
+
+- page_id: `136715818`
+- space_key: `CDH2024x`
+- source_url: https://docs.nomagic.com/spaces/CDH2024x/pages/136715818/2024x+Version+News
+- version_number: 13
+- version_date: `2026-02-11T10:55:47.184+01:00`
+- ancestors: Cameo DataHub Documentation
+- labels: []
+
+### NORMALIZED CONTENT
+
+[IMAGE alt='' src='']
+
+Released on: November 10, 2023
+
+In version 2024x, we have put a lot of effort into delivering the new driver, Jama Connect® (Technology Preview). You can now use the new Jama Connect driver to add data sources in the Cameo DataHub Explorer panel. The Jama Connect driver is only available as a technology preview and should not be used for production. Learn more about thesupported features, , and below.
+
+###### Jama Connect®(Technology Preview)
+
+For adding data sources, a new Jama Connect driver has been added to the list of existing drivers. You can authenticate with the aid of your User Name and password. As of now, data copying and synchronization can be done only from Jama Connect to the Modelling tool.Data copying and synchronization from the Modeling tool to Jama Connect will be available beginning with the next DataHub release.
+
+[IMAGE alt='' src='']
+
+###### The new driver Jama Connect available in the driver list
+
+##### Supported features
+
+1. You can authenticate with the aid ofyour User Name and password. Connection to both the Cloud and On-premise versions of Jama Connect is possible.
+2. When connected, you can see the list of all projects available in the Jama Connect web app.
+3. You can drill down the structure of a project selected from the list of all projects available to you. This feature is affected by and .
+4. The list of properties is available when you double-click the selected Jama Connect Project item
+5. Currently, you can only synchronize the selected part of your project from Jama Connect to the Cameo Model. This feature is affected by .
+6. The Scheme Map Manager is available to map, create, update, import, export, or set to be used by default data mappings between the Cameo Model and the Jama Connect project.
+7. When the synchronized part of the Jama Connect project is updated on the Jama Connect or Cameo model side, the “Check for change” command is available to visually represent the difference. “New”, “Moved”, “Delete” and other statuses are represented with different background colors for visual clarity. It is also possible to see which exact property is updated, as well as the new value.
+8. Once the change is confirmed for either all or selected items, the Cameo model is updated.
+
+##### Features expected in next releases
+
+1. More Jama Connect item properties will be available for mappings.
+2. Two-way synchronization from the Jama Connect to the modeling tool and vice versa will be supported.
+3. Images will be available to synchronize.
+4. Diagram synchronization from the modeling tool to the Jama Connect project will be available.
+5. Support for browser-based authentication will be available.
+6. Diagram synchronization process from the command line UI will be available.
+7. Data synchronization process from the command line will be available. The synchronization-related settings will be stored on the configuration file.
+
+##### Limitations of Jama Connect
+
+1. The link representation in the Cameo Datahub tree is incorrect.
+2. The sync icon is not shown for child elements.
+3. The project structure is not copied correctly to the modeling tool.
+
+**Cameo DataHub documentation**
+
+- Cameo DataHub Documentation
+
+**News of earlier versions**
+
+- [CONFLUENCE_PAGE title='2022x Refresh2 Version News' space='CDH2022xR2']
+- [CONFLUENCE_PAGE title='2022x Refresh1 Version News' space='CDH2022xR1']
+- [CONFLUENCE_PAGE title='2022x Version News' space='CDH2022x']
+- [CONFLUENCE_PAGE title='2021x Refresh2 Version News' space='CDH2021xR2']
+- 
+- [CONFLUENCE_PAGE title='2021x Version News' space='CDH2021x']
+- [CONFLUENCE_PAGE title='19.0 LTR SP4 Version News' space='CDH190SP4']
+- [CONFLUENCE_PAGE title='19.0 LTR SP3 Version News' space='CDH190SP3']
+- [CONFLUENCE_PAGE title='19.0 LTR SP2 Version News' space='CDH190SP2']
+- [CONFLUENCE_PAGE title='19.0 LTR SP1 Version News' space='CDH190SP1']
+- [CONFLUENCE_PAGE title='19.0 LTR Version News' space='CDH190']
+- Product News Archive
+
+### EXACT CONFLUENCE STORAGE SOURCE
+
+````html
+<ac:layout><ac:layout-section ac:type="single"><ac:layout-cell><p><ac:image ac:align="center"><ri:attachment ri:filename="Cameo DataHub logo.png" /></ac:image></p><p style="text-align: center;"><span style="color:var(--ds-text,#707070);">Released on: November 10, 2023</span></p><p><br /></p><p><span style="color:var(--ds-text,#333333);">In version 2024x, <span>we have put a lot of effort</span></span> into delivering the new driver, Jama Connect® (Technology Preview). <span style="color:var(--ds-text,#333333);">You can now use the new Jama Connect driver to add data sources in the Cameo DataHub Explorer panel. The Jama Connect driver is only available as a technology preview and should not be used for production. Learn more about the </span><ac:link ac:anchor="Supported features"><ac:link-body><span style="color:var(--ds-text,#333333);">s</span>upported features</ac:link-body></ac:link>, <ac:link ac:anchor="Features expected in next releases"><ac:plain-text-link-body><![CDATA[expected features]]></ac:plain-text-link-body></ac:link>, and <ac:link ac:anchor="Limitations of Jama Connect"><ac:plain-text-link-body><![CDATA[limitations]]></ac:plain-text-link-body></ac:link> below.</p></ac:layout-cell></ac:layout-section><ac:layout-section ac:type="single"><ac:layout-cell><h5>Jama Connect®(Technology Preview)</h5><p>For adding data sources, a new Jama Connect driver has been added to the list of existing drivers. You can authenticate with the aid of your <span style="color:var(--ds-text,#172b4d);">User Name and password. As of now, d</span><span style="color:var(--ds-text,#172b4d);">ata copying and synchronization can be done only from Jama Connect to the Modelling tool. </span>Data copying and synchronization from the Modeling tool to Jama Connect will be available beginning with the next DataHub release. </p><p><span style="color:var(--ds-text,#172b4d);"><ac:image ac:align="center"><ri:attachment ri:filename="98B95C23.PNG" /></ac:image></span></p><h6 style="text-align: center;">The new driver Jama Connect available in the driver list</h6><h3>Supported features</h3><ol><li data-uuid="2d813150-4b14-4c4b-92ca-5365f400f28d"><span style="color:var(--ds-text,#333333);">You can authenticate with the aid of<span> your </span></span><span style="color:var(--ds-text,#172b4d);">User Name and password. </span>Connection to both the Cloud and On-premise versions of Jama Connect is possible.</li><li data-uuid="f4951d09-a5df-4a16-a9bb-7d652dc10c0d">When connected, you can see the list of all projects available in the Jama Connect web app.</li><li data-uuid="dd5c0aca-576e-4da6-a73d-6dfb43f5ff16">You can drill down the structure of a project selected from the list of all projects available to you. This feature is affected by <ac:link ac:anchor="Limitations of JAMA Connect"><ac:plain-text-link-body><![CDATA[limitation#1]]></ac:plain-text-link-body></ac:link> and<ac:link ac:anchor="Limitations of JAMA Connect"><ac:plain-text-link-body><![CDATA[ limitation#2]]></ac:plain-text-link-body></ac:link>.</li><li data-uuid="76d12a94-c380-4af6-a1d5-89d58e0a42c2">The list of properties is available when you double-click the selected Jama Connect Project item</li><li data-uuid="85c80a61-b2bd-4e43-9401-4a7b3dff0b8e">Currently, you can only synchronize the selected part of your project from Jama Connect to the Cameo Model. This feature is affected by <ac:link ac:anchor="Limitations of JAMA Connect"><ac:plain-text-link-body><![CDATA[limitation#3]]></ac:plain-text-link-body></ac:link>.</li><li data-uuid="56f9844c-d5cb-4f30-b4a9-d7846d237974">The Scheme Map Manager is available to map, create, update, import, export, or set to be used by default data mappings between the Cameo Model and the Jama Connect project.</li><li data-uuid="bf40d45d-92cc-473d-b416-d98f73138dd3">When the synchronized part of the Jama Connect project is updated on the Jama Connect or Cameo model side, the “Check for change” command is available to visually represent the difference. “New”, “Moved”, “Delete” and other statuses are represented with different background colors for visual clarity. It is also possible to see which exact property is updated, as well as the new value.</li><li data-uuid="a8158a2a-091f-49d7-bd10-77569770584b">Once the change is confirmed for either all or selected items, the Cameo model is updated.</li></ol><h3>Features expected in next releases</h3><ol><li data-uuid="aeb92cac-f6be-4859-ab99-9aa74114dc28">More Jama Connect item properties will be available for mappings.</li><li data-uuid="7eaf98e7-f846-42a3-b9fa-d1618e875bda">Two-way synchronization from the Jama Connect to the modeling tool and vice versa will be supported.</li><li data-uuid="602e264f-00e8-4fd3-9b58-19cdfee38fb9">Images will be available to synchronize.</li><li data-uuid="2e6db423-aa89-4a15-895f-8e0e0b2ffbf3">Diagram synchronization from the modeling tool to the Jama Connect project will be available.</li><li data-uuid="8842d6f9-0c98-4478-a9ca-6bb07fc10d41">Support for browser-based authentication will be available.</li><li data-uuid="66c89fbb-b10a-4899-a125-4e06312b14b5">Diagram synchronization process from the command line UI will be available.</li><li data-uuid="8d1e011f-c8fb-4e5d-8602-6f4585240fb5">Data synchronization process from the command line will be available. The synchronization-related settings will be stored on the configuration file.</li></ol><h3><span style="color:var(--ds-text,#333333);">Limitations of Jama Connect</span></h3><ol><li data-uuid="9485c650-74fe-43ee-98ec-f0124cbd2c13">The link representation in the Cameo Datahub tree is incorrect.</li><li data-uuid="c01fe9ce-82a7-473d-9c54-57be949bdcf4">The sync icon is not shown for child elements.</li><li data-uuid="873057cd-e53b-4218-84e5-cb73b4bb006f">The project structure is not copied correctly to the modeling tool.</li></ol></ac:layout-cell></ac:layout-section><ac:layout-section ac:type="two_equal"><ac:layout-cell><p><strong>Cameo DataHub documentation</strong></p><ul><li data-uuid="d4dbe51a-5ce7-4517-ac31-6dd2019e9fb9"><a href="https://docs.nomagic.com/display/CDH2024x/Cameo+DataHub+Documentation">Cameo DataHub Documentation</a></li></ul></ac:layout-cell><ac:layout-cell><p class="with-breadcrumbs"><strong>News of earlier versions</strong></p><ul><li data-uuid="617cb25e-c007-41c5-a4fd-f4719671b22e"><ac:link><ri:page ri:space-key="CDH2022xR2" ri:content-title="2022x Refresh2 Version News" /><ac:plain-text-link-body><![CDATA[Cameo Datahub 2022x Refresh2]]></ac:plain-text-link-body></ac:link></li><li data-uuid="142e2fd5-293f-4f8b-bb2d-3877f9b7ee6d"><ac:link><ri:page ri:space-key="CDH2022xR1" ri:content-title="2022x Refresh1 Version News" /><ac:plain-text-link-body><![CDATA[Cameo Datahub 2022x Refresh1]]></ac:plain-text-link-body></ac:link></li><li data-uuid="ad9806a2-4bb6-4436-a674-52b9091cda99"><ac:link><ri:page ri:space-key="CDH2022x" ri:content-title="2022x Version News" /><ac:plain-text-link-body><![CDATA[Cameo Datahub 2022x]]></ac:plain-text-link-body></ac:link></li><li data-uuid="f58d4d86-7fba-4b34-80c3-76db56bbb6d5"><p class="with-breadcrumbs"><ac:link><ri:page ri:space-key="CDH2021xR2" ri:content-title="2021x Refresh2 Version News" /><ac:plain-text-link-body><![CDATA[Cameo DataHub 2021x Refresh2]]></ac:plain-text-link-body></ac:link></p></li><li data-uuid="eb648f9b-957c-46b8-a8bb-04864cddcdbd"><p class="with-breadcrumbs"><ac:link><ri:space ri:space-key="CDH2021xR1" /></ac:link></p></li><li data-uuid="7737cb15-60bc-4d2c-91a3-d71882e77c16"><ac:link><ri:page ri:space-key="CDH2021x" ri:content-title="2021x Version News" /><ac:plain-text-link-body><![CDATA[Cameo DataHub 2021x]]></ac:plain-text-link-body></ac:link></li><li data-uuid="39133fa1-c6f2-4802-a175-b557c3a01f6a"><ac:link><ri:page ri:space-key="CDH190SP4" ri:content-title="19.0 LTR SP4 Version News" /><ac:plain-text-link-body><![CDATA[Cameo DataHub 19.0 LTR SP4]]></ac:plain-text-link-body></ac:link></li><li data-uuid="96e4e43c-750a-4782-8ef7-78f925130ff4"><ac:link><ri:page ri:space-key="CDH190SP3" ri:content-title="19.0 LTR SP3 Version News" /><ac:plain-text-link-body><![CDATA[Cameo DataHub 19.0 LTR SP3]]></ac:plain-text-link-body></ac:link></li><li data-uuid="e23f2fb6-bc4a-472f-8444-ef61896c0095"><ac:link><ri:page ri:space-key="CDH190SP2" ri:content-title="19.0 LTR SP2 Version News" /><ac:plain-text-link-body><![CDATA[Cameo DataHub 19.0 LTR SP2]]></ac:plain-text-link-body></ac:link></li><li data-uuid="e1ccc816-407b-4196-9e34-e5f1907d2250"><ac:link><ri:page ri:space-key="CDH190SP1" ri:content-title="19.0 LTR SP1 Version News" /><ac:plain-text-link-body><![CDATA[Cameo DataHub 19.0 LTR SP1]]></ac:plain-text-link-body></ac:link></li><li data-uuid="2ea8daeb-c5f6-4503-9fa1-e57237c266ef"><ac:link><ri:page ri:space-key="CDH190" ri:content-title="19.0 LTR Version News" /><ac:plain-text-link-body><![CDATA[Cameo DataHub 19.0 LTR]]></ac:plain-text-link-body></ac:link></li><li data-uuid="048a4f06-d18f-48d4-bee5-abbfc9f6465a"><a class="external-link" href="https://www.nomagic.com/news/new-noteworthy/magicdraw-noteworthy" rel="nofollow">Product News Archive</a></li></ul></ac:layout-cell></ac:layout-section></ac:layout>
+````
+
+<!--NOMAGIC_PAGE id=136715945 space=CDH2024x version=2 -->
+## PAGE 00002: Add-on features
+
+- page_id: `136715945`
+- space_key: `CDH2024x`
+- source_url: https://docs.nomagic.com/spaces/CDH2024x/pages/136715945/Add-on+features
+- version_number: 2
+- version_date: `2026-02-11T07:38:59.325+01:00`
+- ancestors: Cameo DataHub Documentation > Getting started > Understanding DataHub user interface
+- labels: []
+
+### NORMALIZED CONTENT
+
+The current release of DataHub features enhanced capabilities and emphasizes more usability. The **Conflict Dashboard** keeps track of the changes of on both sides of the source and target nodes, which allows you to consider data synchronization. The text search function enables convenient searching for data or items in DataHub Explorer and Alias Manager. Available filtering inactive Data Sources makes it easier for you to focus on working active Data Sources, and the data copy progress bar shows the remaining percentage to complete the data copying operation.
+
+**Related pages**
+
+### EXACT CONFLUENCE STORAGE SOURCE
+
+````html
+<p>The current release of DataHub features enhanced capabilities and emphasizes more usability. The <strong>Conflict Dashboard</strong> keeps track of the changes of on both sides of the source and target nodes, which allows you to consider data synchronization. The text search function enables convenient searching for data or items in DataHub Explorer and Alias Manager. Available filtering inactive Data Sources makes it easier for you to focus on working active Data Sources, and the data copy progress bar shows the remaining percentage to complete the data copying operation.</p><p><strong>Related pages</strong></p><p><ac:structured-macro ac:name="children" ac:schema-version="2" ac:macro-id="20ab95eb-2f4b-4881-a8e8-1fdfaf81fe58" /></p>
+````
+
+<!--NOMAGIC_PAGE id=136716187 space=CDH2024x version=1 -->
+## PAGE 00003: Adding a new node to a Data Source
+
+- page_id: `136716187`
+- space_key: `CDH2024x`
+- source_url: https://docs.nomagic.com/spaces/CDH2024x/pages/136716187/Adding+a+new+node+to+a+Data+Source
+- version_number: 1
+- version_date: `2023-09-21T06:04:29.059+02:00`
+- ancestors: Cameo DataHub Documentation > User Guide > Working with DataHub and modeling tools > Working with the DataHub Explorer tree
+- labels: []
+
+### NORMALIZED CONTENT
+
+You can use DataHub Explorer to add a new node to a particular application without switching to that application. In addition, the new node you have added in DataHub Explorer also appears in the application itself. You can add a new node to any connected Data Sources by using the **New Node** command in the DataHub shortcut menu. Types of nodes vary, depending on the driver and the parent of the new node.
+
+To add a new node to a specific Data Source
+
+1. Right-click a node and select New Node . [ATTACHMENT filename='New_Node.png']
+2. The New Node dialog opens. Select a new node type from the tree view and click Next .
+
+[IMAGE alt='' src='']
+
+3. Specify the new node’s properties details and click **Finish**.
+
+[IMAGE alt='' src='']
+
+### EXACT CONFLUENCE STORAGE SOURCE
+
+````html
+<p>You can use DataHub Explorer to add a new node to a particular application without switching to that application. In addition, the new node you have added in DataHub Explorer also appears in the application itself. You can add a new node to any connected Data Sources by using the <strong>New Node</strong> command in the DataHub shortcut menu. Types of nodes vary, depending on the driver and the parent of the new node.</p><p><br /></p><p>To add a new node to a specific Data Source</p><hr /><ol><li>Right-click a node and select<strong> New Node</strong>.<br /><br /><ac:image><ri:attachment ri:filename="New_Node.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Adding a new node to a Data Source" /></ri:attachment></ac:image><br /><br /></li><li>The <strong>New Node</strong> dialog opens. Select a new node type from the tree view and click <strong>Next</strong>.<br /><br /></li></ol><p style="margin-left: 30.0px;"><ac:image ac:title="Available Node Types under Data Node" ac:alt="Available Node Types under Data Node"><ri:attachment ri:filename="new-node-a.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Adding a new node to a Data Source" /></ri:attachment></ac:image></p><p>     3.   Specify the new node’s properties details and click <strong>Finish</strong>.</p><p style="margin-left: 30.0px;"><ac:image ac:title="New Node wizard interface - step two - mapping node attributes" ac:alt="New Node wizard interface - step two - mapping node attributes"><ri:attachment ri:filename="new-node-b.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Adding a new node to a Data Source" /></ri:attachment></ac:image></p>
+````
+
+<!--NOMAGIC_PAGE id=136716701 space=CDH2024x version=2 -->
+## PAGE 00004: Adding another attribute into the report template
+
+- page_id: `136716701`
+- space_key: `CDH2024x`
+- source_url: https://docs.nomagic.com/spaces/CDH2024x/pages/136716701/Adding+another+attribute+into+the+report+template
+- version_number: 2
+- version_date: `2024-03-13T08:30:51.879+01:00`
+- ancestors: Cameo DataHub Documentation > User Guide > Working with DataHub and modeling tools > Working with the DHLink summary and generating reports
+- labels: []
+
+### NORMALIZED CONTENT
+
+DataHub uses report template code from its report template to create the layout and detail of a **DHLink Summary** report. You can find the report template file in *<*install_root*>**/**plugins/com.nomagic.datahub.magicdraw/data/templates/relation.html*. You can edit the report template file with any text editors to add more information to the report template. In this scenario, you want to add another attribute to the report template.
+
+[IMAGE alt='' src='']
+
+###### The report template code inside the report template file and the construction of the report layout and data script.
+
+To add another attribute to the report template and generate a DHLink Summary report
+
+1. Open the template file located in <*install_root*> / plugins/com.nomagic.datahub.magicdraw/data/templates/relation.html with any text editors.
+2. Type the following code in the highlighted area of the report template code fragment to add more attributes to the report template file. For example, if you want to add the **Created Thru** attributes into the report template file to include them in the DHLink Summary report, you must replace *<Attribute name>* with **Created Thru**. textThe code for adding another attribute in the report template file$DataHubReportEngine.decorateHTMLTag($row.sourceElement.entity.getAttributeValue(""))]]> [IMAGE alt='' src=''] NoteThe name of the attribute you want to add in the report template file must be the same as the one that appears in the **Cameo DataHub Properties** tab.[IMAGE alt='' src='']The attribute name, e.g., Created Thru, in the DataHub Properties tab must match the <Attribute name> in the report template code.
+3. Save the template file.
+4. Open the [DHLink Summary](https://docs.nomagic.com/display/CDH2024x/DHLink+summary) dialog in MagicDraw to [CONFLUENCE_PAGE title='Working with DHLink Summary reports' space='']
+
+[IMAGE alt='' src='']
+
+###### A DHLink Summary report generated from the report template before adding another attribute.
+
+[IMAGE alt='' src='']
+
+###### A DHLink Summary report generated from the report template after adding another attribute.
+
+### EXACT CONFLUENCE STORAGE SOURCE
+
+````html
+<p>DataHub uses report template code from its report template to create the layout and detail of a <strong>DHLink Summary</strong> report. You can find the report template file in <em>&lt;<em style="text-align: left;">install_root</em>&gt;</em><em>/</em><em>plugins/com.nomagic.datahub.magicdraw/data/templates/relation.html</em>. You can edit the report template file with any text editors to add more information to the report template. In this scenario, you want to add another attribute to the report template.</p><p><br /></p><p style="margin-left: 30.0px;"><ac:image ac:align="center" ac:title="The Inside of a Report Template" ac:alt="The Inside of a Report Template"><ri:attachment ri:filename="datahub-folder-relation-template.png" /></ac:image></p><h6 style="margin-left: 30.0px;text-align: center;">The report template code inside the report template file and the construction of the report layout and data script.</h6><p>To add another attribute to the report template and generate a DHLink Summary report</p><hr /><ol><li>Open the template file located in <em>&lt;<em style="text-align: left;">install_root</em>&gt;</em><em>/</em><em>plugins/com.nomagic.datahub.magicdraw/data/templates/relation.html</em> with any text editors.</li><li><p class="auto-cursor-target">Type the following code in the highlighted area of the report template code fragment to add more attributes to the report template file. For example, if you want to add the <strong>Created Thru</strong> attributes into the report template file to include them in the DHLink Summary report, you must replace <em>&lt;Attribute name&gt;</em> with <strong>Created Thru</strong>.<br /><br /></p><ac:structured-macro ac:name="code" ac:schema-version="1" ac:macro-id="0d0a735e-5a93-4102-8d64-7f424a1bf17b"><ac:parameter ac:name="language">text</ac:parameter><ac:parameter ac:name="title">The code for adding another attribute in the report template file</ac:parameter><ac:plain-text-body><![CDATA[<br/>$DataHubReportEngine.decorateHTMLTag($row.sourceElement.entity.getAttributeValue("<Attribute name>"))]]></ac:plain-text-body></ac:structured-macro><h6 style="text-align: center;"><ac:image ac:align="left"><ri:attachment ri:filename="Report Template File.png" /></ac:image><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /></h6><ac:structured-macro ac:name="note" ac:schema-version="1" ac:macro-id="8c810da1-595f-4a5c-b948-268d17398be8"><ac:parameter ac:name="title">Note</ac:parameter><ac:rich-text-body><p>The name of the attribute you want to add in the report template file must be the same as the one that appears in the <strong>Cameo DataHub Properties</strong> tab.</p><p><br /></p><p><ac:image ac:align="center"><ri:attachment ri:filename="Attribute Name in Property Tab.png" /></ac:image></p><h6 style="text-align: center;">The attribute name, e.g., Created Thru, in the DataHub Properties tab must match the &lt;Attribute name&gt; in the report template code.</h6></ac:rich-text-body></ac:structured-macro><p class="auto-cursor-target"><br /></p></li><li><p><span class="confluence-link">Save the template file.</span></p></li><li><p>Open the <a href="https://docs.nomagic.com/display/CDH2024x/DHLink+summary">DHLink Summary</a> dialog in MagicDraw to <ac:link><ri:page ri:content-title="Working with DHLink Summary reports" /><ac:plain-text-link-body><![CDATA[generate the DHLink Summary report.]]></ac:plain-text-link-body></ac:link></p></li></ol><p><br /></p><p><ac:image ac:align="center"><ri:attachment ri:filename="Summary Report (Before).png" /></ac:image></p><h6 style="text-align: center;">A DHLink Summary report generated from the report template before adding another attribute.</h6><p><ac:image ac:align="center"><ri:attachment ri:filename="Summary Report (After).png" /></ac:image></p><h6 style="text-align: center;">A DHLink Summary report generated from the report template after adding another attribute.</h6>
+````
+
+<!--NOMAGIC_PAGE id=136716501 space=CDH2024x version=1 -->
+## PAGE 00005: Adding Data Sources for an OSLC Provider
+
+- page_id: `136716501`
+- space_key: `CDH2024x`
+- source_url: https://docs.nomagic.com/spaces/CDH2024x/pages/136716501/Adding+Data+Sources+for+an+OSLC+Provider
+- version_number: 1
+- version_date: `2023-09-21T06:04:46.672+02:00`
+- ancestors: Cameo DataHub Documentation > User Guide > Working with DataHub and modeling tools > Working with OSLC features
+- labels: []
+
+### NORMALIZED CONTENT
+
+To add a Data Source for an OSLC Provider
+
+1. Click [IMAGE alt='' src=''] on the DataHub Explorer toolbar. The Add Data Source dialog opens.
+2. From the Driver drop-down list, select OSLC Provider . [ATTACHMENT filename='add_provider.png']
+3. Enter the Root Services URI , Consumer key , and Consumer secret (provided by your administrator).
+4. Click Create .
+
+The new OSLC Provider is added to the **DataHub Explorer** tree.
+
+### EXACT CONFLUENCE STORAGE SOURCE
+
+````html
+<p>To add a Data Source for an OSLC Provider</p><hr /><ol><li>Click <span class="confluence-embedded-file-wrapper"><ac:image><ri:attachment ri:filename="dh-add-ds-btn.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Adding Data Sources for an OSLC Provider" /></ri:attachment></ac:image> </span>on the <strong>DataHub Explorer</strong> toolbar. The <strong>Add Data Source</strong> dialog opens.</li><li>From the <strong>Driver</strong> drop-down list, select <strong>OSLC Provider</strong>.<br /><br /><ac:image><ri:attachment ri:filename="add_provider.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Adding Data Sources for an OSLC Provider" /></ri:attachment></ac:image><br /><br /></li><li>Enter the <strong>Root Services URI</strong>, <strong>Consumer key</strong>, and <strong>Consumer secret</strong> (provided by your administrator).</li><li>Click <strong>Create</strong>.</li></ol><p> The new OSLC Provider is added to the <strong>DataHub Explorer</strong> tree.</p><p><br /></p>
+````
+
+<!--NOMAGIC_PAGE id=136716360 space=CDH2024x version=1 -->
+## PAGE 00006: Adding Data Sources for CSV
+
+- page_id: `136716360`
+- space_key: `CDH2024x`
+- source_url: https://docs.nomagic.com/spaces/CDH2024x/pages/136716360/Adding+Data+Sources+for+CSV
+- version_number: 1
+- version_date: `2023-09-21T06:04:36.995+02:00`
+- ancestors: Cameo DataHub Documentation > User Guide > Working with DataHub and modeling tools > Working with Data Sources
+- labels: []
+
+### NORMALIZED CONTENT
+
+To add a new CSV Data Source
+
+1. On the DataHub Explorer toolbar, click the Add Data Source [ATTACHMENT filename='dh-add-ds-btn.png'] button .
+
+[IMAGE alt='' src=''] 
+ 
+The **Add Data Source**dialog opens.
+
+[IMAGE alt='' src='']
+
+2. From the **Driver** drop-down list, select **CSV**.
+
+3. Enter the **CSV** information in the following boxes explained in the table below
+
+| Field | Function |
+| --- | --- |
+| File | The CSV file to be added. |
+| Key | The name of the column header used as the ID of the node.NoteThe Key field is mandatory if you have selected the Copy Data with Sync operation from the Operation drop-down list in DataHub Explorer. |
+| Label | The name of the column header created as the name of the node.NoteIf you leave the Label field blank, a running number will be assigned for the name. |
+| Separator | Select a delimiter for the CSV file. The available delimiters are comma, semi-colon, space, and slash. |
+| Save option | If you select the check box, DataHub makes changes to the CSV file when the CSV item is saved. |
+
+4. Click **Create**.
+
+#### NOTE: Note
+
+Note
+
+- A CSV file must contain the names of attributes in the first row and data in the other rows.
+- Once the CSV Data Source has been created, make sure the following conditions
+  - The order of the data in the tree view in DataHub Explorer is the same as that of data in the CSV file.
+  - If you edit the data in the tree view in DataHub Explorer, you must click Save [IMAGE alt='' src=''] to save the new data to the CSV file.
+  - If the data in the CSV file has been updated, you must click Reload [IMAGE alt='' src=''] to update the tree view in DataHub Explorer.
+  - If a column name has been edited, or a new column has been added into the CSV file, the CSV Data Source will be corrupted. You have to remove and add the CSV Data Source again.
+
+#### INFO: Information
+
+Information
+
+- Nodes under a particular driver in DataHub Explorer represent nodes in the application that the driver represents.
+- If a driver is correctly started, the name of the driver appears in the tree view in DataHub Explorer. The driver connects to the data in each respective application.
+
+### EXACT CONFLUENCE STORAGE SOURCE
+
+````html
+<p>To add a new CSV Data Source</p><hr /><ol><li>On the <strong>DataHub Explorer</strong> toolbar, click the <strong>Add Data Source</strong> <ac:image><ri:attachment ri:filename="dh-add-ds-btn.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Adding Data Sources for CSV" /></ri:attachment></ac:image>button .</li></ol><p style="margin-left: 30.0px;"><ac:image ac:title="The Add Data Source button on the DataHub explorer toolbar" ac:alt="The Add Data Source button on the DataHub explorer toolbar"><ri:attachment ri:filename="dh-explorer-toolbar-add-ds.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Adding Data Sources for CSV" /></ri:attachment></ac:image><br /><br />The <strong>Add Data Source </strong>dialog opens.<br /><br /></p><p style="margin-left: 30.0px;"><ac:image ac:title="Adding a CSV Data Source to DataHub explorer" ac:alt="Adding a CSV Data Source to DataHub explorer"><ri:attachment ri:filename="add-ds-csv-a.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Adding Data Sources for CSV" /></ri:attachment></ac:image></p><p>      2.  From the <strong>Driver</strong> drop-down list, select <strong>CSV</strong>.</p><p>      3.  Enter the <strong>CSV</strong> information in the following boxes explained in the table below</p><table><colgroup><col /><col /></colgroup><tbody><tr><th style="margin-left: 30.0px;">Field</th><th>Function</th></tr><tr><td colspan="1">File</td><td colspan="1">The CSV file to be added.</td></tr><tr><td>Key</td><td><div class="content-wrapper"><p>The name of the column header used as the ID of the node.</p><ac:structured-macro ac:name="note" ac:schema-version="1" ac:macro-id="cee5f392-7206-4894-abdb-9ec6669d76cc"><ac:parameter ac:name="title">Note</ac:parameter><ac:rich-text-body><p>The <strong>Key</strong> field is mandatory if you have selected the <strong>Copy Data with Sync</strong> operation from the<strong> Operation</strong> drop-down list in DataHub Explorer.</p></ac:rich-text-body></ac:structured-macro><p class="auto-cursor-target"><br /></p></div></td></tr><tr><td>Label</td><td><div class="content-wrapper"><p class="auto-cursor-target">The name of the column header created as the name of the node.</p><ac:structured-macro ac:name="note" ac:schema-version="1" ac:macro-id="654c9b53-7144-4cad-be2d-6fb9e8eb67bb"><ac:parameter ac:name="title">Note</ac:parameter><ac:rich-text-body><p>If you leave the <strong>Label</strong> field blank, a running number will be assigned for the name.</p></ac:rich-text-body></ac:structured-macro><p class="auto-cursor-target"><br /></p></div></td></tr><tr><td>Separator</td><td>Select a delimiter for the CSV file. The available delimiters are comma, semi-colon, space, and slash.</td></tr><tr><td>Save option</td><td><div class="content-wrapper"><p>If you select the <ac:image><ri:attachment ri:filename="dh-save-auto.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Adding Data Sources for CSV" /></ri:attachment></ac:image> check box, DataHub makes changes to the CSV file when the CSV item is saved.</p></div></td></tr></tbody></table><p style="margin-left: 30.0px;">4. Click <strong>Create</strong>.</p><ac:structured-macro ac:name="note" ac:schema-version="1" ac:macro-id="08fcfd8c-d8f4-4be6-b196-96780a0cfe01"><ac:parameter ac:name="title">Note</ac:parameter><ac:rich-text-body><ul><li>A CSV file must contain the names of attributes in the first row and data in the other rows.</li><li>Once the CSV Data Source has been created, make sure the following conditions<br /><ul><li>The order of the data in the tree view in DataHub Explorer is the same as that of data in the CSV file.</li><li>If you edit the data in the tree view in DataHub Explorer, you must click <strong>Save <ac:image><ri:attachment ri:filename="save-btn.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Adding Data Sources for CSV" /></ri:attachment></ac:image></strong> to save the new data to the CSV file.</li><li>If the data in the CSV file has been updated, you must click <strong>Reload</strong> <strong><ac:image><ri:attachment ri:filename="reload.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Adding Data Sources for CSV" /></ri:attachment></ac:image> </strong>to update the tree view in DataHub Explorer.</li><li>If a column name has been edited, or a new column has been added into the CSV file, the CSV Data Source will be corrupted. You have to remove and add the CSV Data Source again.</li></ul></li></ul></ac:rich-text-body></ac:structured-macro><p class="auto-cursor-target"><br /></p><ac:structured-macro ac:name="info" ac:schema-version="1" ac:macro-id="5955fe1e-3b4f-4616-b5bd-9525a7a01765"><ac:parameter ac:name="title">Information</ac:parameter><ac:rich-text-body><ul><li>Nodes under a particular driver in DataHub Explorer represent nodes in the application that the driver represents.</li><li>If a driver is correctly started, the name of the driver appears in the tree view in DataHub Explorer. The driver connects to the data in each respective application.</li></ul></ac:rich-text-body></ac:structured-macro><p class="auto-cursor-target"><br /></p>
+````
+
+<!--NOMAGIC_PAGE id=136716480 space=CDH2024x version=4 -->
+## PAGE 00007: Adding Data Sources for ENOVIA Requirements
+
+- page_id: `136716480`
+- space_key: `CDH2024x`
+- source_url: https://docs.nomagic.com/spaces/CDH2024x/pages/136716480/Adding+Data+Sources+for+ENOVIA+Requirements
+- version_number: 4
+- version_date: `2026-02-11T08:02:04.227+01:00`
+- ancestors: Cameo DataHub Documentation > User Guide > Working with DataHub and modeling tools > Working with Data Sources
+- labels: []
+
+### NORMALIZED CONTENT
+
+The ENOVIA Requirements connector, based on the Cameo DataHub framework, provides the data copy and synchronization functionality between your model and the requirement management application on the 3DEXPERIENCE platform. SAML is also supported for passing authorization credentials to the platform. Furthermore, Cameo DataHub enhances the ENOVIA requirements connection by applying a login with an embedded browser in place of a simple login form. As this is the new authentication technique, this login method allows you to connect to both requirement data sources deployed on Premises and Cloud.
+
+To add an ENOVIA RequirementsData Source
+
+1. [CONFLUENCE_PAGE title='Authentication with 3DEXPERIENCE platform' space='MD2024x']
+2. In the main menu, select 3DEXPERIENCE > ENOVIA Requirements. 
+ 
+[IMAGE alt='' src='']
+3. In the specification selection dialog, from the list of all specifications available select one specification and click Connect . [ATTACHMENT filename='Specification Selection dialog.png'] The one specification added is available in the new tab in the Cameo DataHub Explorer panel. 
+ 
+[IMAGE alt='' src='']
+
+To add more specifications one at a time
+
+- Select the Add single requirement specification option from the ENOVIA data source shortcut menu. 
+ 
+[IMAGE alt='' src='']
+
+The Specification Folder name is not displayed in the Cameo DataHub Explorer panel; only the name of the Requirement Specification name is displayed. The Specification Folder name is displayed in the specification selection dialog.[IMAGE alt='' src='']
+
+**Related page**
+
+- Mapping source and target types to copy data to and from a modelling tool
+- [CONFLUENCE_PAGE title='Authentication with 3DEXPERIENCE platform' space='MD2024x']
+
+### EXACT CONFLUENCE STORAGE SOURCE
+
+````html
+<p>The ENOVIA Requirements connector, based on the Cameo DataHub framework, provides the data copy and synchronization functionality between your model and the requirement management application on the 3DEXPERIENCE platform. SAML is also supported for passing authorization credentials to the platform. Furthermore, Cameo DataHub enhances the ENOVIA requirements connection by applying a login with an embedded browser in place of a simple login form. As this is the new authentication technique, this login method allows you to connect to both requirement data sources deployed on Premises and Cloud.</p><p><br /></p><p>To add an ENOVIA <span>Requirements </span>Data Source</p><hr /><ol><li data-uuid="b4000b71-556b-4d0c-8a36-6a69d22f455f"><ac:link><ri:page ri:space-key="MD2024x" ri:content-title="Authentication with 3DEXPERIENCE platform" /><ac:plain-text-link-body><![CDATA[Log in to the 3DEXPERIENCE platform.]]></ac:plain-text-link-body></ac:link></li><li data-uuid="dd0cf290-9e87-48fe-82cb-6c02a59bf179"><p class="auto-cursor-target">In the main menu, select 3DEXPERIENCE &gt; ENOVIA Requirements.<br /><br /><ac:image><ri:attachment ri:filename="ENOVIA Requirements option.png" /></ac:image><br /><br /></p></li><li data-uuid="11e344c6-91d7-4a8e-b416-d3a46e19490d">In the specification selection dialog, from the list of all specifications available select one specification and click <strong>Connect</strong>.<br /><br /><ac:image><ri:attachment ri:filename="Specification Selection dialog.png" /></ac:image><br /><br /><span style="color:var(--ds-text,#333333);">The one specification added is available in the new tab in the Cameo DataHub Explorer panel.<br /><br /><ac:image><ri:attachment ri:filename="Specification Added.png" /></ac:image><br /></span></li></ol><p><span style="color:var(--ds-text,#333333);">To add more specifications one at a time</span></p><hr /><ul><li data-uuid="bad71a19-e913-4f0f-adf5-8df5412b0c49"><span style="color:var(--ds-text,#333333);">Select the<span> </span></span><strong style="text-align: left;">Add single requirement specification</strong><span style="color:var(--ds-text,#333333);"><span> </span>option<span> </span></span><span style="color:var(--ds-text,#333333);">from the ENOVIA data source shortcut menu.<br /><br /><ac:image><ri:attachment ri:filename="ENOVIArequirements_AddMoreSpecs.jpg" /></ac:image><br /></span></li></ul><p><br /></p><ac:structured-macro ac:name="note" ac:schema-version="1" ac:macro-id="d1fa161a-57e1-4836-8f3a-598f14e15e5a"><ac:rich-text-body><p><span style="color:var(--ds-text,#333333);">The Specification Folder name is not displayed in the Cameo DataHub Explorer panel; only the name of the Requirement Specification name is displayed. The Specification Folder name is displayed in the specification selection dialog.<br /><br /></span><span style="color:var(--ds-text,#333333);"><ac:image><ri:attachment ri:filename="Specification Folder name.png" /></ac:image><br /></span></p></ac:rich-text-body></ac:structured-macro><p><strong>Related page</strong></p><ul><li data-uuid="d205d30a-be51-48a4-97e9-06a996c776e8"><a href="https://docs.nomagic.com/display/CDH2024x/Mapping+source+and+target+types+to+copy+data+to+and+from+a+modelling+tool">Mapping source and target types to copy data to and from a modelling tool</a></li><li data-uuid="1fc972bc-224c-4c21-a8eb-da8c05de67b2"><ac:link><ri:page ri:space-key="MD2024x" ri:content-title="Authentication with 3DEXPERIENCE platform" /></ac:link></li></ul>
+````
+
+<!--NOMAGIC_PAGE id=136716370 space=CDH2024x version=3 -->
+## PAGE 00008: Adding Data Sources for IBM Rational DOORS
+
+- page_id: `136716370`
+- space_key: `CDH2024x`
+- source_url: https://docs.nomagic.com/spaces/CDH2024x/pages/136716370/Adding+Data+Sources+for+IBM+Rational+DOORS
+- version_number: 3
+- version_date: `2024-05-14T12:41:21.180+02:00`
+- ancestors: Cameo DataHub Documentation > User Guide > Working with DataHub and modeling tools > Working with Data Sources
+- labels: []
+
+### NORMALIZED CONTENT
+
+#### NOTE: Prerequisite
+
+Prerequisite
+
+To add the IBM® Rational® DOORS®data source, the properties file must be updated for JAVA version 17 and above.
+
+To update the properties file
+
+1. Close the modeling tool.
+2. Go to <*install_root*>/bin folder.
+3. Open <modeling_tool_name> . properties file using any text editor.
+4. At the end of the “JAVA_ARGS=” line, add any one of these three arguments:
+  - -Ddatahub.com_library\=VBS
+  - -Ddatahub.com_library\=VBS-DXL
+  - -Ddatahub.com_library\=COM4J
+5. Save and close the file.
+6. Relaunch the modeling tool after saving the file.
+
+To add an IBM® Rational® DOORS® Data Source
+
+1. On the DataHub Explorer toolbar, click the Add Data Source button. [ATTACHMENT filename='Add data source.png']
+2. From the Driver drop-down list, choose IBM ® Rational® DOORS® . 
+ 
+[IMAGE alt='' src='']
+3. Click **Create 
+ 
+[IMAGE alt='' src='']**
+
+#### WARNING: Warning
+
+Warning
+
+Before adding an IBM® Rational® DOORS® Data Source, you must start the DOORS client on your machine; otherwise, MagicDraw® generates an error dialog box.
+
+### EXACT CONFLUENCE STORAGE SOURCE
+
+````html
+<p class="auto-cursor-target"><br /></p><ac:structured-macro ac:name="note" ac:schema-version="1" ac:macro-id="502fe4d1-2367-487b-bfbd-123aa3244f65"><ac:parameter ac:name="title">Prerequisite</ac:parameter><ac:rich-text-body><p>To add the <span style="color: rgb(51,51,51);">IBM<sup>®</sup> Rational<sup>®</sup> DOORS<sup>® </sup></span>data source, the properties file must be updated for JAVA version 17 and above.</p><p>To update the properties file</p><hr /><ol><li>Close the modeling tool.</li><li>Go to <em>&lt;<em style="text-align: left;">install_root</em>&gt;/bin</em> folder.</li><li>Open <em>&lt;modeling_tool_name&gt;</em>. properties file using any text editor.</li><li>At the end of the “JAVA_ARGS=” line, add any one of these three arguments:<ul><li>-Ddatahub.com_library\=VBS</li><li>-Ddatahub.com_library\=VBS-DXL</li><li>-Ddatahub.com_library\=COM4J</li></ul></li><li>Save and close the file.</li><li>Relaunch the modeling tool after saving the file.</li></ol></ac:rich-text-body></ac:structured-macro><p><br /></p><p><span style="color: rgb(51,51,51);">To add an IBM<sup>®</sup> Rational<sup>®</sup> DOORS<sup>®</sup> Data Source</span></p><hr /><ol><li>On the <strong>DataHub Explorer</strong> toolbar, click the <strong>Add Data Source</strong> button.<br /><br /><ac:image><ri:attachment ri:filename="Add data source.png" /></ac:image></li><li> From the <strong style="letter-spacing: 0.0px;">Driver</strong><span style="letter-spacing: 0.0px;"> drop-down list, choose </span><strong style="letter-spacing: 0.0px;">IBM</strong><sup style="letter-spacing: 0.0px;">®</sup><span style="letter-spacing: 0.0px;"> </span><strong style="letter-spacing: 0.0px;">Rational<sup>®</sup> DOORS<sup>®</sup></strong><span style="letter-spacing: 0.0px;">.<br /><br /><ac:image><ri:attachment ri:filename="Select IBM DOORS.png" /></ac:image><br /><br /></span></li><li><span style="letter-spacing: 0.0px;">Click <strong style="letter-spacing: 0.0px;">Create<br /><br /><ac:image><ri:attachment ri:filename="Click Create.PNG" /></ac:image><br /><br /></strong></span></li></ol><ac:structured-macro ac:name="warning" ac:schema-version="1" ac:macro-id="508d1b7d-494d-427a-82ac-617e046a895d"><ac:parameter ac:name="title">Warning</ac:parameter><ac:rich-text-body><p><span>Before adding an IBM<sup>®</sup> Rational<sup>®</sup> DOORS<sup>®</sup> Data Source, you must start the DOORS client on your machine; otherwise, MagicDraw<sup>®</sup> generates an error dialog box.</span></p></ac:rich-text-body></ac:structured-macro><p class="auto-cursor-target"><br /></p>
+````
+
+<!--NOMAGIC_PAGE id=136716419 space=CDH2024x version=1 -->
+## PAGE 00009: Adding Data Sources for IBM Rational DOORS Next Generation
+
+- page_id: `136716419`
+- space_key: `CDH2024x`
+- source_url: https://docs.nomagic.com/spaces/CDH2024x/pages/136716419/Adding+Data+Sources+for+IBM+Rational+DOORS+Next+Generation
+- version_number: 1
+- version_date: `2023-09-21T06:04:40.506+02:00`
+- ancestors: Cameo DataHub Documentation > User Guide > Working with DataHub and modeling tools > Working with Data Sources
+- labels: []
+
+### NORMALIZED CONTENT
+
+There are two types of authentication when adding Data Sources for IBM Rational DOORS Next Generation as follows
+
+- Login authentication through the embedded browser To support the secured environment with different authentications including single sign-on, the embedded browser can be used to allow you to log on directly to the DNG login page so that DataHub is able to make connections to a variety of secured servers.
+- OAuth consumer key authentication
+
+Before selecting one of the two authentication types, you must open the **Add Data Source** dialog first and select the **IBM Rational DOORS Next Generation** driver.
+
+To open the **Add Data Source** dialog and select **IBM Rational DOORS Next Generation** as the driver
+
+1. On the DataHub Explorer toolbar, click the Add Data Source [ATTACHMENT filename='dh-add-ds-btn.png'] button. The Add Data Source dialog opens. [ATTACHMENT filename='1570 Add Data Source Button.png']
+2. From the Driver drop-down list, select IBM Rational DOORS Next Generation . [ATTACHMENT filename='Add Data Source Dialog - DOORS NG.png']
+
+To add an IBM Rational DOORS Next Generation Data Source using the **Login** authentication type through the embedded browser
+
+1. From the Authentication type options, select Login .
+2. Specify **Service Provider URL** and **Authentication URL**. NoteIf server addresses are copied and pasted into the **Service Provider URL** and **Authentication URL** boxes, the addresses are automatically formatted as the format examples shown below the boxes. The Server information to be specified is explained in the table below **Server information****Function****Format**Service Provider URLSpecifies a web application address to access DOORS.*https://<server>:<port>/rm/rootservices*Authentication URL (optional)Specifies an authentication address to log on DOORS.An authentication URL is required for distributed authentication service.*https://<server>:<port>/jts/j_security_check*
+3. Click Login with browser . The embedded browser opens the DNG Login page. [ATTACHMENT filename='Embedded Browser - DOORS NG.png']
+4. After logging on successfully, close the embedded browser. The newly created DOORS Next Generation Data Source appears in the DataHub Explorer tab.
+
+To add an IBM Rational DOORS Next Generation Data Source using the **OAuth consumer key** authentication type
+
+1. From the Authentication type options, select OAuth consumer key . [ATTACHMENT filename='Add DOORS NG Data Source (OAuth).png']
+2. Specify **Root Services URI**, **Consumer key**, and **Consumer secret**. 
+ 
+The **Server** and **OAuth** information to be specified is explained in the table below **Server and OAuth information****Function**Root Services URISpecifies a Root Services URI.Consumer keySpecifies a key provided by the administrator.Consumer secretSpecifies a secret provided by the administrator. a
+3. Click **Create**. InformationOAuth consumer key authentication when adding Data Sources for IBM Rational DOORS Next Generation is similar to the process of [CONFLUENCE_PAGE title='Adding Data Sources for an OSLC Provider' space='CDH2024x'].
+
+### EXACT CONFLUENCE STORAGE SOURCE
+
+````html
+<p>There are two types of authentication when adding Data Sources for IBM Rational DOORS Next Generation as follows</p><ul><li>Login authentication through the embedded browser<br />To support the secured environment with different authentications including single sign-on, the embedded browser can be used to allow you to log on directly to the DNG login page so that DataHub is able to make connections to a variety of secured servers.<br /><br /></li><li>OAuth consumer key authentication</li></ul><p>Before selecting one of the two authentication types, you must open the <strong>Add Data Source</strong> dialog first and select the <strong>IBM Rational DOORS Next Generation</strong> driver.</p><p><br /></p><p>To open the <strong>Add Data Source</strong> dialog and select <strong>IBM Rational DOORS Next Generation</strong> as the driver</p><hr /><ol><li>On the <strong>DataHub Explorer</strong> toolbar, click the <strong>Add Data Source</strong> <ac:image><ri:attachment ri:filename="dh-add-ds-btn.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Adding Data Sources for IBM Rational DOORS Next Generation" /></ri:attachment></ac:image>button. The <strong>Add Data Source</strong> dialog opens.<br /><br /><ac:image><ri:attachment ri:filename="1570 Add Data Source Button.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Adding Data Sources for IBM Rational DOORS Next Generation" /></ri:attachment></ac:image><br /><br /></li><li>From the <strong>Driver</strong> drop-down list, select <strong>IBM Rational DOORS Next Generation</strong>.<br /><br /><ac:image><ri:attachment ri:filename="Add Data Source Dialog - DOORS NG.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Adding Data Sources for IBM Rational DOORS Next Generation" /></ri:attachment></ac:image></li></ol><p style="margin-left: 30.0px;text-align: left;"><br /></p><p>To add an IBM Rational DOORS Next Generation Data Source using the <strong>Login</strong> authentication type through the embedded browser</p><hr /><ol><li>From the <strong>Authentication type</strong> options, select <strong>Login</strong>.</li><li><p class="auto-cursor-target">Specify <strong>Service Provider URL</strong> and <strong>Authentication URL</strong>.</p><ac:structured-macro ac:name="note" ac:schema-version="1" ac:macro-id="5358c9ee-d13d-43d2-b8dd-0a5b362e13b2"><ac:parameter ac:name="title">Note</ac:parameter><ac:rich-text-body><p>If server addresses are copied and pasted into the <strong>Service Provider URL</strong> and <strong>Authentication URL</strong> boxes, the addresses are automatically formatted as the format examples shown below the boxes.</p></ac:rich-text-body></ac:structured-macro><p class="auto-cursor-target"><br />The Server information to be specified is explained in the table below</p><table class="relative-table"><colgroup> <col /> <col /> <col /> </colgroup><tbody><tr><td><p><strong>Server information</strong></p></td><td><p><strong>Function</strong></p></td><td><p><strong>Format</strong></p></td></tr><tr><td><p>Service Provider URL</p></td><td><p>Specifies a web application address to access DOORS.</p></td><td><p><em>https://&lt;server&gt;:&lt;port&gt;/rm/rootservices</em></p></td></tr><tr><td><p>Authentication URL (optional)</p></td><td><p>Specifies an authentication address to log on DOORS.</p><p>An authentication URL is required for distributed authentication service.</p></td><td><p><em>https://&lt;server&gt;:&lt;port&gt;/jts/j_security_check</em></p></td></tr></tbody></table><p class="auto-cursor-target"><br /><br /></p></li><li>Click <strong>Login with browser</strong>. The embedded browser opens the DNG Login page.<br /><br /><ac:image ac:width="600"><ri:attachment ri:filename="Embedded Browser - DOORS NG.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Adding Data Sources for IBM Rational DOORS Next Generation" /></ri:attachment></ac:image><br /><br /></li><li>After logging on successfully, close the embedded browser. The newly created DOORS Next Generation Data Source appears in the <strong>DataHub Explorer</strong> tab.</li></ol><p class="auto-cursor-target" style="margin-left: 30.0px;"><br /></p><p style="margin-left: 30.0px;"><br /></p><p>To add an IBM Rational DOORS Next Generation Data Source using the <strong>OAuth consumer key</strong> authentication type</p><hr /><ol><li>From the <strong>Authentication type</strong> options, select <strong>OAuth consumer key</strong>.<br /><br /><ac:image><ri:attachment ri:filename="Add DOORS NG Data Source (OAuth).png"><ri:page ri:space-key="CDH2024x" ri:content-title="Adding Data Sources for IBM Rational DOORS Next Generation" /></ri:attachment></ac:image><br /><br /></li><li><p class="auto-cursor-target">Specify <strong>Root Services URI</strong>, <strong>Consumer key</strong>, and <strong>Consumer secret</strong>.<br /><br />The <strong>Server</strong> and <strong>OAuth</strong> information to be specified is explained in the table below</p><table class="relative-table" style="width: 69.4762%;"><colgroup> <col style="width: 36.7111%;" /> <col style="width: 63.3391%;" /> </colgroup><tbody><tr><td><p><strong>Server and OAuth information</strong></p></td><td><p><strong>Function</strong></p></td></tr><tr><td><p>Root Services URI</p></td><td><p>Specifies a Root Services URI.</p></td></tr><tr><td><p>Consumer key</p></td><td>Specifies a key provided by the administrator.</td></tr><tr><td colspan="1">Consumer secret</td><td colspan="1">Specifies a secret provided by the administrator.</td></tr></tbody></table><p class="auto-cursor-target"><span style="color: white;">a</span></p></li><li><p class="auto-cursor-target">Click <strong>Create</strong>.</p><ac:structured-macro ac:name="info" ac:schema-version="1" ac:macro-id="2879099a-ae3a-4d5f-bb52-7a166e0051b6"><ac:parameter ac:name="title">Information</ac:parameter><ac:rich-text-body><p>OAuth consumer key authentication when adding Data Sources for IBM Rational DOORS Next Generation is similar to the process of <ac:link><ri:page ri:space-key="CDH2024x" ri:content-title="Adding Data Sources for an OSLC Provider" /><ac:plain-text-link-body><![CDATA[adding Data Sources for an OSLC Provider]]></ac:plain-text-link-body></ac:link>.</p></ac:rich-text-body></ac:structured-macro><p class="auto-cursor-target"><br /></p></li></ol>
+````
+
+<!--NOMAGIC_PAGE id=136716493 space=CDH2024x version=8 -->
+## PAGE 00010: Adding Data Sources for JAMA Connect - Technology preview
+
+- page_id: `136716493`
+- space_key: `CDH2024x`
+- source_url: https://docs.nomagic.com/spaces/CDH2024x/pages/136716493/Adding+Data+Sources+for+JAMA+Connect+-+Technology+preview
+- version_number: 8
+- version_date: `2023-11-23T07:20:31.510+01:00`
+- ancestors: Cameo DataHub Documentation > User Guide > Working with DataHub and modeling tools > Working with Data Sources
+- labels: []
+
+### NORMALIZED CONTENT
+
+#### CONTENT-LAYER: Prerequisite- For on premise server only
+
+1734256862
+
+#### CONTENT-COLUMN: Prerequisite- For on premise server only
+
+1734256883
+
+1734256861
+
+#### CONTENT-BLOCK: Prerequisite- For on premise server only
+
+1734256872
+
+#### NOTE: Prerequisite- For on premise server only
+
+Prerequisite- For on premise server only
+
+Before adding the Jama Connect data source, you need to add the Jama Connect server certificate. Make sure you have a valid certificate file before initiating the certificate addition process. To learn more about adding server certificates, refer to [CONFLUENCE_PAGE title='Server Certificates' space='MD2024x'].
+
+You must add the server certificate before adding the Jama Connect data source, otherwise it may cause your modeling tool to crash.
+
+##### Supported features
+
+1. You can authenticate with the aid ofyour User Name and password. Connection to both the Cloud and On-premise versions of Jama Connect is possible.
+2. When connected, you can see the list of all projects available in the Jama Connect web app.
+3. You can drill down the structure of a project selected from the list of all projects available to you. This feature is affected by and .
+4. The list of properties is available when you double-click the selected Jama Connect Project item
+5. Currently, you can only synchronize the selected part of your project from Jama Connect to the Cameo Model. This feature is affected by .
+6. The Scheme Map Manager is available to map, create, update, import, export, or set to be used by default data mappings between the Cameo Model and the Jama Connect project.
+7. When the synchronized part of the Jama Connect project is updated on the Jama Connect or Cameo model side, the “Check for change” command is available to visually represent the difference. “New”, “Moved”, “Delete” and other statuses are represented with different background colors for visual clarity. It is also possible to see which exact property is updated, as well as the new value.
+8. Once the change is confirmed for either all or selected items, the Cameo model is updated.
+
+##### Features expected in next releases
+
+1. More Jama Connect item properties will be available for mappings.
+2. Two-way synchronization from the Jama Connect to the modeling tool and vice versa will be supported.
+3. Images will be available to synchronize.
+4. Diagram synchronization from the modeling tool to the Jama Connect project will be available.
+5. Support for browser-based authentication will be available.
+6. Diagram synchronization process from the command line UI will be available.
+7. Data synchronization process from the command line will be available. The synchronization-related settings will be stored on the configuration file.
+
+##### Limitations of Jama Connect
+
+1. The link representation in the Cameo Datahub tree is incorrect.
+2. The sync icon is not shown for child elements.
+3. The project structure is not copied correctly to the modeling tool.
+
+##### Adding the Jama Connect data source
+
+To add the Jama Connect data source
+
+1. In theCameoDataHub Explorertoolbar, click the **Add Data Source. 
+ 
+[IMAGE alt='' src='']**
+2. In the Add Data Source dialog, select**Jama Connect**from the**Driver**drop-down list**.** 
+ 
+[IMAGE alt='' src='']
+3. Enter the server URL and login information and **click Create.** 
+ 
+[IMAGE alt='' src='']
+
+The data source is added in the Cameo DataHub Explorer panel. 
+ 
+[IMAGE alt='' src='']
+
+### EXACT CONFLUENCE STORAGE SOURCE
+
+````html
+<ac:structured-macro ac:name="content-layer" ac:schema-version="1" ac:macro-id="c5a2d9aa-3fb7-4d47-8c1b-9a8b331c691d"><ac:parameter ac:name="id">1734256862</ac:parameter><ac:rich-text-body><ac:structured-macro ac:name="content-column" ac:schema-version="1" ac:macro-id="fa971bab-7422-4947-b2cf-0dfa839d00d8"><ac:parameter ac:name="id">1734256883</ac:parameter><ac:rich-text-body><ac:structured-macro ac:name="content-block" ac:schema-version="1" ac:macro-id="1bb3796a-d597-4491-8543-41bfb283ccec"><ac:parameter ac:name="id">1734256861</ac:parameter><ac:rich-text-body><p><ac:structured-macro ac:name="toc" ac:schema-version="1" ac:macro-id="ee8f6226-5f21-47f2-9e6f-91d6f6e9c6d9" /></p></ac:rich-text-body></ac:structured-macro><ac:structured-macro ac:name="content-block" ac:schema-version="1" ac:macro-id="53108a96-0913-4053-b3f8-63d7c6dc4cf3"><ac:parameter ac:name="id">1734256872</ac:parameter><ac:rich-text-body><ac:structured-macro ac:name="note" ac:schema-version="1" ac:macro-id="eb0aab2f-39e6-47a7-9e0b-276ac0875691"><ac:parameter ac:name="title">Prerequisite- For on premise server only</ac:parameter><ac:rich-text-body><p>Before adding the Jama Connect data source, you need to add the Jama Connect server certificate. Make sure you have a valid certificate file before initiating the certificate addition process. To learn more about adding server certificates, refer to <ac:link><ri:page ri:space-key="MD2024x" ri:content-title="Server Certificates" /></ac:link>. </p><ac:structured-macro ac:name="warning" ac:schema-version="1" ac:macro-id="c0d507e7-7940-4489-8e8a-662cee843f4e"><ac:rich-text-body><p>You must add the server certificate before adding the Jama Connect data source, otherwise it may cause your modeling tool to crash.</p></ac:rich-text-body></ac:structured-macro></ac:rich-text-body></ac:structured-macro><h3>Supported features</h3><ol><li><span style="color: rgb(62,63,64);">You can authenticate with the aid of<span> your </span></span><span style="color: rgb(23,43,77);">User Name and password. </span>Connection to both the Cloud and On-premise versions of Jama Connect is possible.</li><li>When connected, you can see the list of all projects available in the Jama Connect web app.</li><li>You can drill down the structure of a project selected from the list of all projects available to you. This feature is affected by <ac:link ac:anchor="Limitations of Jama Connect"><ac:plain-text-link-body><![CDATA[limitation#1]]></ac:plain-text-link-body></ac:link> and<ac:link ac:anchor="Limitations of Jama Connect"><ac:plain-text-link-body><![CDATA[ limitation#2]]></ac:plain-text-link-body></ac:link>.</li><li>The list of properties is available when you double-click the selected Jama Connect Project item</li><li>Currently, you can only synchronize the selected part of your project from Jama Connect to the Cameo Model. This feature is affected by <ac:link ac:anchor="Limitations of Jama Connect"><ac:plain-text-link-body><![CDATA[limitation#3]]></ac:plain-text-link-body></ac:link>.</li><li>The Scheme Map Manager is available to map, create, update, import, export, or set to be used by default data mappings between the Cameo Model and the Jama Connect project.</li><li>When the synchronized part of the Jama Connect project is updated on the Jama Connect or Cameo model side, the “Check for change” command is available to visually represent the difference. “New”, “Moved”, “Delete” and other statuses are represented with different background colors for visual clarity. It is also possible to see which exact property is updated, as well as the new value.</li><li>Once the change is confirmed for either all or selected items, the Cameo model is updated.</li></ol><h3>Features expected in next releases</h3><ol><li>More Jama Connect item properties will be available for mappings.</li><li>Two-way synchronization from the Jama Connect to the modeling tool and vice versa will be supported.</li><li>Images will be available to synchronize.</li><li>Diagram synchronization from the modeling tool to the Jama Connect project will be available.</li><li>Support for browser-based authentication will be available.</li><li>Diagram synchronization process from the command line UI will be available.</li><li>Data synchronization process from the command line will be available. The synchronization-related settings will be stored on the configuration file.</li></ol><h3><span style="color: rgb(62,63,64);">Limitations of Jama Connect</span></h3><ol><li>The link representation in the Cameo Datahub tree is incorrect.</li><li>The sync icon is not shown for child elements.</li><li>The project structure is not copied correctly to the modeling tool.</li></ol><h3><span style="color: rgb(62,63,64);">Adding the Jama Connect data source</span></h3><p><span style="color: rgb(62,63,64);">To add the Jama Connect d</span><span style="color: rgb(62,63,64);">ata source</span></p><hr /><ol><li><span style="color: rgb(62,63,64);">In the<span> Cameo </span>DataHub Explorer<span> </span>toolbar, click the <strong style="text-align: left;">Add Data Source.<br /><br /><ac:image><ri:attachment ri:filename="Add data source.png" /></ac:image><br /></strong></span></li><li><span style="color: rgb(62,63,64);">In the Add Data Source dialog, select<span> <strong>Jama Connect </strong></span>from the<span> </span><strong>Driver </strong>drop-down list<span><strong>.</strong></span><br /><br /><ac:image><ri:attachment ri:filename="Select JAMA Connect.png" /></ac:image><br /><br /></span></li><li><span style="color: rgb(62,63,64);">Enter the server URL and login information and <strong>click Create.</strong><br /><br /><ac:image><ri:attachment ri:filename="Add credentials.png" /></ac:image><br /></span></li></ol><p><span style="color: rgb(62,63,64);">The data source is added in the Cameo DataHub Explorer panel.<br /><br /><ac:image><ri:attachment ri:filename="Data source added.png" /></ac:image><br /><br /></span></p></ac:rich-text-body></ac:structured-macro></ac:rich-text-body></ac:structured-macro></ac:rich-text-body></ac:structured-macro>
+````
+
+<!--NOMAGIC_PAGE id=136716479 space=CDH2024x version=1 -->
+## PAGE 00011: Adding Data Sources for OSLC Provider
+
+- page_id: `136716479`
+- space_key: `CDH2024x`
+- source_url: https://docs.nomagic.com/spaces/CDH2024x/pages/136716479/Adding+Data+Sources+for+OSLC+Provider
+- version_number: 1
+- version_date: `2023-09-21T06:04:44.691+02:00`
+- ancestors: Cameo DataHub Documentation > User Guide > Working with DataHub and modeling tools > Working with Data Sources
+- labels: []
+
+### NORMALIZED CONTENT
+
+See the [Adding Data Sources for an OSLC Provider](https://docs.nomagic.com/display/CDH2024x/Adding+Data+Sources+for+an+OSLC+Provider) in the [Working with OSLC features](https://docs.nomagic.com/display/CDH2024x/Working+with+OSLC+features) section.
+
+### EXACT CONFLUENCE STORAGE SOURCE
+
+````html
+<p>See the <a href="https://docs.nomagic.com/display/CDH2024x/Adding+Data+Sources+for+an+OSLC+Provider">Adding Data Sources for an OSLC Provider</a> in the <a href="https://docs.nomagic.com/display/CDH2024x/Working+with+OSLC+features">Working with OSLC features</a> section.</p>
+````
+
+<!--NOMAGIC_PAGE id=136716947 space=CDH2024x version=2 -->
+## PAGE 00012: Additional DataHub features
+
+- page_id: `136716947`
+- space_key: `CDH2024x`
+- source_url: https://docs.nomagic.com/spaces/CDH2024x/pages/136716947/Additional+DataHub+features
+- version_number: 2
+- version_date: `2026-02-11T08:06:00.789+01:00`
+- ancestors: Cameo DataHub Documentation > User Guide
+- labels: []
+
+### NORMALIZED CONTENT
+
+In this section, you will learn more about Alias Manager to deal with aliases in DataHub, DHLink panel for identification of changes in each data node, Schema Map Manager and its user interface components to edit or deactivate the mappings, and the database clean-up operation for unused reference removal in projects from modeling tools.
+
+**Related pages**
+
+### EXACT CONFLUENCE STORAGE SOURCE
+
+````html
+<p>In this section, you will learn more about Alias Manager to deal with aliases in DataHub, DHLink panel for identification of changes in each data node, Schema Map Manager and its user interface components to edit or deactivate the mappings, and the database clean-up operation for unused reference removal in projects from modeling tools.</p><p><strong>Related pages</strong></p><p><ac:structured-macro ac:name="children" ac:schema-version="2" ac:macro-id="3278b749-703c-4697-975d-46d6632673e6" /></p>
+````
+
+<!--NOMAGIC_PAGE id=136715912 space=CDH2024x version=1 -->
+## PAGE 00013: Alias Manager
+
+- page_id: `136715912`
+- space_key: `CDH2024x`
+- source_url: https://docs.nomagic.com/spaces/CDH2024x/pages/136715912/Alias+Manager
+- version_number: 1
+- version_date: `2023-09-21T06:04:19.889+02:00`
+- ancestors: Cameo DataHub Documentation > Getting started > Understanding DataHub user interface > DataHub alias
+- labels: []
+
+### NORMALIZED CONTENT
+
+DataHub **Alias Manager** contains a list of all available aliases. It stores these aliases for later use, and you can either access or remove them.
+
+To open Alias Manager
+
+- From the MagicDraw main menu, click Tools > DataHub > Alias Manager . The Alias Manager dialog opens.
+
+[IMAGE alt='' src='']
+
+### EXACT CONFLUENCE STORAGE SOURCE
+
+````html
+<p>DataHub <strong>Alias Manager</strong> contains a list of all available aliases. It stores these aliases for later use, and you can either access or remove them.</p><p><br /></p><p>To open Alias Manager</p><hr /><ul><li>From the MagicDraw main menu, click <strong>Tools</strong> &gt; <strong>DataHub</strong> &gt; <strong>Alias Manager</strong>. The <strong>Alias Manager</strong> dialog opens.</li></ul><p style="margin-left: 30.0px;"><ac:image ac:title="DataHub Alias Manager" ac:alt="DataHub Alias Manager"><ri:attachment ri:filename="alias-manager.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Alias Manager" /></ri:attachment></ac:image></p>
+````
+
+<!--NOMAGIC_PAGE id=136715980 space=CDH2024x version=2 -->
+## PAGE 00014: Basic features of DataHub
+
+- page_id: `136715980`
+- space_key: `CDH2024x`
+- source_url: https://docs.nomagic.com/spaces/CDH2024x/pages/136715980/Basic+features+of+DataHub
+- version_number: 2
+- version_date: `2026-02-11T07:48:31.219+01:00`
+- ancestors: Cameo DataHub Documentation > Getting started
+- labels: []
+
+### NORMALIZED CONTENT
+
+You will be guided through DataHub basic copying operations from the **Operation** drop-down list in Cameo DataHub Explorer including creating OSLC links and DHTraces. There is also more explanation about creating OSLC queries and copying their results, optionally as SysML requirements.
+
+**Related pages**
+
+### EXACT CONFLUENCE STORAGE SOURCE
+
+````html
+<p>You will be guided through DataHub basic copying operations from the <strong>Operation</strong> drop-down list in Cameo DataHub Explorer including creating OSLC links and DHTraces. There is also more explanation about creating OSLC queries and copying their results, optionally as SysML requirements.</p><p><strong>Related pages</strong></p><p><ac:structured-macro ac:name="children" ac:schema-version="2" ac:macro-id="6f2d6385-48e0-4de2-8a92-4805fe86c206" /></p>
+````
+
+<!--NOMAGIC_PAGE id=136716549 space=CDH2024x version=1 -->
+## PAGE 00015: Business Use Case flow with DNG
+
+- page_id: `136716549`
+- space_key: `CDH2024x`
+- source_url: https://docs.nomagic.com/spaces/CDH2024x/pages/136716549/Business+Use+Case+flow+with+DNG
+- version_number: 1
+- version_date: `2023-09-21T06:04:51.314+02:00`
+- ancestors: Cameo DataHub Documentation > User Guide > Working with DataHub and modeling tools > Working with OSLC features > OSLC tutorial
+- labels: []
+
+### NORMALIZED CONTENT
+
+This page outlines the steps to set up a Jazz platform. The abbreviations used in the description are detailed below:
+
+- TWC - Teamwork Cloud Server
+- DNG - Doors Next Generation
+
+First, in Doors Next Generation, you must establish:
+
+- Server-level friendship between TWC-DNG
+- Project-level relationship between TWC-DNG
+
+#### NOTE: OSLC root services URI pattern
+
+OSLC root services URI pattern
+
+OSLC root services document URI can be found using the following pattern - http(s)://TWC_IP:PORT/oslc/rootservices. For more information, see [OSLC API](https://docs.nomagic.com/display/TWCloud2024x/OSLC+API).
+
+You must also [publish the project as an OSLC resource in Cameo Collaborator for Teamwork Cloud](https://docs.nomagic.com/display/CC4TWC2024x/Publishing+an+OSLC+resource).
+
+After establishing server and project-level relationships, open your modeling tool ([MagicDraw](https://docs.nomagic.com/display/MD2024x), [Cameo Systems Modeler](https://docs.nomagic.com/display/CSM2024x), or [Cameo Enterprise Architecture](https://docs.nomagic.com/display/CEA2024x)), and perform the following steps:
+
+1. Add requirements (import or sync) from DNG through DataHub as described at [CONFLUENCE_PAGE title='Adding Data Sources for IBM Rational DOORS Next Generation' space='CDH2024x'].
+2. Copy requirements from DataHub to your model as described at [CONFLUENCE_PAGE title='Copy Data with Sync operation' space='CDH2024x']. The adding of requirements has been enhanced during OSLC consumer implementation in version 19.0. Users are able to see the DNG requirement’s OSLC Previews in the [OSLC Preview](https://docs.nomagic.com/display/CDH2024x/OSLC+Preview) tab of a modeling tool.
+3. After importing requirement(s) to your model under the Copy Data with Sync mode, create «Satisfy» relationships to/from those requirements to system model elements. Currently, only SysML’s «Satisfy» is fully covered under this Business Case.
+4. Synchronize changes back to the DNG side, as described at Synchronizing Requirements .
+5. After the synchronization, the changed requirement’s properties will be reflected on the DNG’s requirements artifact. Additionally, an OSLC backlink is created in DNG. Thus, if the «Satisfy» relationship between a Block <B> and Requirement <R> was established in your model, a backlink relationship «Satisfied by» is created in DNG, pointing to the Block’s <B> identifier, which in OSLC’s context is an http URL. Currently, only SysML’s «Satisfy» is fully covered under this Business Case.
+6. The figure below depictsan OSLC UI preview of the linked Block <B>.(this is not a CC preview!):
+
+[IMAGE alt='' src='']
+
+### EXACT CONFLUENCE STORAGE SOURCE
+
+````html
+<p>This page outlines the steps to set up a Jazz platform. The abbreviations used in the description are detailed below:</p><ul><li>TWC - <a href="https://docs.nomagic.com/display/TWCloud2024x/Teamwork+Cloud+Documentation">Teamwork Cloud Server</a></li><li>DNG - Doors Next Generation</li></ul><p>First, in Doors Next Generation, you must establish:</p><ul><li>Server-level friendship between TWC-DNG</li><li>Project-level relationship between TWC-DNG</li></ul><ac:structured-macro ac:name="note" ac:schema-version="1" ac:macro-id="8f24b03a-ec79-456a-874f-276f425b95ba"><ac:parameter ac:name="title">OSLC root services URI pattern</ac:parameter><ac:rich-text-body><p>OSLC root services document URI can be found using the following pattern - http(s)://TWC_IP:PORT/oslc/rootservices. For more information, see <a href="https://docs.nomagic.com/display/TWCloud2024x/OSLC+API">OSLC API</a>.</p></ac:rich-text-body></ac:structured-macro><p>You must also <a href="https://docs.nomagic.com/display/CC4TWC2024x/Publishing+an+OSLC+resource">publish the project as an OSLC resource in Cameo Collaborator for Teamwork Cloud</a>.</p><p>After establishing server and project-level relationships, open your modeling tool (<a href="https://docs.nomagic.com/display/MD2024x">MagicDraw</a>, <a href="https://docs.nomagic.com/display/CSM2024x">Cameo Systems Modeler</a>, or <a href="https://docs.nomagic.com/display/CEA2024x">Cameo Enterprise Architecture</a>), and perform the following steps:</p><ol><li><p>Add requirements (import or sync) from DNG through DataHub as described at <ac:link><ri:page ri:space-key="CDH2024x" ri:content-title="Adding Data Sources for IBM Rational DOORS Next Generation" /><ac:plain-text-link-body><![CDATA[Adding IBM Rational DOORS Next Generation Data Sources]]></ac:plain-text-link-body></ac:link>.</p></li><li><p>Copy requirements from DataHub to your model as described at <ac:link><ri:page ri:space-key="CDH2024x" ri:content-title="Copy Data with Sync operation" /><ac:plain-text-link-body><![CDATA[Copy Data with Sync operations]]></ac:plain-text-link-body></ac:link>.</p><ac:structured-macro ac:name="note" ac:schema-version="1" ac:macro-id="03ab095c-05ab-4bd8-aea3-253495f3254c"><ac:rich-text-body><p>The adding of requirements has been enhanced during OSLC consumer implementation in version 19.0. Users are able to see the DNG requirement’s OSLC Previews in the <a href="https://docs.nomagic.com/display/CDH2024x/OSLC+Preview">OSLC Preview</a> tab of a modeling tool.</p></ac:rich-text-body></ac:structured-macro><p class="auto-cursor-target"><br /></p></li><li><p class="auto-cursor-target">After importing requirement(s) to your model under the Copy Data with Sync mode, create «Satisfy» relationships to/from those requirements to system model elements.</p><ac:structured-macro ac:name="note" ac:schema-version="1" ac:macro-id="72a411f9-283c-407b-80d5-b125a89acc9a"><ac:rich-text-body><p>Currently, only SysML’s «Satisfy» is fully covered under this Business Case.</p></ac:rich-text-body></ac:structured-macro><p class="auto-cursor-target"><br /></p></li><li>Synchronize changes back to the DNG side, as described at <a href="https://docs.nomagic.com/display/CDH2024x/Synchronizing+Requirements">Synchronizing Requirements</a>.</li><li><p class="auto-cursor-target">After the synchronization, the changed requirement’s properties will be reflected on the DNG’s requirements artifact. Additionally, an OSLC backlink is created in DNG. Thus, if the «Satisfy» relationship between a Block &lt;B&gt; and Requirement &lt;R&gt; was established in your model, a backlink relationship «Satisfied by» is created in DNG, pointing to the Block’s &lt;B&gt; identifier, which in OSLC’s context is an http URL.</p><ac:structured-macro ac:name="note" ac:schema-version="1" ac:macro-id="d250845a-d293-441f-90f2-189d6b695132"><ac:rich-text-body><p>Currently, only SysML’s «Satisfy» is fully covered under this Business Case.</p></ac:rich-text-body></ac:structured-macro><p class="auto-cursor-target"><br /></p></li><li><p>The figure below depicts<span style="color: rgb(62,63,64);"> an OSLC UI preview of the linked Block &lt;B&gt;.</span>(this is not a CC preview!):</p></li></ol><p><ac:image><ri:attachment ri:filename="backlink.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Business Use Case flow with DNG" /></ri:attachment></ac:image></p>
+````
+
+<!--NOMAGIC_PAGE id=136715815 space=CDH2024x version=4 -->
+## PAGE 00016: Cameo DataHub Documentation
+
+- page_id: `136715815`
+- space_key: `CDH2024x`
+- source_url: https://docs.nomagic.com/spaces/CDH2024x/pages/136715815/Cameo+DataHub+Documentation
+- version_number: 4
+- version_date: `2024-02-09T06:35:10.974+01:00`
+- ancestors: 
+- labels: []
+
+### NORMALIZED CONTENT
+
+Cameo DataHub is a powerful data bridge solution that enables the import/export, automatic synchronization and creation of references between MagicDraw®, SysML Plugin, UPDM Plugin, Rational® DOORS® , Enovia™ TRM, and CSV files. Support for other tools/formats/repositories to be forthcoming.
+
+Cameo DataHub is an important part of your development process that enhances traceability between your requirements gathering/analysis to your design/development. Cameo DataHub enables both stakeholders and developers to communicate effectively via their own preferred tools. For example, a business user may use Enovia TRM or Rational® DOORS® to create requirements that may be linked and continually synchronized to models in MagicDraw®. Conversely, developers may link designs back to specific requirements, preventing ambiguity and identifying implementation oversights.
+
+[IMAGE alt='' src='']
+
+###### Cameo DataHub can help you solve data interoperability issues between different vendors.
+
+##### This easy to use tool allows customers to:
+
+- Unify and relate requirements to the system architecture and design
+- Handle the relationship/dependency and information when change occur
+- Transform data from requirements-to-model or model-to-requirements
+- Associate and synchronize data (both automatic and manual)
+- Monitor data when associated data changes
+
+##### Business Benefits Overview
+
+- Lowers the business risks to near zero for both current and future projects by ensuring your data will always be accessible
+- Easier understanding and editing of artifact dependencies via a visual schema mapper
+- Automatic monitoring of ongoing changes that may affect artifacts from either requirements or design
+- Associates and synchronizes tool data - may initiate synchronization either manually or automatically as configured on a per-tool basis
+- Reduces the cost of maintaining consistency
+- Data synchronization for multiple vendor requirements management tools without requiring their being resident in memory or even running on the same platform
+
+To learn how to install and use Cameo DataHub, see:
+
+**Documentation of earlier versions:**
+
+- [CONFLUENCE_PAGE title='Cameo DataHub Documentation' space='CDH2021xR2']
+- [CONFLUENCE_PAGE title='Cameo DataHub Documentation' space='CDH2021xR1']
+- [CONFLUENCE_PAGE title='Cameo DataHub Documentation' space='CDH2021x']
+- Cameo DataHub 19.0 SP4
+- Cameo DataHub 19.0 SP3
+- Cameo DataHub 19.0 SP2
+- Cameo DataHub 19.0 SP1
+- Cameo DataHub 19.0
+
+### EXACT CONFLUENCE STORAGE SOURCE
+
+````html
+<p class="bodytext">Cameo DataHub is a powerful data bridge solution that enables the import/export, automatic synchronization and creation of references between MagicDraw®, SysML Plugin, UPDM Plugin, Rational® DOORS® , Enovia™ TRM, and CSV files. Support for other tools/formats/repositories to be forthcoming.</p><p class="bodytext">Cameo DataHub is an important part of your development process that enhances traceability between your requirements gathering/analysis to your design/development. Cameo DataHub enables both stakeholders and developers to communicate effectively via their own preferred tools. For example, a business user may use Enovia TRM or Rational® DOORS® to create requirements that may be linked and continually synchronized to models in MagicDraw®. Conversely, developers may link designs back to specific requirements, preventing ambiguity and identifying implementation oversights.</p><p class="bodytext"><br /></p><p class="bodytext" style="text-align: center;"><ac:image><ri:attachment ri:filename="cameo-datahub-managing-interoperability_03.png" /></ac:image></p><h6 style="text-align: center;">Cameo DataHub can help you solve data interoperability issues between different vendors.</h6><h3>This easy to use tool allows customers to:</h3><ul style="margin-left: 2.0em;"><li>Unify and relate requirements to the system architecture and design</li><li>Handle the relationship/dependency and information when change occur</li><li>Transform data from requirements-to-model or model-to-requirements</li><li>Associate and synchronize data (both automatic and manual)</li><li>Monitor data when associated data changes</li></ul><h3><br />Business Benefits Overview</h3><ul style="margin-left: 2.0em;"><li>Lowers the business risks to near zero for both current and future projects by ensuring your data will always be accessible</li><li>Easier understanding and editing of artifact dependencies via a visual schema mapper</li><li>Automatic monitoring of ongoing changes that may affect artifacts from either requirements or design</li><li>Associates and synchronizes tool data - may initiate synchronization either manually or automatically as configured on a per-tool basis</li><li>Reduces the cost of maintaining consistency</li><li>Data synchronization for multiple vendor requirements management tools without requiring their being resident in memory or even running on the same platform</li></ul><p><br />To learn how to install and use Cameo DataHub, see:</p><p><ac:structured-macro ac:name="children" ac:schema-version="2" ac:macro-id="3a16e7b6-2e1f-4c2d-9a98-5e2291960150" /></p><p><strong>Documentation of earlier versions:</strong></p><ul><li><ac:link><ri:page ri:space-key="CDH2021xR2" ri:content-title="Cameo DataHub Documentation" /><ac:plain-text-link-body><![CDATA[Cameo DataHub 2021x Refresh2]]></ac:plain-text-link-body></ac:link></li><li><ac:link><ri:page ri:space-key="CDH2021xR1" ri:content-title="Cameo DataHub Documentation" /><ac:plain-text-link-body><![CDATA[Cameo DataHub 2021x Refresh1]]></ac:plain-text-link-body></ac:link></li><li><ac:link><ri:page ri:space-key="CDH2021x" ri:content-title="Cameo DataHub Documentation" /><ac:plain-text-link-body><![CDATA[Cameo DataHub 2021x]]></ac:plain-text-link-body></ac:link></li><li><a href="https://docs.nomagic.com/display/CDH190SP4/Cameo+DataHub+Documentation">Cameo DataHub 19.0 SP4</a></li><li><a href="https://docs.nomagic.com/display/CDH190SP3/Cameo+DataHub+Documentation">Cameo DataHub 19.0 SP3</a></li><li><a href="https://docs.nomagic.com/display/CDH190SP2/Cameo+DataHub+Documentation">Cameo DataHub 19.0 SP2</a></li><li><a href="https://docs.nomagic.com/display/CDH190SP1/Cameo+DataHub+Documentation">Cameo DataHub 19.0 SP1</a></li><li><a href="https://docs.nomagic.com/display/CDH190/Cameo+DataHub+Documentation">Cameo DataHub 19.0</a></li></ul><p class="auto-cursor-target"><br /></p>
+````
+
+<!--NOMAGIC_PAGE id=136716874 space=CDH2024x version=1 -->
+## PAGE 00017: Checking for node changes before synchronizing data
+
+- page_id: `136716874`
+- space_key: `CDH2024x`
+- source_url: https://docs.nomagic.com/spaces/CDH2024x/pages/136716874/Checking+for+node+changes+before+synchronizing+data
+- version_number: 1
+- version_date: `2023-09-21T06:05:01.707+02:00`
+- ancestors: Cameo DataHub Documentation > User Guide > Synchronization
+- labels: []
+
+### NORMALIZED CONTENT
+
+DataHub allows you to check for updates or changes without synchronizing data. You can do this by selecting the **Check Changes** on the DataHub shortcut menu. You can check updates in either the target node or the target node and its hierarchy.
+
+To check for changes in a target node
+
+1. Right-click a target node.
+2. Select Check Changes and then select one of the options.
+
+[IMAGE alt='' src='']
+
+#### INFO: Information
+
+Information
+
+The **Check Changes** command also checks for changes in the hierarchy of the node that has DHLinks.
+
+To check for changes in a target node and its hierarchy
+
+1. Right-click a target node.
+2. Select Check Changes > Check DHLink Changes Recursively .
+
+#### NOTE: Note
+
+Note
+
+- The Check DHLink Changes Recursively command is enabled only when the selected node has hierarchy.
+- You can check the Pending Delete and Suspect DHTrace links status by selecting the Data Source of deleted node(s) and choose Check Changes .
+
+### EXACT CONFLUENCE STORAGE SOURCE
+
+````html
+<p>DataHub allows you to check for updates or changes without synchronizing data. You can do this by selecting the <strong>Check Changes</strong> on the DataHub shortcut menu. You can check updates in either the target node or the target node and its hierarchy.</p><p><br /></p><p>To check for changes in a target node</p><hr /><ol><li>Right-click a target node.</li><li>Select <strong>Check Changes</strong> and then select one of the options.</li></ol><p style="margin-left: 30.0px;"><ac:image><ri:attachment ri:filename="Conflict Dashboard_shortcut menu_DH side.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Checking for node changes before synchronizing data" /></ri:attachment></ac:image><br /><br /></p><ac:structured-macro ac:name="info" ac:schema-version="1" ac:macro-id="ed9c6513-4901-4d1f-8946-6db3c9933172"><ac:parameter ac:name="title">Information</ac:parameter><ac:rich-text-body><p>The <strong>Check Changes</strong> command also checks for changes in the hierarchy of the node that has DHLinks.</p></ac:rich-text-body></ac:structured-macro><p><br /></p><p>To check for changes in a target node and its hierarchy</p><hr /><ol><li>Right-click a target node.</li><li>Select <strong>Check Changes</strong> &gt; <strong>Check DHLink Changes Recursively</strong>.<br /><br /></li></ol><ac:structured-macro ac:name="note" ac:schema-version="1" ac:macro-id="2f8a3f08-52b6-4dc5-81d7-5070e107e310"><ac:parameter ac:name="title">Note</ac:parameter><ac:rich-text-body><ul><li>The <strong>Check DHLink Changes Recursively</strong> command is enabled only when the selected node has hierarchy.</li><li>You can check the <strong>Pending Delete</strong> and <strong>Suspect</strong> DHTrace links status by selecting the Data Source of deleted node(s) and choose <strong>Check Changes</strong>.</li></ul></ac:rich-text-body></ac:structured-macro><p class="auto-cursor-target"><br /></p>
+````
+
+<!--NOMAGIC_PAGE id=136716579 space=CDH2024x version=1 -->
+## PAGE 00018: Cleanup for unused DHLinks
+
+- page_id: `136716579`
+- space_key: `CDH2024x`
+- source_url: https://docs.nomagic.com/spaces/CDH2024x/pages/136716579/Cleanup+for+unused+DHLinks
+- version_number: 1
+- version_date: `2023-09-21T06:04:54.349+02:00`
+- ancestors: Cameo DataHub Documentation > User Guide > Working with DataHub and modeling tools > Creating links between elements
+- labels: []
+
+### NORMALIZED CONTENT
+
+When used for a period of time, DataHub may contain DHLinks left over in the database where the referencing objects are no longer available. This can happen when nodes were manually removed without using the synchronization mechanism. Therefore, DataHub has another capability to detect unused DHLinks and remove them. You can also use this function when you want to split part of a synchronized model as a used project.
+
+To remove all unused DHLink
+
+- On the main menu, click Tools > DataHub > Remove non-use DHLink . [ATTACHMENT filename='Command to Cleanup DHLink.png']
+
+DataHub will detect the DHLinks that are not being used by any elements in the project, and the summary will be shown before you are confirmed to delete them.
+
+### EXACT CONFLUENCE STORAGE SOURCE
+
+````html
+<p>When used for a period of time, DataHub may contain DHLinks left over in the database where the referencing objects are no longer available. This can happen when nodes were manually removed without using the synchronization mechanism. Therefore, DataHub has another capability to detect unused DHLinks and remove them. You can also use this function when you want to split part of a synchronized model as a used project.</p><p><br /></p><p>To remove all unused DHLink</p><hr /><ul><li>On the main menu, click <strong>Tools</strong> &gt; <strong>DataHub</strong> &gt; <strong>Remove non-use DHLink</strong>.<br /><br /><ac:image><ri:attachment ri:filename="Command to Cleanup DHLink.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Cleanup for unused DHLinks" /></ri:attachment></ac:image></li></ul><p>DataHub will detect the DHLinks that are not being used by any elements in the project, and the summary will be shown before you are confirmed to delete them.</p>
+````
+
+<!--NOMAGIC_PAGE id=136716171 space=CDH2024x version=1 -->
+## PAGE 00019: Closing and opening Data Sources
+
+- page_id: `136716171`
+- space_key: `CDH2024x`
+- source_url: https://docs.nomagic.com/spaces/CDH2024x/pages/136716171/Closing+and+opening+Data+Sources
+- version_number: 1
+- version_date: `2023-09-21T06:04:27.943+02:00`
+- ancestors: Cameo DataHub Documentation > User Guide > Working with DataHub and modeling tools > Working with the DataHub Explorer tree
+- labels: []
+
+### NORMALIZED CONTENT
+
+To close an open Data Source
+
+- Right-click a Data Source in the DataHub Explorer tree and choose [IMAGE alt='' src=''] .
+
+#### NOTE: Note
+
+Note
+
+Closing a Data Source doesn’t remove it from the **DataHub Explorer** tree. This action is only for deactivation.
+
+To open or activate an inactive Data Source
+
+- Right-click an inactive Data Source and choose [IMAGE alt='' src=''] . The Data Source shows as connected.
+
+### EXACT CONFLUENCE STORAGE SOURCE
+
+````html
+<p>To close an open Data Source</p><hr /><ul><li>Right-click a Data Source in the <strong>DataHub Explorer</strong> tree and choose <strong><ac:image><ri:attachment ri:filename="close-ds.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Closing and opening Data Sources" /></ri:attachment></ac:image></strong>.</li></ul><ac:structured-macro ac:name="note" ac:schema-version="1" ac:macro-id="227ab3ef-e0d9-4259-9d5e-ca03f5e98b8c"><ac:parameter ac:name="title">Note</ac:parameter><ac:rich-text-body><p>Closing a Data Source doesn’t remove it from the <strong>DataHub Explorer</strong> tree. This action is only for deactivation.</p></ac:rich-text-body></ac:structured-macro><p><br /></p><p>To open or activate an inactive Data Source</p><hr /><ul><li>Right-click an inactive Data Source and choose <strong><ac:image><ri:attachment ri:filename="connect.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Closing and opening Data Sources" /></ri:attachment></ac:image></strong>. The Data Source shows as connected.</li></ul>
+````
+
+<!--NOMAGIC_PAGE id=136716468 space=CDH2024x version=1 -->
+## PAGE 00020: Collection nodes in DOORS Next Generation
+
+- page_id: `136716468`
+- space_key: `CDH2024x`
+- source_url: https://docs.nomagic.com/spaces/CDH2024x/pages/136716468/Collection+nodes+in+DOORS+Next+Generation
+- version_number: 1
+- version_date: `2023-09-21T06:04:43.699+02:00`
+- ancestors: Cameo DataHub Documentation > User Guide > Working with DataHub and modeling tools > Working with Data Sources > Adding Data Sources for IBM Rational DOORS Next Generation
+- labels: []
+
+### NORMALIZED CONTENT
+
+You can work with an artifact in a Collection via a new Collection tab that displays items of the Collection artifact by using the **Open collection in new window** command.
+
+To open a Collection artifact in a new tab
+
+- Right-click a Collection element in DataHub Explorer and select Open collection in new window .
+
+[IMAGE alt='' src='']
+
+###### The Open collection in new window command.
+
+[IMAGE alt='' src='']
+
+###### An open DOORS Next Generation Collection artifact tab in DataHub Explorer.
+
+The new Collection artifact tab that shows items of the Collection artifact will open in DataHub Explorer.
+
+#### NOTE: Note
+
+Note
+
+- DataHub records the open Collection artifact tab as a new Alias tree, thus allowing you to directly open the DOORS Next Generation Collection artifact tab by clicking Tools > DataHub > Alias Manager and selecting the Collection from the list at the next time you connect the DOORS Next Generation Data Source.
+- All associated DHLinks created will be available only within the Collection artifact tab.
+
+### EXACT CONFLUENCE STORAGE SOURCE
+
+````html
+<p>You can work with an artifact in a Collection via a new Collection tab that displays items of the Collection artifact by using the <strong>Open collection in new window</strong> command.</p><p><br /></p><p>To open a Collection artifact in a new tab</p><hr /><ul><li>Right-click a Collection element in DataHub Explorer and select <strong>Open collection in new window</strong>.</li></ul><p><ac:image ac:align="center"><ri:attachment ri:filename="Open collection.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Collection nodes in DOORS Next Generation" /></ri:attachment></ac:image></p><h6 style="text-align: center;">The Open collection in new window command.</h6><p style="text-align: center;"><ac:image><ri:attachment ri:filename="An Open DOORS Next Generation Collection Artifact Tab in DataHub Explorer.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Collection nodes in DOORS Next Generation" /></ri:attachment></ac:image></p><h6 style="text-align: center;">An open DOORS Next Generation Collection artifact tab in DataHub Explorer.</h6><p>The new Collection artifact tab that shows items of the Collection artifact will open in DataHub Explorer.</p><ac:structured-macro ac:name="note" ac:schema-version="1" ac:macro-id="61a4d8b4-c545-434f-b429-4312515ad7c4"><ac:parameter ac:name="title">Note</ac:parameter><ac:rich-text-body><ul><li>DataHub records the open Collection artifact tab as a new Alias tree, thus allowing you to directly open the DOORS Next Generation Collection artifact tab by clicking <strong>Tools</strong> &gt; <strong>DataHub</strong> &gt; <strong>Alias Manager</strong> and selecting the Collection from the list at the next time you connect the DOORS Next Generation Data Source.</li><li>All associated DHLinks created will be available only within the Collection artifact tab.</li></ul></ac:rich-text-body></ac:structured-macro><p class="auto-cursor-target"><br /></p>
+````
+
+<!--NOMAGIC_PAGE id=136716437 space=CDH2024x version=1 -->
+## PAGE 00021: Comment elements under Requirements of DOORS Next Generation Data Source
+
+- page_id: `136716437`
+- space_key: `CDH2024x`
+- source_url: https://docs.nomagic.com/spaces/CDH2024x/pages/136716437/Comment+elements+under+Requirements+of+DOORS+Next+Generation+Data+Source
+- version_number: 1
+- version_date: `2023-09-21T06:04:41.683+02:00`
+- ancestors: Cameo DataHub Documentation > User Guide > Working with DataHub and modeling tools > Working with Data Sources > Adding Data Sources for IBM Rational DOORS Next Generation
+- labels: []
+
+### NORMALIZED CONTENT
+
+In DOORS Next Generation, comments are together with Requirements as attributes. DataHub captures comments by reading them as comment elements under Requirements. Therefore, you can import and create mappings with any element types, including comment elements, under SysML Requirements.
+
+[IMAGE alt='' src='']
+
+###### Comment elements in DOORS Next Generation under a Requirement.
+
+To display a DOORS Next Generation comment element under a Requirement
+
+- Right-click a DOORS Next Generation Data Source and select Show comments . [ATTACHMENT filename='Show_comments.png']
+
+The comment element(s) will be displayed under the Requirement(s) of the selected Data Source.
+
+[IMAGE alt='' src='']
+
+###### Comment elements are shown under the Requirement of the selected DOORS Next Generation Data Source.
+
+#### NOTE: Note
+
+Note
+
+DataHub does not show the Requirements’ comment elements by default.
+
+### EXACT CONFLUENCE STORAGE SOURCE
+
+````html
+<p>In DOORS Next Generation, comments are together with Requirements as attributes. DataHub captures comments by reading them as comment elements under Requirements. Therefore, you can import and create mappings with any element types, including comment elements, under SysML Requirements.</p><p style="text-align: center;"><ac:image><ri:attachment ri:filename="DNG Comment.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Comment elements under Requirements of DOORS Next Generation Data Source" /></ri:attachment></ac:image></p><h6 style="text-align: center;">Comment elements in DOORS Next Generation under a Requirement.</h6><p>To display a DOORS Next Generation comment element under a Requirement</p><hr /><ul><li>Right-click a DOORS Next Generation Data Source and select <strong>Show comments</strong>.<br /><br /><ac:image><ri:attachment ri:filename="Show_comments.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Comment elements under Requirements of DOORS Next Generation Data Source" /></ri:attachment></ac:image></li></ul><p>The comment element(s) will be displayed under the Requirement(s) of the selected Data Source.</p><p><br /></p><p><ac:image ac:align="center"><ri:attachment ri:filename="Show Comments for DOORS NG.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Comment elements under Requirements of DOORS Next Generation Data Source" /></ri:attachment></ac:image></p><h6 style="text-align: center;">Comment elements are shown under the Requirement of the selected DOORS Next Generation Data Source.</h6><ac:structured-macro ac:name="note" ac:schema-version="1" ac:macro-id="a3bae2f8-d19b-4a19-a426-92db3406d4a5"><ac:parameter ac:name="title">Note</ac:parameter><ac:rich-text-body><p>DataHub does not show the Requirements’ comment elements by default.</p></ac:rich-text-body></ac:structured-macro><p class="auto-cursor-target"><br /></p>
+````
+
+<!--NOMAGIC_PAGE id=136715915 space=CDH2024x version=1 -->
+## PAGE 00022: Compatible data sources
+
+- page_id: `136715915`
+- space_key: `CDH2024x`
+- source_url: https://docs.nomagic.com/spaces/CDH2024x/pages/136715915/Compatible+data+sources
+- version_number: 1
+- version_date: `2023-09-21T06:04:19.977+02:00`
+- ancestors: Cameo DataHub Documentation > Getting started > Understanding DataHub user interface
+- labels: []
+
+### NORMALIZED CONTENT
+
+A Data Source is typically a reference to some data. Data in a DOORS repository can be setup as a Data Source from within DataHub. Following is the list of possible data sources with their compatible versions:
+
+- A MagicDraw ® project
+- An IBM ® Rational ® DOORS ® Next Generation (4.x, 5.x, and 6.x up to 7.0.2)
+- An IBM ® Rational ® DOORS ® Client (8.0-8.3 and 9.0-9.7)
+- ENOVIA Requirements (Up to 22x FD01)
+- A CSV file repository
+- An OSLC Provider
+
+### EXACT CONFLUENCE STORAGE SOURCE
+
+````html
+<p>A Data Source is typically a reference to some data. Data in a DOORS repository can be setup as a Data Source from within DataHub. Following is the list of possible data sources with their compatible versions:</p><ul><li>A MagicDraw<sup>®</sup> project</li><li>An IBM<sup>®</sup> Rational<sup>®</sup> DOORS<sup>®</sup> Next Generation (4.x, 5.x, and 6.x up to 7.0.2)</li><li>An IBM<sup>®</sup> Rational<sup>®</sup> DOORS<sup>®</sup> Client (8.0-8.3 and 9.0-9.7)</li><li>ENOVIA Requirements (Up to 22x FD01)</li><li>A CSV file repository</li><li>An OSLC Provider</li></ul>
+````
+
+<!--NOMAGIC_PAGE id=136716474 space=CDH2024x version=1 -->
+## PAGE 00023: Configuration Management
+
+- page_id: `136716474`
+- space_key: `CDH2024x`
+- source_url: https://docs.nomagic.com/spaces/CDH2024x/pages/136716474/Configuration+Management
+- version_number: 1
+- version_date: `2023-09-21T06:04:44.216+02:00`
+- ancestors: Cameo DataHub Documentation > User Guide > Working with DataHub and modeling tools > Working with Data Sources > Adding Data Sources for IBM Rational DOORS Next Generation
+- labels: []
+
+### NORMALIZED CONTENT
+
+2063392710
+
+2063392721
+
+2063392709
+
+**On this page**
+
+**4**
+
+2063392720
+
+Configuration Management can be enabled once the project initiates, after which it cannot be disabled later in DOORS Next Generation. When Configuration Management is not enabled for a project, only the content of default project component is available in the Cameo DataHub Explorer Panel. When configuration management is enabled, you can have more than one component in the project. Each component could have multiple streams and baselines and can be used on Global Configurations. All those objects once created and configured are available to work with in the Cameo DataHub Explorer Panel.
+
+##### Working with Global Configuration
+
+The DOORS Next Generation connector now supports global configuration. When configuration management is enabled in DOORS Next Generation, you can add all RM domain-related objects identified on the selected global configuration to the Cameo DataHub Explorer panel as separate data sources.
+
+To create Global Configuration as a data source
+
+1. Right click on the DOORS Next Generation data source and select Create GC Configuration as Data Source [IMAGE alt='' src='']
+2. The Create GC Configuration as Data Source dialog box appears. From the Select GC project list select the GC project. Select the GC component from the Select GC component list. Then select the stream/baseline you want to work on from the Select GC stream/baseline list. The list of available streams/baselines in the GC configuration are displayed below. Click Create to create GC Configuration as Data Source. [ATTACHMENT filename='GC_DialogBox.png']
+3. After the GC configuration is created as a data source, it will be visible in the same Cameo Datahub Explorer panel. Once you click on any stream/baseline, the GC configuration data source will open in a new tab. [ATTACHMENT filename='GC_Datasource.png']
+
+##### Configuration Management effect on CDH Explorer Panel
+
+Enabling or disabling Configuration Management in DOORS Next Generation affects Cameo Datahub Explorer Panel in the following ways:
+
+- When Configuration management is not enabled, the content of the default component is displayed under the project parent node.
+- When Configuration Management is enabled, only the project's components are displayed under the project parent node. [ATTACHMENT filename='CDH_finalResult.png'] Configuration Management effect on CDH Explorer Panel
+
+### EXACT CONFLUENCE STORAGE SOURCE
+
+````html
+<ac:structured-macro ac:name="content-layer" ac:schema-version="1" ac:macro-id="2567db7c-675a-49e4-9128-5c7ac7cbdfb1"><ac:parameter ac:name="id">2063392710</ac:parameter><ac:rich-text-body><ac:structured-macro ac:name="content-column" ac:schema-version="1" ac:macro-id="1ca2aeb7-ca44-484a-bdbc-160dce429176"><ac:parameter ac:name="id">2063392721</ac:parameter><ac:rich-text-body><ac:structured-macro ac:name="content-block" ac:schema-version="1" ac:macro-id="4f0cd87a-a797-4f22-a4d1-3f5b82725045"><ac:parameter ac:name="id">2063392709</ac:parameter><ac:rich-text-body><p><strong>On this page</strong></p><p><strong><ac:structured-macro ac:name="toc" ac:schema-version="1" ac:macro-id="e6e808b8-3c1b-4551-8651-071c5f85dccb"><ac:parameter ac:name="maxLevel">4</ac:parameter></ac:structured-macro></strong></p></ac:rich-text-body></ac:structured-macro><ac:structured-macro ac:name="content-block" ac:schema-version="1" ac:macro-id="9c74a32e-9d02-4eff-b33e-37344885930f"><ac:parameter ac:name="id">2063392720</ac:parameter><ac:rich-text-body><p>Configuration Management can be enabled once the project initiates, after which it cannot be disabled later in DOORS Next Generation. When Configuration Management is not enabled for a project, only the content of default project component is available in the Cameo DataHub Explorer Panel. When configuration management is enabled, you can have more than one component in the project. Each component could have multiple streams and baselines and can be used on Global Configurations. All those objects once created and configured are available to work with in the Cameo DataHub Explorer Panel.</p><h3><span style="color: rgb(62,63,64);"><ac:inline-comment-marker ac:ref="461607c2-17b0-493b-b45c-81eb5e5bdfbd">Working with Global Configuration</ac:inline-comment-marker></span></h3><p><span style="color: rgb(62,63,64);">The DOORS Next Generation connector now supports global configuration. <ac:inline-comment-marker ac:ref="a5071c72-fa59-46bd-83ab-481e9ca1ca9c">When configuration management is enabled i</ac:inline-comment-marker>n DOORS Next Generation, you can add all RM domain-related objects identified on the selected global configuration to the Cameo DataHub Explorer panel as separate data sources.</span></p><p><span style="color: rgb(62,63,64);">To create Global Configuration as a data source</span></p><hr /><ol><li>Right click on the DOORS Next Generation data source and select <strong>Create GC Configuration as Data Source<br /><br /></strong><strong><ac:image><ri:attachment ri:filename="GC_Command.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Configuration Management" /></ri:attachment></ac:image><br /><br /></strong></li><li>The <strong>Create GC Configuration as Data Source </strong>dialog box appears. From the <strong>Select GC project</strong> list select the GC project. Select the GC component from the <strong>Select GC component</strong> list.  Then select the stream/baseline you want to work on from the <strong>Select GC stream/baseline</strong> list. The list of available streams/baselines in the GC configuration are displayed below. Click <strong>Create </strong>to create<strong> </strong>GC Configuration as Data Source.<br /><br /><ac:image><ri:attachment ri:filename="GC_DialogBox.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Configuration Management" /></ri:attachment></ac:image><br /><br /></li><li>After the GC configuration is created as a data source, it will be visible in the same Cameo Datahub Explorer panel. Once you click on any stream/baseline, the GC configuration data source will open in a new tab.<br /><br /><ac:image><ri:attachment ri:filename="GC_Datasource.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Configuration Management" /></ri:attachment></ac:image><br /><br /></li></ol><h3>Configuration Management effect on CDH Explorer Panel</h3><p><br /></p><p>Enabling or disabling Configuration Management in DOORS Next Generation affects Cameo Datahub Explorer Panel in the following ways:</p><ul><li>When Configuration management is not enabled, the content of the default component is displayed under the project parent node.</li><li>When Configuration Management is enabled, only the <span style="color: rgb(62,63,64);">project's </span>components are displayed under the project parent node.<br /><br /><ac:image ac:align="center"><ri:attachment ri:filename="CDH_finalResult.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Configuration Management" /></ri:attachment></ac:image><h6 style="text-align: center;">Configuration Management effect on CDH Explorer Panel</h6></li></ul><p class="auto-cursor-target"><br /></p></ac:rich-text-body></ac:structured-macro></ac:rich-text-body></ac:structured-macro></ac:rich-text-body></ac:structured-macro>
+````
+
+<!--NOMAGIC_PAGE id=136716548 space=CDH2024x version=5 -->
+## PAGE 00024: Configuring software for OSLC integration
+
+- page_id: `136716548`
+- space_key: `CDH2024x`
+- source_url: https://docs.nomagic.com/spaces/CDH2024x/pages/136716548/Configuring+software+for+OSLC+integration
+- version_number: 5
+- version_date: `2026-02-11T08:02:37.449+01:00`
+- ancestors: Cameo DataHub Documentation > User Guide > Working with DataHub and modeling tools > Working with OSLC features > OSLC tutorial
+- labels: []
+
+### NORMALIZED CONTENT
+
+##### Software requirements
+
+To link and share data using Open Services for Lifecycle Collaboration (OSLC) integration, ensure that the following software requirements are met:
+
+- The following software is installed on your machine:
+  1. Modeling tool with the Requirements plugin (e.g., MagicDraw + Requirements plugin, Cameo Systems Modeler, Cameo Enterprise Architecture)
+  2. Cameo DataHub
+
+- You have access to the following software on a server:
+  1. Teamwork Cloud
+  2. Cameo Collaborator for Teamwork Cloud
+  3. Doors Next Generation v6.0.3+ (DNG)
+
+#### NOTE: Software versions
+
+Software versions
+
+You must use the same version of a modeling tool and Cameo DataHub, and the same version of Teamwork Cloud and Cameo Collaborator for Teamwork Cloud. For more information, see the [product compatibility page](https://www.nomagic.com/support/compatibility).
+
+### EXACT CONFLUENCE STORAGE SOURCE
+
+````html
+<h3>Software requirements</h3><p>To link and share data using Open Services for Lifecycle Collaboration (OSLC) integration, ensure that the following software requirements are met:</p><ul><li data-uuid="7883d760-12e3-43ab-9dfb-9a33ab90af81">The following software is installed on your machine:<ol><li>Modeling tool with the Requirements plugin (e.g., MagicDraw + Requirements plugin, Cameo Systems Modeler, Cameo Enterprise Architecture)</li><li>Cameo DataHub</li></ol></li></ul><ul><li class="auto-cursor-target" data-uuid="5994a8bc-6a97-4c02-bad3-13e3ffc3424e">You have access to the following software on a server:<br /><ol><li>Teamwork Cloud</li><li>Cameo Collaborator for Teamwork Cloud</li><li>Doors Next Generation v6.0.3+ (DNG)<br /><br /></li></ol></li></ul><ac:structured-macro ac:name="note" ac:schema-version="1" ac:macro-id="4d23ba4a-401c-4b82-8cc0-3dd47bf95b75"><ac:parameter ac:name="title">Software versions</ac:parameter><ac:rich-text-body><p>You must use the same version of a modeling tool and Cameo DataHub, and the same version of Teamwork Cloud and Cameo Collaborator for Teamwork Cloud. For more information, see the <a href="https://www.nomagic.com/support/compatibility">product compatibility page</a>.</p></ac:rich-text-body></ac:structured-macro>
+````
+
+<!--NOMAGIC_PAGE id=136716121 space=CDH2024x version=1 -->
+## PAGE 00025: Confirmation
+
+- page_id: `136716121`
+- space_key: `CDH2024x`
+- source_url: https://docs.nomagic.com/spaces/CDH2024x/pages/136716121/Confirmation
+- version_number: 1
+- version_date: `2023-09-21T06:04:25.663+02:00`
+- ancestors: Cameo DataHub Documentation > User Guide > Working with DataHub and modeling tools > Customizing DataHub options
+- labels: []
+
+### NORMALIZED CONTENT
+
+You can adjust the behavior of the Confirmation popup dialogs in DataHub through the Confirmation option group.
+
+To enable or disable the Cameo DataHub Confirmation dialogs in MagicDraw®
+
+1. Open the Cameo DataHub Options dialog. [ATTACHMENT filename='Environment_Options_CDH_Confirmation.png']
+2. Go to the Confirmation group and select or clear the checkbox as per your requirement.
+3. Click OK .
+
+The following table explains each Confirmation option group in the Cameo DataHub Options dialog.
+
+| Option | Function |
+| --- | --- |
+| Show a confirmation dialog when synchronizing data. | Opens a confirmation dialog before synchronizing data. |
+| Show a warning dialog about the lost Rich Text format when copying or synchronizing data. | Opens a warning dialog that copying or synchronizing data erases the Rich Text format. |
+| Show a confirmation dialog when deleting node action. | Opens a confirmation dialog before deleting a node. |
+| Show a confirmation dialog when deleting Pending Delete status. | Opens a confirmation dialog before deleting a node whose status is PendingDelete. |
+| Show a confirmation dialog when deleting the schema map. | Opens a confirmation dialog before deleting a schema map. |
+| Show a warning dialog when the schema being edited is used in another project. | Opens a warning dialog when editing a schema used in another project. |
+| Show a warning dialog when copying data. | Opens a warning dialog before copying data when some nodes have not been completely mapped. |
+| Show a warning dialog when saving a text property that causes formatting lost. | Opens a warning dialog about saving a property value and erases the format. |
+| Show a warning dialog when synchronizing at another side of the Out of Scope node. | Opens a warning dialog that synchronizing data relocates some out-of-scope nodes on the other side within the DHLink. |
+| Show a confirmation dialog when removing DHLink. | Opens a confirmation dialog before removing the DHLink of the selected node. |
+| Show a confirmation dialog when removing DHLinks recursively. | Opens a confirmation dialog before removing DHLinks of the selected node and its hierarchy. |
+| Show a confirmation dialog when replacing the existing map. | Opens a confirmation dialog before overwriting a schema map. |
+| Show a confirmation dialog when updating all pending DHLinks recursively. | Opens a confirmation dialog before updating all pending DHLinks of the selected node and its hierarchy. |
+| Show a confirmation dialog when updating all pending DHLinks. | Opens a confirmation dialog before updating all pending DHLinks of the selected node. |
+| Show a confirmation dialog when updating the Pending Update status. | Opens a confirmation dialog before updating a node whose status is PendingUpdate. |
+| Show a confirmation dialog when discarding pending DHLinks. | Opens a confirmation dialog before discarding the pending DHLinks. |
+| Show a confirmation dialog when discarding pending DHLinks recursively. | Opens a confirmation dialog before discarding the pending DHLinks recursively. |
+| Show a confirmation dialog when discarding orphan DHLinks. | Opens a confirmation dialog before discarding the orphan DHLinks. |
+| Show a confirmation dialog when discarding orphan DHLinks recursively. | Opens a confirmation dialog before discarding the orphan DHLinks recursively. |
+| Show a confirmation dialog when removing orphan DHLinks. | Opens a confirmation dialog before removing orphan DHLinks. |
+| Show a confirmation dialog when removing orphan DHLinks recursively. | Opens a confirmation dialog before removing orphan DHLinks recursively. |
+| Show a confirmation dialog when excluding entities recursively. | Opens a confirmation dialog before excluding entities recursively. |
+| Show a confirmation dialog when excluding entities. | Opens a confirmation dialog before excluding entities. |
+| Show a confirmation dialog when including entities recursively. | Opens a confirmation dialog before including entities recursively. |
+| Show a confirmation dialog when including entities. | Opens a confirmation dialog before including entities. |
+
+#### NOTE: Note
+
+Note
+
+- An out-of-scope node is a node that has been relocated outside the root node. Therefore, the node hierarchy is changed.
+- Synchronizing on the side where some out-of-scope nodes exist does not change the node hierarchy of the related nodes on the other side. Therefore, a warning message does not open, but synchronizing from the other side moves the out-of-scope nodes to their original locations.
+
+### EXACT CONFLUENCE STORAGE SOURCE
+
+````html
+<p>You can adjust the behavior of the Confirmation popup dialogs in DataHub through the Confirmation option group.</p><p><br /></p><p>To enable or disable the Cameo DataHub Confirmation dialogs in MagicDraw<sup>®</sup></p><hr /><ol><li>Open the <a href="https://docs.nomagic.com/display/CDH2024x/Customizing+DataHub+options">Cameo DataHub Options</a> dialog.<br /><br /><ac:image><ri:attachment ri:filename="Environment_Options_CDH_Confirmation.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Confirmation" /></ri:attachment></ac:image><br /><br /></li><li>Go to the <strong>Confirmation </strong>group and select or clear the checkbox as per your requirement.</li><li>Click <strong>OK</strong>.</li></ol><p style="margin-left: 30.0px;"><br /></p><p>The following table explains each Confirmation option group in the Cameo DataHub Options dialog.</p><table class="relative-table" style="margin-left: 30.0px;width: 89.797%;"><colgroup><col style="width: 35.9413%;" /><col style="width: 64.0587%;" /></colgroup><tbody style="margin-left: 30.0px;"><tr style="margin-left: 30.0px;"><th colspan="1">Option</th><th colspan="1">Function</th></tr><tr style="margin-left: 30.0px;"><td style="margin-left: 30.0px;">Show a confirmation dialog when synchronizing data.</td><td style="margin-left: 30.0px;">Opens a confirmation dialog before synchronizing data.</td></tr><tr style="margin-left: 30.0px;"><td style="margin-left: 30.0px;">Show a warning dialog about the lost Rich Text format when copying or synchronizing data.</td><td style="margin-left: 30.0px;">Opens a warning dialog that copying or synchronizing data erases the Rich Text format.</td></tr><tr style="margin-left: 30.0px;"><td style="margin-left: 30.0px;">Show a confirmation dialog when deleting node action.</td><td style="margin-left: 30.0px;">Opens a confirmation dialog before deleting a node.</td></tr><tr style="margin-left: 30.0px;"><td style="margin-left: 30.0px;" colspan="1">Show a confirmation dialog when deleting Pending Delete status.</td><td style="margin-left: 30.0px;" colspan="1">Opens a confirmation dialog before deleting a node whose status is PendingDelete.</td></tr><tr style="margin-left: 30.0px;"><td style="margin-left: 30.0px;" colspan="1">Show a confirmation dialog when deleting the schema map.</td><td style="margin-left: 30.0px;" colspan="1">Opens a confirmation dialog before deleting a schema map.</td></tr><tr style="margin-left: 30.0px;"><td style="margin-left: 30.0px;" colspan="1">Show a warning dialog when the schema being edited is used in another project.</td><td style="margin-left: 30.0px;" colspan="1">Opens a warning dialog when editing a schema used in another project.</td></tr><tr style="margin-left: 30.0px;"><td style="margin-left: 30.0px;" colspan="1">Show a warning dialog when copying data.</td><td style="margin-left: 30.0px;" colspan="1">Opens a warning dialog before copying data when some nodes have not been completely mapped.</td></tr><tr style="margin-left: 30.0px;"><td style="margin-left: 30.0px;" colspan="1">Show a warning dialog when saving a text property that causes formatting lost.</td><td style="margin-left: 30.0px;" colspan="1">Opens a warning dialog about saving a property value and erases the format.</td></tr><tr style="margin-left: 30.0px;"><td style="margin-left: 30.0px;" colspan="1">Show a warning dialog when synchronizing at another side of the Out of Scope node.</td><td style="margin-left: 30.0px;" colspan="1">Opens a warning dialog that synchronizing data relocates some out-of-scope nodes on the other side within the DHLink.</td></tr><tr style="margin-left: 30.0px;"><td style="margin-left: 30.0px;" colspan="1">Show a confirmation dialog when removing DHLink.</td><td style="margin-left: 30.0px;" colspan="1">Opens a confirmation dialog before removing the DHLink of the selected node.</td></tr><tr style="margin-left: 30.0px;"><td style="margin-left: 30.0px;" colspan="1">Show a confirmation dialog when removing DHLinks recursively.</td><td style="margin-left: 30.0px;" colspan="1">Opens a confirmation dialog before removing DHLinks of the selected node and its hierarchy.</td></tr><tr style="margin-left: 30.0px;"><td style="margin-left: 30.0px;" colspan="1">Show a confirmation dialog when replacing the existing map.</td><td style="margin-left: 30.0px;" colspan="1">Opens a confirmation dialog before overwriting a schema map.</td></tr><tr style="margin-left: 30.0px;"><td style="margin-left: 30.0px;" colspan="1">Show a confirmation dialog when updating all pending DHLinks recursively.</td><td style="margin-left: 30.0px;" colspan="1">Opens a confirmation dialog before updating all pending DHLinks of the selected node and its hierarchy.</td></tr><tr style="margin-left: 30.0px;"><td style="margin-left: 30.0px;" colspan="1">Show a confirmation dialog when updating all pending DHLinks.</td><td style="margin-left: 30.0px;" colspan="1">Opens a confirmation dialog before updating all pending DHLinks of the selected node.</td></tr><tr style="margin-left: 30.0px;"><td style="margin-left: 30.0px;" colspan="1">Show a confirmation dialog when updating the Pending Update status.</td><td style="margin-left: 30.0px;" colspan="1">Opens a confirmation dialog before updating a node whose status is PendingUpdate.</td></tr><tr style="margin-left: 30.0px;"><td colspan="1">Show a confirmation dialog when discarding pending DHLinks.</td><td colspan="1">Opens a confirmation dialog before discarding the pending DHLinks.</td></tr><tr style="margin-left: 30.0px;"><td colspan="1">Show a confirmation dialog when discarding pending DHLinks recursively.</td><td colspan="1">Opens a confirmation dialog before discarding the pending DHLinks recursively.</td></tr><tr style="margin-left: 30.0px;"><td colspan="1">Show a confirmation dialog when discarding orphan DHLinks.</td><td colspan="1">Opens a confirmation dialog before discarding the orphan DHLinks.</td></tr><tr style="margin-left: 30.0px;"><td colspan="1">Show a confirmation dialog when discarding orphan DHLinks recursively.</td><td colspan="1">Opens a confirmation dialog before discarding the orphan DHLinks recursively.</td></tr><tr style="margin-left: 30.0px;"><td colspan="1">Show a confirmation dialog when removing orphan DHLinks.</td><td colspan="1">Opens a confirmation dialog before removing orphan DHLinks.</td></tr><tr style="margin-left: 30.0px;"><td colspan="1">Show a confirmation dialog when removing orphan DHLinks recursively.</td><td colspan="1">Opens a confirmation dialog before removing orphan DHLinks recursively.</td></tr><tr style="margin-left: 30.0px;"><td colspan="1">Show a confirmation dialog when excluding entities recursively.</td><td colspan="1">Opens a confirmation dialog before excluding entities recursively.</td></tr><tr style="margin-left: 30.0px;"><td colspan="1">Show a confirmation dialog when excluding entities.</td><td colspan="1">Opens a confirmation dialog before excluding entities.</td></tr><tr style="margin-left: 30.0px;"><td colspan="1">Show a confirmation dialog when including entities recursively.</td><td colspan="1">Opens a confirmation dialog before including entities recursively.</td></tr><tr style="margin-left: 30.0px;"><td colspan="1">Show a confirmation dialog when including entities.</td><td colspan="1">Opens a confirmation dialog before including entities.</td></tr></tbody></table><p class="auto-cursor-target"><br /></p><ac:structured-macro ac:name="note" ac:schema-version="1" ac:macro-id="70cc71d3-4485-437d-b912-0c37ba104fb2"><ac:parameter ac:name="title">Note</ac:parameter><ac:rich-text-body><ul><li>An out-of-scope node is a node that has been relocated outside the root node. Therefore, the node hierarchy is changed.</li><li>Synchronizing on the side where some out-of-scope nodes exist does not change the node hierarchy of the related nodes on the other side. Therefore, a warning message does not open, but synchronizing from the other side moves the out-of-scope nodes to their original locations.</li></ul></ac:rich-text-body></ac:structured-macro><p class="auto-cursor-target"><br /></p>
+````
+
+<!--NOMAGIC_PAGE id=136716234 space=CDH2024x version=1 -->
+## PAGE 00026: Copy Data operation
+
+- page_id: `136716234`
+- space_key: `CDH2024x`
+- source_url: https://docs.nomagic.com/spaces/CDH2024x/pages/136716234/Copy+Data+operation
+- version_number: 1
+- version_date: `2023-09-21T06:04:30.942+02:00`
+- ancestors: Cameo DataHub Documentation > User Guide > Working with DataHub and modeling tools > Operations in DataHub Explorer
+- labels: []
+
+### NORMALIZED CONTENT
+
+The DataHub **Copy Data** dialog allows you to copy data without synchronization. Copying data works like the copy and paste operation. If the node you want to copy does not have any default Schema Map, you must resolve any unmapped nodes through the **Copy Data** dialog.
+
+To copy data from a source node to a target node
+
+1. From the **Operation** drop-down list in **Cameo DataHub Explorer**, select **Copy Data**.
+
+[IMAGE alt='' src='']
+
+2. Drag a source node from **Cameo DataHub Explorer** to a target node in the MagicDraw Containment tree.
+
+[IMAGE alt='' src='']
+
+The **Copy Data** dialog opens.
+
+[IMAGE alt='' src='']
+
+3. Start mapping the source node attributes to target attribute types. You see the node color changing from a red circle to a green one, which means the node and its attributes have been mapped to a target type. The **OK** button becomes enabled at this point. Click **OK** to finish the copying process.
+
+The functions in the **Copy Data** dialog are explained in the table below.
+
+| Component | Function |
+| --- | --- |
+| Mapping Mode | Switches between Individual Type Mapping and Group Type Mapping. The Mapping Mode drop-down list shows the default type that you selected through the Options dialog. |
+| Source Tree | Specifies a data tree of the sources that are copied. You need to specify a target type for every source type. |
+|  | Identifies a node whose source type has already been resolved. |
+|  | Identifies a node whose source type needs to be resolved before copying. |
+|  | Identifies the following items asa node that is not copied since the target type does not support any children.a link that is not copied since the source and/or the target type does not support the link. |
+| The following three rows are for the Define Target Type from Attribute Value mapping mode option. |  |
+| Define Target Type from Attribute Value | Maps by using the Define Target Type from Attribute Value mode. If you select this mode, you need to define the values and specify the target types of each value in the provided table. This mode is enabled in Group Type Mapping only. |
+| Attribute | Selects an attribute of a source node and define its values and a target type. The selected attribute is not available to be mapped for the Source Attribute in the Schema Map table. |
+| Define Value (below Attribute) | Defines the values of a selected attribute and the target type of each value. The table consists of the following columnsDefaultSpecifies a default target type. If an attribute value does not match any mapped values when copying data or creating a relation, DataHub uses the default target type. PrioritySpecifies the priority of a target type. It is used when a defined attribute has multiple values. The first target type on the list has the highest priority and is always selected first in the mapping process.ValueSelects a value for a target type. If a selected attribute is an Enumeration, you can choose the values from the drop-down list.TargetDefines a target type for a selected value. |
+| Quick search | Finds a particular type that contains the specific searched text. |
+| Target Type tree | Shows all types that are allowed to be added according to the type you have selected in the Data Type tree. |
+| Set as default target type | Sets a selected target type to be the default when the same mapping source attribute is selected next time. |
+| Schema Map | Maps source attributes with target attributes and uses them in data synchronization. |
+|  | Edits a Schema Map by selecting the attributes in the provided Schema Map table. |
+|  | Starts copying the selected target type and Schema Map. |
+|  | Cancels the copying action. |
+
+### EXACT CONFLUENCE STORAGE SOURCE
+
+````html
+<p>The DataHub <strong>Copy Data</strong> dialog allows you to copy data without synchronization. Copying data works like the copy and paste operation. If the node you want to copy does not have any default Schema Map, you must resolve any unmapped nodes through the <strong>Copy Data</strong> dialog.</p><p><br /></p><p>To copy data from a source node to a target node</p><hr /><p style="margin-left: 30.0px;">1. From the <strong>Operation</strong> drop-down list in <strong>Cameo DataHub Explorer</strong>, select <strong>Copy Data</strong>.<br /><br /></p><p style="margin-left: 30.0px;"><ac:image><ri:attachment ri:filename="Copy_Data_Operation.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Copy Data operation" /></ri:attachment></ac:image><br /><br /></p><p style="margin-left: 30.0px;">2. Drag a source node from <strong>Cameo DataHub Explorer</strong> to a target node in the MagicDraw Containment tree.<br /><br /></p><p style="margin-left: 30.0px;"><ac:image ac:title="Copying data by dragging a source node to target" ac:alt="Copying data by dragging a source node to target"><ri:attachment ri:filename="importing-reqs-from-doors-ds.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Copy Data operation" /></ri:attachment></ac:image><br /><br /></p><p style="margin-left: 30.0px;">The <strong>Copy Data</strong> dialog opens.<br /><br /></p><p style="margin-left: 30.0px;"><ac:image><ri:attachment ri:filename="Copy Data Dialog Group.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Copy Data operation" /></ri:attachment></ac:image><br /><br /></p><p style="margin-left: 30.0px;">3. Start mapping the source node attributes to target attribute types. You see the node color changing from a red circle to a green one, which means the node and its attributes have been mapped to a target type. The <strong>OK</strong> button becomes enabled at this point. Click <strong>OK</strong> to finish the copying process.</p><p style="margin-left: 30.0px;"><br /></p><p>The functions in the <strong>Copy Data</strong> dialog are explained in the table below.</p><table class="relative-table" style="margin-left: 30.0px;width: 94.367%;"><colgroup><col style="width: 19.216%;" /><col style="width: 80.7958%;" /></colgroup><tbody style="margin-left: 30.0px;"><tr style="margin-left: 30.0px;"><th style="margin-left: 30.0px;">Component</th><th style="margin-left: 30.0px;">Function</th></tr><tr style="margin-left: 30.0px;"><td style="margin-left: 30.0px;">Mapping Mode</td><td style="margin-left: 30.0px;">Switches between Individual Type Mapping and Group Type Mapping. The <strong>Mapping Mode</strong> drop-down list shows the default type that you selected through the <strong>Options</strong> dialog.</td></tr><tr style="margin-left: 30.0px;"><td style="margin-left: 30.0px;">Source Tree</td><td style="margin-left: 30.0px;">Specifies a data tree of the sources that are copied. You need to specify a target type for every source type.</td></tr><tr style="margin-left: 30.0px;"><td style="margin-left: 30.0px;"><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><ac:image ac:thumbnail="true" ac:width="20"><ri:attachment ri:filename="green.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Working with DataHub and modeling tools" /></ri:attachment></ac:image></span></span></td><td style="margin-left: 30.0px;">Identifies a node whose source type has already been resolved.</td></tr><tr style="margin-left: 30.0px;"><td style="margin-left: 30.0px;" colspan="1"><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><ac:image ac:thumbnail="true" ac:width="20"><ri:attachment ri:filename="red.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Working with DataHub and modeling tools" /></ri:attachment></ac:image></span></span></td><td style="margin-left: 30.0px;" colspan="1">Identifies a node whose source type needs to be resolved before copying.</td></tr><tr style="margin-left: 30.0px;"><td style="margin-left: 30.0px;" colspan="1"><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><ac:image ac:thumbnail="true" ac:width="20"><ri:attachment ri:filename="gray.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Working with DataHub and modeling tools" /></ri:attachment></ac:image></span></span></td><td style="margin-left: 30.0px;" colspan="1">Identifies the following items as<ul><li style="list-style-type: none;background-image: none;"><ul><li>a node that is not copied since the target type does not support any children.</li><li>a link that is not copied since the source and/or the target type does not support the link.</li></ul></li></ul></td></tr><tr style="margin-left: 30.0px;"><td style="margin-left: 30.0px;" colspan="2"><div class="content-wrapper"><p>The following three rows are for the<strong>  Define Target Type from Attribute Value </strong>mapping mode option.</p></div></td></tr><tr style="margin-left: 30.0px;"><td style="margin-left: 30.0px;" colspan="1">Define Target Type from Attribute Value</td><td style="margin-left: 30.0px;" colspan="1"><div class="content-wrapper"><p>Maps by using the <strong>Define Target Type from Attribute Value </strong>mode. If you select this mode, you need to define the values and specify the target types of each value in the provided table. This mode is enabled in <strong>Group Type Mapping</strong> only.</p></div></td></tr><tr style="margin-left: 30.0px;"><td style="margin-left: 30.0px;" colspan="1">Attribute</td><td style="margin-left: 30.0px;" colspan="1">Selects an attribute of a source node and define its values and a target type. The selected attribute is not available to be mapped for the Source Attribute in the Schema Map table.</td></tr><tr style="margin-left: 30.0px;"><td style="margin-left: 30.0px;" colspan="1">Define Value (below Attribute)</td><td style="margin-left: 30.0px;" colspan="1"><p>Defines the values of a selected attribute and the target type of each value. The table consists of the following columns</p><ul><li style="list-style-type: none;background-image: none;"><ul><li><strong>Default</strong><br />Specifies a default target type. If an attribute value does not match any mapped values when copying data or creating a relation, DataHub uses the default target type. </li><li><strong>Priority</strong><br />Specifies the priority of a target type. It is used when a defined attribute has multiple values. The first target type on the list has the highest priority and is always selected first in the mapping process.</li><li><strong>Value</strong><br />Selects a value for a target type. If a selected attribute is an Enumeration, you can choose the values from the drop-down list.</li><li><strong>Target</strong><br />Defines a target type for a selected value.</li></ul></li></ul></td></tr><tr style="margin-left: 30.0px;"><td style="margin-left: 30.0px;" colspan="1"><p>Quick search</p></td><td style="margin-left: 30.0px;" colspan="1">Finds a particular type that contains the specific searched text.</td></tr><tr style="margin-left: 30.0px;"><td style="margin-left: 30.0px;" colspan="1">Target Type tree</td><td style="margin-left: 30.0px;" colspan="1">Shows all types that are allowed to be added according to the type you have selected in the Data Type tree.</td></tr><tr style="margin-left: 30.0px;"><td style="margin-left: 30.0px;" colspan="1">Set as default target type</td><td style="margin-left: 30.0px;" colspan="1">Sets a selected target type to be the default when the same mapping source attribute is selected next time.</td></tr><tr style="margin-left: 30.0px;"><td style="margin-left: 30.0px;" colspan="1">Schema Map</td><td style="margin-left: 30.0px;" colspan="1">Maps source attributes with target attributes and uses them in data synchronization. </td></tr><tr style="margin-left: 30.0px;"><td style="margin-left: 30.0px;" colspan="1"><div class="content-wrapper"><p><span class="confluence-embedded-file-wrapper"><span class="confluence-embedded-file-wrapper"><ac:image><ri:attachment ri:filename="edit(1).png"><ri:page ri:space-key="CDH2024x" ri:content-title="Working with DataHub and modeling tools" /></ri:attachment></ac:image></span></span></p></div></td><td style="margin-left: 30.0px;" colspan="1">Edits a Schema Map by selecting the attributes in the provided Schema Map table.</td></tr><tr style="margin-left: 30.0px;"><td style="margin-left: 30.0px;" colspan="1"><div class="content-wrapper"><p><span class="confluence-embedded-file-wrapper"><span class="confluence-embedded-file-wrapper"><ac:image><ri:attachment ri:filename="OK.PNG"><ri:page ri:space-key="CDH2024x" ri:content-title="Working with DataHub and modeling tools" /></ri:attachment></ac:image></span></span></p></div></td><td style="margin-left: 30.0px;" colspan="1">Starts copying the selected target type and Schema Map.</td></tr><tr style="margin-left: 30.0px;"><td style="margin-left: 30.0px;" colspan="1"><div class="content-wrapper"><p><span class="confluence-embedded-file-wrapper"><span class="confluence-embedded-file-wrapper"><ac:image><ri:attachment ri:filename="Cancel.PNG"><ri:page ri:space-key="CDH2024x" ri:content-title="Working with DataHub and modeling tools" /></ri:attachment></ac:image></span></span></p></div></td><td style="margin-left: 30.0px;" colspan="1">Cancels the copying action.</td></tr></tbody></table><p class="auto-cursor-target"><br /></p>
+````
+
+<!--NOMAGIC_PAGE id=136716273 space=CDH2024x version=1 -->
+## PAGE 00027: Copy Data with DHTrace operation
+
+- page_id: `136716273`
+- space_key: `CDH2024x`
+- source_url: https://docs.nomagic.com/spaces/CDH2024x/pages/136716273/Copy+Data+with+DHTrace+operation
+- version_number: 1
+- version_date: `2023-09-21T06:04:32.282+02:00`
+- ancestors: Cameo DataHub Documentation > User Guide > Working with DataHub and modeling tools > Operations in DataHub Explorer
+- labels: []
+
+### NORMALIZED CONTENT
+
+This DataHub operation is similar to **Copy Data with Sync**, but whereas synchronization relations are either source to target, or target to source, or bidirectional, the direction of DHTrace is not important. There is only a link relationship between the source and target nodes. When either of the nodes changes, the DHTrace relationship is marked with a **Suspect** status and allows you to clear the DHTrace and validate the Requirement.
+
+To Copy Data with DHTrace
+
+1. From the Operation drop-down list in Cameo DataHub Explorer , select Copy Data with DHTrace . [ATTACHMENT filename='Copy_Data_With_DHTrace_Operation.png']
+2. Drag some selected nodes from the Cameo DataHub Explorer panel to the Containment tree. [ATTACHMENT filename='MD Tree for CopyandCreateDHTrace.png'] The Create DHTrace Summary dialog opens. [ATTACHMENT filename='Create DHTrace Summary Dialog.png']
+3. Make some changes to the nodes on any side, e.g., modifying a node or deleting a node. InformationDHTrace can detect a modified or deleted node.
+4. Right-click the changed node on either side and select Check DHTrace Changes Recursively . The DHTrace Summary dialog opens. [ATTACHMENT filename='DHTrace Summary.png']
+5. Select the checkboxes to the left of any Suspect relationships and click OK to clear the Suspect DHTrace links.
+
+#### INFO: Information
+
+Information
+
+If you do not clear the suspect DHTrace links, they will have the **Suspect** status.
+
+#### TIP: Tip
+
+Tip
+
+**Copy Data**, **Copy Data with Sync**, and**Copy Data** **with DHTrace** all copy data along with links. To skip copying links, hold **CTRL** while dragging the nodes. This operation ignores the links in the application, e.g., DOORS 9.X Link, DOORS Next Generation Link, and MagicDraw Link.
+
+### EXACT CONFLUENCE STORAGE SOURCE
+
+````html
+<p>This DataHub operation is similar to <strong>Copy Data with Sync</strong>, but whereas synchronization relations are either source to target, or target to source, or bidirectional, the direction of DHTrace is not important. There is only a link relationship between the source and target nodes. When either of the nodes changes, the DHTrace relationship is marked with a <strong>Suspect</strong> status and allows you to clear the DHTrace and validate the Requirement.</p><p><br /></p><p>To Copy Data with DHTrace</p><hr /><ol><li>From the <strong>Operation</strong> drop-down list in <strong>Cameo DataHub Explorer</strong>, select <strong>Copy Data with DHTrace</strong>.<br /><br /><ac:image><ri:attachment ri:filename="Copy_Data_With_DHTrace_Operation.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Copy Data with DHTrace operation" /></ri:attachment></ac:image><br /><br /></li><li><p>Drag some selected nodes from the Cameo DataHub Explorer panel to the Containment tree.<br /><br /></p><ac:image><ri:attachment ri:filename="MD Tree for CopyandCreateDHTrace.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Copy Data with DHTrace operation" /></ri:attachment></ac:image><br /><br />The <strong>Create DHTrace</strong> <strong>Summary</strong> dialog opens.<br /><br /><ac:image><ri:attachment ri:filename="Create DHTrace Summary Dialog.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Copy Data with DHTrace operation" /></ri:attachment></ac:image><br /><br /></li><li><p class="auto-cursor-target">Make some changes to the nodes on any side, e.g., modifying a node or deleting a node.</p><ac:structured-macro ac:name="info" ac:schema-version="1" ac:macro-id="487c5573-94a9-4169-8f36-cb8976a1adc8"><ac:parameter ac:name="title">Information</ac:parameter><ac:rich-text-body><p>DHTrace can detect a modified or deleted node.</p></ac:rich-text-body></ac:structured-macro><p class="auto-cursor-target"><br /></p></li><li>Right-click the changed node on either side and select <strong>Check DHTrace Changes Recursively</strong>. The <strong>DHTrace Summary</strong> dialog opens.<br /><br /><ac:image><ri:attachment ri:filename="DHTrace Summary.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Copy Data with DHTrace operation" /></ri:attachment></ac:image><br /><br /></li><li>Select the checkboxes to the left of any Suspect relationships and click <strong>OK</strong> to clear the <strong>Suspect</strong> DHTrace links.</li></ol><ac:structured-macro ac:name="info" ac:schema-version="1" ac:macro-id="98256673-0b0e-43e8-95e7-0a1eb0b0cc7c"><ac:parameter ac:name="title">Information</ac:parameter><ac:rich-text-body><p>If you do not clear the suspect DHTrace links, they will have the <strong>Suspect</strong> status.</p></ac:rich-text-body></ac:structured-macro><p class="auto-cursor-target"><br /></p><ac:structured-macro ac:name="tip" ac:schema-version="1" ac:macro-id="384ab95b-61b7-4bcc-aa67-1d5b069042f5"><ac:parameter ac:name="title">Tip</ac:parameter><ac:rich-text-body><p><strong>Copy Data</strong>, <strong>Copy Data with Sync</strong>, and<strong> Copy Data</strong> <strong>with DHTrace</strong> all copy data along with links. To skip copying links, hold <strong>CTRL</strong> while dragging the nodes. This operation ignores the links in the application, e.g., DOORS 9.X Link, DOORS Next Generation Link, and MagicDraw Link.</p></ac:rich-text-body></ac:structured-macro><p class="auto-cursor-target"><br /></p>
+````
+
+<!--NOMAGIC_PAGE id=136716247 space=CDH2024x version=1 -->
+## PAGE 00028: Copy Data with Sync operation
+
+- page_id: `136716247`
+- space_key: `CDH2024x`
+- source_url: https://docs.nomagic.com/spaces/CDH2024x/pages/136716247/Copy+Data+with+Sync+operation
+- version_number: 1
+- version_date: `2023-09-21T06:04:31.433+02:00`
+- ancestors: Cameo DataHub Documentation > User Guide > Working with DataHub and modeling tools > Operations in DataHub Explorer
+- labels: []
+
+### NORMALIZED CONTENT
+
+When you select this operation, a DHLink for synchronization is added to the data. It maintains the structure and data of the elements within the node. During data synchronization, DataHub searches for any new nodes and deleted nodes. If it finds any new nodes or deleted nodes within the scope on one side, DataHub copies them to the other side and create a synchronization relation between them or deletes them from the other side.
+
+To Copy Data with Sync
+
+1. From the Operation drop-down list in Cameo DataHub Explorer , select Copy Data with Sync .
+2. Drag a source node to a target node.
+
+[IMAGE alt='' src='']
+
+3. The**Copy Data with Sync** dialog opens. When the nodes and their attributes have been mapped to their respective target types, click **OK**.
+
+[IMAGE alt='' src='']
+
+#### NOTE: Note
+
+Note
+
+- The mapping process also includes two target types: [IMAGE alt='' src=''] and [IMAGE alt='' src=''].
+- The**[IMAGE alt='' src='']** target type is available for the **Individual Type Mapping** mode only. You can see the [IMAGE alt='' src=''] type in the Target Type tree in the **Copy Data with Sync** dialog.
+- The [IMAGE alt='' src='']target type is available for both the **Individual Type Mapping** mode and **Group Type Mapping** mode. You can see the [IMAGE alt='' src='']type in the Target Type tree only in the **Copy Data with Sync** dialog.
+- You can exclude nodes in the **Copy Data with Sync** dialog by selecting the [IMAGE alt='' src=''] option and selecting the [IMAGE alt='' src=''] target type. This target type marks the unmapped nodes with an**Exclude**status that will not be copied.
+- Alternatively, you can create the schema mapping for the selected nodes as Exclude by selecting the [ATTACHMENT filename='Excluded.png'] target type.
+- If you want to include unmapped nodes, go to the DH Links panel, right-click in the panel, and select Include Node .
+
+The table below summarizes the components of the **Copy Data with Sync** Dialog.
+
+| Component | Function |
+| --- | --- |
+| Sync Direction | Selects which direction to synchronize data from, either unidirectional or bidirectional:: Synchronizes data in both directions.: Synchronizes the other Data Source with the MagicDraw Data Source. This option appears only when one of the sides is a MagicDraw Data Source.: Synchronizes the MagicDraw Data Source with the other Data Source. |
+| Mapping Mode | Switches between Individual Type Mapping and Group Type Mapping. The Mapping Mode drop-down list always shows the default type that you have selected through the Cameo DataHub Options dialog. |
+| Source Type tree | Specifies a data tree of the source that is to be copied. You must specify a target type for every source type. |
+| status icon | Identifies a node whose source type has already been resolved. |
+| status icon | Identifies a node whose source type needs to be resolved before copying. It refers to either a node that needs to be mapped or a node that needs to be excluded from the DHLink. |
+| status icon | Identifies the followingA node that will not be copied since the target type does not support adding any children.A link that will not be copied since the source and/or the target type does not support creating links. |
+|  | Identifies the copied node having its parent copied as a node that has already been mapped and is now locked since it has a DHLink sync relation. |
+| Define Target Type from Attribute Value | Maps by using the Define Target Type from Attribute Value mode. If you select this mode, you must define the property values and specify the target types of each value in the provided table.NoteThe Define Target Type from Attribute Value mode is enabled in Group Type Mapping only. |
+| Attribute | Selects an attribute of a source node to define its values and a target type.NoteThe selected attribute is not available to be mapped for the Source Attribute in the provided schema map table. |
+| Define Value table (below the Attribute drop-down list) | Defines the values of the selected attribute and the target type of each value. The table has four columns as follows:DefaultSpecifies the default target type. If an attribute value does not match any mapped values when copying data or creating relations, DataHub uses the default target type. PriorityPrioritizes the selection order in the mapping process. It is used when a defined attribute has multiple values. The first target type on the list has the highest priority and is always selected first in the mapping process.ValueSelects a value for a target type. If the selected attribute is an Enumeration, you can choose the values from the provided drop-down list.TargetDefines a target type for the selected value. |
+| Exclude all non-mapped nodes from DHLinks | Excludes all nodes that you select from data synchronization. |
+| Quick search text box | Finds a particular type containing specific text. |
+| Target Type tree | Shows all types allowed to be added according to the type you have selected in the Source Type tree. The tree comes from the driver and a Cameo DataHub client shows the tree accordingly. |
+|  | Unmaps the selected nodes in the Source Type tree. Unmapped nodes is displayed in red. |
+|  | Skips and creates the schema mapping for the selected nodes as Exclude. |
+| Set as default target type | Allows a Cameo DataHub client to create the same type of the target when a source type is selected.NoteIf the mapping has already existed in the system, the new target type overwrites the old one, and the Schema Map dialog does not open. |
+|  | Edits a schema mapping by selecting the attributes in the provided schema map table. |
+|  | Starts copying with the selected target type and schema mapping. |
+|  | Cancels the copying operation. |
+
+To copy data from **DataHub Explorer** to the MagicDraw® Containment tree
+
+1. From the Operation drop-down list in DataHub Explorer, do one of the following
+  - Select Copy Data to copy data only.
+  - Select Copy Data with Sync to copy data and create synchronization.
+2. Drag a node from DataHub Explorer to an element in the MagicDraw Containment tree. The **Copy Data** dialog opens and shows the mapping mode and options for mapping the source and target types. NoteYou can also drag a node from DataHub Explorer into the MagicDraw® diagram pane. The dragged node is displayed as an element. Any nodes that have not been mapped to a type in the target tool is shown with a red circle.[IMAGE alt='' src='']The dragged nodes from DataHub Explorer into the MagicDraw diagram pane are displayed as elements. InformationIf you want to copy a DHLink (a MagicDraw® relation or a DOORS link), you must copy all the parent nodes in this relation. If only one parent node is copied, the DHLink will not appear. TipYou canget a properly arranged diagram byusing the MagicDraw® **Layout** menu. From the MagicDraw main menu, click **Layout**>**Quick Diagram Layout** to rearrange or reorganize the diagram.
+3. To resolve an unmapped node (a node with a red circle), select it from the Source Type tree and choose a target type that is available on the list on the right side of the dialog. TipDue to the DataHub support of stereotypes, if you have the same MagicDraw® data type with different stereotypes, you can map these two nodes using a different schema.You can also map customized stereotypes. When you have created the nodes, reload the Data Sources. The customized stereotypes becomes visible in DataHub Explorer.
+4. Select the [IMAGE alt='' src=''] check box if you want your nodes to be automatically mapped to target types for the same type of data, without mapping them again in the Copy Data dialog.
+5. Click any cells of the target attribute and select the target attribute from the provided drop-down list to be mapped with the source attribute. When the type and attributes are mapped, the color of the circle on the source node changes from red to green.
+6. Continue mapping all the types of the source node, and then click **OK** to copy them. TipThe **Copy Data** and **Copy Data with Sync** operations use the default templates in **Schema Map Manager**. If you want to map a source node with other element types, you must edit the default schema mapping.DataHub supports mapping multi-valued attributes by using the multiplicity of models. Therefore, if you map the multiple attribute values to the multi-valued target attributes, you must create customized stereotypes and properties to apply to the particular target nodes.To map the source node’s attribute to the multi-valued attribute of the target node, you must select the target node that uses the stereotype node and select the stereotype property.
+7. When the data has been copied successfully, the Copy Data with Sync Summary dialog opens and shows a list of all the copied data. [ATTACHMENT filename='copy-data-with-sync-summary.png']
+
+#### WARNING: Warning
+
+Warning
+
+- If you select the Copy Data operation, DataHub allows you to leave unresolved nodes when copying data.
+- If you select the Copy Data with Sync operation, you must map all nodes to maintain the data hierarchy, or select the **Exclude all unmapped nodes from DHLinks** option to ignore any unmapped nodes.
+
+To copy data or create a DHLink from a Data Source within DataHub Explorer
+
+1. From the Operation drop-down list in DataHub Explorer, do one of the following
+  - Select Copy Data to copy data only.
+  - Select Copy Data with Sync to copy data and create synchronization links.
+2. Drag a node from any Data Source to a node within DataHub Explorer . Either the source or target node must be a MagicDraw ® node. [ATTACHMENT filename='dh-export-within-explorer.png']
+3. The Copy Data dialog opens, prompting you to choose either Individual or Group Type Mapping mode. Choose a mode and map the source types to appropriate target types. Click OK .
+
+#### TIP: Tip
+
+Tip
+
+The following rules apply to the **Copy Data with Sync** operation:
+
+- All nodes under the dragged source root node must be able to create the synchronization links.
+- A node cannot have more than one Sync relation with one Data Source. For example, node a has a Sync relation with Data Source D1 . Therefore, node a cannot create another Sync relation within D1 , but it can create a Sync relation with any node under Data Source D2 or other Data Sources.
+- You can drag a node whose child has a Sync relation. However, all the nodes under the Sync node are locked in the Copy Data with Sync dialog and the existing Sync relations are moved to a new parent node.
+- You cannot move an object across the Formal Module in DOORS.
+- You cannot change the type of the node that will be moved or has been moved, e.g., from a module to an object and vice versa.
+
+To copy data from a CSV Data Source to MagicDraw Data Source
+
+1. From the Operation drop-down list in DataHub Explorer, do one of the following [ATTACHMENT filename='export-within-dh-exp.png']
+  - Select Copy Data to copy data only.
+  - Select Copy Data with Sync to copy data with synchronization.
+2. Drag the nodes from the CSV Data Source to MagicDraw Data Source. A dialog appears confirming you want to add the nodes recursively. Select one of the following
+  - If you want to copy the selected node with data hierarchy, select Yes .
+  - If you want to copy only the selected node without data hierarchy, select No .
+3. The **Copy Data** dialog opens to allow you to choose Individual or Group Type Mapping mode. Choose a mapping mode and map the source types to appropriate target types.
+
+#### NOTE: Note
+
+Note
+
+- Nesting is not possible for CSV data source, as CSV file has no data hierarchy.
+- You cannot copy links (a MagicDraw ® or a DOORS link) to a CSV Data Source since links always have data hierarchy with their parent nodes.
+- You cannot synchronize relations with a CSV Data Source if you change the attribute synchronized with a CSV key field because DataHub uses the CSV key field to indicate the synchronization target.
+
+### EXACT CONFLUENCE STORAGE SOURCE
+
+````html
+<p>When you select this operation, a DHLink for synchronization is added to the data. It maintains the structure and data of the elements within the node. During data synchronization, DataHub searches for any new nodes and deleted nodes. If it finds any new nodes or deleted nodes within the scope on one side, DataHub copies them to the other side and create a synchronization relation between them or deletes them from the other side.</p><p><br /></p><p>To Copy Data with Sync</p><hr /><ol><li>From the <strong>Operation</strong> drop-down list in <strong>Cameo DataHub Explorer</strong>, select <strong>Copy Data with Sync</strong>.</li><li>Drag a source node to a target node.<br /><br /></li></ol><p style="margin-left: 30.0px;"><ac:image ac:title="Drag and drop a source node to target in Copy Data with Sync operation mode" ac:alt="Drag and drop a source node to target in Copy Data with Sync operation mode"><ri:attachment ri:filename="doors-ds-to-md-containment-drag.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Copy Data with Sync operation" /></ri:attachment></ac:image><br /><br /></p><p style="margin-left: 30.0px;">3. The<strong> Copy Data with Sync</strong> dialog opens. When the nodes and their attributes have been mapped to their respective target types, click <strong>OK</strong>.<br /><br /></p><p style="margin-left: 30.0px;"><ac:image><ri:attachment ri:filename="Node Mapping Group.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Copy Data with Sync operation" /></ri:attachment></ac:image></p><p style="margin-left: 30.0px;"><br /></p><ac:structured-macro ac:name="note" ac:schema-version="1" ac:macro-id="24dc94a9-6d7b-441f-ae33-80199fffa8b2"><ac:parameter ac:name="title">Note</ac:parameter><ac:rich-text-body><ul><li><p>The mapping process also includes two target types:  <ac:image ac:thumbnail="true" ac:height="18"><ri:attachment ri:filename="Non-mapping.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Copy Data with Sync operation" /></ri:attachment></ac:image> and <ac:image ac:thumbnail="true" ac:height="17"><ri:attachment ri:filename="Excluded.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Copy Data with Sync operation" /></ri:attachment></ac:image>.</p></li><li><p>The<strong> <ac:image ac:thumbnail="true" ac:height="18"><ri:attachment ri:filename="Non-mapping.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Copy Data with Sync operation" /></ri:attachment></ac:image></strong> target type is available for the <strong>Individual Type Mapping</strong> mode only. You can see the <ac:image ac:thumbnail="true" ac:height="18"><ri:attachment ri:filename="Non-mapping.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Copy Data with Sync operation" /></ri:attachment></ac:image> type in the Target Type tree in the <strong>Copy Data with Sync</strong> dialog.</p></li><li><p>The <ac:image ac:thumbnail="true" ac:height="17"><ri:attachment ri:filename="Excluded.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Copy Data with Sync operation" /></ri:attachment></ac:image>target type is available for both the <strong>Individual Type Mapping</strong> mode and <strong>Group Type Mapping</strong> mode. You can see the <ac:image ac:thumbnail="true" ac:height="17"><ri:attachment ri:filename="Excluded.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Copy Data with Sync operation" /></ri:attachment></ac:image>type in the Target Type tree only in the <strong>Copy Data with Sync</strong> dialog.</p></li><li><p>You can exclude nodes in the <strong>Copy Data with Sync</strong> dialog by selecting the <ac:image ac:thumbnail="true" ac:height="15"><ri:attachment ri:filename="image2018-3-7_15-30-24.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Copy Data with Sync operation" /></ri:attachment></ac:image> option and selecting the <ac:image ac:thumbnail="true" ac:height="18"><ri:attachment ri:filename="Non-mapping.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Copy Data with Sync operation" /></ri:attachment></ac:image> target type. This target type marks the unmapped nodes with an<strong> Exclude </strong>status that will not be copied.</p></li><li>Alternatively, you can create the schema mapping for the selected nodes as <strong>Exclude</strong> by selecting the <ac:image ac:thumbnail="true" ac:height="17"><ri:attachment ri:filename="Excluded.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Copy Data with Sync operation" /></ri:attachment></ac:image>target type.</li><li>If you want to include unmapped nodes, go to the<strong> DH Links</strong> panel, right-click in the panel, and select<strong> Include Node</strong>.</li></ul></ac:rich-text-body></ac:structured-macro><p>The table below summarizes the components of the <strong>Copy Data with Sync</strong> Dialog.</p><table class="relative-table" style="margin-left: 30.0px;width: 96.157%;"><colgroup><col style="width: 19.818%;" /><col style="width: 80.273%;" /></colgroup><thead style="margin-left: 30.0px;"><tr style="margin-left: 30.0px;"><td class="highlight-grey" colspan="1" data-highlight-colour="grey"><strong><span style="color: rgb(0,0,0);">Component</span></strong></td><td class="highlight-grey" colspan="1" data-highlight-colour="grey"><strong><span style="color: rgb(0,0,0);">Function</span></strong></td></tr></thead><tbody style="margin-left: 30.0px;"><tr style="margin-left: 30.0px;"><td style="margin-left: 30.0px;">Sync Direction</td><td style="margin-left: 30.0px;"><div class="content-wrapper"><p>Selects which direction to synchronize data from, either unidirectional or bidirectional:</p><ul><li style="list-style-type: none;background-image: none;"><ul><li><strong><ac:image><ri:attachment ri:filename="two-way-sync.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Copy Data with Sync operation" /></ri:attachment></ac:image></strong>: Synchronizes data in both directions.</li><li><strong><ac:image><ri:attachment ri:filename="one-way-sync-to-md.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Copy Data with Sync operation" /></ri:attachment></ac:image></strong>: Synchronizes the other Data Source with the MagicDraw Data Source. This option appears only when one of the sides is a MagicDraw Data Source.</li><li><strong><ac:image><ri:attachment ri:filename="one-way-sync-from-md.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Copy Data with Sync operation" /></ri:attachment></ac:image></strong>: Synchronizes the MagicDraw Data Source with the other Data Source.</li></ul></li></ul></div></td></tr><tr style="margin-left: 30.0px;"><td style="margin-left: 30.0px;">Mapping Mode</td><td style="margin-left: 30.0px;">Switches between <strong>Individual</strong> <strong>Type</strong> Mapping and <strong>Group</strong> <strong>Type</strong> Mapping. The <strong>Mapping Mode</strong> drop-down list always shows the default type that you have selected through the<strong> Cameo DataHub Options</strong> dialog.</td></tr><tr style="margin-left: 30.0px;"><td style="margin-left: 30.0px;">Source Type tree</td><td style="margin-left: 30.0px;">Specifies a data tree of the source that is to be copied. You must specify a target type for every source type.</td></tr><tr style="margin-left: 30.0px;"><td style="margin-left: 30.0px;" colspan="1"><div class="content-wrapper"><p><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><ac:image ac:thumbnail="true" ac:width="20"><ri:attachment ri:filename="green.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Working with DataHub and modeling tools" /></ri:attachment></ac:image> status icon<br /></span></span></p></div></td><td style="margin-left: 30.0px;" colspan="1">Identifies a node whose source type has already been resolved.</td></tr><tr style="margin-left: 30.0px;"><td style="margin-left: 30.0px;" colspan="1"><div class="content-wrapper"><p><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><ac:image ac:thumbnail="true" ac:width="20"><ri:attachment ri:filename="red.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Working with DataHub and modeling tools" /></ri:attachment></ac:image> status icon<br /></span></span></p></div></td><td style="margin-left: 30.0px;" colspan="1">Identifies a node whose source type needs to be resolved before copying. It refers to either a node that needs to be mapped or a node that needs to be excluded from the DHLink.</td></tr><tr style="margin-left: 30.0px;"><td style="margin-left: 30.0px;" colspan="1"><div class="content-wrapper"><p><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><ac:image ac:thumbnail="true" ac:width="20"><ri:attachment ri:filename="gray.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Working with DataHub and modeling tools" /></ri:attachment></ac:image> status icon<br /></span></span></p></div></td><td style="margin-left: 30.0px;" colspan="1"><p>Identifies the following</p><ul><li style="list-style-type: none;background-image: none;"><ul><li>A node that will not be copied since the target type does not support adding any children.</li><li>A link that will not be copied since the source and/or the target type does not support creating links.</li></ul></li></ul></td></tr><tr style="margin-left: 30.0px;"><td style="margin-left: 30.0px;" colspan="1"> <span class="confluence-embedded-file-wrapper"><span class="confluence-embedded-file-wrapper"><ac:image><ri:attachment ri:filename="lock.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Working with DataHub and modeling tools" /></ri:attachment></ac:image></span></span></td><td style="margin-left: 30.0px;" colspan="1">Identifies the copied node having its parent copied as a node that has already been mapped and is now locked since it has a DHLink sync relation.</td></tr><tr style="margin-left: 30.0px;"><td style="margin-left: 30.0px;" colspan="1">Define Target Type from Attribute Value</td><td style="margin-left: 30.0px;" colspan="1"><div class="content-wrapper"><p>Maps by using the <strong>Define Target Type from Attribute Value</strong> mode. If you select this mode, you must define the property values and specify the target types of each value in the provided table.</p><ac:structured-macro ac:name="note" ac:schema-version="1" ac:macro-id="081d2295-b453-411a-8479-9caa8431db0b"><ac:parameter ac:name="title">Note</ac:parameter><ac:rich-text-body><p>The <strong>Define Target Type from Attribute Value</strong> mode is enabled in Group Type Mapping only.</p></ac:rich-text-body></ac:structured-macro><p class="auto-cursor-target"><br /></p></div></td></tr><tr style="margin-left: 30.0px;"><td style="margin-left: 30.0px;" colspan="1">Attribute</td><td style="margin-left: 30.0px;" colspan="1"><div class="content-wrapper"><p>Selects an attribute of a source node to define its values and a target type.</p><ac:structured-macro ac:name="note" ac:schema-version="1" ac:macro-id="9b752424-9409-4584-9600-66986cb3c146"><ac:parameter ac:name="title">Note</ac:parameter><ac:rich-text-body><p>The selected attribute is not available to be mapped for the Source Attribute in the provided schema map table.</p></ac:rich-text-body></ac:structured-macro><p class="auto-cursor-target"><br /></p></div></td></tr><tr style="margin-left: 30.0px;"><td style="margin-left: 30.0px;" colspan="1">Define Value table (below the <strong>Attribute</strong> drop-down list)<br /><br /></td><td style="margin-left: 30.0px;" colspan="1"><p>Defines the values of the selected attribute and the target type of each value. The table has four columns as follows:</p><ul><li style="list-style-type: none;background-image: none;"><ul><li><strong>Default</strong><br />Specifies the default target type. If an attribute value does not match any mapped values when copying data or creating relations, DataHub uses the default target type. </li><li><strong>Priority</strong><br />Prioritizes the selection order in the mapping process. It is used when a defined attribute has multiple values. The first target type on the list has the highest priority and is always selected first in the mapping process.</li><li><strong>Value</strong><br />Selects a value for a target type. If the selected attribute is an Enumeration, you can choose the values from the provided drop-down list.</li><li><strong>Target</strong><br />Defines a target type for the selected value.</li></ul></li></ul></td></tr><tr style="margin-left: 30.0px;"><td style="margin-left: 30.0px;" colspan="1">Exclude all non-mapped nodes from DHLinks</td><td style="margin-left: 30.0px;" colspan="1"><div class="content-wrapper"><p>Excludes all nodes that you select from data synchronization.</p></div></td></tr><tr style="margin-left: 30.0px;"><td style="margin-left: 30.0px;" colspan="1">Quick search text box</td><td style="margin-left: 30.0px;" colspan="1">Finds a particular type containing specific text.</td></tr><tr style="margin-left: 30.0px;"><td style="margin-left: 30.0px;" colspan="1">Target Type tree</td><td style="margin-left: 30.0px;" colspan="1">Shows all types allowed to be added according to the type you have selected in the Source Type tree. The tree comes from the driver and a Cameo DataHub client shows the tree accordingly.</td></tr><tr style="margin-left: 30.0px;"><td style="margin-left: 30.0px;" colspan="1"><div class="content-wrapper"><p><ac:image ac:thumbnail="true" ac:height="18"><ri:attachment ri:filename="Non-mapping.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Copy Data with Sync operation" /></ri:attachment></ac:image> </p></div></td><td style="margin-left: 30.0px;" colspan="1"><div class="content-wrapper"><p>Unmaps the selected nodes in the Source Type tree. Unmapped nodes is displayed in red.</p></div></td></tr><tr style="margin-left: 30.0px;"><td colspan="1"><div class="content-wrapper"><p><ac:image ac:thumbnail="true" ac:height="17"><ri:attachment ri:filename="Excluded.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Copy Data with Sync operation" /></ri:attachment></ac:image></p></div></td><td colspan="1">Skips and creates the schema mapping for the selected nodes as <strong>Exclude</strong>.</td></tr><tr style="margin-left: 30.0px;"><td style="margin-left: 30.0px;" colspan="1">Set as default target type</td><td style="margin-left: 30.0px;" colspan="1"><div class="content-wrapper"><p>Allows a Cameo DataHub client to create the same type of the target when a source type is selected.</p><ac:structured-macro ac:name="note" ac:schema-version="1" ac:macro-id="7fbd4e2d-fee6-4793-ab5e-afb033d74790"><ac:parameter ac:name="title">Note</ac:parameter><ac:rich-text-body><p>If the mapping has already existed in the system, the new target type overwrites the old one, and the <strong>Schema Map</strong> dialog does not open.</p></ac:rich-text-body></ac:structured-macro><p class="auto-cursor-target"><br /></p></div></td></tr><tr style="margin-left: 30.0px;"><td style="margin-left: 30.0px;" colspan="1"><div class="content-wrapper"><p><span class="confluence-embedded-file-wrapper"><span class="confluence-embedded-file-wrapper"><ac:image><ri:attachment ri:filename="edit(1).png"><ri:page ri:space-key="CDH2024x" ri:content-title="Working with DataHub and modeling tools" /></ri:attachment></ac:image></span></span></p></div></td><td style="margin-left: 30.0px;" colspan="1">Edits a schema mapping by selecting the attributes in the provided schema map table.</td></tr><tr style="margin-left: 30.0px;"><td style="margin-left: 30.0px;" colspan="1"><div class="content-wrapper"><p><span class="confluence-embedded-file-wrapper"><span class="confluence-embedded-file-wrapper"><ac:image><ri:attachment ri:filename="OK.PNG"><ri:page ri:space-key="CDH2024x" ri:content-title="Working with DataHub and modeling tools" /></ri:attachment></ac:image></span></span></p></div></td><td style="margin-left: 30.0px;" colspan="1">Starts copying with the selected target type and schema mapping.</td></tr><tr style="margin-left: 30.0px;"><td style="margin-left: 30.0px;" colspan="1"><div class="content-wrapper"><p><span class="confluence-embedded-file-wrapper"><span class="confluence-embedded-file-wrapper"><ac:image><ri:attachment ri:filename="Cancel.PNG"><ri:page ri:space-key="CDH2024x" ri:content-title="Working with DataHub and modeling tools" /></ri:attachment></ac:image><br /></span></span></p></div></td><td style="margin-left: 30.0px;" colspan="1">Cancels the copying operation.</td></tr></tbody></table><p><br /></p><p>To copy data from <strong>DataHub Explorer</strong> to the MagicDraw® Containment tree</p><hr /><ol><li>From the <strong>Operation</strong> drop-down list in DataHub Explorer, do one of the following<br /><ul><li>Select <strong>Copy Data</strong> to copy data only.</li><li>Select <strong>Copy Data with Sync</strong> to copy data and create synchronization.</li></ul></li><li><p class="auto-cursor-target">Drag a node from DataHub Explorer to an element in the MagicDraw Containment tree. The <strong>Copy Data</strong> dialog opens and shows the mapping mode and options for mapping the source and target types.</p><ac:structured-macro ac:name="note" ac:schema-version="1" ac:macro-id="8c441526-5c25-4f65-b80f-b85e2fe299a6"><ac:parameter ac:name="title">Note</ac:parameter><ac:rich-text-body><p style="text-align: left;">You can also drag a node from DataHub Explorer into the MagicDraw<sup>®</sup> diagram pane. The dragged node is displayed as an element. Any nodes that have not been mapped to a type in the target tool is shown with a red circle.</p><p><ac:image ac:align="center" ac:title="Dragging a Node to the MagicDraw Diagram Pane" ac:alt="Dragging a Node to the MagicDraw Diagram Pane"><ri:attachment ri:filename="result-of-import-req-diag.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Copy Data with Sync operation" /></ri:attachment></ac:image></p><h6 style="text-align: center;">The dragged nodes from DataHub Explorer into the MagicDraw diagram pane are displayed as elements.</h6></ac:rich-text-body></ac:structured-macro><p class="auto-cursor-target"><br /></p><ac:structured-macro ac:name="info" ac:schema-version="1" ac:macro-id="d7119b1a-cb23-4fad-b3e3-1a192e368aa9"><ac:parameter ac:name="title">Information</ac:parameter><ac:rich-text-body><p><span>If you want to copy a DHLink (a MagicDraw<sup>®</sup> relation or a DOORS link), you must copy all the parent nodes in this relation. If only one parent node is copied, the DHLink will not appear.</span></p></ac:rich-text-body></ac:structured-macro><p class="auto-cursor-target"><br /></p><ac:structured-macro ac:name="tip" ac:schema-version="1" ac:macro-id="73731676-bd16-4641-8f02-78540d95c87c"><ac:parameter ac:name="title">Tip</ac:parameter><ac:rich-text-body><p><span>You can<span> get a properly arranged diagram by </span>using the MagicDraw<sup>®</sup> <strong>Layout</strong> menu. From the MagicDraw main menu, click <strong>Layout</strong><span> &gt; </span><strong>Quick Diagram Layout</strong> to rearrange or reorganize the diagram.</span><span><br /></span></p></ac:rich-text-body></ac:structured-macro><p class="auto-cursor-target"><br /></p></li><li><p class="auto-cursor-target">To resolve an unmapped node (a node with a red circle), select it from the Source Type tree and choose a target type that is available on the list on the right side of the dialog.</p><ac:structured-macro ac:name="tip" ac:schema-version="1" ac:macro-id="449a45b2-bdfc-455e-9659-a0b57b36d4d9"><ac:parameter ac:name="title">Tip</ac:parameter><ac:rich-text-body><ul><li>Due to the DataHub support of stereotypes, if you have the same MagicDraw<sup>®</sup> data type with different stereotypes, you can map these two nodes using a different schema.</li><li>You can also map customized stereotypes. When you have created the nodes, reload the Data Sources. The customized stereotypes becomes visible in DataHub Explorer.</li></ul></ac:rich-text-body></ac:structured-macro><p class="auto-cursor-target"><br /></p></li><li>Select the <strong><ac:image><ri:attachment ri:filename="set-default-target-type-btn.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Copy Data with Sync operation" /></ri:attachment></ac:image></strong> check box if you want your nodes to be automatically mapped to target types for the same type of data, without mapping them again in the <strong>Copy Data</strong> dialog.</li><li>Click any cells of the target attribute and select the target attribute from the provided drop-down list to be mapped with the source attribute. When the type and attributes are mapped, the color of the circle on the source node changes from red to green.</li><li><p class="auto-cursor-target">Continue mapping all the types of the source node, and then click <strong>OK</strong> to copy them.<br /><br /></p><ac:structured-macro ac:name="tip" ac:schema-version="1" ac:macro-id="32206432-d972-4cce-a853-e11636149c0a"><ac:parameter ac:name="title">Tip</ac:parameter><ac:rich-text-body><ul><li>The <strong>Copy Data</strong> and <strong>Copy Data with Sync</strong> operations use the default templates in <strong>Schema Map Manager</strong>. If you want to map a source node with other element types, you must edit the default schema mapping.</li><li>DataHub supports mapping multi-valued attributes by using the multiplicity of models. Therefore, if you map the multiple attribute values to the multi-valued target attributes, you must create customized stereotypes and properties to apply to the particular target nodes.</li><li>To map the source node’s attribute to the multi-valued attribute of the target node, you must select the target node that uses the stereotype node and select the stereotype property.</li></ul></ac:rich-text-body></ac:structured-macro><p class="auto-cursor-target"><br /></p></li><li>When the data has been copied successfully, the <strong>Copy Data with Sync</strong> <strong>Summary</strong> dialog opens and shows a list of all the copied data.<br /><br /><ac:image ac:title="The Export Summary Dialog" ac:alt="The Export Summary Dialog"><ri:attachment ri:filename="copy-data-with-sync-summary.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Copy Data with Sync operation" /></ri:attachment></ac:image><br /><br /></li></ol><ac:structured-macro ac:name="warning" ac:schema-version="1" ac:macro-id="238ed12e-ea65-4530-8803-748ab1711010"><ac:parameter ac:name="title">Warning</ac:parameter><ac:rich-text-body><ul><li><span>If you select the </span><strong>Copy Data</strong><span> operation, DataHub allows you to leave unresolved nodes when copying data.</span></li><li><span>If you select the </span><strong>Copy Data with Sync</strong><span> operation, you must map all nodes to maintain the data hierarchy, or select the </span><span><strong>Exclude all unmapped nodes from DHLinks</strong> option to ignore any unmapped nodes.</span></li></ul></ac:rich-text-body></ac:structured-macro><p>To copy data or create a DHLink from a Data Source within DataHub Explorer</p><hr /><ol><li>From the <strong>Operation</strong> drop-down list in DataHub Explorer, do one of the following<br /><ul><li class="auto-cursor-target">Select <strong>Copy Data</strong> to copy data only.</li><li class="auto-cursor-target">Select <strong>Copy Data with Sync</strong> to copy data and create synchronization links.</li></ul></li><li>Drag a node from any Data Source to a node within<strong> DataHub Explorer</strong>. Either the source or target node must be a MagicDraw<sup>®</sup> node.<br /><br /><ac:image ac:title="Dragging a Node within DataHub Explorer" ac:alt="Dragging a Node within DataHub Explorer"><ri:attachment ri:filename="dh-export-within-explorer.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Copy Data with Sync operation" /></ri:attachment></ac:image><br /><br /></li><li>The <strong>Copy Data</strong> dialog opens, prompting you to choose either Individual or Group Type Mapping mode. Choose a mode and map the source types to appropriate target types. Click <strong>OK</strong>.</li></ol><ac:structured-macro ac:name="tip" ac:schema-version="1" ac:macro-id="2d30f764-0c02-40c0-8e42-6da60726380b"><ac:parameter ac:name="title">Tip</ac:parameter><ac:rich-text-body><p>The following rules apply to the <strong>Copy Data with Sync</strong> operation:</p><ul><li>All nodes under the dragged source root node must be able to create the synchronization links.</li><li>A node cannot have more than one Sync relation with one Data Source. For example, node <em>a</em> has a Sync relation with Data Source <em>D1</em>. Therefore, node <em>a</em> cannot create another Sync relation within <em>D1</em>, but it can create a Sync relation with any node under Data Source <em>D2</em> or other Data Sources.</li><li>You can drag a node whose child has a Sync relation. However, all the nodes under the Sync node are locked in the <strong>Copy Data with Sync</strong> dialog and the existing Sync relations are moved to a new parent node. </li><li>You cannot move an object across the Formal Module in DOORS.</li><li>You cannot change the type of the node that will be moved or has been moved, e.g., from a module to an object and vice versa.</li></ul></ac:rich-text-body></ac:structured-macro><p class="auto-cursor-target"><br /></p><p>To copy data from a CSV Data Source to MagicDraw Data Source</p><hr /><ol><li>From the <strong>Operation</strong> drop-down list in DataHub Explorer, do one of the following<br /><ul><li>Select <strong>Copy Data</strong> to copy data only.</li><li>Select <strong>Copy Data with Sync</strong> to copy data with synchronization.</li></ul><br /><ac:image ac:title="Copying from a CSV Data Source" ac:alt="Copying from a CSV Data Source"><ri:attachment ri:filename="export-within-dh-exp.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Copy Data with Sync operation" /></ri:attachment></ac:image><br /><br /></li><li>Drag the nodes from the CSV Data Source to MagicDraw Data Source. A dialog appears confirming you want to add the nodes recursively. Select one of the following<br /><ul><li>If you want to copy the selected node with data hierarchy, select <strong>Yes</strong>.</li><li>If you want to copy only the selected node without data hierarchy, select <strong>No</strong>.</li></ul></li><li><p>The <strong>Copy Data</strong> dialog opens to allow you to choose Individual or Group Type Mapping mode. Choose a mapping mode and map the source types to appropriate target types.</p></li></ol><ac:structured-macro ac:name="note" ac:schema-version="1" ac:macro-id="2be3c524-e77f-494a-afcd-515a9751e33b"><ac:parameter ac:name="title">Note</ac:parameter><ac:rich-text-body><ul><li>Nesting is not possible for CSV data source, as CSV file has no data hierarchy.</li><li>You cannot copy links (a MagicDraw<sup style="letter-spacing: 0.0px;">®</sup><span style="letter-spacing: 0.0px;"> or a DOORS link) to a CSV Data Source since links always have data hierarchy with their parent nodes. </span></li><li>You cannot synchronize relations with a CSV Data Source if you change the attribute synchronized with a CSV key field because DataHub uses the CSV key field to indicate the synchronization target.</li></ul></ac:rich-text-body></ac:structured-macro><p class="auto-cursor-target"><br /></p>
+````
+
+<!--NOMAGIC_PAGE id=136716897 space=CDH2024x version=1 -->
+## PAGE 00029: Copying data with custom types and properties
+
+- page_id: `136716897`
+- space_key: `CDH2024x`
+- source_url: https://docs.nomagic.com/spaces/CDH2024x/pages/136716897/Copying+data+with+custom+types+and+properties
+- version_number: 1
+- version_date: `2023-09-21T06:05:02.870+02:00`
+- ancestors: Cameo DataHub Documentation > User Guide > Synchronization
+- labels: []
+
+### NORMALIZED CONTENT
+
+Elements in the source and the target data normally contain different sets of attributes. To have matching attributes when copying data across tools, you need to prepare custom attributes for the target types before copying data so that new custom attributes are available during data copying.
+
+To prepare custom attributes for Requirement elements in MagicDraw®
+
+1. Create a new Stereotype, e.g., <<doors_attr>> .
+2. Add properties to <<doors_attr>> , e.g., Custom1 and Custom2 . These properties are custom attributes.
+3. Create a Requirement element.
+4. Right-click the created Requirement element and select Stereotype .
+5. Search for < <doors_attr> > and select the stereotype. The custom data type is now ready for DataHub. This data type is available for you to select in the Copy Data dialog.
+
+When you select this data type as the target type, the custom attributes, *Custom1* and *Custom2*, are available.
+
+### EXACT CONFLUENCE STORAGE SOURCE
+
+````html
+<p>Elements in the source and the target data normally contain different sets of attributes. To have matching attributes when copying data across tools, you need to prepare custom attributes for the target types before copying data so that new custom attributes are available during data copying.</p><p><br /></p><p>To prepare custom attributes for Requirement elements in MagicDraw<sup>®</sup></p><hr /><ol><li>Create a new Stereotype, e.g., <em>&lt;&lt;doors_attr&gt;&gt;</em>.</li><li>Add properties to <em>&lt;&lt;doors_attr&gt;&gt;</em>, e.g., <em>Custom1 </em>and<em> Custom2</em>. These properties are custom attributes.</li><li>Create a Requirement element.</li><li>Right-click the created Requirement element and select <strong>Stereotype</strong>.</li><li>Search for &lt;<strong>&lt;doors_attr&gt;</strong>&gt; and select the stereotype. The custom data type is now ready for DataHub. This data type is available for you to select in the <strong>Copy Data</strong> dialog.</li></ol><p><br /></p><p>When you select this data type as the target type, the custom attributes, <em>Custom1</em> and <em>Custom2</em>, are available.</p>
+````
+
+<!--NOMAGIC_PAGE id=136716453 space=CDH2024x version=1 -->
+## PAGE 00030: Copying DHLinks across Stream or Baseline Data Sources
+
+- page_id: `136716453`
+- space_key: `CDH2024x`
+- source_url: https://docs.nomagic.com/spaces/CDH2024x/pages/136716453/Copying+DHLinks+across+Stream+or+Baseline+Data+Sources
+- version_number: 1
+- version_date: `2023-09-21T06:04:42.890+02:00`
+- ancestors: Cameo DataHub Documentation > User Guide > Working with DataHub and modeling tools > Working with Data Sources > Adding Data Sources for IBM Rational DOORS Next Generation
+- labels: []
+
+### NORMALIZED CONTENT
+
+When you have synchronization with any existing Stream or Baseline, you can continue it with a new stream or baseline. DataHub enables you to copy DHLinks from one Stream or Baseline Data Source to another.
+
+[IMAGE alt='' src='']
+
+###### Selecting an existing DHLink in an Initial Stream or Baseline.
+
+To copy an existing DHLink to another Stream or Baseline Data Source
+
+1. Right-click an element in the target Stream or Baseline that DHLink(s) will be copied to and select Copy DHLink from other data sources . [ATTACHMENT filename='Copy_DHLinks from other data source.png']
+2. The Copy DHLink from other data sources dialog box opens. From the Select root element of the DHLink list, select a Stream or baseline to copy DHLink(s) from. Click OK . [ATTACHMENT filename='Dailog_box.png']
+
+After links are copied from one data source to the other, both data sources will not contain synchronized links. Data sourcesthose links are copied from will be displayed with an ***x*** icon on the components, indicating that it is not insynchronizationwith the model. The other data source the links are copied to will be displayed with an ***s*** icon on the components, indicating that it is insynchronizationwith the model.
+
+[IMAGE alt='' src='']
+
+###### The duplicated DHLink copied from the Initial Stream
+
+It is possible to have both sources in synchronization by selecting the **Include Link Recursively** command.
+
+[IMAGE alt='' src='']
+
+###### Inlcude DHLinks Recursively command
+
+[IMAGE alt='' src='']
+
+###### Both data sources in synchronization
+
+#### NOTE: Note
+
+Note
+
+- The selected element in the target Stream must be the root element of DHLink(s) in the other Stream Data Source to perform the copying DHLink operation across Stream Data Sources.
+- When the Check for change command is initiated, you need to select which target stream to check the model against.
+
+### EXACT CONFLUENCE STORAGE SOURCE
+
+````html
+<p>When you have synchronization with any existing Stream or Baseline, you can continue it with a new stream or baseline. DataHub enables you to copy DHLinks from one Stream or Baseline Data Source to another.</p><p style="text-align: center;"><ac:image><ri:attachment ri:filename="DHlink_Selection.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Copying DHLinks across Stream or Baseline Data Sources" /></ri:attachment></ac:image></p><h6 style="text-align: center;">Selecting an existing DHLink in an Initial Stream or Baseline.</h6><p>To copy an existing DHLink to another Stream or Baseline Data Source</p><hr /><ol><li style="text-align: left;">Right-click an element in the target Stream or Baseline that DHLink(s) will be copied to and select <strong>Copy DHLink from other data sources</strong>.<br /><br /><ac:image><ri:attachment ri:filename="Copy_DHLinks from other data source.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Copying DHLinks across Stream or Baseline Data Sources" /></ri:attachment></ac:image><br /><br /></li><li style="text-align: left;">The <strong style="letter-spacing: 0.0px;">Copy DHLink from other data sources</strong><span style="letter-spacing: 0.0px;"> dialog box opens. From the </span><strong style="letter-spacing: 0.0px;">Select root element of the DHLink</strong><span style="letter-spacing: 0.0px;"> list, select a Stream or baseline to copy DHLink(s) from. Click </span><strong style="letter-spacing: 0.0px;">OK</strong><span style="letter-spacing: 0.0px;">.</span><br /><br /><ac:image><ri:attachment ri:filename="Dailog_box.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Copying DHLinks across Stream or Baseline Data Sources" /></ri:attachment></ac:image></li></ol><p><br /><span style="letter-spacing: 0.0px;">After links are copied from one data source to the other, both data sources will not contain synchronized links. Data sources </span><span style="letter-spacing: 0.0px;">those links are copied from will be displayed with an <em><strong>x</strong></em> icon on the components, <span>indicating that it is not in </span>synchronization<span> with the model</span>. The other data source the links are copied to will be displayed with an <em><strong>s</strong></em> icon on the components, indicating that it is in </span>synchronization<span style="letter-spacing: 0.0px;"> with the model.</span></p><p><br /></p><p style="text-align: center;"><ac:image><ri:attachment ri:filename="DHlink_copy.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Copying DHLinks across Stream or Baseline Data Sources" /></ri:attachment></ac:image></p><h6 style="text-align: center;">The duplicated DHLink copied from the Initial Stream</h6><p>It is possible to have both sources in synchronization by selecting the <strong>Include Link Recursively</strong> command.</p><p style="text-align: center;"><ac:image><ri:attachment ri:filename="Inlcude DHLinks.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Copying DHLinks across Stream or Baseline Data Sources" /></ri:attachment></ac:image></p><h6 style="text-align: center;">Inlcude DHLinks Recursively command</h6><p style="text-align: center;"><ac:image><ri:attachment ri:filename="DHlink_copy_both_sync.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Copying DHLinks across Stream or Baseline Data Sources" /></ri:attachment></ac:image></p><h6 style="text-align: center;">Both data sources in synchronization</h6><ac:structured-macro ac:name="note" ac:schema-version="1" ac:macro-id="cbe65665-f9b5-4667-be69-52cba4a780f5"><ac:parameter ac:name="title">Note</ac:parameter><ac:rich-text-body><ul><li>The selected element in the target Stream must be the root element of DHLink(s) in the other Stream Data Source to perform the copying DHLink operation across Stream Data Sources.</li><li>When the Check for change command is initiated, you need to select which target stream to check the model against.</li></ul></ac:rich-text-body></ac:structured-macro><p class="auto-cursor-target"><br /></p>
+````
+
+<!--NOMAGIC_PAGE id=136716535 space=CDH2024x version=1 -->
+## PAGE 00031: Copying OSLC query results to a modeling tool as SysML Requirements
+
+- page_id: `136716535`
+- space_key: `CDH2024x`
+- source_url: https://docs.nomagic.com/spaces/CDH2024x/pages/136716535/Copying+OSLC+query+results+to+a+modeling+tool+as+SysML+Requirements
+- version_number: 1
+- version_date: `2023-09-21T06:04:49.801+02:00`
+- ancestors: Cameo DataHub Documentation > User Guide > Working with DataHub and modeling tools > Working with OSLC features
+- labels: []
+
+### NORMALIZED CONTENT
+
+To copy OSLC query results to a modeling tool as SysML Requirements, you must set up [CONFLUENCE_PAGE title='Adding IBM Rational DOORS Next Generation Data Sources' space='CDH2024x']an IBM® Rational® DOORS® Next Generation Data Source and query the Data Source using OSLC query syntax. When you have the query results, you can copy them into your modeling tool as SysML Requirements.
+
+To copy OSLC query results to a modeling tool as SysML Requirements
+
+1. Complete the steps of [CONFLUENCE_PAGE title='Creating OSLC queries' space='CDH2024x'] .
+2. From the OSLC query results, drag the matching query tree to the Containment tree of the modeling tool.
+
+[IMAGE alt='' src='']
+
+2. The **Copy Data** dialog opens. From the target type list in the **MagicDraw Side** group, choose **Extended Requirement**. Click **OK**.
+
+[IMAGE alt='' src='']
+
+The result of the copy is shown in the MagicDraw Containment tree.
+
+[IMAGE alt='' src='']
+
+###### The result of the copied OSLC query in the MagicDraw Containment tree.
+
+#### INFO: Information
+
+Information
+
+**OSLC Query Editor**supports the**Copy Data**,**Copy Data with DHTrace**, and**Create DHTrace******operations.
+
+[IMAGE alt='' src='']
+
+###### The Copy Data, Copy Data with DHTrace, and Create DHTrace operations are supported in the OSLC Query Editor dialog.
+
+### EXACT CONFLUENCE STORAGE SOURCE
+
+````html
+<p>To copy OSLC query results to a modeling tool as SysML Requirements, you must set up <ac:link><ri:page ri:space-key="CDH2024x" ri:content-title="Adding IBM Rational DOORS Next Generation Data Sources" /><ac:link-body>an IBM<sup>®</sup> Rational<sup>®</sup> DOORS<sup>®</sup> Next Generation Data Source</ac:link-body></ac:link> and query the Data Source using OSLC query syntax. When you have the query results, you can copy them into your modeling tool as SysML Requirements.</p><p>To copy OSLC query results to a modeling tool as SysML Requirements</p><hr /><ol><li>Complete the steps of <ac:link><ri:page ri:space-key="CDH2024x" ri:content-title="Creating OSLC queries" /><ac:plain-text-link-body><![CDATA[creating OSLC queries]]></ac:plain-text-link-body></ac:link>.</li><li>From the OSLC query results, drag the matching query tree to the Containment tree of the modeling tool.<br /><br /></li></ol><p style="margin-left: 30.0px;"><ac:image><ri:attachment ri:filename="export-from-oslc-qe.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Copying OSLC query results to a modeling tool as SysML Requirements" /></ri:attachment></ac:image><br /><br /></p><p style="margin-left: 30.0px;">2. The <strong>Copy Data</strong> dialog opens. From the target type list in the <strong>MagicDraw Side</strong> group, choose <strong>Extended Requirement</strong>. Click <strong>OK</strong>.<br /><br /></p><p style="margin-left: 30.0px;"><ac:image><ri:attachment ri:filename="Copy Data for OSLC Query User Guide.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Copying OSLC query results to a modeling tool as SysML Requirements" /></ri:attachment></ac:image></p><p><br /></p><p>The result of the copy is shown in the MagicDraw Containment tree.</p><p><ac:image ac:align="center"><ri:attachment ri:filename="export-doors-ng-node-2.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Copying OSLC query results to a modeling tool as SysML Requirements" /></ri:attachment></ac:image></p><h6 style="margin-left: 30.0px;text-align: center;">The result of the copied OSLC query in the MagicDraw Containment tree.</h6><ac:structured-macro ac:name="info" ac:schema-version="1" ac:macro-id="c9cbee8c-4d2b-4f4b-8733-bc9cbfe86342"><ac:parameter ac:name="title">Information</ac:parameter><ac:rich-text-body><p style="margin-left: 30.0px;"><strong>OSLC Query Editor</strong><span> supports the </span><strong>Copy Data</strong>,<strong> Copy Data with DHTrace</strong>, and<strong> Create DHTrace</strong><strong> </strong>operations<span>.</span></p><p style="margin-left: 30.0px;"><span><br /></span></p><p><ac:image ac:align="center"><ri:attachment ri:filename="OSLC Query Editor.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Copying OSLC query results to a modeling tool as SysML Requirements" /></ri:attachment></ac:image></p><h6 style="text-align: center;">The Copy Data, Copy Data with DHTrace, and Create DHTrace operations are supported in the OSLC Query Editor dialog.</h6></ac:rich-text-body></ac:structured-macro><p class="auto-cursor-target"><br /></p>
+````
+
+<!--NOMAGIC_PAGE id=136716325 space=CDH2024x version=2 -->
+## PAGE 00032: Copying Requirements into a modeling tool
+
+- page_id: `136716325`
+- space_key: `CDH2024x`
+- source_url: https://docs.nomagic.com/spaces/CDH2024x/pages/136716325/Copying+Requirements+into+a+modeling+tool
+- version_number: 2
+- version_date: `2026-02-11T07:59:21.709+01:00`
+- ancestors: Cameo DataHub Documentation > User Guide > Working with DataHub and modeling tools > Operations in DataHub Explorer
+- labels: []
+
+### NORMALIZED CONTENT
+
+DataHub allows you to copy Requirements from DOORS into UML diagrams, from DOORS Data Source to the Containment area as Use Case diagrams, from DOORS or DOORS Next Generation to a modeling tool with DHLinks, and copy Requirements using OSLC links.
+
+**Related pages**
+
+### EXACT CONFLUENCE STORAGE SOURCE
+
+````html
+<p>DataHub allows you to copy Requirements from DOORS into UML diagrams, from DOORS Data Source to the Containment area as Use Case diagrams, from DOORS or DOORS Next Generation to a modeling tool with DHLinks, and copy Requirements using OSLC links.</p><p><strong>Related pages</strong></p><p><ac:structured-macro ac:name="children" ac:schema-version="2" ac:macro-id="96c19c2f-7366-41b0-ad7b-00ce7fa929ff" /></p>
+````
+
+<!--NOMAGIC_PAGE id=136716326 space=CDH2024x version=1 -->
+## PAGE 00033: Copying Requirements to a modeling tool as the SysML Requirement diagram
+
+- page_id: `136716326`
+- space_key: `CDH2024x`
+- source_url: https://docs.nomagic.com/spaces/CDH2024x/pages/136716326/Copying+Requirements+to+a+modeling+tool+as+the+SysML+Requirement+diagram
+- version_number: 1
+- version_date: `2023-09-21T06:04:34.900+02:00`
+- ancestors: Cameo DataHub Documentation > User Guide > Working with DataHub and modeling tools > Operations in DataHub Explorer > Copying Requirements into a modeling tool
+- labels: []
+
+### NORMALIZED CONTENT
+
+You can copy text-based Requirements and their associated Use Cases from DOORS or DOORS Next Generation Data Sources by simply dragging the node from the DOORS Data Source to your modeling tool's Containment tree.
+
+This section deals with how to copy text-based Requirements from IBM® Rational® DOORS® into a UML diagram.
+
+To copy Requirements from DOORS Data Source to a modeling tool as the SysML Requirement diagram
+
+1. [CONFLUENCE_PAGE title='Adding Data Sources for IBM Rational DOORS' space='CDH2024x'] or [CONFLUENCE_PAGE title='Adding Data Sources for IBM Rational DOORS Next Generation' space='CDH2024x'] in DataHub Explorer.
+2. Select a node and drag it from DataHub Explorer to your modeling tool's Containment area.
+3. Map the Formal Module to a package and the object to a base stereotype of the Requirement. Click **OK**. [IMAGE alt='' src='']
+
+###### The Copy Data dialog in Group Type Mapping mode when copying Requirements from DOORS to the modeling tool's Containment tree.
+
+[IMAGE alt='' src='']
+
+###### The dragged Requirement elements in the Requirement diagram as the result of copying.
+
+### EXACT CONFLUENCE STORAGE SOURCE
+
+````html
+<p>You can copy text-based Requirements and their associated Use Cases from DOORS or DOORS Next Generation Data Sources by simply dragging the node from the DOORS Data Source to your modeling tool's Containment tree.</p><p>This section deals with how to copy text-based Requirements from IBM<sup>®</sup> Rational<sup>®</sup> DOORS<sup>®</sup> into a UML diagram.</p><p>To copy Requirements from DOORS Data Source to a modeling tool as the SysML Requirement diagram</p><hr /><ol><li class="confluence-link"><ac:link><ri:page ri:space-key="CDH2024x" ri:content-title="Adding Data Sources for IBM Rational DOORS" /><ac:plain-text-link-body><![CDATA[Add a DOORS Data Source ]]></ac:plain-text-link-body></ac:link>or <ac:link><ri:page ri:space-key="CDH2024x" ri:content-title="Adding Data Sources for IBM Rational DOORS Next Generation" /><ac:plain-text-link-body><![CDATA[DOORS Next Generation Data Source ]]></ac:plain-text-link-body></ac:link>in DataHub Explorer.</li><li>Select a node and drag it from DataHub Explorer to your modeling tool's Containment area.</li><li><p>Map the Formal Module to a package and the object to a base stereotype of the Requirement. Click <strong>OK</strong>. <br /><br /></p><p><ac:image ac:align="center"><ri:attachment ri:filename="Copy Data with Object.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Copying Requirements to a modeling tool as the SysML Requirement diagram" /></ri:attachment></ac:image></p></li></ol><h6 style="margin-left: 30.0px;text-align: center;">The Copy Data dialog in Group Type Mapping mode when copying Requirements from DOORS to the modeling tool's Containment tree.</h6><p style="margin-left: 30.0px;"><ac:image ac:align="center" ac:title="Result of copying SysML requirements diagram to MagicDraw" ac:alt="Result of copying SysML requirements diagram to MagicDraw"><ri:attachment ri:filename="result-of-import-req-diag.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Copying Requirements to a modeling tool as the SysML Requirement diagram" /></ri:attachment></ac:image></p><p><br /></p><h6 style="text-align: center;"> The dragged Requirement elements in the Requirement diagram as the result of copying.</h6>
+````
+
+<!--NOMAGIC_PAGE id=136716334 space=CDH2024x version=1 -->
+## PAGE 00034: Copying Requirements to a modeling tool as the Use Case diagram
+
+- page_id: `136716334`
+- space_key: `CDH2024x`
+- source_url: https://docs.nomagic.com/spaces/CDH2024x/pages/136716334/Copying+Requirements+to+a+modeling+tool+as+the+Use+Case+diagram
+- version_number: 1
+- version_date: `2023-09-21T06:04:35.447+02:00`
+- ancestors: Cameo DataHub Documentation > User Guide > Working with DataHub and modeling tools > Operations in DataHub Explorer > Copying Requirements into a modeling tool
+- labels: []
+
+### NORMALIZED CONTENT
+
+This section deals with copying a Use Case diagram from a DOORS Data Source into your modeling tool's Containment area.
+
+To copy a Use Case from a DOORS Data Source to a modeling tool as the Use Case diagram
+
+1. Add a DOORS Data Source or DOORS Next Generation Data Source in DataHub Explorer.
+2. Drag the selected node from DOORS Data Source to your modeling tool's Containment tree. 
+ 
+[IMAGE alt='' src='']
+3. Map the Formal Module to a Use Case diagram type and the object to a Use Case type. Click **OK**. [IMAGE alt='' src='']
+
+###### The Copy Data dialog in Group Type Mapping mode when copying Use Case elements from DOORS to the modeling tool's Containment area.
+
+[IMAGE alt='' src='']
+
+###### The Use Case diagram after copying Requirements from DOORS to a modeling tool.
+
+### EXACT CONFLUENCE STORAGE SOURCE
+
+````html
+<p>This section deals with copying a Use Case diagram from a DOORS Data Source into your modeling tool's Containment area.</p><p>To copy a Use Case from a DOORS Data Source to a modeling tool as the Use Case diagram</p><hr /><ol><li><a href="https://docs.nomagic.com/display/CDH2024x/Adding+Data+Sources+for+IBM+Rational+DOORS">Add a DOORS Data Source </a>or <a href="https://docs.nomagic.com/display/CDH2024x/Adding+Data+Sources+for+IBM+Rational+DOORS+Next+Generation">DOORS Next Generation Data Source </a>in DataHub Explorer.</li><li><p style="text-align: left;">Drag the selected node from DOORS Data Source to your modeling tool's Containment tree.<br /><br /><ac:image ac:title="Drag and drop to copy requirements from DOORS data source to MagicDraw" ac:alt="Drag and drop to copy requirements from DOORS data source to MagicDraw"><ri:attachment ri:filename="importing-reqs-from-doors-ds.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Copying Requirements to a modeling tool as the Use Case diagram" /></ri:attachment></ac:image><br /><br /></p></li><li><p style="text-align: left;">Map the Formal Module to a Use Case diagram type and the object to a Use Case type. Click <strong>OK</strong>.</p><p><ac:image ac:align="center"><ri:attachment ri:filename="Copy Data with Object.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Copying Requirements to a modeling tool as the Use Case diagram" /></ri:attachment></ac:image></p></li></ol><h6 style="text-align: center;margin-left: 30.0px;">The Copy Data dialog in Group Type Mapping mode when copying Use Case elements from DOORS to the modeling tool's Containment area.</h6><p style="margin-left: 30.0px;"><ac:image ac:align="center" ac:title="Result of copying Use Case Diagram to MagicDraw" ac:alt="Result of copying Use Case Diagram to MagicDraw"><ri:attachment ri:filename="result-of-import-use-case.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Copying Requirements to a modeling tool as the Use Case diagram" /></ri:attachment></ac:image></p><h6 style="text-align: center;">The Use Case diagram after copying Requirements from DOORS to a modeling tool.</h6>
+````
+
+<!--NOMAGIC_PAGE id=136716342 space=CDH2024x version=1 -->
+## PAGE 00035: Copying Requirements to a modeling tool with DHLinks
+
+- page_id: `136716342`
+- space_key: `CDH2024x`
+- source_url: https://docs.nomagic.com/spaces/CDH2024x/pages/136716342/Copying+Requirements+to+a+modeling+tool+with+DHLinks
+- version_number: 1
+- version_date: `2023-09-21T06:04:35.869+02:00`
+- ancestors: Cameo DataHub Documentation > User Guide > Working with DataHub and modeling tools > Operations in DataHub Explorer > Copying Requirements into a modeling tool
+- labels: []
+
+### NORMALIZED CONTENT
+
+To copy Requirements from DOORS or DOORS Next Generation Data Source to a modeling tool
+
+1. From the Operation drop-down list in DataHub Explorer, select Copy Data with Sync .
+2. Drag a data node in a DOORS or DOORS Next Generation Data Source from DataHub Explorer to the modeling tool's Containment tree. [ATTACHMENT filename='Copy Requirement with DHLinks.png']
+3. The Copy Data with Sync dialog appears. From the Mapping Mode drop-down list, choose Individual Type Mapping or Group Type Mapping . [ATTACHMENT filename='Copy Data with Sync Dialog with Mapping Dropdown List (Group Mapping).png']
+4. After you finish all attribute mappings, click OK . The copying result is shown in the modeling tool's Containment tree.
+
+[IMAGE alt='' src='']
+
+### EXACT CONFLUENCE STORAGE SOURCE
+
+````html
+<p>To copy Requirements from DOORS or DOORS Next Generation Data Source to a modeling tool</p><hr /><ol><li>From the <strong>Operation</strong> drop-down list in DataHub Explorer, select <strong>Copy Data with Sync</strong>.</li><li>Drag a data node in a DOORS or DOORS Next Generation Data Source from DataHub Explorer to the modeling tool's Containment tree.<br /><br /><ac:image><ri:attachment ri:filename="Copy Requirement with DHLinks.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Copying Requirements to a modeling tool with DHLinks" /></ri:attachment></ac:image><br /><br /></li><li>The <strong>Copy Data with Sync</strong> dialog appears. From the <strong>Mapping Mode</strong> drop-down list, choose <strong>Individual Type Mapping</strong> or <strong>Group Type Mapping</strong>.<br /><br /><ac:image><ri:attachment ri:filename="Copy Data with Sync Dialog with Mapping Dropdown List (Group Mapping).png"><ri:page ri:space-key="CDH2024x" ri:content-title="Copying Requirements to a modeling tool with DHLinks" /></ri:attachment></ac:image><br /><br /></li><li>After you finish all attribute mappings, click <strong>OK</strong>. The copying result is shown in the modeling tool's Containment tree.<br /><br /></li></ol><p style="margin-left: 30.0px;"><ac:image ac:title="Result of copying SysML requirement with DHLink" ac:alt="Result of copying SysML requirement with DHLink"><ri:attachment ri:filename="result-of-import-req-as-dh-link.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Copying Requirements to a modeling tool with DHLinks" /></ri:attachment></ac:image></p>
+````
+
+<!--NOMAGIC_PAGE id=136716352 space=CDH2024x version=1 -->
+## PAGE 00036: Copying Requirements to a modeling tool with OSLC links
+
+- page_id: `136716352`
+- space_key: `CDH2024x`
+- source_url: https://docs.nomagic.com/spaces/CDH2024x/pages/136716352/Copying+Requirements+to+a+modeling+tool+with+OSLC+links
+- version_number: 1
+- version_date: `2023-09-21T06:04:36.388+02:00`
+- ancestors: Cameo DataHub Documentation > User Guide > Working with DataHub and modeling tools > Operations in DataHub Explorer > Copying Requirements into a modeling tool
+- labels: []
+
+### NORMALIZED CONTENT
+
+#### NOTE: Note
+
+Note
+
+In the 19.0 and later versions, the **Create OSLC link** operation is not displayed and is used through the **Create DHTrace** operation instead from the **Operation** drop-down list in **Cameo DataHub Explorer** (for IBM® Rational® DOORS® Next Generation Data Source).
+
+This version of DataHub now supports OSLC queries and links that you can [CONFLUENCE_PAGE title='Create DHTrace operation with OSLC links' space='CDH2024x'].
+
+To copy Requirements using OSLC links
+
+1. From the Operation drop-down list in DataHub Explorer, select Create DHTrace . [ATTACHMENT filename='Create_DHTrace.png']
+2. From an IBM ® Rational ® DOORS ® Next Generation Data Source, drag a node into the modeling tool's Containment area. A shortcut menu appears, prompting you to select the type of link. Select one from the shortcut menu. [ATTACHMENT filename='Create OSLC Link by Create DHTrace.png']
+
+[IMAGE alt='' src='']
+
+###### The newly created OSLC hyperlink from copying the Requirement in the modeling tool's Containment tree.
+
+### EXACT CONFLUENCE STORAGE SOURCE
+
+````html
+<p class="auto-cursor-target"><br /></p><ac:structured-macro ac:name="note" ac:schema-version="1" ac:macro-id="ad0ec783-712d-491a-8709-a013333b8cc6"><ac:parameter ac:name="title">Note</ac:parameter><ac:rich-text-body><p>In the 19.0 and later versions, the <strong>Create OSLC link</strong> operation is not displayed and is used through the <strong>Create DHTrace</strong> operation instead from the <strong>Operation</strong> drop-down list in <strong>Cameo DataHub Explorer</strong> (for IBM<sup>®</sup> Rational<sup>®</sup> DOORS<sup>®</sup> Next Generation Data Source).</p></ac:rich-text-body></ac:structured-macro><p>This version of DataHub now supports OSLC queries and links that you can <ac:link><ri:page ri:space-key="CDH2024x" ri:content-title="Create DHTrace operation with OSLC links" /><ac:plain-text-link-body><![CDATA[create OSLC links through the Create DHTrace operation]]></ac:plain-text-link-body></ac:link>.</p><p><br /></p><p>To copy Requirements using OSLC links</p><hr /><ol><li>From the <strong>Operation</strong> drop-down list in DataHub Explorer, select <strong>Create DHTrace</strong>.<br /><br /><ac:image><ri:attachment ri:filename="Create_DHTrace.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Copying Requirements to a modeling tool with OSLC links" /></ri:attachment></ac:image><br /><br /></li><li>From an IBM<sup>®</sup> Rational<sup>®</sup> DOORS<sup>®</sup> Next Generation Data Source, drag a node into the modeling tool's Containment area. A shortcut menu appears, prompting you to select the type of link. Select one from the shortcut menu.<br /><br /><ac:image><ri:attachment ri:filename="Create OSLC Link by Create DHTrace.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Copying Requirements to a modeling tool with OSLC links" /></ri:attachment></ac:image><br /><br /></li></ol><p><ac:image ac:align="center"><ri:attachment ri:filename="result-of-create-oslc-link.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Copying Requirements to a modeling tool with OSLC links" /></ri:attachment></ac:image></p><h6 style="text-align: center;">The newly created OSLC hyperlink from copying the Requirement in the modeling tool's Containment tree.</h6>
+````
+
+<!--NOMAGIC_PAGE id=136716297 space=CDH2024x version=2 -->
+## PAGE 00037: Create DHTrace operation with OSLC links
+
+- page_id: `136716297`
+- space_key: `CDH2024x`
+- source_url: https://docs.nomagic.com/spaces/CDH2024x/pages/136716297/Create+DHTrace+operation+with+OSLC+links
+- version_number: 2
+- version_date: `2026-02-11T07:59:02.367+01:00`
+- ancestors: Cameo DataHub Documentation > User Guide > Working with DataHub and modeling tools > Operations in DataHub Explorer
+- labels: []
+
+### NORMALIZED CONTENT
+
+#### NOTE: Note
+
+Note
+
+In addition to creating DHTrace, the **Create DHTrace** operation enables you to create OSLC links instead of using the **Create OSLC link** operation in earlier versions of Cameo DataHub 19.0.
+
+##### Create DHTrace operation
+
+This DataHub operation does not copy data. It only creates a DHTrace link from a source to a target. When the source has any changes, the DHTrace link becomes **Suspect**.
+
+To create DHTrace
+
+1. From the Operation drop-down list in Cameo DataHub Explorer , select Create DHTrace . [ATTACHMENT filename='Create_DHTrace.png']
+2. Drag any nodes from DataHub Explorer to the MagicDraw Containment tree. [ATTACHMENT filename='MD Tree for CreateDHTrace.png'] The Create DHTrace Summary dialog opens. [ATTACHMENT filename='Create DHTrace Summary Dialog.png']
+3. When you modify the source nodes, right-click one of them and select Check Changes > Check DHTrace Changes or Check DHTrace Changes recursively . The DHTrace Summary dialog appears showing the Suspect status of the DHTrace links. [ATTACHMENT filename='DHTrace Summary.png']
+4. Select the checkboxes of the data nodes you want to clear the Suspect status in the DHTrace Summary dialog and click OK .
+
+##### Creating OSLC links through the Create DHTrace operation
+
+#### NOTE: Note
+
+Note
+
+In the 19.0 and later versions, the **Create OSLC link** operation is not displayed and is used through the **Create DHTrace** operation instead from the **Operation** drop-down list in **Cameo DataHub Explorer** (for IBM® Rational® DOORS® Next Generation Data Source).
+
+OSLC links can be created when you open an IBM® Rational® DOORS® Next Generation Data Source in DataHub.
+
+To create an OSLC link
+
+1. From the Operation drop-down list in DataHub Explorer , select Create DHTrace .
+2. From an IBM® Rational® DOORS® Next Generation Data Source, drag a node into the MagicDraw® Containment area.
+3. A shortcut menu prompts you to choose the type of link. Select one from the shortcut menu. The link of the selected type will be created. [ATTACHMENT filename='worddav5a3754b972c5e28584dc28a2a6a5178a.png']
+
+[IMAGE alt='' src='']
+
+###### The newly created OSLC hyperlinks in the MagicDraw® Containment tree.
+
+[IMAGE alt='' src='']
+
+###### The OSLC hyperlink's Properties.
+
+[IMAGE alt='' src='']
+
+###### The OSLC hyperlink is in the DH Links panel.
+
+**Related page**
+
+- [CONFLUENCE_PAGE title='Creating OSLC links' space='']
+
+### EXACT CONFLUENCE STORAGE SOURCE
+
+````html
+<ac:structured-macro ac:name="note" ac:schema-version="1" ac:macro-id="eb70b979-0fa0-474c-8101-94279fb2a98e"><ac:parameter ac:name="title">Note</ac:parameter><ac:rich-text-body><p>In addition to creating DHTrace, the <strong>Create DHTrace</strong> operation enables you to create OSLC links instead of using the <strong>Create OSLC link</strong> operation in earlier versions of Cameo DataHub 19.0.</p></ac:rich-text-body></ac:structured-macro><h3>Create DHTrace operation</h3><p>This DataHub operation does not copy data. It only creates a DHTrace link from a source to a target. When the source has any changes, the DHTrace link becomes <strong>Suspect</strong>.</p><p><br /></p><p>To create DHTrace</p><hr /><ol><li data-uuid="aa078ebf-f6ab-422c-81b7-8b8c86fce631">From the <strong>Operation</strong> drop-down list in <strong>Cameo DataHub Explorer</strong>, select <strong>Create DHTrace</strong>.<br /><br /><ac:image><ri:attachment ri:filename="Create_DHTrace.png" /></ac:image><br /><br /></li><li data-uuid="0f201597-0a3e-486f-84a1-ffc52b8112df">Drag any nodes from <strong>DataHub Explorer</strong> to the MagicDraw Containment tree.<br /><br /><ac:image><ri:attachment ri:filename="MD Tree for CreateDHTrace.png" /></ac:image><br /><br />The <strong>Create DHTrace Summary</strong> dialog opens.<br /><br /><ac:image><ri:attachment ri:filename="Create DHTrace Summary Dialog.png" /></ac:image><br /><br /></li><li data-uuid="b871fd74-c3df-43b9-9048-b3a3113403bd">When you modify the source nodes, right-click one of them and select <strong>Check Changes</strong> &gt; <strong>Check DHTrace Changes</strong> or <strong>Check DHTrace Changes recursively</strong>. The <strong>DHTrace Summary</strong> dialog appears showing the <strong>Suspect</strong> status of the DHTrace links.<br /><br /><ac:image><ri:attachment ri:filename="DHTrace Summary.png" /></ac:image><br /><br /></li><li data-uuid="ab8f5232-7156-4e2d-874b-d504b2eac184">Select the checkboxes of the data nodes you want to clear the <strong>Suspect</strong> status in the <strong>DHTrace Summary</strong> dialog and click <strong>OK</strong>.</li></ol><h3>Creating OSLC links through the Create DHTrace operation</h3><p><br /></p><ac:structured-macro ac:name="note" ac:schema-version="1" ac:macro-id="ad0ec783-712d-491a-8709-a013333b8cc6"><ac:parameter ac:name="title">Note</ac:parameter><ac:rich-text-body><p>In the 19.0 and later versions, the <strong>Create OSLC link</strong> operation is not displayed and is used through the <strong>Create DHTrace</strong> operation instead from the <strong>Operation</strong> drop-down list in <strong>Cameo DataHub Explorer</strong> (for IBM<sup>®</sup> Rational<sup>®</sup> DOORS<sup>®</sup> Next Generation Data Source).</p></ac:rich-text-body></ac:structured-macro><p>OSLC links can be created when you open an IBM<sup>®</sup> Rational<sup>®</sup> DOORS<sup>®</sup> Next Generation Data Source in DataHub.</p><p><br /></p><p>To create an OSLC link</p><hr /><ol><li data-uuid="f8e9e75b-d44e-487c-b874-15df0f4e4d92">From the <strong>Operation</strong> drop-down list in <strong>DataHub Explorer</strong>, select <strong>Create DHTrace</strong>.</li><li data-uuid="81b9e59f-99ac-4dbd-9b28-3272f34ec954"><p class="_mce_tagged_br" style="text-align: left;">From an IBM<sup>®</sup> Rational<sup>®</sup> DOORS<sup>®</sup> Next Generation Data Source, drag a node into the MagicDraw<sup>®</sup> Containment area.</p></li><li data-uuid="edae854c-ebb3-4ba8-9b3d-aea63e73235e"><p class="_mce_tagged_br" style="text-align: left;">A shortcut menu prompts you to choose the type of link. Select one from the shortcut menu. The link of the selected type will be created.<br /><br /></p><ac:image ac:align="left" ac:title="Figure OSLC Link types" ac:alt="Figure OSLC Link types"><ri:attachment ri:filename="worddav5a3754b972c5e28584dc28a2a6a5178a.png" /></ac:image></li></ol><p><br /></p><p><br /></p><p><br /></p><p><br /></p><p><br /></p><p><br /></p><p><br /></p><p><br /></p><p><br /></p><p><br /></p><p><br /></p><p style="text-align: center;"><ac:image ac:align="center"><ri:attachment ri:filename="worddav940b362d2a8553e7320fdc5b60af115c.png" /></ac:image></p><h6 style="text-align: center;">The newly created OSLC hyperlinks in the MagicDraw<sup>®</sup> Containment tree.</h6><p style="margin-left: 30.0px;text-align: center;"><ac:image ac:title="Properties of OSLC Link " ac:alt="Properties of OSLC Link "><ri:attachment ri:filename="worddavae7ad7197fdcea58505c68e4c441a7fb.png" /></ac:image></p><h6 style="text-align: center;margin-left: 30.0px;">The OSLC hyperlink's Properties.</h6><p style="margin-left: 30.0px;text-align: center;"><ac:image><ri:attachment ri:filename="OSLC Hyperlink.png" /></ac:image></p><h6 style="text-align: center;margin-left: 30.0px;">The OSLC hyperlink is in the DH Links panel.</h6><p><strong>Related page</strong></p><ul><li data-uuid="62e6cf33-cbe7-4c9f-80d6-57e687aa8dbb"><ac:link><ri:page ri:content-title="Creating OSLC links" /></ac:link></li></ul><p><br /></p>
+````
+
+<!--NOMAGIC_PAGE id=136716288 space=CDH2024x version=1 -->
+## PAGE 00038: Create Sync operation
+
+- page_id: `136716288`
+- space_key: `CDH2024x`
+- source_url: https://docs.nomagic.com/spaces/CDH2024x/pages/136716288/Create+Sync+operation
+- version_number: 1
+- version_date: `2023-09-21T06:04:32.990+02:00`
+- ancestors: Cameo DataHub Documentation > User Guide > Working with DataHub and modeling tools > Operations in DataHub Explorer
+- labels: []
+
+### NORMALIZED CONTENT
+
+The Create Sync operation is an addition to the list of Cameo DataHub operations. The Create Sync operation will recreate synchronization (DHLinks) if you lose or delete the DHLinks. Before, in order to recreate synchronization (DHLinks), if you lost or deleted the DHLinks you were required to copy the data from the Cameo DataHub to the modeling tool(Cameo) using the Copy Data with Sync operation. This new operation allows you to recreate synchronization(DHLinks) without replicating the data.
+
+###### [IMAGE alt='' src=''] 
+ 
+The same data source exists in the Cameo DataHub Explorer panel and the Modelling tool without DHLinks
+
+To create sync between existing data
+
+1. From the Operation list inthe Cameo DataHub Explorer panel , select Create Sync . 
+ 
+[IMAGE alt='' src='']
+2. Drag the parent data set from the Cameo DataHub Explorer panel and drop it over the identical data set in the Containment tree. [ATTACHMENT filename='Create Sync_Drag and Drop.png']
+3. The Create Sync Wizard will appear. Perform the Type/Attribute mapping as you would while using the [CONFLUENCE_PAGE title='Copy Data with Sync operation' space='CDH2024x'] . [ATTACHMENT filename='CreateSync_Wizard.png']
+4. Select the mapped type, then choose the Key attribute between them. The key attribute will be used to match the values. [ATTACHMENT filename='CreateSync_Wizard_2.png']
+5. Once matching results are displayed, do one or several of the following: The matching result displays the matched attributes in green(Sync relation created) and unmatched attributes in red(Sync relation not created).
+  - If there are key attributes that do not match (highlighted in red) and you want them to be included, select the checkbox for the particular value and click Add Sync .
+  - If there are key attributes that match and you do not want them to be included, select the checkbox for the particular value and click Remove Sync.
+  - If there are key attributes that do not match (highlighted in red)and you want them to be excluded, select the checkbox for the particular value and click Exclude .
+  - Select Ignore all no sync source entities checkbox, if you want all nodes that did not match to be ignored. The synchronization will discover them later.
+  - Select Exclude all no sync source entities checkbox, if you want all the nodes that did not match to be marked as Excluded. The synchronization will no longer include them in the operation. [ATTACHMENT filename='CreateSync_Wizard_3.png']
+6. Click **Finish**. Until every node is marked as synced or excluded, you cannot click **Finish.** [IMAGE alt='' src=''] Once the procedure is finished, the newly created synchronization will be visible as shown in the image below, denoted with the **S**icon. 
+ 
+[IMAGE alt='' src='']
+
+### EXACT CONFLUENCE STORAGE SOURCE
+
+````html
+<p style="text-align: left;">The Create Sync operation is an addition to the list of Cameo DataHub operations. The Create Sync operation will recreate synchronization (DHLinks) if you lose or delete the DHLinks. Before, in order to recreate synchronization (DHLinks), if you lost or deleted the DHLinks you were required to copy the data from the Cameo DataHub to the modeling tool(Cameo) using the Copy Data with Sync operation. This new operation allows you to recreate synchronization(DHLinks) without replicating the data.<br /><br /></p><h6 style="text-align: center;"><ac:image><ri:attachment ri:filename="Same Data.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Create Sync operation" /></ri:attachment></ac:image><br /><br />The same data source exists in the Cameo DataHub Explorer panel and the Modelling tool without DHLinks</h6><p>To create sync between existing data</p><hr /><ol><li><span style="color: rgb(62,63,64);">From the<span> </span></span><strong>Operation</strong><span style="color: rgb(62,63,64);"> list in<span> the </span></span><strong>Cameo DataHub Explorer </strong>panel<span style="color: rgb(62,63,64);">, select<span> </span></span><strong>Create Sync</strong><span style="color: rgb(62,63,64);">.<br /><br /><ac:image><ri:attachment ri:filename="Create_Sync.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Create Sync operation" /></ri:attachment></ac:image><br /><br /></span></li><li>Drag the parent data set from the Cameo DataHub Explorer panel and drop it over the identical data set in the Containment tree.<br /><br /><ac:image><ri:attachment ri:filename="Create Sync_Drag and Drop.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Create Sync operation" /></ri:attachment></ac:image><br /><br /></li><li>The Create Sync Wizard will appear. Perform the Type/Attribute mapping as you would while using the <ac:link><ri:page ri:space-key="CDH2024x" ri:content-title="Copy Data with Sync operation" /></ac:link>. <br /><br /><ac:image><ri:attachment ri:filename="CreateSync_Wizard.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Create Sync operation" /></ri:attachment></ac:image><br /><br /></li><li>Select the mapped type, then choose the <strong>Key attribute </strong>between them. The key attribute will be used to match the values. <br /><br /><ac:image ac:border="true"><ri:attachment ri:filename="CreateSync_Wizard_2.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Create Sync operation" /></ri:attachment></ac:image><br /><br /></li><li><p class="auto-cursor-target">Once matching results are displayed, do one or several of the following:</p><ac:structured-macro ac:name="note" ac:schema-version="1" ac:macro-id="84e8ec61-84a7-462f-bb96-86b3924bc0e6"><ac:rich-text-body><p>The matching result displays the matched attributes in green(Sync relation created) and unmatched attributes in red(Sync relation not created).</p></ac:rich-text-body></ac:structured-macro><ul><li>If there are key attributes that do not match (highlighted in red) and you want them to be included, select the checkbox for the particular value and click <strong>Add Sync</strong>.</li><li>If there are key attributes that match and you do not want them to be included, select the checkbox for the particular value and click <strong>Remove Sync.</strong></li><li>If there are key attributes that do not match (highlighted in red)and you want them to be excluded, select the checkbox for the particular value and click <strong>Exclude</strong>.</li><li>Select <strong>Ignore</strong> <strong>all no sync source entities</strong> checkbox, if you want all nodes that did not match to be ignored. The synchronization will discover them later.</li><li>Select <strong>Exclude all no sync source entities </strong>checkbox, if you want all the nodes that did not match to be marked as Excluded. The synchronization will no longer include them in the operation.<br /><br /><ac:image><ri:attachment ri:filename="CreateSync_Wizard_3.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Create Sync operation" /></ri:attachment></ac:image><br /><br /></li></ul></li><li><p class="auto-cursor-target">Click <strong>Finish</strong>.</p><ac:structured-macro ac:name="note" ac:schema-version="1" ac:macro-id="343eb2e6-cf3f-4c62-a8dd-4e2382a57e94"><ac:rich-text-body><p>Until every node is marked as synced or excluded, you cannot click <strong>Finish.</strong></p></ac:rich-text-body></ac:structured-macro><p class="auto-cursor-target"><ac:image><ri:attachment ri:filename="CreateSync_Wizard_4.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Create Sync operation" /></ri:attachment></ac:image></p><p class="auto-cursor-target">Once the procedure is finished, the newly created synchronization will be visible as shown in the image below, denoted with the <strong>S </strong>icon.<br /><br /><ac:image><ri:attachment ri:filename="Sync_Done.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Create Sync operation" /></ri:attachment></ac:image></p></li></ol>
+````
+
+<!--NOMAGIC_PAGE id=136716442 space=CDH2024x version=1 -->
+## PAGE 00039: Creating a Stream and Baseline as a Data Source
+
+- page_id: `136716442`
+- space_key: `CDH2024x`
+- source_url: https://docs.nomagic.com/spaces/CDH2024x/pages/136716442/Creating+a+Stream+and+Baseline+as+a+Data+Source
+- version_number: 1
+- version_date: `2023-09-21T06:04:42.148+02:00`
+- ancestors: Cameo DataHub Documentation > User Guide > Working with DataHub and modeling tools > Working with Data Sources > Adding Data Sources for IBM Rational DOORS Next Generation
+- labels: []
+
+### NORMALIZED CONTENT
+
+A Component is a container in a project that you can use to organize artifacts. When connected with a DOORS Next Generation Data Source, DataHub lists Components under each project. The main Data Source tree still displays artifacts from default Components. You can also open additional Components as another Data Source. Additionally, you can perform all DataHub operations, such as the main Data Source, from the Component Data Source.
+
+[IMAGE alt='' src='']
+
+[IMAGE alt='' src='']
+
+###### Components in DOORS Next Generation.
+
+[IMAGE alt='' src='']
+
+###### Components in DOORS Next Generation in Cameo DataHub Explorer.
+
+You can now work with a Stream and Baseline by creating a new Data Source from components; thus, DOORS Next Generation projects can be connected to a specific Stream and Baseline.
+
+To create a Stream as a Data Source
+
+- Right-click a Component element in DataHub Explorer and select Create Stream as Data Source .
+
+[IMAGE alt='' src='']
+
+###### The Create Component/Stream as Data Source command.
+
+#### NOTE: Note
+
+Note
+
+- An Initial Stream is used when creating a Data Source for a Component without an additional Stream.
+- If the Component with Stream(s) other than the Initial Stream is selected, the Select stream list in the Create Stream as Data Source dialog box will appear.
+
+[IMAGE alt='' src='']
+
+###### The Select stream list in the Create Stream as Data Source dialog.
+
+[IMAGE alt='' src='']
+
+###### The created Stream Data Source.
+
+To create a Baseline as a Data Source
+
+- Right-click a Component element in DataHub Explorer and select Create Baseline as Data Source .
+
+[IMAGE alt='' src='']
+
+###### The Create Baseline as Data Source command.
+
+#### NOTE: Note
+
+Note
+
+- An Initial Baseline is used when creating a Data Source for a Component without an additional Stream.
+- If the Component with Baseline(s) other than the Initial Stream is selected, the Select baseline list in the Create Baseline as Data Source dialog box will appear.
+
+[IMAGE alt='' src='']
+
+###### The Select baseline list in the Create Baseline as Data Source dialog box.
+
+[IMAGE alt='' src='']
+
+###### The created Baseline Data Source.
+
+#### INFO: Information
+
+Information
+
+- Components on the CDH Explorer panel and DNG side are only visible and available to use when the Configuration Management for selected projects is enabled.
+- The Stream and Baseline Data Source name is represented in the format of <Project Area name> | <Component name> | <Stream/Baseline name> .
+
+### EXACT CONFLUENCE STORAGE SOURCE
+
+````html
+<p>A Component is a container in a project that you can use to organize artifacts. When connected with a DOORS Next Generation Data Source, DataHub lists Components under each project.  The main Data Source tree still displays artifacts from default Components. You can also open additional Components as another Data Source. Additionally, you can perform all DataHub operations, such as the main Data Source, from the Component Data Source.</p><p><span class="confluence-embedded-file-wrapper image-center-wrapper"><ac:image ac:align="center"><ri:attachment ri:filename="Components Supported in Cameo DataHub.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Creating a Stream and Baseline as a Data Source" /></ri:attachment></ac:image></span></p><p style="text-align: center;"><span class="confluence-embedded-file-wrapper"><ac:image><ri:attachment ri:filename="Components in DOORS NG.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Creating a Stream and Baseline as a Data Source" /></ri:attachment></ac:image></span></p><h6 style="text-align: center;">Components in DOORS Next Generation.</h6><p style="text-align: center;"><span class="confluence-embedded-file-wrapper"><ac:image><ri:attachment ri:filename="Components in DOORS Next Generation.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Creating a Stream and Baseline as a Data Source" /></ri:attachment></ac:image></span></p><h6 style="text-align: center;">Components in DOORS Next Generation in Cameo DataHub Explorer.</h6><p>You can now work with a Stream and Baseline by creating a new Data Source from components; thus, DOORS Next Generation projects can be connected to a specific Stream and Baseline.</p><p><br /></p><p>To create a Stream as a Data Source</p><hr /><ul><li>Right-click a Component element in DataHub Explorer and select <strong>Create Stream as Data Source</strong>.<br /><br /></li></ul><p><ac:image ac:align="center"><ri:attachment ri:filename="Create Component or Stream as Data Source Command.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Creating a Stream and Baseline as a Data Source" /></ri:attachment></ac:image></p><h6 style="text-align: center;">The Create Component/Stream as Data Source command.</h6><ac:structured-macro ac:name="note" ac:schema-version="1" ac:macro-id="eb78f629-4d38-4d98-8a1d-deb7a74288e4"><ac:parameter ac:name="title">Note</ac:parameter><ac:rich-text-body><ul><li>An Initial Stream is used when creating a Data Source for a Component without an additional Stream.</li><li>If the Component with Stream(s) other than the Initial Stream is selected, the <strong>Select stream</strong> list in the <strong>Create Stream as Data Source</strong> dialog box will appear.</li></ul><p><ac:image ac:align="center"><ri:attachment ri:filename="Select_component or stream.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Creating a Stream and Baseline as a Data Source" /></ri:attachment></ac:image></p><h6 style="text-align: center;">The Select stream list in the Create Stream as Data Source dialog.</h6></ac:rich-text-body></ac:structured-macro><p><br /></p><p style="text-align: center;"><ac:image><ri:attachment ri:filename="Created Component Stream Data Source.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Creating a Stream and Baseline as a Data Source" /></ri:attachment></ac:image></p><h6 style="text-align: center;">The created Stream Data Source.</h6><p class="auto-cursor-target"><br /></p><p class="auto-cursor-target">To create a Baseline as a Data Source</p><hr /><ul><li>Right-click a Component element in DataHub Explorer and select <strong>Create Baseline as Data Source</strong>.</li></ul><p style="text-align: center;"><ac:image><ri:attachment ri:filename="Baseline_creation.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Creating a Stream and Baseline as a Data Source" /></ri:attachment></ac:image></p><h6 style="text-align: center;">The Create Baseline as Data Source command.</h6><ac:structured-macro ac:name="note" ac:schema-version="1" ac:macro-id="a2390e6c-6994-4b2b-8206-16616f4c6f4d"><ac:parameter ac:name="title">Note</ac:parameter><ac:rich-text-body><ul><li>An Initial Baseline is used when creating a Data Source for a Component without an additional Stream.</li><li>If the Component with Baseline(s) other than the Initial Stream is selected, the <strong>Select baseline </strong>list in the <strong>Create Baseline as Data Source</strong> dialog box will appear.</li></ul><p style="text-align: center;"><ac:image><ri:attachment ri:filename="Baseline_selection.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Creating a Stream and Baseline as a Data Source" /></ri:attachment></ac:image></p><h6 style="text-align: center;">The Select baseline list in the Create Baseline as Data Source dialog box.</h6></ac:rich-text-body></ac:structured-macro><p class="auto-cursor-target" style="text-align: center;"><br /></p><p class="auto-cursor-target" style="text-align: center;"><ac:image><ri:attachment ri:filename="Baseline_created.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Creating a Stream and Baseline as a Data Source" /></ri:attachment></ac:image></p><h6 style="text-align: center;">The created Baseline Data Source.</h6><ac:structured-macro ac:name="info" ac:schema-version="1" ac:macro-id="0e94662f-8e68-4617-9160-846140545311"><ac:parameter ac:name="title">Information</ac:parameter><ac:rich-text-body><ul><li>Components on the CDH Explorer panel and DNG side are only visible and available to use when the Configuration Management for selected projects is enabled.</li><li>The Stream and Baseline Data Source name is represented in the format of<em> &lt;Project Area name&gt;</em> | <em>&lt;Component name&gt;</em> | <em>&lt;Stream/Baseline name&gt;</em>.</li></ul></ac:rich-text-body></ac:structured-macro><p class="auto-cursor-target"><br /></p>
+````
+
+<!--NOMAGIC_PAGE id=136716198 space=CDH2024x version=1 -->
+## PAGE 00040: Creating Alias
+
+- page_id: `136716198`
+- space_key: `CDH2024x`
+- source_url: https://docs.nomagic.com/spaces/CDH2024x/pages/136716198/Creating+Alias
+- version_number: 1
+- version_date: `2023-09-21T06:04:29.519+02:00`
+- ancestors: Cameo DataHub Documentation > User Guide > Working with DataHub and modeling tools > Working with the DataHub Explorer tree
+- labels: []
+
+### NORMALIZED CONTENT
+
+353875079
+
+353875090
+
+353875089
+
+To create **Alias Explorer**
+
+- Right-click a node that you want to create the selected scope and click Create Alias . The Alias Explorer tab opens, showing only the nodes in the scope that you have selected.
+
+[IMAGE alt='' src='']
+
+353875078
+
+**Related Pages**
+
+- [CONFLUENCE_PAGE title='DataHub Alias Manager' space='CDH2024x']
+
+### EXACT CONFLUENCE STORAGE SOURCE
+
+````html
+<ac:structured-macro ac:name="content-layer" ac:schema-version="1" ac:macro-id="166bb0f4-46b3-4286-bd38-2b3a719e387f"><ac:parameter ac:name="id">353875079</ac:parameter><ac:rich-text-body><ac:structured-macro ac:name="content-column" ac:schema-version="1" ac:macro-id="1e5f0458-bf25-49bb-a821-31da2eaed2e7"><ac:parameter ac:name="id">353875090</ac:parameter><ac:rich-text-body><ac:structured-macro ac:name="content-block" ac:schema-version="1" ac:macro-id="3c6c5bb8-6a16-4107-984a-7308c671ba2b"><ac:parameter ac:name="id">353875089</ac:parameter><ac:rich-text-body><p>To create <strong>Alias Explorer</strong></p><hr /><ul><li>Right-click a node that you want to create the selected scope and click <strong>Create Alias</strong>. The <strong>Alias Explorer</strong> tab opens, showing only the nodes in the scope that you have selected.</li></ul><p style="margin-left: 30.0px;"><ac:image><ri:attachment ri:filename="Create_Alias.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Creating Alias" /></ri:attachment></ac:image></p></ac:rich-text-body></ac:structured-macro><ac:structured-macro ac:name="content-block" ac:schema-version="1" ac:macro-id="6ba0acdf-47cc-4ae0-af47-5df6e5462e19"><ac:parameter ac:name="id">353875078</ac:parameter><ac:rich-text-body><p><strong>Related Pages</strong></p><ul><li><strong><ac:link><ri:page ri:space-key="CDH2024x" ri:content-title="DataHub Alias Manager" /></ac:link></strong></li></ul></ac:rich-text-body></ac:structured-macro></ac:rich-text-body></ac:structured-macro></ac:rich-text-body></ac:structured-macro>
+````
+
+<!--NOMAGIC_PAGE id=136716561 space=CDH2024x version=2 -->
+## PAGE 00041: Creating DHTrace links
+
+- page_id: `136716561`
+- space_key: `CDH2024x`
+- source_url: https://docs.nomagic.com/spaces/CDH2024x/pages/136716561/Creating+DHTrace+links
+- version_number: 2
+- version_date: `2026-02-11T08:03:06.560+01:00`
+- ancestors: Cameo DataHub Documentation > User Guide > Working with DataHub and modeling tools > Creating links between elements
+- labels: []
+
+### NORMALIZED CONTENT
+
+There are two types of links supported by DataHub: DHLinks and DHTrace links. You can choose to copy data with DHLinks, with DHTrace links, or without any links.
+
+To create a DHTrace link
+
+1. From the Operations drop-down list, select the Create DHTrace option.
+2. Drag a node, e.g., a DOORS or CSV Data Source, to the MagicDraw Containment tree.
+3. The Create DHTrace Summary dialog box opens to confirm the DHTrace link has been created.
+
+[IMAGE alt='' src='']
+
+The DHTrace links appear on the **DH Links** panel.
+
+[IMAGE alt='' src='']
+
+###### DHTrace links on the DH Links panel.
+
+#### NOTE: Note
+
+Note
+
+Nodes that contain DHTrace links are indicated with small half-green squares. In the following figure, the DHTrace links are created between CSV Data Source nodes and MagicDraw elements. The links are indicated with small half-green squares in **Cameo DataHub Explorer** and the MagicDraw Containment tree. 
+ 
+[IMAGE alt='' src=''][IMAGE alt='' src='']
+
+###### CSV Data Source nodes with DHTrace links to MagicDraw elements are indicated with small half-green squares in Cameo DataHub Explorer and the MagicDraw Containment tree.
+
+**Related page**
+
+- [CONFLUENCE_PAGE title='Copy Data with Sync' space='']
+
+### EXACT CONFLUENCE STORAGE SOURCE
+
+````html
+<p>There are two types of links supported by DataHub: DHLinks and DHTrace links. You can choose to copy data with DHLinks, with DHTrace links, or without any links.</p><p><br /></p><p>To create a DHTrace link</p><hr /><ol><li data-uuid="644b4fcd-a5fe-4914-984f-df327e3293ce">From the <strong>Operations</strong> drop-down list, select the <strong>Create DHTrace</strong> option.</li><li data-uuid="6a0930fb-2eb3-49e1-aedc-4019a0d9bafb">Drag a node, e.g., a DOORS or CSV Data Source, to the MagicDraw Containment tree.</li><li data-uuid="2e576561-ca83-44f9-b17f-739969669fb3">The <strong>Create DHTrace Summary</strong> dialog box opens to confirm the DHTrace link has been created.</li></ol><p style="margin-left: 30.0px;"><ac:image ac:title="DHTrace Summary dialog - shows when you create a DHTrace" ac:alt="DHTrace Summary dialog - shows when you create a DHTrace"><ri:attachment ri:filename="create-dhtrace-summary-a.png" /></ac:image></p><p style="margin-left: 30.0px;"><br /></p><p>The DHTrace links appear on the <strong>DH Links</strong> panel.</p><p><br /></p><p><ac:image ac:align="center" ac:title="The newly created DHTrace in the DHLinks panel" ac:alt="The newly created DHTrace in the DHLinks panel"><ri:attachment ri:filename="dhlink-panel-view.png" /></ac:image></p><h6 style="text-align: center;">DHTrace links on the DH Links panel.</h6><ac:structured-macro ac:name="note" ac:schema-version="1" ac:macro-id="d954e575-4b9d-42bb-9b47-756251a88256"><ac:parameter ac:name="title">Note</ac:parameter><ac:rich-text-body><p>Nodes that contain DHTrace links are indicated with small half-green squares. In the following figure, the DHTrace links are created between CSV Data Source nodes and MagicDraw elements. The links are indicated with small half-green squares in <strong>Cameo DataHub Explorer</strong> and the MagicDraw Containment tree.<br /><br /><ac:image ac:align="center"><ri:attachment ri:filename="create-dh-trace-c.png" /></ac:image><ac:image ac:align="center"><ri:attachment ri:filename="create-dh-trace-d.png" /></ac:image></p><h6 style="text-align: center;">CSV Data Source nodes with DHTrace links to MagicDraw elements are indicated with small half-green squares in Cameo DataHub Explorer and the MagicDraw Containment tree.</h6></ac:rich-text-body></ac:structured-macro><p><strong>Related page</strong></p><ul><li data-uuid="cd20420a-9974-4103-9a99-ce08d050d8e1"><ac:link><ri:page ri:content-title="Copy Data with Sync" /><ac:plain-text-link-body><![CDATA[Copy Data with Sync]]></ac:plain-text-link-body></ac:link></li></ul>
+````
+
+<!--NOMAGIC_PAGE id=136716380 space=CDH2024x version=1 -->
+## PAGE 00042: Creating DOORS module view Data Sources
+
+- page_id: `136716380`
+- space_key: `CDH2024x`
+- source_url: https://docs.nomagic.com/spaces/CDH2024x/pages/136716380/Creating+DOORS+module+view+Data+Sources
+- version_number: 1
+- version_date: `2023-09-21T06:04:38.044+02:00`
+- ancestors: Cameo DataHub Documentation > User Guide > Working with DataHub and modeling tools > Working with Data Sources > Adding Data Sources for IBM Rational DOORS
+- labels: []
+
+### NORMALIZED CONTENT
+
+In Rational DOORS, you can apply the filter that controls the display of particular information in the content section. You can also save the information into views and deploy views to quickly switch data perspectives. Additionally, DataHub supports the flat-hierarchy Module View you can create a Data Source (without links) that represents objects of a particular view. You import all objects into MagicDraw by dragging either the Module View Data Source or each node individually into MagicDraw models to synchronize the Module View. When more objects are added to the view, DataHub can also synchronize them into MagicDraw.
+
+#### NOTE: Note
+
+Note
+
+When creating the module view:
+
+- All objects are shown in the flat hierarchy.
+- Links with the module view Data Source is not supported.
+- You can synchronize the module view into MagicDraw, but new elements from MagicDraw will not be synchronized back to the module view Data Source. To synchronize new elements from MagicDraw to the module view Data Source, you must synchronize them from the original Data Source that represents that module.
+- The data are available only when the view is visible, thus all DataHub operations for module view Data Sources need the DOORS module with a particular view to be open at all times.
+
+To create a module view Data Source
+
+1. Right-click a module in DataHub Explorer and select Create data source from View . [ATTACHMENT filename='Create_data_source_from_view.PNG']
+2. The Create data source from View dialog opens and lists all available views. From the View drop-down list, select one of the views. [ATTACHMENT filename='viewsupport02.png']
+3. The module view Data Source of the selected view will be created. [ATTACHMENT filename='viewsupport03.png']
+
+### EXACT CONFLUENCE STORAGE SOURCE
+
+````html
+<p>In Rational DOORS, you can apply the filter that controls the display of particular information in the content section. You can also save the information into views and deploy views to quickly switch data perspectives. Additionally, DataHub supports the flat-hierarchy Module View you can create a Data Source (without links) that represents objects of a particular view. You import all objects into MagicDraw by dragging either the Module View Data Source or each node individually into MagicDraw models to synchronize the Module View. When more objects are added to the view, DataHub can also synchronize them into MagicDraw.</p><ac:structured-macro ac:name="note" ac:schema-version="1" ac:macro-id="1446d24a-a3fb-46d9-a012-8c9d0f38d5bf"><ac:parameter ac:name="title">Note</ac:parameter><ac:rich-text-body><p>When creating the module view:</p><ul><li>All objects are shown in the flat hierarchy.</li><li>Links with the module view Data Source is not supported.</li><li>You can synchronize the module view into MagicDraw, but new elements from MagicDraw will not be synchronized back to the module view Data Source. To synchronize new elements from MagicDraw to the module view Data Source, you must synchronize them from the original Data Source that represents that module.</li><li>The data are available only when the view is visible, thus all DataHub operations for module view Data Sources need the DOORS module with a particular view to be open at all times.</li></ul></ac:rich-text-body></ac:structured-macro><p><br /></p><p>To create a module view Data Source</p><hr /><ol><li>Right-click a module in <strong>DataHub Explorer</strong> and select <strong>Create data source from View</strong>.<br /><br /><ac:image><ri:attachment ri:filename="Create_data_source_from_view.PNG"><ri:page ri:space-key="CDH2024x" ri:content-title="Creating DOORS module view Data Sources" /></ri:attachment></ac:image><br /><br /></li><li>The <strong>Create data source from View</strong> dialog opens and lists all available views. From the <strong>View</strong> drop-down list, select one of the views.<br /><br /><ac:image><ri:attachment ri:filename="viewsupport02.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Creating DOORS module view Data Sources" /></ri:attachment></ac:image><br /><br /></li><li>The module view Data Source of the selected view will be created.<br /><br /><ac:image><ri:attachment ri:filename="viewsupport03.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Creating DOORS module view Data Sources" /></ri:attachment></ac:image></li></ol>
+````
+
+<!--NOMAGIC_PAGE id=136716551 space=CDH2024x version=1 -->
+## PAGE 00043: Creating links between elements
+
+- page_id: `136716551`
+- space_key: `CDH2024x`
+- source_url: https://docs.nomagic.com/spaces/CDH2024x/pages/136716551/Creating+links+between+elements
+- version_number: 1
+- version_date: `2023-09-21T06:04:51.829+02:00`
+- ancestors: Cameo DataHub Documentation > User Guide > Working with DataHub and modeling tools
+- labels: []
+
+### NORMALIZED CONTENT
+
+DataHub links can create relationships between elements. The relationship determines how the elements react when one of the elements changes. You can use the MagicDraw shortcut menu to navigate to DHLinks.
+
+To navigate to DHLinks from the MagicDraw shortcut menu
+
+- Right-click a node in the MagicDraw Containment tree. Select Go To > DHLinks .
+
+[IMAGE alt='' src='']
+
+### EXACT CONFLUENCE STORAGE SOURCE
+
+````html
+<p>DataHub links can create relationships between elements. The relationship determines how the elements react when one of the elements changes. You can use the MagicDraw shortcut menu to navigate to DHLinks.</p><p><br /></p><p>To navigate to DHLinks from the MagicDraw shortcut menu</p><hr /><ul><li>Right-click a node in the MagicDraw Containment tree. Select <strong>Go To</strong> &gt;<strong> DHLinks</strong>.</li></ul><p style="margin-left: 30.0px;"><ac:image ac:title="MagicDraw Containment Tree context menu to navigate to DHLinks" ac:alt="MagicDraw Containment Tree context menu to navigate to DHLinks"><ri:attachment ri:filename="dh-go-to-dh-links.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Creating links between elements" /></ri:attachment></ac:image></p><p><br /></p>
+````
+
+<!--NOMAGIC_PAGE id=136716516 space=CDH2024x version=1 -->
+## PAGE 00044: Creating OSLC links
+
+- page_id: `136716516`
+- space_key: `CDH2024x`
+- source_url: https://docs.nomagic.com/spaces/CDH2024x/pages/136716516/Creating+OSLC+links
+- version_number: 1
+- version_date: `2023-09-21T06:04:48.495+02:00`
+- ancestors: Cameo DataHub Documentation > User Guide > Working with DataHub and modeling tools > Working with OSLC features
+- labels: []
+
+### NORMALIZED CONTENT
+
+#### NOTE: Note
+
+Note
+
+In the 19.0 and later versions, the **Create OSLC link** operation is not displayed and is used through the **Create DHTrace** operation instead from the **Operation** drop-down list in **Cameo DataHub Explorer** (for IBM® Rational® DOORS® Next Generation Data Source).
+
+You can create OSLC links and queries from an [CONFLUENCE_PAGE title='Adding IBM Rational DOORS Next Generation Data Sources' space='CDH2024x']IBM® Rational® DOORS® Next Generation Data Source in DataHub by using the **Create DHTrace** operation from the **Operation** drop-down list in **Cameo DataHub Explorer**.
+
+To create an OSLC Link
+
+1. Open an IBM® Rational® DOORS® Next Generation Data Source .
+2. From the Operation drop-down list in DataHub Explorer , select Create DHTrace . [ATTACHMENT filename='CDH_Panel_Create_DHTrace.png']
+3. From the IBM ® Rational ® DOORS ® Next Generation data source, drag a node into the MagicDraw ® Containment area.
+4. There is a popup menu after dragging the node to the MagicDraw Containment area. Choose one type of link from the list that you want to create. [ATTACHMENT filename='dh-link-types.png']
+
+#### NOTE: Note
+
+Note
+
+When you copy the Doors Next Generation (DNG) datasource's requirements from the DataHub Explorer to the MagicDraw containment tree, the URI link is created automatically for those requirements with the type “self”. This "self" type link is needed for [CONFLUENCE_PAGE title='OSLC Preview' space='CDH2024x'], navigation, or other purposes.
+
+The figures below show the newly created OSLC hyperlinks in the MagicDraw® Containment tree, OSLC hyperlinks' properties, and an OSLC hyperlink in the **DH Links** panel respectively.
+
+[IMAGE alt='' src='']
+
+###### The newly created OSLC hyperlinks in the MagicDraw® Containment tree.
+
+[IMAGE alt='' src='']
+
+###### The OSLC hyperlink's properties.
+
+[IMAGE alt='' src='']
+
+###### An OSLC hyperlink in the DH Links panel.
+
+### EXACT CONFLUENCE STORAGE SOURCE
+
+````html
+<p class="auto-cursor-target"><br /></p><ac:structured-macro ac:name="note" ac:schema-version="1" ac:macro-id="a56a9bc2-1c75-4b2d-8fde-0b7f76c04bea"><ac:parameter ac:name="title">Note</ac:parameter><ac:rich-text-body><p>In the 19.0 and later versions, the <strong>Create OSLC link</strong> operation is not displayed and is used through the <strong>Create DHTrace</strong> operation instead from the <strong>Operation</strong> drop-down list in <strong>Cameo DataHub Explorer</strong> (for IBM<sup>®</sup> Rational<sup>®</sup> DOORS<sup>®</sup> Next Generation Data Source).</p></ac:rich-text-body></ac:structured-macro><p><br /></p><p class="confluence-link">You can create OSLC links and queries from an <ac:link><ri:page ri:space-key="CDH2024x" ri:content-title="Adding IBM Rational DOORS Next Generation Data Sources" /><ac:link-body>IBM<sup>®</sup> Rational<sup>®</sup> DOORS<sup>®</sup> Next Generation Data Source</ac:link-body></ac:link> in DataHub by using the <strong>Create DHTrace</strong> operation from the <strong>Operation</strong> drop-down list in <strong>Cameo DataHub Explorer</strong>.</p><p><br /></p><p>To create an OSLC Link</p><hr /><ol><li class="confluence-link">Open an <span class="confluence-link">IBM<sup>®</sup> Rational<sup>®</sup> DOORS<sup>®</sup> Next Generation Data Source</span>.</li><li>From the <strong>Operation</strong> drop-down list in <strong>DataHub Explorer</strong>, select <strong>Create DHTrace</strong>.<br /><br /><ac:image><ri:attachment ri:filename="CDH_Panel_Create_DHTrace.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Creating OSLC links" /></ri:attachment></ac:image><br /><br /></li><li>From the IBM<sup>®</sup> Rational<sup>®</sup> DOORS<sup>®</sup> Next Generation data source, drag a node into the MagicDraw<sup>®</sup> Containment area.</li><li>There is a popup menu after dragging the node to the MagicDraw Containment area. Choose one type of link from the list that you want to create.<br /><br /><ac:image ac:title="Figure OSLC Link types" ac:alt="Figure OSLC Link types"><ri:attachment ri:filename="dh-link-types.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Creating OSLC links" /></ri:attachment></ac:image><br /><br /></li></ol><ac:structured-macro ac:name="note" ac:schema-version="1" ac:macro-id="d127d1d5-cbff-4b8c-a7e7-c48f3fdfa28d"><ac:parameter ac:name="title">Note</ac:parameter><ac:rich-text-body><p>When you copy the Doors Next Generation (DNG) datasource's requirements from the DataHub Explorer to the MagicDraw containment tree, the URI link is created automatically for those requirements with the type “self”. This &quot;self&quot; type link is needed for <ac:link><ri:page ri:space-key="CDH2024x" ri:content-title="OSLC Preview" /><ac:plain-text-link-body><![CDATA[previewing]]></ac:plain-text-link-body></ac:link>, navigation, or other purposes.</p></ac:rich-text-body></ac:structured-macro><p><span style="line-height: 1.4285715;"><br /></span></p><p><span style="line-height: 1.4285715;">The figures below show the newly created OSLC hyperlinks in the MagicDraw<sup>®</sup> Containment tree, OSLC hyperlinks' properties, and an OSLC hyperlink in the</span> <strong>DH Links</strong> panel respectively.</p><p><br /></p><p style="margin-left: 30.0px;"><ac:image ac:align="center" ac:title="OSLC hyperlinks in MagicDraw containment area" ac:alt="OSLC hyperlinks in MagicDraw containment area"><ri:attachment ri:filename="oslc-hyperlinks.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Creating OSLC links" /></ri:attachment></ac:image></p><h6 style="text-align: center;"> The newly created OSLC hyperlinks in the MagicDraw<sup>®</sup> Containment tree.</h6><p style="text-align: center;margin-left: 30.0px;"><ac:image ac:title="Properties of OSLC Link " ac:alt="Properties of OSLC Link "><ri:attachment ri:filename="worddavae7ad7197fdcea58505c68e4c441a7fb.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Creating OSLC links" /></ri:attachment></ac:image></p><h6 style="text-align: center;">The OSLC hyperlink's properties.</h6><p><ac:image ac:align="center"><ri:attachment ri:filename="OSLC Hyperlink.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Creating OSLC links" /></ri:attachment></ac:image></p><h6 style="text-align: center;">An OSLC hyperlink in the DH Links panel.</h6>
+````
+
+<!--NOMAGIC_PAGE id=136716525 space=CDH2024x version=1 -->
+## PAGE 00045: Creating OSLC queries
+
+- page_id: `136716525`
+- space_key: `CDH2024x`
+- source_url: https://docs.nomagic.com/spaces/CDH2024x/pages/136716525/Creating+OSLC+queries
+- version_number: 1
+- version_date: `2023-09-21T06:04:49.154+02:00`
+- ancestors: Cameo DataHub Documentation > User Guide > Working with DataHub and modeling tools > Working with OSLC features
+- labels: []
+
+### NORMALIZED CONTENT
+
+There are two types of OSLC queries you can construct to query the DOORS® Next Generation artifacts repository - simple or basic query and advanced query based on SQL or SPARQL*.*You can find the details of OSLC queries and more examples of queries and their syntax on the [OSLC Specification website](http://open-services.net/).
+
+To create and run a simple or basic OSLC query
+
+1. Do one of the following
+
+- 
+  - On the main menu, click Tools > DataHub > Create OSLC Query from MagicDraw®.
+  - On the DataHub Explorer toolbar, click the Create OSLC Query [ATTACHMENT filename='oslc-query-icon.png'] button.
+
+The **OSLC Query Editor** dialog opens.
+
+[IMAGE alt='' src='']
+
+2. Fill out the information that you want to create the query to search for.
+
+3. Click **[IMAGE alt='' src='']**. The results of the query, if any, appears below the *Type text to search* box.
+
+#### TIP: Tip
+
+Tip
+
+- You can filter the search results of the query by using the Type text to search box.
+- You can click [ATTACHMENT filename='oslc-btn1.png'] to save the results in Alias Manager .
+
+To create and run an advanced query
+
+1. Do one of the following
+
+- 
+  - On the main menu, click Tools > DataHub > Create OSLC Query from MagicDraw®.
+  - On the DataHub Explorer toolbar, click the Create OSLC Query [ATTACHMENT filename='oslc-query-icon.png'] button.
+
+The **OSLC Query Editor** dialog opens.
+
+[IMAGE alt='' src='']
+
+2. Click the **[IMAGE alt='' src='']** tab. In the **Query String** box, type your query using the simple or basic query language, e.g., *https://10.1.1.70:9443/rm/views?oslc.query=true* or using the SPARQL query language, e.g., *https://host:port/bugs?oslc.select=dcterms:created,dcterms:creator{foaf:familyName}&oslc.where=cm:severity="high*"**.
+
+3. Click **[IMAGE alt='' src='']**. The results of the query, if any, appears below the *Type text to search* box.
+
+#### TIP: Tip
+
+Tip
+
+- You can filter the search results of the query by using the Type text to search box.
+- You can click [ATTACHMENT filename='oslc-btn1.png'] to save the results in Alias Manager .
+
+### EXACT CONFLUENCE STORAGE SOURCE
+
+````html
+<p>There are two types of OSLC queries you can construct to query the DOORS<sup>®</sup> Next Generation artifacts repository - simple or basic query and advanced query based on SQL or SPARQL<em>. </em>You can find the details of OSLC queries and more examples of queries and their syntax on the <a class="external-link" href="http://open-services.net/" style="line-height: 1.4285715;" rel="nofollow">OSLC Specification website</a>.</p><p><br /></p><p>To create and run a simple or basic OSLC query</p><hr /><ol><li>Do one of the following</li></ol><ul><li style="list-style-type: none;background-image: none;"><ul><li>On the main menu, click <strong>Tools</strong> &gt; <strong>DataHub</strong> &gt; <strong>Create OSLC Query</strong> from MagicDraw®.</li><li>On the <strong>DataHub Explorer</strong> toolbar, click the <strong>Create OSLC Query</strong> <ac:image><ri:attachment ri:filename="oslc-query-icon.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Creating OSLC queries" /></ri:attachment></ac:image> button.</li></ul></li></ul><p style="margin-left: 30.0px;">The <strong>OSLC Query Editor</strong> dialog opens.</p><p style="margin-left: 30.0px;"><ac:image ac:title="OSLC Query editor window" ac:alt="OSLC Query editor window"><ri:attachment ri:filename="oslc-query-editor-a.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Creating OSLC queries" /></ri:attachment></ac:image></p><p style="margin-left: 30.0px;">2. Fill out the information that you want to create the query to search for.</p><p style="margin-left: 30.0px;">3. Click <strong><ac:image><ri:attachment ri:filename="run-btn.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Creating OSLC queries" /></ri:attachment></ac:image></strong>. The results of the query, if any, appears below the <em>Type text to search</em> box.</p><p style="margin-left: 30.0px;"><br /></p><ac:structured-macro ac:name="tip" ac:schema-version="1" ac:macro-id="d156c760-b22b-45db-a9e8-5fd0c8057a3f"><ac:parameter ac:name="title">Tip</ac:parameter><ac:rich-text-body><ul><li>You can filter the search results of the query by using the <em>Type text to search</em> box.</li><li>You can click <ac:image><ri:attachment ri:filename="oslc-btn1.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Creating OSLC queries" /></ri:attachment></ac:image> to save the results in <strong>Alias Manager</strong>.</li></ul></ac:rich-text-body></ac:structured-macro><p><br /></p><p>To create and run an advanced query</p><hr /><ol><li>Do one of the following</li></ol><ul><li style="list-style-type: none;background-image: none;"><ul><li>On the main menu, click <strong>Tools</strong> &gt; <strong>DataHub</strong> &gt; <strong>Create OSLC Query</strong> from MagicDraw®.</li><li>On the <strong>DataHub Explorer</strong> toolbar, click the <strong>Create OSLC Query</strong> <ac:image><ri:attachment ri:filename="oslc-query-icon.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Creating OSLC queries" /></ri:attachment></ac:image> button.</li></ul></li></ul><p style="margin-left: 30.0px;">The <strong>OSLC Query Editor</strong> dialog opens.</p><p style="margin-left: 30.0px;"><ac:image ac:title="The OSLC advanced Query Editor tab" ac:alt="The OSLC advanced Query Editor tab"><ri:attachment ri:filename="datahub-oslc-query-editor.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Creating OSLC queries" /></ri:attachment></ac:image></p><p style="margin-left: 30.0px;">2. Click the <strong><ac:image><ri:attachment ri:filename="query-editor.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Creating OSLC queries" /></ri:attachment></ac:image></strong> tab. In the <strong>Query String</strong> box, type your query using the simple or basic query language, e.g., <em><span class="nolink">https://10.1.1.70:9443/rm/views?oslc.query=true</span></em> or using the SPARQL query language, e.g., <em><span class="external-link">https://host:port/bugs?oslc.select=dcterms:created,dcterms:creator{foaf:familyName}&amp;oslc.where=cm:severity=&quot;high<em><span class="external-link">&quot;</span></em></span></em>.</p><p style="margin-left: 30.0px;">3. Click <strong><ac:image><ri:attachment ri:filename="run-btn.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Creating OSLC queries" /></ri:attachment></ac:image></strong>. The results of the query, if any, appears below the <em>Type text to search</em> box.</p><p style="margin-left: 30.0px;"><br /></p><ac:structured-macro ac:name="tip" ac:schema-version="1" ac:macro-id="af0338e8-0d8f-4cb1-b445-df64678c4cf5"><ac:parameter ac:name="title">Tip</ac:parameter><ac:rich-text-body><ul><li>You can filter the search results of the query by using the <em>Type text to search</em> box.</li><li>You can click <ac:image><ri:attachment ri:filename="oslc-btn1.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Creating OSLC queries" /></ri:attachment></ac:image> to save the results in <strong>Alias Manager</strong>.</li></ul></ac:rich-text-body></ac:structured-macro><p class="auto-cursor-target"><br /></p>
+````
+
+<!--NOMAGIC_PAGE id=136716008 space=CDH2024x version=3 -->
+## PAGE 00046: Creating OSLC Query operation
+
+- page_id: `136716008`
+- space_key: `CDH2024x`
+- source_url: https://docs.nomagic.com/spaces/CDH2024x/pages/136716008/Creating+OSLC+Query+operation
+- version_number: 3
+- version_date: `2026-02-11T07:51:30.602+01:00`
+- ancestors: Cameo DataHub Documentation > Getting started > Basic features of DataHub
+- labels: []
+
+### NORMALIZED CONTENT
+
+In OSLC, each artifact in the lifecycle, e.g., Requirements, Change Requests, or Test Cases, is identified by a URI. Each artifact in the lifecycle is an HTTP resource. Standard HTTP methods (GET, PUT, POST, DELETE) are used to interact with each artifact. When you look up a URI, OSLC queries provide useful information using the standards (RDF*, SPARQL). Each OSLC resource has an RDF representation. RDF/XML is mandatory and other representations such as JSON or HTML are common. OSLC lifecycle artifacts are linked by relationships, e.g., elaborates or elaborated, defined by URIs.
+
+You can construct two types of OSLC queries to query an artifacts repository - simple or basic query and advanced query based on SQL or SPARQL. You can also find more information about OSLC queries on [the OSLC Specification website](http://open-services.net/+).
+
+**Related Pages**
+
+- [CONFLUENCE_PAGE title='Creating OSLC queries' space='']
+
+### EXACT CONFLUENCE STORAGE SOURCE
+
+````html
+<p>In OSLC, each artifact in the lifecycle, e.g., Requirements, Change Requests, or Test Cases, is identified by a URI. Each artifact in the lifecycle is an HTTP resource. Standard HTTP methods (GET, PUT, POST, DELETE) are used to interact with each artifact. When you look up a URI, OSLC queries provide useful information using the standards (RDF*, SPARQL). Each OSLC resource has an RDF representation. RDF/XML is mandatory and other representations such as JSON or HTML are common. OSLC lifecycle artifacts are linked by relationships, e.g., elaborates or elaborated, defined by URIs.</p><p>You can construct two types of OSLC queries to query an artifacts repository - simple or basic query and advanced query based on SQL or SPARQL. You can also find more information about OSLC queries on <a class="external-link" href="http://open-services.net/+" rel="nofollow">the OSLC Specification website</a>.</p><p><strong>Related Pages</strong></p><ul><li data-uuid="2fba9e3a-e319-4cbd-abac-9ccb6dfd9170"><strong><ac:link><ri:page ri:content-title="Creating OSLC queries" /></ac:link></strong></li></ul>
+````
+
+<!--NOMAGIC_PAGE id=136716109 space=CDH2024x version=2 -->
+## PAGE 00047: Customizing DataHub options
+
+- page_id: `136716109`
+- space_key: `CDH2024x`
+- source_url: https://docs.nomagic.com/spaces/CDH2024x/pages/136716109/Customizing+DataHub+options
+- version_number: 2
+- version_date: `2024-01-31T07:24:54.186+01:00`
+- ancestors: Cameo DataHub Documentation > User Guide > Working with DataHub and modeling tools
+- labels: []
+
+### NORMALIZED CONTENT
+
+You can specify Cameo DataHub environment options in the **Environment Options** dialog of your modeling tool.
+
+To access Cameo DataHub environment options in a modeling tool
+
+1. In the main menu of your modeling tool, select Options > Environment .
+2. When the Environment Options dialog opens, select the Cameo DataHub option group on the left side of the dialog. [ATTACHMENT filename='Environment_Options_CDH_Page69.png']
+
+Cameo DataHub environment options are divided into the following groups:
+
+### EXACT CONFLUENCE STORAGE SOURCE
+
+````html
+<p>You can specify Cameo DataHub environment options in the <strong>Environment Options</strong> dialog of your modeling tool.</p><p><br /></p><p>To access Cameo DataHub environment options in a modeling tool</p><hr /><ol><li>In the main menu of your modeling tool, select <strong>Options</strong> &gt; <strong>Environment</strong>.</li><li>When the <strong>Environment Options</strong> dialog opens, select the <strong>Cameo DataHub</strong> option group on the left side of the dialog.<br /><br /><ac:image><ri:attachment ri:filename="Environment_Options_CDH_Page69.png" /></ac:image><br /><br /></li></ol><p>Cameo DataHub environment options are divided into the following groups:</p><p><ac:structured-macro ac:name="children" ac:schema-version="2" ac:macro-id="3cddc042-642a-43e7-b63a-55564e8abc23" /></p>
+````
+
+<!--NOMAGIC_PAGE id=136715975 space=CDH2024x version=1 -->
+## PAGE 00048: Customizing module and object label in DataHub Explorer
+
+- page_id: `136715975`
+- space_key: `CDH2024x`
+- source_url: https://docs.nomagic.com/spaces/CDH2024x/pages/136715975/Customizing+module+and+object+label+in+DataHub+Explorer
+- version_number: 1
+- version_date: `2023-09-21T06:04:21.840+02:00`
+- ancestors: Cameo DataHub Documentation > Getting started > DataHub basic operations
+- labels: []
+
+### NORMALIZED CONTENT
+
+#### NOTE: Note
+
+Note
+
+This customization applies for the entire DOORS Data Source. You cannot customize the node’s label for only some modules.
+
+To customize the node’s label
+
+1. Right-click a DOORS Data Source and select Customize Module/Object label . [ATTACHMENT filename='6.png']
+2. The **Customize label** dialog opens. Enter the name of property that you want to display for the module and object by placing the property name inside quotation marks. You can append more properties or add some text, e.g., *“Object Identifier”::”Object Heading*”. Click **OK**. 
+ 
+[IMAGE alt='' src=''] [IMAGE alt='' src=''] NoteWhen you edit the node’s label, you must reload the tree in **DataHub Explorer**.
+
+### EXACT CONFLUENCE STORAGE SOURCE
+
+````html
+<p class="auto-cursor-target"><br /></p><ac:structured-macro ac:name="note" ac:schema-version="1" ac:macro-id="79c5d464-e846-47f5-9784-96f13e36978d"><ac:parameter ac:name="title">Note</ac:parameter><ac:rich-text-body><p>This customization applies for the entire DOORS Data Source. You cannot customize the node’s label for only some modules.</p></ac:rich-text-body></ac:structured-macro><p><br /></p><p>To customize the node’s label</p><hr /><ol><li>Right-click a DOORS Data Source and select <strong>Customize Module/Object label</strong>.<br /><br /><ac:image><ri:attachment ri:filename="6.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Customizing module and object label in DataHub Explorer" /></ri:attachment></ac:image><br /><br /></li><li><p class="auto-cursor-target">The <strong>Customize label</strong> dialog opens. Enter the name of property that you want to display for the module and object by placing the property name inside quotation marks. You can append more properties or add some text, e.g., <em>“Object Identifier”::”Object Heading</em>”. Click <strong>OK</strong>.<br /><br /><ac:image><ri:attachment ri:filename="customlabel02.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Customizing module and object label in DataHub Explorer" /></ri:attachment></ac:image></p><p class="auto-cursor-target"><ac:image><ri:attachment ri:filename="customlabel03.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Customizing module and object label in DataHub Explorer" /></ri:attachment></ac:image></p><ac:structured-macro ac:name="note" ac:schema-version="1" ac:macro-id="14daf86b-d10f-46f0-b683-8de8bbfeab9d"><ac:parameter ac:name="title">Note</ac:parameter><ac:rich-text-body><p>When you edit the node’s label, you must reload the tree in <strong>DataHub Explorer</strong>.</p></ac:rich-text-body></ac:structured-macro><p class="auto-cursor-target"><br /></p></li></ol>
+````
+
+<!--NOMAGIC_PAGE id=136716413 space=CDH2024x version=1 -->
+## PAGE 00049: Customizing module and object labels in DataHub Explorer
+
+- page_id: `136716413`
+- space_key: `CDH2024x`
+- source_url: https://docs.nomagic.com/spaces/CDH2024x/pages/136716413/Customizing+module+and+object+labels+in+DataHub+Explorer
+- version_number: 1
+- version_date: `2023-09-21T06:04:40.035+02:00`
+- ancestors: Cameo DataHub Documentation > User Guide > Working with DataHub and modeling tools > Working with Data Sources > Adding Data Sources for IBM Rational DOORS
+- labels: []
+
+### NORMALIZED CONTENT
+
+Another capability of Cameo DataHub is designing labels of modules and objects for Rational DOORS Data Sources that allows you to create labels from appending one or more property values and additional text.
+
+Instead of displaying the module names and object headings or object text in the tree, you can now design the labels of modules and objects by using one or more properties’ values or adding some text.
+
+#### NOTE: Note
+
+Note
+
+This customization applies to the entire DOORS Data Source. You cannot customize the node’s label for only some modules.
+
+To customize the node’s label
+
+1. Right-click a DOORS Data Source and select Customize Module/Object label . [ATTACHMENT filename='Customize module label.PNG']
+2. The **Customize label** dialog opens. Enter the name of the property that you want to display for the module and object by placing the property name inside quotation marks. You can append more properties or add some text, e.g., *“Object Identifier”::”Object Heading*”. Click **OK**. 
+ 
+[IMAGE alt='' src=''] [IMAGE alt='' src=''] NoteWhen you edit the node’s label, you must reload the tree in **DataHub Explorer**.
+
+### EXACT CONFLUENCE STORAGE SOURCE
+
+````html
+<p>Another capability of Cameo DataHub is designing labels of modules and objects for Rational DOORS Data Sources that allows you to create labels from appending one or more property values and additional text.</p><p>Instead of displaying the module names and object headings or object text in the tree, you can now design the labels of modules and objects by using one or more properties’ values or adding some text.</p><ac:structured-macro ac:name="note" ac:schema-version="1" ac:macro-id="79c5d464-e846-47f5-9784-96f13e36978d"><ac:parameter ac:name="title">Note</ac:parameter><ac:rich-text-body><p>This customization applies to the entire DOORS Data Source. You cannot customize the node’s label for only some modules.</p></ac:rich-text-body></ac:structured-macro><p><br /></p><p>To customize the node’s label</p><hr /><ol><li>Right-click a DOORS Data Source and select <strong>Customize Module/Object label</strong>.<br /><br /><ac:image><ri:attachment ri:filename="Customize module label.PNG"><ri:page ri:space-key="CDH2024x" ri:content-title="Customizing module and object labels in DataHub Explorer" /></ri:attachment></ac:image><br /><br /></li><li><p class="auto-cursor-target">The <strong>Customize label</strong> dialog opens. Enter the name of the property that you want to display for the module and object by placing the property name inside quotation marks. You can append more properties or add some text, e.g., <em>“Object Identifier”::”Object Heading</em>”. Click <strong>OK</strong>.<br /><br /><ac:image><ri:attachment ri:filename="customlabel02.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Customizing module and object labels in DataHub Explorer" /></ri:attachment></ac:image></p><p class="auto-cursor-target"><ac:image><ri:attachment ri:filename="customlabel03.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Customizing module and object labels in DataHub Explorer" /></ri:attachment></ac:image></p><ac:structured-macro ac:name="note" ac:schema-version="1" ac:macro-id="14daf86b-d10f-46f0-b683-8de8bbfeab9d"><ac:parameter ac:name="title">Note</ac:parameter><ac:rich-text-body><p>When you edit the node’s label, you must reload the tree in <strong>DataHub Explorer</strong>.</p></ac:rich-text-body></ac:structured-macro><p class="auto-cursor-target"><br /></p></li></ol>
+````
+
+<!--NOMAGIC_PAGE id=136716406 space=CDH2024x version=1 -->
+## PAGE 00050: Customizing new node type for DOORS
+
+- page_id: `136716406`
+- space_key: `CDH2024x`
+- source_url: https://docs.nomagic.com/spaces/CDH2024x/pages/136716406/Customizing+new+node+type+for+DOORS
+- version_number: 1
+- version_date: `2023-09-21T06:04:39.568+02:00`
+- ancestors: Cameo DataHub Documentation > User Guide > Working with DataHub and modeling tools > Working with Data Sources > Adding Data Sources for IBM Rational DOORS
+- labels: []
+
+### NORMALIZED CONTENT
+
+To customize an **Object**in DOORS, you must specify attributes for each object individually. The following outlines a few examples of how an object is specified.
+
+- When you specify the Object Heading attribute value for an object , the object is recognized as a Topic .
+- When you specify the Object Text attribute value for an object, the object is recognized as a Requirement .
+
+A****custom attribute can be used to identify a variety of requirement types in DOORS. However, that could be difficult when you have multiple objects to customize.
+
+In Cameo DataHub, the **Define Target Type**option is provided while mapping to customize a module or node. However, that could be difficult when it must be done for every module or when there are multiple attributes to filter.
+
+Using the JSON configuration, you can collectively customize DOORS objects to have multiple types. You can even import the custom-created JSON configuration file in Cameo DataHub. With JSON configuration you can write the configuration, as follows:
+
+- (ObjectHeading=blank)+(ObjectType="Req") = Requirement
+- (ObjectHeading=blank)+(ObjectType=”ExtReq”) = Extended Requirement
+- (ObjectHeading=blank)+(ObjectType=”Physical”) = Physical Requirement
+- (ObjectHeading not blank)+(ObjectType="Topic") = Topic
+
+To import the configuration file
+
+1. Right-click the parent node that you want to recursively apply the type configuration.
+2. Select Customize Module/Object data type.
+3. Select Import configuration. 
+ 
+[IMAGE alt='' src='']
+
+When the configuration file is imported, the DataHub tree will refresh.
+
+[IMAGE alt='' src='']
+
+###### Copy Data with Sync dialog showing only modules and object nodes
+
+[IMAGE alt='' src='']
+
+###### Copy Data with Sync dialog showing customized nodes after importing JSON configuration
+
+Custom type definition JSON:
+
+```text
+,
+		
+	]
+}]]>
+```
+
+Type definition JSON:
+
+```text
+",
+	"doors_type": "Project | Module | Object",
+	"type_icon": "Project | Module | Object | ",
+	"type_condition": ,
+	"init_doors_values": {
+		"": "",
+		"": "",
+		"": ""
+	}
+}]]>
+```
+
+Value condition JSON:
+
+```text
+",
+		"condition": "= | != | > | >= | < | <= | contains | before | after | regex",
+		"attr_value": ""
+	}
+}
+{
+	"all_match" : [
+		,
+		,
+		
+	]
+}
+{
+	"any_match" : [
+		,
+		,
+		
+	]
+}
+{
+	"not_match" : [
+		,
+		,
+		
+	]
+}]]>
+```
+
+Sample configuration:
+
+```text
+
+```
+
+### EXACT CONFLUENCE STORAGE SOURCE
+
+````html
+<p>To customize an <strong>Object </strong>in DOORS, you must specify attributes for each object individually. The following outlines a few examples of how an object is specified.</p><ul><li>When you specify the <strong>Object Heading </strong>attribute value for an object<strong>, </strong>the object is recognized as a <ac:inline-comment-marker ac:ref="7cceb8ca-aee3-4401-a922-72f6aecb3e92">Topic</ac:inline-comment-marker>.</li><li>When you specify the <strong>Object Text </strong>attribute value for an object, the object is recognized as a <ac:inline-comment-marker ac:ref="eb53701c-6617-42e4-97ac-4297b3bdc217">Requirement</ac:inline-comment-marker>.</li></ul><p>A<strong> </strong>custom attribute can be used to identify a variety of requirement types in DOORS. However, that could be difficult when you have multiple objects to customize.</p><p>In Cameo DataHub, the <strong>Define Target Type </strong>option is provided while mapping to customize a module or node. However, that could be difficult when it must be done for every module or when there are multiple attributes to filter.</p><p>Using the JSON configuration, you can collectively customize DOORS objects to have multiple types. You can even import the custom-created JSON configuration file in Cameo DataHub. With JSON configuration you can write the configuration, as follows:</p><ul><li>(ObjectHeading=blank)+(ObjectType=&quot;Req&quot;) = Requirement</li><li>(ObjectHeading=blank)+(ObjectType=”ExtReq”) = Extended Requirement</li><li>(ObjectHeading=blank)+(ObjectType=”Physical”) = Physical Requirement</li><li>(ObjectHeading not blank)+(ObjectType=&quot;Topic&quot;) = Topic</li></ul><p><br /></p><p>To import the configuration file</p><hr /><ol><li>Right-click the parent node that you want to recursively apply the type configuration.</li><li>Select <strong>Customize Module/Object data type.</strong></li><li>Select <strong>Import configuration. <br /><br /><ac:image><ri:attachment ri:filename="Import Configuration.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Customizing new node type for DOORS" /></ri:attachment></ac:image><br /><br /></strong></li></ol><ac:structured-macro ac:name="info" ac:schema-version="1" ac:macro-id="cde6aaa7-b36d-4bfa-9224-1c116a9a968a"><ac:rich-text-body><p>When the configuration file is imported, the DataHub tree will refresh.</p></ac:rich-text-body></ac:structured-macro><p style="text-align: center;"><br /></p><p style="text-align: center;"><ac:image><ri:attachment ri:filename="Copy Data with Sync_Without Import.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Customizing new node type for DOORS" /></ri:attachment></ac:image></p><h6 style="text-align: center;">Copy Data with Sync dialog showing only modules and object nodes</h6><p style="text-align: center;"><ac:image><ri:attachment ri:filename="Copy Data with Sync_With Import.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Customizing new node type for DOORS" /></ri:attachment></ac:image></p><h6 style="text-align: center;">Copy Data with Sync dialog showing customized nodes after importing JSON configuration</h6><p>Custom type definition JSON:</p><ac:structured-macro ac:name="code" ac:schema-version="1" ac:macro-id="24f405df-ffdb-4ca2-8c0a-373720a7aaba"><ac:plain-text-body><![CDATA[{
+	"custom_types" : [ 
+		<Type definition JSON>,
+		<Type definition JSON>
+	]
+}]]></ac:plain-text-body></ac:structured-macro><p><br /></p><p>Type definition JSON: </p><ac:structured-macro ac:name="code" ac:schema-version="1" ac:macro-id="15597381-5dc9-43f6-9161-d0a6af021f97"><ac:plain-text-body><![CDATA[{
+	"type_name": "<type name>",
+	"doors_type": "Project | Module | Object",
+	"type_icon": "Project | Module | Object | <icon name in XML>",
+	"type_condition": <Value condition JSON>,
+	"init_doors_values": {
+		"<attr name>": "<attr value>",
+		"<attr name>": "<attr value>",
+		"<attr name>": "<attr value>"
+	}
+}]]></ac:plain-text-body></ac:structured-macro><p><br /></p><p>Value condition JSON:</p><ac:structured-macro ac:name="code" ac:schema-version="1" ac:macro-id="b80dd910-b84c-43a0-8f71-6ac73e017c16"><ac:plain-text-body><![CDATA[{
+	"value_condition": {
+		"attr_name": "<attr name>",
+		"condition": "= | != | > | >= | < | <= | contains | before | after | regex",
+		"attr_value": "<attr value>"
+	}
+}
+{
+	"all_match" : [
+		<Value condition JSON>,
+		<Value condition JSON>,
+		<Value condition JSON>
+	]
+}
+{
+	"any_match" : [
+		<Value condition JSON>,
+		<Value condition JSON>,
+		<Value condition JSON>
+	]
+}
+{
+	"not_match" : [
+		<Value condition JSON>,
+		<Value condition JSON>,
+		<Value condition JSON>
+	]
+}]]></ac:plain-text-body></ac:structured-macro><p><br /></p><p>Sample configuration:</p><ac:structured-macro ac:name="code" ac:schema-version="1" ac:macro-id="6b3c086c-6fb0-456c-ac98-b4b3f37bbe93"><ac:plain-text-body><![CDATA[{
+	"custom_types": [
+		{
+			"type_name": "Topic",
+			"doors_type": "Object",
+			"type_icon": "Object",
+			"type_condition": {
+				"all_match": [
+					{
+						"value_condition": {
+							"attr_name": "Object Heading",
+							"condition": "!=",
+							"attr_value": ""
+						},
+						"value_condition": {
+							"attr_name": "Object Type",
+							"condition": "=",
+							"attr_value": "Topic"
+						}
+					}
+				]
+			},
+			"init_doors_values": {
+				"Object Type": "Topic"
+			}
+		},
+		{
+			"type_name": "Requirement",
+			"doors_type": "Object",
+			"type_icon": "Object",
+			"type_condition": {
+				"all_match": [
+					{
+						"value_condition": {
+							"attr_name": "Object Heading",
+							"condition": "=",
+							"attr_value": ""
+						},
+						"value_condition": {
+							"attr_name": "Object Type",
+							"condition": "=",
+							"attr_value": "Req"
+						}
+					}
+				]
+			},
+			"init_doors_values": {
+				"Object Type": "Req"
+			}
+		},
+		{
+			"type_name": "Extended Requirement",
+			"doors_type": "Object",
+			"type_icon": "Object",
+			"type_condition": {
+				"all_match": [
+					{
+						"value_condition": {
+							"attr_name": "Object Heading",
+							"condition": "=",
+							"attr_value": ""
+						},
+						"value_condition": {
+							"attr_name": "Object Type",
+							"condition": "=",
+							"attr_value": "ExtReq"
+						}
+					}
+				]
+			},
+			"init_doors_values": {
+				"Object Type": "ExtReq"
+			}
+		},
+		{
+			"type_name": "Physical Requirement",
+			"doors_type": "Object",
+			"type_icon": "Object",
+			"type_condition": {
+				"all_match": [
+					{
+						"value_condition": {
+							"attr_name": "Object Heading",
+							"condition": "=",
+							"attr_value": ""
+						},
+						"value_condition": {
+							"attr_name": "Object Type",
+							"condition": "=",
+							"attr_value": "Physical"
+						}
+					}
+				]
+			},
+			"init_doors_values": {
+				"Object Type": "Physical"
+			}
+		}
+	]
+}]]></ac:plain-text-body></ac:structured-macro><p class="auto-cursor-target"><br /></p>
+````
+
+<!--NOMAGIC_PAGE id=136715956 space=CDH2024x version=1 -->
+## PAGE 00051: Data copying progress bar
+
+- page_id: `136715956`
+- space_key: `CDH2024x`
+- source_url: https://docs.nomagic.com/spaces/CDH2024x/pages/136715956/Data+copying+progress+bar
+- version_number: 1
+- version_date: `2023-09-21T06:04:21.286+02:00`
+- ancestors: Cameo DataHub Documentation > Getting started > Understanding DataHub user interface > Add-on features
+- labels: []
+
+### NORMALIZED CONTENT
+
+When copying data, DataHub shows the progress through its progress bar.
+
+[IMAGE alt='' src='']
+
+###### The progress bar when DataHub copies data.
+
+### EXACT CONFLUENCE STORAGE SOURCE
+
+````html
+<p>When copying data, DataHub shows the progress through its progress bar.</p><p><br /></p><p style="margin-left: 30.0px;"><ac:image ac:align="center" ac:title="DataHub Copy progress bar" ac:alt="DataHub Copy progress bar"><ri:attachment ri:filename="data-copy-progress-bar.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Data copying progress bar" /></ri:attachment></ac:image></p><h6 style="text-align: center;"> The progress bar when DataHub copies data.</h6>
+````
+
+<!--NOMAGIC_PAGE id=136716741 space=CDH2024x version=1 -->
+## PAGE 00052: Data Source synchronization
+
+- page_id: `136716741`
+- space_key: `CDH2024x`
+- source_url: https://docs.nomagic.com/spaces/CDH2024x/pages/136716741/Data+Source+synchronization
+- version_number: 1
+- version_date: `2023-09-21T06:04:57.874+02:00`
+- ancestors: Cameo DataHub Documentation > User Guide > Synchronization > Synchronizing Requirements
+- labels: []
+
+### NORMALIZED CONTENT
+
+You can synchronize a Data Source by selecting it and clicking either the **Synchronize** button on the **DataHub Explorer** toolbar or by choosing the **Synchronize** menu item from the shortcut menu.
+
+To synchronize an entire Data Source, do one of the following
+
+- Select a Data Source in the DataHub Explorer tab and click the Synchronize button on the DataHub Explorer toolbar. [ATTACHMENT filename='data-sync-btn-on-explorer-tab.png']
+- Right-click a Data Source and select Synchronize > Synchronize Node or Synchronize Node Recursively to synchronize all items that have DHLinks within the selected Data Source. [ATTACHMENT filename='Node Sync Shortcut Menu DataHub Explorer.png']
+
+#### INFO: Information
+
+Information
+
+The**Synchronize**button in DataHub Explorer is enabled only when you select a node or a Data Source.
+
+### EXACT CONFLUENCE STORAGE SOURCE
+
+````html
+<p>You can synchronize a Data Source by selecting it and clicking either the <strong>Synchronize</strong> button on the <strong>DataHub Explorer</strong> toolbar or by choosing the <strong>Synchronize</strong> menu item from the shortcut menu.</p><p><br /></p><p>To synchronize an entire Data Source, do one of the following</p><hr /><ul><li>Select a Data Source in the <strong>DataHub Explorer</strong> tab and click the <strong>Synchronize</strong> button on the <strong>DataHub Explorer</strong> toolbar.<br /><br /><ac:image ac:title="Data Source Synchronization Button in the DataHub Explorer of MagicDraw" ac:alt="Data Source Synchronization Button in the DataHub Explorer of MagicDraw"><ri:attachment ri:filename="data-sync-btn-on-explorer-tab.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Data Source synchronization" /></ri:attachment></ac:image><br /><br /></li><li>Right-click a Data Source and select <strong>Synchronize &gt; Synchronize Node </strong>or<strong> Synchronize Node Recursively</strong> to synchronize all items that have<strong> </strong>DHLinks within the selected Data Source.<br /><br /><ac:image><ri:attachment ri:filename="Node Sync Shortcut Menu DataHub Explorer.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Data Source synchronization" /></ri:attachment></ac:image></li></ul><ac:structured-macro ac:name="info" ac:schema-version="1" ac:macro-id="766ea1b3-44c5-4274-b4ae-1b740e3330a0"><ac:parameter ac:name="title">Information</ac:parameter><ac:rich-text-body><p><span>The </span><strong>Synchronize</strong><span> button in DataHub Explorer is enabled only when you select a node or a Data Source.</span></p></ac:rich-text-body></ac:structured-macro><p class="auto-cursor-target"><br /></p>
+````
+
+<!--NOMAGIC_PAGE id=136716714 space=CDH2024x version=2 -->
+## PAGE 00053: Data Sources on Teamwork Cloud
+
+- page_id: `136716714`
+- space_key: `CDH2024x`
+- source_url: https://docs.nomagic.com/spaces/CDH2024x/pages/136716714/Data+Sources+on+Teamwork+Cloud
+- version_number: 2
+- version_date: `2026-02-11T08:04:14.175+01:00`
+- ancestors: Cameo DataHub Documentation > User Guide > Using DataHub in Teamwork Cloud environment
+- labels: []
+
+### NORMALIZED CONTENT
+
+Data Sources on Teamwork Cloud are projects accessible to all users who have credentials to the network. Therefore, **Teamwork Cloud Data Sources** are actually projects stored in Teamwork Cloud. A **Teamwork Cloud project** may be accessible to more than one client.
+
+**Related page**
+
+### EXACT CONFLUENCE STORAGE SOURCE
+
+````html
+<p>Data Sources on Teamwork Cloud are projects accessible to all users who have credentials to the network. Therefore, <strong>Teamwork Cloud Data Sources</strong> are actually projects stored in Teamwork Cloud. A <strong>Teamwork Cloud project</strong> may be accessible to more than one client.</p><p><strong>Related page</strong></p><p><ac:structured-macro ac:name="children" ac:schema-version="2" ac:macro-id="3f62e555-d0c2-4821-a858-1e379affc3c7" /></p>
+````
+
+<!--NOMAGIC_PAGE id=136716017 space=CDH2024x version=2 -->
+## PAGE 00054: Data Synchronization
+
+- page_id: `136716017`
+- space_key: `CDH2024x`
+- source_url: https://docs.nomagic.com/spaces/CDH2024x/pages/136716017/Data+Synchronization
+- version_number: 2
+- version_date: `2026-02-11T07:51:57.047+01:00`
+- ancestors: Cameo DataHub Documentation > Getting started > Basic features of DataHub
+- labels: []
+
+### NORMALIZED CONTENT
+
+Synchronization is primarily used for keeping track of changes. Data synchronization allows you to track different types of changes and maintain the consistency of data across nodes in different data sources and applications.Data synchronization can be categorized into two functional types namely, Data Source synchronization and Node synchronization.For more information, refer to [CONFLUENCE_PAGE title='Synchronization' space=''].
+
+To synchronize the data sources
+
+1. Open the [CONFLUENCE_PAGE title='DataHub Explorer tab' space=''] .
+2. From the [CONFLUENCE_PAGE title='Operation drop-down list' space=''], select [CONFLUENCE_PAGE title='Copy Data with Sync operation' space='']. You can also synchronize the data by using [CONFLUENCE_PAGE title='Create Sync operation' space=''].
+
+You can track the changes and updates done after the synchronization with the help of the[CONFLUENCE_PAGE title='Tracking changes on Conflict Dashboard' space='']
+
+### EXACT CONFLUENCE STORAGE SOURCE
+
+````html
+<p><span style="color:var(--ds-text,#333333);">Synchronization is primarily used for keeping track of changes. Data synchronization allows you to track different types of changes and maintain the consistency of data across nodes in different data sources and applications.<span> Data synchronization can be categorized into two functional types namely, Data Source synchronization and Node synchronization. </span></span><span style="color:var(--ds-text,#333333);"><span>For more information, refer to <ac:link><ri:page ri:content-title="Synchronization" /></ac:link>.</span></span></p><p>To synchronize the data sources</p><hr /><ol><li class="auto-cursor-target" data-uuid="d58437f8-a29c-4ec3-8d70-2ff3e53441c0">Open the <ac:link><ri:page ri:content-title="DataHub Explorer tab" /><ac:plain-text-link-body><![CDATA[Cameo DataHub Explorer Panel]]></ac:plain-text-link-body></ac:link>.</li><li class="auto-cursor-target" data-uuid="d950a2e9-8424-4fe4-8b87-5095e8f34fe5"><p class="auto-cursor-target">From the <ac:link><ri:page ri:content-title="Operation drop-down list" /></ac:link>, select <ac:link><ri:page ri:content-title="Copy Data with Sync operation" /></ac:link>. You can also synchronize the data by using <ac:link><ri:page ri:content-title="Create Sync operation" /><ac:plain-text-link-body><![CDATA[Create Sync Operation]]></ac:plain-text-link-body></ac:link>.</p></li></ol><p><span>You can track the changes and updates done after the synchronization with the help of the </span><ac:link><ri:page ri:content-title="Tracking changes on Conflict Dashboard" /><ac:plain-text-link-body><![CDATA[Conflict Dashboard.]]></ac:plain-text-link-body></ac:link></p>
+````
+
+<!--NOMAGIC_PAGE id=136715909 space=CDH2024x version=3 -->
+## PAGE 00055: DataHub alias
+
+- page_id: `136715909`
+- space_key: `CDH2024x`
+- source_url: https://docs.nomagic.com/spaces/CDH2024x/pages/136715909/DataHub+alias
+- version_number: 3
+- version_date: `2026-02-11T07:33:28.215+01:00`
+- ancestors: Cameo DataHub Documentation > Getting started > Understanding DataHub user interface
+- labels: []
+
+### NORMALIZED CONTENT
+
+An alias can be created from any nodes or Data Source. DataHub [CONFLUENCE_PAGE title='Alias Manager' space='']**Alias Manager** stores all available aliases, and they can be either accessed or removed from there.
+
+### EXACT CONFLUENCE STORAGE SOURCE
+
+````html
+<p>An alias can be created from any nodes or Data Source. DataHub <ac:link><ri:page ri:content-title="Alias Manager" /><ac:link-body><strong>Alias Manager</strong></ac:link-body></ac:link> stores all available aliases, and they can be either accessed or removed from there.</p>
+````
+
+<!--NOMAGIC_PAGE id=136716202 space=CDH2024x version=1 -->
+## PAGE 00056: DataHub Alias Manager
+
+- page_id: `136716202`
+- space_key: `CDH2024x`
+- source_url: https://docs.nomagic.com/spaces/CDH2024x/pages/136716202/DataHub+Alias+Manager
+- version_number: 1
+- version_date: `2023-09-21T06:04:29.866+02:00`
+- ancestors: Cameo DataHub Documentation > User Guide > Working with DataHub and modeling tools > Working with the DataHub Explorer tree
+- labels: []
+
+### NORMALIZED CONTENT
+
+When an Alias is created, it is saved in **Alias Manager**. You can reopen or remove an Alias you have created through the**Alias Manager** dialog.
+
+To manage an existing Alias
+
+1. On the main menu, click Tools > DataHub > Alias Manager .
+2. The Alias Manager dialog opens. Expand each driver to see all of the Aliases under each driver.
+
+To open or remove an Alias
+
+- Select an Alias. Click [ATTACHMENT filename='open-btn2.png'] to open the selected Alias or [ATTACHMENT filename='remove-btn.png'] to delete it. [ATTACHMENT filename='alias-manager.png']
+
+#### WARNING: Warning
+
+Warning
+
+The created Alias is displayed in**Alias Manager**only when the related Data Source is connected.
+
+### EXACT CONFLUENCE STORAGE SOURCE
+
+````html
+<p>When an Alias is created, it is saved in <strong style="line-height: 1.4285715;">Alias Manager</strong>. You can reopen or remove an Alias you have created through the<strong style="line-height: 1.4285715;"> Alias Manager</strong> dialog.</p><p><br /></p><p>To manage an existing Alias</p><hr /><ol><li>On the main menu, click <strong>Tools</strong> &gt; <strong>DataHub</strong> &gt; <strong>Alias Manager</strong>.</li><li>The <strong>Alias Manager</strong> dialog opens. Expand each driver to see all of the Aliases under each driver.</li></ol><p><br /></p><p>To open or remove an Alias</p><hr /><ul><li>Select an Alias. Click <ac:image><ri:attachment ri:filename="open-btn2.png"><ri:page ri:space-key="CDH2024x" ri:content-title="DataHub Alias Manager" /></ri:attachment></ac:image> to open the selected Alias or <ac:image><ri:attachment ri:filename="remove-btn.png"><ri:page ri:space-key="CDH2024x" ri:content-title="DataHub Alias Manager" /></ri:attachment></ac:image> to delete it.<br /><br /> <ac:image ac:title="Deleting an Existing Schema Map in the Schema Map Manager" ac:alt="Deleting an Existing Schema Map in the Schema Map Manager"><ri:attachment ri:filename="alias-manager.png"><ri:page ri:space-key="CDH2024x" ri:content-title="DataHub Alias Manager" /></ri:attachment></ac:image></li></ul><ac:structured-macro ac:name="warning" ac:schema-version="1" ac:macro-id="63a4e2e9-057d-4145-9b7a-5012a14ade3b"><ac:parameter ac:name="title">Warning</ac:parameter><ac:rich-text-body><p><span>The created Alias is displayed in </span><strong>Alias Manager</strong><span> only when the related Data Source is connected.</span></p></ac:rich-text-body></ac:structured-macro><p class="auto-cursor-target"><br /></p>
+````
+
+<!--NOMAGIC_PAGE id=136715961 space=CDH2024x version=2 -->
+## PAGE 00057: DataHub basic operations
+
+- page_id: `136715961`
+- space_key: `CDH2024x`
+- source_url: https://docs.nomagic.com/spaces/CDH2024x/pages/136715961/DataHub+basic+operations
+- version_number: 2
+- version_date: `2026-02-11T07:46:53.594+01:00`
+- ancestors: Cameo DataHub Documentation > Getting started
+- labels: []
+
+### NORMALIZED CONTENT
+
+After installing Cameo DataHub, you can begin to add Data Sources. Data Sources can be added for the following requirements management systems
+
+- IBM DOORS
+- IBM DOORS Next Generation
+- CSV Files
+
+Once you have the Data Sources in DataHub open, you can start using more advanced DataHub features, e.g., copying data and DHLink relations between Data Sources. The synchronization features of DataHub are also illustrated in this chapter.
+
+**Related pages**
+
+### EXACT CONFLUENCE STORAGE SOURCE
+
+````html
+<p>After installing Cameo DataHub, you can begin to add Data Sources. Data Sources can be added for the following requirements management systems</p><ul><li data-uuid="43673093-17ac-401c-bb24-500449d51a51">IBM DOORS</li><li data-uuid="be810915-dd79-429a-87c6-c55bfd9a8d24">IBM DOORS Next Generation</li><li data-uuid="a4328c7e-5a88-44f6-9643-e39c9e9cb4c3">CSV Files</li></ul><p>Once you have the Data Sources in DataHub open, you can start using more advanced DataHub features, e.g., copying data and DHLink relations between Data Sources. The synchronization features of DataHub are also illustrated in this chapter.</p><p><strong>Related pages</strong></p><p><ac:structured-macro ac:name="children" ac:schema-version="2" ac:macro-id="d3d3c6cd-463e-4172-89e0-623c37fcd0a3" /></p>
+````
+
+<!--NOMAGIC_PAGE id=136715849 space=CDH2024x version=1 -->
+## PAGE 00058: DataHub Explorer buttons and icons
+
+- page_id: `136715849`
+- space_key: `CDH2024x`
+- source_url: https://docs.nomagic.com/spaces/CDH2024x/pages/136715849/DataHub+Explorer+buttons+and+icons
+- version_number: 1
+- version_date: `2023-09-21T06:04:18.798+02:00`
+- ancestors: Cameo DataHub Documentation > Getting started > Understanding DataHub user interface > DataHub Explorer tab
+- labels: []
+
+### NORMALIZED CONTENT
+
+The following table lists the icons in the **DataHub Explorer** tab.
+
+| Icon | Name | Description |
+| --- | --- | --- |
+|  | Cameo DataHub | The DataHub root. |
+|  | MagicDraw® Driver | The MagicDraw® driver to connect to a MagicDraw® project. |
+|  | Drivers | The drivers to connect to the other tools (CSV, IBM® Rational® DOORS®, IBM® Rational® DOORS® Next Generation). |
+|  | Toggle showing only connected Data Sources | Hides all disconnected Data Sources in the DataHub Explorer tab. |
+|  | Toggle showing all Data Sources | Displays all Data Sources in the DataHub Explorer tab. |
+|  | Add Data Source button | Opens the Add Data Source dialog. |
+|  | Synchronize button | Starts the synchronization process. |
+|  | Disconnected Data Source | The Data Source (of MagicDraw®, IBM® Rational® DOORS®, or a CSV file) disconnected from its source. |
+|  | Folder, Package | A folder or a Package. |
+|  | DOORS Link | A link in the IBM® Rational® DOORS® application. |
+| MagicDraw® relationship | A link in the MagicDraw® application. |  |
+|  | Item | Any items, e.g., an IBM® Rational® DOORS® object, MagicDraw® element, or CSV item. |
+|  | Create OSLC Query button | Opens the OSLC Query Editor dialog, allowing you to perform basic and advanced queries to an IBM® Rational® DOORS® Next Generation Data Source. This becomes enabled when you add an IBM® Rational® DOORS® Next Generation Data Source. |
+|  | DataHub explorer Trash Icon | Deletes an item when the item is dragged onto the icon. A confirmation dialog appears before deleting the item. |
+
+### EXACT CONFLUENCE STORAGE SOURCE
+
+````html
+<p><span style="color: rgb(51,51,51);">The following table lists the icons in the <strong>DataHub Explorer</strong> tab.<br /> </span></p><table class="relative-table" style="width: 99.9434%;"><colgroup><col style="width: 4.86219%;" /><col style="width: 17.9848%;" /><col style="width: 77.2406%;" /></colgroup><tbody><tr><th>Icon</th><th>Name</th><th>Description</th></tr><tr><td><ac:image ac:align="center" ac:thumbnail="true" ac:width="25"><ri:attachment ri:filename="datahub.gif"><ri:page ri:space-key="CDH2024x" ri:content-title="DataHub Explorer buttons and icons" /></ri:attachment></ac:image></td><td><ac:inline-comment-marker ac:ref="e01ff494-dd00-4c24-8631-ba510086a80f">Cameo DataHub</ac:inline-comment-marker></td><td>The DataHub root.</td></tr><tr><td><ac:image ac:align="center" ac:thumbnail="true" ac:width="25"><ri:attachment ri:filename="magicdraw_driver.gif"><ri:page ri:space-key="CDH2024x" ri:content-title="DataHub Explorer buttons and icons" /></ri:attachment></ac:image></td><td>MagicDraw® Driver</td><td>The MagicDraw<sup>®</sup> driver to connect to a MagicDraw<sup>®</sup> project.</td></tr><tr><td><ac:image ac:align="center" ac:thumbnail="true" ac:width="25"><ri:attachment ri:filename="driver.png"><ri:page ri:space-key="CDH2024x" ri:content-title="DataHub Explorer buttons and icons" /></ri:attachment></ac:image></td><td>Drivers</td><td><ac:inline-comment-marker ac:ref="5aaf4904-6f2d-44bf-960e-e28fc7b06a66">The drivers to connect to the other tools </ac:inline-comment-marker><ac:inline-comment-marker ac:ref="5aaf4904-6f2d-44bf-960e-e28fc7b06a66">(</ac:inline-comment-marker><ac:inline-comment-marker ac:ref="5aaf4904-6f2d-44bf-960e-e28fc7b06a66">CSV</ac:inline-comment-marker><ac:inline-comment-marker ac:ref="5aaf4904-6f2d-44bf-960e-e28fc7b06a66">, IBM<sup>®</sup> Rational<sup>®</sup> DOORS<sup>®</sup>, </ac:inline-comment-marker><ac:inline-comment-marker ac:ref="5aaf4904-6f2d-44bf-960e-e28fc7b06a66">IBM<sup>®</sup> Rational<sup>®</sup> DOORS<sup>®</sup> Next Generation).</ac:inline-comment-marker></td></tr><tr><td colspan="1"><ac:image ac:align="center" ac:thumbnail="true" ac:width="25"><ri:attachment ri:filename="dh-explorer-toggle-btn.png"><ri:page ri:space-key="CDH2024x" ri:content-title="DataHub Explorer buttons and icons" /></ri:attachment></ac:image></td><td colspan="1">Toggle showing only <br />connected Data Sources</td><td colspan="1">Hides all disconnected Data Sources in the <strong>DataHub Explorer</strong> tab.</td></tr><tr><td colspan="1"><ac:image ac:align="center" ac:thumbnail="true" ac:width="25"><ri:attachment ri:filename="toggle-data-sources-icon.png"><ri:page ri:space-key="CDH2024x" ri:content-title="DataHub Explorer buttons and icons" /></ri:attachment></ac:image></td><td colspan="1">Toggle showing all Data Sources</td><td colspan="1">Displays all Data Sources in the <strong>DataHub Explorer</strong> tab.</td></tr><tr><td colspan="1"><ac:image ac:align="center" ac:thumbnail="true" ac:width="25"><ri:attachment ri:filename="dh-explorer-add-ds-btn.png"><ri:page ri:space-key="CDH2024x" ri:content-title="DataHub Explorer buttons and icons" /></ri:attachment></ac:image></td><td colspan="1">Add Data Source button</td><td colspan="1">Opens the <strong>Add Data Source</strong> dialog.</td></tr><tr><td colspan="1"><ac:image ac:align="center" ac:thumbnail="true" ac:width="25"><ri:attachment ri:filename="dh-explorer-btn-4.png"><ri:page ri:space-key="CDH2024x" ri:content-title="DataHub Explorer buttons and icons" /></ri:attachment></ac:image></td><td colspan="1">Synchronize button</td><td colspan="1">Starts the synchronization process.</td></tr><tr><td colspan="1"><ac:image ac:align="center" ac:thumbnail="true" ac:width="25"><ri:attachment ri:filename="dh-disconnected-ds-btn.png"><ri:page ri:space-key="CDH2024x" ri:content-title="DataHub Explorer buttons and icons" /></ri:attachment></ac:image></td><td colspan="1">Disconnected Data Source</td><td colspan="1"><ac:inline-comment-marker ac:ref="f7f1691c-9fae-4102-a0b8-8635a3c8265b">The Data Source (of MagicDraw<sup>®</sup>, IBM<sup>®</sup> Rational<sup>®</sup> DOORS<sup>®</sup>, or a CSV file) disconnected from </ac:inline-comment-marker><ac:inline-comment-marker ac:ref="f7f1691c-9fae-4102-a0b8-8635a3c8265b">its source.</ac:inline-comment-marker></td></tr><tr><td colspan="1"><ac:image ac:align="center" ac:thumbnail="true" ac:width="25"><ri:attachment ri:filename="folder.gif"><ri:page ri:space-key="CDH2024x" ri:content-title="DataHub Explorer buttons and icons" /></ri:attachment></ac:image></td><td colspan="1">Folder, Package</td><td colspan="1">A folder or a Package.</td></tr><tr><td rowspan="2"><ac:image ac:align="center" ac:thumbnail="true" ac:width="25"><ri:attachment ri:filename="link.png"><ri:page ri:space-key="CDH2024x" ri:content-title="DataHub Explorer buttons and icons" /></ri:attachment></ac:image></td><td colspan="1">DOORS Link</td><td colspan="1">A link in the IBM<sup>®</sup> Rational<sup>®</sup> DOORS<sup>®</sup> application.</td></tr><tr><td colspan="1">MagicDraw<sup>®</sup> relationship</td><td colspan="1">A link in the MagicDraw<sup>®</sup> application.</td></tr><tr><td colspan="1"><ac:image ac:align="center" ac:thumbnail="true" ac:width="25"><ri:attachment ri:filename="ex.gif"><ri:page ri:space-key="CDH2024x" ri:content-title="DataHub Explorer buttons and icons" /></ri:attachment></ac:image></td><td colspan="1">Item</td><td colspan="1">Any items, e.g., an IBM<sup>®</sup> Rational<sup>®</sup> DOORS<sup>®</sup> object, MagicDraw<sup>®</sup> element, or CSV item.</td></tr><tr><td colspan="1"><ac:image ac:align="center" ac:thumbnail="true" ac:width="25"><ri:attachment ri:filename="dh-oslc-query-icon.png"><ri:page ri:space-key="CDH2024x" ri:content-title="DataHub Explorer buttons and icons" /></ri:attachment></ac:image></td><td colspan="1">Create OSLC Query <br />button</td><td colspan="1">Opens the <strong>OSLC Query Editor</strong> dialog, allowing you to perform basic and advanced queries to an IBM<sup>®</sup> Rational<sup>®</sup> DOORS<sup>®</sup> Next Generation Data Source. This becomes enabled when you add an IBM<sup>®</sup> Rational<sup>®</sup> DOORS<sup>®</sup> Next Generation Data Source.</td></tr><tr><td colspan="1"><ac:image ac:thumbnail="true" ac:width="25"><ri:attachment ri:filename="dh-trash-icon.png"><ri:page ri:space-key="CDH2024x" ri:content-title="DataHub Explorer buttons and icons" /></ri:attachment></ac:image></td><td colspan="1">DataHub explorer Trash <br />Icon</td><td colspan="1">Deletes an item when the item is dragged onto the icon. A confirmation dialog appears before deleting the item.</td></tr></tbody></table><p class="auto-cursor-target"><br /></p><p><br /></p>
+````
+
+<!--NOMAGIC_PAGE id=136715839 space=CDH2024x version=3 -->
+## PAGE 00059: DataHub Explorer tab
+
+- page_id: `136715839`
+- space_key: `CDH2024x`
+- source_url: https://docs.nomagic.com/spaces/CDH2024x/pages/136715839/DataHub+Explorer+tab
+- version_number: 3
+- version_date: `2026-02-10T14:06:57.826+01:00`
+- ancestors: Cameo DataHub Documentation > Getting started > Understanding DataHub user interface
+- labels: []
+
+### NORMALIZED CONTENT
+
+The **DataHub Explorer** tab has toolbar options for the following actions
+
+- Add a new Data Source
+- Close a Data Source
+- Open a Data Source
+- Filter inactive Data Source
+- Create OSLC query
+- Work with data in the tree
+- Search for items
+
+You can use **DataHub Explorer toolbar** buttons and shortcut menu items to connect, add, or remove Data Sources. You can also use it to view drivers, Data Sources, and items of the connected Data Sources in the DataHub tree. You can also apply a filter to display only the connected Data Sources in DataHub Explorer.
+
+To open DataHub Explorer
+
+1. Start MagicDraw® and open an existing project or start a new one.
+2. From the MagicDraw main menu, click Tools > DataHub > DataHub Explorer . The DataHub Explorer tab opens. [ATTACHMENT filename='dh-explorer.png']
+
+The **DataHub Explorer** tab contains the following
+
+- 
+  - Operation drop-down list
+  - Tree of Data Sources
+  - Explorer buttons and icons
+  - Text search box
+
+**Related pages**
+
+### EXACT CONFLUENCE STORAGE SOURCE
+
+````html
+<p>The <strong>DataHub Explorer</strong> tab has toolbar options for the following actions</p><ul><li data-uuid="8162ce94-733b-4dc5-a56a-5deed697b40e">Add a new Data Source</li><li data-uuid="13d084c3-1f64-40fd-a03e-54df05c73fa2">Close a Data Source</li><li data-uuid="350e10f9-920d-48e9-aa8b-85f756a50fc1">Open a Data Source</li><li data-uuid="614556d9-08ca-49b2-bfe9-6ce506773d02">Filter inactive Data Source</li><li data-uuid="017e32b4-b838-4ca7-b4ba-11eb1ce93be0">Create OSLC query</li><li data-uuid="2142dda0-7758-41fa-b195-ff841187a4a0">Work with data in the tree</li><li data-uuid="724db0fd-5cdf-4113-8dd1-d762014a4d8f">Search for items</li></ul><p>You can use <strong>DataHub Explorer toolbar</strong> buttons and shortcut menu items to connect, add, or remove Data Sources. You can also use it to view drivers, Data Sources, and items of the connected Data Sources in the DataHub tree. You can also apply a filter to display only the connected Data Sources in DataHub Explorer.</p><p><br />To open DataHub Explorer</p><hr /><ol><li data-uuid="89f85935-50f1-4bfb-875b-78d074f5919b">Start MagicDraw® and open an existing project or start a new one.</li><li data-uuid="8301235f-d33d-47d3-8c99-7562adfabcaa">From the MagicDraw main menu, click <strong>Tools</strong> &gt; <strong>DataHub</strong> &gt; <strong>DataHub Explorer</strong>. The <strong>DataHub Explorer</strong> tab opens.<br /><br /><ac:image ac:title="The DataHub Explorer Tab" ac:alt="The DataHub Explorer Tab"><ri:attachment ri:filename="dh-explorer.png" /></ac:image></li></ol><p><br /></p><p>The <strong>DataHub Explorer</strong> tab contains the following</p><ul><li style="list-style-type: none;" data-uuid="33234396-050b-41c7-b045-e0fd08e506d0"><ul><li><strong>Operation</strong> drop-down list</li><li>Tree of Data Sources</li><li>Explorer buttons and icons</li><li>Text search box</li></ul></li></ul><p><strong>Related pages</strong></p><p><ac:structured-macro ac:name="children" ac:schema-version="2" ac:macro-id="7340f42d-dbd3-4040-97d4-dab2d6e6ebbe" /></p>
+````
+
+<!--NOMAGIC_PAGE id=136715827 space=CDH2024x version=2 -->
+## PAGE 00060: DataHub menu
+
+- page_id: `136715827`
+- space_key: `CDH2024x`
+- source_url: https://docs.nomagic.com/spaces/CDH2024x/pages/136715827/DataHub+menu
+- version_number: 2
+- version_date: `2026-02-10T13:43:07.810+01:00`
+- ancestors: Cameo DataHub Documentation > Getting started > Understanding DataHub user interface
+- labels: []
+
+### NORMALIZED CONTENT
+
+To access the DataHub menu, you need to start MagicDraw® and open a new or existing project.
+
+To open the DataHub menu in MagicDraw®
+
+- From the MagicDraw main menu, click **Tools** > **DataHub**. The DataHub menu items open. [IMAGE alt='' src='']
+
+###### DataHub menu items.
+
+The table below explains the functions of the DataHub menu items.
+
+| Name | Function |
+| --- | --- |
+| Synchronize updates to Data Source | Synchronizes the node if there are any pending changes. Otherwise, does nothing. |
+| DataHub Explorer | Opens the DataHub Explorer tab. |
+| DHLink Panel | Opens the DHLink Panel |
+| DHLink Summary | Opens the DHLink Summary dialog |
+| Schema Map Manager | Opens the Schema Map Manager dialog |
+| Alias Manager | Opens the Alias Manager dialog |
+| Remove non-use DHLink | Opens the Remove DHLinks Confirmation dialog to remove DHLinks that are not in the project. |
+| Migrate DataHub | Opens the Cameo DataHub Migration dialog. Data from older versions of DataHub are migrated to the latest version of DataHub. |
+| Driver Deployment | Opens the Driver Deployment dialog |
+| Create OSLC Query | Opens the OSLC Query Editor dialog |
+| Actions | Opens the Actions menu |
+| 3rd Party Libraries Info | Opens the 3rd Party Libraries Info dialog. |
+
+#### NOTE: Note
+
+Note
+
+Some of the DataHub menu items may be disabled if those items are not applicable in the current context. For example, the **Create OSLC query** menu item is enabled only when you have an**IBM® Rational® DOORS® Next Generation** Data Source open.
+
+[IMAGE alt='' src='']
+
+###### DataHub Actions menu items.
+
+The table below explains the functions of the DataHub Actions menu items.
+
+| Name | Function |
+| --- | --- |
+| Add Data Source | Opens the Add Data Source dialog. |
+| Connect | Connects to the selected Data Source. |
+| Close Data Source | Closes a Data Source. |
+| Save | Saves changes to a Data Source. |
+| Remove Data Source | Removes a Data Source from the DataHub Explorer instances. |
+| New Node | Adds a new node under the selected node or Data Source. |
+| Delete Node | Removes the selected node. |
+| Reload | Reloads all properties and items on the selected item and sub-items. |
+| Select in Application | Selects the selected node in its original application. |
+| Go to the Other Related Link | Goes to a related linked item (within DataHub Explorer). |
+| Check Changes | Reviews all nodes that have been changed or edited without synchronizing them. The Check Changes menu has four sub-menusCheck DHLink Changes: Views the changes in DHLinks only in the selected node.Check DHLink Changes Recursively: Views the changes in DHLinks in both the selected node and its children.Check DHTrace Changes: Determines trace changes in the selected node.Check DHTrace Changes Recursively: Determines changes in trace links in the selected node and its children. |
+| Synchronize | Sends data updates from the selected Data Source to all of the related items in other tools. This option performs data synchronization for DHLinks only, but DHTraces are not synchronized. The Synchronize menu contains two sub-menusSynchronize Node: Synchronizes data only in the selected node.Synchronize Node Recursively: Synchronizes data under the selected node and all its child nodes. |
+| Update DHLinks | Updates pending updates and pending delete DHLinks. This menu item has four sub-menu itemsUpdate Pending DHLinks:Updates pending DHLinks in a single node.Update Pending DHLinks Recursively:Updates pending DHLinks across a node and its children.Clear Suspect DHTraces:Clears suspect DHLinks in a single node.Clear Suspect DHTraces Recursively:Clears suspect DHLinks across a node and its children. |
+| Remove DHLinks | Removes all the DHLink information from the selected node. This menu item has four sub-menu itemsRemove DHLinks: Removes all DHLinks from a single node.Remove DHLinks Recursively: Removes all DHLinks from a node as well as all its children.Remove DHTrace: Removes all DHTrace links from a node.Remove DHTrace Recursively: Removes all DHTrace links from a node and all its children. |
+| Create Alias | Creates an alias for the selected node and adds it to Alias Manager. |
+| Properties | Opens the Cameo DataHub Properties tab and DH Links panel for the selected node. |
+
+#### WARNING: Important
+
+Important
+
+Removing a Data Source deletes all of its mappings and DHLinks.
+
+### EXACT CONFLUENCE STORAGE SOURCE
+
+````html
+<p>To access the DataHub menu, you need to start MagicDraw<sup>®</sup> and open a new or existing project.</p><p><br />To open the DataHub menu in MagicDraw<sup>®</sup></p><hr /><ul><li data-uuid="7d269437-618b-46d3-9970-da227413c079"><p>From the MagicDraw main menu, click <strong>Tools</strong> &gt; <strong>DataHub</strong>. The DataHub menu items open.</p><p><ac:image ac:align="center"><ri:attachment ri:filename="1.png" /></ac:image></p></li></ul><h6 style="text-align: center;">DataHub menu items.</h6><p>The table below explains the functions of the DataHub menu items.</p><table class="relative-table" style="width: 96.6548%;"><colgroup class=""><col class="" style="width: 23.9175%;" /><col class="" style="width: 76.0779%;" /></colgroup><thead class="" style="margin-left: 30.0px;"><tr class="" style="margin-left: 30.0px;"><th><p>Name</p></th><th><p> Function</p></th></tr></thead><tbody class="" style="margin-left: 30.0px;"><tr class="" style="margin-left: 30.0px;"><td>Synchronize updates to Data Source</td><td>Synchronizes the node if there are any pending changes. Otherwise, does nothing.</td></tr><tr class="" style="margin-left: 30.0px;"><td>DataHub Explorer</td><td>Opens the <strong>DataHub Explorer</strong> tab.</td></tr><tr class="" style="margin-left: 30.0px;"><td>DHLink Panel</td><td><p>Opens the <strong>DHLink Panel</strong></p></td></tr><tr class="" style="margin-left: 30.0px;"><td colspan="1">DHLink Summary</td><td colspan="1">Opens the <strong>DHLink Summary</strong> dialog</td></tr><tr class="" style="margin-left: 30.0px;"><td colspan="1">Schema Map Manager</td><td colspan="1">Opens the <strong>Schema Map Manager</strong> dialog</td></tr><tr class="" style="margin-left: 30.0px;"><td colspan="1">Alias Manager</td><td colspan="1">Opens the <strong>Alias Manager</strong> dialog</td></tr><tr class="" style="margin-left: 30.0px;"><td colspan="1">Remove non-use DHLink</td><td colspan="1">Opens the <strong>Remove DHLinks Confirmation</strong> dialog to remove DHLinks that are not in the project.</td></tr><tr class="" style="margin-left: 30.0px;"><td colspan="1">Migrate DataHub</td><td colspan="1">Opens the <strong>Cameo DataHub Migration</strong> dialog. Data from older versions of DataHub are migrated to the latest version of DataHub.</td></tr><tr class="" style="margin-left: 30.0px;"><td colspan="1">Driver Deployment</td><td colspan="1">Opens the <strong>Driver Deployment</strong> dialog</td></tr><tr class="" style="margin-left: 30.0px;"><td colspan="1">Create OSLC Query</td><td colspan="1">Opens the <strong>OSLC Query Editor</strong> dialog</td></tr><tr class="" style="margin-left: 30.0px;"><td colspan="1">Actions</td><td colspan="1">Opens the <strong>Actions</strong> menu</td></tr><tr class="" style="margin-left: 30.0px;"><td colspan="1">3rd Party Libraries Info</td><td colspan="1">Opens the <strong>3rd Party Libraries Info</strong> dialog.</td></tr></tbody></table><ac:structured-macro ac:name="note" ac:schema-version="1" ac:macro-id="72999da0-7dd9-46aa-9056-69f38eeeb619"><ac:parameter ac:name="title">Note</ac:parameter><ac:rich-text-body><p><span>Some of the DataHub menu items may be disabled if those items are not applicable in the current context. For example, the <strong>Create OSLC query</strong> menu item is enabled only when you have an<strong> IBM<sup>®</sup> Rational<sup>®</sup> DOORS<sup>®</sup> Next Generation</strong> Data Source open.</span></p></ac:rich-text-body></ac:structured-macro><p class="auto-cursor-target" style="text-align: center;"><ac:image><ri:attachment ri:filename="DataHub Action Menu.png" /></ac:image></p><h6 style="text-align: center;"><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"> DataHub Actions menu items.</span></h6><p><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size">The table below explains the functions of the DataHub Actions menu items.<br /></span></p><table class="relative-table" style="width: 93.5437%;"><colgroup class=""><col class="" style="width: 19.962%;" /><col class="" style="width: 80.0333%;" /></colgroup><thead class="" style="margin-left: 30.0px;"><tr class="" style="margin-left: 30.0px;"><th><p>Name</p></th><th><p>Function</p></th></tr></thead><tbody class="" style="margin-left: 30.0px;"><tr class="" style="margin-left: 30.0px;"><td><strong>Add Data Source</strong></td><td>Opens the <strong>Add Data Source</strong> dialog.</td></tr><tr class="" style="margin-left: 30.0px;"><td><strong>Connect</strong></td><td>Connects to the selected Data Source.</td></tr><tr class="" style="margin-left: 30.0px;"><td><strong>Close Data Source</strong></td><td>Closes a Data Source.</td></tr><tr class="" style="margin-left: 30.0px;"><td colspan="1"><strong>Save</strong></td><td colspan="1">Saves changes to a Data Source.</td></tr><tr class="" style="margin-left: 30.0px;"><td colspan="1"><strong>Remove Data Source</strong></td><td colspan="1">Removes a Data Source from the DataHub Explorer instances.</td></tr><tr class="" style="margin-left: 30.0px;"><td colspan="1"><strong>New Node</strong></td><td colspan="1">Adds a new node under the selected node or Data Source.</td></tr><tr class="" style="margin-left: 30.0px;"><td colspan="1"><strong>Delete Node</strong></td><td colspan="1">Removes the selected node.</td></tr><tr class="" style="margin-left: 30.0px;"><td colspan="1"><strong>Reload</strong></td><td colspan="1">Reloads all properties and items on the selected item and sub-items.</td></tr><tr class="" style="margin-left: 30.0px;"><td colspan="1"><strong>Select in Application</strong></td><td colspan="1">Selects the selected node in its original application.</td></tr><tr class="" style="margin-left: 30.0px;"><td colspan="1"><strong>Go to the Other Related Link</strong></td><td colspan="1">Goes to a related linked item (within DataHub Explorer).</td></tr><tr class="" style="margin-left: 30.0px;"><td colspan="1"><strong>Check Changes</strong></td><td colspan="1"><p>Reviews all nodes that have been changed or edited without synchronizing them. The <strong>Check Changes</strong> menu has four sub-menus</p><ul><li data-uuid="8b293d44-2d40-4fab-a377-97d9da2316a8"><strong>Check DHLink Changes</strong>: <br />Views the changes in DHLinks only in the selected node.</li><li data-uuid="bbfec899-1ef8-44c9-bc8b-78cdd41f74e8"><strong>Check DHLink Changes Recursively</strong>: <br />Views the changes in DHLinks in both the selected node and its children.</li><li data-uuid="bf0c9187-3bda-45dd-b304-c88e33e4afcb"><p><strong>Check DHTrace Changes</strong>: <br />Determines trace changes in the selected node.</p></li><li data-uuid="6773c3ab-c693-4581-88a1-f3d277be8982"><p><strong>Check DHTrace Changes Recursively</strong>: <br />Determines changes in trace links in the selected node and its children.</p></li></ul></td></tr><tr class="" style="margin-left: 30.0px;"><td colspan="1"><strong>Synchronize</strong></td><td colspan="1"><p>Sends data updates from the selected Data Source to all of the related items in other tools. This option performs data synchronization for<strong> DHLinks</strong> only, but <strong>DHTraces</strong> are not synchronized. The <strong>Synchronize</strong> menu contains two sub-menus</p><ul><li data-uuid="c93631c8-0876-4cc2-a081-566492fd5844"><strong>Synchronize Node</strong>: <br />Synchronizes data only in the selected node.</li><li data-uuid="2b016534-12a5-41a2-be96-db0d650a803e"><strong>Synchronize Node Recursively</strong>: <br />Synchronizes data under the selected node and all its child nodes.</li></ul></td></tr><tr class="" style="margin-left: 30.0px;"><td colspan="1"><strong>Update DHLinks</strong></td><td colspan="1">Updates pending updates and pending delete <strong>DHLinks</strong>. This menu item has four sub-menu items<ul><li data-uuid="d371f64a-1859-4d9e-9046-8fd7067744c2"><strong>Update Pending DHLinks</strong>:<br />Updates pending DHLinks in a single node.</li><li data-uuid="5e181fa9-788a-4429-829f-eea6b2708eea"><strong>Update Pending DHLinks Recursively</strong>:<br />Updates pending DHLinks across a node and its children.</li><li data-uuid="74bf23bf-704e-4406-94b9-e2dca47f2e6c"><strong>Clear Suspect DHTraces</strong>:<br />Clears suspect DHLinks in a single node.</li><li data-uuid="e0f2c1b2-1d8c-4610-b80e-e9579a1fb11d"><strong>Clear Suspect DHTraces Recursively</strong>:<br />Clears suspect DHLinks across a node and its children.</li></ul></td></tr><tr class="" style="margin-left: 30.0px;"><td colspan="1"><strong>Remove DHLinks</strong></td><td colspan="1">Removes all the <strong>DHLink</strong> information from the selected node. This menu item has four sub-menu items<ul><li data-uuid="a01ea423-defc-4723-ae3a-d44bcfcfa535"><strong>Remove DHLinks</strong>: <br />Removes all DHLinks from a single node.</li><li data-uuid="4f10e784-82d8-46c4-820b-71670e2f971e"><strong>Remove DHLinks Recursively</strong>: <br />Removes all DHLinks from a node as well as all its children.</li><li data-uuid="7dcfd1c4-9306-4767-91a4-287604387e18"><strong>Remove DHTrace</strong>: <br />Removes all DHTrace links from a node.</li><li data-uuid="e38ef3c1-4e74-4c59-9fff-42276a504b05"><strong>Remove DHTrace Recursively</strong>: <br />Removes all DHTrace links from a node and all its children.</li></ul></td></tr><tr class="" style="margin-left: 30.0px;"><td colspan="1"><strong>Create Alias</strong></td><td colspan="1">Creates an alias for the selected node and adds it to Alias Manager.</td></tr><tr class="" style="margin-left: 30.0px;"><td colspan="1"><strong>Properties</strong></td><td colspan="1">Opens the <strong>Cameo DataHub Properties</strong> tab and <strong>DH Links</strong> panel for the selected node.</td></tr></tbody></table><ac:structured-macro ac:name="warning" ac:schema-version="1" ac:macro-id="e6e816c4-f592-4d79-a05f-4e4874943ad0"><ac:parameter ac:name="title">Important</ac:parameter><ac:rich-text-body><p>Removing a Data Source deletes all of its mappings and DHLinks.</p></ac:rich-text-body></ac:structured-macro>
+````
+
+<!--NOMAGIC_PAGE id=136715981 space=CDH2024x version=3 -->
+## PAGE 00061: DataHub Operation drop-down list
+
+- page_id: `136715981`
+- space_key: `CDH2024x`
+- source_url: https://docs.nomagic.com/spaces/CDH2024x/pages/136715981/DataHub+Operation+drop-down+list
+- version_number: 3
+- version_date: `2026-02-11T07:49:32.277+01:00`
+- ancestors: Cameo DataHub Documentation > Getting started > Basic features of DataHub
+- labels: []
+
+### NORMALIZED CONTENT
+
+Operations in DataHub Explorertruetrue[CONFLUENCE_PAGE title='Operations in DataHub Explorer' space='']
+
+### EXACT CONFLUENCE STORAGE SOURCE
+
+````html
+<p><ac:structured-macro ac:name="excerpt-include" ac:schema-version="1" ac:macro-id="6c5959a7-f9bc-4377-9578-e4196ae88ca5"><ac:parameter ac:name="page">Operations in DataHub Explorer</ac:parameter><ac:parameter ac:name="nopanel">true</ac:parameter><ac:parameter ac:name="retain-block-width">true</ac:parameter><ac:parameter ac:name=""><ac:link><ri:page ri:content-title="Operations in DataHub Explorer" /></ac:link></ac:parameter></ac:structured-macro></p>
+````
+
+<!--NOMAGIC_PAGE id=136715865 space=CDH2024x version=1 -->
+## PAGE 00062: DataHub Properties tab
+
+- page_id: `136715865`
+- space_key: `CDH2024x`
+- source_url: https://docs.nomagic.com/spaces/CDH2024x/pages/136715865/DataHub+Properties+tab
+- version_number: 1
+- version_date: `2023-09-21T06:04:19.079+02:00`
+- ancestors: Cameo DataHub Documentation > Getting started > Understanding DataHub user interface
+- labels: []
+
+### NORMALIZED CONTENT
+
+The **DataHub Properties** tab shows the properties (names and values) and associations of a selected node in DataHub Explorer that you can edit and save their value. You can also open, update, or delete the following items in the **DataHub Properties**tab.
+
+- MagicDraw ® elements
+- DOORS objects and modules
+- CSV items
+- IBM ® Rational ® DOORS ® Next Generation Artifacts
+
+To open the **DataHub Properties** tab in MagicDraw®, do one of the following
+
+- Right-click a node in DataHub Explorer and click Properties .
+- Double-click a node in DataHub Explorer. The DataHub Properties tab opens in MagicDraw ® , and the properties of the selected item are displayed.
+
+[IMAGE alt='' src='']
+
+#### NOTE: Note
+
+Note
+
+- The DH Links panel opens when the DataHub Properties tab is open.
+- Read-only and multi-valued properties cannot be edited. However, you can edit multi-valued properties through the Specifications window.
+
+The table below explains the function of each icon in the **DataHub Properties** tab in MagicDraw®.
+
+| Icon | Name | Function |
+| --- | --- | --- |
+|  | Categorized View | Shows all property names by category. |
+|  | Alphabetical View | Shows all property names in an alphabetical order. |
+|  | Show Description | Shows description of each property. |
+|  | Expand | Shows all property names and values. |
+|  | Collapse | Hides all property names and values. |
+|  | Save | Saves changes made to a property name or value. The button is enabled when the value of the property changes. |
+
+### EXACT CONFLUENCE STORAGE SOURCE
+
+````html
+<p>The <strong style="line-height: 1.4285715;">DataHub Properties</strong> tab shows the properties (names and values) and associations of a selected node in DataHub Explorer that you can edit and save their value. You can also open, update, or delete the following items in the <strong style="line-height: 1.4285715;">DataHub Properties </strong>tab. </p><ul><li>MagicDraw<sup>®</sup> elements</li><li>DOORS objects and modules</li><li>CSV items</li><li>IBM<sup>®</sup> Rational<sup>®</sup> DOORS<sup>®</sup> Next Generation Artifacts</li></ul><p><br /></p><p>To open the <strong>DataHub Properties</strong> tab in MagicDraw®, do one of the following</p><hr /><ul><li>Right-click a node in DataHub Explorer and click <strong>Properties</strong>.</li><li>Double-click a node in DataHub Explorer.<br /><br />The <strong>DataHub Properties</strong> tab opens in MagicDraw<sup>®</sup>, and the properties of the selected item are displayed.</li></ul><p style="margin-left: 30.0px;"><ac:image><ri:attachment ri:filename="dh-properties-tab.png"><ri:page ri:space-key="CDH2024x" ri:content-title="DataHub Properties tab" /></ri:attachment></ac:image><br /><span style="color: rgb(74,103,133);"> </span></p><ac:structured-macro ac:name="note" ac:schema-version="1" ac:macro-id="d31614a8-1844-44ae-b9a2-5da7206f8cb8"><ac:parameter ac:name="title">Note</ac:parameter><ac:rich-text-body><ul><li>The <strong>DH Links </strong>panel opens when the <strong>DataHub Properties</strong> tab is open.</li><li>Read-only and multi-valued properties cannot be edited. However, you can edit multi-valued properties through the Specifications window.</li></ul></ac:rich-text-body></ac:structured-macro><p><br /></p><p>The table below explains the function of each icon in the <strong>DataHub Properties</strong> tab in MagicDraw<sup>®</sup>.</p><table class="relative-table" style="margin-left: 30.0px;width: 96.4116%;"><colgroup><col style="width: 4.71616%;" /><col style="width: 16.6754%;" /><col style="width: 78.6376%;" /></colgroup><thead style="margin-left: 30.0px;"><tr style="margin-left: 30.0px;"><td class="highlight-grey" colspan="1" data-highlight-colour="grey"><strong><span style="color: rgb(0,0,0);">Icon</span></strong></td><td class="highlight-grey" colspan="1" data-highlight-colour="grey"><strong><span style="color: rgb(0,0,0);">Name</span></strong></td><td class="highlight-grey" colspan="1" data-highlight-colour="grey"><strong><span style="color: rgb(0,0,0);">Function</span></strong></td></tr></thead><tbody style="margin-left: 30.0px;"><tr style="margin-left: 30.0px;"><td style="margin-left: 30.0px;"><ac:image ac:align="center"><ri:attachment ri:filename="Properties - categorized view.png"><ri:page ri:space-key="CDH2024x" ri:content-title="DataHub Properties tab" /></ri:attachment></ac:image></td><td style="margin-left: 30.0px;"><strong>Categorized View</strong></td><td style="margin-left: 30.0px;">Shows all property names by category.</td></tr><tr style="margin-left: 30.0px;"><td style="margin-left: 30.0px;"><ac:image ac:align="center" ac:thumbnail="true" ac:width="29"><ri:attachment ri:filename="Properties - alphabetical view.png"><ri:page ri:space-key="CDH2024x" ri:content-title="DataHub Properties tab" /></ri:attachment></ac:image></td><td style="margin-left: 30.0px;"><strong>Alphabetical View</strong></td><td style="margin-left: 30.0px;">Shows all property names in an alphabetical order.</td></tr><tr style="margin-left: 30.0px;"><td style="margin-left: 30.0px;"><ac:image ac:align="center" ac:thumbnail="true" ac:width="25"><ri:attachment ri:filename="Properties - show description.png"><ri:page ri:space-key="CDH2024x" ri:content-title="DataHub Properties tab" /></ri:attachment></ac:image></td><td style="margin-left: 30.0px;"><strong>Show Description</strong></td><td style="margin-left: 30.0px;">Shows description of each property.</td></tr><tr style="margin-left: 30.0px;"><td style="margin-left: 30.0px;" colspan="1"><ac:image ac:align="center"><ri:attachment ri:filename="Properties - expand.png"><ri:page ri:space-key="CDH2024x" ri:content-title="DataHub Properties tab" /></ri:attachment></ac:image></td><td style="margin-left: 30.0px;" colspan="1"><strong>Expand</strong></td><td style="margin-left: 30.0px;" colspan="1"><p>Shows all property names and values.</p></td></tr><tr style="margin-left: 30.0px;"><td style="margin-left: 30.0px;" colspan="1"><ac:image ac:align="center"><ri:attachment ri:filename="Properties - collapse.png"><ri:page ri:space-key="CDH2024x" ri:content-title="DataHub Properties tab" /></ri:attachment></ac:image></td><td style="margin-left: 30.0px;" colspan="1"><strong>Collapse</strong></td><td style="margin-left: 30.0px;" colspan="1">Hides all property names and values.</td></tr><tr style="margin-left: 30.0px;"><td style="margin-left: 30.0px;" colspan="1"><ac:image ac:align="center" ac:thumbnail="true" ac:width="25"><ri:attachment ri:filename="Properties - save.png"><ri:page ri:space-key="CDH2024x" ri:content-title="DataHub Properties tab" /></ri:attachment></ac:image></td><td style="margin-left: 30.0px;" colspan="1"><strong>Save</strong></td><td style="margin-left: 30.0px;" colspan="1">Saves changes made to a property name or value. The button is enabled when the value of the property changes.</td></tr></tbody></table><p class="auto-cursor-target"><br /></p>
+````
+
+<!--NOMAGIC_PAGE id=136715847 space=CDH2024x version=3 -->
+## PAGE 00063: DataHub tree
+
+- page_id: `136715847`
+- space_key: `CDH2024x`
+- source_url: https://docs.nomagic.com/spaces/CDH2024x/pages/136715847/DataHub+tree
+- version_number: 3
+- version_date: `2026-02-11T07:20:18.220+01:00`
+- ancestors: Cameo DataHub Documentation > Getting started > Understanding DataHub user interface > DataHub Explorer tab
+- labels: []
+
+### NORMALIZED CONTENT
+
+DataHub tree is composed of nodes, each of which represents either a node or a connected Data Source. Data in the DataHub tree are arranged hierarchically in a tree structure. It represents all the data that DataHub contains at that time.
+
+[IMAGE alt='' src='']
+
+###### The DataHub tree.
+
+**Related pages**
+
+- [CONFLUENCE_PAGE title='Data Source synchronization' space='']
+- [CONFLUENCE_PAGE title='Displaying MagicDraw Data Sources in DataHub Explorer' space='']
+- [CONFLUENCE_PAGE title='Removing a Data Source' space='']
+
+### EXACT CONFLUENCE STORAGE SOURCE
+
+````html
+<p>DataHub tree is composed of nodes, each of which represents either a node or a connected Data Source. Data in the DataHub tree are arranged hierarchically in a tree structure. It represents all the data that DataHub contains at that time.</p><p><br /></p><p style="text-align: center;"><ac:image><ri:attachment ri:filename="DataHub Tree.png" /></ac:image></p><h6 style="text-align: center;">The DataHub tree.</h6><p><strong>Related pages</strong></p><ul><li data-uuid="45886e70-0ea6-43cd-bcf2-eba55b916291"><ac:link><ri:page ri:content-title="Data Source synchronization" /></ac:link></li><li data-uuid="9e9fb783-ca82-4d7e-a8da-5485b13e875d"><ac:link><ri:page ri:content-title="Displaying MagicDraw Data Sources in DataHub Explorer" /><ac:plain-text-link-body><![CDATA[Displaying MagicDraw Data Sources]]></ac:plain-text-link-body></ac:link></li><li data-uuid="a3a5eacf-9ec6-4125-9edc-5e3e283adc4d"><ac:link><ri:page ri:content-title="Removing a Data Source" /></ac:link></li></ul>
+````
+
+<!--NOMAGIC_PAGE id=136716628 space=CDH2024x version=4 -->
+## PAGE 00064: Define Target Type from Attribute Value dialog and mapping
+
+- page_id: `136716628`
+- space_key: `CDH2024x`
+- source_url: https://docs.nomagic.com/spaces/CDH2024x/pages/136716628/Define+Target+Type+from+Attribute+Value+dialog+and+mapping
+- version_number: 4
+- version_date: `2025-10-08T12:23:53.126+02:00`
+- ancestors: Cameo DataHub Documentation > User Guide > Working with DataHub and modeling tools > Requirement Mapping > Schema mapping modes
+- labels: []
+
+### NORMALIZED CONTENT
+
+The Define Target Type from Attribute Value mapping is another copying and synchronization capability in Cameo DataHub. This capability helps to locate or find a node type in the target so that you can map a node type from the source to the target. You can update the target types and attribute values in the Define Target Type from the Attribute Value****dialog.
+
+The following video shows the data mapping based on the attribute value in action:
+
+800450
+
+At least two source–target value pairs must be specified to use the Define Target Type from Attribute Value mapping feature.
+
+##### Enabling the Define Target Type from Attribute Value Mapping
+
+If you previously mapped a schema and copy data using the Define Target Type from Attribute Value mapping mode, you will automatically have the same mode open as the default mapping mode the next time you open the [Cameo DataHub Schema Map Manager](https://docs.nomagic.com/display/CDH2024x/Mapping+with+Schema+Map+Manager) dialog. Therefore, the Export Schema Map Wizard dialog no longer opens the next time you copy data. If you do not want to map in this mode, you can click **Deactivate**to disable the Define Target Type from Attribute Value mapping mode in the Cameo DataHub Schema Map Manager dialog.
+
+To disable the Define Target Type from Attribute Value mapping mode
+
+1. Open the Cameo DataHub Schema Map Manager dialog.
+2. Select a source type that you want to map. The default target type appears in the Target Type section.
+3. Select a target type in the Target Type section. The Select Attribute to Sync list shows the list of default attributes mapping.
+4. Click Deactivate to disable the Define Target Type from Attribute Value mapping mode. After you click Deactivate, the button changes to Activate.
+
+To enable the Define Target Type from Attribute Value mapping mode
+
+1. Open the Cameo DataHub Schema Map Manager dialog.
+2. Select a source type that you want to map.
+3. Select a target type in the Target Type section. The Select Attribute to Sync list shows the list of default attributes mapping.
+4. Click Activate to enable the Define Target Type from Attribute Value mapping mode. After you click Activate the button changes to Deactivate.
+
+##### Updating the Define Target from Attribute Value Mapping
+
+You can add, remove, or change the priority of a target type to high or low priority. You can update the attribute mappings through the****Define Target Type from Attribute Value dialog.
+
+To update the defined target type from attribute value mapping
+
+1. Open the Cameo DataHub Schema Map Manager dialog.
+2. Select a source type that you want to map.
+3. Select a target type in the Target Type section. The Select Attribute to Sync list shows the list of default attributes mapping.
+4. Click Edit and update the mapping values.
+
+[IMAGE alt='' src='']
+
+5. Click **Save**.
+
+### EXACT CONFLUENCE STORAGE SOURCE
+
+````html
+<p>The Define Target Type from Attribute Value mapping is another copying and synchronization capability in Cameo DataHub. This capability helps to locate or find a node type in the target so that you can map a node type from the source to the target. You can update the target types and attribute values in the Define Target Type from the Attribute Value<strong> </strong>dialog.</p><p><span style="color:var(--ds-text,#333333);">The following video shows the data mapping based on the attribute value in action:</span></p><p style="text-align: center;"><span style="color:var(--ds-text,#333333);"><ac:structured-macro ac:name="widget" ac:schema-version="1" ac:macro-id="8a6366c1-7e6f-4240-a608-72b54e2759f5"><ac:parameter ac:name="width">800</ac:parameter><ac:parameter ac:name="url"><ri:url ri:value="https://www.youtube.com/watch?v=VKWR9lMCGHs" /></ac:parameter><ac:parameter ac:name="height">450</ac:parameter></ac:structured-macro></span></p><ac:structured-macro ac:name="note" ac:schema-version="1" ac:macro-id="7ea195bd-4fb9-4d2d-bf41-dc35e850bcac"><ac:rich-text-body><p>At least two source–target value pairs must be specified to use the Define Target Type from Attribute Value mapping feature.</p></ac:rich-text-body></ac:structured-macro><h3>Enabling the Define Target Type from Attribute Value Mapping</h3><p>If you previously mapped a schema and copy data using the Define Target Type from Attribute Value mapping mode, you will automatically have the same mode open as the default mapping mode the next time you open the <a href="https://docs.nomagic.com/display/CDH2024x/Mapping+with+Schema+Map+Manager">Cameo DataHub Schema Map Manager</a> dialog. Therefore, the Export Schema Map Wizard dialog no longer opens the next time you copy data. If you do not want to map in this mode, you can click <strong>Deactivate </strong>to disable the Define Target Type from Attribute Value mapping mode in the Cameo DataHub Schema Map Manager dialog.</p><p>To disable the Define Target Type from Attribute Value mapping mode</p><hr /><ol><li>Open the Cameo DataHub Schema Map Manager dialog.</li><li>Select a source type that you want to map. The default target type appears in the Target Type section.</li><li>Select a target type in the Target Type section. The<strong> </strong>Select Attribute to Sync list shows the list of default attributes mapping.</li><li>Click <strong>Deactivate </strong>to disable the Define Target Type from Attribute Value mapping mode. After you click Deactivate, the button changes to Activate. <br /><br /></li></ol><p>To enable the Define Target Type from Attribute Value mapping mode</p><hr /><ol><li>Open the Cameo DataHub Schema Map Manager dialog. </li><li>Select a source type that you want to map.</li><li>Select a target type in the Target Type section. The Select Attribute to Sync list shows the list of default attributes mapping.</li><li>Click <strong>Activate </strong>to enable the Define Target Type from Attribute Value mapping mode. After you click Activate the button changes to Deactivate.</li></ol><h3>Updating the Define Target from Attribute Value Mapping</h3><p>You can add, remove, or change the priority of a target type to high or low priority. You can update the attribute mappings through the<strong> </strong>Define Target Type from Attribute Value dialog.</p><p>To update the defined target type from attribute value mapping</p><hr /><ol><li>Open the Cameo DataHub Schema Map Manager dialog.</li><li>Select a source type that you want to map.</li><li>Select a target type in the Target Type section. The Select Attribute to Sync list shows the list of default attributes mapping.</li><li>Click <strong>Edit </strong>and update the mapping values.</li></ol><p style="margin-left: 30.0px;"><ac:image><ri:attachment ri:filename="Define Target Type for Group Mapping Dialog.png" /></ac:image></p><p>     5. Click <strong>Save</strong>.</p>
+````
+
+<!--NOMAGIC_PAGE id=136715924 space=CDH2024x version=1 -->
+## PAGE 00065: Define target type from attribute value mapping
+
+- page_id: `136715924`
+- space_key: `CDH2024x`
+- source_url: https://docs.nomagic.com/spaces/CDH2024x/pages/136715924/Define+target+type+from+attribute+value+mapping
+- version_number: 1
+- version_date: `2023-09-21T06:04:20.310+02:00`
+- ancestors: Cameo DataHub Documentation > Getting started > Understanding DataHub user interface > Schema map and mapping options
+- labels: []
+
+### NORMALIZED CONTENT
+
+The**Define Target Type from Attribute Value**mapping mode is the capability of specifying or defining type of nodes to map in the target by using a node’s attribute value in the source as the condition. This mode is available in the**Copy Data**dialog, **Copy Data with Sync**dialog, and **Copy Data****with DHTrace** dialog for the **Group Type Mapping** option. The**Define Target Type from Attribute Value**mapping mode makes it possible to select the attribute’s values of a node and map them to multiple target types.
+
+###### [IMAGE alt='' src='']The Define Target Type from Attribute Value option in the Copy Data with Sync Dialog.
+
+### EXACT CONFLUENCE STORAGE SOURCE
+
+````html
+<p><span style="color: rgb(51,51,51);">The </span><strong>Define Target Type from Attribute Value</strong><span style="color: rgb(51,51,51);"> mapping mode is the capability of specifying or defining type of nodes to map in the target by using a node’s attribute value in the source as the condition. This mode is available in the </span><strong style="color: rgb(51,51,51);font-size: 14.0px;line-height: 1.4285715;">Copy Data</strong><span style="color: rgb(51,51,51);"> dialog, <strong>Copy Data with Sync</strong><span style="color: rgb(51,51,51);"> dialog</span>, and <strong>Copy Data</strong><span style="color: rgb(51,51,51);"><strong> with DHTrace</strong> dialog</span> for the <strong>Group Type Mapping</strong> option. The </span><strong>Define Target Type from Attribute Value</strong><span style="color: rgb(51,51,51);"> mapping mode makes it possible to select the attribute’s values of a node and map them to multiple target types.</span></p><p><span style="color: rgb(51,51,51);"><br /></span></p><h6 style="text-align: center;"><ac:image ac:align="center"><ri:attachment ri:filename="Define Target Type for Group Mapping.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Define target type from attribute value mapping" /></ri:attachment></ac:image>The Define Target Type from Attribute Value option in the Copy Data with Sync Dialog.</h6>
+````
+
+<!--NOMAGIC_PAGE id=136716837 space=CDH2024x version=2 -->
+## PAGE 00066: Defining a target type from an attribute value
+
+- page_id: `136716837`
+- space_key: `CDH2024x`
+- source_url: https://docs.nomagic.com/spaces/CDH2024x/pages/136716837/Defining+a+target+type+from+an+attribute+value
+- version_number: 2
+- version_date: `2026-02-11T08:05:25.938+01:00`
+- ancestors: Cameo DataHub Documentation > User Guide > Synchronization
+- labels: []
+
+### NORMALIZED CONTENT
+
+The functionality of synchronization has been additionally simplified with the use of the **Define Target Type from Attribute Value** option. The synchronization does not limit only to a simple type-to type-mapping and attribute-to-attribute mapping but also a target node type can be defined dynamically according to a specified attribute value.
+
+To copy data and define a target node type from an attribute value
+
+1. From the Operation drop-down list in DataHub Explorer, select one of the DataHub operations to copy data. The Copy Data with Sync dialog (depending on the operation you have selected) opens.
+2. From the Mapping Mode option, select Group Type Mapping . [ATTACHMENT filename='set-as-default-target-type.png']
+3. Select a source node type to start mapping.
+4. Select the Define Target Type from Attribute Value check box. [ATTACHMENT filename='Define Target Type for Group Mapping.png']
+5. From the Attribute drop-down list, choose an attribute to define a target node type.
+6. Specify the attribute value to do the mapping. InformationIf the attribute is **Enumeration**, you can select a value from the **Value** drop-down list for each attribute. 
+ 
+[IMAGE alt='' src='']If the attribute is a simple data type, you can type any expected value in the **Value** box.
+7. From the target type box on the right-hand side of the source type box, choose a target node type for that value.
+8. Continue mapping the attributes.
+9. If you have more values for mapping, click [ATTACHMENT filename='add-btn2.png'] to enter more values for mapping. [ATTACHMENT filename='Define Target Type for Group Mapping End - Edited.png']
+10. Repeat Steps 5 to 9 to map each attribute value.
+11. When you finish mapping each attribute value, click OK to start copying.
+
+#### NOTE: Note
+
+Note
+
+- The functionality to map between Attribute value and Target type is available only in Group Type Mapping.
+- At least 2 values must be identified for mapping.
+- You can edit or deactivate the mapping in the Schema Map Manager dialog.
+
+**Related page**
+
+- Mapping with Schema Map Manager
+
+### EXACT CONFLUENCE STORAGE SOURCE
+
+````html
+<p>The functionality of synchronization has been additionally simplified with the use of the <strong>Define Target Type from Attribute Value</strong> option. The synchronization does not limit only to a simple type-to type-mapping and attribute-to-attribute mapping but also a target node type can be defined dynamically according to a specified attribute value.</p><p><br /></p><p>To copy data and define a target node type from an attribute value</p><hr /><ol><li data-uuid="9efa0c37-2ab3-4095-8f39-27ab47b7c3a8">From the Operation drop-down list in DataHub Explorer, select one of the DataHub operations to copy data. The Copy Data with Sync dialog (depending on the operation you have selected) opens.</li><li data-uuid="aa82ebc7-6bb6-4bf8-9055-ee5121a6f734">From the <strong>Mapping Mode</strong> option, select <strong>Group Type Mapping</strong>.<br /><br /><ac:image ac:title="Copy Data with Sync in Group Type Mapping " ac:alt="Copy Data with Sync in Group Type Mapping "><ri:attachment ri:filename="set-as-default-target-type.png" /></ac:image><br /><br /></li><li data-uuid="77e1121b-3de4-4e0d-9ef3-51df121ac271">Select a source node type to start mapping.</li><li data-uuid="4e492b1e-ec90-4231-9a73-55fe5aaba493">Select the <strong>Define Target Type from Attribute Value</strong> check box.<br /><br /><ac:image><ri:attachment ri:filename="Define Target Type for Group Mapping.png" /></ac:image><br /><br /></li><li data-uuid="ac9ab386-eb1e-41f4-8025-369c244d01b1">From the <strong>Attribute</strong> drop-down list, choose an attribute to define a target node type.</li><li data-uuid="d014fbef-5d14-4249-a03d-b2940d099cad"><p class="auto-cursor-target">Specify the attribute value to do the mapping.</p><ac:structured-macro ac:name="info" ac:schema-version="1" ac:macro-id="307eb3bc-f78b-4130-9353-ece0cc9e69b0"><ac:parameter ac:name="title">Information</ac:parameter><ac:rich-text-body><ul><li>If the attribute is <strong>Enumeration</strong>, you can select a value from the <strong>Value</strong> drop-down list for each attribute.<br /><br /><ac:image><ri:attachment ri:filename="Selecting Value from Name Attribute.png" /></ac:image><br /><br /></li><li>If the attribute is a simple data type, you can type any expected value in the <strong>Value</strong> box.</li></ul></ac:rich-text-body></ac:structured-macro></li><li data-uuid="1c9ab180-a6dd-442a-a691-daf576d8cfae">From the target type box on the right-hand side of the source type box, choose a target node type for that value.</li><li data-uuid="6d828e42-6730-4ff4-ad8f-c2e16c5f6ad7">Continue mapping the attributes.</li><li data-uuid="3f7652bf-1365-46c5-84fa-b73d17ed5833">If you have more values for mapping, click <ac:image><ri:attachment ri:filename="add-btn2.png" /></ac:image> to enter more values for mapping.<br /><br /><ac:image><ri:attachment ri:filename="Define Target Type for Group Mapping End - Edited.png" /></ac:image><br /><br /></li><li data-uuid="54ac2249-737f-462f-982e-8c1b9f27c7ed">Repeat Steps 5 to 9 to map each attribute value.</li><li data-uuid="7bc96b3d-30b0-4417-91a6-36583a77d8fd">When you finish mapping each attribute value, click <strong>OK</strong> to start copying.<br /><br /></li></ol><ac:structured-macro ac:name="note" ac:schema-version="1" ac:macro-id="661cd26c-c59e-4110-b077-6b60922bbe9b"><ac:parameter ac:name="title">Note</ac:parameter><ac:rich-text-body><ul><li data-uuid="f022de2f-9c0b-41fb-94e7-9f42e8b1e6c8">The functionality to map between<strong> </strong>Attribute value and Target type is available only in Group Type Mapping.</li><li data-uuid="ef2c1b0b-3c3b-4db5-913e-2c2686d9a76c">At least 2 values must be identified for mapping.</li><li data-uuid="fc15a57d-a29c-440b-90f4-2ab033640296">You can edit or deactivate the mapping in the <a href="https://docs.nomagic.com/display/CDH2024x/Mapping+with+Schema+Map+Manager">Schema Map Manager</a> dialog.</li></ul></ac:rich-text-body></ac:structured-macro><p><strong>Related page</strong></p><ul><li data-uuid="d00e0fa1-af9f-4437-9798-5f1884fb6743"><a href="https://docs.nomagic.com/display/CDH2024x/Mapping+with+Schema+Map+Manager">Mapping with Schema Map Manager</a></li></ul>
+````
+
+<!--NOMAGIC_PAGE id=136716178 space=CDH2024x version=1 -->
+## PAGE 00067: Deleting Requirements
+
+- page_id: `136716178`
+- space_key: `CDH2024x`
+- source_url: https://docs.nomagic.com/spaces/CDH2024x/pages/136716178/Deleting+Requirements
+- version_number: 1
+- version_date: `2023-09-21T06:04:28.518+02:00`
+- ancestors: Cameo DataHub Documentation > User Guide > Working with DataHub and modeling tools > Working with the DataHub Explorer tree
+- labels: []
+
+### NORMALIZED CONTENT
+
+To delete a Requirement from the **DataHub Explorer** tree, do one of the following
+
+- Right-click the node you want to delete and select [IMAGE alt='' src=''] .
+- Drag the node onto the DataHub Explorer [ATTACHMENT filename='dh-trash-icon.png'] Trash icon.
+
+A confirmation dialog asking you to confirm the deletion opens. Click **OK**.
+
+### EXACT CONFLUENCE STORAGE SOURCE
+
+````html
+<p>To delete a Requirement from the <strong>DataHub Explorer</strong> tree, do one of the following</p><hr /><ul><li>Right-click the node you want to delete and select <strong><ac:image><ri:attachment ri:filename="delete-node.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Deleting Requirements" /></ri:attachment></ac:image></strong>.</li><li>Drag the node onto the <strong>DataHub Explorer</strong><ac:image><ri:attachment ri:filename="dh-trash-icon.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Deleting Requirements" /></ri:attachment></ac:image><strong>Trash</strong> icon.</li></ul><p>A confirmation dialog asking you to confirm the deletion opens. Click <strong>OK</strong>.</p>
+````
+
+<!--NOMAGIC_PAGE id=136716654 space=CDH2024x version=1 -->
+## PAGE 00068: Deleting schema maps
+
+- page_id: `136716654`
+- space_key: `CDH2024x`
+- source_url: https://docs.nomagic.com/spaces/CDH2024x/pages/136716654/Deleting+schema+maps
+- version_number: 1
+- version_date: `2023-09-21T06:04:55.522+02:00`
+- ancestors: Cameo DataHub Documentation > User Guide > Working with DataHub and modeling tools > Requirement Mapping
+- labels: []
+
+### NORMALIZED CONTENT
+
+If a schema map is referenced by a DHLink, it cannot be deleted. You can delete only schema maps that are not referenced by any DHLinks. Deleting aDefine Target Type from Attribute Value mapped schema deletes all defined target types. If you want to delete only some values of the schema, you can delete them in the[CONFLUENCE_PAGE title='Define Target Type from Attribute Value dialog and mapping' space='CDH2024x'] dialog.
+
+To delete an existing schema map
+
+1. Open the Cameo DataHub [CONFLUENCE_PAGE title='Mapping with Schema Map Manager' space='CDH2024x'] dialog.
+2. Select a source type that you want to edit its mapping. The default target type appears in the Target Type section.
+3. Click Delete . A confirmation dialog box to confirm the deletion opens. Click Yes .
+
+[IMAGE alt='' src='']
+
+#### NOTE: Note
+
+Note
+
+If you delete a schema map that is currently in use, an error message opens, showing that one or more relations are using the deleted schema map. Therefore, you must delete the relations first, and then delete the schema map.
+
+### EXACT CONFLUENCE STORAGE SOURCE
+
+````html
+<p><span style="color: rgb(51,51,51);">If a schema map is referenced by a DHLink, it cannot be deleted. You can delete only schema maps that are not referenced by any DHLinks. Deleting a </span><span style="color: rgb(51,51,51);"> Define Target Type from Attribute Value mapped schema deletes all defined target types. If you want to delete only some values of the schema, you can delete them in the </span><span><ac:link><ri:page ri:space-key="CDH2024x" ri:content-title="Define Target Type from Attribute Value dialog and mapping" /><ac:plain-text-link-body><![CDATA[Define Target Type from Attribute Value]]></ac:plain-text-link-body></ac:link> dialog.<br /></span></p><p><span style="color: rgb(51,51,51);"><br /></span></p><p>To delete an existing schema map</p><hr /><ol><li>Open the Cameo DataHub <ac:link><ri:page ri:space-key="CDH2024x" ri:content-title="Mapping with Schema Map Manager" /><ac:plain-text-link-body><![CDATA[Schema Map Manager]]></ac:plain-text-link-body></ac:link> dialog. </li><li>Select a source type that you want to edit its mapping. The default target type appears in the Target Type section.</li><li>Click <strong>Delete</strong>. A confirmation dialog box to confirm the deletion opens. Click <strong>Yes</strong>.</li></ol><p style="margin-left: 30.0px;"><ac:image><ri:attachment ri:filename="Schema_Map_Manager_Delete.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Deleting schema maps" /></ri:attachment></ac:image></p><p class="auto-cursor-target"><br /></p><ac:structured-macro ac:name="note" ac:schema-version="1" ac:macro-id="bc7e74f4-3315-4de8-91fe-e9a9dde36a79"><ac:parameter ac:name="title">Note</ac:parameter><ac:rich-text-body><p>If you delete a schema map that is currently in use, an error message opens, showing that one or more relations are using the deleted schema map. Therefore, you must delete the relations first, and then delete the schema map.</p></ac:rich-text-body></ac:structured-macro><p class="auto-cursor-target"><br /></p>
+````
+
+<!--NOMAGIC_PAGE id=136715873 space=CDH2024x version=2 -->
+## PAGE 00069: DH Links panel
+
+- page_id: `136715873`
+- space_key: `CDH2024x`
+- source_url: https://docs.nomagic.com/spaces/CDH2024x/pages/136715873/DH+Links+panel
+- version_number: 2
+- version_date: `2026-02-11T07:23:12.972+01:00`
+- ancestors: Cameo DataHub Documentation > Getting started > Understanding DataHub user interface
+- labels: []
+
+### NORMALIZED CONTENT
+
+Information about links between elements is arranged in a tabular form in the**DH Links**panel. This tab shows the detail of all the links you have added to items from theDataHub**Operation**drop-down list.
+
+**DHLink** maintains synchronization between source and target elements, either bidirectional or unidirectional.
+
+To open the **DH Links**panel in MagicDraw®
+
+- From the MagicDraw main menu, click Tools > DataHub > DHLink Panel . The DH Links panel opens. [ATTACHMENT filename='DH Links Panel Shortcut Menu.png']
+
+The **DH Links** panel contains icons and a table. Each node in the table has a [CONFLUENCE_PAGE title='DH Links panel shortcut menu and Sync Status icons' space=''] called the Actions menu that helps you manage the node and its relations.
+
+The following table provides the description of each column in the table in the **DH Links** panel.
+
+| Value | Description |
+| --- | --- |
+| Data Source and its driver name (MagicDraw) | The name of the Data Source in MagicDraw. |
+| Direction | The direction of DHLink synchronization. |
+| Data Source and its driver name (other drivers) | The name and the driver of the Data Source. |
+| Status | The status of the node (Modified, Moved, Deleted or Synchronized). |
+| Property button | Contains the Property button that opens up the node’s properties panel. |
+
+#### TIP: Tip
+
+Tip
+
+You can click the **Property [IMAGE alt='' src='']** button to see more details of the target node.
+
+### EXACT CONFLUENCE STORAGE SOURCE
+
+````html
+<p><span style="color:var(--ds-text,#333333);">Information about links between elements is arranged in a tabular form in the </span><strong>DH Links</strong><span style="color:var(--ds-text,#333333);"> panel. This tab shows the detail of all the links you have added to items from the </span>DataHub<strong> Operation </strong>drop-down list<span style="color:var(--ds-text,#333333);">.</span></p><p><strong>DHLink</strong> maintains synchronization between source and target elements, either bidirectional or unidirectional.</p><p><br /></p><p>To open the <strong>DH Links </strong>panel in MagicDraw<sup>®</sup></p><hr /><ul><li data-uuid="4c348d67-ebd8-4b17-959a-7f93f546ce8a">From the MagicDraw main menu, click <strong>Tools</strong> &gt; <strong>DataHub</strong> &gt;<strong> DHLink Panel</strong>. The <strong>DH Links </strong>panel opens.<br /><br /><ac:image><ri:attachment ri:filename="DH Links Panel Shortcut Menu.png" /></ac:image></li></ul><p><br /></p><p>The <strong>DH Links</strong> panel contains icons and a table. Each node in the table has a <ac:link><ri:page ri:content-title="DH Links panel shortcut menu and Sync Status icons" /><ac:plain-text-link-body><![CDATA[shortcut menu]]></ac:plain-text-link-body></ac:link> called the Actions menu that helps you manage the node and its relations.</p><p>The following table provides the description of each column in the table in the <strong>DH Links</strong> panel.</p><table class="relative-table" style="width: 96.751%;"><colgroup class=""><col class="" style="width: 34.4722%;" /><col class="" style="width: 65.5587%;" /></colgroup><thead class="" style="margin-left: 30.0px;"><tr class="" style="margin-left: 30.0px;"><th><p>Value</p></th><th><p>Description</p></th></tr></thead><tbody class="" style="margin-left: 30.0px;"><tr class="" style="margin-left: 30.0px;"><td>Data Source and its driver name (MagicDraw)</td><td>The name of the Data Source in MagicDraw.</td></tr><tr class="" style="margin-left: 30.0px;"><td>Direction</td><td>The direction of DHLink synchronization.</td></tr><tr class="" style="margin-left: 30.0px;"><td>Data Source and its driver name (other drivers)</td><td>The name and the driver of the Data Source.</td></tr><tr class="" style="margin-left: 30.0px;"><td colspan="1">Status</td><td colspan="1">The status of the node (<strong>Modified</strong>, <strong>Moved</strong>, <strong>Deleted</strong> or <strong>Synchronized</strong>).</td></tr><tr class="" style="margin-left: 30.0px;"><td colspan="1"><strong>Property</strong> button</td><td colspan="1"><div class="content-wrapper"><p>Contains the <strong>Property</strong> <ac:image><ri:attachment ri:filename="property-btn.png" /></ac:image>button that opens up the node’s properties panel.</p></div></td></tr></tbody></table><ac:structured-macro ac:name="tip" ac:schema-version="1" ac:macro-id="042fa1a5-124e-4cb0-800a-e4c526fc2a25"><ac:parameter ac:name="title">Tip</ac:parameter><ac:rich-text-body><p>You can click the <strong>Property <ac:image><ri:attachment ri:filename="property-btn.png" /></ac:image></strong> button to see more details of the target node.</p></ac:rich-text-body></ac:structured-macro>
+````
+
+<!--NOMAGIC_PAGE id=136715887 space=CDH2024x version=1 -->
+## PAGE 00070: DH Links panel shortcut menu and Sync Status icons
+
+- page_id: `136715887`
+- space_key: `CDH2024x`
+- source_url: https://docs.nomagic.com/spaces/CDH2024x/pages/136715887/DH+Links+panel+shortcut+menu+and+Sync+Status+icons
+- version_number: 1
+- version_date: `2023-09-21T06:04:19.483+02:00`
+- ancestors: Cameo DataHub Documentation > Getting started > Understanding DataHub user interface > DH Links panel
+- labels: []
+
+### NORMALIZED CONTENT
+
+You can right-click an item in the table in the **DH Links** panel to open a shortcut menu. This shortcut menu allows you to execute specific operations on a node in the panel.
+
+[IMAGE alt='' src='']
+
+###### The Shortcut menu in the table in the DH Links panel.
+
+The table below explains the functions of the **DH Links**panel shortcut menu.
+
+| Command | Function |
+| --- | --- |
+| Select MagicDraw project name node in Application | Selects the element in the MagicDraw Containment tree. |
+| Select MagicDraw project name node in DataHub Explorer | Selects the MagicDraw node in DataHub/Alias Explorer. |
+| Select Data Source name node in Application | Selects the node in the original application, e.g., the node originally from DOORS will be opened in the DOORS client application. |
+| Select Data Source name node in DataHub Explorer | Selects the node from other Data Sources, e.g., DOORS, in DataHub/Alias Explorer. |
+| Change Direction (only for root nodes) | Changes the current direction of synchronization: Two-way Sync, Sync from MagicDraw, and Sync to MagicDraw. |
+| View Schema Map | Opens the View Schema Map dialog.The View Schema Map dialog. |
+| Exclude Node (not for root nodes) | Skips the synchronization of the selected node and its child nodes. |
+| Include Node | Includes the selected node and its child nodes for the synchronization. |
+| Update Pending DHLink (for Pending Update items) | Synchronizes the node by updating the pending DHLink. |
+| Discard Update (for Pending Delete items) | Synchronizes the node by discarding the DHLink. |
+| Remove DHLink | Removes the selected DHLink. |
+
+#### NOTE: Note
+
+Note
+
+- DataHub cannot recreate a node if its parent does not exist.
+- You can perform the Change Direction and Remove DHLink command(sync relation) on a root node only.
+
+You can click the **Sync Status** icons to filter the status of synchronization of the nodes. The **DH Links**panel displays only the DHLinks with the Sync status you have selected from the specified **Sync Status** icons.
+
+[IMAGE alt='' src='']
+
+###### The Sync Status icons on the DH Links panel.
+
+All the **Sync Status** icons are listed in the following table
+
+| Button | Color sync | Status | Meaning |
+| --- | --- | --- | --- |
+|  | Green | Synchronized | Displays only the DHLink of the Synchronized status. |
+|  | Blue | Orphan | Displays only the DHLink of the Orphan status. |
+|  | Red | Pending Delete | Displays only the DHLink of the Pending Delete status. |
+|  | Yellow | Pending Update | Displays only the DHLink of the Pending Update status. |
+|  | Grey | Excluded | Displays only the DHLink of the Excluded status. |
+
+### EXACT CONFLUENCE STORAGE SOURCE
+
+````html
+<p>You can right-click an item in the table in the <strong>DH Links</strong> panel to open a shortcut menu. This shortcut menu allows you to execute specific operations on a node in the panel.</p><p><br /></p><p style="text-align: center;"><ac:image><ri:attachment ri:filename="DH Links Panel Shortcut Menu.png"><ri:page ri:space-key="CDH2024x" ri:content-title="DH Links panel shortcut menu and Sync Status icons" /></ri:attachment></ac:image></p><h6 style="text-align: center;">The Shortcut menu in the table in the DH Links panel.</h6><p>The table below explains the functions of the <strong>DH Links </strong>panel shortcut menu.</p><table class="relative-table" style="width: 99.9444%;"><colgroup><col style="width: 32.9073%;" /><col style="width: 67.1242%;" /></colgroup><tbody><tr><th>Command</th><th>Function</th></tr><tr><td colspan="1">Select <em>MagicDraw project name</em> node in Application</td><td colspan="1">Selects the element in the MagicDraw Containment tree.</td></tr><tr><td colspan="1">Select <em>MagicDraw project name</em> node in DataHub Explorer</td><td colspan="1">Selects the MagicDraw node in <strong>DataHub/Alias Explorer</strong>.</td></tr><tr><td colspan="1">Select <em>Data Source</em> <em>name</em> node in Application</td><td colspan="1">Selects the node in the original application, e.g., the node originally from DOORS will be opened in the DOORS client application.</td></tr><tr><td colspan="1">Select <em>Data Source</em> <em>name</em> node in DataHub Explorer</td><td colspan="1">Selects the node from other Data Sources, e.g., DOORS, in <strong>DataHub/Alias Explorer</strong>.</td></tr><tr><td colspan="1">Change Direction (only for root nodes)</td><td colspan="1">Changes the current direction of synchronization: <strong>Two-way Sync</strong>, <strong>Sync from MagicDraw</strong>, and <strong>Sync to MagicDraw</strong>.</td></tr><tr><td>View Schema Map</td><td><div class="content-wrapper"><p>Opens the <strong><a href="https://docs.nomagic.com/display/CDH2024x/Mapping+with+Schema+Map+Manager">View Schema Map </a></strong>dialog.</p><p style="text-align: center;"><ac:image><ri:attachment ri:filename="View Schema Map dialog.png"><ri:page ri:space-key="CDH2024x" ri:content-title="DH Links panel shortcut menu and Sync Status icons" /></ri:attachment></ac:image></p><h6 style="text-align: center;">The View Schema Map dialog.</h6></div></td></tr><tr><td>Exclude Node (not for root nodes)</td><td>Skips the synchronization of the selected node and its child nodes.</td></tr><tr><td>Include Node</td><td>Includes the selected node and its child nodes for the synchronization.</td></tr><tr><td colspan="1">Update Pending DHLink (for Pending Update items)</td><td colspan="1">Synchronizes the node by updating the pending DHLink.</td></tr><tr><td colspan="1">Discard Update (for Pending Delete items)</td><td colspan="1">Synchronizes the node by discarding the DHLink.</td></tr><tr><td>Remove DHLink</td><td>Removes the selected DHLink.</td></tr></tbody></table><p><br /></p><ac:structured-macro ac:name="note" ac:schema-version="1" ac:macro-id="8b1f4548-42a5-42da-ad07-92b0e1ea7b5a"><ac:parameter ac:name="title">Note</ac:parameter><ac:rich-text-body><ul><li>DataHub cannot recreate a node if its parent does not exist.</li><li>You can perform the <strong>Change Direction</strong> and <strong>Remove DHLink</strong> command(sync relation) on a root node only.</li></ul></ac:rich-text-body></ac:structured-macro><p><br /></p><p>You can click the <strong>Sync Status</strong> icons to filter the status of synchronization of the nodes. The <strong>DH Links </strong>panel displays only the DHLinks with the Sync status you have selected from the specified <strong>Sync Status</strong> icons.</p><p><br /></p><p style="margin-left: 30.0px;text-align: center;"><ac:image><ri:attachment ri:filename="2.png"><ri:page ri:space-key="CDH2024x" ri:content-title="DH Links panel shortcut menu and Sync Status icons" /></ri:attachment></ac:image></p><h6 style="margin-left: 30.0px;text-align: center;">The Sync Status icons on the DH Links panel.</h6><p>All the <strong>Sync Status</strong> icons are listed in the following table</p><table class="relative-table"><colgroup><col /><col /><col /><col /></colgroup><thead style="margin-left: 30.0px;"><tr style="margin-left: 30.0px;"><td class="highlight-grey" colspan="1" data-highlight-colour="grey"><strong><span style="color: rgb(0,0,0);">Button</span></strong></td><td class="highlight-grey" colspan="1" data-highlight-colour="grey"><strong><span style="color: rgb(0,0,0);">Color sync</span></strong></td><td class="highlight-grey" colspan="1" data-highlight-colour="grey"><strong><span style="color: rgb(0,0,0);">Status</span></strong></td><td class="highlight-grey" colspan="1" data-highlight-colour="grey"><strong><span style="color: rgb(0,0,0);">Meaning</span></strong></td></tr></thead><tbody style="margin-left: 30.0px;"><tr style="margin-left: 30.0px;"><td style="text-align: center;"><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><ac:image ac:thumbnail="true" ac:width="20"><ri:attachment ri:filename="s_active_t_none.png"><ri:page ri:space-key="CDH2024x" ri:content-title="DH Links panel shortcut menu and Sync Status icons" /></ri:attachment></ac:image></span></td><td>Green</td><td>Synchronized</td><td>Displays only the DHLink of the <strong>Synchronized</strong> status.</td></tr><tr style="margin-left: 30.0px;"><td style="text-align: center;"><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><ac:image ac:thumbnail="true" ac:width="20"><ri:attachment ri:filename="s_orphan_t_none.png"><ri:page ri:space-key="CDH2024x" ri:content-title="DH Links panel shortcut menu and Sync Status icons" /></ri:attachment></ac:image></span></td><td>Blue</td><td>Orphan</td><td>Displays only the DHLink of the <strong>Orphan</strong> status.</td></tr><tr style="margin-left: 30.0px;"><td style="text-align: center;"><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><ac:image ac:thumbnail="true" ac:width="20"><ri:attachment ri:filename="s_delete_t_none.png"><ri:page ri:space-key="CDH2024x" ri:content-title="DH Links panel shortcut menu and Sync Status icons" /></ri:attachment></ac:image></span></td><td>Red</td><td>Pending Delete</td><td>Displays only the DHLink of the <strong>Pending Delete</strong> status.</td></tr><tr style="margin-left: 30.0px;"><td style="text-align: center;" colspan="1"><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><ac:image ac:thumbnail="true" ac:width="20"><ri:attachment ri:filename="s_update_t_none.png"><ri:page ri:space-key="CDH2024x" ri:content-title="DH Links panel shortcut menu and Sync Status icons" /></ri:attachment></ac:image></span></td><td colspan="1">Yellow</td><td colspan="1">Pending Update</td><td colspan="1">Displays only the DHLink of the <strong>Pending Update</strong> status.</td></tr><tr style="margin-left: 30.0px;"><td style="text-align: center;" colspan="1"><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><ac:image ac:thumbnail="true" ac:width="25"><ri:attachment ri:filename="exclude_icon.png"><ri:page ri:space-key="CDH2024x" ri:content-title="DH Links panel shortcut menu and Sync Status icons" /></ri:attachment></ac:image></span></td><td colspan="1">Grey</td><td colspan="1">Excluded</td><td colspan="1">Displays only the DHLink of the <strong>Excluded</strong> status.</td></tr></tbody></table><p class="auto-cursor-target"><br /></p>
+````
+
+<!--NOMAGIC_PAGE id=136716666 space=CDH2024x version=1 -->
+## PAGE 00071: DHLink Summary
+
+- page_id: `136716666`
+- space_key: `CDH2024x`
+- source_url: https://docs.nomagic.com/spaces/CDH2024x/pages/136716666/DHLink+Summary
+- version_number: 1
+- version_date: `2023-09-21T06:04:55.789+02:00`
+- ancestors: Cameo DataHub Documentation > User Guide > Working with DataHub and modeling tools > Working with the DHLink summary and generating reports
+- labels: []
+
+### NORMALIZED CONTENT
+
+If you have many DHLinks to review, you can select **DHLink Summary** from the DataHub menu to open the Cameo DataHub **DHLink Summary** dialog and view all types of links. In the **DHLink Summary** dialog, you can filter the relations that you want to view and adjust the display. You can also remove or update a relation, or clear the status.
+
+There are two filter options: **No DHLink** and **DHLink**. The **No DHLink** option filters all elements that have no DHLink element in the DataHub, and the **DHLink** option filters all elements that contain DHLink synchronization.
+
+The functions of the**DHLink Summary**dialog are as follows
+
+- Provides the options to extract specific relation types and customize their scope from a project and to preview them.
+- Saves the extracted relation types in the customized scope to be included in a generated report.
+- Generates DHLink Summary reports in HTML containing the selected relation types.
+
+To open the **DHLink Summary** dialog
+
+1. On the MagicDraw main menu, click Tools > DataHub > DHLink Summary .
+2. The DHLink Summary dialog opens. The Filter Options pane on the left-hand side allows you to choose what type of relations you want to see. You can select one of the following:
+  - No DHLink to display independent standalone elements and nodes without any DHLink.
+  - DHLink to display the relation between elements. The state of the DHLink could be Synchronized , Orphan , Pending Delete , Pending Update , or Excluded .
+  - DHTrace to display the state of a DHTrace. If the DHTrace is changed on either side, it becomes Suspect . If there is no change, its state remains as Traced .
+3. Select any check boxes that represents the driver and Data Source to open them in the DHLink summary.
+4. Click [ATTACHMENT filename='view-btn.png'] . The DHLink summary displays on the right-hand side of the dialog.
+
+[IMAGE alt='' src='']
+
+The table below provides the description of each column in the **DHLink Summary** dialog.
+
+| Column | Description |
+| --- | --- |
+| Source | The name of the element or node in a selected driver that has a DHLink.The sources are ordered according to their Data Sources. |
+| Direction | The direction of synchronization between two elements. |
+| Target | The name of the element that has a DHLink with another element in the Source column. |
+| Type | The type of the element. This is usually a node or a link. |
+| DHLink Type | The type of DHLink between the Source and Target. |
+| Status | The status of the DHLink that can be Synchronized, Pending Update, Pending Delete, Excluded, or Orphan. |
+| DHTrace | To include a summary of the DHTrace links - Suspect or traced. |
+
+### EXACT CONFLUENCE STORAGE SOURCE
+
+````html
+<p>If you have many DHLinks to review, you can select <strong style="line-height: 1.4285715;">DHLink Summary</strong> from the DataHub menu to open the Cameo DataHub <strong style="line-height: 1.4285715;">DHLink Summary</strong> dialog and view all types of links. In the <strong>DHLink Summary</strong> dialog, you can filter the relations that you want to view and adjust the display. You can also remove or update a relation, or clear the status.</p><p>There are two filter options: <strong>No DHLink</strong> and <strong>DHLink</strong>. The <strong>No DHLink</strong> option filters all elements that have no DHLink element in the DataHub, and the <strong>DHLink</strong> option filters all elements that contain DHLink synchronization.</p><p style="">The functions of the<span> </span><strong>DHLink Summary</strong><span> </span>dialog are as follows</p><ul style=""><li>Provides the options to extract specific relation types and customize their scope from a project and to preview them.</li><li>Saves the extracted relation types in the customized scope to be included in a generated report.</li><li>Generates DHLink Summary reports in HTML containing the selected relation types.</li></ul><p><br /></p><p>To open the <strong>DHLink Summary</strong> dialog</p><hr /><ol><li>On the MagicDraw main menu, click <strong>Tools</strong> &gt; <strong>DataHub</strong> &gt; <strong>DHLink Summary</strong>.</li><li>The <strong>DHLink Summary</strong> dialog opens. The <strong>Filter Options</strong> pane on the left-hand side allows you to choose what type of relations you want to see. You can select one of the following:<ul><li><strong>No DHLink</strong> to display independent standalone elements and nodes without any DHLink.</li><li><strong>DHLink</strong> to display the relation between elements. The state of the DHLink could be <strong>Synchronized</strong>, <strong>Orphan</strong>, <strong>Pending Delete</strong>, <strong>Pending Update</strong>, or <strong>Excluded</strong>.</li><li><strong>DHTrace</strong> to display the state of a DHTrace. If the DHTrace is changed on either side, it becomes <strong>Suspect</strong>. If there is no change, its state remains as <strong>Traced</strong>.</li></ul></li><li>Select any check boxes that represents the driver and Data Source to open them in the DHLink summary.</li><li>Click <ac:image><ri:attachment ri:filename="view-btn.png"><ri:page ri:space-key="CDH2024x" ri:content-title="DHLink Summary" /></ri:attachment></ac:image>. The DHLink summary displays on the right-hand side of the dialog.</li></ol><p style="margin-left: 30.0px;"><ac:image ac:title="DHLink Summary of DataHub" ac:alt="DHLink Summary of DataHub"><ri:attachment ri:filename="dh-link-summary.png"><ri:page ri:space-key="CDH2024x" ri:content-title="DHLink Summary" /></ri:attachment></ac:image></p><p><br /></p><p>The table below provides the description of each column in the <strong>DHLink Summary</strong> dialog.</p><table class="relative-table" style="margin-left: 30.0px;width: 77.2468%;"><colgroup><col style="width: 15.5968%;" /><col style="width: 84.4439%;" /></colgroup><thead style="margin-left: 30.0px;"><tr style="margin-left: 30.0px;"><td class="highlight-grey" colspan="1" data-highlight-colour="grey"><strong><span style="color: rgb(0,0,0);">Column</span></strong></td><td class="highlight-grey" colspan="1" data-highlight-colour="grey"><strong><span style="color: rgb(0,0,0);">Description</span></strong></td></tr></thead><tbody style="margin-left: 30.0px;"><tr style="margin-left: 30.0px;"><td style="margin-left: 30.0px;"><strong>Source</strong></td><td style="margin-left: 30.0px;"><p>The name of the element or node in a selected driver that has a DHLink.</p><p>The sources are ordered according to their Data Sources.</p></td></tr><tr style="margin-left: 30.0px;"><td style="margin-left: 30.0px;"><strong>Direction</strong></td><td style="margin-left: 30.0px;">The direction of synchronization between two elements.</td></tr><tr style="margin-left: 30.0px;"><td style="margin-left: 30.0px;"><strong>Target</strong></td><td style="margin-left: 30.0px;"><p>The name of the element that has a DHLink with another element in the <strong style="line-height: 1.42857;">Source</strong> column.</p></td></tr><tr style="margin-left: 30.0px;"><td style="margin-left: 30.0px;" colspan="1"><strong>Type</strong></td><td style="margin-left: 30.0px;" colspan="1"><p>The type of the element. This is usually a node or a link.</p></td></tr><tr style="margin-left: 30.0px;"><td style="margin-left: 30.0px;" colspan="1"><strong>DHLink Type</strong></td><td style="margin-left: 30.0px;" colspan="1"><p>The type of DHLink between the <strong>Source</strong> and<strong> Target</strong>.</p></td></tr><tr style="margin-left: 30.0px;"><td style="margin-left: 30.0px;" colspan="1"><strong>Status</strong></td><td style="margin-left: 30.0px;" colspan="1"><p>The status of the DHLink that can be <strong>Synchronized</strong>, <strong>Pending Update</strong>, <strong>Pending Delete</strong>, <strong>Excluded</strong>, or <strong>Orphan</strong>.</p></td></tr><tr style="margin-left: 30.0px;"><td colspan="1"><strong>DHTrace</strong></td><td colspan="1"><p>To include a summary of the DHTrace links - <strong>Suspect</strong> or <strong>traced</strong>.</p></td></tr></tbody></table><p class="auto-cursor-target"><br /></p>
+````
+
+<!--NOMAGIC_PAGE id=136716678 space=CDH2024x version=1 -->
+## PAGE 00072: DHLink Summary dialog shortcut menu
+
+- page_id: `136716678`
+- space_key: `CDH2024x`
+- source_url: https://docs.nomagic.com/spaces/CDH2024x/pages/136716678/DHLink+Summary+dialog+shortcut+menu
+- version_number: 1
+- version_date: `2023-09-21T06:04:56.023+02:00`
+- ancestors: Cameo DataHub Documentation > User Guide > Working with DataHub and modeling tools > Working with the DHLink summary and generating reports
+- labels: []
+
+### NORMALIZED CONTENT
+
+To open the shortcut menu in the **[CONFLUENCE_PAGE title='DHLink Summary' space='CDH2024x']** dialog
+
+- In the **DHLink Summary** dialog, right-click a value in the element. The shortcut menu opens. [IMAGE alt='' src=''] 
+The shortcut menu of the root data node in the DHLink Summary dialog. [IMAGE alt='' src=''] The shortcut menu of a data node in the DHLink Summary dialog.
+
+To open the shortcut menu in the **DH Links**panel
+
+- In the DH Links panel, right-click a Data Source in the element. The shortcut menu opens.
+
+[IMAGE alt='' src='']
+
+###### The shortcut menu of the synchronized DHLink in the DH Links panel.
+
+[IMAGE alt='' src='']
+
+###### The shortcut menu of DHTrace in the DH Links panel.
+
+The table below summarizes the shortcut menu items in the **DHLink Summary**dialog and **DH Links** panel.
+
+| Menu | Function |
+| --- | --- |
+| Change Direction (only for the root element) | Changes the direction of synchronization: Sync from MagicDraw and Sync to MagicDraw. |
+| Remove DHLink | Removes the selected DHLink from both of the associated nodes. |
+| Remove DHTrace | Removes the selected DHTrace from both of the associated nodes. |
+| Clear Suspect DHTrace | Clears the Suspect status from both of the associated nodes. |
+| Select MagicDraw project name node in Application | Selects the element in the MagicDraw Containment tree. |
+| Select MagicDraw project name node in DataHub Explorer | Selects the MagicDraw node in DataHub/Alias Explorer. |
+| Select Data Source name node in Application | Selects the node in the original application, e.g., the node originally from DOORS will be opened in the DOORS client application. |
+| Select Data Source name node in DataHub Explorer | Selects the node from other Data Sources, e.g., DOORS, in DataHub/Alias Explorer. |
+| Discard Update (only for the Pending Update status) | Synchronizes the node by discarding the DHLink. |
+| Exclude Node (not for the root element) | Excludes the node from being included for synchronization. |
+| Include Node | Includes the selected node and its child nodes for the synchronization. |
+| Update Pending DHLink (only for the Pending Update status) | Synchronizes the node by updating the pending DHLink. |
+| View Schema Map | Opens the dialog. |
+
+### EXACT CONFLUENCE STORAGE SOURCE
+
+````html
+<p>To open the shortcut menu in the <strong><ac:link><ri:page ri:space-key="CDH2024x" ri:content-title="DHLink Summary" /></ac:link></strong> dialog</p><hr /><ul><li><p>In the <strong>DHLink Summary</strong> dialog, right-click a value in the element. The shortcut menu opens.<br /><br /></p><h6 style="text-align: center;"><ac:image><ri:attachment ri:filename="DHLink Summary  (Root Element).png"><ri:page ri:space-key="CDH2024x" ri:content-title="DHLink Summary dialog shortcut menu" /></ri:attachment></ac:image><br />The shortcut menu of the root data node in the DHLink Summary dialog.</h6><p><ac:image><ri:attachment ri:filename="DHLink Summary  (Except Root Element).png"><ri:page ri:space-key="CDH2024x" ri:content-title="DHLink Summary dialog shortcut menu" /></ri:attachment></ac:image></p><h6 style="text-align: center;">The shortcut menu of a data node in the DHLink Summary dialog.</h6></li></ul><p>To open the shortcut menu in the <strong>DH Links </strong>panel</p><hr /><ul><li>In the <strong>DH Links </strong>panel, right-click a Data Source in the element. The shortcut menu opens.</li></ul><p><br /></p><p><ac:image ac:align="center"><ri:attachment ri:filename="DH Links Panel Shortcut Menu.png"><ri:page ri:space-key="CDH2024x" ri:content-title="DHLink Summary dialog shortcut menu" /></ri:attachment></ac:image></p><h6 style="text-align: center;">The shortcut menu of the synchronized DHLink in the DH Links panel.</h6><p><ac:image ac:align="center"><ri:attachment ri:filename="DH Links Panel Shortcut Menu with DHTrace.png"><ri:page ri:space-key="CDH2024x" ri:content-title="DHLink Summary dialog shortcut menu" /></ri:attachment></ac:image></p><h6 style="text-align: center;">The shortcut menu of DHTrace in the DH Links panel.</h6><p><br /></p><p>The table below summarizes the shortcut menu items in the <strong>DHLink Summary </strong>dialog and <strong>DH Links</strong> panel.</p><table class="relative-table" style="margin-left: 30.0px;width: 96.8238%;"><colgroup><col style="width: 35.191%;" /><col style="width: 64.8204%;" /></colgroup><thead style="margin-left: 30.0px;"><tr style="margin-left: 30.0px;"><th><div class="tablesorter-header-inner">Menu</div></th><th><div class="tablesorter-header-inner">Function</div></th></tr></thead><tbody style="margin-left: 30.0px;"><tr style="margin-left: 30.0px;"><td><strong>Change Direction</strong> (only for the root element)<strong> </strong></td><td><div class="content-wrapper"><p>Changes the direction of synchronization: <strong>Sync from MagicDraw</strong> and <strong>Sync to MagicDraw</strong>.</p></div></td></tr><tr style="margin-left: 30.0px;"><td><strong>Remove DHLink </strong></td><td><p>Removes the selected DHLink from both of the associated nodes.</p></td></tr><tr style="margin-left: 30.0px;"><td colspan="1"><strong>Remove DHTrace</strong></td><td colspan="1">Removes the selected DHTrace from both of the associated nodes.</td></tr><tr style="margin-left: 30.0px;"><td colspan="1"><strong>Clear Suspect DHTrace</strong></td><td colspan="1">Clears the Suspect status from both of the associated nodes.</td></tr><tr style="margin-left: 30.0px;"><td><strong>Select <em>MagicDraw project name</em> node in Application</strong></td><td>Selects the element in the MagicDraw Containment tree.</td></tr><tr style="margin-left: 30.0px;"><td colspan="1"><strong>Select <em>MagicDraw project name</em> node in DataHub Explorer</strong></td><td colspan="1">Selects the MagicDraw node in <strong>DataHub/Alias Explorer</strong>.</td></tr><tr style="margin-left: 30.0px;"><td colspan="1"><strong>Select <em>Data Source</em> <em>name</em> node in Application</strong></td><td colspan="1">Selects the node in the original application, e.g., the node originally from DOORS will be opened in the DOORS client application.</td></tr><tr style="margin-left: 30.0px;"><td colspan="1"><strong>Select <em>Data Source</em> <em>name</em> node in DataHub Explorer</strong></td><td colspan="1">Selects the node from other Data Sources, e.g., DOORS, in <strong>DataHub/Alias Explorer</strong>.</td></tr><tr style="margin-left: 30.0px;"><td colspan="1"><strong>Discard Update </strong>(only for the <strong>Pending Update</strong> status)<strong><br /></strong></td><td colspan="1">Synchronizes the node by discarding the DHLink.</td></tr><tr style="margin-left: 30.0px;"><td colspan="1"><strong>Exclude Node </strong>(not for the root element)<strong> </strong></td><td colspan="1">Excludes the node from being included for synchronization.</td></tr><tr style="margin-left: 30.0px;"><td colspan="1"><strong>Include Node</strong></td><td colspan="1">Includes the selected node and its child nodes for the synchronization.</td></tr><tr style="margin-left: 30.0px;"><td colspan="1"><p><strong>Update Pending DHLink</strong> (only for the <strong>Pending Update</strong> status)<strong><br /></strong></p></td><td colspan="1">Synchronizes the node by updating the pending DHLink.</td></tr><tr style="margin-left: 30.0px;"><td colspan="1"><strong>View Schema Map</strong></td><td colspan="1">Opens the <strong><ac:link><ri:page ri:space-key="CDH2024x" ri:content-title="Mapping with Schema Map Manager" /><ac:plain-text-link-body><![CDATA[Schema Map Manager]]></ac:plain-text-link-body></ac:link></strong> dialog.</td></tr></tbody></table><p class="auto-cursor-target"><br /></p>
+````
+
+<!--NOMAGIC_PAGE id=136716677 space=CDH2024x version=1 -->
+## PAGE 00073: Directions of DHLinks
+
+- page_id: `136716677`
+- space_key: `CDH2024x`
+- source_url: https://docs.nomagic.com/spaces/CDH2024x/pages/136716677/Directions+of+DHLinks
+- version_number: 1
+- version_date: `2023-09-21T06:04:55.966+02:00`
+- ancestors: Cameo DataHub Documentation > User Guide > Working with DataHub and modeling tools > Working with the DHLink summary and generating reports
+- labels: []
+
+### NORMALIZED CONTENT
+
+Besides showing types of DHLinks and the source and type elements that have DHLinks, the **[CONFLUENCE_PAGE title='DHLink Summary' space='CDH2024x']** dialog displays the direction of the **DHLink** with an arrow. The arrow describes the direction of synchronization graphically, either unidirectional or bidirectional.
+
+| Symbol | Type | Sync status | Description |
+| --- | --- | --- | --- |
+|  | Two-way sync | Synchronized | Data synchronization can be performed on both sides, which are source or target with the Synchronized status. |
+|  | One-way Sync from MagicDraw | Synchronized | Selecting this synchronization mode allows the Data Source from the node with a DHLink in the other driver picks up changes from the MagicDraw Data Source. |
+|  | One-way Sync to MagicDraw | Synchronized | Selecting this synchronization mode allows the MagicDraw Data Source to pick up changes from the node with a DHLink in the other driver. |
+|  | All | Pending Update/ Pending Delete | The relation status is PendingUpdate, PendingDelete, or Orphan, and the data are updated from the source to the target. |
+|  | All | Pending Update/ Pending Delete | The relation status is PendingUpdate, PendingDelete, or Orphan, and the data will be updated from the target to the source. |
+| - - - - - | All | Excluded | This symbol is used for a DHLink relation that has been excluded and has a virtual relation. |
+
+### EXACT CONFLUENCE STORAGE SOURCE
+
+````html
+<p>Besides showing types of DHLinks and the source and type elements that have DHLinks, the <strong><ac:link><ri:page ri:space-key="CDH2024x" ri:content-title="DHLink Summary" /><ac:plain-text-link-body><![CDATA[DHLink Summary]]></ac:plain-text-link-body></ac:link></strong> dialog displays the direction of the <strong>DHLink</strong> with an arrow. The arrow describes the direction of synchronization graphically, either unidirectional or bidirectional.</p><p><br /></p><table class="relative-table" style="margin-left: 30.0px;width: 97.3794%;"><colgroup><col style="width: 6.01758%;" /><col style="width: 16.4233%;" /><col style="width: 16.4909%;" /><col style="width: 61.0908%;" /></colgroup><thead style="margin-left: 30.0px;"><tr style="margin-left: 30.0px;"><td class="highlight-grey" colspan="1" data-highlight-colour="grey"><strong><span style="color: rgb(0,0,0);">Symbol</span></strong></td><td class="highlight-grey" colspan="1" data-highlight-colour="grey"><strong><span style="color: rgb(0,0,0);">Type</span></strong></td><td class="highlight-grey" colspan="1" data-highlight-colour="grey"><strong><span style="color: rgb(0,0,0);">Sync status</span></strong></td><td class="highlight-grey" colspan="1" data-highlight-colour="grey"><strong><span style="color: rgb(0,0,0);">Description</span></strong></td></tr></thead><tbody style="margin-left: 30.0px;"><tr style="margin-left: 30.0px;"><td style="margin-left: 30.0px;"><span class="confluence-embedded-file-wrapper"><span class="confluence-embedded-file-wrapper"><ac:image><ri:attachment ri:filename="capture-20120810-151732.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Working with DataHub and modeling tools" /></ri:attachment></ac:image></span></span></td><td style="margin-left: 30.0px;"><strong>Two-way sync</strong></td><td style="margin-left: 30.0px;"><strong>Synchronized</strong></td><td style="margin-left: 30.0px;">Data synchronization can be performed on both sides, which are source or target with the <strong>Synchronized</strong> status.</td></tr><tr style="margin-left: 30.0px;"><td style="margin-left: 30.0px;"><span class="confluence-embedded-file-wrapper"> </span><ac:image><ri:attachment ri:filename="capture-20120810-150304.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Working with DataHub and modeling tools" /></ri:attachment></ac:image></td><td style="margin-left: 30.0px;"><strong>One-way Sync from MagicDraw </strong></td><td style="margin-left: 30.0px;"><strong>Synchronized</strong></td><td style="margin-left: 30.0px;"><span>Selecting this synchronization mode allows the Data Source from the node with a DHLink in the other driver picks up changes from the MagicDraw Data Source.</span></td></tr><tr style="margin-left: 30.0px;"><td style="margin-left: 30.0px;"><span class="confluence-embedded-file-wrapper"><span class="confluence-embedded-file-wrapper"><ac:image><ri:attachment ri:filename="capture-20120810-150426.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Working with DataHub and modeling tools" /></ri:attachment></ac:image></span></span></td><td style="margin-left: 30.0px;"><strong>One-way Sync to MagicDraw</strong></td><td style="margin-left: 30.0px;"><strong>Synchronized</strong></td><td style="margin-left: 30.0px;"><span>Selecting this synchronization mode allows the MagicDraw Data Source to pick up changes from the node <span>with a DHLink in the other driver</span>.</span></td></tr><tr style="margin-left: 30.0px;"><td style="margin-left: 30.0px;" colspan="1"><ac:image><ri:attachment ri:filename="capture-20120810-150304.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Working with DataHub and modeling tools" /></ri:attachment></ac:image></td><td style="margin-left: 30.0px;" colspan="1">All</td><td style="margin-left: 30.0px;" colspan="1"><strong>Pending Update/ Pending Delete</strong></td><td style="margin-left: 30.0px;" colspan="1">The relation status is <strong>PendingUpdate</strong>, <strong>PendingDelete, </strong>or<strong> Orphan</strong>, and the data are updated from the source to the target.</td></tr><tr style="margin-left: 30.0px;"><td style="margin-left: 30.0px;" colspan="1"><ac:image><ri:attachment ri:filename="capture-20120810-150426.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Working with DataHub and modeling tools" /></ri:attachment></ac:image></td><td style="margin-left: 30.0px;" colspan="1">All</td><td style="margin-left: 30.0px;" colspan="1"><strong>Pending Update/ Pending Delete</strong> </td><td style="margin-left: 30.0px;" colspan="1"><p>The relation status is <strong style="line-height: 1.42857;">PendingUpdate,</strong> <strong style="line-height: 1.42857;">PendingDelete<strong>, </strong><span>or</span></strong> <strong>Orphan</strong>, and the data will be updated from the target to the source.</p></td></tr><tr style="margin-left: 30.0px;"><td style="margin-left: 30.0px;" colspan="1">- - - - -</td><td style="margin-left: 30.0px;" colspan="1">All</td><td style="margin-left: 30.0px;" colspan="1"><strong>Excluded</strong></td><td style="margin-left: 30.0px;" colspan="1">This symbol is used for a <strong>DHLink</strong> relation that has been excluded and has a virtual relation.</td></tr></tbody></table><p class="auto-cursor-target"><br /></p>
+````
+
+<!--NOMAGIC_PAGE id=136716773 space=CDH2024x version=2 -->
+## PAGE 00074: Directions of synchronization
+
+- page_id: `136716773`
+- space_key: `CDH2024x`
+- source_url: https://docs.nomagic.com/spaces/CDH2024x/pages/136716773/Directions+of+synchronization
+- version_number: 2
+- version_date: `2026-02-11T08:05:00.214+01:00`
+- ancestors: Cameo DataHub Documentation > User Guide > Synchronization > Synchronizing Requirements
+- labels: []
+
+### NORMALIZED CONTENT
+
+The synchronization direction allows you to choose the direction from which the changes are sent. There are three directions of data synchronization in the dialog of the selected DataHub Explorer operation as follows
+
+- [ATTACHMENT filename='two-way-sync.png'] Synchronizations are in both directions.
+- [IMAGE alt='' src=''] The third-party Data Source is always synchronized to the MagicDraw Data Source.
+- [ATTACHMENT filename='one-way-sync-from-md.png'] The MagicDraw Data Source is always synchronized to the third-party Data Source.
+
+**Related page**
+
+- [CONFLUENCE_PAGE title='Operations in DataHub Explorer' space='']
+
+### EXACT CONFLUENCE STORAGE SOURCE
+
+````html
+<p>The synchronization direction allows you to choose the direction from which the changes are sent. There are three directions of data synchronization in the dialog of the selected DataHub Explorer operation as follows</p><ul><li data-uuid="32fe1b13-c712-42d0-aecb-93fcc8baf701"><ac:image><ri:attachment ri:filename="two-way-sync.png" /></ac:image><br />Synchronizations are in both directions.</li><li data-uuid="fd5892db-f062-4533-aa62-5963fedac81b"><strong><ac:image><ri:attachment ri:filename="one-way-sync-to-md.png" /></ac:image></strong><br />The third-party Data Source is always synchronized to the MagicDraw Data Source.</li><li data-uuid="c1378c6e-8d6e-47cc-b359-bc9c37c86b7a"><ac:image><ri:attachment ri:filename="one-way-sync-from-md.png" /></ac:image><br />The MagicDraw Data Source is always synchronized to the third-party Data Source.</li></ul><p><strong>Related page</strong></p><ul><li data-uuid="5f04e17d-587c-4c4c-844a-3c05aae7d5f5"><ac:link><ri:page ri:content-title="Operations in DataHub Explorer" /></ac:link></li></ul><p><br /></p>
+````
+
+<!--NOMAGIC_PAGE id=136715962 space=CDH2024x version=1 -->
+## PAGE 00075: Displaying MagicDraw Data Sources in DataHub Explorer
+
+- page_id: `136715962`
+- space_key: `CDH2024x`
+- source_url: https://docs.nomagic.com/spaces/CDH2024x/pages/136715962/Displaying+MagicDraw+Data+Sources+in+DataHub+Explorer
+- version_number: 1
+- version_date: `2023-09-21T06:04:21.560+02:00`
+- ancestors: Cameo DataHub Documentation > Getting started > DataHub basic operations
+- labels: []
+
+### NORMALIZED CONTENT
+
+By default, MagicDraw® Data Sources are not shown in the [CONFLUENCE_PAGE title='DataHub Explorer tab' space='CDH2024x']. However, you can display MagicDraw® Data Sources in the DataHub Explorer tree through the Cameo DataHub Environment options.
+
+To display a MagicDraw® Data Source in the DataHub Explorer tree
+
+1. From the MagicDraw main menu, click Options > Environment . The Environment Options dialog opens. [ATTACHMENT filename='Environment_Options_General.png']
+2. On the left-hand side of the dialog, select Cameo DataHub in the list. [ATTACHMENT filename='Environment_Options_CDH.png']
+3. In the General group of options, clear the Filter a Magic Systems of Systems Architect data source from the DataHub Explorer checkbox. [ATTACHMENT filename='Environment_Options_Clear_Checkbox.png']
+4. Click OK . A MagicDraw ® Data Source now appears in the DataHub Explorer panel. [ATTACHMENT filename='MD_Data_Source.png']
+
+### EXACT CONFLUENCE STORAGE SOURCE
+
+````html
+<p>By default, MagicDraw<sup>®</sup> Data Sources are not shown in the <ac:link><ri:page ri:space-key="CDH2024x" ri:content-title="DataHub Explorer tab" /></ac:link>. However, you can display MagicDraw<sup>®</sup> Data Sources in the DataHub Explorer tree through the Cameo DataHub Environment options.</p><p><br /></p><p>To display a MagicDraw<sup>®</sup> Data Source in the DataHub Explorer tree</p><hr /><ol><li>From the MagicDraw main menu, click <strong>Options</strong> &gt; <strong>Environment</strong>. The Environment Options dialog opens.<br /><br /><ac:image><ri:attachment ri:filename="Environment_Options_General.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Displaying MagicDraw Data Sources in DataHub Explorer" /></ri:attachment></ac:image><br /><br /></li><li>On the left-hand side of the dialog, select <strong>Cameo DataHub</strong> in the list.<br /><br /><ac:image><ri:attachment ri:filename="Environment_Options_CDH.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Displaying MagicDraw Data Sources in DataHub Explorer" /></ri:attachment></ac:image><br /><br /></li><li>In the<strong> General</strong> group of options, clear the Filter a Magic Systems of Systems Architect data source from the DataHub Explorer checkbox.<br /><br /><ac:image><ri:attachment ri:filename="Environment_Options_Clear_Checkbox.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Displaying MagicDraw Data Sources in DataHub Explorer" /></ri:attachment></ac:image><br /><br /></li><li>Click <strong>OK</strong>. A MagicDraw<sup>®</sup> Data Source now appears in the DataHub Explorer panel.<br /><br /><ac:image><ri:attachment ri:filename="MD_Data_Source.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Displaying MagicDraw Data Sources in DataHub Explorer" /></ri:attachment></ac:image></li></ol><p><br /></p>
+````
+
+<!--NOMAGIC_PAGE id=136716387 space=CDH2024x version=1 -->
+## PAGE 00076: DOORS Baseline Data Sources
+
+- page_id: `136716387`
+- space_key: `CDH2024x`
+- source_url: https://docs.nomagic.com/spaces/CDH2024x/pages/136716387/DOORS+Baseline+Data+Sources
+- version_number: 1
+- version_date: `2023-09-21T06:04:38.669+02:00`
+- ancestors: Cameo DataHub Documentation > User Guide > Working with DataHub and modeling tools > Working with Data Sources > Adding Data Sources for IBM Rational DOORS
+- labels: []
+
+### NORMALIZED CONTENT
+
+You can access DOORS Baseline by adding a new Baseline Data Source.
+
+To create the Baseline Data Source
+
+1. Right-click any folder, project, or module you want to create the Baseline Data Source and select Create data source from Baseline . [ATTACHMENT filename='Create data source fom baseline.PNG']
+2. The Create data source from Baseline dialog opens and lists all Baseline versions grouped by the Baseline set. Do one of the following: [ATTACHMENT filename='Dialog Box.PNG']
+  - To create a Data Source with only the selected module, select a particular module version.
+  - To create a Data Source with all modules in the Baseline set, select a Baseline set version.
+3. Select the Baseline that you want and click OK . You will get a new Data Source that contains the modules with the specific version you have selected. [ATTACHMENT filename='Data Source with module and specific versions.PNG']
+
+It is possible that your data in DataHub (DHLink to MagicDraw) work with original DOORS Data Sources or other Data Sources with different Baseline versions. If you also want the newly created Baseline Data Sources to synchronize with those data, you can use the copying function to copy the DHLinks from other DOORS Data Sources to the new Baseline Data Sources.
+
+To copy the DHLink to a Baseline Data Source
+
+1. Right-click any module in the Baseline Data Source and select Copy DHLink from other data sources . [ATTACHMENT filename='Copy DHlinks from other data sources.PNG']
+2. The Copy DHLink from other data source dialog opens. From the drop-down list, choose the Data Source you want to copy the DHLink from. [ATTACHMENT filename='Copi DHLinks Dialog box.PNG']
+3. Click OK . The DHLink will be copied to the new Baseline Data Source. [ATTACHMENT filename='DHLinks_Copied.PNG']
+
+### EXACT CONFLUENCE STORAGE SOURCE
+
+````html
+<p>You can access DOORS Baseline by adding a new Baseline Data Source.</p><p>To create the Baseline Data Source</p><hr /><ol><li>Right-click any folder, project, or module you want to create the Baseline Data Source and select <strong>Create data source from Baseline</strong>.<br /><br /><ac:image><ri:attachment ri:filename="Create data source fom baseline.PNG"><ri:page ri:space-key="CDH2024x" ri:content-title="DOORS Baseline Data Sources" /></ri:attachment></ac:image><br /><br /></li><li>The <strong>Create data source from Baseline</strong> dialog opens and lists all Baseline versions grouped by the Baseline set. Do one of the following:<br /><br /><ul><li><p>To create a Data Source with only the selected module, select a particular module version.</p></li><li><p>To create a Data Source with all modules in the Baseline set, select a Baseline set version.</p></li></ul><br /><ac:image><ri:attachment ri:filename="Dialog Box.PNG"><ri:page ri:space-key="CDH2024x" ri:content-title="DOORS Baseline Data Sources" /></ri:attachment></ac:image><br /><br /></li><li>Select the Baseline that you want and click <strong>OK</strong>.  You will get a new Data Source that contains the modules with the specific version you have selected.<br /><br /><ac:image><ri:attachment ri:filename="Data Source with module and specific versions.PNG"><ri:page ri:space-key="CDH2024x" ri:content-title="DOORS Baseline Data Sources" /></ri:attachment></ac:image></li></ol><p>It is possible that your data in DataHub (DHLink to MagicDraw) work with original DOORS Data Sources or other Data Sources with different Baseline versions. If you also want the newly created Baseline Data Sources to synchronize with those data, you can use the copying function to copy the DHLinks from other DOORS Data Sources to the new Baseline Data Sources.</p><p>To copy the DHLink to a Baseline Data Source</p><hr /><ol><li>Right-click any module in the Baseline Data Source and select <strong>Copy DHLink from other data sources</strong>.<br /><br /><ac:image><ri:attachment ri:filename="Copy DHlinks from other data sources.PNG"><ri:page ri:space-key="CDH2024x" ri:content-title="DOORS Baseline Data Sources" /></ri:attachment></ac:image><br /><br /></li><li>The <strong>Copy DHLink from other data source</strong> dialog opens. From the drop-down list, choose the Data Source you want to copy the DHLink from.<br /><br /><ac:image><ri:attachment ri:filename="Copi DHLinks Dialog box.PNG"><ri:page ri:space-key="CDH2024x" ri:content-title="DOORS Baseline Data Sources" /></ri:attachment></ac:image><br /><br /></li><li>Click <strong>OK</strong>. The DHLink will be copied to the new Baseline Data Source.<br /><br /><ac:image><ri:attachment ri:filename="DHLinks_Copied.PNG"><ri:page ri:space-key="CDH2024x" ri:content-title="DOORS Baseline Data Sources" /></ri:attachment></ac:image></li></ol>
+````
+
+<!--NOMAGIC_PAGE id=136715939 space=CDH2024x version=1 -->
+## PAGE 00077: Driver deployment
+
+- page_id: `136715939`
+- space_key: `CDH2024x`
+- source_url: https://docs.nomagic.com/spaces/CDH2024x/pages/136715939/Driver+deployment
+- version_number: 1
+- version_date: `2023-09-21T06:04:20.730+02:00`
+- ancestors: Cameo DataHub Documentation > Getting started > Understanding DataHub user interface
+- labels: []
+
+### NORMALIZED CONTENT
+
+DataHub supports driver deployment for the DOORS client. This enables the DOORS application to activate its DataHub menu items and also allows DataHub to create DOORS Data Sources.
+
+#### NOTE: Note
+
+Note
+
+- Driver deployment copies the DXL script file into the DOORS addin folder and updates the registry for DOORS to recognize the addin path. Therefore, you must run MagicDraw or Cameo products as an administrator to allow these operations during driver deployment.
+- You must close the DOORS application before driver deployment since folders are write-protected when the application is active.
+
+To deploy the DOORS driver in DataHub
+
+1. From the MagicDraw ® main menu, click Tools > Datahub > Driver Deployment . The Driver Deployment dialog appears. [ATTACHMENT filename='driver-deployment.png']
+2. Select the DOORS version you would like to add and then click [ATTACHMENT filename='add-2.png'] .
+3. A browse dialog opens. You must navigate to the DOORS installation directory to load the driver.
+
+### EXACT CONFLUENCE STORAGE SOURCE
+
+````html
+<p>DataHub supports driver deployment for the DOORS client. This enables the DOORS application to activate its DataHub menu items and also allows DataHub to create DOORS Data Sources.</p><ac:structured-macro ac:name="note" ac:schema-version="1" ac:macro-id="e7022272-4b14-4706-b0a0-9bff07eb067b"><ac:parameter ac:name="title">Note</ac:parameter><ac:rich-text-body><ul><li>Driver deployment copies the DXL script file into the DOORS <strong>addin</strong> folder and updates the registry for DOORS to recognize the <strong>addin</strong> path. Therefore, you must run MagicDraw or Cameo products as an administrator to allow these operations during driver deployment.</li><li>You must close the DOORS application before driver deployment since folders are write-protected when the application is active.</li></ul></ac:rich-text-body></ac:structured-macro><p class="auto-cursor-target"><br /></p><p><br /></p><p>To deploy the DOORS driver in DataHub</p><hr /><ol><li>From the MagicDraw<sup>®</sup> main menu, click <strong>Tools</strong> &gt; <strong>Datahub</strong> &gt; <strong>Driver Deployment</strong>. The <strong>Driver Deployment</strong> dialog appears.<br /><br /><ac:image ac:title="The DataHub driver deployment dialog" ac:alt="The DataHub driver deployment dialog"><ri:attachment ri:filename="driver-deployment.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Driver deployment" /></ri:attachment></ac:image><br /><br /></li><li>Select the DOORS version you would like to add and then click <ac:image><ri:attachment ri:filename="add-2.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Driver deployment" /></ri:attachment></ac:image>.</li><li>A browse dialog opens. You must navigate to the DOORS installation directory to load the driver.</li></ol>
+````
+
+<!--NOMAGIC_PAGE id=136716154 space=CDH2024x version=1 -->
+## PAGE 00078: ENOVIA Requirements
+
+- page_id: `136716154`
+- space_key: `CDH2024x`
+- source_url: https://docs.nomagic.com/spaces/CDH2024x/pages/136716154/ENOVIA+Requirements
+- version_number: 1
+- version_date: `2023-09-21T06:04:27.069+02:00`
+- ancestors: Cameo DataHub Documentation > User Guide > Working with DataHub and modeling tools > Customizing DataHub options
+- labels: []
+
+### NORMALIZED CONTENT
+
+This section explains the ENOVIA Requirements setting in the Cameo DataHub Options dialog.
+
+To configure the****ENOVIA Requirements setting
+
+1. Open the Cameo DataHub Options dialog. [ATTACHMENT filename='ENOVIA Requirements.png']
+2. Go to the ENOVIA Requirements group and update the required options.
+3. Click OK .
+
+The following table explains the****ENOVIA Requirements options in the Cameo DataHub Options dialog.
+
+| Option | Function |
+| --- | --- |
+| Maximum concurrent connection | Takes a numerical value for the maximum number of concurrent connections. |
+| Driver mode | Integrated mode enables you to connect to ENOVIA from the 3DEXPERIENCE menu. DataHub mode enables you to add the ENOVIA data source from the Cameo DataHub Explorer panel. |
+| Use JxBrowser incognito mode | Enables the Incognito mode for the default profile. Incognito mode stores user data, such as browsing history, cookies, and site data in the memory. |
+| Use DataHub JxBrowser | RedObsolete |
+| Use JxBrowser GPU | JxBrowser renders content using GPU (Graphical Processing Unit) and displays it directly. |
+| Use JxBrowser sandbox | If True, JxBrowser supports Chromium Sandbox on Windows. |
+
+### EXACT CONFLUENCE STORAGE SOURCE
+
+````html
+<p>This section explains the ENOVIA Requirements setting in the Cameo DataHub Options dialog.</p><p><br /></p><p> To configure the<strong> </strong>ENOVIA Requirements setting</p><hr /><ol><li>Open the <a href="https://docs.nomagic.com/display/CDH2024x/Customizing+DataHub+options">Cameo DataHub Options</a> dialog.<br /><br /><ac:image><ri:attachment ri:filename="ENOVIA Requirements.png"><ri:page ri:space-key="CDH2024x" ri:content-title="ENOVIA Requirements" /></ri:attachment></ac:image><br /><br /></li><li>Go to the <strong>ENOVIA Requirements </strong>group and update the required options.</li><li>Click <strong>OK</strong>.</li></ol><p><br /></p><p>The following table explains the<strong> </strong>ENOVIA Requirements options in the Cameo DataHub Options dialog.</p><table class="relative-table" style="width: 68.0746%;"><colgroup><col style="width: 20.4032%;" /><col style="width: 79.5968%;" /></colgroup><tbody><tr><th>Option</th><th>Function</th></tr><tr><td colspan="1">Maximum concurrent connection</td><td colspan="1">Takes a numerical value for the maximum number of concurrent connections.</td></tr><tr><td colspan="1">Driver mode</td><td colspan="1">Integrated mode enables you to connect to ENOVIA from the 3DEXPERIENCE menu.  <br />DataHub mode enables you to add the ENOVIA data source from the Cameo DataHub Explorer panel.</td></tr><tr><td colspan="1">Use JxBrowser incognito mode</td><td colspan="1">Enables the Incognito mode for the default profile. Incognito mode stores user data, such as browsing history, cookies, and site data in the memory.</td></tr><tr><td colspan="1">Use DataHub JxBrowser</td><td colspan="1"><div class="content-wrapper"><p><ac:structured-macro ac:name="status" ac:schema-version="1" ac:macro-id="3d2e677c-1721-4ee1-ac48-39ce832d6b2e"><ac:parameter ac:name="colour">Red</ac:parameter><ac:parameter ac:name="title">Obsolete</ac:parameter></ac:structured-macro></p></div></td></tr><tr><td colspan="1">Use JxBrowser GPU</td><td colspan="1">JxBrowser renders content using GPU (Graphical Processing Unit) and displays it directly.</td></tr><tr><td colspan="1">Use JxBrowser sandbox</td><td colspan="1">If True, JxBrowser supports Chromium Sandbox on Windows.</td></tr></tbody></table><p class="auto-cursor-target"><br /></p>
+````
+
+<!--NOMAGIC_PAGE id=136716858 space=CDH2024x version=1 -->
+## PAGE 00079: Excluding some nodes when copying data
+
+- page_id: `136716858`
+- space_key: `CDH2024x`
+- source_url: https://docs.nomagic.com/spaces/CDH2024x/pages/136716858/Excluding+some+nodes+when+copying+data
+- version_number: 1
+- version_date: `2023-09-21T06:05:01.188+02:00`
+- ancestors: Cameo DataHub Documentation > User Guide > Synchronization
+- labels: []
+
+### NORMALIZED CONTENT
+
+The **Copy Data with Sync** operation has been enhanced. It no longer requires you to map the whole set of data before copying data. With the **Copy Data with Sync** operation, DataHub can exclude data types that you do not map when you select [IMAGE alt='' src=''] as the target type and select the **Exclude all unmapped nodes from DHLinks** check box, and these nodes will not be copied. Alternatively, DataHub allows you to create the schema mapping for the selected nodes as **Exclude** by selecting the [IMAGE alt='' src=''] target type. You can also include the portion of data that has been excluded later.
+
+To exclude a portion of data while copying with DHLink
+
+1. From the Operation drop-down list in DataHub Explorer, select Copy Data with Sync . The Copy Data with Sync dialog opens.
+2. Map the data types that you need to copy .
+3. Exclude nodes from being copied by doing one of the following [ATTACHMENT filename='Exclude in Copy Data with Sync Dialog (highlighted).png']
+  - Selecting the [ATTACHMENT filename='Non-mapping.png'] target type and the Exclude all unmapped nodes from DHLinks check box.
+  - Selecting the [ATTACHMENT filename='Excluded.png'] target type.
+4. Click OK to start copying the data. The copied data are indicated with the [ATTACHMENT filename='s-node.png'] symbols, and the data which is not copied are indicated with the [ATTACHMENT filename='x-clude.png'] symbols.
+
+[IMAGE alt='' src='']
+
+To include previously excluded data into a scope set
+
+1. Double-click a node marked with a [ATTACHMENT filename='x-clude.png'] symbol. The DH Links panel appears.
+2. Right-click the relation table and select Include Node .
+
+[IMAGE alt='' src='']
+
+#### INFO: Information
+
+Information
+
+When you synchronize data next time, DataHub will recognize it as a newly added node to the target side.
+
+### EXACT CONFLUENCE STORAGE SOURCE
+
+````html
+<p>The <strong>Copy Data with Sync</strong> operation has been enhanced. It no longer requires you to map the whole set of data before copying data. With the <strong>Copy Data with Sync</strong> operation, DataHub can exclude data types that you do not map when you select <ac:image ac:thumbnail="true" ac:height="18"><ri:attachment ri:filename="Non-mapping.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Excluding some nodes when copying data" /></ri:attachment></ac:image> as the target type and select the <strong>Exclude all unmapped nodes from DHLinks</strong> check box, and these nodes will not be copied. Alternatively, DataHub allows you to create the schema mapping for the selected nodes as <strong>Exclude</strong> by selecting the <ac:image ac:thumbnail="true" ac:height="17"><ri:attachment ri:filename="Excluded.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Excluding some nodes when copying data" /></ri:attachment></ac:image> target type. You can also include the portion of data that has been excluded later.</p><p><br /></p><p>To exclude a portion of data while copying with DHLink</p><hr /><ol><li>From the <strong>Operation</strong> drop-down list in DataHub Explorer, select <strong>Copy Data with Sync</strong>. The <strong>Copy Data with Sync</strong> dialog opens.</li><li><a href="https://docs.nomagic.com/display/CDH2024x/Mapping+source+and+target+types+to+copy+data+to+and+from+a+modeling+tool">Map the data types that you need to copy</a>.</li><li>Exclude nodes from being copied by doing one of the following<br /><br /><ul><li class="auto-cursor-target">Selecting the <ac:image ac:thumbnail="true" ac:height="18"><ri:attachment ri:filename="Non-mapping.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Excluding some nodes when copying data" /></ri:attachment></ac:image> target type and the <strong>Exclude all unmapped nodes from DHLinks</strong> check box.</li><li class="auto-cursor-target">Selecting the <ac:image ac:thumbnail="true" ac:height="17"><ri:attachment ri:filename="Excluded.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Excluding some nodes when copying data" /></ri:attachment></ac:image>target type.</li></ul><br /><ac:image><ri:attachment ri:filename="Exclude in Copy Data with Sync Dialog (highlighted).png"><ri:page ri:space-key="CDH2024x" ri:content-title="Excluding some nodes when copying data" /></ri:attachment></ac:image><br /><br /></li><li>Click <strong>OK </strong>to start copying the data. The copied data are indicated with the <ac:image><ri:attachment ri:filename="s-node.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Excluding some nodes when copying data" /></ri:attachment></ac:image> symbols, and the data which is not copied are indicated with the <ac:image><ri:attachment ri:filename="x-clude.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Excluding some nodes when copying data" /></ri:attachment></ac:image> symbols.<br /><br /></li></ol><p style="margin-left: 30.0px;"><ac:image><ri:attachment ri:filename="Exclude in DH Explorer Tree (Highlighted).png"><ri:page ri:space-key="CDH2024x" ri:content-title="Excluding some nodes when copying data" /></ri:attachment></ac:image><br /><br /><br /></p><p>To include previously excluded data into a scope set</p><hr /><ol><li>Double-click a node marked with a <ac:image><ri:attachment ri:filename="x-clude.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Excluding some nodes when copying data" /></ri:attachment></ac:image> symbol. The <strong>DH Links </strong>panel appears.</li><li>Right-click the relation table and select <strong>Include Node</strong>.</li></ol><p style="margin-left: 30.0px;"><ac:image><ri:attachment ri:filename="worddavf35042654464548804c64111c9aebecf.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Excluding some nodes when copying data" /></ri:attachment></ac:image><br /><br /></p><ac:structured-macro ac:name="info" ac:schema-version="1" ac:macro-id="19aadcfd-b40c-4815-aa50-24d490721a9f"><ac:parameter ac:name="title">Information</ac:parameter><ac:rich-text-body><p>When you synchronize data next time, DataHub will recognize it as a newly added node to the target side.</p></ac:rich-text-body></ac:structured-macro><p class="auto-cursor-target"><br /></p>
+````
+
+<!--NOMAGIC_PAGE id=136716934 space=CDH2024x version=1 -->
+## PAGE 00080: Exporting a schema map as a new template
+
+- page_id: `136716934`
+- space_key: `CDH2024x`
+- source_url: https://docs.nomagic.com/spaces/CDH2024x/pages/136716934/Exporting+a+schema+map+as+a+new+template
+- version_number: 1
+- version_date: `2023-09-21T06:05:04.616+02:00`
+- ancestors: Cameo DataHub Documentation > User Guide > Schema Mapping
+- labels: []
+
+### NORMALIZED CONTENT
+
+To export a schema map as a new template
+
+1. On the main menu, click Tools > DataHub > Schema Map Manager . The Schema Map Manager dialog opens. There are some properties with pre-mappings. [ATTACHMENT filename='Schema_Map_Manager.png']
+2. Click Export . The Export Schema Map Wizard appears. [ATTACHMENT filename='Export Schema Map Wizard.png']
+3. Select the source and target driver of the map and click Next .
+4. Do one of the following:
+  - If any maps are not attribute-defined, select the box(es) in front of the maps and click the selected map to choose the type object, e.g., DOORS, to change it to a generic type. Click Next . [ATTACHMENT filename='Non-attribute Map.png']
+  - If any maps are attribute-defined, select all the box(es) in front of the maps that contain defined attributes and click the selected map to choose the type object, e.g., DOORS, to change it to a generic type. Click Next . [ATTACHMENT filename='Attribute-defined Map.png']
+5. Name the schema and the exported file. Click Finish . [ATTACHMENT filename='Naming Schema.png']
+
+To import a schema map
+
+1. On the main menu, click Tools > DataHub > Schema Map Manager . The Schema Map Manager dialog opens.
+2. Click Import and choose the schema map file. The template will be updated with the new mapping.
+
+[IMAGE alt='' src='']
+
+###### The updated template with the new mapping and without defined attributes.
+
+[IMAGE alt='' src='']
+
+###### The updated template with the new attribute-defined mapping.
+
+### EXACT CONFLUENCE STORAGE SOURCE
+
+````html
+<p>To export a schema map as a new template</p><hr /><ol><li>On the main menu, click <strong>Tools</strong> &gt; <strong>DataHub</strong> &gt; <strong>Schema Map Manager</strong>. The Schema Map Manager dialog opens. There are some properties with pre-mappings.<br /><br /><ac:image><ri:attachment ri:filename="Schema_Map_Manager.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Exporting a schema map as a new template" /></ri:attachment></ac:image><br /><br /></li><li>Click <strong>Export</strong>. The Export Schema Map Wizard appears.<br /><br /><ac:image><ri:attachment ri:filename="Export Schema Map Wizard.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Exporting a schema map as a new template" /></ri:attachment></ac:image><br /><br /></li><li>Select the source and target driver of the map and click <strong>Next</strong>.</li><li>Do one of the following:<br /><br /><ul><li>If any maps are not attribute-defined, select the box(es) in front of the maps and click the selected map to choose the type object, e.g., DOORS, to change it to a generic type. Click <strong>Next</strong>.<br /><br /><ac:image><ri:attachment ri:filename="Non-attribute Map.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Exporting a schema map as a new template" /></ri:attachment></ac:image><br /><br /></li><li>If any maps are attribute-defined, select all the box(es) in front of the maps that contain defined attributes and click the selected map to choose the type object, e.g., DOORS, to change it to a generic type. Click <strong>Next</strong>.<br /><br /><ac:image><ri:attachment ri:filename="Attribute-defined Map.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Exporting a schema map as a new template" /></ri:attachment></ac:image><br /><br /></li></ul></li><li>Name the schema and the exported file. Click <strong>Finish</strong>.<br /><br /><ac:image><ri:attachment ri:filename="Naming Schema.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Exporting a schema map as a new template" /></ri:attachment></ac:image></li></ol><p><br /></p><p>To import a schema map</p><hr /><ol><li>On the main menu, click <strong>Tools</strong> &gt; <strong>DataHub</strong> &gt; <strong>Schema Map Manager</strong>. The <strong>Schema Map Manager</strong> dialog opens.</li><li>Click <strong>Import</strong> and choose the schema map file. The template will be updated with the new mapping.</li></ol><p><br /><ac:image ac:align="center"><ri:attachment ri:filename="maptemplate05.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Exporting a schema map as a new template" /></ri:attachment></ac:image></p><h6 style="text-align: center;">The updated template with the new mapping and without defined attributes.</h6><p><ac:image ac:align="center"><ri:attachment ri:filename="Attribute-defined Template.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Exporting a schema map as a new template" /></ri:attachment></ac:image></p><h6 style="text-align: center;">The updated template with the new attribute-defined mapping.</h6>
+````
+
+<!--NOMAGIC_PAGE id=136716640 space=CDH2024x version=1 -->
+## PAGE 00081: Exporting schema maps
+
+- page_id: `136716640`
+- space_key: `CDH2024x`
+- source_url: https://docs.nomagic.com/spaces/CDH2024x/pages/136716640/Exporting+schema+maps
+- version_number: 1
+- version_date: `2023-09-21T06:04:55.292+02:00`
+- ancestors: Cameo DataHub Documentation > User Guide > Working with DataHub and modeling tools > Requirement Mapping
+- labels: []
+
+### NORMALIZED CONTENT
+
+When you have copied some data with types and attributes mappings, DataHub stores the mappings between the types and attributes. If you set them as the default mappings, DataHub maps the source node with the target node automatically the next time you copy data or create DHLinks. You can edit those mappings later in the **[Schema Map Manager](https://docs.nomagic.com/display/CDH2024x/Mapping+with+Schema+Map+Manager)** dialog.
+
+With the **Export Schema Map** **Wizard**, you can export an existing schema map to an XML file by selecting a particular schema map from a Data Source in the selected driver.
+
+To export a schema map
+
+1. Open the Cameo DataHub [Schema Map Manager](https://docs.nomagic.com/display/CDH2024x/Mapping+with+Schema+Map+Manager) dialog and click [IMAGE alt='' src=''] . The Export Schema Map Wizard dialog opens. In the Source Driver and Target Driver sections, select the source and target Data Source that you want to export its mapping. Click [IMAGE alt='' src=''] . [ATTACHMENT filename='export-schema-map-a.png']
+2. Select the data types that you want to export their mappings and click [IMAGE alt='' src=''] . [ATTACHMENT filename='export-schema-map-b.png']
+3. Type the name and description of the schema map. [ATTACHMENT filename='export-schema-map-c.png']
+4. Click [ATTACHMENT filename='btn3.png'] to select a location to save the file.
+5. Click [ATTACHMENT filename='finish-btn.png'] to export the schema map.
+
+### EXACT CONFLUENCE STORAGE SOURCE
+
+````html
+<p>When you have copied some data with types and attributes mappings, DataHub stores the mappings between the types and attributes. If you set them as the default mappings, DataHub maps the source node with the target node automatically the next time you copy data or create DHLinks. You can edit those mappings later in the <strong><a href="https://docs.nomagic.com/display/CDH2024x/Mapping+with+Schema+Map+Manager">Schema Map Manager</a></strong> dialog.</p><p>With the <strong>Export Schema Map</strong> <strong>Wizard</strong>, you can export an existing schema map to an XML file by selecting a particular schema map from a Data Source in the selected driver.</p><p><br /></p><p>To export a schema map</p><hr /><ol><li>Open the <strong>Cameo DataHub <a href="https://docs.nomagic.com/display/CDH2024x/Mapping+with+Schema+Map+Manager">Schema Map Manager</a></strong> dialog and click <strong><ac:image><ri:attachment ri:filename="export-btn.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Exporting schema maps" /></ri:attachment></ac:image></strong>. The <strong>Export Schema Map Wizard</strong> dialog opens. In the <strong>Source Driver</strong> and <strong>Target Driver</strong> sections, select the source and target Data Source that you want to export its mapping. Click <strong><ac:image><ri:attachment ri:filename="next-btn.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Exporting schema maps" /></ri:attachment></ac:image></strong>.<br /><br /><ac:image ac:title="Export Schema Map Wizard Dialog" ac:alt="Export Schema Map Wizard Dialog"><ri:attachment ri:filename="export-schema-map-a.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Exporting schema maps" /></ri:attachment></ac:image><br /><br /></li><li>Select the data types that you want to export their mappings and click <strong><ac:image><ri:attachment ri:filename="next-btn.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Exporting schema maps" /></ri:attachment></ac:image></strong>.<br /><br /><ac:image ac:title="Select the Existing Schema Map to be Exported" ac:alt="Select the Existing Schema Map to be Exported"><ri:attachment ri:filename="export-schema-map-b.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Exporting schema maps" /></ri:attachment></ac:image><br /><br /></li><li>Type the name and description of the schema map.<br /><br /><ac:image ac:title="Exporting a Schema Map to local file in xml format" ac:alt="Exporting a Schema Map to local file in xml format"><ri:attachment ri:filename="export-schema-map-c.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Exporting schema maps" /></ri:attachment></ac:image><br /><br /></li><li>Click <ac:image><ri:attachment ri:filename="btn3.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Exporting schema maps" /></ri:attachment></ac:image> to select a location to save the file.</li><li>Click <ac:image><ri:attachment ri:filename="finish-btn.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Exporting schema maps" /></ri:attachment></ac:image>to export the schema map.</li></ol>
+````
+
+<!--NOMAGIC_PAGE id=136715931 space=CDH2024x version=1 -->
+## PAGE 00082: Exporting schema maps as new templates
+
+- page_id: `136715931`
+- space_key: `CDH2024x`
+- source_url: https://docs.nomagic.com/spaces/CDH2024x/pages/136715931/Exporting+schema+maps+as+new+templates
+- version_number: 1
+- version_date: `2023-09-21T06:04:20.557+02:00`
+- ancestors: Cameo DataHub Documentation > Getting started > Understanding DataHub user interface > Schema map and mapping options
+- labels: []
+
+### NORMALIZED CONTENT
+
+You can now export the previously defined mappings of particular modules as new templates for Rational DOORS Data Sources to be effective when importing new modules.
+
+DataHub usually provides mapping template, e.g., the pre-mappings between DOORS objects and SysML Requirements with some properties mapped. However, you can now export the mappings done with a particular module to be a template. Therefore, when you import a new module, the new template is used.
+
+To export a schema map as a new template
+
+1. On the main menu, click Tools > DataHub > Schema Map Manager . The Schema Map Manager dialog opens. There are some properties with pre-mappings. [ATTACHMENT filename='Schema_Map_Manager.png']
+2. Click Export . The Export Schema Map Wizard appears. [ATTACHMENT filename='maptemplate03.png']
+3. Select the source and target driver of the map and click Next .
+4. Select the box(es) in front of the maps and click the selected map to choose the DOORS type object to change it to a generic type. Click Next . [ATTACHMENT filename='maptemplate04.png']
+5. Name the schema and the exported file. Click Finish . [ATTACHMENT filename='Exporting Schema.png']
+
+To import a schema map
+
+1. On the main menu, click Tools > DataHub > Schema Map Manager . The Schema Map Manager dialog opens.
+2. Click Import and choose the schema map file. The template will be updated with the new mapping. [ATTACHMENT filename='Schema_Map_Manager.png']
+
+### EXACT CONFLUENCE STORAGE SOURCE
+
+````html
+<p>You can now export the previously defined mappings of particular modules as new templates for Rational DOORS Data Sources to be effective when importing new modules.</p><p>DataHub usually provides mapping template, e.g., the pre-mappings between DOORS objects and SysML Requirements with some properties mapped. However, you can now export the mappings done with a particular module to be a template. Therefore, when you import a new module, the new template is used.</p><p><br /></p><p>To export a schema map as a new template</p><hr /><ol><li>On the main menu, click <strong>Tools</strong> &gt; <strong>DataHub</strong> &gt; <strong>Schema Map Manager</strong>. The <strong>Schema Map Manager</strong> dialog opens. There are some properties with pre-mappings.<br /><br /><ac:image><ri:attachment ri:filename="Schema_Map_Manager.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Exporting schema maps as new templates" /></ri:attachment></ac:image><br /><br /></li><li>Click <strong>Export</strong>. The <strong>Export Schema Map Wizard</strong> appears.<br /><br /><ac:image><ri:attachment ri:filename="maptemplate03.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Exporting schema maps as new templates" /></ri:attachment></ac:image><br /><br /></li><li>Select the source and target driver of the map and click <strong>Next</strong>.</li><li>Select the box(es) in front of the maps and click the selected map to choose the DOORS type object to change it to a generic type. Click <strong>Next</strong>.<br /><br /><ac:image><ri:attachment ri:filename="maptemplate04.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Exporting schema maps as new templates" /></ri:attachment></ac:image><br /><br /></li><li>Name the schema and the exported file. Click <strong>Finish</strong>.<br /><br /><ac:image><ri:attachment ri:filename="Exporting Schema.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Exporting schema maps as new templates" /></ri:attachment></ac:image></li></ol><p><br /></p><p>To import a schema map</p><hr /><ol><li>On the main menu, click <strong>Tools</strong> &gt; <strong>DataHub</strong> &gt; <strong>Schema Map Manager</strong>. The <strong>Schema Map Manager</strong> dialog opens.</li><li>Click <strong>Import</strong> and choose the schema map file. The template will be updated with the new mapping.<br /><br /><ac:image><ri:attachment ri:filename="Schema_Map_Manager.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Exporting schema maps as new templates" /></ri:attachment></ac:image></li></ol>
+````
+
+<!--NOMAGIC_PAGE id=136716174 space=CDH2024x version=1 -->
+## PAGE 00083: Filtering inactive Data Sources
+
+- page_id: `136716174`
+- space_key: `CDH2024x`
+- source_url: https://docs.nomagic.com/spaces/CDH2024x/pages/136716174/Filtering+inactive+Data+Sources
+- version_number: 1
+- version_date: `2023-09-21T06:04:28.145+02:00`
+- ancestors: Cameo DataHub Documentation > User Guide > Working with DataHub and modeling tools > Working with the DataHub Explorer tree
+- labels: []
+
+### NORMALIZED CONTENT
+
+To filter out an inactive Data Source
+
+- On the DataHub Explorer toolbar, click the Filter inactive data sources [ATTACHMENT filename='dh-inactive-ds-filter.png'] button.
+
+### EXACT CONFLUENCE STORAGE SOURCE
+
+````html
+<p>To filter out an inactive Data Source</p><hr /><ul><li>On the <strong>DataHub Explorer</strong> toolbar, click the <strong>Filter inactive data sources</strong> <ac:image><ri:attachment ri:filename="dh-inactive-ds-filter.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Filtering inactive Data Sources" /></ri:attachment></ac:image>button.</li></ul>
+````
+
+<!--NOMAGIC_PAGE id=136716131 space=CDH2024x version=1 -->
+## PAGE 00084: General
+
+- page_id: `136716131`
+- space_key: `CDH2024x`
+- source_url: https://docs.nomagic.com/spaces/CDH2024x/pages/136716131/General
+- version_number: 1
+- version_date: `2023-09-21T06:04:26.089+02:00`
+- ancestors: Cameo DataHub Documentation > User Guide > Working with DataHub and modeling tools > Customizing DataHub options
+- labels: []
+
+### NORMALIZED CONTENT
+
+DataHub allows you to select default options for mapping type and policy, filter, and synchronization in the General environment option group.
+
+To modify the DataHub****General environment options
+
+1. Open Cameo DataHub environment options . [ATTACHMENT filename='Environment_Options_CDH_General.png']
+2. Open the General option group and update the required options.
+3. Click OK .
+
+The following table explains the details of Cameo DataHub options in the General option group
+
+| Option | Function |
+| --- | --- |
+| Synchronize data when saving project | Enables automatic synchronization with MagicDraw® when you save a project. |
+| Set the Group Type Mapping as the default mapping | Sets the default mapping to group type mapping when copying data. |
+| Filter a MagicDraw data source from the DataHub explorer | Hides the display of MagicDraw® Data Sources in DataHub Explorer and shows the Data Sources when cleared. |
+| Auto layout when copy to diagram | The diagram layout is adjusted automatically to fit the newly added element. |
+| Show copy dialog when import | If True, opens the Copy Data with Sync dialog while importing the data. |
+| Mapping policy | Shows options for displaying the mapping dialog that you can select in the drop-down list, as follows:Always show the mapping dialogShow mapping for elements without default mappingShow mapping for elements that cannot be automatically mappedShow mapping for elements with an unknown data typeTreat no-default mapping element as exclude. |
+| Database Compression Algorithm | Enables you to choose a compression engine to compress project files to reduce the model size. You can choose between Zip and BZip2 engines. |
+| Save HTML images from the data source in the project as attached files | Saves HTML images from the data source in the project as attached files. |
+
+### EXACT CONFLUENCE STORAGE SOURCE
+
+````html
+<p>DataHub allows you to select default options for mapping type and policy, filter, and synchronization in the General environment option group.</p><p><br /></p><p>To modify the DataHub<strong> </strong>General environment options</p><hr /><ol><li>Open <a href="https://docs.nomagic.com/display/CDH2024x/Customizing+DataHub+options" rel="nofollow">Cameo DataHub environment options</a>.<br /><br /><ac:image><ri:attachment ri:filename="Environment_Options_CDH_General.png"><ri:page ri:space-key="CDH2024x" ri:content-title="General" /></ri:attachment></ac:image><br /><br /></li><li>Open the <strong>General</strong> option group and <span style="color: rgb(62,63,64);">update the required options.</span></li><li>Click <strong>OK</strong>.</li></ol><p style="margin-left: 30.0px;"><br /></p><p style="margin-left: 30.0px;">The following table explains the details of Cameo DataHub options in the General option group</p><table class="relative-table" style="margin-left: 30.0px;width: 92.9828%;"><colgroup><col style="width: 40.5751%;" /><col style="width: 59.4588%;" /></colgroup><tbody><tr><th style="margin-left: 30.0px;">Option</th><th>Function</th></tr><tr><td>Synchronize data when saving project</td><td>Enables automatic synchronization with MagicDraw<sup>®</sup> when you save a project.</td></tr><tr><td>Set the Group Type Mapping as the default mapping</td><td><p>Sets the default mapping to group type mapping when copying data.</p></td></tr><tr><td>Filter a MagicDraw data source from the DataHub explorer</td><td>Hides the display of MagicDraw<sup>®</sup> Data Sources in DataHub Explorer and shows the Data Sources when cleared.</td></tr><tr><td colspan="1">Auto layout when copy to diagram</td><td colspan="1">The diagram layout is adjusted automatically to fit the newly added element. </td></tr><tr><td colspan="1">Show copy dialog when import</td><td colspan="1">If True, opens the Copy Data with Sync dialog while importing the data.</td></tr><tr><td>Mapping policy</td><td><p>Shows options for displaying the mapping dialog that you can select in the drop-down list, as follows:</p><ul><li>Always show the mapping dialog</li><li>Show mapping for elements without default mapping</li><li>Show mapping for elements that cannot be automatically mapped</li><li>Show mapping for elements with an unknown data type</li><li>Treat no-default mapping element as exclude.</li></ul></td></tr><tr><td colspan="1">Database Compression Algorithm</td><td colspan="1">Enables you to choose a compression engine to compress project files to reduce the model size. You can choose between Zip and BZip2 engines.</td></tr><tr><td colspan="1">Save HTML images from the data source in the project as attached files</td><td colspan="1"><span>Saves HTML images from the data source in the project as attached files.</span></td></tr></tbody></table><p class="auto-cursor-target"><br /></p>
+````
+
+<!--NOMAGIC_PAGE id=136715825 space=CDH2024x version=1 -->
+## PAGE 00085: Getting started
+
+- page_id: `136715825`
+- space_key: `CDH2024x`
+- source_url: https://docs.nomagic.com/spaces/CDH2024x/pages/136715825/Getting+started
+- version_number: 1
+- version_date: `2023-09-21T06:04:18.239+02:00`
+- ancestors: Cameo DataHub Documentation
+- labels: []
+
+### NORMALIZED CONTENT
+
+This user guide is intended to serve as an introduction to the Cameo DataHub features and functionality and how to use it to work with requirement management tools such as IBM® Rational® DOORS® and IBM® Rational® DOORS® Next Generation. This user guide also contains examples of how to use the DataHub features of copying data, linking, and synchronization. You will be able to copy requirements, link them to one another, as well as link them to system design models such as Use Cases, artifacts, and test cases. Additionally, the DataHub also supports working with requirements in a collaborative context by providing data sharing among team members via [CONFLUENCE_PAGE title='Teamwork Cloud Documentation' space='TWCloud2024x'].
+
+This user guide is an introduction to the UI components of DataHub and some of its features. The last section of this user guide provides the definitions of the terms used in the DataHub context. The features of the plug-in that are explained in this user guide includes: User Interface, copy features, *OSLC* link and query, and DataHub configuration elements.
+
+### EXACT CONFLUENCE STORAGE SOURCE
+
+````html
+<p>This user guide is intended to serve as an introduction to the Cameo DataHub features and functionality and how to use it to work with requirement management tools such as IBM<sup>®</sup> Rational<sup>®</sup> DOORS<sup>®</sup> and IBM<sup>®</sup> Rational<sup>®</sup> DOORS<sup>®</sup> Next Generation. This user guide also contains examples of how to use the DataHub features of copying data, linking, and synchronization. You will be able to copy requirements, link them to one another, as well as link them to system design models such as Use Cases, artifacts, and test cases. Additionally, the DataHub also supports working with requirements in a collaborative context by providing data sharing among team members via <ac:link><ri:page ri:space-key="TWCloud2024x" ri:content-title="Teamwork Cloud Documentation" /><ac:plain-text-link-body><![CDATA[Teamwork Cloud]]></ac:plain-text-link-body></ac:link>.</p><p>This user guide is an introduction to the UI components of DataHub and some of its features. The last section of this user guide provides the definitions of the terms used in the DataHub context. The features of the plug-in that are explained in this user guide includes: <ac:inline-comment-marker ac:ref="bc84481a-3f7c-4b68-8da7-9e5dd9d68ed7">User Interface</ac:inline-comment-marker>, copy features, <em>OSLC</em> link and query, and DataHub configuration elements.</p><p><br /></p>
+````
+
+<!--NOMAGIC_PAGE id=136716965 space=CDH2024x version=2 -->
+## PAGE 00086: Glossary
+
+- page_id: `136716965`
+- space_key: `CDH2024x`
+- source_url: https://docs.nomagic.com/spaces/CDH2024x/pages/136716965/Glossary
+- version_number: 2
+- version_date: `2026-02-11T08:06:08.939+01:00`
+- ancestors: Cameo DataHub Documentation
+- labels: []
+
+### NORMALIZED CONTENT
+
+##### Alias
+
+Alias is a name that is assigned to a node in the DataHub Explorer tree or MagicDraw® Containment area tree. This node can then be accessed or removed via the [CONFLUENCE_PAGE title='Alias Manager' space='']**Alias Manager** dialog.
+
+##### Artifact
+
+An artifact is a kind of tangible by-products produced during software development. Some artifacts, e.g., Use Cases, Class diagrams, and other Unified Modeling Language (UML) models, and requirements and design documents, help describe the function, architecture, and design of software. Other artifacts are concerned with the process of development itself, e.g., project plans, business cases, and risk assessments.
+
+##### Bidirectional
+
+A source-to-target link. A bidirectional link will update both source and target nodes.
+
+##### Data
+
+Data refers to an item whose specific format enables it to be synchronized with and referenced to and from another data. Data can be a MagicDraw® element or relation, a DOORS node or relation, or a CSV row.
+
+##### DataHub operations
+
+You can use DataHub operations to copy data, copy data with sync, create OSLC Link, copy data and create DHTrace, or create DHTrace. The table below describes the functions of the DataHub operations.
+
+| Operation | Function |
+| --- | --- |
+| Copy Data | To copy data without creating any DHLinks. |
+| Copy Data With Sync | To copy data and create a DHLink for synchronization. |
+| Copy Data with DHTrace | To copy data and also create DHTrace links between source and target. |
+| Create DHTrace | To create only a DHTrace link without any data. |
+| Create OSLC Link | To create an OSLC Link. |
+
+##### DataHub tree
+
+A DataHub tree refers to a tree structure designed to show drivers, Data Sources, and items of the connected Data Sources in DataHub. The tree within DataHub Explorer has two top levels: DataHub and Data Sources respectively. The tree consists of four drivers (MagicDraw®, DOORS, DOORS Next Generation, and CSV) and each driver, except DOORS, has one or more Data Sources.
+
+##### Data Source
+
+A Data Source refers to the project path of an application. A Data Source can be any of the following
+
+- MagicDraw ® project
+- IBM ® Rational ® DOORS ® client
+- IBM ® Rational ® DOORS ® Next Generation client
+- CSV file
+
+An application can have more than one Data Source. Each Data Source refers to a specific project path and has a unique Data Source ID.
+
+You can connect DataHub to the following applications
+
+- MagicDraw ®
+- IBM ® Rational ® DOORS ®
+- IBM ® Rational ® DOORS ® Next Generation
+- Data repository in the CSV format.
+
+##### DHTrace
+
+The DHTrace relationship is a specialization of a Dependency, connecting model elements or sets of elements that represent the same concept across models. A DHTrace is often used to track requirements and model changes, typically in the Traceability diagram, a Class, Use Case, Object, or the Composite Structure diagram.
+
+As changes can occur in both directions, the order of this Dependency is usually ignored. The properties of the relationship can specify the DHTrace mapping, but the DHTrace is usually bidirectional, informal, and rarely computable.
+
+##### Driver
+
+A driver refers to a connector to either an application or to a file. Each driver has a unique Driver ID. There are three applications (MagicDraw®, DOORS, and Excel) and one data repository in the CSV format. Each application uses a specific driver. For example, the *DOORS* driver connects to *DOORS* and *DOORS* Next Generation driver connects to *DOORS* Next Generation.
+
+##### Excluded
+
+Excluded refers to the status of an ignored node only in Sync relations. The excluded nodes depend on the Sync relation that one node can have both Excluded and the other synchronization status.
+
+##### Global ID
+
+A global ID consists of a Driver ID, Data Source ID, Type ID, and Item ID arranged in order and separated by a delimiter “/”. Each item or item type in the DataHub tree has a unique global ID.
+
+##### HP Application Lifecycle Management (HP ALM)
+
+HP ALM is a set of software tools developed and marketed by theHP Software Divisionfor application development and application testing. It includes tools forrequirements management,test planningandfunctional testing,performance testing, developer managementand defect management.
+
+##### Item
+
+An item refers to a particular element in the DataHub tree. Each item has a unique item ID. Elements such as drivers, data sources, folders, packages, DOORS formal modules, requirements (data), and relationships (links) in the DataHub Explorer tree are called items. A node may have nested children as items.
+
+refers to an item whose specific format enables it to be synchronized with and traced to and from another data.
+
+A is an item whose specific format can link one data to another and also enables it to be synchronized with other links.
+
+##### Item type
+
+An item type consists of a list of properties. For example, a SysML Requirement type consists of two properties (ID and Text). Thus, every item with the same item type shares the same property list. An item type can be a driver type, Data Source type, IBM DOORS requirement type, MagicDraw® stereotype, or CSV column. Each item type has a unique Type ID.
+
+##### Link
+
+A link is an item whose specific format can link one data to another and also enables it to be synchronized with other links. A link can only be a MagicDraw® relationship, an IBM® Rational® DOORS® link, or an OSLC Link. Unlike data, links can only be synchronized. A link is also a URI reference from one resource, subject, or source to another resource, and can be an object or target. In RDF and OSLC, we use links to model relationships. Links are unidirectional like relationships.
+
+##### Mapping mode
+
+DataHub has two types of mapping, **Individual Type Mapping** and **Group Type Mapping**. The**Individual Type Mapping** shows the same node structure as the dragged nodes, and you need to map each source node to each target node. The **Group Type Mapping** groups nodes according to their types and allows you to map a source type to a target type.
+
+##### Module
+
+A DOORS container which may contain hierarchically arranged sub-modules. Typically, this is a requirement specification tree.
+
+##### Node
+
+A node is like a leaf in a tree. It represents a distinct point within the tree structure. A node can have children or be a child itself.
+
+##### Orphan
+
+Orphan refers to the status of an updated item that attempts to synchronize to the other side of the relation that has been deleted.
+
+##### OSLC
+
+DataHub, as of this version facilitates OSLC queries. Open Services for Lifecycle Collaboration (OSLC) is an open community creating specifications for integrating tools. The goal of OSLC is to create specifications for interactions between tools.
+
+In OSLC, each artifact in the lifecycle, e.g., a requirement, defect, test case, source file, or development plan, is an HTTP resource that is manipulated using the standard methods of the HTTP specification (GET, PUT, POST, DELETE).
+
+##### OSLC link
+
+The OSLC specification defines relationships, which can be modeled as links. 
+Types of unidirectional links supported include *affectedBy, constrainedBy, constrains, decomposedBy, decomposes, eleborates, elaboratedBy, implementedBy*, and*satisfiedBy*.
+
+##### OSLC query
+
+DataHub supports two types of OSLC queries - basic query and advanced query. The basic query is a simple text based on searching, while the advanced query syntax follows SQL or SPARQL.
+
+##### PendingDelete
+
+PendingDelete refers to the status of an item that occurs because one or more related items have been deleted. The PendingDelete status is similar to the Orphan status, but the PendingDelete occurs at synchronization.
+
+##### PendingUpdate
+
+PendingUpdate refers to the status of an item that occurs because one or more related items have been updated (changes have been made to the item(s)). Items in the PendingUpdate status can be either accepted to update the properties or discarded.
+
+##### Recursively
+
+When this option is chosen, all the child nodes under the selected node are included. Otherwise, only a single element is processed.
+
+##### Relationship
+
+A relationship exists between two resources when there is something that connects them. The two resources work together, belong together, are similar, or should be considered together. There are different types of relationships.
+
+##### Requirements traceability
+
+Requirements traceability is concerned with documenting the life of a requirement and providing bidirectional traceability between various associated requirements. It enables you to find the origin of each requirement and track every change that has been made to this requirement.
+
+Requirements include design artifacts, implementation, and are finally verified. The artifacts tied to the latter stages can be traced back to the requirements as well. This is typically done via a Requirements Traceability matrix.
+
+##### Schema map
+
+A schema Map refers to the mapping of attributes between the source and target types. The source and target types can be identical or different. Apart from mapping, you can also use schema maps to copy items from different item types and update them for attribute synchronization.
+
+The table below is an example of attribute mapping between MagicDraw® and the DOORS formal module.
+
+| MagicDraw® SysML requirements | Functional requirements module |
+| --- | --- |
+| Name | Object Heading |
+| Id | Object Identifier |
+| Text | Object Text |
+
+##### Status
+
+Status refers to the status of an association item. The status of an item varies depending on the association type (**Sync DHLink** or **DHTrace**). If the association type is a **Sync DHLink**, the item status will be **Synchronized**, **PendingUpdate**, **PendingDelete**, **Excluded**, or **Orphan**. If it is a trace, its status might be **Suspect**.
+
+##### Synchronized
+
+Synchronized refers to the status of relations that the related nodes need to be the same as the other side or the status of an item that does not have any pending changes.
+
+##### Sync relation
+
+DHLink synchronizations are associations between data in both source and target items. Items with DHLink can synchronize one another. DHLink synchronization is available in the **Operation** drop-down list in DataHub Explorer. 
+There are two kinds of DHLink: Unidirectional and bidirectional.
+
+- Unidirectional DHLink synchronization is either from a source to a target or vice-versa. Data is synchronized in only one direction and not both directions.
+- Bidirectional DHLink synchronization refers to two-way synchronization. When the data in the source is updated, the data in the target item will be updated as well and vice versa. When you synchronize data with bidirectional DHLink synchronization, DataHub will establish the consistency in data hierarchy of both items.
+
+If two data items have an Association, they can be open from one another.
+
+##### System model
+
+A system model is the conceptual model that describes and represents a system. A system is comprised of multiple views such as planning, requirement (analysis), design, implementation, deployment, structure, behavior, input data, and output data views. A system model must describe and represent all these multiple views.
+
+##### Unidirectional
+
+This is a one-way synchronization either from a source to a target or from a target to a source. Unidirectional synchronization changes only one side of the source and target.
+
+### EXACT CONFLUENCE STORAGE SOURCE
+
+````html
+<h3>Alias</h3><p><span style="color:var(--ds-text,#333333);">Alias is a name that is assigned to a node in the DataHub Explorer tree or MagicDraw<sup>®</sup> Containment area tree. This node can then be accessed or removed via the <ac:link><ri:page ri:content-title="Alias Manager" /><ac:link-body><strong>Alias Manager</strong></ac:link-body></ac:link> dialog.</span></p><h3>Artifact</h3><p>An artifact is a kind of tangible by-products produced during software development. Some artifacts, e.g., Use Cases, Class diagrams, and other Unified Modeling Language (UML) models, and requirements and design documents, help describe the function, architecture, and design of software. Other artifacts are concerned with the process of development itself, e.g., project plans, business cases, and risk assessments.</p><h3>Bidirectional</h3><p>A source-to-target link. A bidirectional link will update both source and target nodes.</p><h3>Data</h3><p>Data refers to an item whose specific format enables it to be synchronized with and referenced to and from another data. Data can be a MagicDraw<sup>®</sup> element or relation, a DOORS node or relation, or a CSV row.</p><h3>DataHub operations</h3><p>You can use DataHub operations to copy data, copy data with sync, create OSLC Link, copy data and create DHTrace, or create DHTrace. The table below describes the functions of the DataHub operations.</p><table class="relative-table" style="width: 58.2885%;"><colgroup class=""><col class="" style="width: 25.9981%;" /><col class="" style="width: 74.0501%;" /></colgroup><tbody class=""><tr class=""><th>Operation</th><th>Function</th></tr><tr class=""><td><strong>Copy Data</strong></td><td>To copy data without creating any DHLinks.</td></tr><tr class=""><td><strong>Copy Data With Sync</strong></td><td>To copy data and create a DHLink for synchronization.</td></tr><tr class=""><td colspan="1"><strong>Copy Data with DHTrace</strong></td><td colspan="1">To copy data and also create DHTrace links between source and target.</td></tr><tr class=""><td colspan="1"><strong>Create DHTrace</strong></td><td colspan="1">To create only a DHTrace link without any data.</td></tr><tr class=""><td colspan="1"><strong>Create OSLC Link</strong></td><td colspan="1">To create an OSLC Link.</td></tr></tbody></table><h3>DataHub tree</h3><p>A DataHub tree refers to a tree structure designed to show drivers, Data Sources, and items of the connected Data Sources in DataHub. The tree within DataHub Explorer has two top levels: DataHub and Data Sources respectively. The tree consists of four drivers (MagicDraw<sup>®</sup>, DOORS, DOORS Next Generation, and CSV) and each driver, except DOORS, has one or more Data Sources.</p><h3>Data Source</h3><p>A Data Source refers to the project path of an application. A Data Source can be any of the following</p><ul><li data-uuid="30ec1959-d6f5-40dd-a148-86f9aafd2686">MagicDraw<sup>®</sup> project</li><li data-uuid="4109e6a6-9d91-4af0-a778-dcc284e5a408">IBM<sup>®</sup> Rational<sup>®</sup> DOORS<sup>®</sup> client</li><li data-uuid="bbcc9e6d-fc9a-4611-8bba-7de398bafb80">IBM<sup>®</sup> Rational<sup>®</sup> DOORS<sup>®</sup> Next Generation client</li><li data-uuid="89992bba-8283-4c57-ae7d-a2d12e53f5aa">CSV file</li></ul><p>An application can have more than one Data Source. Each Data Source refers to a specific project path and has a unique Data Source ID.</p><p>You can connect DataHub to the following applications</p><ul><li data-uuid="ade16fcc-7b86-4f38-bd89-3ee300695404">MagicDraw<sup>®</sup></li><li data-uuid="33ab529b-1714-45e8-a761-ca1f6de63ce0">IBM<sup>®</sup> Rational<sup>®</sup> DOORS<sup>®</sup></li><li data-uuid="52a42aaf-b3da-44e6-8092-e37205deb373">IBM<sup>®</sup> Rational<sup>®</sup> DOORS<sup>®</sup> Next Generation</li><li data-uuid="b424852d-b1e4-4838-a190-e8c982e452d7">Data repository in the CSV format.</li></ul><h3>DHTrace</h3><p>The DHTrace relationship is a specialization of a Dependency, connecting model elements or sets of elements that represent the same concept across models. A DHTrace is often used to track requirements and model changes, typically in the Traceability diagram, a Class, Use Case, Object, or the Composite Structure diagram.</p><p>As changes can occur in both directions, the order of this Dependency is usually ignored. The properties of the relationship can specify the DHTrace mapping, but the DHTrace is usually bidirectional, informal, and rarely computable.</p><h3>Driver</h3><p>A driver refers to a connector to either an application or to a file. Each driver has a unique Driver ID. There are three applications (MagicDraw<sup>®</sup>, DOORS, and Excel) and one data repository in the CSV format. Each application uses a specific driver. For example, the <em>DOORS</em> driver connects to <em>DOORS</em> and <em>DOORS</em> Next Generation driver connects to <em>DOORS</em> Next Generation.</p><h3>Excluded</h3><p>Excluded refers to the status of an ignored node only in Sync relations. The excluded nodes depend on the Sync relation that one node can have both Excluded and the other synchronization status.</p><h3>Global ID</h3><p>A global ID consists of a Driver ID, Data Source ID, Type ID, and Item ID arranged in order and separated by a delimiter “/”. Each item or item type in the DataHub tree has a unique global ID.</p><h3>HP Application Lifecycle Management (HP ALM)<span style="color:var(--ds-text,#333333);"> </span></h3><p><span style="color:var(--ds-text,#333333);">HP ALM is a set of software tools developed and marketed by the </span>HP Software Division<span style="color:var(--ds-text,#333333);"> for application development and application testing. It includes tools for </span>requirements management<span style="color:var(--ds-text,#333333);">, </span>test planning<span style="color:var(--ds-text,#333333);"> and </span>functional testing<span style="color:var(--ds-text,#333333);">, </span>performance testing, <span style="color:var(--ds-text,#333333);">developer management </span><span style="color:var(--ds-text,#333333);">and defect management.</span></p><h3>Item</h3><p>An item refers to a particular element in the DataHub tree. Each item has a unique item ID. Elements such as drivers, data sources, folders, packages, DOORS formal modules, requirements (data), and relationships (links) in the DataHub Explorer tree are called items. A node may have nested children as items.</p><p><ac:link ac:anchor="Data" /> refers to an item whose specific format enables it to be synchronized with and traced to and from another data.</p><p>A <ac:link ac:anchor="Link"><ac:plain-text-link-body><![CDATA[link]]></ac:plain-text-link-body></ac:link> is an item whose specific format can link one data to another and also enables it to be synchronized with other links.</p><h3>Item type</h3><p>An item type consists of a list of properties. For example, a SysML Requirement type consists of two properties (ID and Text). Thus, every item with the same item type shares the same property list. An item type can be a driver type, Data Source type, IBM DOORS requirement type, MagicDraw<sup>®</sup> stereotype, or CSV column. Each item type has a unique Type ID.</p><h3>Link</h3><p>A link is an item whose specific format can link one data to another and also enables it to be synchronized with other links. A link can only be a MagicDraw<sup>®</sup> relationship, an IBM<sup>®</sup> Rational<sup>®</sup> DOORS<sup>®</sup> link, or an OSLC Link. Unlike data, links can only be synchronized. A link is also a URI reference from one resource, subject, or source to another resource, and can be an object or target. In RDF and OSLC, we use links to model relationships. Links are unidirectional like relationships.</p><h3><span style="color:var(--ds-text,#000000);">Mapping mode</span></h3><p>DataHub has two types of mapping, <strong>Individual Type Mapping</strong> and <strong>Group Type Mapping</strong>. The<strong> Individual Type Mapping</strong> shows the same node structure as the dragged nodes, and you need to map each source node to each target node. The <strong>Group Type Mapping</strong> groups nodes according to their types and allows you to map a source type to a target type.</p><h3>Module</h3><p>A DOORS container which may contain hierarchically arranged sub-modules. Typically, this is a requirement specification tree.</p><h3>Node</h3><p>A node is like a leaf in a tree. It represents a distinct point within the tree structure. A node can have children or be a child itself.</p><h3>Orphan</h3><p>Orphan refers to the status of an updated item that attempts to synchronize to the other side of the relation that has been deleted.</p><h3>OSLC</h3><p>DataHub, as of this version facilitates OSLC queries. Open Services for Lifecycle Collaboration (OSLC) is an open community creating specifications for integrating tools. The goal of OSLC is to create specifications for interactions between tools.</p><p>In OSLC, each artifact in the lifecycle, e.g., a requirement, defect, test case, source file, or development plan, is an HTTP resource that is manipulated using the standard methods of the HTTP specification (GET, PUT, POST, DELETE).</p><h3>OSLC link</h3><p>The OSLC specification defines relationships, which can be modeled as links.<br />Types of unidirectional links supported include <em>affectedBy, constrainedBy, constrains, decomposedBy, decomposes, eleborates, elaboratedBy, implementedBy</em>, and<em> satisfiedBy</em>.</p><h3>OSLC query</h3><p>DataHub supports two types of OSLC queries - basic query and advanced query. The basic query is a simple text based on searching, while the advanced query syntax follows SQL or SPARQL.</p><h3>PendingDelete</h3><p>PendingDelete refers to the status of an item that occurs because one or more related items have been deleted. The PendingDelete status is similar to the Orphan status, but the PendingDelete occurs at synchronization.</p><h3>PendingUpdate</h3><p>PendingUpdate refers to the status of an item that occurs because one or more related items have been updated (changes have been made to the item(s)). Items in the PendingUpdate status can be either accepted to update the properties or discarded.</p><h3>Recursively</h3><p>When this option is chosen, all the child nodes under the selected node are included. Otherwise, only a single element is processed.</p><h3>Relationship</h3><p>A relationship exists between two resources when there is something that connects them. The two resources work together, belong together, are similar, or should be considered together. There are different types of relationships.</p><h3>Requirements traceability</h3><p>Requirements traceability is concerned with documenting the life of a requirement and providing bidirectional traceability between various associated requirements. It enables you to find the origin of each requirement and track every change that has been made to this requirement.</p><p>Requirements include design artifacts, implementation, and are finally verified. The artifacts tied to the latter stages can be traced back to the requirements as well. This is typically done via a Requirements Traceability matrix.</p><h3>Schema map</h3><p>A schema Map refers to the mapping of attributes between the source and target types. The source and target types can be identical or different. Apart from mapping, you can also use schema maps to copy items from different item types and update them for attribute synchronization.</p><p>The table below is an example of attribute mapping between MagicDraw<sup>®</sup> and the DOORS formal module.</p><table class="relative-table" style="width: 48.5502%;"><colgroup class=""><col class="" style="width: 48.1712%;" /><col class="" style="width: 51.863%;" /></colgroup><tbody class=""><tr class=""><th>MagicDraw<sup>®</sup> SysML requirements</th><th>Functional requirements module</th></tr><tr class=""><td>Name</td><td>Object Heading</td></tr><tr class=""><td>Id</td><td>Object Identifier</td></tr><tr class=""><td>Text</td><td>Object Text</td></tr></tbody></table><h3>Status</h3><p>Status refers to the status of an association item. The status of an item varies depending on the association type (<strong>Sync DHLink</strong> or <strong>DHTrace</strong>). If the association type is a <strong>Sync DHLink</strong>, the item status will be <strong>Synchronized</strong>, <strong>PendingUpdate</strong>, <strong>PendingDelete</strong>, <strong>Excluded</strong>, or <strong>Orphan</strong>. If it is a trace, its status might be <strong>Suspect</strong>.</p><h3>Synchronized</h3><p>Synchronized refers to the status of relations that the related nodes need to be the same as the other side or the status of an item that does not have any pending changes.</p><h3>Sync relation</h3><p>DHLink synchronizations are associations between data in both source and target items. Items with DHLink can synchronize one another. DHLink synchronization is available in the <strong>Operation</strong> drop-down list in DataHub Explorer. <br />There are two kinds of DHLink: Unidirectional and bidirectional.</p><ul><li data-uuid="7ee28ca3-601d-4bdf-97b0-83d9951f3dd9"><strong>Unidirectional DHLink synchronization</strong> is either from a source to a target or vice-versa. Data is synchronized in only one direction and not both directions.</li><li data-uuid="8aafefbb-71c0-456d-930f-8fc35a7b4c80"><strong>Bidirectional DHLink synchronization</strong> refers to two-way synchronization. When the data in the source is updated, the data in the target item will be updated as well and vice versa. When you synchronize data with bidirectional DHLink synchronization, DataHub will establish the consistency in data hierarchy of both items.</li></ul><p>If two data items have an Association, they can be open from one another.</p><h3>System model</h3><p>A system model is the conceptual model that describes and represents a system. A system is comprised of multiple views such as planning, requirement (analysis), design, implementation, deployment, structure, behavior, input data, and output data views. A system model must describe and represent all these multiple views.</p><h3>Unidirectional</h3><p>This is a one-way synchronization either from a source to a target or from a target to a source. Unidirectional synchronization changes only one side of the source and target.</p>
+````
+
+<!--NOMAGIC_PAGE id=136715921 space=CDH2024x version=1 -->
+## PAGE 00087: Group type mapping
+
+- page_id: `136715921`
+- space_key: `CDH2024x`
+- source_url: https://docs.nomagic.com/spaces/CDH2024x/pages/136715921/Group+type+mapping
+- version_number: 1
+- version_date: `2023-09-21T06:04:20.219+02:00`
+- ancestors: Cameo DataHub Documentation > Getting started > Understanding DataHub user interface > Schema map and mapping options
+- labels: []
+
+### NORMALIZED CONTENT
+
+The default mapping type in DataHub is group type mapping. If you prefer mapping node types to mapping the nodes one-by-one before copying and/or synchronizing them, you can select the **Group Type Mapping** mode from the **Mapping Mode** drop-down list. It arranges all nodes according to their types to allow you to see the grouped types instead of individual nodes arranged in a tree structure. You can select a type from the source tree and map it to another type in the target tree.
+
+#### NOTE: Note
+
+Note
+
+Each formal module in DOORS is categorized as one node type.
+
+[IMAGE alt='' src='']
+
+###### Group type mapping mode in the Copy Data with Sync dialog.
+
+### EXACT CONFLUENCE STORAGE SOURCE
+
+````html
+<p>The default mapping type in DataHub is group type mapping. If you prefer mapping node types to mapping the nodes one-by-one before copying and/or synchronizing them, you can select the <strong style="line-height: 1.4285715;">Group Type Mapping</strong> mode from the <strong>Mapping Mode</strong> drop-down list. It arranges all nodes according to their types to allow you to see the grouped types instead of individual nodes arranged in a tree structure. You can select a type from the source tree and map it to another type in the target tree.</p><ac:structured-macro ac:name="note" ac:schema-version="1" ac:macro-id="cb9623b7-e9f0-4d8f-a918-0d18da32ef80"><ac:parameter ac:name="title">Note</ac:parameter><ac:rich-text-body><p>Each formal module in DOORS is categorized as one node type.</p></ac:rich-text-body></ac:structured-macro><p style="text-align: center;"><br /></p><p style="text-align: center;"><ac:image><ri:attachment ri:filename="Node Mapping Group - One Way.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Group type mapping" /></ri:attachment></ac:image></p><h6 style="text-align: center;">Group type mapping mode in the Copy Data with Sync dialog.</h6>
+````
+
+<!--NOMAGIC_PAGE id=136715834 space=CDH2024x version=1 -->
+## PAGE 00088: Hot keys
+
+- page_id: `136715834`
+- space_key: `CDH2024x`
+- source_url: https://docs.nomagic.com/spaces/CDH2024x/pages/136715834/Hot+keys
+- version_number: 1
+- version_date: `2023-09-21T06:04:18.417+02:00`
+- ancestors: Cameo DataHub Documentation > Getting started > Understanding DataHub user interface > DataHub menu
+- labels: []
+
+### NORMALIZED CONTENT
+
+The DataHub hotkeys are available in MagicDraw®. You can define a set of hotkeys to execute particular DataHub commands as follows
+
+- Add Data Source
+- Check Node Changes Recursively
+- Check Node Changes
+- Clean up DataHub Database
+- Connect
+- Create Alias
+- Create OSLC Query
+- DHLink Panel
+- DHLink Summary
+- DataHub Explorer
+- Alias Manager
+- Go To The Other Related Node
+- New Node
+- Prepare Data for Module
+- Remove DHLink Recursively
+- Remove DHLink
+- Remove DataSource
+- Schema Map Manager
+- Synchronize Node Recursively
+- Synchronize Node
+- Synchronize
+- Update Pending DHLink Recursively
+- Update Pending DHLink
+
+To assign a hotkey to any of the available DataHub functions
+
+1. From the MagicDraw main menu, click Options > Environment. The Environment Options dialog opens.
+2. On the left-hand side, select Keyboard . From the expandable list, select DataHub . [ATTACHMENT filename='Environment_Options_Dialog.png']
+3. From the expandable list, select the function you want to create a hotkey for. [ATTACHMENT filename='Environment_Options_Select_Command.png']
+4. In the Press new shortcut key box, click in the box and press any key or key combination (holding one or two keys while pressing another key) you want to designate.
+5. Click Assign .
+
+#### TIP: Tip
+
+Tip
+
+If the key or key combination you have pressed has already been assigned to another function, it will display "Currently assigned to: <*assigned function*>" below the **Press new shortcut key** box. In this case, choose another key combination.
+
+### EXACT CONFLUENCE STORAGE SOURCE
+
+````html
+<p>The DataHub hotkeys are available in MagicDraw<sup>®</sup>. You can define a set of hotkeys to execute particular DataHub commands as follows</p><ul><li>Add Data Source</li><li>Check Node Changes Recursively</li><li>Check Node Changes</li><li>Clean up DataHub Database</li><li>Connect</li><li>Create Alias</li><li>Create OSLC Query</li><li>DHLink Panel</li><li>DHLink Summary</li><li>DataHub Explorer</li><li>Alias Manager</li><li>Go To The Other Related Node</li><li>New Node</li><li>Prepare Data for Module</li><li>Remove DHLink Recursively</li><li>Remove DHLink</li><li>Remove DataSource</li><li>Schema Map Manager</li><li>Synchronize Node Recursively</li><li>Synchronize Node</li><li>Synchronize</li><li>Update Pending DHLink Recursively</li><li>Update Pending DHLink </li></ul><p><br /></p><p>To assign a hotkey to any of the available DataHub functions</p><hr /><ol><li>From the MagicDraw main menu, click <strong>Options</strong> &gt; <strong>Environment. </strong>The<strong> Environment Options</strong> dialog opens.</li><li>On the left-hand side, select<strong> Keyboard</strong>. From the expandable list, select <strong>DataHub</strong>.<br /><br /><ac:image><ri:attachment ri:filename="Environment_Options_Dialog.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Hot keys" /></ri:attachment></ac:image><br /><br /></li><li>From the expandable list, select the function you want to create a hotkey for.<br /><br /><ac:image><ri:attachment ri:filename="Environment_Options_Select_Command.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Hot keys" /></ri:attachment></ac:image><br /><br /></li><li>In the <strong>Press new shortcut key</strong> box, click in the box and press any key or key combination (holding one or two keys while pressing another key) you want to designate.</li><li>Click <strong>Assign</strong>.<br /><br /></li></ol><ac:structured-macro ac:name="tip" ac:schema-version="1" ac:macro-id="4944ad17-f9aa-4fad-b86f-90415280cbbc"><ac:parameter ac:name="title">Tip</ac:parameter><ac:rich-text-body><p><span>If the key or key combination you have pressed has already been assigned to another function, it will display &quot;Currently assigned to: &lt;<em>assigned function</em>&gt;&quot; below the <strong>Press new shortcut key</strong> box. In this case, choose another key combination.</span></p></ac:rich-text-body></ac:structured-macro><p class="auto-cursor-target"><br /></p>
+````
+
+<!--NOMAGIC_PAGE id=136716728 space=CDH2024x version=2 -->
+## PAGE 00089: How synchronization works
+
+- page_id: `136716728`
+- space_key: `CDH2024x`
+- source_url: https://docs.nomagic.com/spaces/CDH2024x/pages/136716728/How+synchronization+works
+- version_number: 2
+- version_date: `2026-02-11T08:04:33.151+01:00`
+- ancestors: Cameo DataHub Documentation > User Guide > Synchronization
+- labels: []
+
+### NORMALIZED CONTENT
+
+DataHub synchronization capability is a core feature of the DataHub. Synchronization is primarily used for keeping track of changes. This synchronization feature allows you to track different types of node changes, to update or remove DHLinks from the **Synchronize** button on either side of the MagicDraw Containment area or DataHub Explorer, to synchronize Data Sources with other collaboration tools, and to choose to synchronize single, grouped, or entire Data Source.
+
+The following videos show the data synchronization and the data links in action:
+
+800450
+
+800450
+
+**Related pages**
+
+### EXACT CONFLUENCE STORAGE SOURCE
+
+````html
+<ac:layout><ac:layout-section ac:type="single"><ac:layout-cell><p>DataHub synchronization capability is a core feature of the DataHub. Synchronization is primarily used for keeping track of changes. This synchronization feature allows you to track different types of node changes, to update or remove DHLinks from the <strong>Synchronize</strong> button on either side of the MagicDraw Containment area or DataHub Explorer, to synchronize Data Sources with other collaboration tools, and to choose to synchronize single, grouped, or entire Data Source.</p><p><span style="color:var(--ds-text,#333333);">The following videos show the data synchronization and the data links in action:</span></p><p><br /></p><p style="text-align: center;"><ac:structured-macro ac:name="widget" ac:schema-version="1" ac:macro-id="8a6f2cc2-f7a8-4d80-9956-4cd8a6fea605"><ac:parameter ac:name="width">800</ac:parameter><ac:parameter ac:name="url"><ri:url ri:value="https://www.youtube.com/watch?v=O3LijuCItEM" /></ac:parameter><ac:parameter ac:name="height">450</ac:parameter></ac:structured-macro></p><p style="text-align: center;"><ac:structured-macro ac:name="widget" ac:schema-version="1" ac:macro-id="3122e301-6e43-4c8d-8ba8-738e3a23db4c"><ac:parameter ac:name="width">800</ac:parameter><ac:parameter ac:name="url"><ri:url ri:value="https://www.youtube.com/watch?v=gKiXaQK7Wf8" /></ac:parameter><ac:parameter ac:name="height">450</ac:parameter></ac:structured-macro></p></ac:layout-cell></ac:layout-section><ac:layout-section ac:type="single"><ac:layout-cell><p><strong>Related pages</strong></p><p><ac:structured-macro ac:name="children" ac:schema-version="2" ac:macro-id="25bb0086-a93b-4a5c-8c33-65a6c954e6fb" /></p></ac:layout-cell></ac:layout-section></ac:layout>
+````
+
+<!--NOMAGIC_PAGE id=136716948 space=CDH2024x version=1 -->
+## PAGE 00090: HTML images, RTF, and OLE support
+
+- page_id: `136716948`
+- space_key: `CDH2024x`
+- source_url: https://docs.nomagic.com/spaces/CDH2024x/pages/136716948/HTML+images+RTF+and+OLE+support
+- version_number: 1
+- version_date: `2023-09-21T06:05:05.427+02:00`
+- ancestors: Cameo DataHub Documentation > User Guide > Additional DataHub features
+- labels: []
+
+### NORMALIZED CONTENT
+
+Cameo DataHub supports HTML image tags as attached files, text style in rich-text files (RTF), and image and other objects (such as Embedded Excel spreadsheet and Words files) in object linking and embedding (OLE).
+
+To enable HTML image support from a data source in a project as an attached file
+
+1. On the main menu, click Options > Environment . The Environment Options dialog opens.
+2. In the left pane, select Cameo DataHub . Under the General group, set the Save HTML images from the data source in the project as attached files option to true , as shown below: [ATTACHMENT filename='Environment_Options_CDH_Save HTML files.png']
+3. Click **OK** to close the **Environment Options** dialog.
+
+To enable RTF text support
+
+- Right-click the DOORS Data Source and select Enable RTF for text support , shown below: [ATTACHMENT filename='Enabling RTF.png']
+
+To enable RTF and OLE support for text style and image
+
+1. Right-click the DOORS Data Source and select Enable RTF for text support .
+2. Right-click the DOORS Data Source again and select Enable RTF for OLEs support . [ATTACHMENT filename='Disabling and Enabling RTF.png']
+
+| RTF and OLE command | Function |
+| --- | --- |
+| Enable RTF for text support | Allows support of text styles in RTF when copying data from DOORS to MagicDraw. |
+| Disable RTF for text support(available after selecting Enable RTF for text support) | Suspends RTF and OLE support. |
+| Enable RTF for OLEs support(available after selecting Enable RTF for text support) | Copies text styles and images as OLE objects from DOORS to MagicDraw.NoteThis function may take longer to complete the copying process, depending on the amount of data. |
+
+If you selected only **Enable RTF for text support**, but did not select **Enable RTF for OLEs support** after right-clicking the DOORS Data Source for the second time, copying elements (e.g., Requirements) from DOORS to MagicDraw will include only text styles (e.g., bold, italic, underline, strikethrough, superscript, and subscript). However, any image in the data will not be copied.
+
+[IMAGE alt='' src='']
+
+###### Text styles in RTF is copied from DOORS to MagicDraw when enabling RTF for text support.
+
+[IMAGE alt='' src='']
+
+###### Image in RTF is not copied from DOORS to MagicDraw when selecting only the Enable RTF for text support command.
+
+If you selected **Enable RTF for text support** and then select **Enable RTF for OLEs support** after right-clicking the DOORS Data Source for the second time, copying elements (e.g., Requirements) from DOORS to MagicDraw will include both text styles and image as an OLE object.
+
+[IMAGE alt='' src='']
+
+###### RTF text styles and image as an OLE object are copied from DOORS to MagicDraw.
+
+[IMAGE alt='' src='']
+
+###### Image as OLE object is copied from DOORS to MagicDraw as an AttachedFile element under the copied element in the Containment tree.
+
+#### NOTE: Note
+
+Note
+
+Due to the different compatibility of image types between MagicDraw and DOORS, image types are converted during synchronization between the tools.
+
+- Synchronizing to MagicDraw: Image is converted to PNG.
+- Synchronizing to DOORS: Image is converted to BMP.
+
+#### NOTE: Note
+
+Note
+
+- Enabling RTF and OLE support affects all child modules under the DOORS Data Source. If you want to disable RTF and OLE support, right-click the DOORS Data Source and select Disable RTF for text support .
+- A DOORS object that contains a WMF image is set as read-only to avoid conversion to BMP, which will result in the loss of functionality for the vector image.
+- A DOORS object that contains any other OLE object besides an image is set as read-only because DataHub does not support OLE objects.
+- In most cases, the OLE content (e.g., embedded Excel table or Word) is converted to an image and synchronized to MagicDraw.
+
+### EXACT CONFLUENCE STORAGE SOURCE
+
+````html
+<p>Cameo DataHub supports HTML image tags as attached files, text style in rich-text files (RTF), and image and other objects (such as Embedded Excel spreadsheet and Words files) in object linking and embedding (OLE).</p><p><br /></p><p>To enable HTML image support from a data source in a project as an attached file</p><hr /><ol><li>On the main menu, click <strong>Options</strong> &gt; <strong>Environment</strong>. The <strong>Environment Options</strong> dialog opens.</li><li>In the left pane, select <strong>Cameo DataHub</strong>. Under the <strong>General</strong> group, set the <strong>Save HTML images from the data source in the project as attached files</strong> option to <strong>true</strong>, as shown below:<br /><br /><ac:image><ri:attachment ri:filename="Environment_Options_CDH_Save HTML files.png"><ri:page ri:space-key="CDH2024x" ri:content-title="HTML images, RTF, and OLE support" /></ri:attachment></ac:image><br /><br /></li><li><p>Click <strong>OK</strong> to close the <strong>Environment Options</strong> dialog.</p></li></ol><p>To enable RTF text support</p><hr /><ul><li>Right-click the DOORS Data Source and select <strong>Enable RTF for text support</strong>, shown below:<br /><br /><ac:image><ri:attachment ri:filename="Enabling RTF.png"><ri:page ri:space-key="CDH2024x" ri:content-title="HTML images, RTF, and OLE support" /></ri:attachment></ac:image><br /><br /></li></ul><p>To enable RTF and OLE support for text style and image</p><hr /><ol><li>Right-click the DOORS Data Source and select <strong>Enable RTF for text support</strong>.</li><li>Right-click the DOORS Data Source again and select <strong>Enable RTF for OLEs support</strong>.<br /><br /><ac:image><ri:attachment ri:filename="Disabling and Enabling RTF.png"><ri:page ri:space-key="CDH2024x" ri:content-title="HTML images, RTF, and OLE support" /></ri:attachment></ac:image></li></ol><table class="relative-table" style="width: 99.7884%;"><colgroup><col style="width: 35.2162%;" /><col style="width: 64.8138%;" /></colgroup><tbody><tr><th>RTF and OLE command</th><th>Function</th></tr><tr><td colspan="1">Enable RTF for text support</td><td colspan="1">Allows support of text styles in RTF when copying data from DOORS to MagicDraw.</td></tr><tr><td><p>Disable RTF for text support</p><p>(available after selecting <strong>Enable RTF for text support</strong>)</p></td><td>Suspends RTF and OLE support.</td></tr><tr><td><p>Enable RTF for OLEs support</p><p>(available after selecting <strong>Enable RTF for text support</strong>)</p></td><td><div class="content-wrapper"><p>Copies text styles and images as OLE objects from DOORS to MagicDraw.</p><ac:structured-macro ac:name="note" ac:schema-version="1" ac:macro-id="67e33c01-89d9-4c2b-8c3b-0a7d88b376c1"><ac:parameter ac:name="title">Note</ac:parameter><ac:rich-text-body><p>This function may take longer to complete the copying process, depending on the amount of data.</p></ac:rich-text-body></ac:structured-macro><p class="auto-cursor-target"><br /></p></div></td></tr></tbody></table><p>If you selected only <strong>Enable RTF for text support</strong>, but did not select <strong>Enable RTF for OLEs support</strong> after right-clicking the DOORS Data Source for the second time, copying elements (e.g., Requirements) from DOORS to MagicDraw will include only text styles (e.g., bold, italic, underline, strikethrough, superscript, and subscript). However, any image in the data will not be copied.</p><p style="text-align: center;"><ac:image><ri:attachment ri:filename="RTF Text Style Copied.png"><ri:page ri:space-key="CDH2024x" ri:content-title="HTML images, RTF, and OLE support" /></ri:attachment></ac:image></p><h6 style="text-align: center;">Text styles in RTF is copied from DOORS to MagicDraw when enabling RTF for text support.</h6><p><ac:image ac:align="center"><ri:attachment ri:filename="Image Not Copied in RTF.png"><ri:page ri:space-key="CDH2024x" ri:content-title="HTML images, RTF, and OLE support" /></ri:attachment></ac:image></p><h6 style="text-align: center;">Image in RTF is not copied from DOORS to MagicDraw when selecting only the Enable RTF for text support command.</h6><p>If you selected <strong>Enable RTF for text support</strong> and then select <strong>Enable RTF for OLEs support</strong> after right-clicking the DOORS Data Source for the second time, copying elements (e.g., Requirements) from DOORS to MagicDraw will include both text styles and image as an OLE object.</p><p style="text-align: center;"><ac:image><ri:attachment ri:filename="RTF Text Style and Image Copied.png"><ri:page ri:space-key="CDH2024x" ri:content-title="HTML images, RTF, and OLE support" /></ri:attachment></ac:image></p><h6 style="text-align: center;">RTF text styles and image as an OLE object are copied from DOORS to MagicDraw.</h6><p><ac:image ac:align="center"><ri:attachment ri:filename="AttachedFile Element in Containment Tree.png"><ri:page ri:space-key="CDH2024x" ri:content-title="HTML images, RTF, and OLE support" /></ri:attachment></ac:image></p><h6 style="text-align: center;">Image as OLE object is copied from DOORS to MagicDraw as an AttachedFile element under the copied element in the Containment tree.</h6><ac:structured-macro ac:name="note" ac:schema-version="1" ac:macro-id="4e01b44a-1c9c-457b-9509-152e205d86bd"><ac:parameter ac:name="title">Note</ac:parameter><ac:rich-text-body><p>Due to the different compatibility of image types between MagicDraw and DOORS, image types are converted during synchronization between the tools.</p><ul><li>Synchronizing to MagicDraw: Image is converted to PNG.</li><li>Synchronizing to DOORS: Image is converted to BMP.</li></ul></ac:rich-text-body></ac:structured-macro><p class="auto-cursor-target"><br /></p><ac:structured-macro ac:name="note" ac:schema-version="1" ac:macro-id="ec7f4ffd-a5be-4a9c-b58c-127deab5a98f"><ac:parameter ac:name="title">Note</ac:parameter><ac:rich-text-body><ul><li>Enabling RTF and OLE support affects all child modules under the DOORS Data Source. If you want to disable RTF and OLE support, right-click the DOORS Data Source and select <strong>Disable RTF for text support</strong>.</li><li>A DOORS object that contains a WMF image is set as read-only to avoid conversion to BMP, which will result in the loss of functionality for the vector image.</li><li>A DOORS object that contains any other OLE object besides an image is set as read-only because DataHub does not support OLE objects.</li><li>In most cases, the OLE content (e.g., embedded Excel table or Word) is converted to an image and synchronized to MagicDraw.</li></ul></ac:rich-text-body></ac:structured-macro><p class="auto-cursor-target"><br /></p>
+````
+
+<!--NOMAGIC_PAGE id=136716141 space=CDH2024x version=1 -->
+## PAGE 00091: IBM Rational DOORS
+
+- page_id: `136716141`
+- space_key: `CDH2024x`
+- source_url: https://docs.nomagic.com/spaces/CDH2024x/pages/136716141/IBM+Rational+DOORS
+- version_number: 1
+- version_date: `2023-09-21T06:04:26.457+02:00`
+- ancestors: Cameo DataHub Documentation > User Guide > Working with DataHub and modeling tools > Customizing DataHub options
+- labels: []
+
+### NORMALIZED CONTENT
+
+This section explains the IBM Rational DOORS setting in the Cameo DataHub Options dialog.
+
+To configure the IBM Rational DOORS setting
+
+1. Open the Cameo DataHub Options dialog. [ATTACHMENT filename='Environment_Options_CDH_DOORS_.png']
+2. Go to the IBM Rational DOORS group and update the required options.
+
+The following table explains the IBM Rational DOORS options in the Cameo DataHub Options dialog.
+
+| Option | Function |
+| --- | --- |
+| DataHub DOORS DXL file location | For DOORS integration, DataHub provides options to configure how the DXL script is used. There are two options for the DOORS DXL file locations as follows:Deployed folderFor each DXL request, DataHub will look for a DXL command stored in the DOORS addins folder. The DXL script file will be available after you have completed for DOORS.DataHub plug-in folderFor each DXL request, DataHub will look for a DXL command stored in the DataHub plugin folder. The DXL script file will be available by default. |
+| Show the 'Go To DOORS object satisfied by the selected element' menu | If True, enables the Go To DOORS object satisfied by the selected element menu. |
+| Keep module open | If True, leaves the DOORS module open. |
+| Use read only DOORS DXL file | If True, opens the DOORS module in read-only mode. |
+| Ignore DXL attribute | If True, ignores the DXL attributes whose value is populated from the DXL script. |
+| Do not use the DXL file (commands are sent on requests) | If True, sends each DXL request directly to DOORS without using the DXL script file.NoteIf the configuration of DXL commands from the script file is restricted with specific security settings that limit the access to the selected folders at DataHub DOORS DXL file location on some machines, you can select the Do not use the DXL file (commands are sent on requests) option to solve this problem. |
+
+### EXACT CONFLUENCE STORAGE SOURCE
+
+````html
+<p>This section explains the IBM Rational DOORS setting in the Cameo DataHub Options dialog.</p><p><br /></p><p> To configure the IBM Rational DOORS setting</p><hr /><ol><li>Open the <a href="https://docs.nomagic.com/display/CDH2024x/Customizing+DataHub+options">Cameo DataHub Options</a> dialog.<br /><br /><ac:image><ri:attachment ri:filename="Environment_Options_CDH_DOORS_.png"><ri:page ri:space-key="CDH2024x" ri:content-title="IBM Rational DOORS" /></ri:attachment></ac:image><br /><br /></li><li>Go to the <strong>IBM Rational DOORS</strong> group and <span style="color: rgb(62,63,64);">update the required options.</span></li></ol><p><br /></p><p>The following table explains the IBM Rational DOORS options in the Cameo DataHub Options dialog.</p><table class="relative-table" style="width: 99.9444%;"><colgroup><col style="width: 45.8001%;" /><col style="width: 54.2314%;" /></colgroup><tbody><tr><th>Option</th><th>Function</th></tr><tr><td colspan="1"><div class="content-wrapper"><p>DataHub DOORS DXL file location</p></div></td><td colspan="1"><div class="content-wrapper"><p>For DOORS integration, DataHub provides options to configure how the DXL script is used. There are two options for the DOORS DXL file locations as follows:</p><ul><li><p><strong>Deployed folder</strong><br />For each DXL request, DataHub will look for a DXL command stored in the DOORS<strong> </strong>addins folder. The DXL script file will be available after you have completed <ac:link><ri:page ri:space-key="CDH2024x" ri:content-title="Driver deployment" /><ac:plain-text-link-body><![CDATA[driver deployment]]></ac:plain-text-link-body></ac:link> for DOORS.</p></li><li><p><strong>DataHub plug-in folder</strong><br />For each DXL request, DataHub will look for a DXL command stored in the DataHub<strong> </strong>plugin folder. The DXL script file will be available by default.</p></li></ul></div></td></tr><tr><td colspan="1">Show the 'Go To DOORS object satisfied by the selected element' menu</td><td colspan="1">If True, enables the <strong>Go To DOORS object satisfied by the selected element</strong> menu.</td></tr><tr><td colspan="1">Keep module open</td><td colspan="1">If True, leaves the DOORS module open.</td></tr><tr><td colspan="1">Use read only DOORS DXL file</td><td colspan="1">If True, opens the DOORS module in read-only mode.</td></tr><tr><td colspan="1">Ignore DXL attribute</td><td colspan="1">If True, ignores the DXL attributes whose value is populated from the DXL script.</td></tr><tr><td colspan="1">Do not use the DXL file (commands are sent on requests)</td><td colspan="1"><div class="content-wrapper"><p>If True, sends each DXL request directly to DOORS without using the DXL script file.</p><ac:structured-macro ac:name="note" ac:schema-version="1" ac:macro-id="04f19813-e632-4d42-87ca-31061c56aeeb"><ac:parameter ac:name="title">Note</ac:parameter><ac:rich-text-body><p>If the configuration of DXL commands from the script file is restricted with specific security settings that limit the access to the selected folders at DataHub DOORS DXL file location on some machines, you can select the <strong>Do not use the DXL file (commands are sent on requests)</strong> option to solve this problem.</p></ac:rich-text-body></ac:structured-macro><p class="auto-cursor-target"><br /></p></div></td></tr></tbody></table><p class="auto-cursor-target"><br /></p>
+````
+
+<!--NOMAGIC_PAGE id=136716148 space=CDH2024x version=1 -->
+## PAGE 00092: IBM Rational DOORS Next Generation
+
+- page_id: `136716148`
+- space_key: `CDH2024x`
+- source_url: https://docs.nomagic.com/spaces/CDH2024x/pages/136716148/IBM+Rational+DOORS+Next+Generation
+- version_number: 1
+- version_date: `2023-09-21T06:04:26.745+02:00`
+- ancestors: Cameo DataHub Documentation > User Guide > Working with DataHub and modeling tools > Customizing DataHub options
+- labels: []
+
+### NORMALIZED CONTENT
+
+This section explains the IBM Rational DOORS Next Generation preference in the Cameo DataHub Options dialog.
+
+To specify the number of maximum concurrent connections for IBM Rational DOORS Next Generation
+
+1. Open the Cameo DataHub Options dialog. [ATTACHMENT filename='Environment_Options_CDH_DOORS_NG.png']
+2. Go to the IBM Rational DOORS Next Generation option group and update the required options.
+
+The following table explains the IBM Rational DOORS Next Generation options in the Cameo DataHub Options dialog.
+
+| Option | Function |
+| --- | --- |
+| Maximum concurrent connection | Takes a numerical value for the maximum number of concurrent connections. |
+| Show all GC data source | If True, all Global Configuration data sources are visible on the Cameo DdataHub Explorer panel, including removed and inactive data sources. |
+| Use DataHub JxBrowser | RedObsolete |
+| Use JxBrowser incognito mode | Enables Incognito mode for the default profile. Incognito mode stores user data, such as browsing history, cookies, and site data in the memory. |
+| Use JxBrowser GPU | JxBrowser renders content using GPU (Graphical Processing Unit) and displays it directly. |
+| Use JxBrowser sandbox | If True, JxBrowser supports Chromium Sandbox on Windows. |
+
+### EXACT CONFLUENCE STORAGE SOURCE
+
+````html
+<p>This section explains the IBM Rational DOORS Next Generation preference in the Cameo DataHub Options dialog.</p><p><br /></p><p> To specify the number of maximum concurrent connections for IBM Rational DOORS Next Generation</p><hr /><ol><li>Open the <a href="https://docs.nomagic.com/display/CDH2024x/Customizing+DataHub+options">Cameo DataHub Options</a> dialog.<br /><br /><ac:image><ri:attachment ri:filename="Environment_Options_CDH_DOORS_NG.png"><ri:page ri:space-key="CDH2024x" ri:content-title="IBM Rational DOORS Next Generation" /></ri:attachment></ac:image><br /><br /></li><li>Go to the <strong>IBM Rational DOORS Next Generation</strong> option <span style="color: rgb(62,63,64);">group and<span> </span></span><span style="color: rgb(62,63,64);">update the required options.<br /></span></li></ol><p>The following table explains the IBM Rational DOORS Next Generation options in the Cameo DataHub Options dialog.</p><table class="relative-table" style="width: 87.8548%;"><colgroup><col style="width: 30.4639%;" /><col style="width: 69.5294%;" /></colgroup><tbody><tr><th>Option</th><th>Function</th></tr><tr><td>Maximum concurrent connection</td><td>Takes a numerical value for the maximum number of concurrent connections.</td></tr><tr><td colspan="1">Show all GC data source</td><td colspan="1">If True, all Global Configuration data sources are visible on the Cameo DdataHub Explorer panel, including removed and inactive data sources.</td></tr><tr><td colspan="1">Use DataHub JxBrowser</td><td colspan="1"><div class="content-wrapper"><p><ac:structured-macro ac:name="status" ac:schema-version="1" ac:macro-id="a97943d2-3b2e-47e8-bf35-7e376966bb72"><ac:parameter ac:name="colour">Red</ac:parameter><ac:parameter ac:name="title">Obsolete</ac:parameter></ac:structured-macro></p></div></td></tr><tr><td colspan="1">Use JxBrowser incognito mode</td><td colspan="1">Enables Incognito mode for the default profile. Incognito mode stores user data, such as browsing history, cookies, and site data in the memory.</td></tr><tr><td colspan="1">Use JxBrowser GPU</td><td colspan="1">JxBrowser renders content using GPU (Graphical Processing Unit) and displays it directly.</td></tr><tr><td>Use JxBrowser sandbox</td><td>If True, JxBrowser supports Chromium Sandbox on Windows.</td></tr></tbody></table><p class="auto-cursor-target"><br /></p>
+````
+
+<!--NOMAGIC_PAGE id=136716651 space=CDH2024x version=1 -->
+## PAGE 00093: Importing schema maps
+
+- page_id: `136716651`
+- space_key: `CDH2024x`
+- source_url: https://docs.nomagic.com/spaces/CDH2024x/pages/136716651/Importing+schema+maps
+- version_number: 1
+- version_date: `2023-09-21T06:04:55.441+02:00`
+- ancestors: Cameo DataHub Documentation > User Guide > Working with DataHub and modeling tools > Requirement Mapping
+- labels: []
+
+### NORMALIZED CONTENT
+
+You can import a schema map that is in the XML format to DataHub.
+
+To import a saved schema map
+
+1. Open the Cameo DataHub [CONFLUENCE_PAGE title='Mapping with Schema Map Manager' space='CDH2024x'][CONFLUENCE_PAGE title='Mapping with Schema Map Manager' space='CDH190'] dialog and click [IMAGE alt='' src=''] .
+2. Select a schema file to import and click [IMAGE alt='' src=''] .
+
+### EXACT CONFLUENCE STORAGE SOURCE
+
+````html
+<p>You can import a schema map that is in the XML format to DataHub.</p><p><br /></p><p>To import a saved schema map</p><hr /><ol><li>Open the <strong>Cameo DataHub <ac:link><ri:page ri:space-key="CDH2024x" ri:content-title="Mapping with Schema Map Manager" /><ac:plain-text-link-body><![CDATA[Schema Map Manage]]></ac:plain-text-link-body></ac:link><ac:link><ri:page ri:space-key="CDH190" ri:content-title="Mapping with Schema Map Manager" /><ac:plain-text-link-body><![CDATA[r]]></ac:plain-text-link-body></ac:link></strong> dialog and click <strong><ac:image><ri:attachment ri:filename="import-btn.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Importing schema maps" /></ri:attachment></ac:image></strong>.</li><li>Select a schema file to import and click <strong><ac:image><ri:attachment ri:filename="open-btn.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Importing schema maps" /></ri:attachment></ac:image></strong>.</li></ol>
+````
+
+<!--NOMAGIC_PAGE id=136715953 space=CDH2024x version=1 -->
+## PAGE 00094: Inactive Data Source filter
+
+- page_id: `136715953`
+- space_key: `CDH2024x`
+- source_url: https://docs.nomagic.com/spaces/CDH2024x/pages/136715953/Inactive+Data+Source+filter
+- version_number: 1
+- version_date: `2023-09-21T06:04:21.159+02:00`
+- ancestors: Cameo DataHub Documentation > Getting started > Understanding DataHub user interface > Add-on features
+- labels: []
+
+### NORMALIZED CONTENT
+
+The**Inactive Data Source Filter** button [IMAGE alt='' src='']is available on the **DataHub Explorer** toolbar. You can use this filter to filter out all inactive Data Sources from the **DataHub Explorer** tree.
+
+[IMAGE alt='' src='']
+
+###### Inactive Data Source Filter button on the DataHub Explorer toolbar.
+
+### EXACT CONFLUENCE STORAGE SOURCE
+
+````html
+<p>The<strong> Inactive Data Source Filter</strong> button <ac:image><ri:attachment ri:filename="dh-inactive-ds-filter.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Inactive Data Source filter" /></ri:attachment></ac:image>is available on the <strong>DataHub Explorer</strong> toolbar. You can use this filter to filter out all inactive Data Sources from the <strong>DataHub Explorer</strong> tree.</p><p style="margin-left: 30.0px;"><ac:image ac:align="center" ac:title="DataHub Explorer toolbar - Filtering inactive sources button" ac:alt="DataHub Explorer toolbar - Filtering inactive sources button"><ri:attachment ri:filename="dh-toggle-connected-data-sources.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Inactive Data Source filter" /></ri:attachment></ac:image></p><h6 style="text-align: center;"> Inactive Data Source Filter button on the DataHub Explorer toolbar.</h6>
+````
+
+<!--NOMAGIC_PAGE id=136715918 space=CDH2024x version=2 -->
+## PAGE 00095: Individual type mapping
+
+- page_id: `136715918`
+- space_key: `CDH2024x`
+- source_url: https://docs.nomagic.com/spaces/CDH2024x/pages/136715918/Individual+type+mapping
+- version_number: 2
+- version_date: `2024-02-06T10:46:53.926+01:00`
+- ancestors: Cameo DataHub Documentation > Getting started > Understanding DataHub user interface > Schema map and mapping options
+- labels: []
+
+### NORMALIZED CONTENT
+
+For individual type mapping, you must start by mapping the parent node first, following the sequence. Please make sure to map the parent before moving on to the children nodes.
+
+The individual type mapping feature in DataHub arranges all nodes into a tree structure. You can select a node from the source node and map it to a type in the target node. The auto-mapping function of DataHub allows you to map similar node types automatically and change the target type that has been mapped.
+
+[IMAGE alt='' src='']
+
+###### Individual type mapping mode in the Copy Data with Sync dialog.
+
+### EXACT CONFLUENCE STORAGE SOURCE
+
+````html
+<p class="auto-cursor-target"><br /></p><ac:structured-macro ac:name="note" ac:schema-version="1" ac:macro-id="3150abf9-9ee6-4403-885a-445715877e9c"><ac:rich-text-body><p>For individual type mapping, you must start by mapping the parent node first, following the sequence. Please make sure to map the parent before moving on to the children nodes.</p></ac:rich-text-body></ac:structured-macro><p>The individual type mapping feature in DataHub arranges all nodes into a tree structure. You can select a node from the source node and map it to a type in the target node. The auto-mapping function of DataHub allows you to map similar node types automatically and change the target type that has been mapped.</p><p><br /></p><p style="text-align: center;"><ac:image><ri:attachment ri:filename="Node Mapping Individual - One Way.png" /></ac:image></p><h6 style="text-align: center;">Individual type mapping mode in the Copy Data with Sync dialog.</h6>
+````
+
+<!--NOMAGIC_PAGE id=136715824 space=CDH2024x version=1 -->
+## PAGE 00096: Installation, licensing, and system requirements
+
+- page_id: `136715824`
+- space_key: `CDH2024x`
+- source_url: https://docs.nomagic.com/spaces/CDH2024x/pages/136715824/Installation+licensing+and+system+requirements
+- version_number: 1
+- version_date: `2023-09-21T06:04:18.207+02:00`
+- ancestors: Cameo DataHub Documentation
+- labels: []
+
+### NORMALIZED CONTENT
+
+For information regarding installation, licensing, and system requirements, visit the [CONFLUENCE_PAGE title='Installation, licensing, and system requirements' space='IL2024x'] page.
+
+### EXACT CONFLUENCE STORAGE SOURCE
+
+````html
+<p class="with-breadcrumbs">For information regarding installation, licensing, and system requirements, visit the <ac:link><ri:page ri:space-key="IL2024x" ri:content-title="Installation, licensing, and system requirements" /></ac:link> page.</p>
+````
+
+<!--NOMAGIC_PAGE id=136715823 space=CDH2024x version=2 -->
+## PAGE 00097: Introduction to Cameo DataHub
+
+- page_id: `136715823`
+- space_key: `CDH2024x`
+- source_url: https://docs.nomagic.com/spaces/CDH2024x/pages/136715823/Introduction+to+Cameo+DataHub
+- version_number: 2
+- version_date: `2024-01-31T07:26:51.006+01:00`
+- ancestors: Cameo DataHub Documentation
+- labels: []
+
+### NORMALIZED CONTENT
+
+Cameo DataHub Documentationtrue[CONFLUENCE_PAGE title='Cameo DataHub Documentation' space='']
+
+### EXACT CONFLUENCE STORAGE SOURCE
+
+````html
+<p><ac:structured-macro ac:name="excerpt-include" ac:schema-version="1" ac:macro-id="255cd6c5-30b7-4255-a04f-bc452c5248a1"><ac:parameter ac:name="page">Cameo DataHub Documentation</ac:parameter><ac:parameter ac:name="nopanel">true</ac:parameter><ac:parameter ac:name=""><ac:link><ri:page ri:content-title="Cameo DataHub Documentation" /></ac:link></ac:parameter></ac:structured-macro></p><p><br /></p>
+````
+
+<!--NOMAGIC_PAGE id=136716512 space=CDH2024x version=2 -->
+## PAGE 00098: Linking model elements to OSLC resources
+
+- page_id: `136716512`
+- space_key: `CDH2024x`
+- source_url: https://docs.nomagic.com/spaces/CDH2024x/pages/136716512/Linking+model+elements+to+OSLC+resources
+- version_number: 2
+- version_date: `2026-02-11T08:02:26.229+01:00`
+- ancestors: Cameo DataHub Documentation > User Guide > Working with DataHub and modeling tools > Working with OSLC features
+- labels: []
+
+### NORMALIZED CONTENT
+
+You can link your model elements to the OSLC resources through the hyperlinks.
+
+There are two ways you can link a model element to an OSLC resource:
+
+- Selecting an existing resource
+- Creating a new resource
+
+##### Selecting an existing OSLC resource
+
+To link an element to an OSLC resource
+
+1. Do one of the following:
+  - In the Model Browser, select an element, open its [CONFLUENCE_PAGE title='Specification window' space='MD2024x']**Specification** window and go to Documentation / Hyperlinks property group. Click Add .
+  - On the diagram pane, select an element, click the Hyperlinks / Go To button at the bottom left corner of the element shape. Select Add Hyperlink .
+2. In the Edit Hyperlink dialog, open the OSLC Link tab.
+3. From the OSLC link type drop-down list, select a link type.
+4. Click the ... button. The Select OSLC Resource dialog opens. [ATTACHMENT filename='add_link.png']
+5. In the Select OSLC Resource dialog, select the Choose Existing option.
+6. Select an artifact and click OK . [ATTACHMENT filename='select.png']
+7. Click Close .
+8. Close the Edit Hyperlink dialog.
+
+##### Creating a new OSLC resource
+
+To create a new OSLC resource
+
+1. Do one of the following:
+  - In the Model Browser, select an element, open its [CONFLUENCE_PAGE title='Specification window' space='MD2024x']**Specification** window and go to Documentation / Hyperlinks property group. Click Add .
+  - On the diagram pane, select an element, click the Hyperlinks / Go To button at the bottom left corner of the element shape. Select Add Hyperlink .
+2. In the Edit Hyperlink dialog, open the OSLC Link tab.
+3. From the OSLC link type drop-down list, select a link type.
+4. Click the ... button. The Select OSLC Resource dialog opens. [ATTACHMENT filename='add_link.png']
+5. In the Select OSLC Resource dialog, select the Create New option.
+6. Fill out the data for the new element. [ATTACHMENT filename='create.png']
+7. Click OK .
+8. Close the Edit Hyperlink dialog.
+
+The created element is now linked to your selected model element.
+
+### EXACT CONFLUENCE STORAGE SOURCE
+
+````html
+<p class="auto-cursor-target"><br /></p><p>You can link your model elements to the OSLC resources through the hyperlinks.</p><p>There are two ways you can link a model element to an OSLC resource:</p><ul><li data-uuid="12402214-1eef-4cf8-a767-e3af36728c72">Selecting an existing resource</li><li data-uuid="b7922dba-4ccc-4d90-b85a-c30d1a9920d6">Creating a new resource</li></ul><h3>Selecting an existing OSLC resource</h3><p><br /></p><p>To link an element to an OSLC resource</p><hr /><ol><li data-uuid="b21638cc-8919-406b-9743-5996aa4ac91f">Do one of the following:<ul><li>In the Model Browser, select an element, open its <ac:link><ri:page ri:space-key="MD2024x" ri:content-title="Specification window" /><ac:link-body><strong>Specification</strong> window</ac:link-body></ac:link> and go to <strong>Documentation / Hyperlinks</strong> property group. Click <strong>Add</strong>.</li><li>On the diagram pane, select an element, click the <strong>Hyperlinks / Go To</strong> button at the bottom left corner of the element shape. Select <strong>Add Hyperlink</strong>.</li></ul></li><li data-uuid="ade35b7f-6468-4be6-8175-c15d55510c1b">In the <strong>Edit Hyperlink</strong> dialog, open the <strong>OSLC Link</strong> tab.</li><li data-uuid="33f18d56-fafa-410a-ac51-25f82f54ff9f">From the <strong>OSLC link type</strong> drop-down list, select a link type.</li><li data-uuid="d78fdbca-1cd1-4fdb-838b-5ce315778126">Click the <strong>...</strong> button. The <strong>Select OSLC Resource</strong> dialog opens.<br /><br /><ac:image><ri:attachment ri:filename="add_link.png" /></ac:image><br /><br /></li><li data-uuid="c0c7c200-5d1b-4f3f-9a39-c11f9c882822">In the <strong>Select OSLC Resource</strong> dialog, select the <strong>Choose Existing</strong> option.</li><li data-uuid="095ac860-3eda-49c0-820a-6cf33b39e7ff">Select an artifact and click <strong>OK</strong>.<br /><br /><ac:image><ri:attachment ri:filename="select.png" /></ac:image><br /><br /></li><li data-uuid="7cc045ba-d583-4a54-a039-0e26fd80d638">Click <strong>Close</strong>.</li><li data-uuid="eb624b59-a881-4964-890a-7c3735a59fd7">Close the <strong>Edit Hyperlink</strong> dialog.</li></ol><h3>Creating a new OSLC resource</h3><p><br /></p><p>To create a new OSLC resource</p><hr /><ol><li data-uuid="7aa0d52f-1351-4674-80e6-f4ffa0575141">Do one of the following:<ul><li>In the Model Browser, select an element, open its <ac:link><ri:page ri:space-key="MD2024x" ri:content-title="Specification window" /><ac:link-body><strong>Specification</strong> window</ac:link-body></ac:link> and go to <strong>Documentation / Hyperlinks</strong> property group. Click <strong>Add</strong>.</li><li>On the diagram pane, select an element, click the Hyperlinks / Go To button at the bottom left corner of the element shape. Select <strong>Add Hyperlink</strong>.</li></ul></li><li data-uuid="6eca8c10-1710-47bd-a661-15492173a175">In the <strong>Edit Hyperlink</strong> dialog, open the <strong>OSLC Link</strong> tab.</li><li data-uuid="b577a4e0-50d6-41b3-9bfb-ddb493ab625c">From the <strong>OSLC link type</strong> drop-down list, select a link type.</li><li data-uuid="f8cecba8-9c1e-4e89-b821-d66ca2fc56af">Click the <strong>...</strong> button. The <strong>Select OSLC Resource</strong> dialog opens.<br /><br /><ac:image><ri:attachment ri:filename="add_link.png" /></ac:image><br /><br /></li><li data-uuid="f711c065-06bb-45c0-a117-8096dd0e9df8">In the <strong>Select OSLC Resource</strong> dialog, select the <strong>Create New</strong> option.</li><li data-uuid="ece8303e-739c-4dc2-b3e0-74c433facec2">Fill out the data for the new element.<br /><br /><ac:image><ri:attachment ri:filename="create.png" /></ac:image><br /><br /></li><li data-uuid="cfb2e087-09b7-4700-853e-799373b63e4a">Click <strong>OK</strong>.</li><li data-uuid="a96b6588-e72a-4334-9d9d-b51736a24493">Close the <strong>Edit Hyperlink</strong> dialog.</li></ol><p>The created element is now linked to your selected model element.</p>
+````
+
+<!--NOMAGIC_PAGE id=136716899 space=CDH2024x version=1 -->
+## PAGE 00099: Mapping modes
+
+- page_id: `136716899`
+- space_key: `CDH2024x`
+- source_url: https://docs.nomagic.com/spaces/CDH2024x/pages/136716899/Mapping+modes
+- version_number: 1
+- version_date: `2023-09-21T06:05:03.139+02:00`
+- ancestors: Cameo DataHub Documentation > User Guide > Schema Mapping
+- labels: []
+
+### NORMALIZED CONTENT
+
+You can copy data from the MagicDraw Containment tree to **DataHub Explorer** or vice versa, or within **DataHub Explorer** by dragging the source item to the target item. Therefore, you need to have a Data Type and a Schema Map. If default Data Type or auto Schema Map is not found in the system, Cameo DataHub asks you to do the mapping.
+
+DataHub provides two types of schema mapping modes: **Individual Type Mapping** and **Group Type Mapping** as the default mapping mode, and the selected operation from DataHub Explorer is displayed as the name of the dialog, e.g., **Copy Data** dialog. You can also change the default setting through the **Cameo DataHub Options** dialog, including changing the default mapping mode.
+
+[IMAGE alt='' src='']
+
+###### The Mapping Mode drop-down list in the Copy Data with Sync dialog.
+
+If you have mapped a schema with the **[IMAGE alt='' src='']** option, DataHub saves this mode automatically and use it as the default mapping mode. You can still change the default mapping mode through the **Copy data** dialog.
+
+DataHub also provides a default Schema Map template for mapping data. In the **[CONFLUENCE_PAGE title='Schema Map Manager' space='CDH2024x']**dialog, you can find the default Schema Map template under the IBM® Rational® DOORS® driver side.
+
+When you select a Schema Map template for mapping, DataHub uses the selected template again next time you copy the same Data Type, if the copied data match the default Schema Map template. For example, if you copy a node from a DOORS Data Source to MagicDraw®, DataHub automatically selects a SysML Requirement node as the target type next time you copy data to the MagicDraw® driver. You can also change the default Schema Map template in the **Schema Map Manager** dialog.
+
+### EXACT CONFLUENCE STORAGE SOURCE
+
+````html
+<p>You can copy data from the MagicDraw Containment tree to <strong style="line-height: 1.4285715;">DataHub Explorer</strong> or vice versa, or within <strong style="line-height: 1.4285715;">DataHub Explorer</strong> by dragging the source item to the target item. Therefore, you need to have a Data Type and a Schema Map. If default Data Type or auto Schema Map is not found in the system, Cameo DataHub asks you to do the mapping.</p><p>DataHub provides two types of schema mapping modes: <strong>Individual Type Mapping</strong> and <strong>Group Type Mapping</strong> as the default mapping mode, and the selected operation from DataHub Explorer is displayed as the name of the dialog, e.g., <strong>Copy Data</strong> dialog. You can also change the default setting through the <strong>Cameo DataHub Options</strong> dialog, including changing the default mapping mode.<br /><br /></p><p style="text-align: center;"><ac:image><ri:attachment ri:filename="Copy Data with Sync Dialog with Mapping Dropdown List (Group Mapping).png"><ri:page ri:space-key="CDH2024x" ri:content-title="Mapping modes" /></ri:attachment></ac:image></p><h6 style="text-align: center;">The Mapping Mode drop-down list in the Copy Data with Sync dialog.</h6><p>If you have mapped a schema with the <strong><ac:image><ri:attachment ri:filename="define-target-type-from-attribute-value.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Mapping modes" /></ri:attachment></ac:image></strong> option, DataHub saves this mode automatically and use it as the default mapping mode. You can still change the default mapping mode through the <strong>Copy data</strong> dialog.</p><p>DataHub also provides a default Schema Map template for mapping data. In the <strong><ac:link><ri:page ri:space-key="CDH2024x" ri:content-title="Schema Map Manager" /></ac:link> </strong>dialog, you can find the default Schema Map template under the IBM<sup>®</sup> Rational<sup>®</sup> DOORS<sup>®</sup> driver side.</p><p>When you select a Schema Map template for mapping, DataHub uses the selected template again next time you copy the same Data Type, if the copied data match the default Schema Map template. For example, if you copy a node from a DOORS Data Source to MagicDraw<sup>®</sup>, DataHub automatically selects a SysML Requirement node as the target type next time you copy data to the MagicDraw<sup>®</sup> driver. You can also change the default Schema Map template in the <strong>Schema Map Manager</strong> dialog.</p>
+````
+
+<!--NOMAGIC_PAGE id=136715984 space=CDH2024x version=2 -->
+## PAGE 00100: Mapping source and target types to copy data to and from a modelling tool
+
+- page_id: `136715984`
+- space_key: `CDH2024x`
+- source_url: https://docs.nomagic.com/spaces/CDH2024x/pages/136715984/Mapping+source+and+target+types+to+copy+data+to+and+from+a+modelling+tool
+- version_number: 2
+- version_date: `2026-02-11T07:50:09.718+01:00`
+- ancestors: Cameo DataHub Documentation > Getting started > Basic features of DataHub
+- labels: []
+
+### NORMALIZED CONTENT
+
+Data can be copied into the MagicDraw® Containment area from other Data Sources. Data can also be moved from MagicDraw® into other Data Sources like DOORS and CSV repositories. You can use the Copy Data, Copy Data with Sync, and Copy Data with DHTrace operations to copy data. While moving the data, the **Copy Data**, **Copy Data with Sync,** or **Copy Data with DHTrace** dialog prompts you to map the source and target types as well as their attribute types. After you map the source and target types, you can copy the data.
+
+To copy data into MagicDraw® or to copy data to other Data Sources
+
+1. Drag the data node to another Data Source, e.g., DOORS. [IMAGE alt='' src=''] 
+ 
+The export dialog, e.g., **Copy Data with Sync**(depending on the operation you have selected from the [CONFLUENCE_PAGE title='DataHub Operation drop-down list' space='']), opens to allow you to map the source and target attribute. 
+ 
+[IMAGE alt='' src=''] 
+ 
+The detail of each option in the export dialog is explained in the table below. OptionFunction**Mapping mode**You can either do **Individual Type mapping** or **Group Type mapping**. **Individual type mapping** allows you to map the individual nodes themselves, and **Group Type mapping** allows you to map the node type as a whole.**Set as default target type**The source nodes are mapped to the selected stereotype element type as default. The export dialog will not open when you copy the same type of data next time.**Define Target Type from Attribute Value**This mapping option is only available for group type mapping mode. In this mapping mode, you can specify node values and their target types.**Exclude all no-mapped nodes from DHLinks**Unmapped nodes will not be copied, and the source nodes will be marked as excluded with an 'X' symbol. Unmapped nodes are marked with red circles beside them and the mapped ones have green circles.**Sync Direction****Two-way sync**, **One-way Sync from MagicDraw,** and **One-way Sync to MagicDraw**. Two-way sync changes the nodes on both ends, while one-way sync only synchronizes changes from the source node to the target node. a
+2. Choose a mapping type, either individual or group. Map the source types to target types and map source attributes to target attributes. When the nodes have all been mapped, the red circles beside them change to green. You can select Exclude all no-mapped nodes from DHLinks the checkbox to exclude nodes that have not been mapped from being copied.
+3. Click OK . The nodes are copied to the MagicDraw ® Containment area.
+
+**Related page**
+
+- [CONFLUENCE_PAGE title='DataHub Operation drop-down list' space='']
+
+### EXACT CONFLUENCE STORAGE SOURCE
+
+````html
+<p>Data can be copied into the MagicDraw<sup>®</sup> Containment area from other Data Sources. Data can also be moved from MagicDraw<sup>®</sup> into other Data Sources like DOORS and CSV repositories. You can use the Copy Data, Copy Data with Sync, and Copy Data with DHTrace operations to copy data. While moving the data, the <strong>Copy Data</strong>, <strong>Copy Data with Sync,</strong> or <strong>Copy Data with DHTrace</strong> dialog prompts you to map the source and target types as well as their attribute types. After you map the source and target types, you can copy the data.</p><p>To copy data into MagicDraw<sup>®</sup> or to copy data to other Data Sources</p><hr /><ol><li data-uuid="7930c4df-7bad-4d9b-9e9f-22fc53ea95bc">Drag the data node to another Data Source, e.g., DOORS.<br /><p class="auto-cursor-target"><br /><ac:image><ri:attachment ri:filename="Tutorial - Dragging DOORS Data Source.png" /></ac:image><br /><br />The export dialog, e.g., <strong>Copy Data with Sync </strong>(depending on the operation you have selected from the <ac:link><ri:page ri:content-title="DataHub Operation drop-down list" /></ac:link>), opens to allow you to map the source and target attribute.<br /><br /><ac:image><ri:attachment ri:filename="Export Dialog (Group Type Mapping, Copy Data with Sync).png" /></ac:image><br /><br />The detail of each option in the export dialog is explained in the table below.</p><table class="relative-table" style="width: 97.5529%;"><colgroup class=""> <col class="" style="width: 20.1533%;" /> <col class="" style="width: 79.88%;" /> </colgroup><tbody class=""><tr class=""><th><div class="content-wrapper"><p>Option</p></div></th><th>Function</th></tr><tr class=""><td><strong>Mapping mode</strong></td><td><div class="content-wrapper"><p>You can either do <strong>Individual Type mapping</strong> or <strong>Group Type mapping</strong>. <strong>Individual type mapping</strong> allows you to map the individual nodes themselves, and <strong>Group Type mapping</strong> allows you to map the node type as a whole.</p></div></td></tr><tr class=""><td><div class="content-wrapper"><p><strong>Set as default target type</strong></p></div></td><td><div class="content-wrapper"><p>The source nodes are mapped to the selected stereotype element type as default. The export dialog will not open when you copy the same type of data next time.</p></div></td></tr><tr class=""><td><div class="content-wrapper"><p><strong>Define Target Type from Attribute Value</strong></p></div></td><td>This mapping option is only available for group type mapping mode. In this mapping mode, you can specify node values and their target types.</td></tr><tr class=""><td><div class="content-wrapper"><p><strong>Exclude all no-mapped nodes from DHLinks</strong></p></div></td><td>Unmapped nodes will not be copied, and the source nodes will be marked as excluded with an 'X' symbol. Unmapped nodes are marked with red circles beside them and the mapped ones have green circles.</td></tr><tr class=""><td><strong>Sync Direction</strong></td><td><div class="content-wrapper"><p><strong>Two-way sync</strong>, <strong>One-way Sync from MagicDraw,</strong> and <strong>One-way Sync to MagicDraw</strong>. Two-way sync changes the nodes on both ends, while one-way sync only synchronizes changes from the source node to the target node.</p></div></td></tr></tbody></table><p><span style="color:var(--ds-text-inverse,#ffffff);">a</span></p></li><li data-uuid="48582e34-03ab-47eb-a917-cf52dd034e91">Choose a mapping type, either individual or group. Map the source types to target types and map source attributes to target attributes. When the nodes have all been mapped, the red circles beside them change to green. You can select <strong>Exclude all no-mapped nodes from DHLinks </strong>the checkbox to exclude nodes that have not been mapped from being copied.</li><li data-uuid="63209cf5-4aae-4b98-b8e4-367ecc3d5510">Click <strong>OK</strong>. The nodes are copied to the MagicDraw<sup>®</sup> Containment area.</li></ol><p><strong>Related page</strong></p><ul><li data-uuid="ca747e1c-c839-4e52-991d-bc37f05cc1d2"><ac:link><ri:page ri:content-title="DataHub Operation drop-down list" /></ac:link></li></ul><p><br /></p>
+````
+
+<!--NOMAGIC_PAGE id=136716598 space=CDH2024x version=1 -->
+## PAGE 00101: Mapping with Schema Map Manager
+
+- page_id: `136716598`
+- space_key: `CDH2024x`
+- source_url: https://docs.nomagic.com/spaces/CDH2024x/pages/136716598/Mapping+with+Schema+Map+Manager
+- version_number: 1
+- version_date: `2023-09-21T06:04:54.701+02:00`
+- ancestors: Cameo DataHub Documentation > User Guide > Working with DataHub and modeling tools > Requirement Mapping
+- labels: []
+
+### NORMALIZED CONTENT
+
+The **Schema Map Manager** dialog allows you to see all attributes of both sources and targets. It automates data matching and mapping so that you can integrate data on both sides and make them identical.
+
+To open the **Schema Map Manager** dialog in MagicDraw®
+
+1. From the main menu, click Tools > DataHub > Schema Map Manager . The Cameo DataHub Schema Map Manager dialog opens. [ATTACHMENT filename='Schema_Map_Manager.png']
+2. Expand the nodes to see the types that have already been mapped.
+
+You can also select a schema map template in the**Schema Map Manager** dialog by expanding each Data Source. DataHub also allows you to view schema maps used by particular relations. You can right-click an item in the table and select **View Schema Map** to open the**View Schema Map** dialog from that schema map.
+
+[IMAGE alt='' src='']
+
+###### The View Schema Map dialog showing schema maps used by particular relations.
+
+### EXACT CONFLUENCE STORAGE SOURCE
+
+````html
+<p>The <strong>Schema Map Manager</strong> dialog allows you to see all attributes of both sources and targets. It automates data matching and mapping so that you can integrate data on both sides and make them identical.</p><p>To open the <strong>Schema Map Manager</strong> dialog in MagicDraw<sup>®</sup></p><hr /><ol><li>From the main menu, click <strong>Tools</strong> &gt; <strong>DataHub</strong> &gt; <strong>Schema Map Manager</strong>. The Cameo DataHub <strong>Schema Map Manager</strong> dialog opens.<br /><br /><ac:image><ri:attachment ri:filename="Schema_Map_Manager.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Mapping with Schema Map Manager" /></ri:attachment></ac:image><br /><br /></li><li>Expand the nodes to see the types that have already been mapped.<br /><br /></li></ol><p>You can also select a schema map template in the<strong> Schema Map Manager</strong> dialog by expanding each Data Source. DataHub also allows you to view schema maps used by particular relations. You can right-click an item in the table and select <strong>View Schema Map</strong> to open the<strong> View Schema Map</strong> dialog from that schema map.<br /><br /></p><p style="text-align: center;"><ac:image><ri:attachment ri:filename="View Schema Map dialog.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Mapping with Schema Map Manager" /></ri:attachment></ac:image></p><h6 style="text-align: center;">The View Schema Map dialog showing schema maps used by particular relations.</h6>
+````
+
+<!--NOMAGIC_PAGE id=136716433 space=CDH2024x version=1 -->
+## PAGE 00102: Module artifacts of DOORS Next Generation
+
+- page_id: `136716433`
+- space_key: `CDH2024x`
+- source_url: https://docs.nomagic.com/spaces/CDH2024x/pages/136716433/Module+artifacts+of+DOORS+Next+Generation
+- version_number: 1
+- version_date: `2023-09-21T06:04:41.260+02:00`
+- ancestors: Cameo DataHub Documentation > User Guide > Working with DataHub and modeling tools > Working with Data Sources > Adding Data Sources for IBM Rational DOORS Next Generation
+- labels: []
+
+### NORMALIZED CONTENT
+
+Normally, artifacts of DOORS Next Generation do not have hierarchy, and the module artifact is the customized view of artifacts that can create structure of added or created artifacts. Since the module is also an artifact, DataHub will show the module as a single node. However, with new support of the DOORS Next Generation module, you can now open the module artifact to see a list of artifacts inside as a separate tab.
+
+#### NOTE: Note
+
+Note
+
+Since artifacts in the module and their hierarchy do not reflect the original ones, DataHub will treat artifacts in the module separately apart from the original artifacts out of the module.
+
+To open the module in a new tab
+
+- Right-click the module artifact and select **Open module in new window**. The module will be open in another tab. [IMAGE alt='' src=''] Using the Open module in new window command to open a DOORS Next Generation module artifact in a new tab. [IMAGE alt='' src=''] The selected Evaluation Suggestions DOORS Next Generation module artifact is open in a new tab.
+
+When you work with the module next time, you can open the module through **Alias Manager** or by clicking **Open module in new window**. In the module tab, you can perform all the same DataHub operations as in DataHub Explorer.
+
+### EXACT CONFLUENCE STORAGE SOURCE
+
+````html
+<p><span style="color: rgb(62,63,64);">Normally, artifacts of DOORS Next Generation do not have hierarchy, and the module artifact is the customized view of artifacts that can create structure of added or created artifacts. Since the module is also an artifact, DataHub will show the module as a single node. However, with new support of the DOORS Next Generation module, you can now open the module artifact to see a list of artifacts inside as a separate tab.</span></p><ac:structured-macro ac:name="note" ac:schema-version="1" ac:macro-id="50aa9403-eb49-42c9-ae9b-011bb3d449f5"><ac:parameter ac:name="title">Note</ac:parameter><ac:rich-text-body><p>Since artifacts in the module and their hierarchy do not reflect the original ones, DataHub will treat artifacts in the module separately apart from the original artifacts out of the module.</p></ac:rich-text-body></ac:structured-macro><p><br /></p><p>To open the module in a new tab</p><hr /><ul><li><p>Right-click the module artifact and select <strong style="letter-spacing: 0.0px;">Open module in new window</strong>. The module will be open in another tab.</p><p><ac:image><ri:attachment ri:filename="Open_module_new_window.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Module artifacts of DOORS Next Generation" /></ri:attachment></ac:image></p><h6><span style="color: rgb(128,128,128);">Using the Open module in new window command to open a DOORS Next Generation module artifact in a new tab.</span></h6><p><ac:image><ri:attachment ri:filename="Module Open3.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Module artifacts of DOORS Next Generation" /></ri:attachment></ac:image></p><h6><span style="color: rgb(128,128,128);"><span style="color: rgb(128,128,128);">The selected Evaluation Suggestions DOORS Next Generation module artifact is open in a new tab.</span><br /></span></h6></li></ul><p>When you work with the module next time, you can open the module through <strong>Alias Manager</strong> or by clicking <strong>Open module in new window</strong>. In the module tab, you can perform all the same DataHub operations as in DataHub Explorer.</p>
+````
+
+<!--NOMAGIC_PAGE id=136716746 space=CDH2024x version=1 -->
+## PAGE 00103: Node synchronization
+
+- page_id: `136716746`
+- space_key: `CDH2024x`
+- source_url: https://docs.nomagic.com/spaces/CDH2024x/pages/136716746/Node+synchronization
+- version_number: 1
+- version_date: `2023-09-21T06:04:58.015+02:00`
+- ancestors: Cameo DataHub Documentation > User Guide > Synchronization > Synchronizing Requirements
+- labels: []
+
+### NORMALIZED CONTENT
+
+Node synchronization allows you to select a particular node that you want to synchronize. There are two ways to synchronize a node: **Synchronize Node** and **Synchronize Node Recursively**.
+
+When you select a node and right-click to select **Synchronize Node**, DataHub synchronizes only the selected node. The **Synchronize Node Recursively** command synchronizes a selected node and its child nodes.
+
+After selecting a node that you want to synchronize, choose one of the following procedures to complete the node synchronization.
+
+To synchronize data with node synchronization on the MagicDraw® main menu
+
+1. Select a node to synchronize. On the main menu, click Tools > DataHub > Actions > Synchronize > Synchronize Node or Synchronize Node Recursively . [ATTACHMENT filename='Node Sync_Main Menu_Tools.png']
+
+To synchronize data with node synchronization on the MagicDraw side through the shortcut menu
+
+- In the MagicDraw Containment tree, right-click a node to synchronize and select DataHub Actions > Synchronize > Synchronize Node or Synchronize Node Recursively . [ATTACHMENT filename='Node Sync_Shortcut Menu.png']
+
+To synchronize data with node synchronization on the DataHub Explorer side through the shortcut menu
+
+- In DataHub Explorer, right-click a node to synchronize and click Synchronize > Synchronize Node or Synchronize Node Recursively .
+
+[IMAGE alt='' src='']
+
+When the **Data Synchronization Confirmation** dialog box opens, click **OK** to proceed.
+
+[IMAGE alt='' src='']
+
+###### The Data Synchronization Confirmation dialog box.
+
+#### NOTE: Note
+
+Note
+
+- The Synchronize menu item can detect changes in a node that has DHLink information, and synchronization can begin from the source node or the target node to the other node.
+- Both Check DHLink Changes and Synchronize commands can detect newly created nodes including the children only at one-level depth. For example, if you want to synchronize a node that you have synchronized before, but it has another new node created at the depth lower than one level after the last synchronization, that new node and its child nodes will not be detected.
+- Both Check DHLink Changes Recursively and Synchronize Node Recursively commands can detect only newly created nodes and their children.
+- Synchronization process and Check DHLink Changes process do not involve DHTrace .
+
+### EXACT CONFLUENCE STORAGE SOURCE
+
+````html
+<p>Node synchronization allows you to select a particular node that you want to synchronize. There are two ways to synchronize a node: <strong>Synchronize Node</strong> and <strong>Synchronize Node Recursively</strong>.</p><p>When you select a node and right-click to select <strong>Synchronize Node</strong>, DataHub synchronizes only the selected node. The <strong>Synchronize Node Recursively</strong> command synchronizes a selected node and its child nodes.</p><p>After selecting a node that you want to synchronize, choose one of the following procedures to complete the node synchronization.</p><p><br /></p><p>To synchronize data with node synchronization on the MagicDraw<sup>®</sup> main menu</p><hr /><ol><li>Select a node to synchronize. On the main menu, click <strong>Tools</strong> &gt; <strong>DataHub</strong> &gt; <strong>Actions </strong>&gt;<strong> Synchronize</strong> &gt; <strong>Synchronize Node</strong> or <strong>Synchronize Node Recursively</strong>.<br /><br /><ac:image><ri:attachment ri:filename="Node Sync_Main Menu_Tools.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Node synchronization" /></ri:attachment></ac:image><br /><br /></li></ol><p>To synchronize data with node synchronization on the MagicDraw side through the shortcut menu</p><hr /><ul><li>In the MagicDraw Containment tree, right-click a node to synchronize and select <strong>DataHub Actions</strong> &gt; <strong>Synchronize</strong> &gt; <strong>Synchronize Node</strong> or <strong>Synchronize Node Recursively</strong>.<br /><br /><ac:image><ri:attachment ri:filename="Node Sync_Shortcut Menu.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Node synchronization" /></ri:attachment></ac:image><br /><br /></li></ul><p>To synchronize data with node synchronization on the DataHub Explorer side through the shortcut menu</p><hr /><ul><li>In DataHub Explorer, right-click a node to synchronize and click <strong>Synchronize</strong> &gt; <strong>Synchronize Node</strong> or <strong>Synchronize Node Recursively</strong>.</li></ul><p style="margin-left: 30.0px;"><ac:image><ri:attachment ri:filename="Node Sync_Shortcut Menu_Explorer panel.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Node synchronization" /></ri:attachment></ac:image></p><p style="margin-left: 30.0px;"><br /></p><p style="margin-left: 30.0px;">When the <strong>Data Synchronization Confirmation</strong> dialog box opens, click <strong>OK</strong> to proceed.</p><p style="margin-left: 30.0px;"><br /></p><p style="margin-left: 30.0px;"><ac:image ac:align="center" ac:title="Data Synchronization Confirmation Dialog" ac:alt="Data Synchronization Confirmation Dialog"><ri:attachment ri:filename="dh-sync-confirmation-dialog.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Node synchronization" /></ri:attachment></ac:image></p><h6 style="margin-left: 30.0px;text-align: center;">The Data Synchronization Confirmation dialog box.</h6><ac:structured-macro ac:name="note" ac:schema-version="1" ac:macro-id="38165f4e-7d12-47b8-906b-62bc962c4db9"><ac:parameter ac:name="title">Note</ac:parameter><ac:rich-text-body><ul><li>The <strong>Synchronize</strong> menu item can detect changes in a node that has DHLink information, and synchronization can begin from the source node or the target node to the other node.</li><li>Both <strong>Check DHLink Changes</strong> and <strong>Synchronize</strong> commands can detect newly created nodes including the children only at one-level depth. For example, if you want to synchronize a node that you have synchronized before, but it has another new node created at the depth lower than one level after the last synchronization, that new node and its child nodes will not be detected.</li><li>Both <strong>Check DHLink Changes Recursively</strong> and <strong>Synchronize Node Recursively</strong> commands can detect only newly created nodes and their children.</li><li>Synchronization process and <strong>Check DHLink Changes</strong> process do not involve <strong>DHTrace</strong>.</li></ul></ac:rich-text-body></ac:structured-macro><p class="auto-cursor-target"><br /></p>
+````
+
+<!--NOMAGIC_PAGE id=136716784 space=CDH2024x version=1 -->
+## PAGE 00104: One-way synchronization
+
+- page_id: `136716784`
+- space_key: `CDH2024x`
+- source_url: https://docs.nomagic.com/spaces/CDH2024x/pages/136716784/One-way+synchronization
+- version_number: 1
+- version_date: `2023-09-21T06:04:59.055+02:00`
+- ancestors: Cameo DataHub Documentation > User Guide > Synchronization
+- labels: []
+
+### NORMALIZED CONTENT
+
+Synchronization updates data from one end of a DHLink to another. With one-way synchronization, data flows in only one direction. With two-way synchronization, you can either synchronize data from the source to the target or from the target to the source. Nodes that are selected for one-way synchronization have the [IMAGE alt='' src='']icons.
+
+[IMAGE alt='' src='']
+
+###### Nodes selected for one-way synchronization in the MagicDraw Containment tree.
+
+One-way synchronization updates data only in the direction specified in the **Sync Direction** option. For example, if the synchronization direction is from the source to the target, DataHub will synchronize updates that come from the source to the target data.
+
+If there are no changes in the source data, a message saying there are no changes to synchronize appears.
+
+To copy data with one-way synchronization
+
+1. Drag a source node to a target node. The Copy Data with Sync dialog appears, depending on what you have selected in the Operation drop-down list. From the Mapping Mode drop-down list, choose either Group Type Mapping or Individual Type Mapping . [ATTACHMENT filename='Node Mapping Group - One Way.png'] [ATTACHMENT filename='Node Mapping Individual - One Way.png']
+2. From the Sync Direction option, choose the direction of data synchronization. The selected synchronization direction will apply to all nodes to copy. Available options for data synchronization direction are Two-way Sync , One-way Sync to MagicDraw , and One-way Sync from MagicDraw .
+3. Complete the schema mapping then click OK to start copying data.
+
+To apply one-way or two-way synchronization direction to any existing relations
+
+1. Double-click the root node of the DHLink hierarchy or right-click it and select Properties . The Cameo DataHub DHLink panel opens.
+2. Right-click the relation that you want to apply one-way synchronization to and select Change Direction .
+3. Select the synchronization direction that you want. The selected synchronization direction will recursively apply to all child nodes.
+
+[IMAGE alt='' src='']
+
+### EXACT CONFLUENCE STORAGE SOURCE
+
+````html
+<p>Synchronization updates data from one end of a DHLink to another. With one-way synchronization, data flows in only one direction. With two-way synchronization, you can either synchronize data from the source to the target or from the target to the source. Nodes that are selected for one-way synchronization have the <ac:image><ri:attachment ri:filename="1s-icon.png"><ri:page ri:space-key="CDH2024x" ri:content-title="One-way synchronization" /></ri:attachment></ac:image>icons.</p><p><br /></p><p style="margin-left: 30.0px;"><ac:image ac:align="center"><ri:attachment ri:filename="worddav83e10b4cf089f3d962b8145bb2661583.png"><ri:page ri:space-key="CDH2024x" ri:content-title="One-way synchronization" /></ri:attachment></ac:image></p><h6 style="text-align: center;">Nodes selected for one-way synchronization in the MagicDraw Containment tree.</h6><p>One-way synchronization updates data only in the direction specified in the <strong>Sync Direction</strong> option. For example, if the synchronization direction is from the source to the target, DataHub will synchronize updates that come from the source to the target data.</p><p>If there are no changes in the source data, a message saying there are no changes to synchronize appears.</p><p><br /></p><p>To copy data with one-way synchronization</p><hr /><ol><li>Drag a source node to a target node. The <strong>Copy Data with Sync</strong> dialog appears, depending on what you have selected in the <strong>Operation</strong> drop-down list. From the <strong>Mapping Mode</strong> drop-down list, choose either<strong> Group Type Mapping</strong> or <strong>Individual Type Mapping</strong>.<strong><br /></strong><br /><ac:image><ri:attachment ri:filename="Node Mapping Group - One Way.png"><ri:page ri:space-key="CDH2024x" ri:content-title="One-way synchronization" /></ri:attachment></ac:image><br /><br /><ac:image><ri:attachment ri:filename="Node Mapping Individual - One Way.png"><ri:page ri:space-key="CDH2024x" ri:content-title="One-way synchronization" /></ri:attachment></ac:image><br /><br /></li><li>From the <strong>Sync Direction</strong> option, choose the direction of data synchronization. The selected synchronization direction will apply to all nodes to copy. Available options for data synchronization direction are <strong><span class="confluence-embedded-file-wrapper">Two-way Sync</span></strong>, <strong>One-way Sync to MagicDraw</strong>, and <strong>One-way Sync from MagicDraw</strong>.</li><li><a href="https://docs.nomagic.com/display/CDH2024x/Mapping+source+and+target+types+to+copy+data+to+and+from+a+modeling+tool">Complete the schema mapping</a> then click <strong>OK</strong> to start copying data.</li></ol><p><br /></p><p>To apply one-way or two-way synchronization direction to any existing relations</p><hr /><ol><li>Double-click the root node of the DHLink hierarchy or right-click it and select <strong>Properties</strong>. The Cameo DataHub <strong>DHLink panel</strong> opens.</li><li>Right-click the relation that you want to apply one-way synchronization to and select <strong>Change Direction</strong>.</li><li>Select the synchronization direction that you want. The selected synchronization direction will recursively apply to all child nodes.</li></ol><p>     <ac:image ac:title="Changing Sync Direction through the Shortcut Menu" ac:alt="Changing Sync Direction through the Shortcut Menu"><ri:attachment ri:filename="change-direction.png"><ri:page ri:space-key="CDH2024x" ri:content-title="One-way synchronization" /></ri:attachment></ac:image></p>
+````
+
+<!--NOMAGIC_PAGE id=136715959 space=CDH2024x version=2 -->
+## PAGE 00105: Opening DataHub Explorer
+
+- page_id: `136715959`
+- space_key: `CDH2024x`
+- source_url: https://docs.nomagic.com/spaces/CDH2024x/pages/136715959/Opening+DataHub+Explorer
+- version_number: 2
+- version_date: `2026-02-11T07:44:52.834+01:00`
+- ancestors: Cameo DataHub Documentation > Getting started
+- labels: []
+
+### NORMALIZED CONTENT
+
+To open **DataHub Explorer**
+
+1. Create a new MagicDraw ® project or open an existing project.
+2. From the MagicDraw main menu, click Tools > DataHub > DataHub Explorer . The [CONFLUENCE_PAGE title='DataHub Explorer tab' space=''] opens.
+
+[IMAGE alt='' src='']
+
+#### NOTE: Note
+
+Note
+
+- Nodes under particular drivers in DataHub Explorer also represent nodes in the applications belonging to the drivers.
+- If a driver is correctly started, the name of the driver will appear in the DataHub Explorer tree. The driver will then connect to data in each of its respective application.
+
+**Related page**
+
+- [CONFLUENCE_PAGE title='DataHub Explorer tab' space='']
+
+### EXACT CONFLUENCE STORAGE SOURCE
+
+````html
+<p><span style="color:var(--ds-text,#333333);">To open <strong>DataHub Explorer</strong></span></p><hr /><ol><li data-uuid="ea297185-ac74-4913-89a1-e713226c5f3c">Create a new MagicDraw<sup>®</sup> project or open an existing project.</li><li data-uuid="126109d8-027c-4c3f-9f53-907702224274">From the MagicDraw main menu, click <strong>Tools</strong> &gt; <strong>DataHub</strong> &gt; <strong>DataHub Explorer</strong>. The <ac:link><ri:page ri:content-title="DataHub Explorer tab" /></ac:link> opens.<br /> </li></ol><p style="margin-left: 30.0px;"><ac:image ac:title="DataHub Explorer" ac:alt="DataHub Explorer"><ri:attachment ri:filename="worddavff8df49b8dd564525b509af5bc3f682e.png" /></ac:image></p><p class="auto-cursor-target"><br /></p><ac:structured-macro ac:name="note" ac:schema-version="1" ac:macro-id="59442eae-22b5-4d89-902c-278cc7ff4145"><ac:parameter ac:name="title">Note</ac:parameter><ac:rich-text-body><ul><li data-uuid="4f68eacc-e2d3-42be-b416-f3fe16d483b7">Nodes under particular drivers in <strong>DataHub Explorer</strong> also represent nodes in the applications belonging to the drivers.</li><li data-uuid="b2534cc6-7e8f-4271-880c-da3b37732c90">If a driver is correctly started, the name of the driver will appear in the <strong>DataHub Explorer</strong> tree. The driver will then connect to data in each of its respective application.</li></ul></ac:rich-text-body></ac:structured-macro><p><strong>Related page</strong></p><ul><li data-uuid="aee445f2-38dc-4db1-82d4-6b103766279b"><ac:link><ri:page ri:content-title="DataHub Explorer tab" /></ac:link></li></ul>
+````
+
+<!--NOMAGIC_PAGE id=136716581 space=CDH2024x version=1 -->
+## PAGE 00106: Opening selected Requirements in DataHub Explorer or other applications
+
+- page_id: `136716581`
+- space_key: `CDH2024x`
+- source_url: https://docs.nomagic.com/spaces/CDH2024x/pages/136716581/Opening+selected+Requirements+in+DataHub+Explorer+or+other+applications
+- version_number: 1
+- version_date: `2023-09-21T06:04:54.458+02:00`
+- ancestors: Cameo DataHub Documentation > User Guide > Working with DataHub and modeling tools > Creating links between elements
+- labels: []
+
+### NORMALIZED CONTENT
+
+To open a selected Requirement in **DataHub Explorer** or other applications****
+
+- Right-click the Requirement node you want to open and select DataHub Actions > Select Related Element . You can choose DataHub Explorer to open the Requirement node in DataHub Explorer, or you can choose Application to open the Requirement node in the other application that the node is associated with, e.g., DOORS.
+
+[IMAGE alt='' src='']
+
+### EXACT CONFLUENCE STORAGE SOURCE
+
+````html
+<p>To open a selected Requirement in <strong>DataHub Explorer</strong> or other applications<strong><br /></strong></p><hr /><ul><li>Right-click the Requirement node you want to open and select <strong>DataHub </strong><strong>Actions</strong> &gt; <strong>Select Related Element</strong>. You can choose <strong>DataHub Explorer</strong> to open the Requirement node in DataHub Explorer, or you can choose <strong>Application</strong> to open the Requirement node in the other application that the node is associated with, e.g., DOORS.<br /><br /></li></ul><p style="margin-left: 30.0px;"><ac:image><ri:attachment ri:filename="Navigating Selected Requirement in Explorer.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Opening selected Requirements in DataHub Explorer or other applications" /></ri:attachment></ac:image></p>
+````
+
+<!--NOMAGIC_PAGE id=136715841 space=CDH2024x version=2 -->
+## PAGE 00107: Operation drop-down list
+
+- page_id: `136715841`
+- space_key: `CDH2024x`
+- source_url: https://docs.nomagic.com/spaces/CDH2024x/pages/136715841/Operation+drop-down+list
+- version_number: 2
+- version_date: `2026-02-11T07:16:34.672+01:00`
+- ancestors: Cameo DataHub Documentation > Getting started > Understanding DataHub user interface > DataHub Explorer tab
+- labels: []
+
+### NORMALIZED CONTENT
+
+The DataHub **Operation** drop-down list has multiple operations as described below.
+
+[IMAGE alt='' src='']
+
+###### The DataHub Operation drop-down list.
+
+##### Copy Data
+
+This operation only copies data. It does not allow synchronization.
+
+##### Copy Data with Sync
+
+This operation mode allows copying data with synchronization. You can perform synchronization between source and target nodes, either unidirectional or bidirectional, in this mode.
+
+##### Copy Data with DHTrace
+
+This operation mode copies data and also includes a trace link between the source and target elements. When a node containing a trace link changes, that trace link is marked **Suspect**.
+
+Trace links or DHTrace links can exist between text-based Requirements and models or elements that define them, like use cases, system artifacts, documents, and other Requirement objects.
+
+When the nodes being traced are modified, deleted, or moved, you can right-click a node in either the MagicDraw Containment tree or DataHub Explorer and select **Check DHTrace Changes Recursively**. Choosing this option opens up the**DHTrace Summary** dialog which lists all the **Suspect** links in the system. You can choose to clear the **Suspect** trace through the **DHTrace Summary** dialog or you can leave them. In this case, the Requirement is validated.
+
+##### Create Sync
+
+This operation recreates synchronization (DHLinks) in case you lose or delete the DHLinks. The synchronization (DHLinks) is recreated without replicating the data.
+
+##### Create DHTrace (with OSLC links)
+
+This operation mode creates a **DHTrace** link between the source and target items. A trace link can exist between two requirement objects or between requirements and their model elements such as a use-case. As in the previous operation mode, whenever the source or target nodes are moved, modified, or deleted, will result in the trace link becoming **Suspect**.
+
+You can then right-click the node in the MagicDraw containment tree or DataHub Explorer and choose **Check DHTrace Changes Recursively**. The **DHTrace Summary** dialog will open allowing you to clear the trace links which have acquired a suspect status, thus validating the state of the requirement and the linked UML element.
+
+##### Creating OSLC links (through the Create DHTrace operation)
+
+#### NOTE: Note
+
+Note
+
+In the 19.0 and later versions, the **Create OSLC link** operation is not displayed and is used through the **Create DHTrace** operation instead of the **Operation** drop-down list in **Cameo DataHub Explorer**.
+
+OSLC links can be created when you open an IBM® Rational® DOORS® Next Generation Data Source in DataHub. You can create OSLC links from IBM® Rational® DOORS® Next Generation artifacts repository by using the **Create DHTrace** operation from the **Operation** drop-down list in **Cameo DataHub Explorer**.
+
+Typically, an OSLC link is a relation between two lifecycle artifacts. Relationships are modeled with two types of properties: link property and backlink property. The following relations have properties listed in the table below
+
+| Relation | Link property | Backlink property |
+| --- | --- | --- |
+| implementation |  | oslc.implementedBy |
+| constrain | oslc.constrains | oslc.constrainedBy |
+| elaborate | oslc.elaborates | oslc.elaboratedBy |
+| satisfy | oslc.satisfies | oslc.satisfiedBy |
+| affect |  | oslc.affectedBy |
+| specify | oslc.specifies | oslc.specifiedBy |
+| track |  | oslc.trackedBy |
+| decompose | oslc.decomposes | oslc.decomposedBy |
+| validate |  | oslc.validatedBy |
+
+**Related pages**
+
+- [CONFLUENCE_PAGE title='Copy Data operation' space='']
+- [CONFLUENCE_PAGE title='Copy Data with Sync operation' space='']
+- [CONFLUENCE_PAGE title='Copy Data with DHTrace operation' space='']
+- [CONFLUENCE_PAGE title='Create Sync operation' space='']
+- [CONFLUENCE_PAGE title='Create DHTrace operation with OSLC links' space='']
+
+### EXACT CONFLUENCE STORAGE SOURCE
+
+````html
+<p>The DataHub <strong>Operation</strong> drop-down list has multiple operations as described below.</p><p><ac:image ac:align="center"><ri:attachment ri:filename="CDH_Panel.png" /></ac:image></p><h6 style="text-align: center;">The DataHub Operation drop-down list.</h6><h3>Copy Data</h3><p>This operation only copies data. It does not allow synchronization.</p><h3>Copy Data with Sync</h3><p>This operation mode allows copying data with synchronization. You can perform synchronization between source and target nodes, either unidirectional or bidirectional, in this mode.</p><h3>Copy Data with DHTrace</h3><p>This operation mode copies data and also includes a trace link between the source and target elements. When a node containing a trace link changes, that trace link is marked <strong>Suspect</strong>.</p><p>Trace links or DHTrace links can exist between text-based Requirements and models or elements that define them, like use cases, system artifacts, documents, and other Requirement objects.</p><p>When the nodes being traced are modified, deleted, or moved, you can right-click a node in either the MagicDraw Containment tree or DataHub Explorer and select <strong>Check DHTrace Changes Recursively</strong>. Choosing this option opens up the<strong> DHTrace Summary</strong> dialog which lists all the <strong>Suspect</strong> links in the system. You can choose to clear the <strong>Suspect</strong> trace through the <strong>DHTrace Summary</strong> dialog or you can leave them. In this case, the Requirement is validated.</p><h3>Create Sync</h3><p>This operation recreates synchronization (DHLinks) in case you lose or delete the DHLinks. The synchronization (DHLinks) is recreated without replicating the data.</p><h3>Create DHTrace (with OSLC links)</h3><p>This operation mode creates a <strong>DHTrace</strong> link between the source and target items. A trace link can exist between two requirement objects or between requirements and their model elements such as a use-case. As in the previous operation mode, whenever the source or target nodes are moved, modified, or deleted, will result in the trace link becoming <strong>Suspect</strong>.</p><p>You can then right-click the node in the MagicDraw containment tree or DataHub Explorer and choose <strong>Check DHTrace Changes Recursively</strong>. The <strong>DHTrace Summary</strong> dialog will open allowing you to clear the trace links which have acquired a suspect status, thus validating the state of the requirement and the linked UML element.</p><h3>Creating OSLC links (through the Create DHTrace operation)</h3><ac:structured-macro ac:name="note" ac:schema-version="1" ac:macro-id="d57a198f-0480-4b8a-ab5a-b1ccb1ada965"><ac:parameter ac:name="title">Note</ac:parameter><ac:rich-text-body><p>In the 19.0 and later versions, the <strong>Create OSLC link</strong> operation is not displayed and is used through the <strong>Create DHTrace</strong> operation instead of the <strong>Operation</strong> drop-down list in <strong>Cameo DataHub Explorer</strong>.</p></ac:rich-text-body></ac:structured-macro><p>OSLC links can be created when you open an IBM<sup>®</sup> Rational<sup>®</sup> DOORS<sup>®</sup> Next Generation Data Source in DataHub. You can create OSLC links from IBM<sup>®</sup> Rational<sup>®</sup> DOORS<sup>®</sup> Next Generation artifacts repository by using the <strong>Create DHTrace</strong> operation from the <strong>Operation</strong> drop-down list in <strong>Cameo DataHub Explorer</strong>.</p><p>Typically, an OSLC link is a relation between two lifecycle artifacts. Relationships are modeled with two types of properties: link property and backlink property. The following relations have properties listed in the table below</p><table style="margin-left: 30.0px;"><colgroup class=""><col class="" /><col class="" /><col class="" /></colgroup><thead class="" style="margin-left: 30.0px;"><tr class="" style="margin-left: 30.0px;"><td class="highlight-grey" colspan="1" data-highlight-colour="grey"><strong><span style="color:var(--ds-text,#000000);">Relation</span></strong></td><td class="highlight-grey" colspan="1" data-highlight-colour="grey"><strong><span style="color:var(--ds-text,#000000);">Link property</span></strong></td><td class="highlight-grey" colspan="1" data-highlight-colour="grey"><strong><span style="color:var(--ds-text,#000000);">Backlink property</span></strong></td></tr></thead><tbody class="" style="margin-left: 30.0px;"><tr class="" style="margin-left: 30.0px;"><td>implementation</td><td><br /></td><td>oslc.implementedBy</td></tr><tr class="" style="margin-left: 30.0px;"><td>constrain</td><td>oslc.constrains</td><td>oslc.constrainedBy</td></tr><tr class="" style="margin-left: 30.0px;"><td>elaborate</td><td>oslc.elaborates</td><td>oslc.elaboratedBy</td></tr><tr class="" style="margin-left: 30.0px;"><td colspan="1">satisfy</td><td colspan="1">oslc.satisfies</td><td colspan="1">oslc.satisfiedBy</td></tr><tr class="" style="margin-left: 30.0px;"><td colspan="1">affect</td><td colspan="1"><br /></td><td colspan="1">oslc.affectedBy</td></tr><tr class="" style="margin-left: 30.0px;"><td colspan="1">specify</td><td colspan="1">oslc.specifies</td><td colspan="1">oslc.specifiedBy</td></tr><tr class="" style="margin-left: 30.0px;"><td colspan="1">track</td><td colspan="1"><br /></td><td colspan="1">oslc.trackedBy</td></tr><tr class="" style="margin-left: 30.0px;"><td colspan="1">decompose</td><td colspan="1">oslc.decomposes</td><td colspan="1">oslc.decomposedBy</td></tr><tr class="" style="margin-left: 30.0px;"><td colspan="1">validate</td><td colspan="1"><br /></td><td colspan="1">oslc.validatedBy</td></tr></tbody></table><p><strong>Related pages</strong></p><ul><li data-uuid="2f53d12e-ccf8-4af6-a785-1d100f845038"><ac:link><ri:page ri:content-title="Copy Data operation" /></ac:link></li><li data-uuid="fa963683-97c4-418a-a7af-107264caefde"><ac:link><ri:page ri:content-title="Copy Data with Sync operation" /></ac:link></li><li data-uuid="9b0f6089-bc4d-4ab8-a7da-5dcf4be1770f"><ac:link><ri:page ri:content-title="Copy Data with DHTrace operation" /></ac:link></li><li data-uuid="17abaa6b-fe8e-44d3-83fb-f91151fd0b59"><ac:link><ri:page ri:content-title="Create Sync operation" /></ac:link></li><li data-uuid="dccedcdf-15ad-4f45-96cb-5d9c6d21fa4f"><ac:link><ri:page ri:content-title="Create DHTrace operation with OSLC links" /></ac:link></li></ul>
+````
+
+<!--NOMAGIC_PAGE id=136716207 space=CDH2024x version=3 -->
+## PAGE 00108: Operations in DataHub Explorer
+
+- page_id: `136716207`
+- space_key: `CDH2024x`
+- source_url: https://docs.nomagic.com/spaces/CDH2024x/pages/136716207/Operations+in+DataHub+Explorer
+- version_number: 3
+- version_date: `2026-02-11T07:58:39.401+01:00`
+- ancestors: Cameo DataHub Documentation > User Guide > Working with DataHub and modeling tools
+- labels: []
+
+### NORMALIZED CONTENT
+
+INLINE
+
+The **Operation**list in the **Cameo DataHub Explorer**panel provides several options for you to work with your data.
+
+[IMAGE alt='' src='']
+
+###### Operation drop-down list
+
+The table below briefly explains the functions of the DataHub operations.
+
+| Operation | Function |
+| --- | --- |
+| Copy Data | Only copies the data with child nodes. |
+| Copy Data with Sync | Copies data and creates synchronization (DHLinks) between the source and target nodes. Nodes in the modeling tool are updated or deleted whenever their corresponding nodes in associated tools are updated or deleted. The newly created nodes can be transferred to other associated tools as well. |
+| Copy Data with DHTrace | Copies data and creates DHTrace links between the source and target nodes. DHLinks are used to trace the changes. |
+| Create Sync | Recreates synchronization (DHLinks) if you lose or delete the DHLinks without replicating the data. |
+| Create DHTrace (with OSLC links) | Creates DHLinks between the source and target nodes without copying any data.Creates an OSLC link from an IBM® Rational® DOORS® Next Generation Data Source to a MagicDraw® element. |
+
+- The parent-and-child relationships are transferred from the source to the target items.
+- The dependency relationships from MagicDraw® are also transferred if both the source and target nodes are selected.
+- By default, Copy Data with Sync is selected in the operations list.
+
+**Related Pages**
+
+- [CONFLUENCE_PAGE title='Copy Data operation' space='']
+- [CONFLUENCE_PAGE title='Copy Data with Sync operation' space='']
+- [CONFLUENCE_PAGE title='Copy Data with DHTrace operation' space='']
+- [CONFLUENCE_PAGE title='Create Sync operation' space='']
+- [CONFLUENCE_PAGE title='Create DHTrace operation with OSLC links' space='']
+- [CONFLUENCE_PAGE title='Compatible data sources' space='']
+
+### EXACT CONFLUENCE STORAGE SOURCE
+
+````html
+<ac:layout><ac:layout-section ac:type="single"><ac:layout-cell><ac:structured-macro ac:name="excerpt" ac:schema-version="1" ac:macro-id="6bdad06c-a0b1-49c2-ab7d-d1a59c05ac4c"><ac:parameter ac:name="atlassian-macro-output-type">INLINE</ac:parameter><ac:rich-text-body><p>The <strong>Operation </strong>list in the <strong>Cameo DataHub Explorer </strong>panel provides several options for you to work with your data.</p><p style="text-align: center;"><ac:image><ri:attachment ri:filename="CDH_Panel.png" /></ac:image></p><h6 style="text-align: center;">Operation drop-down list</h6><p>The table below briefly explains the functions of the DataHub operations.</p><p><br /></p><table class="fixed-table wrapped"><colgroup><col style="width: 257.0px;" /><col style="width: 996.0px;" /></colgroup><tbody><tr><th>Operation</th><th>Function</th></tr><tr><td><strong>Copy Data</strong></td><td>Only copies the data with child nodes.</td></tr><tr><td><strong>Copy Data with Sync</strong></td><td><div class="content-wrapper"><p>Copies data and creates synchronization (DHLinks) between the source and target nodes. Nodes in the modeling tool are updated or deleted whenever their corresponding nodes in associated tools are updated or deleted. The newly created nodes can be transferred to other associated tools as well.</p></div></td></tr><tr><td><strong>Copy Data with DHTrace</strong></td><td>Copies data and creates DHTrace links between the source and target nodes. DHLinks are used to trace the changes.</td></tr><tr><td><strong>Create Sync</strong></td><td>Recreates synchronization (DHLinks) if you lose or delete the DHLinks without replicating the data.</td></tr><tr><td><strong>Create DHTrace (with OSLC links)</strong></td><td>Creates DHLinks between the source and target nodes without copying any data.<br />Creates an OSLC link from an IBM® Rational® DOORS® Next Generation Data Source to a MagicDraw® element.</td></tr></tbody></table><ac:structured-macro ac:name="info" ac:schema-version="1" ac:macro-id="72de58ac-4522-4ab4-8c99-427b6a92c097"><ac:rich-text-body><ul><li data-uuid="b1957a24-deb3-453f-81e4-acb2fefa2a4c">The parent-and-child relationships are transferred from the source to the target items.</li><li data-uuid="efb7ba73-9b3a-4d08-a47f-936840482611">The dependency relationships from MagicDraw® are also transferred if both the source and target nodes are selected.</li><li data-uuid="16f7451e-6f07-4a36-8012-56f28e599e2a">By default, <strong>Copy Data with Sync</strong> is selected in the operations list.</li></ul></ac:rich-text-body></ac:structured-macro></ac:rich-text-body></ac:structured-macro></ac:layout-cell></ac:layout-section><ac:layout-section ac:type="single"><ac:layout-cell><p><strong>Related Pages</strong></p><ul><li data-uuid="3afe5ca8-fd87-4f4d-a4bd-f4904e349047"><ac:link><ri:page ri:content-title="Copy Data operation" /></ac:link></li><li data-uuid="836154c5-58d4-4109-95c6-e7111e39c2b2"><ac:link><ri:page ri:content-title="Copy Data with Sync operation" /></ac:link></li><li data-uuid="de9331cf-d2f2-4369-ac5e-4047282f144a"><ac:link><ri:page ri:content-title="Copy Data with DHTrace operation" /></ac:link></li><li data-uuid="04b26114-510c-4d98-905c-e80352e61dea"><ac:link><ri:page ri:content-title="Create Sync operation" /></ac:link></li><li data-uuid="4700e332-5a3f-4768-8ab7-459509203c91"><ac:link><ri:page ri:content-title="Create DHTrace operation with OSLC links" /></ac:link></li><li data-uuid="edac726d-c4a5-46c0-99f5-b73169564d68"><ac:link><ri:page ri:content-title="Compatible data sources" /></ac:link></li></ul></ac:layout-cell></ac:layout-section><ac:layout-section ac:type="single"><ac:layout-cell><p><br /></p></ac:layout-cell></ac:layout-section></ac:layout>
+````
+
+<!--NOMAGIC_PAGE id=136716505 space=CDH2024x version=1 -->
+## PAGE 00109: OSLC Preview
+
+- page_id: `136716505`
+- space_key: `CDH2024x`
+- source_url: https://docs.nomagic.com/spaces/CDH2024x/pages/136716505/OSLC+Preview
+- version_number: 1
+- version_date: `2023-09-21T06:04:47.208+02:00`
+- ancestors: Cameo DataHub Documentation > User Guide > Working with DataHub and modeling tools > Working with OSLC features
+- labels: []
+
+### NORMALIZED CONTENT
+
+Using **DataHub Explorer**, you can connect to the Data Sources, such as IBM® Rational® DOORS®, IBM® Rational® DOORS Next Generation, or other OSLC Providers. **DataHub Explorer** lists the content of the open Data Source.
+
+The **OSLC Preview** tab in the [CONFLUENCE_PAGE title='Understanding the user interface' space='MD2024x'] allows you to view the details of the OSLC resource. The OSLC resource can be selected from **DataHub Explorer**, in the MagicDraw Containment tree, and an OSLC link to the other node from the connected OSLC Data Source that links to an element selected in the Model Browser**.**
+
+To open the **OSLC Preview** tab
+
+- From the main menu, select Window > OSLC Preview .
+
+[IMAGE alt='' src='']
+
+You can use OSLC preview to display the information of the selected node or the linked node in the following ways:
+
+- When you add an OSLC Data Source into DataHub Explorer , e.g., DOORS Next Generation, the OSLC Preview tab can display the information of the selected node.
+
+[IMAGE alt='' src='']
+
+###### The details of the selected OSLC resource in Cameo DataHub Explorer are displayed in the OSLC Preview tab.
+
+- When you import data from an OSLC Data Source into the MagicDraw Containment tree, the OSLC Preview tab can display the information of the related/linked node.
+
+[IMAGE alt='' src='']
+
+###### The details of the selected OSLC resource in the MagicDraw Containment tree are displayed in the OSLC Preview tab.
+
+- With an existing element in the model, you can also manually create an OSLC link to the other node from the connected OSLC Data Source so that the OSLC Preview tab can display the information of the linked node.
+
+[IMAGE alt='' src='']
+
+###### The detail of the resources that the OSLC link to are displayed in the OSLC Preview tab.
+
+When the Data Source in **DataHub Explorer** is closed, the preview of the selected element details is not available. The **OSLC Preview** tab offers you a link to reconnect to the Data Source.
+
+To reconnect to a Data Source
+
+1. In the OSLC Preview tab, click the Connect to Data Source link.
+2. In the login dialog, enter the User ID and Password .
+3. Click Connect .
+
+[IMAGE alt='' src='']
+
+###### An example of the closed Data Source.
+
+### EXACT CONFLUENCE STORAGE SOURCE
+
+````html
+<p>Using <strong>DataHub Explorer</strong>, you can connect to the Data Sources, such as IBM<sup>®</sup> Rational<sup>®</sup> DOORS<sup>®</sup>, IBM<sup>®</sup> Rational<sup>®</sup> DOORS Next Generation, or other OSLC Providers. <strong>DataHub Explorer</strong> lists the content of the open Data Source.</p><p>The <strong>OSLC Preview</strong> tab in the <ac:link><ri:page ri:space-key="MD2024x" ri:content-title="Understanding the user interface" /><ac:plain-text-link-body><![CDATA[Quick properties panel]]></ac:plain-text-link-body></ac:link> allows you to view the details of the OSLC resource. The OSLC resource can be selected from <strong>DataHub Explorer</strong>, in the MagicDraw Containment tree, and an OSLC link to the other node from the connected OSLC Data Source that links to an element selected in the Model Browser<strong>.</strong></p><p><br /></p><p>To open the <strong>OSLC Preview</strong> tab</p><hr /><ul><li>From the main menu, select <strong>Window</strong> &gt; <strong>OSLC Preview</strong>.</li></ul><p style="margin-left: 30.0px;"><ac:image><ri:attachment ri:filename="OSLC Preview.png"><ri:page ri:space-key="CDH2024x" ri:content-title="OSLC Preview" /></ri:attachment></ac:image></p><p><br /></p><p>You can use OSLC preview to display the information of the selected node or the linked node in the following ways:</p><ul><li>When you add an OSLC Data Source into <strong>DataHub Explorer</strong>, e.g., DOORS Next Generation, the <strong>OSLC Preview</strong> tab can display the information of the selected node.</li></ul><p><ac:image ac:align="center"><ri:attachment ri:filename="preview.png"><ri:page ri:space-key="CDH2024x" ri:content-title="OSLC Preview" /></ri:attachment></ac:image></p><h6 style="text-align: center;">The details of the selected OSLC resource in Cameo DataHub Explorer are displayed in the OSLC Preview tab.</h6><ul><li>When you import data from an OSLC Data Source into the MagicDraw Containment tree, the <strong>OSLC Preview</strong> tab can display the information of the related/linked node.</li></ul><p style="text-align: center;"><ac:image><ri:attachment ri:filename="OSLC Preview on Containment Tree.png"><ri:page ri:space-key="CDH2024x" ri:content-title="OSLC Preview" /></ri:attachment></ac:image></p><h6 style="text-align: center;">The details of the selected OSLC resource in the MagicDraw Containment tree are displayed in the OSLC Preview tab.</h6><ul><li>With an existing element in the model, you can also manually create an OSLC link to the other node from the connected OSLC Data Source so that the <strong>OSLC Preview</strong> tab can display the information of the linked node.</li></ul><p style="text-align: center;"><ac:image><ri:attachment ri:filename="OSLC Preview on URLs.png"><ri:page ri:space-key="CDH2024x" ri:content-title="OSLC Preview" /></ri:attachment></ac:image></p><h6 style="text-align: center;">The detail of the resources that the OSLC link to are displayed in the OSLC Preview tab.</h6><p><br /></p><p>When the Data Source in <strong>DataHub Explorer</strong> is closed, the preview of the selected element details is not available. The <strong>OSLC Preview</strong> tab offers you a link to reconnect to the Data Source.</p><p><br /></p><p>To reconnect to a Data Source</p><hr /><ol><li>In the <strong>OSLC Preview</strong> tab, click the <strong>Connect to Data Source</strong> link.</li><li>In the login dialog, enter the <strong>User ID</strong> and <strong>Password</strong>.</li><li>Click <strong>Connect</strong>.</li></ol><p><ac:image ac:align="center"><ri:attachment ri:filename="connect.png"><ri:page ri:space-key="CDH2024x" ri:content-title="OSLC Preview" /></ri:attachment></ac:image></p><h6 style="text-align: center;">An example of the closed Data Source.</h6>
+````
+
+<!--NOMAGIC_PAGE id=136716157 space=CDH2024x version=1 -->
+## PAGE 00110: OSLC Provider
+
+- page_id: `136716157`
+- space_key: `CDH2024x`
+- source_url: https://docs.nomagic.com/spaces/CDH2024x/pages/136716157/OSLC+Provider
+- version_number: 1
+- version_date: `2023-09-21T06:04:27.347+02:00`
+- ancestors: Cameo DataHub Documentation > User Guide > Working with DataHub and modeling tools > Customizing DataHub options
+- labels: []
+
+### NORMALIZED CONTENT
+
+This section explains the Generic OSLC Service Provider preference in the Cameo DataHub Options dialog.
+
+To specify the number of maximum concurrent connections for the OSLC Provider
+
+1. Open the Cameo DataHub Options dialog. [ATTACHMENT filename='Environment_Options_CDH_OSLC.png']
+2. Go to the Generic OSLC Service Provider option group and update the option.
+
+The following table explains the Generic OSLC Service Provider****options in the Cameo DataHub Options dialog.
+
+| Option | Function |
+| --- | --- |
+| Maximum concurrent connection | Takes a numerical value for the maximum number of concurrent connections. |
+
+### EXACT CONFLUENCE STORAGE SOURCE
+
+````html
+<p>This section explains the Generic OSLC Service Provider preference in the Cameo DataHub Options dialog.</p><p><br /></p><p>To specify the number of maximum concurrent connections for the OSLC Provider</p><hr /><ol><li>Open the <a href="https://docs.nomagic.com/display/CDH2024x/Customizing+DataHub+options">Cameo DataHub Options</a> dialog.<br /><br /><ac:image><ri:attachment ri:filename="Environment_Options_CDH_OSLC.png"><ri:page ri:space-key="CDH2024x" ri:content-title="OSLC Provider" /></ri:attachment></ac:image><br /><br /></li><li>Go to the <strong>Generic OSLC Service Provider</strong> option<span> </span><span style="color: rgb(62,63,64);">group and<span> </span></span><span style="color: rgb(62,63,64);">update the option.<br /></span></li></ol><p style="">The following table explains the Generic OSLC Service Provider<strong> </strong>options in the Cameo DataHub Options dialog.</p><table class="relative-table" style="width: 87.8548%;"><colgroup><col style="width: 30.4639%;" /><col style="width: 69.5294%;" /></colgroup><tbody><tr><th>Option</th><th>Function</th></tr><tr><td>Maximum concurrent connection</td><td>Takes a numerical value for the maximum number of concurrent connections.</td></tr></tbody></table><p class="auto-cursor-target"><br /></p>
+````
+
+<!--NOMAGIC_PAGE id=136715944 space=CDH2024x version=1 -->
+## PAGE 00111: OSLC support
+
+- page_id: `136715944`
+- space_key: `CDH2024x`
+- source_url: https://docs.nomagic.com/spaces/CDH2024x/pages/136715944/OSLC+support
+- version_number: 1
+- version_date: `2023-09-21T06:04:20.853+02:00`
+- ancestors: Cameo DataHub Documentation > Getting started > Understanding DataHub user interface
+- labels: []
+
+### NORMALIZED CONTENT
+
+Since Cameo DataHub 18.1, DataHub has begun implementing features to support OSLC interactions. Open Services for Lifecycle Collaboration (OSLC) is a community standardizing the way that life cycle tools work together. With support for OSLC, DataHub can easily communicate with other software such as IBM® Rational® DOORS® Next Generation, which also supports OSLC integration. Therefore, you can share and use linked data, analyze, track, and explore them via OSLC links between DOORS Next Generation artifacts and DataHub data nodes.
+
+DataHub supports the following
+
+- OSLC Link support for IBM ® Rational ® DOORS ® Next Generation
+- OSLC Query support for IBM ® Rational ® DOORS ® Next Generation
+
+### EXACT CONFLUENCE STORAGE SOURCE
+
+````html
+<p>Since Cameo DataHub 18.1, DataHub has begun implementing features to support OSLC interactions. Open Services for Lifecycle Collaboration (OSLC) is a community standardizing the way that life cycle tools work together. With support for OSLC, DataHub can easily communicate with other software such as IBM<sup>®</sup> Rational<sup>®</sup> DOORS<sup>®</sup> Next Generation, which also supports OSLC integration. Therefore, you can share and use linked data, analyze, track, and explore them via OSLC links between DOORS Next Generation artifacts and DataHub data nodes.</p><p>DataHub supports the following</p><ul><li>OSLC Link support for IBM<sup>®</sup> Rational<sup>®</sup> DOORS<sup>®</sup> Next Generation</li><li>OSLC Query support for IBM<sup>®</sup> Rational<sup>®</sup> DOORS<sup>®</sup> Next Generation</li></ul>
+````
+
+<!--NOMAGIC_PAGE id=136716546 space=CDH2024x version=1 -->
+## PAGE 00112: OSLC tutorial
+
+- page_id: `136716546`
+- space_key: `CDH2024x`
+- source_url: https://docs.nomagic.com/spaces/CDH2024x/pages/136716546/OSLC+tutorial
+- version_number: 1
+- version_date: `2023-09-21T06:04:50.616+02:00`
+- ancestors: Cameo DataHub Documentation > User Guide > Working with DataHub and modeling tools > Working with OSLC features
+- labels: []
+
+### NORMALIZED CONTENT
+
+Cameo DataHub has the ability to use OSLC data from any OSLC-compliant Provider. It is now possible to establish hyperlinks between model elements and elements provided by an OSLC Provider, as well as having OSLC previews of remote elements from within a modeling tool environment.
+
+The steps for establishing links between model elements and OSLC resources are shown below:
+
+[IMAGE alt='' src='']
+
+###### Stepsto establish links between model elements and OSLC resources.
+
+In the following pages, you will find step-by-step descriptions for linking model elements with OSLC resources.
+
+### EXACT CONFLUENCE STORAGE SOURCE
+
+````html
+<p>Cameo DataHub has the ability to use OSLC data from any OSLC-compliant Provider. It is now possible to establish hyperlinks between model elements and elements provided by an OSLC Provider, as well as having OSLC previews of remote elements from within a modeling tool environment.</p><p>The steps for establishing links between model elements and OSLC resources are shown below:</p><p style="text-align: center;"><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><ac:image ac:width="400"><ri:attachment ri:filename="OSLC Workflow Process.png"><ri:page ri:space-key="CDH2024x" ri:content-title="OSLC tutorial" /></ri:attachment></ac:image></span></p><h6 style="text-align: center;"><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size">Steps<span style="color: rgb(128,130,132);"> to establish links between model elements and OSLC resources.</span><br /></span></h6><p style="text-align: left;"><span style="color: rgb(62,63,64);">In the following pages, you will find step-by-step descriptions for linking model elements with OSLC resources.</span></p>
+````
+
+<!--NOMAGIC_PAGE id=136716314 space=CDH2024x version=2 -->
+## PAGE 00113: Property value conversion
+
+- page_id: `136716314`
+- space_key: `CDH2024x`
+- source_url: https://docs.nomagic.com/spaces/CDH2024x/pages/136716314/Property+value+conversion
+- version_number: 2
+- version_date: `2026-02-11T07:59:11.652+01:00`
+- ancestors: Cameo DataHub Documentation > User Guide > Working with DataHub and modeling tools > Operations in DataHub Explorer
+- labels: []
+
+### NORMALIZED CONTENT
+
+In addition to property-to-property mapping, you can apply a conversion rule to convert an original property value to another value when importing or synchronizing the data. You can set the conversion rule by clicking the **Edit rule** button at the end of each property mapping in the **Cameo DataHub Schema Map Manager** dialog or DataHub operation dialogs.
+
+[IMAGE alt='' src='']
+
+###### The Edit rule button in the Cameo DataHub Schema Map Manager dialog to set the conversion rules.
+
+[IMAGE alt='' src='']
+
+###### The Edit rule button in the Copy Data with Sync dialog to set the conversion rules.
+
+Converting Rule Editor has two converting rule schemes as follows
+
+- Converting rules from an Enumeration to another Enumeration.
+- Converting rules between source attribute values and target values as String.
+
+#### Converting rules from an Enumeration to another Enumeration
+
+The **Converting Rule Editor** dialog converts all the mapped Enumeration values on the left table and converts the Enumeration values from the left table back to the right table and vice versa. In the first table, the first column will list the Enumeration values of the source property, and the second column automatically shows the values that match the values of the Elements to synchronize. In the right table, the Enumeration values will be in relation to the selected mapping values in the left table.
+
+###### [IMAGE alt='' src='']Selecting Enumeration values for conversion in the Converting Rule Editor dialog.
+
+#### WARNING: Important
+
+Important
+
+If there is no matching value, you must manually correct all the mapping attribute values shown in red.
+
+#### Converting rules between source attribute values and target values as String
+
+In the **Converting Rule Editor** dialog, the left table allows specifying the values of source attributes in String to be converted to target values according to the selected conversion rules. The table on the right allows the user to select the rules to convert the values of target attributes to source values.
+
+[IMAGE alt='' src='']
+
+###### Selecting the rules to convert the values of source attributes to target values in the Converting Rule Editor dialog.
+
+#### TIP: Tip
+
+Tip
+
+- To add another conversion rule, click [ATTACHMENT filename='Add Button.png'] .
+- When setting all the conversion rules, you can use [ATTACHMENT filename='Button.png'] for left-to-right reflection or [ATTACHMENT filename='Button2.png'] for right-to-left reflection of the conversion rules for round-trip synchronization.
+
+[IMAGE alt='' src='']
+
+###### Using the >> button for left-to-right reflection of the conversion rules for round-trip synchronization.
+
+#### WARNING: Important
+
+Important
+
+In case of conversion conflicts, you need to manually correct all the mapping attribute values shown in red.
+
+#### NOTE: Note
+
+Note
+
+You must specify a conversion rule for the **<ANY VALUE>** source attribute to ensure that the selected conversion rule applies to other unspecified values of source attributes.
+
+The**Converting Rule Editor** dialog has the following conversion rules
+
+- <CONVERT TO>
+
+Synchronize the converted value if the source value matches the value in the **From** column.
+
+- <DEFAULT>
+
+Synchronize the original value if the source value matches the value in the **From** column.
+
+- <IGNORED>
+
+Do not perform any synchronization if the source value matches the value in the **From** column.
+
+### EXACT CONFLUENCE STORAGE SOURCE
+
+````html
+<p>In addition to property-to-property mapping, you can apply a conversion rule to convert an original property value to another value when importing or synchronizing the data. You can set the conversion rule by clicking the <strong>Edit rule</strong> button at the end of each property mapping in the <strong>Cameo DataHub Schema Map Manager</strong> dialog or DataHub operation dialogs.</p><p><br /></p><p><ac:image ac:align="center"><ri:attachment ri:filename="Schema_Map_Manager.png" /></ac:image></p><h6 style="text-align: center;">The Edit rule button in the Cameo DataHub Schema Map Manager dialog to set the conversion rules.</h6><p><ac:image ac:align="center"><ri:attachment ri:filename="Schema_Map_Manager _Edit_rule.png" /></ac:image></p><h6 style="text-align: center;">The Edit rule button in the Copy Data with Sync dialog to set the conversion rules.</h6><p>Converting Rule Editor has two converting rule schemes as follows</p><ul><li data-uuid="c2b934f4-be74-4066-97e0-bf7df93dda8e"><p><span class="confluence-link">Converting rules from an Enumeration to another Enumeration.</span></p></li><li data-uuid="879ebd08-354d-4692-ae05-8aab85f575f9"><span class="confluence-link">Converting rules between source attribute values and target values as String.</span></li></ul><h2><span class="confluence-link">Converting rules from an Enumeration to another Enumeration</span></h2><p>The <strong>Converting Rule Editor</strong> dialog converts all the mapped Enumeration values on the left table and converts the Enumeration values from the left table back to the right table and vice versa. In the first table, the first column will list the Enumeration values of the source property, and the second column automatically shows the values that match the values of the Elements to synchronize. In the right table, the Enumeration values will be in relation to the selected mapping values in the left table.</p><p><br /></p><h6 style="text-align: center;"><ac:image ac:align="center"><ri:attachment ri:filename="Enum Conversion.png" /></ac:image>Selecting Enumeration values for conversion in the Converting Rule Editor dialog.</h6><ac:structured-macro ac:name="warning" ac:schema-version="1" ac:macro-id="13ba9aa7-0de9-4ca9-83ef-7a3683263f30"><ac:parameter ac:name="title">Important</ac:parameter><ac:rich-text-body><p>If there is no matching value, you must manually correct all the mapping attribute values shown in red.</p></ac:rich-text-body></ac:structured-macro><h2><span class="confluence-link">Converting rules between source attribute values and target values as String</span></h2><p>In the <strong>Converting Rule Editor</strong> dialog, the left table allows specifying the values of source attributes in String to be converted to target values according to the selected conversion rules.  The table on the right allows the user to select the rules to convert the values of target attributes to source values.</p><p><ac:image ac:align="center"><ri:attachment ri:filename="Source Attribute Conversion Editor.png" /></ac:image></p><h6 style="text-align: center;">Selecting the rules to convert the values of source attributes to target values in the Converting Rule Editor dialog.</h6><ac:structured-macro ac:name="tip" ac:schema-version="1" ac:macro-id="26b62cc7-9019-48ef-9d08-8f37e1c1866c"><ac:parameter ac:name="title">Tip</ac:parameter><ac:rich-text-body><ul><li data-uuid="91b2421b-cd12-4575-bcc3-487d09ba7564">To add another conversion rule, click <ac:image><ri:attachment ri:filename="Add Button.png" /></ac:image>.</li><li data-uuid="6986ca6e-262b-4030-909e-7cdd458ceb0f">When setting all the conversion rules, you can use <ac:image><ri:attachment ri:filename="Button.png" /></ac:image> for left-to-right reflection or <ac:image><ri:attachment ri:filename="Button2.png" /></ac:image> for right-to-left reflection of the conversion rules for round-trip synchronization.</li></ul><p><ac:image ac:align="center"><ri:attachment ri:filename="Using Button as Reflecting Sync.png" /></ac:image></p><h6 style="text-align: center;">Using the &gt;&gt; button for left-to-right reflection of the conversion rules for round-trip synchronization.</h6></ac:rich-text-body></ac:structured-macro><ac:structured-macro ac:name="warning" ac:schema-version="1" ac:macro-id="d6338f48-5835-4acf-8735-0cc7f37eefd4"><ac:parameter ac:name="title">Important</ac:parameter><ac:rich-text-body><p>In case of conversion conflicts, you need to manually correct all the mapping attribute values shown in red.</p></ac:rich-text-body></ac:structured-macro><ac:structured-macro ac:name="note" ac:schema-version="1" ac:macro-id="4acdf0b5-4a93-46b7-820b-57091725cd49"><ac:parameter ac:name="title">Note</ac:parameter><ac:rich-text-body><p>You must specify a conversion rule for the <strong>&lt;ANY VALUE&gt;</strong> source attribute to ensure that the selected conversion rule applies to other unspecified values of source attributes.</p></ac:rich-text-body></ac:structured-macro><p><br /></p><p>The<strong> Converting Rule Editor</strong> dialog has the following conversion rules</p><ul><li data-uuid="c32a6063-9cb7-40c7-ac60-dca1098be3cb"><strong>&lt;CONVERT TO&gt;</strong></li></ul><p style="margin-left: 30.0px;">Synchronize the converted value if the source value matches the value in the <strong>From</strong> column.</p><ul><li data-uuid="798bd885-afb9-459a-bc3d-15026ff4996c"><strong>&lt;DEFAULT&gt;</strong></li></ul><p style="margin-left: 30.0px;">Synchronize the original value if the source value matches the value in the <strong>From</strong> column.</p><ul><li data-uuid="8ce80616-e7a1-4b70-ad1b-825de81bb4ec"><strong>&lt;IGNORED&gt;</strong></li></ul><p style="margin-left: 30.0px;">Do not perform any synchronization if the source value matches the value in the <strong>From</strong> column.</p>
+````
+
+<!--NOMAGIC_PAGE id=136716176 space=CDH2024x version=1 -->
+## PAGE 00114: Removing a Data Source
+
+- page_id: `136716176`
+- space_key: `CDH2024x`
+- source_url: https://docs.nomagic.com/spaces/CDH2024x/pages/136716176/Removing+a+Data+Source
+- version_number: 1
+- version_date: `2023-09-21T06:04:28.317+02:00`
+- ancestors: Cameo DataHub Documentation > User Guide > Working with DataHub and modeling tools > Working with the DataHub Explorer tree
+- labels: []
+
+### NORMALIZED CONTENT
+
+To remove a Data Source
+
+1. Right-click the Data Source to remove and select [IMAGE alt='' src=''] .
+2. You are prompted to confirm the removal action. Click OK .
+
+This option removes the Data Source from the **DataHub Explorer** tree. It also removes all related DHLinks and Schema Map information from DataHub.
+
+### EXACT CONFLUENCE STORAGE SOURCE
+
+````html
+<p>To remove a Data Source</p><hr /><ol><li>Right-click the Data Source to remove and select <strong><ac:image><ri:attachment ri:filename="remove-ds.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Removing a Data Source" /></ri:attachment></ac:image></strong>.</li><li>You are prompted to confirm the removal action. Click <strong>OK</strong>.</li></ol><p>This option removes the Data Source from the <strong>DataHub Explorer</strong> tree. It also removes all related DHLinks and Schema Map information from DataHub.</p>
+````
+
+<!--NOMAGIC_PAGE id=136716568 space=CDH2024x version=1 -->
+## PAGE 00115: Removing DHLinks
+
+- page_id: `136716568`
+- space_key: `CDH2024x`
+- source_url: https://docs.nomagic.com/spaces/CDH2024x/pages/136716568/Removing+DHLinks
+- version_number: 1
+- version_date: `2023-09-21T06:04:53.351+02:00`
+- ancestors: Cameo DataHub Documentation > User Guide > Working with DataHub and modeling tools > Creating links between elements
+- labels: []
+
+### NORMALIZED CONTENT
+
+DataHub provides two options to remove the DHLink of a node as follows
+
+- Remove only a DHLink or DHTrace of the selected node.
+- Remove all DHLinks or DHTraces recursively in the node hierarchy.
+
+To remove a DHLink or DHTrace (recursively), do one of the following
+
+- Right-click an item in DataHub Explorer and select Remove DHLinks .
+
+[IMAGE alt='' src='']
+
+- Right-click a DHLink in the DH Links panel and select Remove DHLink .
+
+[IMAGE alt='' src='']
+
+- Right-click a Traced or Suspect link in the DH Links panel and click Remove DHTrace .
+
+[IMAGE alt='' src='']
+
+- Right-click a node in the MagicDraw Containment tree and select DataHub Actions > Remove DHLinks .
+
+[IMAGE alt='' src='']
+
+### EXACT CONFLUENCE STORAGE SOURCE
+
+````html
+<p>DataHub provides two options to remove the DHLink of a node as follows</p><ul><li>Remove only a DHLink or DHTrace of the selected node.</li><li>Remove all DHLinks or DHTraces recursively in the node hierarchy.</li></ul><p><br />To remove a DHLink or DHTrace (recursively), do one of the following</p><hr /><ul><li>Right-click an item in <strong>DataHub Explorer</strong> and select <strong>Remove DHLinks</strong>.<br /><br /></li></ul><p style="margin-left: 30.0px;"><ac:image><ri:attachment ri:filename="Remove DHLinks.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Removing DHLinks" /></ri:attachment></ac:image><br /><br /></p><ul><li>Right-click a DHLink in the <strong>DH Links</strong> panel and select <strong>Remove DHLink</strong>.<br /><br /></li></ul><p style="margin-left: 30.0px;"><ac:image ac:title="Removing DHLink in the Cameo DataHub DHLink Panel" ac:alt="Removing DHLink in the Cameo DataHub DHLink Panel"><ri:attachment ri:filename="dh-links-tab-sync-tasks.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Removing DHLinks" /></ri:attachment></ac:image><br /><br /></p><ul><li>Right-click a Traced or Suspect link in the <strong>DH Links </strong>panel and click <strong>Remove DHTrace</strong>.<br /><br /></li></ul><p style="margin-left: 30.0px;"><ac:image ac:title="Remove DHTrace option from DHLinks Panel" ac:alt="Remove DHTrace option from DHLinks Panel"><ri:attachment ri:filename="remove-dh-trace.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Removing DHLinks" /></ri:attachment></ac:image><br /><br /></p><ul><li>Right-click a node in the MagicDraw Containment tree and select <strong>DataHub Actions</strong> &gt; <strong>Remove DHLinks</strong>.<br /><br /></li></ul><p style="margin-left: 30.0px;"><ac:image><ri:attachment ri:filename="Right-click to Remove DHLink.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Removing DHLinks" /></ri:attachment></ac:image></p>
+````
+
+<!--NOMAGIC_PAGE id=136716585 space=CDH2024x version=2 -->
+## PAGE 00116: Requirement Mapping
+
+- page_id: `136716585`
+- space_key: `CDH2024x`
+- source_url: https://docs.nomagic.com/spaces/CDH2024x/pages/136716585/Requirement+Mapping
+- version_number: 2
+- version_date: `2026-02-11T08:03:22.894+01:00`
+- ancestors: Cameo DataHub Documentation > User Guide > Working with DataHub and modeling tools
+- labels: []
+
+### NORMALIZED CONTENT
+
+You can do simple schema mappings or definetarget types from attribute value mappings between sources and targets in Cameo DataHub by using Schema Map Manager. This section also describes exporting, importing, and deleting schema mappings by using the **Schema Map Manager** dialog.
+
+**Related pages**
+
+### EXACT CONFLUENCE STORAGE SOURCE
+
+````html
+<p>You can do simple schema mappings or define<span class="current"> target types from attribute value mapping</span>s between sources and targets in Cameo DataHub by using Schema Map Manager. This section also describes exporting, importing, and deleting schema mappings by using the <strong>Schema Map Manager</strong> dialog.</p><p><strong>Related pages</strong></p><p><ac:structured-macro ac:name="children" ac:schema-version="2" ac:macro-id="a3d1720d-ba69-440a-acdb-61ac8accc19c" /></p>
+````
+
+<!--NOMAGIC_PAGE id=136716697 space=CDH2024x version=1 -->
+## PAGE 00117: Saving the DHLink summary as reports
+
+- page_id: `136716697`
+- space_key: `CDH2024x`
+- source_url: https://docs.nomagic.com/spaces/CDH2024x/pages/136716697/Saving+the+DHLink+summary+as+reports
+- version_number: 1
+- version_date: `2023-09-21T06:04:56.459+02:00`
+- ancestors: Cameo DataHub Documentation > User Guide > Working with DataHub and modeling tools > Working with the DHLink summary and generating reports
+- labels: []
+
+### NORMALIZED CONTENT
+
+After you view a DHLink summary, you can click [IMAGE alt='' src=''] to save the summary view. The report is saved in the HTML format so that you can open it in a web browser, e.g., Chrome or Firefox.
+
+To save a DHLink summary as a report
+
+1. In the Filter Options pane on the left-hand side of the [CONFLUENCE_PAGE title='DHLink Summary' space='CDH2024x'] dialog, choose type of relations you want to see in the DHLink summary.
+2. Do one of the following to save the report
+
+- 
+  - Click [IMAGE alt='' src=''] to view the DHLink summary and click [ATTACHMENT filename='save-btn-2.png'] to save the DHLink summary as a report.
+  - Click [IMAGE alt='' src=''] to save the DHLink summary as a report without viewing the items in the DHLink summary.
+
+#### TIP: Tip
+
+Tip
+
+If you want to save a large amount of data in the report more quickly, click **[IMAGE alt='' src='']**.
+
+### EXACT CONFLUENCE STORAGE SOURCE
+
+````html
+<p>After you view a DHLink summary, you can click <ac:image><ri:attachment ri:filename="save-btn-2.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Saving the DHLink summary as reports" /></ri:attachment></ac:image> to save the summary view. The report is saved in the HTML format so that you can open it in a web browser, e.g., Chrome or Firefox.</p><p><br /></p><p>To save a DHLink summary as a report</p><hr /><ol><li>In the<strong> Filter Options</strong> pane on the left-hand side of the <strong><ac:link><ri:page ri:space-key="CDH2024x" ri:content-title="DHLink Summary" /></ac:link></strong> dialog, choose type of relations you want to see in the DHLink summary.</li><li>Do one of the following to save the report</li></ol><ul><li style="list-style-type: none;background-image: none;"><ul><li>Click<strong> <ac:image><ri:attachment ri:filename="view-btn.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Saving the DHLink summary as reports" /></ri:attachment></ac:image></strong> to view the DHLink summary and click <ac:image><ri:attachment ri:filename="save-btn-2.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Saving the DHLink summary as reports" /></ri:attachment></ac:image> to save the DHLink summary as a report.</li><li>Click<strong> <ac:image><ri:attachment ri:filename="generate-btn.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Saving the DHLink summary as reports" /></ri:attachment></ac:image></strong> to save the DHLink summary as a report without viewing the items in the DHLink summary.</li></ul></li></ul><p><br /></p><ac:structured-macro ac:name="tip" ac:schema-version="1" ac:macro-id="e10c92a1-e958-4bae-a124-7b7341b2fb1c"><ac:parameter ac:name="title">Tip</ac:parameter><ac:rich-text-body><p>If you want to save a large amount of data in the report more quickly, click <strong><ac:image><ri:attachment ri:filename="generate-btn.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Saving the DHLink summary as reports" /></ri:attachment></ac:image></strong>.</p></ac:rich-text-body></ac:structured-macro><p class="auto-cursor-target"><br /></p>
+````
+
+<!--NOMAGIC_PAGE id=136715916 space=CDH2024x version=2 -->
+## PAGE 00118: Schema map and mapping options
+
+- page_id: `136715916`
+- space_key: `CDH2024x`
+- source_url: https://docs.nomagic.com/spaces/CDH2024x/pages/136715916/Schema+map+and+mapping+options
+- version_number: 2
+- version_date: `2026-02-11T07:36:06.823+01:00`
+- ancestors: Cameo DataHub Documentation > Getting started > Understanding DataHub user interface
+- labels: []
+
+### NORMALIZED CONTENT
+
+DataHub provides the two mapping modes to simplify the way you map source and target nodes as follows
+
+- Group type mapping mode
+- Individual type mapping mode
+
+These schema mapping methods are accessible through the **Copy Data** dialog, **Copy Data with Sync** dialog, and **Copy Data with DHTrace** dialog. Additional options, e.g., excluding unmapped nodes, are also available.
+
+There is also a **[CONFLUENCE_PAGE title='Define target type from attribute value mapping' space='']** mapping mode only available in group type mapping mode. Once you use the **Define Target Type from Attribute Value**mapping mode, DataHub saves it as the default mode and activates it the next time you copy the same type of data. In this case, the **Copy Data**dialog, **Copy Data with Sync** dialog, or **Copy Data with DHTrace** dialog does not open.
+
+**Related pages**
+
+### EXACT CONFLUENCE STORAGE SOURCE
+
+````html
+<p>DataHub provides the two mapping modes to simplify the way you map source and target nodes as follows</p><ul><li data-uuid="7303e119-0e89-4f29-a431-dbbf8540696b">Group type mapping mode</li><li data-uuid="9ade2f1f-09db-4ee0-badd-27af664ad567">Individual type mapping mode</li></ul><p>These schema mapping methods are accessible through the <strong>Copy Data</strong> dialog, <strong>Copy Data with Sync</strong> dialog, and <strong>Copy Data with DHTrace</strong> dialog. Additional options, e.g., excluding unmapped nodes, are also available.</p><p>There is also a <strong><ac:link><ri:page ri:content-title="Define target type from attribute value mapping" /><ac:plain-text-link-body><![CDATA[Define target type from attribute value]]></ac:plain-text-link-body></ac:link></strong> mapping mode only available in group type mapping mode. Once you use the <strong>Define Target Type from Attribute Value </strong>mapping mode, DataHub saves it as the default mode and activates it the next time you copy the same type of data. In this case, the <strong>Copy Data </strong>dialog, <strong>Copy Data with Sync</strong> dialog, or <strong>Copy Data with DHTrace</strong> dialog does not open.</p><p><strong>Related pages</strong></p><p><ac:structured-macro ac:name="children" ac:schema-version="2" ac:macro-id="3e2827ac-45e6-4160-9dc5-21696946df96" /></p>
+````
+
+<!--NOMAGIC_PAGE id=136715927 space=CDH2024x version=1 -->
+## PAGE 00119: Schema Map Manager
+
+- page_id: `136715927`
+- space_key: `CDH2024x`
+- source_url: https://docs.nomagic.com/spaces/CDH2024x/pages/136715927/Schema+Map+Manager
+- version_number: 1
+- version_date: `2023-09-21T06:04:20.400+02:00`
+- ancestors: Cameo DataHub Documentation > Getting started > Understanding DataHub user interface > Schema map and mapping options
+- labels: []
+
+### NORMALIZED CONTENT
+
+You can **[CONFLUENCE_PAGE title='Working with Schema Map Manager' space='CDH2024x']** to edit attribute mapping. When the DHLinks between nodes and attributes have been created, **Schema Map Manager** saves the mapped nodes and attributes. You can edit the attribute mapping for a specific schema mapping. You can also export the mappings in XML format and share them with other users.
+
+[IMAGE alt='' src='']
+
+###### Schema Map Manager
+
+### EXACT CONFLUENCE STORAGE SOURCE
+
+````html
+<p>You can <strong><ac:link><ri:page ri:space-key="CDH2024x" ri:content-title="Working with Schema Map Manager" /><ac:plain-text-link-body><![CDATA[Schema Map Manager]]></ac:plain-text-link-body></ac:link></strong> to edit attribute mapping. When the DHLinks between nodes and attributes have been created, <strong>Schema Map Manager</strong> saves the mapped nodes and attributes. You can edit the attribute mapping for a specific schema mapping. You can also export the mappings in XML format and share them with other users.</p><p><br /></p><p><ac:image ac:align="center"><ri:attachment ri:filename="Schema_Map_Manager.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Schema Map Manager" /></ri:attachment></ac:image></p><h6 style="text-align: center;">Schema Map Manager</h6>
+````
+
+<!--NOMAGIC_PAGE id=136715930 space=CDH2024x version=1 -->
+## PAGE 00120: Schema map templates
+
+- page_id: `136715930`
+- space_key: `CDH2024x`
+- source_url: https://docs.nomagic.com/spaces/CDH2024x/pages/136715930/Schema+map+templates
+- version_number: 1
+- version_date: `2023-09-21T06:04:20.498+02:00`
+- ancestors: Cameo DataHub Documentation > Getting started > Understanding DataHub user interface > Schema map and mapping options
+- labels: []
+
+### NORMALIZED CONTENT
+
+DataHub provides schema map templates in each application, e.g., MagicDraw® and DOORS, by default. The templates are available in the **Cameo DataHub Schema Map Manager** dialog. They allow you to select a type of node to do mapping in the target application and edit the attributes. You can also select and set a target type as the default one so that the next time you map similar data attributes from any sources, they will always be mapped to the same target type.
+
+### EXACT CONFLUENCE STORAGE SOURCE
+
+````html
+<p>DataHub provides schema map templates in each application, e.g., MagicDraw<sup>®</sup> and DOORS, by default. The templates are available in the <strong>Cameo DataHub Schema Map Manager</strong> dialog. They allow you to select a type of node to do mapping in the target application and edit the attributes. You can also select and set a target type as the default one so that the next time you map similar data attributes from any sources, they will always be mapped to the same target type.</p>
+````
+
+<!--NOMAGIC_PAGE id=136716898 space=CDH2024x version=2 -->
+## PAGE 00121: Schema Mapping
+
+- page_id: `136716898`
+- space_key: `CDH2024x`
+- source_url: https://docs.nomagic.com/spaces/CDH2024x/pages/136716898/Schema+Mapping
+- version_number: 2
+- version_date: `2026-02-11T08:05:51.857+01:00`
+- ancestors: Cameo DataHub Documentation > User Guide
+- labels: []
+
+### NORMALIZED CONTENT
+
+DataHub is capable of synchronizing data in either one-way or two-way direction that you can apply to other relations, showing updates or changes through checking DHLinks and DHTrace prior to synchronizing data, excluding some nodes when copying data, providing synchronized changes in data hierarchy and in schema mapping, arranging nodes into the group type mapping to complete mapping faster, and dynamically defining target types from attributes' values before copying data.
+
+**Related pages**
+
+### EXACT CONFLUENCE STORAGE SOURCE
+
+````html
+<p>DataHub is capable of synchronizing data in either one-way or two-way direction that you can apply to other relations, showing updates or changes through checking DHLinks and DHTrace prior to synchronizing data, excluding some nodes when copying data, providing synchronized changes in data hierarchy and in schema mapping, arranging nodes into the group type mapping to complete mapping faster, and dynamically defining target types from attributes' values before copying data.</p><p><strong>Related pages</strong></p><p><ac:structured-macro ac:name="children" ac:schema-version="2" ac:macro-id="c659dc4a-8977-4c0e-82d0-4e26c8d62f20" /></p>
+````
+
+<!--NOMAGIC_PAGE id=136716607 space=CDH2024x version=1 -->
+## PAGE 00122: Schema mapping modes
+
+- page_id: `136716607`
+- space_key: `CDH2024x`
+- source_url: https://docs.nomagic.com/spaces/CDH2024x/pages/136716607/Schema+mapping+modes
+- version_number: 1
+- version_date: `2023-09-21T06:04:54.871+02:00`
+- ancestors: Cameo DataHub Documentation > User Guide > Working with DataHub and modeling tools > Requirement Mapping
+- labels: []
+
+### NORMALIZED CONTENT
+
+You can map nodes by doing either of the following
+
+- [CONFLUENCE_PAGE title='Simple schema mapping' space='CDH2024x']
+- [CONFLUENCE_PAGE title='Define Target Type from Attribute Value dialog and mapping' space='CDH2024x']
+
+### EXACT CONFLUENCE STORAGE SOURCE
+
+````html
+<p>You can map nodes by doing either of the following</p><ul><li><ac:link><ri:page ri:space-key="CDH2024x" ri:content-title="Simple schema mapping" /><ac:plain-text-link-body><![CDATA[Using simple Schema Mapping]]></ac:plain-text-link-body></ac:link></li><li><ac:link><ri:page ri:space-key="CDH2024x" ri:content-title="Define Target Type from Attribute Value dialog and mapping" /></ac:link></li></ul>
+````
+
+<!--NOMAGIC_PAGE id=136716181 space=CDH2024x version=1 -->
+## PAGE 00123: Searching for a text string
+
+- page_id: `136716181`
+- space_key: `CDH2024x`
+- source_url: https://docs.nomagic.com/spaces/CDH2024x/pages/136716181/Searching+for+a+text+string
+- version_number: 1
+- version_date: `2023-09-21T06:04:28.716+02:00`
+- ancestors: Cameo DataHub Documentation > User Guide > Working with DataHub and modeling tools > Working with the DataHub Explorer tree
+- labels: []
+
+### NORMALIZED CONTENT
+
+To search for text
+
+1. Type the text you want to search into the search box [ATTACHMENT filename='text-search-box.png'] . [ATTACHMENT filename='dh-explorer-toolbar.png']
+2. The search results are shown in the DataHub Explorer tree with highlighted texts in accordance with the used search word. [ATTACHMENT filename='results-of-text-search.png']
+3. To navigate to the Next Result or Previous Result in the highlighted texts, use the navigation buttons next to the search box. [ATTACHMENT filename='Navigation Button.png']
+
+### EXACT CONFLUENCE STORAGE SOURCE
+
+````html
+<p>To search for text</p><hr /><ol><li><span style="color: rgb(62,63,64);">Type the text you want to search into the search box </span> <ac:image><ri:attachment ri:filename="text-search-box.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Searching for a text string" /></ri:attachment></ac:image>.<br /><br /><ac:image ac:title="Text Search from DataHub Explorer" ac:alt="Text Search from DataHub Explorer"><ri:attachment ri:filename="dh-explorer-toolbar.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Searching for a text string" /></ri:attachment></ac:image><br /><br /></li><li><span style="color: rgb(62,63,64);">The search results are shown in the<span> </span></span><strong style="text-align: left;">DataHub Explorer</strong><span style="color: rgb(62,63,64);"><span> </span>tree with highlighted texts in accordance with the used search word.</span><br /><br /><ac:image ac:title="Results of text search - the search item will be highlighted" ac:alt="Results of text search - the search item will be highlighted"><ri:attachment ri:filename="results-of-text-search.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Searching for a text string" /></ri:attachment></ac:image><br /><br /></li><li><span style="color: rgb(62,63,64);">To navigate to the</span><span style="color: rgb(62,63,64);"> </span><strong style="text-align: left;">Next Result<span> </span></strong><span style="color: rgb(62,63,64);">or</span><span style="color: rgb(62,63,64);"> </span><strong style="text-align: left;">Previous Result<span> </span></strong><span style="color: rgb(62,63,64);">in the highlighted texts, use the navigation buttons next to the search box.<br /></span><br /><ac:image><ri:attachment ri:filename="Navigation Button.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Searching for a text string" /></ri:attachment></ac:image></li></ol>
+````
+
+<!--NOMAGIC_PAGE id=136716608 space=CDH2024x version=2 -->
+## PAGE 00124: Simple schema mapping
+
+- page_id: `136716608`
+- space_key: `CDH2024x`
+- source_url: https://docs.nomagic.com/spaces/CDH2024x/pages/136716608/Simple+schema+mapping
+- version_number: 2
+- version_date: `2026-02-11T08:03:41.780+01:00`
+- ancestors: Cameo DataHub Documentation > User Guide > Working with DataHub and modeling tools > Requirement Mapping > Schema mapping modes
+- labels: []
+
+### NORMALIZED CONTENT
+
+You can do simple schema mapping and update existing schema maps in the Schema Map Manager dialog between data in the source schema and the target schema. You can also define a target type from the attribute value mappings by selecting the **Define Target Type from Attribute Value** option.
+
+If your previous mapping mode is Define Target Type from Attribute Value mapping, it is set as the default mapping automatically. You can also change the default mapping back to a simple mapping so that you can use the simple mapping to copy data when the **Define Target Type from Attribute Value** mapping mode is not selected.
+
+To specify a default mapping
+
+1. Open the [CONFLUENCE_PAGE title='Mapping with Schema Map Manager' space=''] [CONFLUENCE_PAGE title='Mapping with Schema Map Manager' space='CDH190'] dialog. [ATTACHMENT filename='Schema_Map_Manager.png']
+2. Select a source type that you want to edit its mapping. The default target type appears in the Target Type section.
+3. Select a target type in the Target Type section that you want to specify as the default one.
+4. Click Set as Default . The selected target type is now the default mapping, and the button changes to Remove Default .
+
+To remove a default mapping
+
+1. Open the [CONFLUENCE_PAGE title='Mapping with Schema Map Manager' space=''] [CONFLUENCE_PAGE title='Mapping with Schema Map Manager' space='CDH190'] dialog. [ATTACHMENT filename='Schema_Map_Manager.png']
+2. Select a source type that you want to edit its mapping. The default target type appears in the Target Type section.
+3. Select a default target type in the Target Type section that you want to remove.
+4. Click Remove Default . The selected target type is no longer the default mapping, and the button changes to Set as Default .
+
+To edit a schema mapping
+
+1. Open the [CONFLUENCE_PAGE title='Mapping with Schema Map Manager' space=''] [CONFLUENCE_PAGE title='Mapping with Schema Map Manager' space='CDH190'] dialog.
+2. Select a source type that you want to edit its mapping. The default target type appears in the Target Type section.
+3. Select a target type in the Target Type section that you want to edit. The Select Attribute to Sync list shows the list of default attributes mapping.
+4. Click Edit to enable editing mode.
+5. Change the attributes mapping, and then click Save . [ATTACHMENT filename='Schema_Map_Edited_Attribute.png']
+
+#### NOTE: Note
+
+Note
+
+If the edited schema mapping affects any elements in the current project, the Edit Schema Map Confirmation dialog opens. Click **Yes** to confirm that you want to edit the schema, **No** to cancel the editing, or **Details** to see the details of all affected nodes.
+
+[IMAGE alt='' src='']
+
+###### The Edit Schema Map Confirmation dialog.
+
+#### INFO: Information
+
+Information
+
+After DataHubsaves an edited schema map, it will be effective when you perform data synchronization next time.
+
+**Related page**
+
+- [CONFLUENCE_PAGE title='Mapping with Schema Map Manager' space='']
+
+### EXACT CONFLUENCE STORAGE SOURCE
+
+````html
+<ac:layout><ac:layout-section ac:type="single"><ac:layout-cell><p>You can do simple schema mapping and update existing schema maps in the Schema Map Manager dialog between data in the source schema and the target schema. You can also define a target type from the attribute value mappings by selecting the <strong>Define Target Type from Attribute Value</strong> option.</p><p>If your previous mapping mode is  Define Target Type from Attribute Value mapping, it is set as the default mapping automatically. You can also change the default mapping back to a simple mapping so that you can use the simple mapping to copy data when the <strong>Define Target Type from Attribute Value</strong> mapping mode is not selected.</p><p><br /></p><p>To specify a default mapping</p><hr /><ol><li data-uuid="82c19a45-c888-4b7d-ab48-07d3a671dc6f">Open the <ac:link><ri:page ri:content-title="Mapping with Schema Map Manager" /><ac:plain-text-link-body><![CDATA[Cameo DataHub Schema Map Manager]]></ac:plain-text-link-body></ac:link><ac:link><ri:page ri:space-key="CDH190" ri:content-title="Mapping with Schema Map Manager" /><ac:plain-text-link-body><![CDATA[ ]]></ac:plain-text-link-body></ac:link>dialog. <br /><br /><ac:image><ri:attachment ri:filename="Schema_Map_Manager.png" /></ac:image><br /><br /></li><li data-uuid="ed743be8-db29-4252-b129-f1c9028b4759">Select a source type that you want to edit its mapping. The default target type appears in the Target Type section.</li><li data-uuid="310b93d7-1b9f-477b-85e4-4e691113e136">Select a target type in the Target Type section that you want to specify as the default one.</li><li data-uuid="691bb113-941a-4913-bdc8-9be9935beadc">Click <strong>Set as Default</strong>. The selected target type is now the default mapping, and the button changes to <strong>Remove Default</strong>.<br /><br /></li></ol><p>To remove a default mapping</p><hr /><ol><li data-uuid="633d4cc0-505b-4ff2-b5f1-abcce8fca4a4">Open the <ac:link><ri:page ri:content-title="Mapping with Schema Map Manager" /><ac:plain-text-link-body><![CDATA[Cameo DataHub Schema Map Manager]]></ac:plain-text-link-body></ac:link><ac:link><ri:page ri:space-key="CDH190" ri:content-title="Mapping with Schema Map Manager" /><ac:plain-text-link-body><![CDATA[ ]]></ac:plain-text-link-body></ac:link>dialog. <br /><br /><ac:image><ri:attachment ri:filename="Schema_Map_Manager.png" /></ac:image><br /><br /></li><li data-uuid="b5f01832-f570-4f07-8398-0d6c3867ef52">Select a source type that you want to edit its mapping. The default target type appears in the Target Type section.</li><li data-uuid="6d64901b-657b-4e22-914f-ebefee5273dd">Select a default target type in the Target Type section that you want to remove.</li><li data-uuid="7596c1b2-b558-4bf8-9bfd-697b0de0a139">Click <strong>Remove Default</strong>. The selected target type is no longer the default mapping, and the button changes to <strong>Set as Default</strong>.<br /><br /></li></ol><p>To edit a schema mapping</p><hr /><ol><li data-uuid="a4bb55da-7080-436a-a63a-22afd71ba533">Open the <ac:link><ri:page ri:content-title="Mapping with Schema Map Manager" /><ac:plain-text-link-body><![CDATA[Cameo DataHub Schema Map Manager]]></ac:plain-text-link-body></ac:link><ac:link><ri:page ri:space-key="CDH190" ri:content-title="Mapping with Schema Map Manager" /><ac:plain-text-link-body><![CDATA[ ]]></ac:plain-text-link-body></ac:link>dialog. </li><li data-uuid="8f39c3f4-88ff-4455-9de5-972f20133d41">Select a source type that you want to edit its mapping. The default target type appears in the Target Type section.</li><li data-uuid="b814779b-4d2a-482b-a956-7c3bb957793f">Select a target type in the Target Type section that you want to edit.  The Select Attribute to Sync list shows the list of default attributes mapping.</li><li data-uuid="5c02cb68-fd4e-48d9-afa0-b39e5fa263ad">Click <strong>Edit </strong>to enable editing mode.</li><li data-uuid="6b0b0488-78a3-4f95-bce7-f49f5206cb75">Change the attributes mapping, and then click <strong>Save</strong>.<br /><br /><ac:image><ri:attachment ri:filename="Schema_Map_Edited_Attribute.png" /></ac:image><br /><br /></li></ol><ac:structured-macro ac:name="note" ac:schema-version="1" ac:macro-id="57302633-e7ba-426e-8ec0-0711ebe96967"><ac:parameter ac:name="title">Note</ac:parameter><ac:rich-text-body><p>If the edited schema mapping affects any elements in the current project, the Edit Schema Map Confirmation dialog opens. Click <strong>Yes</strong> to confirm that you want to edit the schema, <strong>No</strong> to cancel the editing, or <strong>Details</strong> to see the details of all affected nodes.</p><p style="margin-left: 30.0px;"><ac:image ac:align="center" ac:title="Edit Schema Map Confirmation Dialog" ac:alt="Edit Schema Map Confirmation Dialog"><ri:attachment ri:filename="dh-edit-schema-map.png" /></ac:image></p><h6 style="text-align: center;margin-left: 30.0px;">The Edit Schema Map Confirmation dialog.</h6></ac:rich-text-body></ac:structured-macro><ac:structured-macro ac:name="info" ac:schema-version="1" ac:macro-id="f0408f31-efd0-4097-a2f7-dfc810c5a46d"><ac:parameter ac:name="title">Information</ac:parameter><ac:rich-text-body><p>After DataHub<span> saves an edited schema map, it will be effective when you perform data synchronization next time.</span></p></ac:rich-text-body></ac:structured-macro></ac:layout-cell></ac:layout-section><ac:layout-section ac:type="single"><ac:layout-cell><p><strong>Related page</strong></p><ul><li data-uuid="c9d7b969-c0e8-45a9-8835-21687072357d"><ac:link><ri:page ri:content-title="Mapping with Schema Map Manager" /></ac:link></li></ul></ac:layout-cell></ac:layout-section></ac:layout>
+````
+
+<!--NOMAGIC_PAGE id=136716891 space=CDH2024x version=1 -->
+## PAGE 00125: Splitting part of a synchronized model as a used project
+
+- page_id: `136716891`
+- space_key: `CDH2024x`
+- source_url: https://docs.nomagic.com/spaces/CDH2024x/pages/136716891/Splitting+part+of+a+synchronized+model+as+a+used+project
+- version_number: 1
+- version_date: `2023-09-21T06:05:02.608+02:00`
+- ancestors: Cameo DataHub Documentation > User Guide > Synchronization
+- labels: []
+
+### NORMALIZED CONTENT
+
+When the synchronized data are quite large, and you want to cut part of them into another separate project, you can export both model data and DataHub database that include the synchronization information to the new project.
+
+To split part of a synchronized model as a used project
+
+1. Select the DataHub_Data_<project> element. Copy and paste it into the same location under the Model element in the Containment tree. You will get DataHub_Data_<project>1 . [ATTACHMENT filename='removelink1.png']
+2. On the main menu, click File > Export To > Project Usage . The Export Packages to New Project dialog appears. Select the Package you want to export and choose DataHub_Data_<project>1 . [ATTACHMENT filename='removelink2.png']
+3. Type a new project file name and click Save . You will see the selected data are saved to the new project file. [ATTACHMENT filename='removelink3.png']
+4. On the main menu, click Tools > DataHub > Remove non-use DHLink . The confirmation dialog appears. Select Yes . [ATTACHMENT filename='removelink4.png'] [ATTACHMENT filename='removelink5.png'] The DHLinks for the elements that were exported to the used project will be removed from DataHub_Data of the main project.
+
+#### NOTE: Note
+
+Note
+
+- When you export the used project, the full DataHub_Data will be copied.
+- Since the Remove non-use DHLink operation affects only the main project, you need to run this operation with the used project too. To remove the non-use DHLinks (the links that belong to the main project) from the used project, you must open the used project and select the Remove non-use DHlink command.
+
+### EXACT CONFLUENCE STORAGE SOURCE
+
+````html
+<p>When the synchronized data are quite large, and you want to cut part of them into another separate project, you can export both model data and DataHub database that include the synchronization information to the new project.</p><p><br /></p><p>To split part of a synchronized model as a used project</p><hr /><ol><li>Select the <strong>DataHub_Data_&lt;project&gt;</strong> element. Copy and paste it into the same location under the <strong>Model</strong> element in the Containment tree. You will get <strong>DataHub_Data_&lt;project&gt;1</strong>.<br /><br /><ac:image><ri:attachment ri:filename="removelink1.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Splitting part of a synchronized model as a used project" /></ri:attachment></ac:image><br /><br /></li><li>On the main menu, click <strong>File</strong> &gt; <strong>Export To </strong>&gt; <strong>Project Usage</strong>. The <strong>Export Packages to New Project dialog</strong> appears. Select the Package you want to export and choose <strong>DataHub_Data_&lt;project&gt;1</strong>.<br /><br /><ac:image><ri:attachment ri:filename="removelink2.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Splitting part of a synchronized model as a used project" /></ri:attachment></ac:image><br /><br /></li><li>Type a new project file name and click <strong>Save</strong>. You will see the selected data are saved to the new project file.<br /><br /><ac:image><ri:attachment ri:filename="removelink3.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Splitting part of a synchronized model as a used project" /></ri:attachment></ac:image><br /><br /></li><li>On the main menu, click <strong>Tools</strong> &gt; <strong>DataHub</strong> &gt; <strong>Remove non-use DHLink</strong>. The confirmation dialog appears. Select <strong>Yes</strong>.<br /><br /><ac:image><ri:attachment ri:filename="removelink4.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Splitting part of a synchronized model as a used project" /></ri:attachment></ac:image><br /><br /><ac:image><ri:attachment ri:filename="removelink5.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Splitting part of a synchronized model as a used project" /></ri:attachment></ac:image><br /><br />The DHLinks for the elements that were exported to the used project will be removed from DataHub_Data of the main project.</li></ol><p><br /></p><ac:structured-macro ac:name="note" ac:schema-version="1" ac:macro-id="09fe09b3-a59f-4bd3-872a-82972b31fc28"><ac:parameter ac:name="title">Note</ac:parameter><ac:rich-text-body><ul><li>When you export the used project, the full DataHub_Data will be copied.</li><li>Since the <strong>Remove non-use DHLink</strong> operation affects only the main project, you need to run this operation with the used project too. To remove the non-use DHLinks (the links that belong to the main project) from the used project, you must open the used project and select the <strong>Remove non-use DHlink</strong> command.</li></ul></ac:rich-text-body></ac:structured-macro><p class="auto-cursor-target"><br /></p>
+````
+
+<!--NOMAGIC_PAGE id=136716727 space=CDH2024x version=2 -->
+## PAGE 00126: Synchronization
+
+- page_id: `136716727`
+- space_key: `CDH2024x`
+- source_url: https://docs.nomagic.com/spaces/CDH2024x/pages/136716727/Synchronization
+- version_number: 2
+- version_date: `2024-01-31T07:25:06.942+01:00`
+- ancestors: Cameo DataHub Documentation > User Guide
+- labels: []
+
+### NORMALIZED CONTENT
+
+DataHub helps you to Synchronize the data between the modeler and the data source. Synchronization can be done one way or two ways. You can also check the changes made on either the modeler side or the data source side.
+
+To learn more about synchronization, refer to:
+
+### EXACT CONFLUENCE STORAGE SOURCE
+
+````html
+<p>DataHub helps you to Synchronize the data between the modeler and the data source. Synchronization can be done one way or two ways. You can also check the changes made on either the modeler side or the data source side.</p><p>To learn more about synchronization, refer to:</p><p><ac:structured-macro ac:name="children" ac:schema-version="2" ac:macro-id="afde7abc-dd34-4adf-a7e0-1b419d0b18d7" /></p>
+````
+
+<!--NOMAGIC_PAGE id=136716806 space=CDH2024x version=1 -->
+## PAGE 00127: Synchronize buttons and commands
+
+- page_id: `136716806`
+- space_key: `CDH2024x`
+- source_url: https://docs.nomagic.com/spaces/CDH2024x/pages/136716806/Synchronize+buttons+and+commands
+- version_number: 1
+- version_date: `2023-09-21T06:04:59.724+02:00`
+- ancestors: Cameo DataHub Documentation > User Guide > Synchronization
+- labels: []
+
+### NORMALIZED CONTENT
+
+DataHub has **Synchronize** buttons and commands in different locations to perform different functions as follows
+
+- On top of the MagicDraw Containment tree When you click this **Synchronize [IMAGE alt='' src='']** button, all nodes from MagicDraw are synchronized. A single node without children nodes can be synchronized, while a node containing children nodes can be synchronized recursively. [IMAGE alt='' src=''] The Synchronize button on top of the MagicDraw Containment tree.
+- On top of DataHub Explorer. When you click this **Synchronize [IMAGE alt='' src='']** button, all nodes in the Data Source of the selected node in DataHub Explorer are synchronized. [IMAGE alt='' src='']The Synchronize button on top of DataHub Explorer.
+- From the MagicDraw main menu Clicking **Tools** > **DataHub** > **Synchronize updates to Data Source** performs the same function as clicking the **Synchronize** [IMAGE alt='' src=''] button on top of the MagicDraw Containment Tree.All nodes from MagicDraw are synchronized. A single node without children nodes can be synchronized, while a node containing children nodes can be synchronized recursively. [IMAGE alt='' src=''] The Synchronize updates to the Data Source command from the MagicDraw main menu.
+- From the MagicDraw shortcut menu When you right-click a node and select **DataHub Actions**>**Synchronize**>**Synchronize Node** or **Synchronize Node Recursively**, the selected node is synchronized or recursively synchronized. You can also **Update Pending DHLinks**, **Update Pending DHLinks Recursively**, **Clear Suspect DHTraces**, **Clear Suspect DHTraces Recursively**, **Remove DHLinks, Remove DHLinks recursively**, **Remove DHTrace,** and **Remove DHTrace recursively**. [IMAGE alt='' src=''] The Synchronize command from the MagicDraw shortcut menu. 
+[IMAGE alt='' src=''] The Update DHLinks command from the MagicDraw shortcut menu. 
+[IMAGE alt='' src=''] The Remove DHLinks command from the MagicDraw shortcut menu.
+- From the DataHub shortcut menu The Datahub shortcut menu is for **Synchronize** **Node** or **Synchronize Node Recursively** that the selected node is synchronized or recursively synchronized, **Update DHLinks**, and **Remove DHLinks**. You can also **Update Pending DHLinks**,**Update Pending DHLinks Recursively**, **Clear Suspect DHTraces**, **Clear Suspect DHTraces Recursively**, **Remove DHLinks, Remove DHLinks recursively**, **Remove DHTrace,** and **Remove DHTrace recursively**. [IMAGE alt='' src=''] The Synchronize command from the DataHub shortcut menu. 
+[IMAGE alt='' src=''] The Update DHLinks command from the DataHub shortcut menu. [IMAGE alt='' src='']
+
+###### The Remove DHLinks command from the DataHub shortcut menu.
+
+### EXACT CONFLUENCE STORAGE SOURCE
+
+````html
+<p>DataHub has <strong>Synchronize</strong> buttons and commands in different locations to perform different functions as follows</p><p><br /></p><ul><li><p>On top of the MagicDraw Containment tree</p><p>When you click this <strong>Synchronize <ac:image><ri:attachment ri:filename="sync-btn.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Synchronize buttons and commands" /></ri:attachment></ac:image></strong> button, all nodes from MagicDraw are synchronized. A single node without children nodes can be synchronized, while a node containing children nodes can be synchronized recursively.<br /><br /></p><p><ac:image ac:align="center" ac:title="Synchronize button on MagicDraw containment Tree" ac:alt="Synchronize button on MagicDraw containment Tree"><ri:attachment ri:filename="md-sync-btn.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Synchronize buttons and commands" /></ri:attachment></ac:image></p><h6 style="text-align: center;">The Synchronize button on top of the MagicDraw Containment tree.</h6></li><li><p>On top of DataHub Explorer.</p><p>When you click this <strong>Synchronize <ac:image><ri:attachment ri:filename="sync-btn.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Synchronize buttons and commands" /></ri:attachment></ac:image></strong> button, all nodes in the Data Source of the selected node in DataHub Explorer are synchronized.<br /><br /></p><h6 style="text-align: center;"><ac:image ac:align="center" ac:title="Sync button on DataHub Explorer toolbar" ac:alt="Sync button on DataHub Explorer toolbar"><ri:attachment ri:filename="dh-exp-sync-btn.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Synchronize buttons and commands" /></ri:attachment></ac:image>The Synchronize button on top of DataHub Explorer.</h6></li><li><p>From the MagicDraw main menu</p><p>Clicking <strong>Tools</strong> &gt; <strong>DataHub</strong> &gt; <strong>Synchronize updates to Data Source</strong> <span>performs the same function as clicking the <strong>Synchronize</strong> <ac:image><ri:attachment ri:filename="sync-btn.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Synchronize buttons and commands" /></ri:attachment></ac:image> button on top of the MagicDraw Containment Tree. </span><span><span>All nodes from MagicDraw are synchronized. A single node without children nodes can be synchronized, while a node containing children nodes can be synchronized recursively.</span><br /><br /></span></p><p style="text-align: center;"><ac:image><ri:attachment ri:filename="Synchronize updates to data source.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Synchronize buttons and commands" /></ri:attachment></ac:image></p><h6 style="text-align: center;">The Synchronize updates to the Data Source command from the MagicDraw main menu.</h6></li><li><p>From the MagicDraw shortcut menu</p><p>When you right-click a node and select <strong>DataHub Actions </strong>&gt;<strong> Synchronize </strong>&gt;<strong> Synchronize Node</strong> or <strong>Synchronize Node Recursively</strong>, the selected node is synchronized or recursively synchronized. You can also <strong>Update Pending DHLinks</strong>, <strong>Update Pending DHLinks Recursively</strong>, <strong>Clear Suspect DHTraces</strong>, <strong>Clear Suspect DHTraces Recursively</strong>, <strong>Remove DHLinks, Remove DHLinks recursively</strong>, <strong>Remove DHTrace,</strong> and <strong>Remove DHTrace recursively</strong>.<br /><br /></p><p><ac:image ac:align="center"><ri:attachment ri:filename="Node Sync_Main Menu_Tools.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Synchronize buttons and commands" /></ri:attachment></ac:image></p><h6 style="text-align: center;">The Synchronize command from the MagicDraw shortcut menu.<br /><ac:image><ri:attachment ri:filename="Update DHLink_MD.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Synchronize buttons and commands" /></ri:attachment></ac:image></h6><h6 style="text-align: center;">The Update DHLinks command from the MagicDraw shortcut menu.<br /><ac:image><ri:attachment ri:filename="Remove DHLink_MD.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Synchronize buttons and commands" /></ri:attachment></ac:image></h6><h6 style="text-align: center;">The Remove DHLinks command from the MagicDraw shortcut menu.<br /><br /></h6></li><li><p>From the DataHub shortcut menu</p><p>The Datahub shortcut menu is for <strong>Synchronize</strong> <strong>Node</strong> or <strong>Synchronize Node Recursively</strong> that the selected node is synchronized or recursively synchronized, <strong>Update DHLinks</strong>, and <strong>Remove DHLinks</strong>. You can also <strong>Update Pending DHLinks</strong>,<strong> Update Pending DHLinks Recursively</strong>, <strong>Clear Suspect DHTraces</strong>, <strong>Clear Suspect DHTraces Recursively</strong>, <strong>Remove DHLinks, Remove DHLinks recursively</strong>, <strong>Remove DHTrace,</strong> and <strong>Remove DHTrace recursively</strong>.</p><p style="text-align: center;"><ac:image><ri:attachment ri:filename="Node Sync_Shortcut Menu_Explorer panel.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Synchronize buttons and commands" /></ri:attachment></ac:image></p><h6 style="text-align: center;">The Synchronize command from the DataHub shortcut menu.<br /><ac:image><ri:attachment ri:filename="Update DHLink_DH.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Synchronize buttons and commands" /></ri:attachment></ac:image></h6><h6 style="text-align: center;">The Update DHLinks command from the DataHub shortcut menu.</h6><p style="text-align: center;"><ac:image><ri:attachment ri:filename="Remove DHLink_DH.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Synchronize buttons and commands" /></ri:attachment></ac:image></p></li></ul><h6 style="text-align: center;">The Remove DHLinks command from the DataHub shortcut menu.</h6>
+````
+
+<!--NOMAGIC_PAGE id=136716854 space=CDH2024x version=1 -->
+## PAGE 00128: Synchronizing changes in data hierarchy
+
+- page_id: `136716854`
+- space_key: `CDH2024x`
+- source_url: https://docs.nomagic.com/spaces/CDH2024x/pages/136716854/Synchronizing+changes+in+data+hierarchy
+- version_number: 1
+- version_date: `2023-09-21T06:05:00.977+02:00`
+- ancestors: Cameo DataHub Documentation > User Guide > Synchronization
+- labels: []
+
+### NORMALIZED CONTENT
+
+The functionality of DHLink has been enhanced. The DHLink map is now stored along with the project so you can avoid conflicts in multi-user scenarios. The synchronization does not only limit for updating attribute values but also updating data hierarchy. When nodes are moved within the scope, synchronization also affects the changes in the data hierarchy next time you synchronize the data.
+
+[IMAGE alt='' src='']
+
+### EXACT CONFLUENCE STORAGE SOURCE
+
+````html
+<p>The functionality of DHLink has been enhanced. The DHLink map is now stored along with the project so you can avoid conflicts in multi-user scenarios. The synchronization does not only limit for updating attribute values but also updating data hierarchy. When nodes are moved within the scope, synchronization also affects the changes in the data hierarchy next time you synchronize the data.</p><p><br /></p><p><ac:image><ri:attachment ri:filename="Sync Changes Hierarchy.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Synchronizing changes in data hierarchy" /></ri:attachment></ac:image></p>
+````
+
+<!--NOMAGIC_PAGE id=136716886 space=CDH2024x version=1 -->
+## PAGE 00129: Synchronizing changes in schema mapping
+
+- page_id: `136716886`
+- space_key: `CDH2024x`
+- source_url: https://docs.nomagic.com/spaces/CDH2024x/pages/136716886/Synchronizing+changes+in+schema+mapping
+- version_number: 1
+- version_date: `2023-09-21T06:05:02.349+02:00`
+- ancestors: Cameo DataHub Documentation > User Guide > Synchronization
+- labels: []
+
+### NORMALIZED CONTENT
+
+You can also synchronize updates on a schema map when you perform the data synchronization. If you change a schema map, synchronization applies the changes in the schema map to the affected nodes.
+
+[IMAGE alt='' src='']
+
+###### The Schema Map Manager for synchronizing schema mapping.
+
+#### NOTE: Note
+
+Note
+
+After you update the schema map, the **Edit Schema Map Confirmation** dialog opens to notify that you must synchronize the data again to synchronize the changes to the affected nodes.
+
+###### [IMAGE alt='' src='']The Edit Schema Map Confirmation dialog.
+
+### EXACT CONFLUENCE STORAGE SOURCE
+
+````html
+<p>You can also synchronize updates on a schema map when you perform the data synchronization. If you change a schema map, synchronization applies the changes in the schema map to the affected nodes.</p><p><br /></p><p><ac:image ac:align="center"><ri:attachment ri:filename="Schema Map Changes Synchronize.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Synchronizing changes in schema mapping" /></ri:attachment></ac:image></p><h6 style="text-align: center;">The Schema Map Manager for synchronizing schema mapping.</h6><ac:structured-macro ac:name="note" ac:schema-version="1" ac:macro-id="c5b2c6d2-eaef-4588-89d2-a718b527e510"><ac:parameter ac:name="title">Note</ac:parameter><ac:rich-text-body><p>After you update the schema map, the <strong>Edit Schema Map Confirmation</strong> dialog opens to notify that you must synchronize the data again to synchronize the changes to the affected nodes.</p><h6 style="text-align: center;"><ac:image ac:align="center" ac:title="Confirmation to Synchronize when a Schema Map is Changed" ac:alt="Confirmation to Synchronize when a Schema Map is Changed"><ri:attachment ri:filename="confirm-schema-edit.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Synchronizing changes in schema mapping" /></ri:attachment></ac:image>The Edit Schema Map Confirmation dialog.</h6></ac:rich-text-body></ac:structured-macro><p class="auto-cursor-target"><br /></p>
+````
+
+<!--NOMAGIC_PAGE id=136716777 space=CDH2024x version=1 -->
+## PAGE 00130: Synchronizing DOORS External Links
+
+- page_id: `136716777`
+- space_key: `CDH2024x`
+- source_url: https://docs.nomagic.com/spaces/CDH2024x/pages/136716777/Synchronizing+DOORS+External+Links
+- version_number: 1
+- version_date: `2023-09-21T06:04:58.817+02:00`
+- ancestors: Cameo DataHub Documentation > User Guide > Synchronization > Synchronizing Requirements
+- labels: []
+
+### NORMALIZED CONTENT
+
+After Requirements are synchronized from DOORS, they can have Relationships, e.g., **Satisfy** or **Derive**, with other elements in the model. In this version, DataHub can synchronize these Relationships back to DOORS and create External Links that help display and navigate to those relationships with related model elements.
+
+[IMAGE alt='' src='']
+
+###### DataHub synchronizes Relationships back to DOORS and creates External Links to display and navigate to those relationships.
+
+[IMAGE alt='' src='']
+
+###### The External Link in DOORS displaying the Relationship and navigating to the related model element.
+
+To synchronize a related element in the model with Requirements in DOORS as an External Link
+
+1. Right-click the module or parent node of Requirements and select **Create/Update External Links to the Satisfying elements**. The External Link will be created in the Requirements that contain Relationships in DOORS. 
+ 
+[IMAGE alt='' src=''] NoteIf you have selected the root node of the Sync Scope, the **Create/Update External Links to the Satisfying elements** operation will recursively detect the changes. Otherwise, only the selected node will be checked.
+2. The Updating External Links dialog opens to show the synchronizing actions of the selected module or parent node of Requirements. Click Synchronize to proceed with the actions. [ATTACHMENT filename='Updating External Links Dialog.png']
+3. The **Create/Update External Links Summary** dialog opens to show the summary of External Links that have been created or updated. Click **Close** to complete the External Link synchronization. [IMAGE alt='' src=''] NoteExternal Links will be created with or deleted from Requirements in DOORS according to the Relationships in the model.
+
+### EXACT CONFLUENCE STORAGE SOURCE
+
+````html
+<p>After Requirements are synchronized from DOORS, they can have Relationships, e.g., <strong>Satisfy</strong> or <strong>Derive</strong>, with other elements in the model. In this version, DataHub can synchronize these Relationships back to DOORS and create External Links that help display and navigate to those relationships with related model elements.<br /><br /></p><p style="text-align: center;"><ac:image ac:align="center"><ri:attachment ri:filename="DataHub Synchronizes Relationships back to DOORS with External Links.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Synchronizing DOORS External Links" /></ri:attachment></ac:image></p><h6 style="text-align: center;">DataHub synchronizes Relationships back to DOORS and creates External Links to display and navigate to those relationships.</h6><p style="text-align: center;"><ac:image ac:align="center"><ri:attachment ri:filename="External Link2.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Synchronizing DOORS External Links" /></ri:attachment></ac:image></p><h6 style="text-align: center;">The External Link in DOORS displaying the Relationship and navigating to the related model element.</h6><p><br /></p><p>To synchronize a related element in the model with Requirements in DOORS as an External Link</p><hr /><ol><li><p class="auto-cursor-target">Right-click the module or parent node of Requirements and select <strong>Create/Update External Links to the Satisfying elements</strong>. The External Link will be created in the Requirements that contain Relationships in DOORS.<br /><br /><ac:image><ri:attachment ri:filename="Create External Link.PNG"><ri:page ri:space-key="CDH2024x" ri:content-title="Synchronizing DOORS External Links" /></ri:attachment></ac:image></p><ac:structured-macro ac:name="note" ac:schema-version="1" ac:macro-id="17e2ff65-e4a7-4132-907a-1d60c2449eeb"><ac:parameter ac:name="title">Note</ac:parameter><ac:rich-text-body><p>If you have selected the root node of the Sync Scope, the <strong>Create/Update External Links to the Satisfying elements</strong> operation will recursively detect the changes. Otherwise, only the selected node will be checked.</p></ac:rich-text-body></ac:structured-macro><p class="auto-cursor-target"><br /></p></li><li>The <strong>Updating External Links</strong> dialog opens to show the synchronizing actions of the selected module or parent node of Requirements. Click <strong>Synchronize</strong> to proceed with the actions.<br /><br /><ac:image><ri:attachment ri:filename="Updating External Links Dialog.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Synchronizing DOORS External Links" /></ri:attachment></ac:image><br /><br /></li><li><p class="auto-cursor-target">The <strong>Create/Update External Links Summary</strong> dialog opens to show the summary of External Links that have been created or updated. Click <strong>Close</strong> to complete the External Link synchronization.<br /><br /></p><p class="auto-cursor-target"><ac:image><ri:attachment ri:filename="Create or Update External Links Summary Dialog.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Synchronizing DOORS External Links" /></ri:attachment></ac:image></p><ac:structured-macro ac:name="note" ac:schema-version="1" ac:macro-id="a3b8b291-3600-4c53-8fe9-630159ccdae9"><ac:parameter ac:name="title">Note</ac:parameter><ac:rich-text-body><p>External Links will be created with or deleted from Requirements in DOORS according to the Relationships in the model.</p></ac:rich-text-body></ac:structured-macro><p class="auto-cursor-target"><br /></p></li></ol>
+````
+
+<!--NOMAGIC_PAGE id=136716880 space=CDH2024x version=2 -->
+## PAGE 00131: Synchronizing nodes
+
+- page_id: `136716880`
+- space_key: `CDH2024x`
+- source_url: https://docs.nomagic.com/spaces/CDH2024x/pages/136716880/Synchronizing+nodes
+- version_number: 2
+- version_date: `2026-02-11T08:05:40.533+01:00`
+- ancestors: Cameo DataHub Documentation > User Guide > Synchronization
+- labels: []
+
+### NORMALIZED CONTENT
+
+To synchronize any nodes in the **Conflict Dashboard** dialog
+
+1. Select any check boxes of Data Sources on either of the sides. The selected side will be the master Data Source, and the other side will pick up the changes from the selected side. NoteA single node can be only synchronized from either the source to the target or the target to the source. However, multiple nodes can have different synchronization directions, e.g., one node can be synchronized from the source to the target, and another node can be synchronized from the target to the source.
+2. Click Synchronize .
+
+**Related Pages**
+
+- [CONFLUENCE_PAGE title='Tracking changes on Conflict Dashboard' space='']
+
+### EXACT CONFLUENCE STORAGE SOURCE
+
+````html
+<p>To synchronize any nodes in the <strong>Conflict Dashboard</strong> dialog</p><hr /><ol><li data-uuid="1e5d7c57-c6bb-4a0b-9281-913db064a21d"><p class="auto-cursor-target">Select any check boxes of Data Sources on either of the sides. The selected side will be the master Data Source, and the other side will pick up the changes from the selected side.</p><ac:structured-macro ac:name="note" ac:schema-version="1" ac:macro-id="57776fbc-c1d7-4a13-9494-dcc9a7c64609"><ac:parameter ac:name="title">Note</ac:parameter><ac:rich-text-body><p>A single node can be only synchronized from either the source to the target or the target to the source. However, multiple nodes can have different synchronization directions, e.g., one node can be synchronized from the source to the target, and another node can be synchronized from the target to the source.</p></ac:rich-text-body></ac:structured-macro></li><li data-uuid="31cca763-fc9d-479d-88a0-6adb6503496d">Click <strong>Synchronize</strong>.</li></ol><p><strong>Related Pages</strong></p><ul><li data-uuid="2bfea54c-d9bc-49be-bfb7-b6cf3069cea7"><ac:link><ri:page ri:content-title="Tracking changes on Conflict Dashboard" /></ac:link></li></ul>
+````
+
+<!--NOMAGIC_PAGE id=136716729 space=CDH2024x version=2 -->
+## PAGE 00132: Synchronizing Requirements
+
+- page_id: `136716729`
+- space_key: `CDH2024x`
+- source_url: https://docs.nomagic.com/spaces/CDH2024x/pages/136716729/Synchronizing+Requirements
+- version_number: 2
+- version_date: `2026-02-11T08:04:47.975+01:00`
+- ancestors: Cameo DataHub Documentation > User Guide > Synchronization
+- labels: []
+
+### NORMALIZED CONTENT
+
+Data synchronization is the process of sending all changes in the attribute values including a list of deleted items from a source to target data. Either the source or target must be a MagicDraw® node.
+
+Data synchronization allows you to maintain the consistency of data across nodes in different Data sources and applications. During synchronization, all types of changes in a Data Source or application are stored in the DHLink map along with the project in its repository.
+
+In addition to the **Synchronize** command on the DataHub Actions menu, DataHub provides the synchronization option through the DataHub main menu and the **Synchronize** buttons in the Containment tree and DataHub Explorer.
+
+Data synchronization can be categorized into two functional types: Data Source synchronization and node synchronization.
+
+Data Source synchronization is to synchronize all items in the entire Data Source that have DHLinks in a current project in an application.
+
+Node Synchronization allows you to synchronize a specific node using either of the following mode:
+
+- Synchronize Node
+- Synchronize Node Recursively .
+
+#### NOTE: Note
+
+Note
+
+DataHub ignores all excluded nodes in the Sync relations during data synchronization.
+
+You can perform synchronization on the selected node by clicking the **Synchronize** button on the **DataHub Explorer** toolbar.
+
+[IMAGE alt='' src='']
+
+###### The Synchronize button on the DataHub Explorer toolbar.
+
+Alternatively, you can perform synchronization from the MagicDraw® main menu by clicking **Tools** > **DataHub** > **Synchronize updates to Data Source**.
+
+[IMAGE alt='' src='']
+
+###### Performing synchronization from the MagicDraw main menu.
+
+**Related pages**
+
+### EXACT CONFLUENCE STORAGE SOURCE
+
+````html
+<p>Data synchronization is the process of sending all changes in the attribute values including a list of deleted items from a source to target data. Either the source or target must be a MagicDraw<sup>®</sup> node.</p><p>Data synchronization allows you to maintain the consistency of data across nodes in different Data sources and applications. During synchronization, all types of changes in a Data Source or application are stored in the DHLink map along with the project in its repository.</p><p>In addition to the <strong>Synchronize</strong> command on the DataHub Actions menu, DataHub provides the synchronization option through the DataHub main menu and the <strong>Synchronize</strong> buttons in the Containment tree and DataHub Explorer.</p><p>Data synchronization can be categorized into two functional types: Data Source synchronization and node synchronization.</p><p>Data Source synchronization is to synchronize all items in the entire Data Source that have DHLinks in a current project in an application.</p><p>Node Synchronization allows you to synchronize a specific node using either of the following mode:</p><ul><li data-uuid="67c8b234-a295-4c8d-bb04-71bdf18659bd"><strong>Synchronize Node</strong></li><li data-uuid="402cfa62-9046-4696-ba43-d17c845abc74"><strong>Synchronize Node Recursively</strong>.</li></ul><ac:structured-macro ac:name="note" ac:schema-version="1" ac:macro-id="ed7b4e06-e498-487a-ab82-4d6182168021"><ac:parameter ac:name="title">Note</ac:parameter><ac:rich-text-body><p>DataHub ignores all excluded nodes in the Sync relations during data synchronization.</p></ac:rich-text-body></ac:structured-macro><p>You can perform synchronization on the selected node by clicking the <strong>Synchronize</strong> button on the <strong>DataHub Explorer</strong> toolbar.</p><p><br /></p><p style="margin-left: 30.0px;"><ac:image ac:align="center" ac:title="Synchronizing a Data Source using the Synchronize button in DataHub explorer" ac:alt="Synchronizing a Data Source using the Synchronize button in DataHub explorer"><ri:attachment ri:filename="data-sync-btn-on-explorer-tab.png" /></ac:image></p><h6 style="text-align: center;margin-left: 30.0px;">The Synchronize button on the DataHub Explorer toolbar.</h6><p>Alternatively, you can perform synchronization from the MagicDraw<sup>®</sup> main menu by clicking <strong>Tools</strong> &gt; <strong>DataHub</strong> &gt; <strong>Synchronize updates to Data Source</strong>.</p><p><br /></p><p><ac:image ac:align="center"><ri:attachment ri:filename="DataHub Menu.png" /></ac:image></p><h6 class="auto-cursor-target" style="text-align: center;">Performing synchronization from the MagicDraw main menu.</h6><p><strong>Related pages</strong></p><p><ac:structured-macro ac:name="children" ac:schema-version="2" ac:macro-id="6f812287-2809-421a-95d5-dc4662487c7e" /></p>
+````
+
+<!--NOMAGIC_PAGE id=136716717 space=CDH2024x version=2 -->
+## PAGE 00133: Teamwork Cloud projects
+
+- page_id: `136716717`
+- space_key: `CDH2024x`
+- source_url: https://docs.nomagic.com/spaces/CDH2024x/pages/136716717/Teamwork+Cloud+projects
+- version_number: 2
+- version_date: `2025-11-06T09:59:22.506+01:00`
+- ancestors: Cameo DataHub Documentation > User Guide > Using DataHub in Teamwork Cloud environment > Data Sources on Teamwork Cloud
+- labels: []
+
+### NORMALIZED CONTENT
+
+A **Teamwork Cloud project** creates Data Sources on the repository server and can be identified as the same project for different clients. Since the DHLink mapping detail is stored along with the project details on the Teamwork Cloud, all clients can see and receive changes from one another, in case they update the changes from the server before applying their own changes.
+
+### EXACT CONFLUENCE STORAGE SOURCE
+
+````html
+<p>A <strong>Teamwork Cloud project</strong> creates Data Sources on the repository server and can be identified as the same project for different clients. Since the DHLink mapping detail is stored along with the project details on the Teamwork Cloud, all clients can see and receive changes from one another, in case they update the changes from the server before applying their own changes.</p>
+````
+
+<!--NOMAGIC_PAGE id=136715951 space=CDH2024x version=1 -->
+## PAGE 00134: Text search in DataHub Explorer and Alias Manager
+
+- page_id: `136715951`
+- space_key: `CDH2024x`
+- source_url: https://docs.nomagic.com/spaces/CDH2024x/pages/136715951/Text+search+in+DataHub+Explorer+and+Alias+Manager
+- version_number: 1
+- version_date: `2023-09-21T06:04:21.061+02:00`
+- ancestors: Cameo DataHub Documentation > Getting started > Understanding DataHub user interface > Add-on features
+- labels: []
+
+### NORMALIZED CONTENT
+
+The text search capability in DataHub Explorer allows you to search for data and items in DataHub.
+
+[IMAGE alt='' src='']
+
+###### Text search capability in DataHub Explorer.
+
+### EXACT CONFLUENCE STORAGE SOURCE
+
+````html
+<p>The text search capability in DataHub Explorer allows you to search for data and items in DataHub.</p><p style="margin-left: 30.0px;"><ac:image ac:align="center" ac:title="DataHub Explorer Text Search box" ac:alt="DataHub Explorer Text Search box"><ri:attachment ri:filename="dh-text-search.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Text search in DataHub Explorer and Alias Manager" /></ri:attachment></ac:image></p><h6 style="text-align: center;">Text search capability in DataHub Explorer.</h6>
+````
+
+<!--NOMAGIC_PAGE id=136716758 space=CDH2024x version=1 -->
+## PAGE 00135: Tracking changes on Conflict Dashboard
+
+- page_id: `136716758`
+- space_key: `CDH2024x`
+- source_url: https://docs.nomagic.com/spaces/CDH2024x/pages/136716758/Tracking+changes+on+Conflict+Dashboard
+- version_number: 1
+- version_date: `2023-09-21T06:04:58.282+02:00`
+- ancestors: Cameo DataHub Documentation > User Guide > Synchronization > Synchronizing Requirements
+- labels: []
+
+### NORMALIZED CONTENT
+
+The **Conflict Dashb****oard** lists all the nodes that have been changed, moved, deleted, or excluded. A simple color scheme enables you to differentiate their modified conditions.
+
+#### INFO: Information
+
+Information
+
+The **Check DHLink Changes Recursively** command checks for changes in both the selected node and its child nodes.
+
+To access the **Conflict Dashboard**from a node in the MagicDraw Containment tree****
+
+- In the MagicDraw Containment tree, right-click a node and choose DataHub Actions > Check Changes > Check DHLink Changes or Check DHLink Changes Recursively . [ATTACHMENT filename='Conflict Dashboard_shortcut menu_MD side.png']
+
+To access the **Conflict Dashboard**from a node in DataHub Explorer Panel****
+
+- In DataHub Explorer Panel, right-click a node and select Check Changes > Check DHLink Changes or Check DHLink Changes Recursively . [ATTACHMENT filename='Conflict Dashboard_shortcut menu_DH side.png']
+
+When you**Check DHLink Changes**or**Check DHLink Changes Recursively**, the**Conflict Dashboard**dialog appearsif there are any changes.
+
+[IMAGE alt='' src='']
+
+###### The Conflict Dashboard dialog.
+
+If there are no changes, the following dialog appears.
+
+[IMAGE alt='' src='']
+
+The**Conflict Dashboard**is comprised of the following components
+
+- Source and Target data trees
+- Display drop-down list
+- Properties panel
+- Node changes in colors
+- Synchronize and close buttons
+
+The**Display**drop-down list,**Properties**panel, and node changes in colors are explained below.
+
+##### Display drop-down lists
+
+The**Display**drop-down lists allow you to filter the pending synchronizations according to the type of modifications.
+
+[IMAGE alt='' src='']
+
+###### The Display drop-down list in the Conflict Dashboard.
+
+##### Properties panel
+
+The Conflict Dashboard **Properties** panel shows the properties and attributes of the source and target nodes.
+
+[IMAGE alt='' src='']
+
+###### The Conflict Dashboard Properties panel.
+
+##### Node changes in colors
+
+The**Conflict Dashboard**displays node changes in colors explained in the following table.
+
+| Change type | Color | Meaning |
+| --- | --- | --- |
+| New Entity | Green | Refers to a new node in the scope or a deleted node at the end of a one-way synchronization (re-create). |
+| Modified | Blue | Refers to a modified node. |
+| Moved | Yellow | Refers to a moved node. |
+| Deleted | Pink | Refers to a deleted node or a new node at the end of a one-way sync (force-delete). |
+| Out of Scope | Red Lettering | Refers to a node that is no longer within the scope of the root node. |
+| Excluded | Gray Lettering | Refers to a node that has been excluded from synchronization. |
+
+#### INFO: Information
+
+Information
+
+If there is more than one Data Source connected, the dialog prompting you to choose a target Data Source to check for node changes appears.
+
+[IMAGE alt='' src='']
+
+### EXACT CONFLUENCE STORAGE SOURCE
+
+````html
+<p>The <strong>Conflict Dashb</strong><strong>oard</strong> lists all the nodes that have been changed, moved, deleted, or excluded. A simple color scheme enables you to differentiate their modified conditions.</p><ac:structured-macro ac:name="info" ac:schema-version="1" ac:macro-id="4250d938-7dd7-4191-bd16-45e1b0cdd1e2"><ac:parameter ac:name="title">Information</ac:parameter><ac:rich-text-body><p>The <strong>Check DHLink Changes Recursively</strong> command checks for changes in both the selected node and its child nodes.</p></ac:rich-text-body></ac:structured-macro><p><br /></p><p>To access the <strong>Conflict Dashboard </strong>from a node in the MagicDraw Containment tree<strong><br /></strong></p><hr /><ul><li>In the MagicDraw Containment tree, right-click a node and choose <strong>DataHub</strong> <strong>Actions </strong>&gt;<strong> Check Changes</strong> &gt; <strong>Check DHLink Changes</strong> or <strong>Check DHLink Changes Recursively</strong>.<br /><br /><ac:image><ri:attachment ri:filename="Conflict Dashboard_shortcut menu_MD side.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Tracking changes on Conflict Dashboard" /></ri:attachment></ac:image></li></ul><p><br /></p><p>To access the <strong>Conflict Dashboard </strong>from a node in DataHub Explorer Panel<strong><br /></strong></p><hr /><ul><li>In DataHub Explorer Panel, right-click a node and select <strong>Check Changes </strong>&gt;<strong> Check DHLink Changes</strong> or <strong>Check DHLink Changes Recursively</strong>.<br /><br /><ac:image><ri:attachment ri:filename="Conflict Dashboard_shortcut menu_DH side.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Tracking changes on Conflict Dashboard" /></ri:attachment></ac:image></li></ul><p><br /></p><p>W<span>hen you </span><strong>Check DHLink Changes</strong><span> or </span><strong>Check DHLink Changes Recursively</strong>, the<strong> Conflict Dashboard</strong><span> dialog appears </span>if there are any changes. </p><p><br /></p><p><ac:image ac:align="center"><ri:attachment ri:filename="Conflict_Dashboard.jpg"><ri:page ri:space-key="CDH2024x" ri:content-title="Tracking changes on Conflict Dashboard" /></ri:attachment></ac:image></p><h6 style="text-align: center;">The Conflict Dashboard dialog.</h6><ac:structured-macro ac:name="note" ac:schema-version="1" ac:macro-id="4e40af03-857c-4b3f-b858-3f077c0750e0"><ac:rich-text-body><p>If there are no changes, the following dialog appears.</p><p><ac:image><ri:attachment ri:filename="No Changes_Dialog.jpg"><ri:page ri:space-key="CDH2024x" ri:content-title="Tracking changes on Conflict Dashboard" /></ri:attachment></ac:image></p></ac:rich-text-body></ac:structured-macro><p><br /></p><p><span style="color: rgb(51,51,51);">The<span> </span><strong>Conflict Dashboard</strong><span> </span>is comprised of the following components</span></p><ul><li>Source and Target data trees</li><li><strong>Display</strong><span> </span>drop-down list</li><li><strong>Properties</strong><span> </span>panel</li><li>Node changes in colors</li><li>Synchronize and close buttons</li></ul><p>The<span> </span><strong>Display</strong><span> </span>drop-down list,<span> </span><strong>Properties</strong><span> </span>panel, and node changes in colors are explained below.</p><h3>Display drop-down lists</h3><p>The<span> </span><strong>Display</strong><span> </span>drop-down lists allow you to filter the pending synchronizations according to the type of modifications.</p><p><ac:image ac:align="center"><ri:attachment ri:filename="Display_Drop-down.jpg"><ri:page ri:space-key="CDH2024x" ri:content-title="Tracking changes on Conflict Dashboard" /></ri:attachment></ac:image></p><h6 style="text-align: center;">The Display drop-down list in the Conflict Dashboard.</h6><h3>Properties panel</h3><p>The Conflict Dashboard <strong>Properties</strong> panel shows the properties and attributes of the source and target nodes.</p><p style="text-align: center;"><span class="confluence-embedded-file-wrapper"><ac:image><ri:attachment ri:filename="Properties Panel in Conflict Dashboard.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Tracking changes on Conflict Dashboard" /></ri:attachment></ac:image></span></p><h6 style="text-align: center;">The Conflict Dashboard Properties panel.</h6><h3>Node changes in colors</h3><p>The<span> </span><strong>Conflict Dashboard</strong><span> </span>displays node changes in colors explained in the following table.</p><table class="relative-table" style="width: 65.8804%;"><colgroup><col style="width: 11.75%;" /><col style="width: 14.3333%;" /><col style="width: 73.9167%;" /></colgroup><tbody style="margin-left: 30.0px;"><tr style="margin-left: 30.0px;"><td class="highlight-#f4f5f7" style="text-align: left;" title="Background color : Light grey 100%" colspan="1" data-highlight-colour="#f4f5f7"><strong title="">Change type</strong></td><td class="highlight-grey" style="text-align: left;" title="Background color : " colspan="1" data-highlight-colour="grey"><strong title="">Color</strong></td><td class="highlight-#f4f5f7" style="text-align: left;" title="Background color : Light grey 100%" colspan="1" data-highlight-colour="#f4f5f7"><strong title="">Meaning</strong></td></tr><tr style="margin-left: 30.0px;"><td style="text-align: left;">New Entity</td><td style="text-align: left;">Green</td><td style="text-align: left;">Refers to a new node in the scope or a deleted node at the end of a one-way synchronization (re-create).</td></tr><tr style="margin-left: 30.0px;"><td style="text-align: left;">Modified</td><td style="text-align: left;">Blue</td><td style="text-align: left;">Refers to a modified node.</td></tr><tr style="margin-left: 30.0px;"><td style="text-align: left;">Moved</td><td style="text-align: left;">Yellow</td><td style="text-align: left;">Refers to a moved node.</td></tr><tr style="margin-left: 30.0px;"><td style="text-align: left;" colspan="1">Deleted</td><td style="text-align: left;" colspan="1">Pink</td><td style="text-align: left;" colspan="1">Refers to a deleted node or a new node at the end of a one-way sync (force-delete).</td></tr><tr style="margin-left: 30.0px;"><td style="text-align: left;" colspan="1">Out of Scope</td><td style="text-align: left;" colspan="1">Red Lettering </td><td style="text-align: left;" colspan="1">Refers to a node that is no longer within the scope of the root node.</td></tr><tr style="margin-left: 30.0px;"><td style="text-align: left;" colspan="1">Excluded</td><td style="text-align: left;" colspan="1">Gray Lettering</td><td style="text-align: left;" colspan="1">Refers to a node that has been excluded from synchronization.</td></tr></tbody></table><p><br /></p><ac:structured-macro ac:name="info" ac:schema-version="1" ac:macro-id="1c5b22ea-7f42-4416-a34e-df1a1ee69397"><ac:parameter ac:name="title">Information</ac:parameter><ac:rich-text-body><p style="margin-left: 30.0px;text-align: left;">If there is more than one Data Source connected, the dialog prompting you to choose a target Data Source to check for node changes appears.</p><p style="margin-left: 30.0px;text-align: left;"><ac:image><ri:attachment ri:filename="Select data sources.jpg"><ri:page ri:space-key="CDH2024x" ri:content-title="Tracking changes on Conflict Dashboard" /></ri:attachment></ac:image></p></ac:rich-text-body></ac:structured-macro><p class="auto-cursor-target"><br /></p>
+````
+
+<!--NOMAGIC_PAGE id=136716966 space=CDH2024x version=1 -->
+## PAGE 00136: Troubleshooting
+
+- page_id: `136716966`
+- space_key: `CDH2024x`
+- source_url: https://docs.nomagic.com/spaces/CDH2024x/pages/136716966/Troubleshooting
+- version_number: 1
+- version_date: `2023-09-21T06:05:06.509+02:00`
+- ancestors: Cameo DataHub Documentation
+- labels: []
+
+### NORMALIZED CONTENT
+
+##### Server Certificate tool
+
+Generally, all the certificates are managed automatically by the Server Certificate tool. To learn more about the Server Certificate tool, refer to [CONFLUENCE_PAGE title='Server Certificates' space='MD2024x']. The certificate is manually installed only when it is not trusted. To learn more about installing certificates manually, refer to [CONFLUENCE_PAGE title='3DEXPERIENCE troubleshooting' space='MD2024x'].
+
+### EXACT CONFLUENCE STORAGE SOURCE
+
+````html
+<h3>Server Certificate tool</h3><p>Generally, all the certificates are managed automatically by the Server Certificate tool. To learn more about the Server Certificate tool, refer to <ac:link><ri:page ri:space-key="MD2024x" ri:content-title="Server Certificates" /></ac:link>. The certificate is manually installed only when it is not trusted. To learn more about installing certificates manually, refer to  <ac:link><ri:page ri:space-key="MD2024x" ri:content-title="3DEXPERIENCE troubleshooting" /></ac:link>.</p>
+````
+
+<!--NOMAGIC_PAGE id=136716910 space=CDH2024x version=1 -->
+## PAGE 00137: UI components of Schema Map Manager
+
+- page_id: `136716910`
+- space_key: `CDH2024x`
+- source_url: https://docs.nomagic.com/spaces/CDH2024x/pages/136716910/UI+components+of+Schema+Map+Manager
+- version_number: 1
+- version_date: `2023-09-21T06:05:03.658+02:00`
+- ancestors: Cameo DataHub Documentation > User Guide > Schema Mapping
+- labels: []
+
+### NORMALIZED CONTENT
+
+###### [IMAGE alt='' src='']
+
+###### The Schema Map Manager dialog.
+
+The following UI components in Schema Map Manager are explained in the following table
+
+| UI component | Function |
+| --- | --- |
+| Source Type | All the source types from all Data Sources currently in the system. |
+| Target Type | All the target types from all Data Sources currently in the system. |
+| Set as Default | Sets the current schema configuration as the default one. After clicking, the button changes to Remove Default. Clicking Remove Default removes the schema configuration from the selected source and target types. |
+| Activate (or Deactivate) | Activates or deactivates the selected schema.NoteActivate and Deactivate UI components apply to only the Define Target Type from Attribute Value mapping option. |
+| Delete | Deletes the current schema configuration. |
+| Migrate | Migrates the required scheme map to the present schema map. |
+| Edit | Edits a schema map. |
+| Save | Saves the editing of a schema map. |
+| Cancel | Cancels the editing of a schema map. |
+| Import | Browses a schema map file to import. |
+| Export | Opens the dialog to guide you through exporting the current schema to a file on your file system. |
+| Close | Closes the Schema Map Manager dialog. |
+
+### EXACT CONFLUENCE STORAGE SOURCE
+
+````html
+<h6 style="text-align: center;"><ac:image><ri:attachment ri:filename="Schema_Map_Manager.png"><ri:page ri:space-key="CDH2024x" ri:content-title="UI components of Schema Map Manager" /></ri:attachment></ac:image></h6><h6 style="text-align: center;">The Schema Map Manager dialog.</h6><p>The following UI components in Schema Map Manager are explained in the following table</p><table class="relative-table" style="width: 99.9427%;"><colgroup><col style="width: 17.0335%;" /><col style="width: 83.0299%;" /></colgroup><tbody><tr><th>UI component</th><th>Function</th></tr><tr><td>Source Type</td><td><p>All the source types from all Data Sources currently in the system.</p></td></tr><tr><td colspan="1">Target Type</td><td colspan="1">All the target types from all Data Sources currently in the system.</td></tr><tr><td>Set as Default</td><td><div class="content-wrapper"><p>Sets the current schema configuration as the default one. After clicking, the button changes to <strong>Remove Default</strong>. Clicking<strong> Remove Default </strong>removes the schema configuration from the selected source and target types.</p></div></td></tr><tr><td>Activate (or Deactivate)</td><td><div class="content-wrapper"><p>Activates or deactivates the selected <ac:link><ri:page ri:space-key="CDH2024x" ri:content-title="Define Target Type from Attribute Value dialog and mapping" /><ac:plain-text-link-body><![CDATA[Define Target Type from Attribute Value ]]></ac:plain-text-link-body></ac:link>schema.</p><ac:structured-macro ac:name="note" ac:schema-version="1" ac:macro-id="a71153dd-7a10-4dc2-9a29-931e6a2aaa8b"><ac:parameter ac:name="title">Note</ac:parameter><ac:rich-text-body><p><strong>Activate</strong> and <strong>Deactivate</strong> UI components apply to only the <strong>Define Target Type from Attribute Value</strong><strong> </strong>mapping option.</p></ac:rich-text-body></ac:structured-macro><p class="auto-cursor-target"><br /></p></div></td></tr><tr><td>Delete</td><td>Deletes the current schema configuration.</td></tr><tr><td colspan="1">Migrate</td><td colspan="1">Migrates the required scheme map to the present schema map.</td></tr><tr><td>Edit</td><td>Edits a schema map.</td></tr><tr><td>Save</td><td>Saves the editing of a schema map.</td></tr><tr><td>Cancel</td><td>Cancels the editing of a schema map.</td></tr><tr><td colspan="1">Import</td><td colspan="1">Browses a schema map file to import.</td></tr><tr><td colspan="1">Export</td><td colspan="1"><div class="content-wrapper"><p>Opens the <ac:link><ri:page ri:space-key="CDH2024x" ri:content-title="Exporting schema maps" /><ac:plain-text-link-body><![CDATA[Export Schema Map Wizard]]></ac:plain-text-link-body></ac:link> dialog to guide you through exporting the current schema to a file on your file system.</p></div></td></tr><tr><td colspan="1">Close</td><td colspan="1">Closes the Schema Map Manager dialog.</td></tr></tbody></table><p class="auto-cursor-target"><br /></p>
+````
+
+<!--NOMAGIC_PAGE id=136715826 space=CDH2024x version=1 -->
+## PAGE 00138: Understanding DataHub user interface
+
+- page_id: `136715826`
+- space_key: `CDH2024x`
+- source_url: https://docs.nomagic.com/spaces/CDH2024x/pages/136715826/Understanding+DataHub+user+interface
+- version_number: 1
+- version_date: `2023-09-21T06:04:18.269+02:00`
+- ancestors: Cameo DataHub Documentation > Getting started
+- labels: []
+
+### NORMALIZED CONTENT
+
+This chapter is an introduction to the various elements of the DataHub User Interface, menus, dialogs, context menus, tabs and panels.
+
+Cameo DataHub allows you to work with requirement management tools such as IBM® Rational® DOORS®, IBM® Rational® DOORS® Next Generation, and MagicDraw®. The DataHub also allows you to copy and synchronize Requirements. DHLink links Requirements to one another and also links Requirements to system design models and test cases.
+
+DataHub provides unidirectional or bidirectional synchronization capabilities between target and source nodes. A synchronization Conflict Dashboard shows the sync status and options for additional synchronization.
+
+Before using DataHub to connect with IBM® Rational® DOORS®, you must first [CONFLUENCE_PAGE title='Driver deployment' space='CDH2024x'].
+
+### EXACT CONFLUENCE STORAGE SOURCE
+
+````html
+<p>This chapter is an introduction to the various elements of the DataHub User Interface, menus, dialogs, context menus, tabs and panels.</p><p>Cameo DataHub allows you to work with requirement management tools such as IBM<sup>®</sup> Rational<sup>®</sup> DOORS®, IBM<sup>®</sup> Rational<sup>®</sup> DOORS<sup>®</sup> Next Generation, and MagicDraw<sup>®</sup>. The DataHub also allows you to copy and synchronize Requirements. DHLink links Requirements to one another and also links Requirements to system design models and test cases.</p><p>DataHub provides unidirectional or bidirectional synchronization capabilities between target and source nodes. A synchronization Conflict Dashboard shows the sync status and options for additional synchronization.</p><p>Before using DataHub to connect with IBM<sup>®</sup> Rational<sup>®</sup> DOORS<sup>®</sup>, you must first <ac:link><ri:page ri:space-key="CDH2024x" ri:content-title="Driver deployment" /><ac:plain-text-link-body><![CDATA[deploy the DOORS driver]]></ac:plain-text-link-body></ac:link>.</p><p><br /></p>
+````
+
+<!--NOMAGIC_PAGE id=136716718 space=CDH2024x version=3 -->
+## PAGE 00139: Updating Teamwork Cloud projects
+
+- page_id: `136716718`
+- space_key: `CDH2024x`
+- source_url: https://docs.nomagic.com/spaces/CDH2024x/pages/136716718/Updating+Teamwork+Cloud+projects
+- version_number: 3
+- version_date: `2025-12-03T10:32:11.511+01:00`
+- ancestors: Cameo DataHub Documentation > User Guide > Using DataHub in Teamwork Cloud environment > Data Sources on Teamwork Cloud > Teamwork Cloud projects
+- labels: []
+
+### NORMALIZED CONTENT
+
+A DataHub Data Source in a Teamwork Cloud project, which is opened through Teamwork Cloud, is accessible to multiple clients. The Data Source shows the project currently open on each client’s machine.
+
+You can add a Teamwork Cloud Data Source to DataHub Explorer. You can work on the Data Source and save the changes. Other users can also do the same things you do to the same project. Therefore, the project in the Teamwork Cloud Data Source may contain different sets of data as a result of multiple updates.
+
+As DataHub doesn’t support Collaborative editing, it is critical to check out the project from the server before applying any updates. Only one user can work on the project at the same time. The other user can only start working on the project after the previous user fully commits their changes to the server.
+
+#### INFO: Information
+
+Information
+
+For more details about setting Teamwork Cloud in MagicDraw®, see the MagicDraw® User Guide.
+
+To log in to Teamwork Cloud
+
+1. On the MagicDraw® main menu, click Collaborate > Login . The Login dialog opens. [ATTACHMENT filename='Login_Window.png']
+2. Enter all the server connection parameters.
+3. Click OK .
+
+The table below explains each connection parameter.
+
+| Parameter Name | Function |
+| --- | --- |
+| User name | Specifies a user name to connect to Teamwork Cloud. |
+| Password | Specifies a password to connect to Teamwork Cloud. |
+| Server name | Specifies a Teamwork Cloud server name or IP Address. |
+| Auto Login to Server | Logs on to Teamwork Cloud automatically when MagicDraw® starts. |
+| Use Secured Connection (SSL) | Turns on SSL encryption for data transfer. |
+| OK | Confirms the connection parameters and logs in to Teamwork Cloud. |
+| Cancel | Cancels the login process. |
+| Help | Opens the Help dialog. |
+
+To open a Teamwork Cloud project
+
+1. On the MagicDraw® main menu, click Collaborate > Open Server Project . The Open Server Project dialog opens. [ATTACHMENT filename='Open_Project_Window.png']
+2. Select a particular project and click Open . MagicDraw ® opens the selected project.
+
+#### WARNING: Important
+
+Important
+
+- All users must connect to Teamwork Cloud using the same host address (IP address or machine name).
+- DataHub handles the items in Data Sources in compliance with Teamwork Cloud rules.
+
+### EXACT CONFLUENCE STORAGE SOURCE
+
+````html
+<p>A DataHub Data Source in a Teamwork Cloud project, which is opened through Teamwork Cloud, is accessible to multiple clients. The Data Source shows the project currently open on each client’s machine.</p><p>You can add a Teamwork Cloud Data Source to DataHub Explorer. You can work on the Data Source and save the changes. Other users can also do the same things you do to the same project. Therefore, the project in the Teamwork Cloud Data Source may contain different sets of data as a result of multiple updates.</p><ac:structured-macro ac:name="note" ac:schema-version="1" ac:macro-id="c14e625e-22db-4657-9882-ddea545845b5"><ac:rich-text-body><p>As DataHub doesn’t support Collaborative editing, it is critical to check out the project from the server before applying any updates. Only one user can work on the project at the same time. The other user can only start working on the project after the previous user fully commits their changes to the server.</p></ac:rich-text-body></ac:structured-macro><ac:structured-macro ac:name="info" ac:schema-version="1" ac:macro-id="68303b85-ec48-480a-b277-c0ae8d9c00e5"><ac:parameter ac:name="title">Information</ac:parameter><ac:rich-text-body><p>For more details about setting Teamwork Cloud in MagicDraw<sup>®</sup>, see the MagicDraw<sup>®</sup> User Guide.</p></ac:rich-text-body></ac:structured-macro><p><br /></p><p>To log in to Teamwork Cloud</p><hr /><ol><li>On the MagicDraw® main menu, click <strong>Collaborate</strong> &gt;<strong> Login</strong>. The <strong>Login</strong> dialog opens.<br /><br /><ac:image><ri:attachment ri:filename="Login_Window.png" /></ac:image><br /><br /></li><li>Enter all the server connection parameters.</li><li>Click <strong>OK</strong>.<br /><br /></li></ol><p>The table below explains each connection parameter.</p><table class="relative-table wrapped" style="margin-left: 30.0px;width: 59.2408%;"><colgroup><col style="width: 31.8519%;" /><col style="width: 68.1743%;" /></colgroup><thead style="margin-left: 30.0px;"><tr style="margin-left: 30.0px;"><td class="highlight-grey" colspan="1" data-highlight-colour="grey"><strong><span style="color:var(--ds-text,#000000);">Parameter Name</span></strong></td><td class="highlight-grey" colspan="1" data-highlight-colour="grey"><strong><span style="color:var(--ds-text,#000000);">Function</span></strong></td></tr></thead><tbody style="margin-left: 30.0px;"><tr style="margin-left: 30.0px;"><td style="margin-left: 30.0px;"><strong>User name</strong></td><td style="margin-left: 30.0px;">Specifies a user name to connect to Teamwork Cloud.</td></tr><tr style="margin-left: 30.0px;"><td style="margin-left: 30.0px;"><strong>Password </strong></td><td style="margin-left: 30.0px;">Specifies a password to connect to Teamwork Cloud.</td></tr><tr style="margin-left: 30.0px;"><td style="margin-left: 30.0px;"><strong>Server name</strong></td><td style="margin-left: 30.0px;">Specifies a Teamwork Cloud server name or IP Address.</td></tr><tr style="margin-left: 30.0px;"><td style="margin-left: 30.0px;" colspan="1"><strong>Auto Login to Server</strong></td><td style="margin-left: 30.0px;" colspan="1">Logs on to Teamwork Cloud automatically when MagicDraw<sup>®</sup> starts.</td></tr><tr style="margin-left: 30.0px;"><td style="margin-left: 30.0px;" colspan="1"><strong>Use Secured Connection (SSL)</strong></td><td style="margin-left: 30.0px;" colspan="1">Turns on SSL encryption for data transfer.</td></tr><tr style="margin-left: 30.0px;"><td style="margin-left: 30.0px;" colspan="1"><strong>OK</strong></td><td style="margin-left: 30.0px;" colspan="1">Confirms the connection parameters and logs in to Teamwork Cloud.</td></tr><tr style="margin-left: 30.0px;"><td style="margin-left: 30.0px;" colspan="1"><strong>Cancel </strong></td><td style="margin-left: 30.0px;" colspan="1">Cancels the login process.</td></tr><tr style="margin-left: 30.0px;"><td style="margin-left: 30.0px;" colspan="1"><strong>Help</strong></td><td style="margin-left: 30.0px;" colspan="1">Opens the <strong>Help</strong> dialog.</td></tr></tbody></table><p><br /></p><p>To open a Teamwork Cloud project</p><hr /><ol><li>On the MagicDraw® main menu, click <strong>Collaborate</strong> &gt; <strong>Open Server Project</strong>. The <strong>Open Server Project</strong> dialog opens.<br /><br /><ac:image><ri:attachment ri:filename="Open_Project_Window.png" /></ac:image><br /><br /></li><li>Select a particular project and click <strong>Open</strong>. MagicDraw<sup>®</sup> opens the selected project.</li></ol><p style="margin-left: 30.0px;"><br /></p><ac:structured-macro ac:name="warning" ac:schema-version="1" ac:macro-id="f27058fc-d45d-47ff-b6e0-9a64c6ce2eee"><ac:parameter ac:name="title">Important</ac:parameter><ac:rich-text-body><ul><li>All users must connect to Teamwork Cloud using the same host address (IP address or machine name).</li><li>DataHub handles the items in Data Sources in compliance with Teamwork Cloud rules.</li></ul></ac:rich-text-body></ac:structured-macro><p class="auto-cursor-target"><br /></p>
+````
+
+<!--NOMAGIC_PAGE id=136716018 space=CDH2024x version=2 -->
+## PAGE 00140: User Guide
+
+- page_id: `136716018`
+- space_key: `CDH2024x`
+- source_url: https://docs.nomagic.com/spaces/CDH2024x/pages/136716018/User+Guide
+- version_number: 2
+- version_date: `2024-01-31T07:25:02.839+01:00`
+- ancestors: Cameo DataHub Documentation
+- labels: ['featured', 'documentation-space-sample']
+
+### NORMALIZED CONTENT
+
+Welcome to Cameo DataHub user guide!
+
+See the following chapters to learn more about the product and its features or use the search box to find the information you need:
+
+### EXACT CONFLUENCE STORAGE SOURCE
+
+````html
+<p>Welcome to Cameo DataHub user guide!</p><p>See the following chapters to learn more about the product and its features or use the search box to find the information you need:</p><p><ac:structured-macro ac:name="children" ac:schema-version="2" ac:macro-id="1a133da2-19ca-4061-a82e-0f1b21c445ea" /></p><p><br /></p>
+````
+
+<!--NOMAGIC_PAGE id=136716711 space=CDH2024x version=3 -->
+## PAGE 00141: Using DataHub in Teamwork Cloud environment
+
+- page_id: `136716711`
+- space_key: `CDH2024x`
+- source_url: https://docs.nomagic.com/spaces/CDH2024x/pages/136716711/Using+DataHub+in+Teamwork+Cloud+environment
+- version_number: 3
+- version_date: `2025-11-06T10:09:40.864+01:00`
+- ancestors: Cameo DataHub Documentation > User Guide
+- labels: []
+
+### NORMALIZED CONTENT
+
+DataHub supports local and remote connections. A local project is a project that is stored on your machine. When you connect to Teamwork Cloud, other users can remotely see the project you are working on through Teamwork Cloud. Multiple users can collaborate and work on the same project, and the DHLink map will be stored along with the project on Teamwork Cloud. This allows all users to see other users’ changes in their work.
+
+In addition to local and remote connections, DataHub also provides functionality that allows several users to access the same project, including DataHub relations. This functionality is available for projects that are stored on Teamwork Cloud.
+
+**Related page**
+
+### EXACT CONFLUENCE STORAGE SOURCE
+
+````html
+<p>DataHub supports local and remote connections. A local project is a project that is stored on your machine. When you connect to Teamwork Cloud, other users can remotely see the project you are working on through Teamwork Cloud. Multiple users can collaborate and work on the same project, and the DHLink map will be stored along with the project on Teamwork Cloud. This allows all users to see other users’ changes in their work.</p><p style="text-align: left;">In addition to local and remote connections, DataHub also provides functionality that allows several users to access the same project, including DataHub relations. This functionality is available for projects that are stored on Teamwork Cloud.</p><p><strong>Related page</strong></p><p><ac:structured-macro ac:name="children" ac:schema-version="2" ac:macro-id="69aadb64-cf1a-4e1e-ac23-40c715874ce7" /></p>
+````
+
+<!--NOMAGIC_PAGE id=136716959 space=CDH2024x version=1 -->
+## PAGE 00142: Working with custom IP Classification attributes
+
+- page_id: `136716959`
+- space_key: `CDH2024x`
+- source_url: https://docs.nomagic.com/spaces/CDH2024x/pages/136716959/Working+with+custom+IP+Classification+attributes
+- version_number: 1
+- version_date: `2023-09-21T06:05:05.925+02:00`
+- ancestors: Cameo DataHub Documentation > User Guide > Additional DataHub features
+- labels: []
+
+### NORMALIZED CONTENT
+
+If you use[IP Classification Editor](https://dsua.dsone.3ds.com/R2023x/English/?show=Lbc3DDashUserMap/lbc3ddash-c-ov.htm)on the 3DEXPERIENCE platform to manage libraries and classes, you can view and work with these custom IP classification attributes in the modeling tool as well. Cameo DataHub allows you to choose whether the attributes are displayed or hidden and use them for mapping and synchronization.
+
+To view custom added attributes through IP classification
+
+- Right-click on the ENVOIA REQS data source and select Show IP classification attribute
+
+[IMAGE alt='' src='']
+
+After you click on the **Show IP Classification attribute** command, the data source will be reloaded and the list of custom added attributes will be visible in the properties tab.
+
+To view the properties tab
+
+- Right click on the data source and select Properties [ATTACHMENT filename='IP Classification Properties.png']
+- A new tab will display the properties of the selected data source. [ATTACHMENT filename='IP_Classification Comparison.png']
+
+To hide the custom added attributes through IP classification
+
+- Right-click on the ENVOIA REQS data source and select Hide IP classification attribute 
+ 
+[IMAGE alt='' src='']
+
+### EXACT CONFLUENCE STORAGE SOURCE
+
+````html
+<p><ac:inline-comment-marker ac:ref="dafeae39-9b84-4efb-8cdb-024dabcd4f02"><span style="color: rgb(62,63,64);">If you use</span> </ac:inline-comment-marker><a href="https://dsua.dsone.3ds.com/R2023x/English/?show=Lbc3DDashUserMap/lbc3ddash-c-ov.htm"><ac:inline-comment-marker ac:ref="dafeae39-9b84-4efb-8cdb-024dabcd4f02">IP Classification Editor</ac:inline-comment-marker></a><ac:inline-comment-marker ac:ref="dafeae39-9b84-4efb-8cdb-024dabcd4f02"> <span style="color: rgb(62,63,64);">on the 3DEXPERIENCE platform to manage libraries and classes, you can view and work with these custom IP classification attributes in the modeling tool as well. Cameo DataHub allows you to choose whether the attributes are displayed or hidden and use them for mapping and synchronization.</span></ac:inline-comment-marker></p><p>To view custom added attributes through IP classification</p><hr /><ul><li>Right-click on the <strong>ENVOIA REQS</strong> data source and select <strong>Show IP classification attribute<br /><br /></strong></li></ul><p><ac:image ac:align="left"><ri:attachment ri:filename="Custom IP Classfication command.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Working with custom IP Classification attributes" /></ri:attachment></ac:image><br /><br /><br /><br /><br /></p><p><br /></p><p><br /></p><p><br /></p><p><br /></p><p><br /></p><p><br /></p><p><br /></p><p><br /></p><p><br /></p><p><br /></p><p>After you click on the <strong>Show IP Classification attribute</strong> command, the data source will be reloaded and the list of custom added attributes will be visible in the properties tab.</p><p><br /></p><p>To view the properties tab</p><hr /><ul><li>Right click on the data source and select <strong>Properties<br /></strong><br /><ac:image><ri:attachment ri:filename="IP Classification Properties.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Working with custom IP Classification attributes" /></ri:attachment></ac:image></li><li>A new tab will display the properties of the selected data source.<br /><br /><ac:image><ri:attachment ri:filename="IP_Classification Comparison.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Working with custom IP Classification attributes" /></ri:attachment></ac:image></li></ul><p>To hide the custom added attributes through IP classification</p><hr /><ul><li>Right-click on the <strong>ENVOIA REQS</strong> data source and select <strong>Hide IP classification attribute<br /><br /><ac:image><ri:attachment ri:filename="IP Classification Hide Command.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Working with custom IP Classification attributes" /></ri:attachment></ac:image><br /></strong></li></ul><hr />
+````
+
+<!--NOMAGIC_PAGE id=136716358 space=CDH2024x version=2 -->
+## PAGE 00143: Working with Data Sources
+
+- page_id: `136716358`
+- space_key: `CDH2024x`
+- source_url: https://docs.nomagic.com/spaces/CDH2024x/pages/136716358/Working+with+Data+Sources
+- version_number: 2
+- version_date: `2026-02-11T07:59:32.478+01:00`
+- ancestors: Cameo DataHub Documentation > User Guide > Working with DataHub and modeling tools
+- labels: []
+
+### NORMALIZED CONTENT
+
+Before connecting a Data Source to a driver, you need to have the**DataHub Explorer** tab open in MagicDraw®.
+
+To open **DataHub Explorer**
+
+1. Start MagicDraw ® and create a new project or open an existing one.
+2. From the MagicDraw ® main menu, click Tools > DataHub > DataHub Explorer . The DataHub Explorer tab opens.
+
+[IMAGE alt='' src='']
+
+**Related pages**
+
+### EXACT CONFLUENCE STORAGE SOURCE
+
+````html
+<p>Before connecting a Data Source to a driver, you need to have the<strong> DataHub Explorer</strong> tab open in MagicDraw<sup>®</sup>.</p><p>To open <strong>DataHub Explorer</strong></p><hr /><ol><li data-uuid="5361cc14-9454-49df-9431-abecda2b6af0">Start MagicDraw<sup>®</sup> and create a new project or open an existing one.</li><li data-uuid="a90fbb09-a7d4-4d44-a145-2924d6e5ba28">From the MagicDraw<sup>®</sup> main menu, click <strong>Tools</strong> &gt; <strong>DataHub</strong> &gt; <strong>DataHub Explorer</strong>. The <strong>DataHub Explorer</strong> tab opens.<br /> </li></ol><p style="margin-left: 30.0px;"><ac:image ac:title="DataHub Explorer" ac:alt="DataHub Explorer"><ri:attachment ri:filename="dh-explorer.png" /></ac:image></p><p><strong>Related pages</strong></p><p><ac:structured-macro ac:name="children" ac:schema-version="2" ac:macro-id="4a3bfa82-0bb1-4b85-9474-03162e9e93dc" /></p><p><br /></p>
+````
+
+<!--NOMAGIC_PAGE id=136716019 space=CDH2024x version=3 -->
+## PAGE 00144: Working with DataHub and modeling tools
+
+- page_id: `136716019`
+- space_key: `CDH2024x`
+- source_url: https://docs.nomagic.com/spaces/CDH2024x/pages/136716019/Working+with+DataHub+and+modeling+tools
+- version_number: 3
+- version_date: `2026-02-11T07:53:27.822+01:00`
+- ancestors: Cameo DataHub Documentation > User Guide
+- labels: []
+
+### NORMALIZED CONTENT
+
+DataHub is a fully functional plugin for MagicDraw®, IBM® Rational® DOORS®, IBM® Rational® DOORS® Next Generation, and CSV files. It allows you to work with the Requirement management tools mentioned above and provides three following main functions
+
+- Copy
+- Link
+- Synchronize
+
+You can copy Requirement objects, and link them to one another as well as system models, for example, Use Cases and Diagram elements. You can create OSLC links and synchronize the repositories. This chapter also explains OSLC support and how to use it with Cameo DataHub.
+
+To use Cameo DataHub, make sure you have [deployed it in your application](https://docs.nomagic.com/display/CDH2024x/Driver+deployment). The DataHub plugin works with both local and [CONFLUENCE_PAGE title='Using Teamwork Cloud' space='MD2024x'].
+
+#### NOTE: Note
+
+Note
+
+- To load a MagicDraw ® Teamwork Cloud project as a Data Source in DataHub, you must first log on to MagicDraw ® Teamwork Cloud.
+- Only the Locked For Edit Teamwork Cloud project elements can perform DataHub functions, e.g., copying and creating OSLC links and queries or synchronizing data.
+
+**Related pages**
+
+### EXACT CONFLUENCE STORAGE SOURCE
+
+````html
+<p>DataHub is a fully functional plugin for MagicDraw<sup>®</sup>, IBM<sup>®</sup> Rational<sup>®</sup> DOORS<sup>®</sup>, IBM<sup>®</sup> Rational<sup>®</sup> DOORS<sup>®</sup> Next Generation, and CSV files. It allows you to work with the Requirement management tools mentioned above and provides three following main functions</p><ul><li data-uuid="fed56453-7cc1-45d4-8c08-4a05b4c23be0">Copy</li><li data-uuid="4cfba552-5e97-44cf-a59f-11f1f406d410">Link</li><li data-uuid="b07c5129-565d-40b2-b910-16c600a7f5a0">Synchronize</li></ul><p>You can copy Requirement objects, and link them to one another as well as system models, for example, Use Cases and Diagram elements. You can create OSLC links and synchronize the repositories. This chapter also explains OSLC support and how to use it with Cameo DataHub.</p><p>To use Cameo DataHub, make sure you have <a href="https://docs.nomagic.com/display/CDH2024x/Driver+deployment">deployed it in your application</a>. The DataHub plugin works with both local and <ac:link><ri:page ri:space-key="MD2024x" ri:content-title="Using Teamwork Cloud" /><ac:plain-text-link-body><![CDATA[Teamwork Cloud projects]]></ac:plain-text-link-body></ac:link>.</p><ac:structured-macro ac:name="note" ac:schema-version="1" ac:macro-id="b195c968-f56f-4ea2-844a-9d41925ec19b"><ac:parameter ac:name="title">Note</ac:parameter><ac:rich-text-body><ul><li data-uuid="0b056383-0a25-46f8-b7f1-fec38f341c6e">To load a MagicDraw<sup>®</sup> Teamwork Cloud project as a Data Source in DataHub, you must first log on to MagicDraw<sup>®</sup> Teamwork Cloud.</li><li data-uuid="1b3191e5-829f-4322-bf7a-a8300f3b8006">Only the <strong>Locked For Edit</strong> Teamwork Cloud project elements can perform DataHub functions, e.g., copying and creating OSLC links and queries or synchronizing data.</li></ul></ac:rich-text-body></ac:structured-macro><p><strong>Related pages</strong></p><p><ac:structured-macro ac:name="children" ac:schema-version="2" ac:macro-id="7cee841e-59e1-4a08-911d-3dd3cc05fbea" /></p>
+````
+
+<!--NOMAGIC_PAGE id=136716499 space=CDH2024x version=3 -->
+## PAGE 00145: Working with OSLC features
+
+- page_id: `136716499`
+- space_key: `CDH2024x`
+- source_url: https://docs.nomagic.com/spaces/CDH2024x/pages/136716499/Working+with+OSLC+features
+- version_number: 3
+- version_date: `2026-02-11T08:02:15.009+01:00`
+- ancestors: Cameo DataHub Documentation > User Guide > Working with DataHub and modeling tools
+- labels: []
+
+### NORMALIZED CONTENT
+
+The modeling tool can link and share data using Open Services for Lifecycle Collaboration (OSLC) integration that allows the following
+
+- The modeling environment to work smoothly in the IBM Jazz ecosystem.
+- Linking different project lifecycle artifacts in different tools without additional plugins needed.
+- Seeing information details of linked artifacts without switching between different tools.
+
+The following chapters describe how the modeling tool works with OSLC:
+
+**Related page**
+
+- [CONFLUENCE_PAGE title='Working with Data Sources' space='']
+
+### EXACT CONFLUENCE STORAGE SOURCE
+
+````html
+<p>The modeling tool can link and share data using Open Services for Lifecycle Collaboration (OSLC) integration that allows the following</p><ul><li data-uuid="0a785cb7-26ea-4df3-8e82-0ce08a61440e">The modeling environment to work smoothly in the IBM Jazz ecosystem.</li><li data-uuid="d7c2d183-3f28-4817-b2c2-d18b7e334081">Linking different project lifecycle artifacts in different tools without additional plugins needed.</li><li data-uuid="475f7423-9832-4008-bddf-aced72dae489">Seeing information details of linked artifacts without switching between different tools. </li></ul><p>The following chapters describe how the modeling tool works with OSLC:</p><p><ac:structured-macro ac:name="children" ac:schema-version="2" ac:macro-id="3a8a708b-ec97-4964-9867-09fa9e3e714f" /></p><p><strong>Related page</strong></p><ul><li data-uuid="70b56bab-cd5f-462d-a08a-2bea2a4e3072"><ac:link><ri:page ri:content-title="Working with Data Sources" /></ac:link></li></ul>
+````
+
+<!--NOMAGIC_PAGE id=136716904 space=CDH2024x version=1 -->
+## PAGE 00146: Working with Schema Map Manager
+
+- page_id: `136716904`
+- space_key: `CDH2024x`
+- source_url: https://docs.nomagic.com/spaces/CDH2024x/pages/136716904/Working+with+Schema+Map+Manager
+- version_number: 1
+- version_date: `2023-09-21T06:05:03.400+02:00`
+- ancestors: Cameo DataHub Documentation > User Guide > Schema Mapping
+- labels: []
+
+### NORMALIZED CONTENT
+
+When copying data, schema maps are used for mapping source types to target types and also mapping source attributes to target attributes. **Schema Map Manager** allows you to view schema maps available in the system, edit a schema map, import a new schema map, or copy the current schema map.
+
+To open **Schema Map Manager**
+
+- From the MagicDraw ® main menu, click Tools > DataHub > Schema Map Manager . The Schema Map Manager dialog opens. [ATTACHMENT filename='Schema_Map_Manager.png']
+
+### EXACT CONFLUENCE STORAGE SOURCE
+
+````html
+<p>When copying data, schema maps are used for mapping source types to target types and also mapping source attributes to target attributes. <strong>Schema Map Manager</strong> allows you to view schema maps available in the system, edit a schema map, import a new schema map, or copy the current schema map.</p><p><br /></p><p>To open <strong>Schema Map Manager</strong></p><hr /><ul><li>From the MagicDraw<sup>®</sup> main menu, click <strong>Tools</strong> &gt; <strong>DataHub</strong> &gt; <strong>Schema Map Manager</strong>. The <strong>Schema Map Manager</strong> dialog opens.<br /><br /><ac:image><ri:attachment ri:filename="Schema_Map_Manager.png"><ri:page ri:space-key="CDH2024x" ri:content-title="Working with Schema Map Manager" /></ri:attachment></ac:image></li></ul>
+````
+
+<!--NOMAGIC_PAGE id=136716163 space=CDH2024x version=2 -->
+## PAGE 00147: Working with the DataHub Explorer tree
+
+- page_id: `136716163`
+- space_key: `CDH2024x`
+- source_url: https://docs.nomagic.com/spaces/CDH2024x/pages/136716163/Working+with+the+DataHub+Explorer+tree
+- version_number: 2
+- version_date: `2026-02-11T07:54:45.640+01:00`
+- ancestors: Cameo DataHub Documentation > User Guide > Working with DataHub and modeling tools
+- labels: []
+
+### NORMALIZED CONTENT
+
+While using DataHub to work with Requirements from a project in DOORS or CSV, you must first create a Data Source. Data sources can be created for IBM® Rational® DOORS®, IBM® Rational® DOORS® Next Generation, or CSV files.
+
+When you add the Data Source into MagicDraw®, it appears in the DataHub Explorer tree as a Data Source node.
+
+**Related pages**
+
+### EXACT CONFLUENCE STORAGE SOURCE
+
+````html
+<p><span style="color:var(--ds-text,#333333);">While using DataHub to work with Requirements from a project in DOORS or CSV, you must first create a Data Source. Data sources can be created for IBM<sup>®</sup> Rational<sup>®</sup> DOORS<sup>®</sup>, IBM<sup>®</sup> Rational<sup>®</sup> DOORS<sup>®</sup> Next Generation, or CSV files.</span></p><p>When you add the Data Source into MagicDraw<sup>®</sup>, it appears in the DataHub Explorer tree as a Data Source node.</p><p><strong>Related pages</strong></p><p><ac:structured-macro ac:name="children" ac:schema-version="2" ac:macro-id="cb13ea5e-1aba-4c96-bc28-bd49899fea25" /></p>
+````
+
+<!--NOMAGIC_PAGE id=136716662 space=CDH2024x version=3 -->
+## PAGE 00148: Working with the DHLink summary and generating reports
+
+- page_id: `136716662`
+- space_key: `CDH2024x`
+- source_url: https://docs.nomagic.com/spaces/CDH2024x/pages/136716662/Working+with+the+DHLink+summary+and+generating+reports
+- version_number: 3
+- version_date: `2026-02-11T08:03:59.218+01:00`
+- ancestors: Cameo DataHub Documentation > User Guide > Working with DataHub and modeling tools
+- labels: []
+
+### NORMALIZED CONTENT
+
+You can review DHLinks and make filtering options in terms of selected driver, direction of synchronization, sources and targets, types, status, and DHTrace, to display all interconnected relations through the [CONFLUENCE_PAGE title='DHLink Summary' space='']**DHLink summary** dialog. With the shortcut menu in the DHLink Summary dialog, you can remove DHLinks, change synchronization directions, or select nodes from DataHub Explorer/Alias Explorer or in their original applications. You can also save the DHLink summary as an HTML report and open it in browsers.
+
+**Related pages**
+
+### EXACT CONFLUENCE STORAGE SOURCE
+
+````html
+<p>You can review DHLinks and make filtering options in terms of selected driver, direction of synchronization, sources and targets, types, status, and DHTrace, to display all interconnected relations through the <ac:link><ri:page ri:content-title="DHLink Summary" /><ac:link-body><strong>DHLink summary</strong> dialog</ac:link-body></ac:link>. With the shortcut menu in the DHLink Summary dialog, you can remove DHLinks, change synchronization directions, or select nodes from DataHub Explorer/Alias Explorer or in their original applications. You can also save the DHLink summary as an HTML report and open it in browsers.</p><p><strong>Related pages</strong></p><p><ac:structured-macro ac:name="children" ac:schema-version="2" ac:macro-id="c7a7334e-fde4-4787-bbf4-d8e83c541949" /></p>
+````

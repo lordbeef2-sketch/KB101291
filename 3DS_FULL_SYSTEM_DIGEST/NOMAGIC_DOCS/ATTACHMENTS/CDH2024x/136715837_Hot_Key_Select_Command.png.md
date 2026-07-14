@@ -1,0 +1,114 @@
+# NOMAGIC ATTACHMENT: Hot Key Select Command.png
+
+- attachment_id: `136715837`
+- space_key: `CDH2024x`
+- parent_page_id: `136715834`
+- parent_page_title: Hot keys
+- media_type: `image/png`
+- reported_bytes: 56076
+- download_url: https://docs.nomagic.com/download/attachments/136715834/Hot%20Key%20Select%20Command.png?version=1&modificationDate=1695269058482&api=v2
+- payload_kind: `metadata-only`
+- downloaded_sha256: not-downloaded
+
+## PAYLOAD STATUS
+
+Binary or image attachment is inventoried by official metadata; no binary bytes are embedded in this Markdown-only corpus.
+
+
+## EXACT ATTACHMENT METADATA
+
+````json
+{
+  "id": "136715837",
+  "type": "attachment",
+  "status": "current",
+  "title": "Hot Key Select Command.png",
+  "version": {
+    "by": {
+      "type": "known",
+      "username": "rae6",
+      "userKey": "2c9f81f87be2b373017dc8d7b9750000",
+      "profilePicture": {
+        "path": "/images/icons/profilepics/default.svg",
+        "width": 48,
+        "height": 48,
+        "isDefault": true
+      },
+      "displayName": "Ranveersinha A.",
+      "_links": {
+        "self": "https://docs.nomagic.com/rest/api/user?key=2c9f81f87be2b373017dc8d7b9750000"
+      },
+      "_expandable": {
+        "status": ""
+      }
+    },
+    "when": "2023-09-21T06:04:18.482+02:00",
+    "message": "",
+    "number": 1,
+    "minorEdit": true,
+    "hidden": false,
+    "_links": {
+      "self": "https://docs.nomagic.com/rest/experimental/content/136715837/version/1"
+    },
+    "_expandable": {
+      "content": "/rest/api/content/136715837"
+    }
+  },
+  "position": -1,
+  "container": {
+    "id": "136715834",
+    "type": "page",
+    "status": "current",
+    "title": "Hot keys",
+    "position": 1,
+    "extensions": {
+      "position": 1
+    },
+    "_links": {
+      "webui": "/spaces/CDH2024x/pages/136715834/Hot+keys",
+      "edit": "/pages/resumedraft.action?draftId=136715834",
+      "tinyui": "/x/Oh4mC",
+      "self": "https://docs.nomagic.com/rest/api/content/136715834"
+    },
+    "_expandable": {
+      "container": "/rest/api/space/CDH2024x",
+      "metadata": "",
+      "operations": "",
+      "children": "/rest/api/content/136715834/child",
+      "restrictions": "/rest/api/content/136715834/restriction/byOperation",
+      "history": "/rest/api/content/136715834/history",
+      "ancestors": "",
+      "body": "",
+      "version": "",
+      "descendants": "/rest/api/content/136715834/descendant",
+      "space": "/rest/api/space/CDH2024x",
+      "relevantViewRestrictions": "/rest/api/content/136715834/restriction/relevantViewRestrictions"
+    }
+  },
+  "metadata": {
+    "mediaType": "image/png"
+  },
+  "extensions": {
+    "mediaType": "image/png",
+    "fileSize": 56076,
+    "comment": ""
+  },
+  "_links": {
+    "download": "/download/attachments/136715834/Hot%20Key%20Select%20Command.png?version=1&modificationDate=1695269058482&api=v2",
+    "thumbnail": "/download/thumbnails/136715834/Hot%20Key%20Select%20Command.png?api=v2",
+    "webui": "/spaces/CDH2024x/pages/136715834/Hot+keys?preview=%2F136715834%2F136715837%2FHot+Key+Select+Command.png",
+    "self": "https://docs.nomagic.com/rest/api/content/136715837"
+  },
+  "_expandable": {
+    "operations": "",
+    "children": "/rest/api/content/136715837/child",
+    "restrictions": "/rest/api/content/136715837/restriction/byOperation",
+    "history": "/rest/api/content/136715837/history",
+    "ancestors": "",
+    "body": "",
+    "descendants": "/rest/api/content/136715837/descendant",
+    "space": "/rest/api/space/CDH2024x",
+    "relevantViewRestrictions": "/rest/api/content/136715837/restriction/relevantViewRestrictions"
+  }
+}
+````

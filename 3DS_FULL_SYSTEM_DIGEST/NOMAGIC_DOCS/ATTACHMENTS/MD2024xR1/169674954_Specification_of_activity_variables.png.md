@@ -1,0 +1,114 @@
+# NOMAGIC ATTACHMENT: Specification_of_activity_variables.png
+
+- attachment_id: `169674954`
+- space_key: `MD2024xR1`
+- parent_page_id: `169674953`
+- parent_page_title: Variables
+- media_type: `image/png`
+- reported_bytes: 41844
+- download_url: https://docs.nomagic.com/download/attachments/169674953/Specification_of_activity_variables.png?version=1&modificationDate=1715140309330&api=v2
+- payload_kind: `metadata-only`
+- downloaded_sha256: not-downloaded
+
+## PAYLOAD STATUS
+
+Binary or image attachment is inventoried by official metadata; no binary bytes are embedded in this Markdown-only corpus.
+
+
+## EXACT ATTACHMENT METADATA
+
+````json
+{
+  "id": "169674954",
+  "type": "attachment",
+  "status": "current",
+  "title": "Specification_of_activity_variables.png",
+  "version": {
+    "by": {
+      "type": "known",
+      "username": "2c9f81f86035db680160f8ec8db90000",
+      "userKey": "2c9f81f86035db680160f8ec8db90000",
+      "profilePicture": {
+        "path": "/images/icons/profilepics/default.svg",
+        "width": 48,
+        "height": 48,
+        "isDefault": true
+      },
+      "displayName": "user-66fe9",
+      "_links": {
+        "self": "https://docs.nomagic.com/rest/api/user?key=2c9f81f86035db680160f8ec8db90000"
+      },
+      "_expandable": {
+        "status": ""
+      }
+    },
+    "when": "2024-05-08T05:51:49.330+02:00",
+    "message": "",
+    "number": 1,
+    "minorEdit": true,
+    "hidden": false,
+    "_links": {
+      "self": "https://docs.nomagic.com/rest/experimental/content/169674954/version/1"
+    },
+    "_expandable": {
+      "content": "/rest/api/content/169674954"
+    }
+  },
+  "position": -1,
+  "container": {
+    "id": "169674953",
+    "type": "page",
+    "status": "current",
+    "title": "Variables",
+    "position": -1,
+    "extensions": {
+      "position": "none"
+    },
+    "_links": {
+      "webui": "/spaces/MD2024xR1/pages/169674953/Variables",
+      "edit": "/pages/resumedraft.action?draftId=169674953",
+      "tinyui": "/x/yQgdCg",
+      "self": "https://docs.nomagic.com/rest/api/content/169674953"
+    },
+    "_expandable": {
+      "container": "/rest/api/space/MD2024xR1",
+      "metadata": "",
+      "operations": "",
+      "children": "/rest/api/content/169674953/child",
+      "restrictions": "/rest/api/content/169674953/restriction/byOperation",
+      "history": "/rest/api/content/169674953/history",
+      "ancestors": "",
+      "body": "",
+      "version": "",
+      "descendants": "/rest/api/content/169674953/descendant",
+      "space": "/rest/api/space/MD2024xR1",
+      "relevantViewRestrictions": "/rest/api/content/169674953/restriction/relevantViewRestrictions"
+    }
+  },
+  "metadata": {
+    "mediaType": "image/png"
+  },
+  "extensions": {
+    "mediaType": "image/png",
+    "fileSize": 41844,
+    "comment": ""
+  },
+  "_links": {
+    "download": "/download/attachments/169674953/Specification_of_activity_variables.png?version=1&modificationDate=1715140309330&api=v2",
+    "thumbnail": "/download/thumbnails/169674953/Specification_of_activity_variables.png?api=v2",
+    "webui": "/spaces/MD2024xR1/pages/169674953/Variables?preview=%2F169674953%2F169674954%2FSpecification_of_activity_variables.png",
+    "self": "https://docs.nomagic.com/rest/api/content/169674954"
+  },
+  "_expandable": {
+    "operations": "",
+    "children": "/rest/api/content/169674954/child",
+    "restrictions": "/rest/api/content/169674954/restriction/byOperation",
+    "history": "/rest/api/content/169674954/history",
+    "ancestors": "",
+    "body": "",
+    "descendants": "/rest/api/content/169674954/descendant",
+    "space": "/rest/api/space/MD2024xR1",
+    "relevantViewRestrictions": "/rest/api/content/169674954/restriction/relevantViewRestrictions"
+  }
+}
+````

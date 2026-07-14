@@ -1,0 +1,105 @@
+# OFFICIAL REPOSITORY FILE: SysML-v2-Pilot-Implementation/org.omg.kerml.xpect.tests/src/org/omg/kerml/xpect/tests/testsuite/MemberNameTests_MultipleInheritance_FT.kerml.xt
+
+- repository: `SysML-v2-Pilot-Implementation`
+- source_path: `org.omg.kerml.xpect.tests/src/org/omg/kerml/xpect/tests/testsuite/MemberNameTests_MultipleInheritance_FT.kerml.xt`
+- source_url: https://github.com/Systems-Modeling/SysML-v2-Pilot-Implementation/blob/fa709f28dfd49dfdb7ee83e4e19da2f57e0eb3aa/org.omg.kerml.xpect.tests/src/org/omg/kerml/xpect/tests/testsuite/MemberNameTests_MultipleInheritance_FT.kerml.xt
+- source_bytes: 5147
+- source_sha256: `55d126fd63dfedf7e23a2c1a22e5395ed07933e0030c9535c319157d43c02092`
+- decoded_as: `utf-8`
+
+
+## EXACT SOURCE
+
+````xtext
+//* 
+XPECT_SETUP org.omg.kerml.xpect.tests.parsing.KerMLParsingTest
+	ResourceSet {
+		ThisFile {}
+		File {from ="/library/Base.kerml"}
+	}
+	Workspace {
+		JavaProject {
+			SrcFolder {
+				ThisFile {}
+				File {from ="/library/Base.kerml"}
+			}
+		}
+	}
+END_SETUP 
+*/
+//XPECT noErrors ---> ""
+package test{
+	feature A{
+		feature a {}
+	}
+	//* XPECT scope at A ---
+	A, A.a, A.a.self, A.a.that, A.a.that.self, A.self, A.that, A.that.self, B, B.a,
+	B.a.self, B.a.that, B.a.that.self, B.b, B.b.self, B.b.that, B.b.that.self, B.self,
+	B.that, B.that.self, C, C.a, C.a.self, C.a.that, C.a.that.self, C.b, C.b.self,
+	C.b.that, C.b.that.self, C.c, C.c.self, C.c.that, C.c.that.self, C.self, C.that,
+	C.that.self, D, D.self, D.that, D.that.self, E, E.self, E.that, E.that.self, test.A,
+	test.A.a, test.A.a.self, test.A.a.that, test.A.a.that.self, test.A.self, test.A.that,
+	test.A.that.self, test.B, test.B.a, test.B.a.self, test.B.a.that, test.B.a.that.self, test.B.b,
+	test.B.b.self, test.B.b.that, test.B.b.that.self, test.B.self, test.B.that, test.B.that.self,
+	test.C, test.C.a, test.C.a.self, test.C.a.that, test.C.a.that.self, test.C.b,
+	test.C.b.self, test.C.b.that, test.C.b.that.self, test.C.c, test.C.c.self, test.C.c.that,
+	test.C.c.that.self, test.C.self, test.C.that, test.C.that.self, test.D, test.D.self, test.D.that,
+	test.D.that.self, test.E, test.E.self, test.E.that, test.E.that.self
+	--- */
+	feature B : A {
+		//not able to test a Caused by: java.lang.RuntimeException: The EReference 'Element.ownedRelationship' found at ... a, A.a
+		//\n		fe|ature b : a {... is not valid here.
+		//scope at a --> a, A.a, a.self, A.a.self
+		feature b : a {}
+	}
+	//* XPECT scope at B ---
+	A, A.a, A.a.self, A.a.that, A.a.that.self, A.self, A.that, A.that.self, B, B.a,
+	B.a.self, B.a.that, B.a.that.self, B.b, B.b.self, B.b.that, B.b.that.self, B.self,
+	B.that, B.that.self, C, C.a, C.a.self, C.a.that, C.a.that.self, C.b, C.b.self,
+	C.b.that, C.b.that.self, C.c, C.c.self, C.c.that, C.c.that.self, C.self, C.that,
+	C.that.self, D, D.self, D.that, D.that.self, E, E.self, E.that, E.that.self, test.A,
+	test.A.a, test.A.a.self, test.A.a.that, test.A.a.that.self, test.A.self, test.A.that,
+	test.A.that.self, test.B, test.B.a, test.B.a.self, test.B.a.that, test.B.a.that.self, test.B.b,
+	test.B.b.self, test.B.b.that, test.B.b.that.self, test.B.self, test.B.that, test.B.that.self,
+	test.C, test.C.a, test.C.a.self, test.C.a.that, test.C.a.that.self, test.C.b,
+	test.C.b.self, test.C.b.that, test.C.b.that.self, test.C.c, test.C.c.self, test.C.c.that,
+	test.C.c.that.self, test.C.self, test.C.that, test.C.that.self, test.D, test.D.self, test.D.that,
+	test.D.that.self, test.E, test.E.self, test.E.that, test.E.that.self
+ 	--- */
+	feature C : B{
+		//XPECT linkedName at A::a --> test.A.a
+		//* XPECT scope at A::a ---
+		A, A.a, A.a.self, A.a.that, A.a.that.self, A.self, A.that, A.that.self, B, B.a,
+		B.a.self, B.a.that, B.a.that.self, B.b, B.b.self, B.b.that, B.b.that.self, B.self,
+		B.that, B.that.self, C, C.a, C.a.self, C.a.that, C.a.that.self, C.b, C.b.self,
+		C.b.that, C.b.that.self, C.c, C.c.self, C.c.that, C.c.that.self, C.self, C.that,
+		C.that.self, D, D.self, D.that, D.that.self, E, E.self, E.that, E.that.self, test.A,
+		test.A.a, test.A.a.self, test.A.a.that, test.A.a.that.self, test.A.self, test.A.that,
+		test.A.that.self, test.B, test.B.a, test.B.a.self, test.B.a.that, test.B.a.that.self, test.B.b,
+		test.B.b.self, test.B.b.that, test.B.b.that.self, test.B.self, test.B.that, test.B.that.self,
+		test.C, test.C.a, test.C.a.self, test.C.a.that, test.C.a.that.self, test.C.b,
+		test.C.b.self, test.C.b.that, test.C.b.that.self, test.C.c, test.C.c.self, test.C.c.that,
+		test.C.c.that.self, test.C.self, test.C.that, test.C.that.self, test.D, test.D.self, test.D.that,
+		test.D.that.self, test.E, test.E.self, test.E.that, test.E.that.self
+ 		--- */
+		feature c : a {}
+	}
+	//* XPECT scope at A::a ---
+	A, A.a, A.a.self, A.a.that, A.a.that.self, A.self, A.that, A.that.self, B, B.a,
+	B.a.self, B.a.that, B.a.that.self, B.b, B.b.self, B.b.that, B.b.that.self, B.self,
+	B.that, B.that.self, C, C.a, C.a.self, C.a.that, C.a.that.self, C.b, C.b.self,
+	C.b.that, C.b.that.self, C.c, C.c.self, C.c.that, C.c.that.self, C.self, C.that,
+	C.that.self, D, D.self, D.that, D.that.self, E, E.self, E.that, E.that.self, test.A,
+	test.A.a, test.A.a.self, test.A.a.that, test.A.a.that.self, test.A.self, test.A.that,
+	test.A.that.self, test.B, test.B.a, test.B.a.self, test.B.a.that, test.B.a.that.self, test.B.b,
+	test.B.b.self, test.B.b.that, test.B.b.that.self, test.B.self, test.B.that, test.B.that.self,
+	test.C, test.C.a, test.C.a.self, test.C.a.that, test.C.a.that.self, test.C.b,
+	test.C.b.self, test.C.b.that, test.C.b.that.self, test.C.c, test.C.c.self, test.C.c.that,
+	test.C.c.that.self, test.C.self, test.C.that, test.C.that.self, test.D, test.D.self, test.D.that,
+	test.D.that.self, test.E, test.E.self, test.E.that, test.E.that.self
+ 	--- */
+	feature D : A::a{} 
+	feature E {} //added because E was causing parsing problem (confused with Exponent)
+}
+
+````

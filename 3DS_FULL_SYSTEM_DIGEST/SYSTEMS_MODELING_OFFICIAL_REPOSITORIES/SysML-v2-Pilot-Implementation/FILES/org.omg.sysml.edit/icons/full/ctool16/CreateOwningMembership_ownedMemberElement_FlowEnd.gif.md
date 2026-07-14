@@ -1,0 +1,11 @@
+# OFFICIAL REPOSITORY BINARY INVENTORY: SysML-v2-Pilot-Implementation/org.omg.sysml.edit/icons/full/ctool16/CreateOwningMembership_ownedMemberElement_FlowEnd.gif
+
+- repository: `SysML-v2-Pilot-Implementation`
+- source_path: `org.omg.sysml.edit/icons/full/ctool16/CreateOwningMembership_ownedMemberElement_FlowEnd.gif`
+- source_url: https://github.com/Systems-Modeling/SysML-v2-Pilot-Implementation/blob/fa709f28dfd49dfdb7ee83e4e19da2f57e0eb3aa/org.omg.sysml.edit/icons/full/ctool16/CreateOwningMembership_ownedMemberElement_FlowEnd.gif
+- source_bytes: 223
+- source_sha256: `b878c7dbac3ff12be07f0f081c51034d036b2c8fd967f8b665eba593c84c6347`
+- payload_status: binary metadata only
+- reason: final knowledge base is Markdown-only; binary bytes are not executable knowledge
+
+

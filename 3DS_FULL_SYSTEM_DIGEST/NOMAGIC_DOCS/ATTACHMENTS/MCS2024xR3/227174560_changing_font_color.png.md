@@ -1,0 +1,114 @@
+# NOMAGIC ATTACHMENT: changing_font_color.png
+
+- attachment_id: `227174560`
+- space_key: `MCS2024xR3`
+- parent_page_id: `227174559`
+- parent_page_title: Changing font color
+- media_type: `image/png`
+- reported_bytes: 57418
+- download_url: https://docs.nomagic.com/download/attachments/227174559/changing_font_color.png?version=1&modificationDate=1746452208635&api=v2
+- payload_kind: `metadata-only`
+- downloaded_sha256: not-downloaded
+
+## PAYLOAD STATUS
+
+Binary or image attachment is inventoried by official metadata; no binary bytes are embedded in this Markdown-only corpus.
+
+
+## EXACT ATTACHMENT METADATA
+
+````json
+{
+  "id": "227174560",
+  "type": "attachment",
+  "status": "current",
+  "title": "changing_font_color.png",
+  "version": {
+    "by": {
+      "type": "known",
+      "username": "jse21",
+      "userKey": "2c9f81f87be2b373017e241b5e8b0001",
+      "profilePicture": {
+        "path": "/download/attachments/85767822/user-avatar",
+        "width": 48,
+        "height": 48,
+        "isDefault": false
+      },
+      "displayName": "Jonė Š.",
+      "_links": {
+        "self": "https://docs.nomagic.com/rest/api/user?key=2c9f81f87be2b373017e241b5e8b0001"
+      },
+      "_expandable": {
+        "status": ""
+      }
+    },
+    "when": "2025-05-05T15:36:48.635+02:00",
+    "message": "",
+    "number": 1,
+    "minorEdit": true,
+    "hidden": false,
+    "_links": {
+      "self": "https://docs.nomagic.com/rest/experimental/content/227174560/version/1"
+    },
+    "_expandable": {
+      "content": "/rest/api/content/227174560"
+    }
+  },
+  "position": -1,
+  "container": {
+    "id": "227174559",
+    "type": "page",
+    "status": "current",
+    "title": "Changing font color",
+    "position": 2,
+    "extensions": {
+      "position": 2
+    },
+    "_links": {
+      "webui": "/spaces/MCS2024xR3/pages/227174559/Changing+font+color",
+      "edit": "/pages/resumedraft.action?draftId=227174559",
+      "tinyui": "/x/n2iKDQ",
+      "self": "https://docs.nomagic.com/rest/api/content/227174559"
+    },
+    "_expandable": {
+      "container": "/rest/api/space/MCS2024xR3",
+      "metadata": "",
+      "operations": "",
+      "children": "/rest/api/content/227174559/child",
+      "restrictions": "/rest/api/content/227174559/restriction/byOperation",
+      "history": "/rest/api/content/227174559/history",
+      "ancestors": "",
+      "body": "",
+      "version": "",
+      "descendants": "/rest/api/content/227174559/descendant",
+      "space": "/rest/api/space/MCS2024xR3",
+      "relevantViewRestrictions": "/rest/api/content/227174559/restriction/relevantViewRestrictions"
+    }
+  },
+  "metadata": {
+    "mediaType": "image/png"
+  },
+  "extensions": {
+    "mediaType": "image/png",
+    "fileSize": 57418,
+    "comment": ""
+  },
+  "_links": {
+    "download": "/download/attachments/227174559/changing_font_color.png?version=1&modificationDate=1746452208635&api=v2",
+    "thumbnail": "/download/thumbnails/227174559/changing_font_color.png?api=v2",
+    "webui": "/spaces/MCS2024xR3/pages/227174559/Changing+font+color?preview=%2F227174559%2F227174560%2Fchanging_font_color.png",
+    "self": "https://docs.nomagic.com/rest/api/content/227174560"
+  },
+  "_expandable": {
+    "operations": "",
+    "children": "/rest/api/content/227174560/child",
+    "restrictions": "/rest/api/content/227174560/restriction/byOperation",
+    "history": "/rest/api/content/227174560/history",
+    "ancestors": "",
+    "body": "",
+    "descendants": "/rest/api/content/227174560/descendant",
+    "space": "/rest/api/space/MCS2024xR3",
+    "relevantViewRestrictions": "/rest/api/content/227174560/restriction/relevantViewRestrictions"
+  }
+}
+````

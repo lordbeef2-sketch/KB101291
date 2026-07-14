@@ -1,0 +1,114 @@
+# NOMAGIC ATTACHMENT: show_association_ends_as_ports.png
+
+- attachment_id: `227150204`
+- space_key: `MD2024xR3`
+- parent_page_id: `227150200`
+- parent_page_title: Association End
+- media_type: `image/png`
+- reported_bytes: 2515
+- download_url: https://docs.nomagic.com/download/attachments/227150200/show_association_ends_as_ports.png?version=1&modificationDate=1746160301678&api=v2
+- payload_kind: `metadata-only`
+- downloaded_sha256: not-downloaded
+
+## PAYLOAD STATUS
+
+Binary or image attachment is inventoried by official metadata; no binary bytes are embedded in this Markdown-only corpus.
+
+
+## EXACT ATTACHMENT METADATA
+
+````json
+{
+  "id": "227150204",
+  "type": "attachment",
+  "status": "current",
+  "title": "show_association_ends_as_ports.png",
+  "version": {
+    "by": {
+      "type": "known",
+      "username": "8acad0e54bbfc3ed014ce0189268000a",
+      "userKey": "8acad0e54bbfc3ed014ce0189268000a",
+      "profilePicture": {
+        "path": "/images/icons/profilepics/default.svg",
+        "width": 48,
+        "height": 48,
+        "isDefault": true
+      },
+      "displayName": "user-448c7",
+      "_links": {
+        "self": "https://docs.nomagic.com/rest/api/user?key=8acad0e54bbfc3ed014ce0189268000a"
+      },
+      "_expandable": {
+        "status": ""
+      }
+    },
+    "when": "2025-05-02T06:31:41.678+02:00",
+    "message": "",
+    "number": 1,
+    "minorEdit": false,
+    "hidden": false,
+    "_links": {
+      "self": "https://docs.nomagic.com/rest/experimental/content/227150204/version/1"
+    },
+    "_expandable": {
+      "content": "/rest/api/content/227150204"
+    }
+  },
+  "position": -1,
+  "container": {
+    "id": "227150200",
+    "type": "page",
+    "status": "current",
+    "title": "Association End",
+    "position": 1,
+    "extensions": {
+      "position": 1
+    },
+    "_links": {
+      "webui": "/spaces/MD2024xR3/pages/227150200/Association+End",
+      "edit": "/pages/resumedraft.action?draftId=227150200",
+      "tinyui": "/x/eAmKDQ",
+      "self": "https://docs.nomagic.com/rest/api/content/227150200"
+    },
+    "_expandable": {
+      "container": "/rest/api/space/MD2024xR3",
+      "metadata": "",
+      "operations": "",
+      "children": "/rest/api/content/227150200/child",
+      "restrictions": "/rest/api/content/227150200/restriction/byOperation",
+      "history": "/rest/api/content/227150200/history",
+      "ancestors": "",
+      "body": "",
+      "version": "",
+      "descendants": "/rest/api/content/227150200/descendant",
+      "space": "/rest/api/space/MD2024xR3",
+      "relevantViewRestrictions": "/rest/api/content/227150200/restriction/relevantViewRestrictions"
+    }
+  },
+  "metadata": {
+    "mediaType": "image/png"
+  },
+  "extensions": {
+    "mediaType": "image/png",
+    "fileSize": 2515,
+    "comment": ""
+  },
+  "_links": {
+    "download": "/download/attachments/227150200/show_association_ends_as_ports.png?version=1&modificationDate=1746160301678&api=v2",
+    "thumbnail": "/download/thumbnails/227150200/show_association_ends_as_ports.png?api=v2",
+    "webui": "/spaces/MD2024xR3/pages/227150200/Association+End?preview=%2F227150200%2F227150204%2Fshow_association_ends_as_ports.png",
+    "self": "https://docs.nomagic.com/rest/api/content/227150204"
+  },
+  "_expandable": {
+    "operations": "",
+    "children": "/rest/api/content/227150204/child",
+    "restrictions": "/rest/api/content/227150204/restriction/byOperation",
+    "history": "/rest/api/content/227150204/history",
+    "ancestors": "",
+    "body": "",
+    "descendants": "/rest/api/content/227150204/descendant",
+    "space": "/rest/api/space/MD2024xR3",
+    "relevantViewRestrictions": "/rest/api/content/227150204/restriction/relevantViewRestrictions"
+  }
+}
+````

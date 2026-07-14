@@ -1,0 +1,69 @@
+# OFFICIAL REPOSITORY FILE: SysML-v2-Pilot-Implementation/kerml/src/examples/Variable Feature Examples/Enhancements/TimeVaryingSteps.kerml
+
+- repository: `SysML-v2-Pilot-Implementation`
+- source_path: `kerml/src/examples/Variable Feature Examples/Enhancements/TimeVaryingSteps.kerml`
+- source_url: https://github.com/Systems-Modeling/SysML-v2-Pilot-Implementation/blob/fa709f28dfd49dfdb7ee83e4e19da2f57e0eb3aa/kerml/src/examples/Variable Feature Examples/Enhancements/TimeVaryingSteps.kerml
+- source_bytes: 2359
+- source_sha256: `3f0ce678857e3d68eff599bd241168367375d19e67eca41812100bb2c8584279`
+- decoded_as: `utf-8`
+
+
+## EXACT SOURCE
+
+````kerml
+package TimeVaryingSteps {
+	behavior TakePicture {
+ 		// var step merge : MergePerformance [0..1];
+ 		member step merge : ControlPerformances::MergePerformance [0..1] featured by TakePicture_snapshots {
+ 			member feature TakePicture_snapshots :>> Occurrences::Occurrence::snapshots featured by TakePicture {
+ 				public import merge;
+ 			}
+ 		}
+ 		
+		// var step focus [0..1];
+ 		member step focus [0..1] featured by TakePicture_snapshots {
+ 			member feature TakePicture_snapshots :>> Occurrences::Occurrence::snapshots featured by TakePicture {
+ 				public import focus;
+ 			}
+ 		}
+ 		
+ 		// var step shoot [0..1];
+ 		member step shoot [0..1] featured by TakePicture_snapshots {
+ 			member feature TakePicture_snapshots :>> Occurrences::Occurrence::snapshots featured by TakePicture {
+ 				public import shoot;
+ 			}
+ 		}
+ 		
+ 		// var step decide : DecisionPerformance [0..1];
+ 		member step decide : ControlPerformances::DecisionPerformance [0..1] featured by TakePicture_snapshots {
+ 			member feature TakePicture_snapshots :>> Occurrences::Occurrence::snapshots featured by TakePicture {
+ 				public import decide;
+ 			}
+ 		}
+ 		
+ 		succession first [0..1] startShot then  [1] merge::TakePicture_snapshots.merge;
+ 		succession first [1] merge::TakePicture_snapshots.merge then [1] focus::TakePicture_snapshots.focus;
+  		succession first [1] focus::TakePicture_snapshots.focus then shoot::TakePicture_snapshots.shoot;
+  		succession first [1] shoot::TakePicture_snapshots.shoot then [1] decide::TakePicture_snapshots.decide;
+  		succession first [0..1] decide::TakePicture_snapshots.decide then [0..1] merge::TakePicture_snapshots.merge;
+  		succession first [1] decide::TakePicture_snapshots.decide then[0..1] endShot;
+  	}
+	
+	struct Camera {
+		// Is always taking a picture, one at a time.
+		// var step takePic : TakePicture [1];		
+		member step takePic : TakePicture [1] featured by Camera_snapshots {
+ 			member feature Camera_snapshots :>> Occurrences::Occurrence::snapshots featured by Camera;
+		}
+	}
+
+	struct MultiCamera {
+		// Can take many pictures at one time.
+		// var step takePics : TakePicture [0..*];		
+		member step takePics : TakePicture [0..*] featured by Camera_snapshots {
+ 			member feature Camera_snapshots :>> Occurrences::Occurrence::snapshots featured by Camera;
+		}
+	}
+
+}
+````

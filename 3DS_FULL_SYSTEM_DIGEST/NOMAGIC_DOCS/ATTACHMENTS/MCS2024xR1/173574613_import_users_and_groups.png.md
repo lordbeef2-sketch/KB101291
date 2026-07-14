@@ -1,0 +1,114 @@
+# NOMAGIC ATTACHMENT: import_users_and_groups.png
+
+- attachment_id: `173574613`
+- space_key: `MCS2024xR1`
+- parent_page_id: `173574611`
+- parent_page_title: Importing users and groups
+- media_type: `image/png`
+- reported_bytes: 590
+- download_url: https://docs.nomagic.com/download/attachments/173574611/import_users_and_groups.png?version=1&modificationDate=1717672834018&api=v2
+- payload_kind: `metadata-only`
+- downloaded_sha256: not-downloaded
+
+## PAYLOAD STATUS
+
+Binary or image attachment is inventoried by official metadata; no binary bytes are embedded in this Markdown-only corpus.
+
+
+## EXACT ATTACHMENT METADATA
+
+````json
+{
+  "id": "173574613",
+  "type": "attachment",
+  "status": "current",
+  "title": "import_users_and_groups.png",
+  "version": {
+    "by": {
+      "type": "known",
+      "username": "jse21",
+      "userKey": "2c9f81f87be2b373017e241b5e8b0001",
+      "profilePicture": {
+        "path": "/download/attachments/85767822/user-avatar",
+        "width": 48,
+        "height": 48,
+        "isDefault": false
+      },
+      "displayName": "Jonė Š.",
+      "_links": {
+        "self": "https://docs.nomagic.com/rest/api/user?key=2c9f81f87be2b373017e241b5e8b0001"
+      },
+      "_expandable": {
+        "status": ""
+      }
+    },
+    "when": "2024-06-06T13:20:34.018+02:00",
+    "message": "",
+    "number": 1,
+    "minorEdit": false,
+    "hidden": false,
+    "_links": {
+      "self": "https://docs.nomagic.com/rest/experimental/content/173574613/version/1"
+    },
+    "_expandable": {
+      "content": "/rest/api/content/173574613"
+    }
+  },
+  "position": -1,
+  "container": {
+    "id": "173574611",
+    "type": "page",
+    "status": "current",
+    "title": "Importing users and groups",
+    "position": 2,
+    "extensions": {
+      "position": 2
+    },
+    "_links": {
+      "webui": "/spaces/MCS2024xR1/pages/173574611/Importing+users+and+groups",
+      "edit": "/pages/resumedraft.action?draftId=173574611",
+      "tinyui": "/x/04lYCg",
+      "self": "https://docs.nomagic.com/rest/api/content/173574611"
+    },
+    "_expandable": {
+      "container": "/rest/api/space/MCS2024xR1",
+      "metadata": "",
+      "operations": "",
+      "children": "/rest/api/content/173574611/child",
+      "restrictions": "/rest/api/content/173574611/restriction/byOperation",
+      "history": "/rest/api/content/173574611/history",
+      "ancestors": "",
+      "body": "",
+      "version": "",
+      "descendants": "/rest/api/content/173574611/descendant",
+      "space": "/rest/api/space/MCS2024xR1",
+      "relevantViewRestrictions": "/rest/api/content/173574611/restriction/relevantViewRestrictions"
+    }
+  },
+  "metadata": {
+    "mediaType": "image/png"
+  },
+  "extensions": {
+    "mediaType": "image/png",
+    "fileSize": 590,
+    "comment": ""
+  },
+  "_links": {
+    "download": "/download/attachments/173574611/import_users_and_groups.png?version=1&modificationDate=1717672834018&api=v2",
+    "thumbnail": "/download/thumbnails/173574611/import_users_and_groups.png?api=v2",
+    "webui": "/spaces/MCS2024xR1/pages/173574611/Importing+users+and+groups?preview=%2F173574611%2F173574613%2Fimport_users_and_groups.png",
+    "self": "https://docs.nomagic.com/rest/api/content/173574613"
+  },
+  "_expandable": {
+    "operations": "",
+    "children": "/rest/api/content/173574613/child",
+    "restrictions": "/rest/api/content/173574613/restriction/byOperation",
+    "history": "/rest/api/content/173574613/history",
+    "ancestors": "",
+    "body": "",
+    "descendants": "/rest/api/content/173574613/descendant",
+    "space": "/rest/api/space/MCS2024xR1",
+    "relevantViewRestrictions": "/rest/api/content/173574613/restriction/relevantViewRestrictions"
+  }
+}
+````

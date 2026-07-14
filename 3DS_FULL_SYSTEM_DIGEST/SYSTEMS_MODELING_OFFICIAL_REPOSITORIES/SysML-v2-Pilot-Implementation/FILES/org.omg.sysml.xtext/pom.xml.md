@@ -1,0 +1,105 @@
+# OFFICIAL REPOSITORY FILE: SysML-v2-Pilot-Implementation/org.omg.sysml.xtext/pom.xml
+
+- repository: `SysML-v2-Pilot-Implementation`
+- source_path: `org.omg.sysml.xtext/pom.xml`
+- source_url: https://github.com/Systems-Modeling/SysML-v2-Pilot-Implementation/blob/fa709f28dfd49dfdb7ee83e4e19da2f57e0eb3aa/org.omg.sysml.xtext/pom.xml
+- source_bytes: 2625
+- source_sha256: `af762c156580cad59ec98ff2115c50f5d524de37ba4c84b09717124512d99bb6`
+- decoded_as: `utf-8`
+
+
+## EXACT SOURCE
+
+````xml
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>org.omg.sysml</groupId>
+		<artifactId>org.omg.sysml.parent</artifactId>
+		<version>${revision}</version>
+	</parent>
+
+	<artifactId>org.omg.sysml.xtext</artifactId>
+	<packaging>eclipse-plugin</packaging>
+
+	<dependencies>
+		<dependency>
+			<groupId>com.sensmetry</groupId>
+			<artifactId>sysand</artifactId>
+			<version>${sysand.version}</version>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-clean-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>gen-clean</id>
+						<phase>clean</phase>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>copy-sysand</id>
+						<phase>generate-resources</phase>
+						<goals>
+							<goal>copy</goal>
+						</goals>
+						<configuration>
+							<artifactItems>
+								<artifactItem>
+									<groupId>com.sensmetry</groupId>
+									<artifactId>sysand</artifactId>
+									<version>${sysand.version}</version>
+
+									<outputDirectory>${project.basedir}/lib</outputDirectory>
+									<destFileName>sysand.jar</destFileName>
+								</artifactItem>
+							</artifactItems>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>exec-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>update-project-versions</id>
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>java</goal>
+						</goals>
+						<configuration>
+							<mainClass>org.omg.sysml.xtext.util.StdLibVersionUtil</mainClass>
+							<arguments>
+								<argument>--workspace</argument>
+								<argument>${maven.multiModuleProjectDirectory}/sysml.library</argument>
+								<argument>--build-tag</argument>
+								<argument>${sysml.build-tag}</argument>
+								<argument>--metamodel-tag</argument>
+								<argument>${sysml.metamodel-tag}</argument>
+							</arguments>
+							<classpathScope>compile</classpathScope>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.eclipse.xtend</groupId>
+				<artifactId>xtend-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
+</project>
+````

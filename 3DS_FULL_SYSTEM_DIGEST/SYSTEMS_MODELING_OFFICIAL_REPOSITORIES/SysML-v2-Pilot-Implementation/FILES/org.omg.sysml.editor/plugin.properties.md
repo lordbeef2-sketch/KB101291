@@ -1,0 +1,77 @@
+# OFFICIAL REPOSITORY FILE: SysML-v2-Pilot-Implementation/org.omg.sysml.editor/plugin.properties
+
+- repository: `SysML-v2-Pilot-Implementation`
+- source_path: `org.omg.sysml.editor/plugin.properties`
+- source_url: https://github.com/Systems-Modeling/SysML-v2-Pilot-Implementation/blob/fa709f28dfd49dfdb7ee83e4e19da2f57e0eb3aa/org.omg.sysml.editor/plugin.properties
+- source_bytes: 1953
+- source_sha256: `43637a913bf62a80db5461b88bc701ba26f14f2b8f9318d91b459d94df5bcdfe`
+- decoded_as: `utf-8`
+
+
+## EXACT SOURCE
+
+````properties
+#
+
+pluginName = SysMLX Editor
+providerName = 
+
+_UI_SysMLEditor_menu = &SysMLX Editor
+_UI_TypesEditor_menu = &Types Editor
+
+_UI_CreateChild_menu_item = &New Child
+_UI_CreateSibling_menu_item = dN&ew Sibling
+
+_UI_ShowPropertiesView_menu_item = Show &Properties View
+_UI_RefreshViewer_menu_item = &Refresh
+
+_UI_SelectionPage_label = Selection
+_UI_ParentPage_label = Parent
+_UI_ListPage_label = List
+_UI_TreePage_label = Tree
+_UI_TablePage_label = Table
+_UI_TreeWithColumnsPage_label = Tree with Columns
+_UI_ObjectColumn_label = Object
+_UI_SelfColumn_label = Self
+
+_UI_NoObjectSelected = Selected Nothing
+_UI_SingleObjectSelected = Selected Object: {0}
+_UI_MultiObjectSelected = Selected {0} Objects
+
+_UI_OpenEditorError_label = Open Editor
+
+_UI_Wizard_category = Example EMF Model Creation Wizards
+
+_UI_CreateModelError_message = Problems encountered in file "{0}"
+
+_UI_SysMLModelWizard_label = SysML Model
+_UI_SysMLModelWizard_description = Create a new SysML model
+
+_UI_SysMLEditor_label = SysML Model Editor
+
+_UI_SysMLEditorFilenameDefaultBase = My
+_UI_SysMLEditorFilenameExtensions = sysml
+
+_UI_TypesModelWizard_label = Types Model
+_UI_TypesModelWizard_description = Create a new Types model
+
+_UI_TypesEditor_label = Types Model Editor
+
+_UI_TypesEditorFilenameDefaultBase = My
+_UI_TypesEditorFilenameExtensions = types
+
+_UI_Wizard_label = New
+
+_WARN_FilenameExtension = The file name must end in ''.{0}''
+_WARN_FilenameExtensions = The file name must have one of the following extensions: {0}
+
+_UI_ModelObject = &Model Object
+_UI_XMLEncoding = &XML Encoding
+_UI_XMLEncodingChoices = UTF-8 ASCII UTF-16 UTF-16BE UTF-16LE ISO-8859-1
+_UI_Wizard_initial_object_description = Select a model object to create
+
+_UI_FileConflict_label = File Conflict
+_WARN_FileConflict = There are unsaved changes that conflict with changes made outside the editor.  Do you wish to discard this editor's changes?
+
+
+````

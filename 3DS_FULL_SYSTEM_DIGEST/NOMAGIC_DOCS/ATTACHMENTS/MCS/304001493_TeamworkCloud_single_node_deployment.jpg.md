@@ -1,0 +1,114 @@
+# NOMAGIC ATTACHMENT: TeamworkCloud single node deployment.jpg
+
+- attachment_id: `304001493`
+- space_key: `MCS`
+- parent_page_id: `304001487`
+- parent_page_title: (2026x Refresh1) Installation on Windows
+- media_type: `image/jpeg`
+- reported_bytes: 278322
+- download_url: https://docs.nomagic.com/download/attachments/304001487/TeamworkCloud%20single%20node%20deployment.jpg?version=1&modificationDate=1777452388349&api=v2
+- payload_kind: `metadata-only`
+- downloaded_sha256: not-downloaded
+
+## PAYLOAD STATUS
+
+Binary or image attachment is inventoried by official metadata; no binary bytes are embedded in this Markdown-only corpus.
+
+
+## EXACT ATTACHMENT METADATA
+
+````json
+{
+  "id": "304001493",
+  "type": "attachment",
+  "status": "current",
+  "title": "TeamworkCloud single node deployment.jpg",
+  "version": {
+    "by": {
+      "type": "known",
+      "username": "jse21",
+      "userKey": "2c9f81f87be2b373017e241b5e8b0001",
+      "profilePicture": {
+        "path": "/download/attachments/85767822/user-avatar",
+        "width": 48,
+        "height": 48,
+        "isDefault": false
+      },
+      "displayName": "Jonė Š.",
+      "_links": {
+        "self": "https://docs.nomagic.com/rest/api/user?key=2c9f81f87be2b373017e241b5e8b0001"
+      },
+      "_expandable": {
+        "status": ""
+      }
+    },
+    "when": "2026-04-29T10:46:28.349+02:00",
+    "message": "",
+    "number": 1,
+    "minorEdit": true,
+    "hidden": false,
+    "_links": {
+      "self": "https://docs.nomagic.com/rest/experimental/content/304001493/version/1"
+    },
+    "_expandable": {
+      "content": "/rest/api/content/304001493"
+    }
+  },
+  "position": -1,
+  "container": {
+    "id": "304001487",
+    "type": "page",
+    "status": "current",
+    "title": "(2026x Refresh1) Installation on Windows",
+    "position": 2,
+    "extensions": {
+      "position": 2
+    },
+    "_links": {
+      "webui": "/spaces/MCS/pages/304001487/2026x+Refresh1+Installation+on+Windows",
+      "edit": "/pages/resumedraft.action?draftId=304001487",
+      "tinyui": "/x/z7EeEg",
+      "self": "https://docs.nomagic.com/rest/api/content/304001487"
+    },
+    "_expandable": {
+      "container": "/rest/api/space/MCS",
+      "metadata": "",
+      "operations": "",
+      "children": "/rest/api/content/304001487/child",
+      "restrictions": "/rest/api/content/304001487/restriction/byOperation",
+      "history": "/rest/api/content/304001487/history",
+      "ancestors": "",
+      "body": "",
+      "version": "",
+      "descendants": "/rest/api/content/304001487/descendant",
+      "space": "/rest/api/space/MCS",
+      "relevantViewRestrictions": "/rest/api/content/304001487/restriction/relevantViewRestrictions"
+    }
+  },
+  "metadata": {
+    "mediaType": "image/jpeg"
+  },
+  "extensions": {
+    "mediaType": "image/jpeg",
+    "fileSize": 278322,
+    "comment": ""
+  },
+  "_links": {
+    "download": "/download/attachments/304001487/TeamworkCloud%20single%20node%20deployment.jpg?version=1&modificationDate=1777452388349&api=v2",
+    "thumbnail": "/download/thumbnails/304001487/TeamworkCloud%20single%20node%20deployment.jpg?api=v2",
+    "webui": "/spaces/MCS/pages/304001487/2026x+Refresh1+Installation+on+Windows?preview=%2F304001487%2F304001493%2FTeamworkCloud+single+node+deployment.jpg",
+    "self": "https://docs.nomagic.com/rest/api/content/304001493"
+  },
+  "_expandable": {
+    "operations": "",
+    "children": "/rest/api/content/304001493/child",
+    "restrictions": "/rest/api/content/304001493/restriction/byOperation",
+    "history": "/rest/api/content/304001493/history",
+    "ancestors": "",
+    "body": "",
+    "descendants": "/rest/api/content/304001493/descendant",
+    "space": "/rest/api/space/MCS",
+    "relevantViewRestrictions": "/rest/api/content/304001493/restriction/relevantViewRestrictions"
+  }
+}
+````

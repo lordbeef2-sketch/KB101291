@@ -1,0 +1,114 @@
+# NOMAGIC ATTACHMENT: Generate Output Pane.png
+
+- attachment_id: `227153341`
+- space_key: `MD2024xR3`
+- parent_page_id: `227153340`
+- parent_page_title: Generate Output pane
+- media_type: `image/png`
+- reported_bytes: 41303
+- download_url: https://docs.nomagic.com/download/attachments/227153340/Generate%20Output%20Pane.png?version=1&modificationDate=1746160678898&api=v2
+- payload_kind: `metadata-only`
+- downloaded_sha256: not-downloaded
+
+## PAYLOAD STATUS
+
+Binary or image attachment is inventoried by official metadata; no binary bytes are embedded in this Markdown-only corpus.
+
+
+## EXACT ATTACHMENT METADATA
+
+````json
+{
+  "id": "227153341",
+  "type": "attachment",
+  "status": "current",
+  "title": "Generate Output Pane.png",
+  "version": {
+    "by": {
+      "type": "known",
+      "username": "2c9f81f85d3bb686015e3865fafa0000",
+      "userKey": "2c9f81f85d3bb686015e3865fafa0000",
+      "profilePicture": {
+        "path": "/images/icons/profilepics/default.svg",
+        "width": 48,
+        "height": 48,
+        "isDefault": true
+      },
+      "displayName": "user-52ec1",
+      "_links": {
+        "self": "https://docs.nomagic.com/rest/api/user?key=2c9f81f85d3bb686015e3865fafa0000"
+      },
+      "_expandable": {
+        "status": ""
+      }
+    },
+    "when": "2025-05-02T06:37:58.898+02:00",
+    "message": "",
+    "number": 1,
+    "minorEdit": true,
+    "hidden": false,
+    "_links": {
+      "self": "https://docs.nomagic.com/rest/experimental/content/227153341/version/1"
+    },
+    "_expandable": {
+      "content": "/rest/api/content/227153341"
+    }
+  },
+  "position": -1,
+  "container": {
+    "id": "227153340",
+    "type": "page",
+    "status": "current",
+    "title": "Generate Output pane",
+    "position": 4,
+    "extensions": {
+      "position": 4
+    },
+    "_links": {
+      "webui": "/spaces/MD2024xR3/pages/227153340/Generate+Output+pane",
+      "edit": "/pages/resumedraft.action?draftId=227153340",
+      "tinyui": "/x/vBWKDQ",
+      "self": "https://docs.nomagic.com/rest/api/content/227153340"
+    },
+    "_expandable": {
+      "container": "/rest/api/space/MD2024xR3",
+      "metadata": "",
+      "operations": "",
+      "children": "/rest/api/content/227153340/child",
+      "restrictions": "/rest/api/content/227153340/restriction/byOperation",
+      "history": "/rest/api/content/227153340/history",
+      "ancestors": "",
+      "body": "",
+      "version": "",
+      "descendants": "/rest/api/content/227153340/descendant",
+      "space": "/rest/api/space/MD2024xR3",
+      "relevantViewRestrictions": "/rest/api/content/227153340/restriction/relevantViewRestrictions"
+    }
+  },
+  "metadata": {
+    "mediaType": "image/png"
+  },
+  "extensions": {
+    "mediaType": "image/png",
+    "fileSize": 41303,
+    "comment": ""
+  },
+  "_links": {
+    "download": "/download/attachments/227153340/Generate%20Output%20Pane.png?version=1&modificationDate=1746160678898&api=v2",
+    "thumbnail": "/download/thumbnails/227153340/Generate%20Output%20Pane.png?api=v2",
+    "webui": "/spaces/MD2024xR3/pages/227153340/Generate+Output+pane?preview=%2F227153340%2F227153341%2FGenerate+Output+Pane.png",
+    "self": "https://docs.nomagic.com/rest/api/content/227153341"
+  },
+  "_expandable": {
+    "operations": "",
+    "children": "/rest/api/content/227153341/child",
+    "restrictions": "/rest/api/content/227153341/restriction/byOperation",
+    "history": "/rest/api/content/227153341/history",
+    "ancestors": "",
+    "body": "",
+    "descendants": "/rest/api/content/227153341/descendant",
+    "space": "/rest/api/space/MD2024xR3",
+    "relevantViewRestrictions": "/rest/api/content/227153341/restriction/relevantViewRestrictions"
+  }
+}
+````

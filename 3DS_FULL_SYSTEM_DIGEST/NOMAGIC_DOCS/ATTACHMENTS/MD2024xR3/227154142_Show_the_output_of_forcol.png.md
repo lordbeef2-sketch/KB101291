@@ -1,0 +1,114 @@
+# NOMAGIC ATTACHMENT: Show the output of #forcol.png
+
+- attachment_id: `227154142`
+- space_key: `MD2024xR3`
+- parent_page_id: `227154135`
+- parent_page_title: OpenDocument spreadsheet
+- media_type: `image/png`
+- reported_bytes: 1202
+- download_url: https://docs.nomagic.com/download/attachments/227154135/Show%20the%20output%20of%20%23forcol.png?version=1&modificationDate=1746160797699&api=v2
+- payload_kind: `metadata-only`
+- downloaded_sha256: not-downloaded
+
+## PAYLOAD STATUS
+
+Binary or image attachment is inventoried by official metadata; no binary bytes are embedded in this Markdown-only corpus.
+
+
+## EXACT ATTACHMENT METADATA
+
+````json
+{
+  "id": "227154142",
+  "type": "attachment",
+  "status": "current",
+  "title": "Show the output of #forcol.png",
+  "version": {
+    "by": {
+      "type": "known",
+      "username": "8acad0e54bbfc3ed014bee7340760004",
+      "userKey": "8acad0e54bbfc3ed014bee7340760004",
+      "profilePicture": {
+        "path": "/images/icons/profilepics/default.svg",
+        "width": 48,
+        "height": 48,
+        "isDefault": true
+      },
+      "displayName": "user-ee6cb",
+      "_links": {
+        "self": "https://docs.nomagic.com/rest/api/user?key=8acad0e54bbfc3ed014bee7340760004"
+      },
+      "_expandable": {
+        "status": ""
+      }
+    },
+    "when": "2025-05-02T06:39:57.699+02:00",
+    "message": "",
+    "number": 1,
+    "minorEdit": false,
+    "hidden": false,
+    "_links": {
+      "self": "https://docs.nomagic.com/rest/experimental/content/227154142/version/1"
+    },
+    "_expandable": {
+      "content": "/rest/api/content/227154142"
+    }
+  },
+  "position": -1,
+  "container": {
+    "id": "227154135",
+    "type": "page",
+    "status": "current",
+    "title": "OpenDocument spreadsheet",
+    "position": 1,
+    "extensions": {
+      "position": 1
+    },
+    "_links": {
+      "webui": "/spaces/MD2024xR3/pages/227154135/OpenDocument+spreadsheet",
+      "edit": "/pages/resumedraft.action?draftId=227154135",
+      "tinyui": "/x/1xiKDQ",
+      "self": "https://docs.nomagic.com/rest/api/content/227154135"
+    },
+    "_expandable": {
+      "container": "/rest/api/space/MD2024xR3",
+      "metadata": "",
+      "operations": "",
+      "children": "/rest/api/content/227154135/child",
+      "restrictions": "/rest/api/content/227154135/restriction/byOperation",
+      "history": "/rest/api/content/227154135/history",
+      "ancestors": "",
+      "body": "",
+      "version": "",
+      "descendants": "/rest/api/content/227154135/descendant",
+      "space": "/rest/api/space/MD2024xR3",
+      "relevantViewRestrictions": "/rest/api/content/227154135/restriction/relevantViewRestrictions"
+    }
+  },
+  "metadata": {
+    "mediaType": "image/png"
+  },
+  "extensions": {
+    "mediaType": "image/png",
+    "fileSize": 1202,
+    "comment": ""
+  },
+  "_links": {
+    "download": "/download/attachments/227154135/Show%20the%20output%20of%20%23forcol.png?version=1&modificationDate=1746160797699&api=v2",
+    "thumbnail": "/download/thumbnails/227154135/Show%20the%20output%20of%20%23forcol.png?api=v2",
+    "webui": "/spaces/MD2024xR3/pages/227154135/OpenDocument+spreadsheet?preview=%2F227154135%2F227154142%2FShow+the+output+of+%23forcol.png",
+    "self": "https://docs.nomagic.com/rest/api/content/227154142"
+  },
+  "_expandable": {
+    "operations": "",
+    "children": "/rest/api/content/227154142/child",
+    "restrictions": "/rest/api/content/227154142/restriction/byOperation",
+    "history": "/rest/api/content/227154142/history",
+    "ancestors": "",
+    "body": "",
+    "descendants": "/rest/api/content/227154142/descendant",
+    "space": "/rest/api/space/MD2024xR3",
+    "relevantViewRestrictions": "/rest/api/content/227154142/restriction/relevantViewRestrictions"
+  }
+}
+````

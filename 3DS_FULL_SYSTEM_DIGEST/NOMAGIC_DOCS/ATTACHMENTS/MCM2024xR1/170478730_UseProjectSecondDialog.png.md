@@ -1,0 +1,114 @@
+# NOMAGIC ATTACHMENT: UseProjectSecondDialog.png
+
+- attachment_id: `170478730`
+- space_key: `MCM2024xR1`
+- parent_page_id: `170478727`
+- parent_page_title: Using Concept Modeling Capabilities with non-MCM projects
+- media_type: `image/png`
+- reported_bytes: 50833
+- download_url: https://docs.nomagic.com/download/attachments/170478727/UseProjectSecondDialog.png?version=1&modificationDate=1715173613083&api=v2
+- payload_kind: `metadata-only`
+- downloaded_sha256: not-downloaded
+
+## PAYLOAD STATUS
+
+Binary or image attachment is inventoried by official metadata; no binary bytes are embedded in this Markdown-only corpus.
+
+
+## EXACT ATTACHMENT METADATA
+
+````json
+{
+  "id": "170478730",
+  "type": "attachment",
+  "status": "current",
+  "title": "UseProjectSecondDialog.png",
+  "version": {
+    "by": {
+      "type": "known",
+      "username": "rae6",
+      "userKey": "2c9f81f87be2b373017dc8d7b9750000",
+      "profilePicture": {
+        "path": "/images/icons/profilepics/default.svg",
+        "width": 48,
+        "height": 48,
+        "isDefault": true
+      },
+      "displayName": "Ranveersinha A.",
+      "_links": {
+        "self": "https://docs.nomagic.com/rest/api/user?key=2c9f81f87be2b373017dc8d7b9750000"
+      },
+      "_expandable": {
+        "status": ""
+      }
+    },
+    "when": "2024-05-08T15:06:53.083+02:00",
+    "message": "",
+    "number": 1,
+    "minorEdit": false,
+    "hidden": false,
+    "_links": {
+      "self": "https://docs.nomagic.com/rest/experimental/content/170478730/version/1"
+    },
+    "_expandable": {
+      "content": "/rest/api/content/170478730"
+    }
+  },
+  "position": -1,
+  "container": {
+    "id": "170478727",
+    "type": "page",
+    "status": "current",
+    "title": "Using Concept Modeling Capabilities with non-MCM projects",
+    "position": 1,
+    "extensions": {
+      "position": 1
+    },
+    "_links": {
+      "webui": "/spaces/MCM2024xR1/pages/170478727/Using+Concept+Modeling+Capabilities+with+non-MCM+projects",
+      "edit": "/pages/resumedraft.action?draftId=170478727",
+      "tinyui": "/x/h0wpCg",
+      "self": "https://docs.nomagic.com/rest/api/content/170478727"
+    },
+    "_expandable": {
+      "container": "/rest/api/space/MCM2024xR1",
+      "metadata": "",
+      "operations": "",
+      "children": "/rest/api/content/170478727/child",
+      "restrictions": "/rest/api/content/170478727/restriction/byOperation",
+      "history": "/rest/api/content/170478727/history",
+      "ancestors": "",
+      "body": "",
+      "version": "",
+      "descendants": "/rest/api/content/170478727/descendant",
+      "space": "/rest/api/space/MCM2024xR1",
+      "relevantViewRestrictions": "/rest/api/content/170478727/restriction/relevantViewRestrictions"
+    }
+  },
+  "metadata": {
+    "mediaType": "image/png"
+  },
+  "extensions": {
+    "mediaType": "image/png",
+    "fileSize": 50833,
+    "comment": ""
+  },
+  "_links": {
+    "download": "/download/attachments/170478727/UseProjectSecondDialog.png?version=1&modificationDate=1715173613083&api=v2",
+    "thumbnail": "/download/thumbnails/170478727/UseProjectSecondDialog.png?api=v2",
+    "webui": "/spaces/MCM2024xR1/pages/170478727/Using+Concept+Modeling+Capabilities+with+non-MCM+projects?preview=%2F170478727%2F170478730%2FUseProjectSecondDialog.png",
+    "self": "https://docs.nomagic.com/rest/api/content/170478730"
+  },
+  "_expandable": {
+    "operations": "",
+    "children": "/rest/api/content/170478730/child",
+    "restrictions": "/rest/api/content/170478730/restriction/byOperation",
+    "history": "/rest/api/content/170478730/history",
+    "ancestors": "",
+    "body": "",
+    "descendants": "/rest/api/content/170478730/descendant",
+    "space": "/rest/api/space/MCM2024xR1",
+    "relevantViewRestrictions": "/rest/api/content/170478730/restriction/relevantViewRestrictions"
+  }
+}
+````

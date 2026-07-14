@@ -1,0 +1,112 @@
+# OFFICIAL REPOSITORY FILE: SysML-v2-API-Services/app/jackson/jsonld/DataJsonLdAdorner.java
+
+- repository: `SysML-v2-API-Services`
+- source_path: `app/jackson/jsonld/DataJsonLdAdorner.java`
+- source_url: https://github.com/Systems-Modeling/SysML-v2-API-Services/blob/0af711b14bbcea7b240bb0a3a65817ae68302092/app/jackson/jsonld/DataJsonLdAdorner.java
+- source_bytes: 3537
+- source_sha256: `f95f69ed14dca5209003f72e6c2a8facb3af3a591bb07fc1b22e01e0ec9cbea2`
+- decoded_as: `utf-8`
+
+
+## EXACT SOURCE
+
+````java
+/*
+ * SysML v2 REST/HTTP Pilot Implementation
+ * Copyright (C) 2020 InterCAX LLC
+ * Copyright (C) 2020 California Institute of Technology ("Caltech")
+ * Copyright (C) 2021 Twingineer LLC
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the Eclipse Public License as published by
+ * the Eclipse Foundation, version 2 of the License.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * Eclipse Public License for more details.
+ *
+ * You should have received a copy of the Eclipse Public License
+ * along with this program.  If not, see <https://www.eclipse.org/legal/epl-2.0/>.
+ *
+ * @license EPL-2.0 <http://spdx.org/licenses/EPL-2.0>
+ */
+
+package jackson.jsonld;
+
+import config.MetamodelProvider;
+import org.omg.sysml.lifecycle.Data;
+import play.Environment;
+import play.mvc.Http.Request;
+
+import java.util.Map;
+import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
+
+public final class DataJsonLdAdorner<T extends Data> implements JsonLdAdorner<T, DataJsonLdAdorner.Parameters> {
+    private final Map<String, JsonLdAdorner<T, DataJsonLdAdorner.Parameters>> delegates = new ConcurrentHashMap<>();
+
+    private final MetamodelProvider metamodelProvider;
+    private final Environment environment;
+    private final boolean inline;
+
+    public DataJsonLdAdorner(MetamodelProvider metamodelProvider, Environment environment, boolean inline) {
+        this.metamodelProvider = metamodelProvider;
+        this.environment = environment;
+        this.inline = inline;
+    }
+
+    @Override
+    public JsonLdNode<T> adorn(T entity, Request request, Parameters parameters) {
+        String type;
+        try {
+            type = metamodelProvider.getInterface(entity.getClass()).getSimpleName();
+        } catch (ClassNotFoundException | NullPointerException e) {
+            throw new IllegalStateException(e);
+        }
+        return delegates.computeIfAbsent(type, t -> {
+            // FIXME metamodel hard-coding
+            String contextPath = String.format("jsonld/metamodel/%s.jsonld", t);
+            return new SimpleJsonLdAdorner<>(environment, inline) {
+                @Override
+                protected String getType(Parameters parameters) {
+                    return t;
+                }
+
+                @Override
+                protected String getContextPath(Parameters parameters) {
+                    return contextPath;
+                }
+
+                @Override
+                protected String getBasePath(Parameters parameters) {
+                    // FIXME element hard-coding
+                    return String.format("/projects/%s/commits/%s/elements/",
+                            parameters.getProjectId(),
+                            parameters.getCommitId()
+                    );
+                }
+            };
+        }).adorn(entity, request, parameters);
+    }
+
+    public static class Parameters {
+        private final UUID projectId;
+        private final UUID commitId;
+
+        public Parameters(UUID projectId, UUID commitId) {
+            this.projectId = projectId;
+            this.commitId = commitId;
+        }
+
+        public UUID getProjectId() {
+            return projectId;
+        }
+
+        public UUID getCommitId() {
+            return commitId;
+        }
+    }
+}
+
+````

@@ -1,0 +1,114 @@
+# NOMAGIC ATTACHMENT: port_button.png
+
+- attachment_id: `249577454`
+- space_key: `SYSML2P`
+- parent_page_id: `249577451`
+- parent_page_title: Port
+- media_type: `image/png`
+- reported_bytes: 174
+- download_url: https://docs.nomagic.com/download/attachments/249577451/port_button.png?version=1&modificationDate=1755615936119&api=v2
+- payload_kind: `metadata-only`
+- downloaded_sha256: not-downloaded
+
+## PAYLOAD STATUS
+
+Binary or image attachment is inventoried by official metadata; no binary bytes are embedded in this Markdown-only corpus.
+
+
+## EXACT ATTACHMENT METADATA
+
+````json
+{
+  "id": "249577454",
+  "type": "attachment",
+  "status": "current",
+  "title": "port_button.png",
+  "version": {
+    "by": {
+      "type": "known",
+      "username": "kbe12",
+      "userKey": "2c9f81f87674fd7d017a0928ba470000",
+      "profilePicture": {
+        "path": "/images/icons/profilepics/default.svg",
+        "width": 48,
+        "height": 48,
+        "isDefault": true
+      },
+      "displayName": "Kristina B.",
+      "_links": {
+        "self": "https://docs.nomagic.com/rest/api/user?key=2c9f81f87674fd7d017a0928ba470000"
+      },
+      "_expandable": {
+        "status": ""
+      }
+    },
+    "when": "2025-08-19T17:05:36.119+02:00",
+    "message": "",
+    "number": 1,
+    "minorEdit": true,
+    "hidden": false,
+    "_links": {
+      "self": "https://docs.nomagic.com/rest/experimental/content/249577454/version/1"
+    },
+    "_expandable": {
+      "content": "/rest/api/content/249577454"
+    }
+  },
+  "position": -1,
+  "container": {
+    "id": "249577451",
+    "type": "page",
+    "status": "current",
+    "title": "Port",
+    "position": 2,
+    "extensions": {
+      "position": 2
+    },
+    "_links": {
+      "webui": "/spaces/SYSML2P/pages/249577451/Port",
+      "edit": "/pages/resumedraft.action?draftId=249577451",
+      "tinyui": "/x/6z-gDg",
+      "self": "https://docs.nomagic.com/rest/api/content/249577451"
+    },
+    "_expandable": {
+      "container": "/rest/api/space/SYSML2P",
+      "metadata": "",
+      "operations": "",
+      "children": "/rest/api/content/249577451/child",
+      "restrictions": "/rest/api/content/249577451/restriction/byOperation",
+      "history": "/rest/api/content/249577451/history",
+      "ancestors": "",
+      "body": "",
+      "version": "",
+      "descendants": "/rest/api/content/249577451/descendant",
+      "space": "/rest/api/space/SYSML2P",
+      "relevantViewRestrictions": "/rest/api/content/249577451/restriction/relevantViewRestrictions"
+    }
+  },
+  "metadata": {
+    "mediaType": "image/png"
+  },
+  "extensions": {
+    "mediaType": "image/png",
+    "fileSize": 174,
+    "comment": ""
+  },
+  "_links": {
+    "download": "/download/attachments/249577451/port_button.png?version=1&modificationDate=1755615936119&api=v2",
+    "thumbnail": "/download/thumbnails/249577451/port_button.png?api=v2",
+    "webui": "/spaces/SYSML2P/pages/249577451/Port?preview=%2F249577451%2F249577454%2Fport_button.png",
+    "self": "https://docs.nomagic.com/rest/api/content/249577454"
+  },
+  "_expandable": {
+    "operations": "",
+    "children": "/rest/api/content/249577454/child",
+    "restrictions": "/rest/api/content/249577454/restriction/byOperation",
+    "history": "/rest/api/content/249577454/history",
+    "ancestors": "",
+    "body": "",
+    "descendants": "/rest/api/content/249577454/descendant",
+    "space": "/rest/api/space/SYSML2P",
+    "relevantViewRestrictions": "/rest/api/content/249577454/restriction/relevantViewRestrictions"
+  }
+}
+````

@@ -1,0 +1,218 @@
+# JAVA OPENAPI: DependencyMatrixSelection (2024x Refresh3 API)
+
+- source_url: https://jdocs.nomagic.com/2024xRefresh3/com/nomagic/magicdraw/dependencymatrix/ui/DependencyMatrixSelection.html
+- source_path: `com/nomagic/magicdraw/dependencymatrix/ui/DependencyMatrixSelection.html`
+- source_sha256: `4b1832e20233154ce95c2a6bb60d41310481aaa34509625edf38715bb64d0801`
+- captured_utc: `2026-07-14T16:55:15.578012+00:00`
+
+## NORMALIZED JAVADOC CONTENT
+
+======== START OF CLASS DATA ========
+
+Package [com.nomagic.magicdraw.dependencymatrix.ui](package-summary.html)
+
+## Interface DependencyMatrixSelection
+
+@OpenApiAllpublic interfaceDependencyMatrixSelection
+Provides information about dependency matrix row, column, cell selection.
+
+======== NESTED CLASS SUMMARY ======== 
+Nested Class Summary
+Nested Classes
+Modifier and Type
+Interface
+Description
+`static interface`
+`[DependencyMatrixSelection.CellDescriptor](DependencyMatrixSelection.CellDescriptor.html)`
+Describes cell.
+ ========== METHOD SUMMARY =========== 
+Method Summary
+All MethodsInstance MethodsAbstract Methods
+Modifier and Type
+Method
+Description
+`[Collection](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Collection.html)<[DependencyMatrixSelection.CellDescriptor](DependencyMatrixSelection.CellDescriptor.html)>`
+`[getSelectedCells](#getSelectedCells())()`
+Returns collection of {[`DependencyMatrixSelection.CellDescriptor`](DependencyMatrixSelection.CellDescriptor.html)} of selected cells.
+`[Collection](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Collection.html)<[ElementNode](../datamodel/ElementNode.html)>`
+`[getSelectedColumns](#getSelectedColumns())()`
+Returns collection of {[`ElementNode`](../datamodel/ElementNode.html)} of all selected columns.
+`[Collection](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Collection.html)<[ElementNode](../datamodel/ElementNode.html)>`
+`[getSelectedRows](#getSelectedRows())()`
+Returns collection of {[`ElementNode`](../datamodel/ElementNode.html)} of all selected rows.
+`boolean`
+`[isCellSelected](#isCellSelected(com.nomagic.magicdraw.dependencymatrix.datamodel.ElementNode,com.nomagic.magicdraw.dependencymatrix.datamodel.ElementNode))([ElementNode](../datamodel/ElementNode.html) row,
+ [ElementNode](../datamodel/ElementNode.html) column)`
+Returns true if cell between given row and given column is selected.
+`boolean`
+`[isMultipleCellsSelected](#isMultipleCellsSelected())()`
+Returns true if only multiple cells are selected.
+`boolean`
+`[isSingleCellSelected](#isSingleCellSelected())()`
+Returns true if only single cell is selected.
+
+============ METHOD DETAIL ========== 
+Method Details
+isCellSelected
+boolean isCellSelected([ElementNode](../datamodel/ElementNode.html) row,
+ [ElementNode](../datamodel/ElementNode.html) column)
+Returns true if cell between given row and given column is selected.
+getSelectedRows
+[Collection](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Collection.html)<[ElementNode](../datamodel/ElementNode.html)> getSelectedRows()
+Returns collection of {[`ElementNode`](../datamodel/ElementNode.html)} of all selected rows.
+getSelectedColumns
+[Collection](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Collection.html)<[ElementNode](../datamodel/ElementNode.html)> getSelectedColumns()
+Returns collection of {[`ElementNode`](../datamodel/ElementNode.html)} of all selected columns.
+getSelectedCells
+[Collection](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Collection.html)<[DependencyMatrixSelection.CellDescriptor](DependencyMatrixSelection.CellDescriptor.html)> getSelectedCells()
+Returns collection of {[`DependencyMatrixSelection.CellDescriptor`](DependencyMatrixSelection.CellDescriptor.html)} of selected cells.
+isMultipleCellsSelected
+boolean isMultipleCellsSelected()
+Returns true if only multiple cells are selected.
+isSingleCellSelected
+boolean isSingleCellSelected()
+Returns true if only single cell is selected.
+
+========= END OF CLASS DATA =========
+
+## EXACT JAVADOC MAIN HTML
+
+````html
+<main role="main">
+<!-- ======== START OF CLASS DATA ======== -->
+<div class="header">
+<div class="sub-title"><span class="package-label-in-type">Package</span> <a href="package-summary.html">com.nomagic.magicdraw.dependencymatrix.ui</a></div>
+<h1 class="title" title="Interface DependencyMatrixSelection">Interface DependencyMatrixSelection</h1>
+</div>
+<section class="class-description" id="class-description">
+<hr/>
+<div class="type-signature"><span class="annotations">@OpenApiAll
+</span><span class="modifiers">public interface </span><span class="element-name type-name-label">DependencyMatrixSelection</span></div>
+<div class="block">Provides information about dependency matrix row, column, cell selection.</div>
+</section>
+<section class="summary">
+<ul class="summary-list">
+<!-- ======== NESTED CLASS SUMMARY ======== -->
+<li>
+<section class="nested-class-summary" id="nested-class-summary">
+<h2>Nested Class Summary</h2>
+<div class="caption"><span>Nested Classes</span></div>
+<div class="summary-table three-column-summary">
+<div class="table-header col-first">Modifier and Type</div>
+<div class="table-header col-second">Interface</div>
+<div class="table-header col-last">Description</div>
+<div class="col-first even-row-color"><code>static interface </code></div>
+<div class="col-second even-row-color"><code><a class="type-name-link" href="DependencyMatrixSelection.CellDescriptor.html" title="interface in com.nomagic.magicdraw.dependencymatrix.ui">DependencyMatrixSelection.CellDescriptor</a></code></div>
+<div class="col-last even-row-color">
+<div class="block">Describes cell.</div>
+</div>
+</div>
+</section>
+</li>
+<!-- ========== METHOD SUMMARY =========== -->
+<li>
+<section class="method-summary" id="method-summary">
+<h2>Method Summary</h2>
+<div id="method-summary-table">
+<div aria-orientation="horizontal" class="table-tabs" role="tablist"><button aria-controls="method-summary-table.tabpanel" aria-selected="true" class="active-table-tab" id="method-summary-table-tab0" onclick="show('method-summary-table', 'method-summary-table', 3)" onkeydown="switchTab(event)" role="tab" tabindex="0">All Methods</button><button aria-controls="method-summary-table.tabpanel" aria-selected="false" class="table-tab" id="method-summary-table-tab2" onclick="show('method-summary-table', 'method-summary-table-tab2', 3)" onkeydown="switchTab(event)" role="tab" tabindex="-1">Instance Methods</button><button aria-controls="method-summary-table.tabpanel" aria-selected="false" class="table-tab" id="method-summary-table-tab3" onclick="show('method-summary-table', 'method-summary-table-tab3', 3)" onkeydown="switchTab(event)" role="tab" tabindex="-1">Abstract Methods</button></div>
+<div aria-labelledby="method-summary-table-tab0" id="method-summary-table.tabpanel" role="tabpanel">
+<div class="summary-table three-column-summary">
+<div class="table-header col-first">Modifier and Type</div>
+<div class="table-header col-second">Method</div>
+<div class="table-header col-last">Description</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a class="external-link" href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Collection.html" title="class or interface in java.util">Collection</a>&lt;<a href="DependencyMatrixSelection.CellDescriptor.html" title="interface in com.nomagic.magicdraw.dependencymatrix.ui">DependencyMatrixSelection.CellDescriptor</a>&gt;</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a class="member-name-link" href="#getSelectedCells()">getSelectedCells</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
+<div class="block">Returns collection of {<a href="DependencyMatrixSelection.CellDescriptor.html" title="interface in com.nomagic.magicdraw.dependencymatrix.ui"><code>DependencyMatrixSelection.CellDescriptor</code></a>} of selected cells.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a class="external-link" href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Collection.html" title="class or interface in java.util">Collection</a>&lt;<a href="../datamodel/ElementNode.html" title="class in com.nomagic.magicdraw.dependencymatrix.datamodel">ElementNode</a>&gt;</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a class="member-name-link" href="#getSelectedColumns()">getSelectedColumns</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
+<div class="block">Returns collection of {<a href="../datamodel/ElementNode.html" title="class in com.nomagic.magicdraw.dependencymatrix.datamodel"><code>ElementNode</code></a>} of all selected columns.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a class="external-link" href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Collection.html" title="class or interface in java.util">Collection</a>&lt;<a href="../datamodel/ElementNode.html" title="class in com.nomagic.magicdraw.dependencymatrix.datamodel">ElementNode</a>&gt;</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a class="member-name-link" href="#getSelectedRows()">getSelectedRows</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
+<div class="block">Returns collection of {<a href="../datamodel/ElementNode.html" title="class in com.nomagic.magicdraw.dependencymatrix.datamodel"><code>ElementNode</code></a>} of all selected rows.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>boolean</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a class="member-name-link" href="#isCellSelected(com.nomagic.magicdraw.dependencymatrix.datamodel.ElementNode,com.nomagic.magicdraw.dependencymatrix.datamodel.ElementNode)">isCellSelected</a><wbr/>(<a href="../datamodel/ElementNode.html" title="class in com.nomagic.magicdraw.dependencymatrix.datamodel">ElementNode</a> row,
+ <a href="../datamodel/ElementNode.html" title="class in com.nomagic.magicdraw.dependencymatrix.datamodel">ElementNode</a> column)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
+<div class="block">Returns true if cell between given row and given column is selected.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>boolean</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a class="member-name-link" href="#isMultipleCellsSelected()">isMultipleCellsSelected</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
+<div class="block">Returns true if only multiple cells are selected.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>boolean</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a class="member-name-link" href="#isSingleCellSelected()">isSingleCellSelected</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
+<div class="block">Returns true if only single cell is selected.</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</li>
+</ul>
+</section>
+<section class="details">
+<ul class="details-list">
+<!-- ============ METHOD DETAIL ========== -->
+<li>
+<section class="method-details" id="method-detail">
+<h2>Method Details</h2>
+<ul class="member-list">
+<li>
+<section class="detail" id="isCellSelected(com.nomagic.magicdraw.dependencymatrix.datamodel.ElementNode,com.nomagic.magicdraw.dependencymatrix.datamodel.ElementNode)">
+<h3>isCellSelected</h3>
+<div class="member-signature"><span class="return-type">boolean</span> <span class="element-name">isCellSelected</span><wbr/><span class="parameters">(<a href="../datamodel/ElementNode.html" title="class in com.nomagic.magicdraw.dependencymatrix.datamodel">ElementNode</a> row,
+ <a href="../datamodel/ElementNode.html" title="class in com.nomagic.magicdraw.dependencymatrix.datamodel">ElementNode</a> column)</span></div>
+<div class="block">Returns true if cell between given row and given column is selected.</div>
+</section>
+</li>
+<li>
+<section class="detail" id="getSelectedRows()">
+<h3>getSelectedRows</h3>
+<div class="member-signature"><span class="return-type"><a class="external-link" href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Collection.html" title="class or interface in java.util">Collection</a>&lt;<a href="../datamodel/ElementNode.html" title="class in com.nomagic.magicdraw.dependencymatrix.datamodel">ElementNode</a>&gt;</span> <span class="element-name">getSelectedRows</span>()</div>
+<div class="block">Returns collection of {<a href="../datamodel/ElementNode.html" title="class in com.nomagic.magicdraw.dependencymatrix.datamodel"><code>ElementNode</code></a>} of all selected rows.</div>
+</section>
+</li>
+<li>
+<section class="detail" id="getSelectedColumns()">
+<h3>getSelectedColumns</h3>
+<div class="member-signature"><span class="return-type"><a class="external-link" href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Collection.html" title="class or interface in java.util">Collection</a>&lt;<a href="../datamodel/ElementNode.html" title="class in com.nomagic.magicdraw.dependencymatrix.datamodel">ElementNode</a>&gt;</span> <span class="element-name">getSelectedColumns</span>()</div>
+<div class="block">Returns collection of {<a href="../datamodel/ElementNode.html" title="class in com.nomagic.magicdraw.dependencymatrix.datamodel"><code>ElementNode</code></a>} of all selected columns.</div>
+</section>
+</li>
+<li>
+<section class="detail" id="getSelectedCells()">
+<h3>getSelectedCells</h3>
+<div class="member-signature"><span class="return-type"><a class="external-link" href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Collection.html" title="class or interface in java.util">Collection</a>&lt;<a href="DependencyMatrixSelection.CellDescriptor.html" title="interface in com.nomagic.magicdraw.dependencymatrix.ui">DependencyMatrixSelection.CellDescriptor</a>&gt;</span> <span class="element-name">getSelectedCells</span>()</div>
+<div class="block">Returns collection of {<a href="DependencyMatrixSelection.CellDescriptor.html" title="interface in com.nomagic.magicdraw.dependencymatrix.ui"><code>DependencyMatrixSelection.CellDescriptor</code></a>} of selected cells.</div>
+</section>
+</li>
+<li>
+<section class="detail" id="isMultipleCellsSelected()">
+<h3>isMultipleCellsSelected</h3>
+<div class="member-signature"><span class="return-type">boolean</span> <span class="element-name">isMultipleCellsSelected</span>()</div>
+<div class="block">Returns true if only multiple cells are selected.</div>
+</section>
+</li>
+<li>
+<section class="detail" id="isSingleCellSelected()">
+<h3>isSingleCellSelected</h3>
+<div class="member-signature"><span class="return-type">boolean</span> <span class="element-name">isSingleCellSelected</span>()</div>
+<div class="block">Returns true if only single cell is selected.</div>
+</section>
+</li>
+</ul>
+</section>
+</li>
+</ul>
+</section>
+<!-- ========= END OF CLASS DATA ========= -->
+</main>
+````

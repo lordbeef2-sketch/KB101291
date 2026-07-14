@@ -1,0 +1,114 @@
+# NOMAGIC ATTACHMENT: partialOutput.png
+
+- attachment_id: `227154030`
+- space_key: `MD2024xR3`
+- parent_page_id: `227154028`
+- parent_page_title: Creating a report including the Actor, Use Cases, and diagram image names
+- media_type: `image/png`
+- reported_bytes: 60101
+- download_url: https://docs.nomagic.com/download/attachments/227154028/partialOutput.png?version=1&modificationDate=1746160787133&api=v2
+- payload_kind: `metadata-only`
+- downloaded_sha256: not-downloaded
+
+## PAYLOAD STATUS
+
+Binary or image attachment is inventoried by official metadata; no binary bytes are embedded in this Markdown-only corpus.
+
+
+## EXACT ATTACHMENT METADATA
+
+````json
+{
+  "id": "227154030",
+  "type": "attachment",
+  "status": "current",
+  "title": "partialOutput.png",
+  "version": {
+    "by": {
+      "type": "known",
+      "username": "8acad0e54bbfc3ed014beebdb63b0005",
+      "userKey": "8acad0e54bbfc3ed014beebdb63b0005",
+      "profilePicture": {
+        "path": "/images/icons/profilepics/default.svg",
+        "width": 48,
+        "height": 48,
+        "isDefault": true
+      },
+      "displayName": "user-1438d",
+      "_links": {
+        "self": "https://docs.nomagic.com/rest/api/user?key=8acad0e54bbfc3ed014beebdb63b0005"
+      },
+      "_expandable": {
+        "status": ""
+      }
+    },
+    "when": "2025-05-02T06:39:47.133+02:00",
+    "message": "",
+    "number": 1,
+    "minorEdit": false,
+    "hidden": false,
+    "_links": {
+      "self": "https://docs.nomagic.com/rest/experimental/content/227154030/version/1"
+    },
+    "_expandable": {
+      "content": "/rest/api/content/227154030"
+    }
+  },
+  "position": -1,
+  "container": {
+    "id": "227154028",
+    "type": "page",
+    "status": "current",
+    "title": "Creating a report including the Actor, Use Cases, and diagram image names",
+    "position": 1,
+    "extensions": {
+      "position": 1
+    },
+    "_links": {
+      "webui": "/spaces/MD2024xR3/pages/227154028/Creating+a+report+including+the+Actor+Use+Cases+and+diagram+image+names",
+      "edit": "/pages/resumedraft.action?draftId=227154028",
+      "tinyui": "/x/bBiKDQ",
+      "self": "https://docs.nomagic.com/rest/api/content/227154028"
+    },
+    "_expandable": {
+      "container": "/rest/api/space/MD2024xR3",
+      "metadata": "",
+      "operations": "",
+      "children": "/rest/api/content/227154028/child",
+      "restrictions": "/rest/api/content/227154028/restriction/byOperation",
+      "history": "/rest/api/content/227154028/history",
+      "ancestors": "",
+      "body": "",
+      "version": "",
+      "descendants": "/rest/api/content/227154028/descendant",
+      "space": "/rest/api/space/MD2024xR3",
+      "relevantViewRestrictions": "/rest/api/content/227154028/restriction/relevantViewRestrictions"
+    }
+  },
+  "metadata": {
+    "mediaType": "image/png"
+  },
+  "extensions": {
+    "mediaType": "image/png",
+    "fileSize": 60101,
+    "comment": ""
+  },
+  "_links": {
+    "download": "/download/attachments/227154028/partialOutput.png?version=1&modificationDate=1746160787133&api=v2",
+    "thumbnail": "/download/thumbnails/227154028/partialOutput.png?api=v2",
+    "webui": "/spaces/MD2024xR3/pages/227154028/Creating+a+report+including+the+Actor+Use+Cases+and+diagram+image+names?preview=%2F227154028%2F227154030%2FpartialOutput.png",
+    "self": "https://docs.nomagic.com/rest/api/content/227154030"
+  },
+  "_expandable": {
+    "operations": "",
+    "children": "/rest/api/content/227154030/child",
+    "restrictions": "/rest/api/content/227154030/restriction/byOperation",
+    "history": "/rest/api/content/227154030/history",
+    "ancestors": "",
+    "body": "",
+    "descendants": "/rest/api/content/227154030/descendant",
+    "space": "/rest/api/space/MD2024xR3",
+    "relevantViewRestrictions": "/rest/api/content/227154030/restriction/relevantViewRestrictions"
+  }
+}
+````

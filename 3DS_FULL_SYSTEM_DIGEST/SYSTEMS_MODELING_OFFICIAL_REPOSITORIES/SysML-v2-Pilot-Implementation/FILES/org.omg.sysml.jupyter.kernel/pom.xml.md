@@ -1,0 +1,280 @@
+# OFFICIAL REPOSITORY FILE: SysML-v2-Pilot-Implementation/org.omg.sysml.jupyter.kernel/pom.xml
+
+- repository: `SysML-v2-Pilot-Implementation`
+- source_path: `org.omg.sysml.jupyter.kernel/pom.xml`
+- source_url: https://github.com/Systems-Modeling/SysML-v2-Pilot-Implementation/blob/fa709f28dfd49dfdb7ee83e4e19da2f57e0eb3aa/org.omg.sysml.jupyter.kernel/pom.xml
+- source_bytes: 10067
+- source_sha256: `15fddd30826d4c7fd06d1a62cb6d37eea485095be568e9d315a31b6bc128619d`
+- decoded_as: `utf-8`
+
+
+## EXACT SOURCE
+
+````xml
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>org.omg.sysml</groupId>
+    <artifactId>org.omg.sysml.parent</artifactId>
+    <version>${revision}</version>
+  </parent>
+  <artifactId>jupyter-sysml-kernel</artifactId>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.omg.sysml</groupId>
+            <artifactId>org.omg.sysml.interactive</artifactId>
+            <version>${project.version}</version>
+            <classifier>all</classifier>
+            <!-- Exclude transitive dependencies as they are included in the shaded jar -->
+			<exclusions>
+        		<exclusion>
+            		<groupId>*</groupId>
+            		<artifactId>*</artifactId>
+        		</exclusion>
+    		</exclusions>
+        </dependency>
+        <dependency>
+            <groupId>io.github.spencerpark</groupId>
+            <artifactId>jupyter-jvm-basekernel</artifactId>
+            <version>2.3.0</version>
+             <!-- Exclude gson as it is included in the shaded jar -->
+            <exclusions>
+        		<exclusion>
+            		<groupId>com.google.code.gson</groupId>
+            		<artifactId>gson</artifactId>
+        		</exclusion>
+    		</exclusions>
+        </dependency>
+        <!--
+        Dependencies needed for m2e
+        we need to add these manually so the Eclipse IDE can see the classpath
+        -->
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>2.12.1</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.xtext</groupId>
+            <artifactId>org.eclipse.xtext</artifactId>
+            <version>${xtext.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.18.0</version>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
+
+  <build>
+	<!-- Removing script source files to not be able to part of the compiled jar -->
+    <resources>
+      <resource>
+        <directory>src/main/resources</directory>
+        <excludes>
+          <exclude>**/*.py</exclude>
+          <exclude>**/*.js</exclude>
+          <exclude>**/*.json</exclude>
+        </excludes>
+      </resource>
+    </resources>
+    <plugins>
+      <plugin>
+        <groupId>org.asciidoctor</groupId>
+        <artifactId>asciidoctor-maven-plugin</artifactId>
+        <version>${asciidoctor.maven.plugin.version}</version>
+        <inherited>false</inherited>
+        <dependencies>
+          <dependency>
+            <groupId>org.asciidoctor</groupId>
+            <artifactId>asciidoctorj-pdf</artifactId>
+            <version>${asciidoctorj.pdf.version}</version>
+          </dependency>
+        </dependencies>
+        <configuration>
+          <sourceDocumentName>README.adoc</sourceDocumentName>
+          <sourceDirectory>${basedir}</sourceDirectory>
+          <resources>
+          	<!--
+          	  This resource configuration is necessary as the readme file is in the project
+          	  root and the default resource behaviour would cause asciidoctor to copy all files
+          	  in the project without these exclusion rules
+          	-->
+            <resource>
+              <directory>.</directory>
+              <excludes>
+	              <exclude>**/**</exclude>
+              </excludes>
+            </resource>
+          </resources>
+        </configuration>
+        <executions>
+          <execution>
+            <id>generate-pdf-doc</id>
+            <phase>generate-resources</phase>
+            <goals>
+              <goal>process-asciidoc</goal>
+            </goals>
+            <configuration>
+              <backend>pdf</backend>
+              <attributes>
+                <source-highlighter>rogue</source-highlighter>
+                <icons>font</icons>
+                                <pagenums />
+                                <idprefix />
+                <idseparator>-</idseparator>
+              </attributes>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
+        <version>${maven-jar-plugin.version}</version>
+        <executions>
+			<execution>
+				<id>build-jar</id>
+				<phase>prepare-package</phase>
+				<goals>
+					<goal>jar</goal>
+				</goals>
+			</execution>
+			<execution>
+            	<id>default-jar</id>
+            	<phase>none</phase>
+           </execution>
+        </executions>
+      </plugin>
+
+      <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-shade-plugin</artifactId>
+            <version>3.5.3</version>
+            <configuration>
+                <shadedArtifactAttached>true</shadedArtifactAttached>
+                <shadedClassifierName>all</shadedClassifierName>
+                <!-- These are duplicates from the .jars we merge. We don't need re-packaging them. Also they cause security exceptions if we leave these in. -->
+                <filters>
+                    <filter>
+                        <artifact>*:*</artifact>
+                        <excludes>
+                            <exclude>META-INF/*.SF</exclude>
+                            <exclude>META-INF/*.DSA</exclude>
+                            <exclude>META-INF/*.RSA</exclude>
+                            <exclude>META-INF/*.MF</exclude>
+                        </excludes>
+                    </filter>
+                </filters>
+		        <transformers>
+                  <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                  <manifestEntries>
+                    <Main-Class>org.omg.sysml.jupyter.kernel.ISysML</Main-Class>
+                  </manifestEntries>
+                  </transformer>
+                </transformers>
+            </configuration>
+            <executions>
+                <execution>
+                    <phase>prepare-package</phase>
+                    <goals>
+                        <goal>shade</goal>
+                    </goals>
+                </execution>
+            </executions>
+        </plugin>
+        <!-- Clean old jars in the uzipped kernel. Jars with older version can get stuck in the target/kernel. -->
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-clean-plugin</artifactId>
+            <executions>
+                <execution>
+                    <id>clean-old-shaded-jar</id>
+                    <phase>prepare-package</phase>
+                    <goals>
+                        <goal>clean</goal>
+                    </goals>
+                    <configuration>
+                        <excludeDefaultDirectories>true</excludeDefaultDirectories>
+                        <filesets>
+                            <fileset>
+                                <directory>target/kernel</directory>
+                                <includes>
+                                    <include>*/**.jar</include>
+                                </includes>
+                            </fileset>
+                        </filesets>
+                    </configuration>
+                </execution>
+            </executions>
+        </plugin>
+
+       <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-resources-plugin</artifactId>
+        <version>${maven-resources-plugin.version}</version>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <id>create-kernel</id>
+            <goals>
+              <goal>copy-resources</goal>
+            </goals>
+            <configuration>
+              <outputDirectory>${basedir}/target/kernel</outputDirectory>
+              <resources>
+                <resource>
+                  <directory>${basedir}/target</directory>
+                  <targetPath>sysml</targetPath>
+                  <includes>
+                    <include>${project.artifactId}-${project.version}-all.jar</include>
+                  </includes>
+                </resource>
+                <resource>
+                  <directory>${basedir}/src/main/resources</directory>
+                </resource>
+                <resource>
+                  <directory>..</directory>
+                  <targetPath>sysml</targetPath>
+                  <includes>
+                    <include>sysml.library/**/*.kerml</include>
+                    <include>sysml.library/**/*.sysml</include>
+                    <include>sysml.library/.index.json</include>
+                  </includes>
+                </resource>
+              </resources>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+
+	     <plugin>
+	        <groupId>org.apache.maven.plugins</groupId>
+	        <artifactId>maven-assembly-plugin</artifactId>
+	        <version>${maven-assembly-plugin.version}</version>
+	        <executions>
+	            <execution>
+	                <phase>package</phase>
+	                <goals>
+	                    <goal>single</goal>
+	                </goals>
+	                <configuration>
+	                    <appendAssemblyId>false</appendAssemblyId>
+	                    <descriptors>
+	                        <descriptor>assembly.xml</descriptor>
+	                    </descriptors>
+	                </configuration>
+	            </execution>
+	        </executions>
+	    </plugin>
+    </plugins>
+  </build>
+</project>
+````

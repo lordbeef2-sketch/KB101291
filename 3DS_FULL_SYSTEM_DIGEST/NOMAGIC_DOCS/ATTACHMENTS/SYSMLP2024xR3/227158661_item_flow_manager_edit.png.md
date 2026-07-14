@@ -1,0 +1,114 @@
+# NOMAGIC ATTACHMENT: item_flow_manager_edit.png
+
+- attachment_id: `227158661`
+- space_key: `SYSMLP2024xR3`
+- parent_page_id: `227158646`
+- parent_page_title: Item Flow Manager dialog
+- media_type: `image/png`
+- reported_bytes: 37596
+- download_url: https://docs.nomagic.com/download/attachments/227158646/item_flow_manager_edit.png?version=1&modificationDate=1746174000598&api=v2
+- payload_kind: `metadata-only`
+- downloaded_sha256: not-downloaded
+
+## PAYLOAD STATUS
+
+Binary or image attachment is inventoried by official metadata; no binary bytes are embedded in this Markdown-only corpus.
+
+
+## EXACT ATTACHMENT METADATA
+
+````json
+{
+  "id": "227158661",
+  "type": "attachment",
+  "status": "current",
+  "title": "item_flow_manager_edit.png",
+  "version": {
+    "by": {
+      "type": "known",
+      "username": "agnpal",
+      "userKey": "ff80808151426f0e0151af8b0d360002",
+      "profilePicture": {
+        "path": "/download/attachments/6598412/user-avatar",
+        "width": 48,
+        "height": 48,
+        "isDefault": false
+      },
+      "displayName": "Agne P.",
+      "_links": {
+        "self": "https://docs.nomagic.com/rest/api/user?key=ff80808151426f0e0151af8b0d360002"
+      },
+      "_expandable": {
+        "status": ""
+      }
+    },
+    "when": "2025-05-02T10:20:00.598+02:00",
+    "message": "",
+    "number": 1,
+    "minorEdit": false,
+    "hidden": false,
+    "_links": {
+      "self": "https://docs.nomagic.com/rest/experimental/content/227158661/version/1"
+    },
+    "_expandable": {
+      "content": "/rest/api/content/227158661"
+    }
+  },
+  "position": -1,
+  "container": {
+    "id": "227158646",
+    "type": "page",
+    "status": "current",
+    "title": "Item Flow Manager dialog",
+    "position": 1,
+    "extensions": {
+      "position": 1
+    },
+    "_links": {
+      "webui": "/spaces/SYSMLP2024xR3/pages/227158646/Item+Flow+Manager+dialog",
+      "edit": "/pages/resumedraft.action?draftId=227158646",
+      "tinyui": "/x/diqKDQ",
+      "self": "https://docs.nomagic.com/rest/api/content/227158646"
+    },
+    "_expandable": {
+      "container": "/rest/api/space/SYSMLP2024xR3",
+      "metadata": "",
+      "operations": "",
+      "children": "/rest/api/content/227158646/child",
+      "restrictions": "/rest/api/content/227158646/restriction/byOperation",
+      "history": "/rest/api/content/227158646/history",
+      "ancestors": "",
+      "body": "",
+      "version": "",
+      "descendants": "/rest/api/content/227158646/descendant",
+      "space": "/rest/api/space/SYSMLP2024xR3",
+      "relevantViewRestrictions": "/rest/api/content/227158646/restriction/relevantViewRestrictions"
+    }
+  },
+  "metadata": {
+    "mediaType": "image/png"
+  },
+  "extensions": {
+    "mediaType": "image/png",
+    "fileSize": 37596,
+    "comment": ""
+  },
+  "_links": {
+    "download": "/download/attachments/227158646/item_flow_manager_edit.png?version=1&modificationDate=1746174000598&api=v2",
+    "thumbnail": "/download/thumbnails/227158646/item_flow_manager_edit.png?api=v2",
+    "webui": "/spaces/SYSMLP2024xR3/pages/227158646/Item+Flow+Manager+dialog?preview=%2F227158646%2F227158661%2Fitem_flow_manager_edit.png",
+    "self": "https://docs.nomagic.com/rest/api/content/227158661"
+  },
+  "_expandable": {
+    "operations": "",
+    "children": "/rest/api/content/227158661/child",
+    "restrictions": "/rest/api/content/227158661/restriction/byOperation",
+    "history": "/rest/api/content/227158661/history",
+    "ancestors": "",
+    "body": "",
+    "descendants": "/rest/api/content/227158661/descendant",
+    "space": "/rest/api/space/SYSMLP2024xR3",
+    "relevantViewRestrictions": "/rest/api/content/227158661/restriction/relevantViewRestrictions"
+  }
+}
+````

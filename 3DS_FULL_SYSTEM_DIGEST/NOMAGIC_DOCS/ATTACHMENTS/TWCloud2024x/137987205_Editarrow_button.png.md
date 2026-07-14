@@ -1,0 +1,114 @@
+# NOMAGIC ATTACHMENT: Editarrow_button.png
+
+- attachment_id: `137987205`
+- space_key: `TWCloud2024x`
+- parent_page_id: `137987202`
+- parent_page_title: Editing an LDAP server configuration properties
+- media_type: `image/png`
+- reported_bytes: 443
+- download_url: https://docs.nomagic.com/download/attachments/137987202/Editarrow_button.png?version=1&modificationDate=1695376297178&api=v2
+- payload_kind: `metadata-only`
+- downloaded_sha256: not-downloaded
+
+## PAYLOAD STATUS
+
+Binary or image attachment is inventoried by official metadata; no binary bytes are embedded in this Markdown-only corpus.
+
+
+## EXACT ATTACHMENT METADATA
+
+````json
+{
+  "id": "137987205",
+  "type": "attachment",
+  "status": "current",
+  "title": "Editarrow_button.png",
+  "version": {
+    "by": {
+      "type": "known",
+      "username": "ingabe",
+      "userKey": "ff80808151f3008c0152c05ba1a40003",
+      "profilePicture": {
+        "path": "/download/attachments/7415957/user-avatar",
+        "width": 48,
+        "height": 48,
+        "isDefault": false
+      },
+      "displayName": "Inga A.",
+      "_links": {
+        "self": "https://docs.nomagic.com/rest/api/user?key=ff80808151f3008c0152c05ba1a40003"
+      },
+      "_expandable": {
+        "status": ""
+      }
+    },
+    "when": "2023-09-22T11:51:37.178+02:00",
+    "message": "",
+    "number": 1,
+    "minorEdit": false,
+    "hidden": false,
+    "_links": {
+      "self": "https://docs.nomagic.com/rest/experimental/content/137987205/version/1"
+    },
+    "_expandable": {
+      "content": "/rest/api/content/137987205"
+    }
+  },
+  "position": -1,
+  "container": {
+    "id": "137987202",
+    "type": "page",
+    "status": "current",
+    "title": "Editing an LDAP server configuration properties",
+    "position": 5,
+    "extensions": {
+      "position": 5
+    },
+    "_links": {
+      "webui": "/spaces/TWCloud2024x/pages/137987202/Editing+an+LDAP+server+configuration+properties",
+      "edit": "/pages/resumedraft.action?draftId=137987202",
+      "tinyui": "/x/goQ5C",
+      "self": "https://docs.nomagic.com/rest/api/content/137987202"
+    },
+    "_expandable": {
+      "container": "/rest/api/space/TWCloud2024x",
+      "metadata": "",
+      "operations": "",
+      "children": "/rest/api/content/137987202/child",
+      "restrictions": "/rest/api/content/137987202/restriction/byOperation",
+      "history": "/rest/api/content/137987202/history",
+      "ancestors": "",
+      "body": "",
+      "version": "",
+      "descendants": "/rest/api/content/137987202/descendant",
+      "space": "/rest/api/space/TWCloud2024x",
+      "relevantViewRestrictions": "/rest/api/content/137987202/restriction/relevantViewRestrictions"
+    }
+  },
+  "metadata": {
+    "mediaType": "image/png"
+  },
+  "extensions": {
+    "mediaType": "image/png",
+    "fileSize": 443,
+    "comment": ""
+  },
+  "_links": {
+    "download": "/download/attachments/137987202/Editarrow_button.png?version=1&modificationDate=1695376297178&api=v2",
+    "thumbnail": "/download/thumbnails/137987202/Editarrow_button.png?api=v2",
+    "webui": "/spaces/TWCloud2024x/pages/137987202/Editing+an+LDAP+server+configuration+properties?preview=%2F137987202%2F137987205%2FEditarrow_button.png",
+    "self": "https://docs.nomagic.com/rest/api/content/137987205"
+  },
+  "_expandable": {
+    "operations": "",
+    "children": "/rest/api/content/137987205/child",
+    "restrictions": "/rest/api/content/137987205/restriction/byOperation",
+    "history": "/rest/api/content/137987205/history",
+    "ancestors": "",
+    "body": "",
+    "descendants": "/rest/api/content/137987205/descendant",
+    "space": "/rest/api/space/TWCloud2024x",
+    "relevantViewRestrictions": "/rest/api/content/137987205/restriction/relevantViewRestrictions"
+  }
+}
+````

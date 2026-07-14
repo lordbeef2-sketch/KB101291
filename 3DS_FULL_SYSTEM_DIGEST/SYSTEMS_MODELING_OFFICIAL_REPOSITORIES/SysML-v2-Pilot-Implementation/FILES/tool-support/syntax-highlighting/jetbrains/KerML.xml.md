@@ -1,0 +1,35 @@
+# OFFICIAL REPOSITORY FILE: SysML-v2-Pilot-Implementation/tool-support/syntax-highlighting/jetbrains/KerML.xml
+
+- repository: `SysML-v2-Pilot-Implementation`
+- source_path: `tool-support/syntax-highlighting/jetbrains/KerML.xml`
+- source_url: https://github.com/Systems-Modeling/SysML-v2-Pilot-Implementation/blob/fa709f28dfd49dfdb7ee83e4e19da2f57e0eb3aa/tool-support/syntax-highlighting/jetbrains/KerML.xml
+- source_bytes: 1642
+- source_sha256: `58c3cdc9f5ad31603553d5ca0dceebdf6217880e1e537928f0d80b33aafbf73e`
+- decoded_as: `utf-8`
+
+
+## EXACT SOURCE
+
+````xml
+<filetype binary="false" description="OMG Kernel Modeling Language" name="KerML">
+  <highlighting>
+    <options>
+      <option name="LINE_COMMENT" value="//" />
+      <option name="COMMENT_START" value="/*" />
+      <option name="COMMENT_END" value="*/" />
+      <option name="HEX_PREFIX" value="" />
+      <option name="NUM_POSTFIXES" value="" />
+      <option name="HAS_BRACES" value="true" />
+      <option name="HAS_BRACKETS" value="true" />
+      <option name="HAS_PARENS" value="true" />
+      <option name="HAS_STRING_ESCAPES" value="true" />
+    </options>
+    <keywords keywords="about;abstract;alias;all;and;as;assoc;behavior;binding;bool;by;chains;class;classifier;comment;composite;conjugate;conjugates;conjugation;connector;const;crosses;datatype;default;dependency;derived;differences;disjoining;disjoint;doc;else;end;expr;false;feature;featured;featuring;filter;first;flow;for;from;function;hastype;if;implies;import;in;inout;interaction;intersects;inv;inverse;inverting;istype;language;library;locale;member;meta;metaclass;metadata;multiplicity;namespace;new;nonunique;not;null;of;or;ordered;out;package;portion;predicate;private;protected;public;redefines;redefinition;references;rep;return;specialization;specializes;standard;step;struct;subclassifier;subset;subsets;subtype;succession;then;to;true;type;typed;typing;unions;var;xor" ignore_case="false" />
+    <keywords2 keywords="!=;!==;#;$;%;&amp;;*;**;+;-;-&gt;;..;.?;/;:;::;::&gt;;:=;:&gt;;:&gt;&gt;;&lt;;&lt;=;=;==;===;=&gt;;&gt;;&gt;=;?;??;@;@@;^;|;~" />
+  </highlighting>
+  <extensionMap>
+    <mapping ext="kerml" />
+  </extensionMap>
+</filetype>
+
+````

@@ -1,0 +1,114 @@
+# NOMAGIC ATTACHMENT: parameter_synch.png
+
+- attachment_id: `272736728`
+- space_key: `MT`
+- parent_page_id: `272736726`
+- parent_page_title: (2026x) Synchronization dialog environment
+- media_type: `image/png`
+- reported_bytes: 73949
+- download_url: https://docs.nomagic.com/download/attachments/272736726/parameter_synch.png?version=1&modificationDate=1764074857156&api=v2
+- payload_kind: `metadata-only`
+- downloaded_sha256: not-downloaded
+
+## PAYLOAD STATUS
+
+Binary or image attachment is inventoried by official metadata; no binary bytes are embedded in this Markdown-only corpus.
+
+
+## EXACT ATTACHMENT METADATA
+
+````json
+{
+  "id": "272736728",
+  "type": "attachment",
+  "status": "current",
+  "title": "parameter_synch.png",
+  "version": {
+    "by": {
+      "type": "known",
+      "username": "ingabe",
+      "userKey": "ff80808151f3008c0152c05ba1a40003",
+      "profilePicture": {
+        "path": "/download/attachments/7415957/user-avatar",
+        "width": 48,
+        "height": 48,
+        "isDefault": false
+      },
+      "displayName": "Inga A.",
+      "_links": {
+        "self": "https://docs.nomagic.com/rest/api/user?key=ff80808151f3008c0152c05ba1a40003"
+      },
+      "_expandable": {
+        "status": ""
+      }
+    },
+    "when": "2025-11-25T13:47:37.156+01:00",
+    "message": "",
+    "number": 1,
+    "minorEdit": false,
+    "hidden": false,
+    "_links": {
+      "self": "https://docs.nomagic.com/rest/experimental/content/272736728/version/1"
+    },
+    "_expandable": {
+      "content": "/rest/api/content/272736728"
+    }
+  },
+  "position": -1,
+  "container": {
+    "id": "272736726",
+    "type": "page",
+    "status": "current",
+    "title": "(2026x) Synchronization dialog environment",
+    "position": 4,
+    "extensions": {
+      "position": 4
+    },
+    "_links": {
+      "webui": "/spaces/MT/pages/272736726/2026x+Synchronization+dialog+environment",
+      "edit": "/pages/resumedraft.action?draftId=272736726",
+      "tinyui": "/x/1qFBE",
+      "self": "https://docs.nomagic.com/rest/api/content/272736726"
+    },
+    "_expandable": {
+      "container": "/rest/api/space/MT",
+      "metadata": "",
+      "operations": "",
+      "children": "/rest/api/content/272736726/child",
+      "restrictions": "/rest/api/content/272736726/restriction/byOperation",
+      "history": "/rest/api/content/272736726/history",
+      "ancestors": "",
+      "body": "",
+      "version": "",
+      "descendants": "/rest/api/content/272736726/descendant",
+      "space": "/rest/api/space/MT",
+      "relevantViewRestrictions": "/rest/api/content/272736726/restriction/relevantViewRestrictions"
+    }
+  },
+  "metadata": {
+    "mediaType": "image/png"
+  },
+  "extensions": {
+    "mediaType": "image/png",
+    "fileSize": 73949,
+    "comment": ""
+  },
+  "_links": {
+    "download": "/download/attachments/272736726/parameter_synch.png?version=1&modificationDate=1764074857156&api=v2",
+    "thumbnail": "/download/thumbnails/272736726/parameter_synch.png?api=v2",
+    "webui": "/spaces/MT/pages/272736726/2026x+Synchronization+dialog+environment?preview=%2F272736726%2F272736728%2Fparameter_synch.png",
+    "self": "https://docs.nomagic.com/rest/api/content/272736728"
+  },
+  "_expandable": {
+    "operations": "",
+    "children": "/rest/api/content/272736728/child",
+    "restrictions": "/rest/api/content/272736728/restriction/byOperation",
+    "history": "/rest/api/content/272736728/history",
+    "ancestors": "",
+    "body": "",
+    "descendants": "/rest/api/content/272736728/descendant",
+    "space": "/rest/api/space/MT",
+    "relevantViewRestrictions": "/rest/api/content/272736728/restriction/relevantViewRestrictions"
+  }
+}
+````

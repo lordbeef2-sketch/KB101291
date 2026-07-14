@@ -1,0 +1,114 @@
+# NOMAGIC ATTACHMENT: Function Requirements.png
+
+- attachment_id: `191932270`
+- space_key: `SCD2024xR2`
+- parent_page_id: `191932262`
+- parent_page_title: Libraries
+- media_type: `image/png`
+- reported_bytes: 19550
+- download_url: https://docs.nomagic.com/download/attachments/191932262/Function%20Requirements.png?version=1&modificationDate=1728281099387&api=v2
+- payload_kind: `metadata-only`
+- downloaded_sha256: not-downloaded
+
+## PAYLOAD STATUS
+
+Binary or image attachment is inventoried by official metadata; no binary bytes are embedded in this Markdown-only corpus.
+
+
+## EXACT ATTACHMENT METADATA
+
+````json
+{
+  "id": "191932270",
+  "type": "attachment",
+  "status": "current",
+  "title": "Function Requirements.png",
+  "version": {
+    "by": {
+      "type": "known",
+      "username": "rae6",
+      "userKey": "2c9f81f87be2b373017dc8d7b9750000",
+      "profilePicture": {
+        "path": "/images/icons/profilepics/default.svg",
+        "width": 48,
+        "height": 48,
+        "isDefault": true
+      },
+      "displayName": "Ranveersinha A.",
+      "_links": {
+        "self": "https://docs.nomagic.com/rest/api/user?key=2c9f81f87be2b373017dc8d7b9750000"
+      },
+      "_expandable": {
+        "status": ""
+      }
+    },
+    "when": "2024-10-07T08:04:59.387+02:00",
+    "message": "",
+    "number": 1,
+    "minorEdit": true,
+    "hidden": false,
+    "_links": {
+      "self": "https://docs.nomagic.com/rest/experimental/content/191932270/version/1"
+    },
+    "_expandable": {
+      "content": "/rest/api/content/191932270"
+    }
+  },
+  "position": -1,
+  "container": {
+    "id": "191932262",
+    "type": "page",
+    "status": "current",
+    "title": "Libraries",
+    "position": 7,
+    "extensions": {
+      "position": 7
+    },
+    "_links": {
+      "webui": "/spaces/SCD2024xR2/pages/191932262/Libraries",
+      "edit": "/pages/resumedraft.action?draftId=191932262",
+      "tinyui": "/x/ZqdwCw",
+      "self": "https://docs.nomagic.com/rest/api/content/191932262"
+    },
+    "_expandable": {
+      "container": "/rest/api/space/SCD2024xR2",
+      "metadata": "",
+      "operations": "",
+      "children": "/rest/api/content/191932262/child",
+      "restrictions": "/rest/api/content/191932262/restriction/byOperation",
+      "history": "/rest/api/content/191932262/history",
+      "ancestors": "",
+      "body": "",
+      "version": "",
+      "descendants": "/rest/api/content/191932262/descendant",
+      "space": "/rest/api/space/SCD2024xR2",
+      "relevantViewRestrictions": "/rest/api/content/191932262/restriction/relevantViewRestrictions"
+    }
+  },
+  "metadata": {
+    "mediaType": "image/png"
+  },
+  "extensions": {
+    "mediaType": "image/png",
+    "fileSize": 19550,
+    "comment": ""
+  },
+  "_links": {
+    "download": "/download/attachments/191932262/Function%20Requirements.png?version=1&modificationDate=1728281099387&api=v2",
+    "thumbnail": "/download/thumbnails/191932262/Function%20Requirements.png?api=v2",
+    "webui": "/spaces/SCD2024xR2/pages/191932262/Libraries?preview=%2F191932262%2F191932270%2FFunction+Requirements.png",
+    "self": "https://docs.nomagic.com/rest/api/content/191932270"
+  },
+  "_expandable": {
+    "operations": "",
+    "children": "/rest/api/content/191932270/child",
+    "restrictions": "/rest/api/content/191932270/restriction/byOperation",
+    "history": "/rest/api/content/191932270/history",
+    "ancestors": "",
+    "body": "",
+    "descendants": "/rest/api/content/191932270/descendant",
+    "space": "/rest/api/space/SCD2024xR2",
+    "relevantViewRestrictions": "/rest/api/content/191932270/restriction/relevantViewRestrictions"
+  }
+}
+````

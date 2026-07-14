@@ -1,0 +1,101 @@
+# OFFICIAL REPOSITORY FILE: SysML-v2-Pilot-Implementation/org.omg.kerml.xtext/src/org/omg/kerml/xtext/xmi/KerMLxRuntimeModule.xtend
+
+- repository: `SysML-v2-Pilot-Implementation`
+- source_path: `org.omg.kerml.xtext/src/org/omg/kerml/xtext/xmi/KerMLxRuntimeModule.xtend`
+- source_url: https://github.com/Systems-Modeling/SysML-v2-Pilot-Implementation/blob/fa709f28dfd49dfdb7ee83e4e19da2f57e0eb3aa/org.omg.kerml.xtext/src/org/omg/kerml/xtext/xmi/KerMLxRuntimeModule.xtend
+- source_bytes: 3186
+- source_sha256: `38111c735dd225c944f5a6d9895761eceae0bd7ef4149f51428079ba7fbe0eba`
+- decoded_as: `utf-8`
+
+
+## EXACT SOURCE
+
+````xtend
+/**
+ * SysML 2 Pilot Implementation
+ * Copyright (C) 2025  Model Driven Solutions, Inc.
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the Eclipse Public License as published by
+ * the Eclipse Foundation, version 2 of the License.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * Eclipse Public License for more details.
+ *
+ * You should have received a copy of the Eclipse Public License
+ * along with this program.  If not, see <https://www.eclipse.org/legal/epl-2.0/>.
+ *
+ * @license EPL-2.0 <http://spdx.org/licenses/EPL-2.0>
+ */
+package org.omg.kerml.xtext.xmi
+
+import com.google.inject.Binder
+import org.eclipse.emf.ecore.resource.Resource
+import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl
+import org.eclipse.xtext.naming.IQualifiedNameConverter
+import org.eclipse.xtext.resource.IResourceServiceProvider
+import org.eclipse.xtext.resource.IResourceDescriptions
+import org.eclipse.xtext.resource.generic.AbstractGenericResourceRuntimeModule
+import org.eclipse.xtext.resource.impl.ResourceSetBasedResourceDescriptions
+import org.omg.kerml.xtext.library.KerMLLibraryProvider
+import org.omg.kerml.xtext.naming.KerMLQualifiedNameConverter
+import org.omg.kerml.xtext.naming.KerMLQualifiedNameProvider
+import org.omg.sysml.logic.api.IModelLibraryProvider
+import org.omg.sysml.util.SysMLLibraryUtil
+
+class KerMLxRuntimeModule extends AbstractGenericResourceRuntimeModule{
+
+	/**
+	 * Installs the library-provider lookup used by {@link SysMLLibraryUtil} for
+	 * the generic KerML XMI runtime.
+	 *
+	 * <p>The lookup resolves the {@link IModelLibraryProvider} from the
+	 * {@link IResourceServiceProvider} associated with the current resource URI so
+	 * library element resolution works in this non-generated XMI-based runtime
+	 * just as it does in the regular Xtext runtime modules.
+	 */
+	new() {
+		SysMLLibraryUtil.setProviderLookup([
+			resource |
+				try {
+					val serviceProvider = IResourceServiceProvider.Registry.INSTANCE.getResourceServiceProvider(resource?.URI)
+					if (serviceProvider === null) null else serviceProvider.get(IModelLibraryProvider)
+				} catch (Exception e) {
+					System.out.println("[SysMLLibraryUtil] Cannot get library provider: " + e)
+					null
+				}
+		])
+	}
+	
+	public static val KERMLX_LANGUAGE_NAME = 'org.omg.kerml.kermlx'
+	
+	override protected getFileExtensions() {
+		'kermlx'
+	}
+	
+	override protected getLanguageName() {
+		'org.omg.kerml.kermlx'
+	}
+	
+	override configure(Binder binder) {
+		super.configure(binder)
+		binder.bind(Resource.Factory).to(XMIResourceFactoryImpl)
+		binder.bind(IResourceDescriptions).to(ResourceSetBasedResourceDescriptions)
+	}
+	
+	override bindIQualifiedNameProvider() {
+		KerMLQualifiedNameProvider
+	}
+	
+	def Class<? extends IQualifiedNameConverter> bindIQualifiedNameConverter() {
+		KerMLQualifiedNameConverter
+	}
+	
+	def Class<? extends IModelLibraryProvider> bindIModelLLibraryProvider() {
+		KerMLLibraryProvider
+	}
+}
+
+````

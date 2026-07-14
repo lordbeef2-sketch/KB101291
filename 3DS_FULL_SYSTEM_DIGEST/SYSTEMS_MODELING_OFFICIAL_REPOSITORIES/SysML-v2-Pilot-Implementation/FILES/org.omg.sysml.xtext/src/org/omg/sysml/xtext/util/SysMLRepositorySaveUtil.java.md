@@ -1,0 +1,84 @@
+# OFFICIAL REPOSITORY FILE: SysML-v2-Pilot-Implementation/org.omg.sysml.xtext/src/org/omg/sysml/xtext/util/SysMLRepositorySaveUtil.java
+
+- repository: `SysML-v2-Pilot-Implementation`
+- source_path: `org.omg.sysml.xtext/src/org/omg/sysml/xtext/util/SysMLRepositorySaveUtil.java`
+- source_url: https://github.com/Systems-Modeling/SysML-v2-Pilot-Implementation/blob/fa709f28dfd49dfdb7ee83e4e19da2f57e0eb3aa/org.omg.sysml.xtext/src/org/omg/sysml/xtext/util/SysMLRepositorySaveUtil.java
+- source_bytes: 3143
+- source_sha256: `21c61b83426dfe050c5897d03a3af7dfa71f19e7a6b49f726981234cb7bee719`
+- decoded_as: `utf-8`
+
+
+## EXACT SOURCE
+
+````java
+/*****************************************************************************
+ * SysML 2 Pilot Implementation
+ * Copyright (c) 2019 Model Driven Solutions, Inc.
+ *    
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the Eclipse Public License as published by
+ * the Eclipse Foundation, version 2 of the License.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * Eclipse Public License for more details.
+ *
+ * You should have received a copy of theEclipse Public License
+ * along with this program.  If not, see <https://www.eclipse.org/legal/epl-2.0/>.
+ *
+ * @license EPL-2.0 <http://spdx.org/licenses/EPL-2.0>
+ * 
+ * Contributors:
+ *  Ed Seidewitz
+ * 
+ *****************************************************************************/
+package org.omg.sysml.xtext.util;
+
+import org.omg.kerml.xtext.util.KerMLRepositorySaveUtil;
+import org.omg.sysml.xtext.SysMLStandaloneSetup;
+
+public class SysMLRepositorySaveUtil extends KerMLRepositorySaveUtil {
+
+	public SysMLRepositorySaveUtil() {
+		super();
+		SysMLStandaloneSetup.doSetup();
+		this.addExtension(".sysml");
+	}
+	
+	/**
+	 * The main program reads the KerML and SysML resources as given by its arguments and then processes all the input
+	 * resources. Elements from library resources are only saved to the repository if they are referenced
+	 * from an input resource or are directly or indirectly related to another Element so referenced.
+	 * 
+	 * <p>Usage:
+	 * 
+	 * <p>SysMLRepositorySaveUtil [-b base-path-url] [-l library-base-path] [-d] [-g] [-v] [-p project-name] 
+	 *                            [--branch branch-name] input-path [library-path library-path...]
+	 * 
+	 * <p>where:
+	 * 
+	 * <ul>
+	 * <li>-b base-path-url       gives the URL for the base path to be used for the API endpoint (if none is given, the default is used)</li>
+	 * <li>-l library-base-path   gives the base path to used for reading model library resources</li>
+	 * <li>-d                     specifies that derived attributes should be included (the default is not to)</li>
+	 * <li>-g                     specifies that implicit elements should be generated (the default is not to)</li>
+	 * <li>-v                     specifies verbose mode (the default is non-verbose)</li>
+	 * <li>-p project-name        gives the name of the project to upload the model into (if none given, the last segment of the input path is used)</li>
+	 * <li>--branch branch-name   gives the project branch to use (if none given, the default branch of the project is used)</li>
+	 * <li>input-path             is a path for reading input resources</li>
+	 * <li>library-paths          are paths for reading library resources, relative to the library-base-path (if one is given)</li>
+	 * </ul>
+	 * 
+	 */
+	public static void main(String[] args) {
+		try {
+			new SysMLRepositorySaveUtil().run(args);
+		} catch (Exception e) {
+			System.out.println("Error: " + e);
+		}
+	}
+
+}
+
+````

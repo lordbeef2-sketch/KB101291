@@ -1,0 +1,114 @@
+# NOMAGIC ATTACHMENT: collaboration_in_environment_options.png
+
+- attachment_id: `169677598`
+- space_key: `MD2024xR1`
+- parent_page_id: `169677596`
+- parent_page_title: Enabling 3DEXPERIENCE collaboration in a modeling tool
+- media_type: `image/png`
+- reported_bytes: 59482
+- download_url: https://docs.nomagic.com/download/attachments/169677596/collaboration_in_environment_options.png?version=1&modificationDate=1715140482227&api=v2
+- payload_kind: `metadata-only`
+- downloaded_sha256: not-downloaded
+
+## PAYLOAD STATUS
+
+Binary or image attachment is inventoried by official metadata; no binary bytes are embedded in this Markdown-only corpus.
+
+
+## EXACT ATTACHMENT METADATA
+
+````json
+{
+  "id": "169677598",
+  "type": "attachment",
+  "status": "current",
+  "title": "collaboration_in_environment_options.png",
+  "version": {
+    "by": {
+      "type": "known",
+      "username": "jse21",
+      "userKey": "2c9f81f87be2b373017e241b5e8b0001",
+      "profilePicture": {
+        "path": "/download/attachments/85767822/user-avatar",
+        "width": 48,
+        "height": 48,
+        "isDefault": false
+      },
+      "displayName": "Jonė Š.",
+      "_links": {
+        "self": "https://docs.nomagic.com/rest/api/user?key=2c9f81f87be2b373017e241b5e8b0001"
+      },
+      "_expandable": {
+        "status": ""
+      }
+    },
+    "when": "2024-05-08T05:54:42.227+02:00",
+    "message": "",
+    "number": 1,
+    "minorEdit": true,
+    "hidden": false,
+    "_links": {
+      "self": "https://docs.nomagic.com/rest/experimental/content/169677598/version/1"
+    },
+    "_expandable": {
+      "content": "/rest/api/content/169677598"
+    }
+  },
+  "position": -1,
+  "container": {
+    "id": "169677596",
+    "type": "page",
+    "status": "current",
+    "title": "Enabling 3DEXPERIENCE collaboration in a modeling tool",
+    "position": 0,
+    "extensions": {
+      "position": 0
+    },
+    "_links": {
+      "webui": "/spaces/MD2024xR1/pages/169677596/Enabling+3DEXPERIENCE+collaboration+in+a+modeling+tool",
+      "edit": "/pages/resumedraft.action?draftId=169677596",
+      "tinyui": "/x/HBMdCg",
+      "self": "https://docs.nomagic.com/rest/api/content/169677596"
+    },
+    "_expandable": {
+      "container": "/rest/api/space/MD2024xR1",
+      "metadata": "",
+      "operations": "",
+      "children": "/rest/api/content/169677596/child",
+      "restrictions": "/rest/api/content/169677596/restriction/byOperation",
+      "history": "/rest/api/content/169677596/history",
+      "ancestors": "",
+      "body": "",
+      "version": "",
+      "descendants": "/rest/api/content/169677596/descendant",
+      "space": "/rest/api/space/MD2024xR1",
+      "relevantViewRestrictions": "/rest/api/content/169677596/restriction/relevantViewRestrictions"
+    }
+  },
+  "metadata": {
+    "mediaType": "image/png"
+  },
+  "extensions": {
+    "mediaType": "image/png",
+    "fileSize": 59482,
+    "comment": ""
+  },
+  "_links": {
+    "download": "/download/attachments/169677596/collaboration_in_environment_options.png?version=1&modificationDate=1715140482227&api=v2",
+    "thumbnail": "/download/thumbnails/169677596/collaboration_in_environment_options.png?api=v2",
+    "webui": "/spaces/MD2024xR1/pages/169677596/Enabling+3DEXPERIENCE+collaboration+in+a+modeling+tool?preview=%2F169677596%2F169677598%2Fcollaboration_in_environment_options.png",
+    "self": "https://docs.nomagic.com/rest/api/content/169677598"
+  },
+  "_expandable": {
+    "operations": "",
+    "children": "/rest/api/content/169677598/child",
+    "restrictions": "/rest/api/content/169677598/restriction/byOperation",
+    "history": "/rest/api/content/169677598/history",
+    "ancestors": "",
+    "body": "",
+    "descendants": "/rest/api/content/169677598/descendant",
+    "space": "/rest/api/space/MD2024xR1",
+    "relevantViewRestrictions": "/rest/api/content/169677598/restriction/relevantViewRestrictions"
+  }
+}
+````

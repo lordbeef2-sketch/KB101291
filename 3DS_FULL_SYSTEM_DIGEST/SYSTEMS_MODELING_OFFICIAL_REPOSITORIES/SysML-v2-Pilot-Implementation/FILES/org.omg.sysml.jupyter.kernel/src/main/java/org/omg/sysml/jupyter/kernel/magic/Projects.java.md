@@ -1,0 +1,58 @@
+# OFFICIAL REPOSITORY FILE: SysML-v2-Pilot-Implementation/org.omg.sysml.jupyter.kernel/src/main/java/org/omg/sysml/jupyter/kernel/magic/Projects.java
+
+- repository: `SysML-v2-Pilot-Implementation`
+- source_path: `org.omg.sysml.jupyter.kernel/src/main/java/org/omg/sysml/jupyter/kernel/magic/Projects.java`
+- source_url: https://github.com/Systems-Modeling/SysML-v2-Pilot-Implementation/blob/fa709f28dfd49dfdb7ee83e4e19da2f57e0eb3aa/org.omg.sysml.jupyter.kernel/src/main/java/org/omg/sysml/jupyter/kernel/magic/Projects.java
+- source_bytes: 1556
+- source_sha256: `d5eb41f7da1c2adb79aa0bc044854717498d39036ee8b350ebe8df8910449b54`
+- decoded_as: `utf-8`
+
+
+## EXACT SOURCE
+
+````java
+/**
+ * SysML 2 Pilot Implementation
+ * Copyright (C) 2025 Model Driven Solutions, Inc.
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the Eclipse Public License as published by
+ * the Eclipse Foundation, version 2 of the License.
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * Eclipse Public License for more details.
+ *
+ * You should have received a copy of the Eclipse Public License
+ * along with this program.  If not, see <https://www.eclipse.org/legal/epl-2.0/>.
+ *
+ * @license EPL-2.0 <http://spdx.org/licenses/EPL-2.0>
+ * 
+ * Contributors:
+ *   Laszlo Gati, MDS
+ */
+package org.omg.sysml.jupyter.kernel.magic;
+
+import java.util.List;
+import java.util.Map;
+
+import org.omg.sysml.jupyter.kernel.ISysML;
+
+import io.github.spencerpark.jupyter.kernel.magic.registry.LineMagic;
+import io.github.spencerpark.jupyter.kernel.magic.registry.MagicsArgs;
+
+public class Projects {
+
+	private static final MagicsArgs SHOW_ARGS = MagicsArgs.builder().onlyKnownKeywords().onlyKnownFlags().flag("help", 'h', "true").build();
+
+	@LineMagic
+	public static String projects(List<String> args) {
+        Map<String, List<String>> vals = SHOW_ARGS.parse(args);
+        List<String> help = vals.get("help");
+		return ISysML.getKernelInstance().getInteractive().projects(help);
+	}
+}
+
+````

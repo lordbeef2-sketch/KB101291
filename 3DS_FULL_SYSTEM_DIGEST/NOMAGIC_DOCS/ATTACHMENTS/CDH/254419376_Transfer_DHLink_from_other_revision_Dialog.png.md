@@ -1,0 +1,114 @@
+# NOMAGIC ATTACHMENT: Transfer DHLink from other revision_Dialog.png
+
+- attachment_id: `254419376`
+- space_key: `CDH`
+- parent_page_id: `254419371`
+- parent_page_title: (2026x) Working with revisions for ENOVIA Requirements
+- media_type: `image/png`
+- reported_bytes: 11090
+- download_url: https://docs.nomagic.com/download/attachments/254419371/Transfer%20DHLink%20from%20other%20revision_Dialog.png?version=1&modificationDate=1757609459216&api=v2
+- payload_kind: `metadata-only`
+- downloaded_sha256: not-downloaded
+
+## PAYLOAD STATUS
+
+Binary or image attachment is inventoried by official metadata; no binary bytes are embedded in this Markdown-only corpus.
+
+
+## EXACT ATTACHMENT METADATA
+
+````json
+{
+  "id": "254419376",
+  "type": "attachment",
+  "status": "current",
+  "title": "Transfer DHLink from other revision_Dialog.png",
+  "version": {
+    "by": {
+      "type": "known",
+      "username": "ingabe",
+      "userKey": "ff80808151f3008c0152c05ba1a40003",
+      "profilePicture": {
+        "path": "/download/attachments/7415957/user-avatar",
+        "width": 48,
+        "height": 48,
+        "isDefault": false
+      },
+      "displayName": "Inga A.",
+      "_links": {
+        "self": "https://docs.nomagic.com/rest/api/user?key=ff80808151f3008c0152c05ba1a40003"
+      },
+      "_expandable": {
+        "status": ""
+      }
+    },
+    "when": "2025-09-11T18:50:59.216+02:00",
+    "message": "",
+    "number": 1,
+    "minorEdit": true,
+    "hidden": false,
+    "_links": {
+      "self": "https://docs.nomagic.com/rest/experimental/content/254419376/version/1"
+    },
+    "_expandable": {
+      "content": "/rest/api/content/254419376"
+    }
+  },
+  "position": -1,
+  "container": {
+    "id": "254419371",
+    "type": "page",
+    "status": "current",
+    "title": "(2026x) Working with revisions for ENOVIA Requirements",
+    "position": 2,
+    "extensions": {
+      "position": 2
+    },
+    "_links": {
+      "webui": "/spaces/CDH/pages/254419371/2026x+Working+with+revisions+for+ENOVIA+Requirements",
+      "edit": "/pages/resumedraft.action?draftId=254419371",
+      "tinyui": "/x/qyEqDw",
+      "self": "https://docs.nomagic.com/rest/api/content/254419371"
+    },
+    "_expandable": {
+      "container": "/rest/api/space/CDH",
+      "metadata": "",
+      "operations": "",
+      "children": "/rest/api/content/254419371/child",
+      "restrictions": "/rest/api/content/254419371/restriction/byOperation",
+      "history": "/rest/api/content/254419371/history",
+      "ancestors": "",
+      "body": "",
+      "version": "",
+      "descendants": "/rest/api/content/254419371/descendant",
+      "space": "/rest/api/space/CDH",
+      "relevantViewRestrictions": "/rest/api/content/254419371/restriction/relevantViewRestrictions"
+    }
+  },
+  "metadata": {
+    "mediaType": "image/png"
+  },
+  "extensions": {
+    "mediaType": "image/png",
+    "fileSize": 11090,
+    "comment": ""
+  },
+  "_links": {
+    "download": "/download/attachments/254419371/Transfer%20DHLink%20from%20other%20revision_Dialog.png?version=1&modificationDate=1757609459216&api=v2",
+    "thumbnail": "/download/thumbnails/254419371/Transfer%20DHLink%20from%20other%20revision_Dialog.png?api=v2",
+    "webui": "/spaces/CDH/pages/254419371/2026x+Working+with+revisions+for+ENOVIA+Requirements?preview=%2F254419371%2F254419376%2FTransfer+DHLink+from+other+revision_Dialog.png",
+    "self": "https://docs.nomagic.com/rest/api/content/254419376"
+  },
+  "_expandable": {
+    "operations": "",
+    "children": "/rest/api/content/254419376/child",
+    "restrictions": "/rest/api/content/254419376/restriction/byOperation",
+    "history": "/rest/api/content/254419376/history",
+    "ancestors": "",
+    "body": "",
+    "descendants": "/rest/api/content/254419376/descendant",
+    "space": "/rest/api/space/CDH",
+    "relevantViewRestrictions": "/rest/api/content/254419376/restriction/relevantViewRestrictions"
+  }
+}
+````
