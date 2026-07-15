@@ -1,0 +1,114 @@
+# NOMAGIC ATTACHMENT: Architectural_description_specification_window.png
+
+- attachment_id: `136721774`
+- space_key: `UAF12P2024x`
+- parent_page_id: `136721773`
+- parent_page_title: Generating DARS report in A1
+- media_type: `image/png`
+- reported_bytes: 77615
+- download_url: https://docs.nomagic.com/download/attachments/136721773/Architectural_description_specification_window.png?version=1&modificationDate=1695284979359&api=v2
+- payload_kind: `metadata-only`
+- downloaded_sha256: not-downloaded
+
+## PAYLOAD STATUS
+
+Binary or image attachment is inventoried by official metadata; no binary bytes are embedded in this Markdown-only corpus.
+
+
+## EXACT ATTACHMENT METADATA
+
+````json
+{
+  "id": "136721774",
+  "type": "attachment",
+  "status": "current",
+  "title": "Architectural_description_specification_window.png",
+  "version": {
+    "by": {
+      "type": "known",
+      "username": "agnpal",
+      "userKey": "ff80808151426f0e0151af8b0d360002",
+      "profilePicture": {
+        "path": "/download/attachments/6598412/user-avatar",
+        "width": 48,
+        "height": 48,
+        "isDefault": false
+      },
+      "displayName": "Agne P.",
+      "_links": {
+        "self": "https://docs.nomagic.com/rest/api/user?key=ff80808151426f0e0151af8b0d360002"
+      },
+      "_expandable": {
+        "status": ""
+      }
+    },
+    "when": "2023-09-21T10:29:39.359+02:00",
+    "message": "",
+    "number": 1,
+    "minorEdit": false,
+    "hidden": false,
+    "_links": {
+      "self": "https://docs.nomagic.com/rest/experimental/content/136721774/version/1"
+    },
+    "_expandable": {
+      "content": "/rest/api/content/136721774"
+    }
+  },
+  "position": -1,
+  "container": {
+    "id": "136721773",
+    "type": "page",
+    "status": "current",
+    "title": "Generating DARS report in A1",
+    "position": 2,
+    "extensions": {
+      "position": 2
+    },
+    "_links": {
+      "webui": "/spaces/UAF12P2024x/pages/136721773/Generating+DARS+report+in+A1",
+      "edit": "/pages/resumedraft.action?draftId=136721773",
+      "tinyui": "/x/bTUmC",
+      "self": "https://docs.nomagic.com/rest/api/content/136721773"
+    },
+    "_expandable": {
+      "container": "/rest/api/space/UAF12P2024x",
+      "metadata": "",
+      "operations": "",
+      "children": "/rest/api/content/136721773/child",
+      "restrictions": "/rest/api/content/136721773/restriction/byOperation",
+      "history": "/rest/api/content/136721773/history",
+      "ancestors": "",
+      "body": "",
+      "version": "",
+      "descendants": "/rest/api/content/136721773/descendant",
+      "space": "/rest/api/space/UAF12P2024x",
+      "relevantViewRestrictions": "/rest/api/content/136721773/restriction/relevantViewRestrictions"
+    }
+  },
+  "metadata": {
+    "mediaType": "image/png"
+  },
+  "extensions": {
+    "mediaType": "image/png",
+    "fileSize": 77615,
+    "comment": ""
+  },
+  "_links": {
+    "download": "/download/attachments/136721773/Architectural_description_specification_window.png?version=1&modificationDate=1695284979359&api=v2",
+    "thumbnail": "/download/thumbnails/136721773/Architectural_description_specification_window.png?api=v2",
+    "webui": "/spaces/UAF12P2024x/pages/136721773/Generating+DARS+report+in+A1?preview=%2F136721773%2F136721774%2FArchitectural_description_specification_window.png",
+    "self": "https://docs.nomagic.com/rest/api/content/136721774"
+  },
+  "_expandable": {
+    "operations": "",
+    "children": "/rest/api/content/136721774/child",
+    "restrictions": "/rest/api/content/136721774/restriction/byOperation",
+    "history": "/rest/api/content/136721774/history",
+    "ancestors": "",
+    "body": "",
+    "descendants": "/rest/api/content/136721774/descendant",
+    "space": "/rest/api/space/UAF12P2024x",
+    "relevantViewRestrictions": "/rest/api/content/136721774/restriction/relevantViewRestrictions"
+  }
+}
+````

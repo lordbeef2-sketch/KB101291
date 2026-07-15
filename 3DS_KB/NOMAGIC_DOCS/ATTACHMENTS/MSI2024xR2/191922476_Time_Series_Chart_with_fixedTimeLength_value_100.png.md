@@ -1,0 +1,114 @@
+# NOMAGIC ATTACHMENT: Time Series Chart with fixedTimeLength value 100.png
+
+- attachment_id: `191922476`
+- space_key: `MSI2024xR2`
+- parent_page_id: `191922473`
+- parent_page_title: Specifying time axis' range in a Time series chart
+- media_type: `image/png`
+- reported_bytes: 16984
+- download_url: https://docs.nomagic.com/download/attachments/191922473/Time%20Series%20Chart%20with%20fixedTimeLength%20value%20100.png?version=1&modificationDate=1728049192557&api=v2
+- payload_kind: `metadata-only`
+- downloaded_sha256: not-downloaded
+
+## PAYLOAD STATUS
+
+Binary or image attachment is inventoried by official metadata; no binary bytes are embedded in this Markdown-only corpus.
+
+
+## EXACT ATTACHMENT METADATA
+
+````json
+{
+  "id": "191922476",
+  "type": "attachment",
+  "status": "current",
+  "title": "Time Series Chart with fixedTimeLength value 100.png",
+  "version": {
+    "by": {
+      "type": "known",
+      "username": "8acad0e54bbfc3ed014beebdb63b0005",
+      "userKey": "8acad0e54bbfc3ed014beebdb63b0005",
+      "profilePicture": {
+        "path": "/images/icons/profilepics/default.svg",
+        "width": 48,
+        "height": 48,
+        "isDefault": true
+      },
+      "displayName": "user-1438d",
+      "_links": {
+        "self": "https://docs.nomagic.com/rest/api/user?key=8acad0e54bbfc3ed014beebdb63b0005"
+      },
+      "_expandable": {
+        "status": ""
+      }
+    },
+    "when": "2024-10-04T15:39:52.557+02:00",
+    "message": "",
+    "number": 1,
+    "minorEdit": false,
+    "hidden": false,
+    "_links": {
+      "self": "https://docs.nomagic.com/rest/experimental/content/191922476/version/1"
+    },
+    "_expandable": {
+      "content": "/rest/api/content/191922476"
+    }
+  },
+  "position": -1,
+  "container": {
+    "id": "191922473",
+    "type": "page",
+    "status": "current",
+    "title": "Specifying time axis' range in a Time series chart",
+    "position": 0,
+    "extensions": {
+      "position": 0
+    },
+    "_links": {
+      "webui": "/spaces/MSI2024xR2/pages/191922473/Specifying+time+axis+range+in+a+Time+series+chart",
+      "edit": "/pages/resumedraft.action?draftId=191922473",
+      "tinyui": "/x/KYFwCw",
+      "self": "https://docs.nomagic.com/rest/api/content/191922473"
+    },
+    "_expandable": {
+      "container": "/rest/api/space/MSI2024xR2",
+      "metadata": "",
+      "operations": "",
+      "children": "/rest/api/content/191922473/child",
+      "restrictions": "/rest/api/content/191922473/restriction/byOperation",
+      "history": "/rest/api/content/191922473/history",
+      "ancestors": "",
+      "body": "",
+      "version": "",
+      "descendants": "/rest/api/content/191922473/descendant",
+      "space": "/rest/api/space/MSI2024xR2",
+      "relevantViewRestrictions": "/rest/api/content/191922473/restriction/relevantViewRestrictions"
+    }
+  },
+  "metadata": {
+    "mediaType": "image/png"
+  },
+  "extensions": {
+    "mediaType": "image/png",
+    "fileSize": 16984,
+    "comment": ""
+  },
+  "_links": {
+    "download": "/download/attachments/191922473/Time%20Series%20Chart%20with%20fixedTimeLength%20value%20100.png?version=1&modificationDate=1728049192557&api=v2",
+    "thumbnail": "/download/thumbnails/191922473/Time%20Series%20Chart%20with%20fixedTimeLength%20value%20100.png?api=v2",
+    "webui": "/spaces/MSI2024xR2/pages/191922473/Specifying+time+axis+range+in+a+Time+series+chart?preview=%2F191922473%2F191922476%2FTime+Series+Chart+with+fixedTimeLength+value+100.png",
+    "self": "https://docs.nomagic.com/rest/api/content/191922476"
+  },
+  "_expandable": {
+    "operations": "",
+    "children": "/rest/api/content/191922476/child",
+    "restrictions": "/rest/api/content/191922476/restriction/byOperation",
+    "history": "/rest/api/content/191922476/history",
+    "ancestors": "",
+    "body": "",
+    "descendants": "/rest/api/content/191922476/descendant",
+    "space": "/rest/api/space/MSI2024xR2",
+    "relevantViewRestrictions": "/rest/api/content/191922476/restriction/relevantViewRestrictions"
+  }
+}
+````

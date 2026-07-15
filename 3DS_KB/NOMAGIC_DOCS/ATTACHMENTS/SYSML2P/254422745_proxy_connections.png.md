@@ -1,0 +1,114 @@
+# NOMAGIC ATTACHMENT: proxy_connections.png
+
+- attachment_id: `254422745`
+- space_key: `SYSML2P`
+- parent_page_id: `254422731`
+- parent_page_title: (2026x) Displaying elements in symbolic views
+- media_type: `image/png`
+- reported_bytes: 28378
+- download_url: https://docs.nomagic.com/download/attachments/254422731/proxy_connections.png?version=1&modificationDate=1757680429802&api=v2
+- payload_kind: `metadata-only`
+- downloaded_sha256: not-downloaded
+
+## PAYLOAD STATUS
+
+Binary or image attachment is inventoried by official metadata; no binary bytes are embedded in this Markdown-only corpus.
+
+
+## EXACT ATTACHMENT METADATA
+
+````json
+{
+  "id": "254422745",
+  "type": "attachment",
+  "status": "current",
+  "title": "proxy_connections.png",
+  "version": {
+    "by": {
+      "type": "known",
+      "username": "ingabe",
+      "userKey": "ff80808151f3008c0152c05ba1a40003",
+      "profilePicture": {
+        "path": "/download/attachments/7415957/user-avatar",
+        "width": 48,
+        "height": 48,
+        "isDefault": false
+      },
+      "displayName": "Inga A.",
+      "_links": {
+        "self": "https://docs.nomagic.com/rest/api/user?key=ff80808151f3008c0152c05ba1a40003"
+      },
+      "_expandable": {
+        "status": ""
+      }
+    },
+    "when": "2025-09-12T14:33:49.802+02:00",
+    "message": "",
+    "number": 1,
+    "minorEdit": true,
+    "hidden": false,
+    "_links": {
+      "self": "https://docs.nomagic.com/rest/experimental/content/254422745/version/1"
+    },
+    "_expandable": {
+      "content": "/rest/api/content/254422745"
+    }
+  },
+  "position": -1,
+  "container": {
+    "id": "254422731",
+    "type": "page",
+    "status": "current",
+    "title": "(2026x) Displaying elements in symbolic views",
+    "position": 0,
+    "extensions": {
+      "position": 0
+    },
+    "_links": {
+      "webui": "/spaces/SYSML2P/pages/254422731/2026x+Displaying+elements+in+symbolic+views",
+      "edit": "/pages/resumedraft.action?draftId=254422731",
+      "tinyui": "/x/yy4qDw",
+      "self": "https://docs.nomagic.com/rest/api/content/254422731"
+    },
+    "_expandable": {
+      "container": "/rest/api/space/SYSML2P",
+      "metadata": "",
+      "operations": "",
+      "children": "/rest/api/content/254422731/child",
+      "restrictions": "/rest/api/content/254422731/restriction/byOperation",
+      "history": "/rest/api/content/254422731/history",
+      "ancestors": "",
+      "body": "",
+      "version": "",
+      "descendants": "/rest/api/content/254422731/descendant",
+      "space": "/rest/api/space/SYSML2P",
+      "relevantViewRestrictions": "/rest/api/content/254422731/restriction/relevantViewRestrictions"
+    }
+  },
+  "metadata": {
+    "mediaType": "image/png"
+  },
+  "extensions": {
+    "mediaType": "image/png",
+    "fileSize": 28378,
+    "comment": ""
+  },
+  "_links": {
+    "download": "/download/attachments/254422731/proxy_connections.png?version=1&modificationDate=1757680429802&api=v2",
+    "thumbnail": "/download/thumbnails/254422731/proxy_connections.png?api=v2",
+    "webui": "/spaces/SYSML2P/pages/254422731/2026x+Displaying+elements+in+symbolic+views?preview=%2F254422731%2F254422745%2Fproxy_connections.png",
+    "self": "https://docs.nomagic.com/rest/api/content/254422745"
+  },
+  "_expandable": {
+    "operations": "",
+    "children": "/rest/api/content/254422745/child",
+    "restrictions": "/rest/api/content/254422745/restriction/byOperation",
+    "history": "/rest/api/content/254422745/history",
+    "ancestors": "",
+    "body": "",
+    "descendants": "/rest/api/content/254422745/descendant",
+    "space": "/rest/api/space/SYSML2P",
+    "relevantViewRestrictions": "/rest/api/content/254422745/restriction/relevantViewRestrictions"
+  }
+}
+````

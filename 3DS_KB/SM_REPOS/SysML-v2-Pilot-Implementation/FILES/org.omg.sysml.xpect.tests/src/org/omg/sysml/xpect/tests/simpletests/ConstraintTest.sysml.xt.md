@@ -1,0 +1,185 @@
+# OFFICIAL REPOSITORY FILE: SysML-v2-Pilot-Implementation/org.omg.sysml.xpect.tests/src/org/omg/sysml/xpect/tests/simpletests/ConstraintTest.sysml.xt
+
+- repository: `SysML-v2-Pilot-Implementation`
+- source_path: `org.omg.sysml.xpect.tests/src/org/omg/sysml/xpect/tests/simpletests/ConstraintTest.sysml.xt`
+- source_url: https://github.com/Systems-Modeling/SysML-v2-Pilot-Implementation/blob/fa709f28dfd49dfdb7ee83e4e19da2f57e0eb3aa/org.omg.sysml.xpect.tests/src/org/omg/sysml/xpect/tests/simpletests/ConstraintTest.sysml.xt
+- source_bytes: 6864
+- source_sha256: `9a584a0eb7c7d1e4bbcc2fc7a3d2559424f08546b3f84b2a6c5e4d32bfce0f80`
+- decoded_as: `utf-8`
+
+
+## EXACT SOURCE
+
+````xtext
+//* 
+XPECT_SETUP org.omg.sysml.xpect.tests.simpletests.SysMLTests
+	ResourceSet {
+		ThisFile {}
+		File {from ="/library.kernel/Base.kerml"}
+		File {from ="/library.kernel/Links.kerml"}
+       	File {from ="/library.kernel/Occurrences.kerml"}
+        File {from ="/library.kernel/Objects.kerml"}
+       	File {from ="/library.kernel/Performances.kerml"}
+		File {from ="/library.kernel/ScalarValues.kerml"}
+		File {from ="/library.kernel/BaseFunctions.kerml"}
+		File {from ="/library.kernel/DataFunctions.kerml"}
+		File {from ="/library.kernel/ScalarFunctions.kerml"}
+		File {from ="/library.kernel/NumericalFunctions.kerml"}
+		File {from ="/library.kernel/ControlFunctions.kerml"}
+		File {from ="/library.systems/Items.sysml"}
+		File {from ="/library.systems/Parts.sysml"}
+		File {from ="/library.systems/Ports.sysml"}
+		File {from ="/library.systems/Constraints.sysml"}
+		File {from ="/library.domain/Quantities and Units/Quantities.sysml"}
+		File {from ="/library.domain/Quantities and Units/MeasurementReferences.sysml"}
+		File {from ="/library.domain/Quantities and Units/ISQAtomicNuclear.sysml"}
+		File {from ="/library.domain/Quantities and Units/ISQChemistryMolecular.sysml"}
+		File {from ="/library.domain/Quantities and Units/ISQElectromagnetism.sysml"}
+		File {from ="/library.domain/Quantities and Units/ISQLight.sysml"}
+		File {from ="/library.domain/Quantities and Units/ISQMechanics.sysml"}
+		File {from ="/library.domain/Quantities and Units/ISQSpaceTime.sysml"}
+		File {from ="/library.domain/Quantities and Units/ISQThermodynamics.sysml"}
+		File {from ="/library.domain/Quantities and Units/ISQ.sysml"}
+		File {from ="/library.domain/Quantities and Units/ISQBase.sysml"}
+		File {from ="/library.domain/Quantities and Units/SI.sysml"}
+		File {from ="/library.domain/Quantities and Units/SIPrefixes.sysml"}
+	}
+	Workspace {
+		JavaProject {
+			SrcFolder {
+				ThisFile {}
+						File {from ="/library.kernel/Base.kerml"}
+						File {from ="/library.kernel/Links.kerml"}
+				       	File {from ="/library.kernel/Occurrences.kerml"}
+				        File {from ="/library.kernel/Objects.kerml"}
+				       	File {from ="/library.kernel/Performances.kerml"}
+						File {from ="/library.kernel/ScalarValues.kerml"}
+						File {from ="/library.kernel/BaseFunctions.kerml"}
+						File {from ="/library.kernel/DataFunctions.kerml"}
+						File {from ="/library.kernel/ScalarFunctions.kerml"}
+						File {from ="/library.kernel/NumericalFunctions.kerml"}
+						File {from ="/library.kernel/ControlFunctions.kerml"}
+						File {from ="/library.systems/Items.sysml"}
+						File {from ="/library.systems/Parts.sysml"}
+						File {from ="/library.systems/Ports.sysml"}
+						File {from ="/library.systems/Constraints.sysml"}
+						File {from ="/library.domain/Quantities and Units/Quantities.sysml"}
+						File {from ="/library.domain/Quantities and Units/MeasurementReferences.sysml"}
+						File {from ="/library.domain/Quantities and Units/ISQAtomicNuclear.sysml"}
+						File {from ="/library.domain/Quantities and Units/ISQChemistryMolecular.sysml"}
+						File {from ="/library.domain/Quantities and Units/ISQElectromagnetism.sysml"}
+						File {from ="/library.domain/Quantities and Units/ISQLight.sysml"}
+						File {from ="/library.domain/Quantities and Units/ISQMechanics.sysml"}
+						File {from ="/library.domain/Quantities and Units/ISQSpaceTime.sysml"}
+						File {from ="/library.domain/Quantities and Units/ISQThermodynamics.sysml"}
+						File {from ="/library.domain/Quantities and Units/ISQ.sysml"}
+						File {from ="/library.domain/Quantities and Units/ISQBase.sysml"}
+						File {from ="/library.domain/Quantities and Units/SI.sysml"}
+						File {from ="/library.domain/Quantities and Units/SIPrefixes.sysml"}
+			}
+		}
+	}
+END_SETUP 
+*/
+// XPECT noErrors ---> ""
+package ConstraintTest {
+	public import ISQ::MassValue;
+	public import SI::kg;
+	public import NumericalFunctions::sum;
+	
+	constraint def MassAnalysis {
+		attribute totalMass: MassValue;
+		attribute componentMasses: MassValue[0..*];
+
+		totalMass == sum(componentMasses)
+	}
+	
+	part def Component {
+		attribute mass: MassValue;
+	}
+	
+	part vehicle : Component {	
+		part engine : Component;
+		part frontAxleAssembly : Component;
+		part rearAxleAssembly : Component;	
+	}
+		
+	part vehicle1a :> vehicle {
+		assert constraint massAnalysis : MassAnalysis {
+			attribute totalMass redefines MassAnalysis::totalMass;
+			attribute componentMasses redefines MassAnalysis::componentMasses;
+		}
+		attribute mass redefines vehicle::mass;
+		part engine redefines vehicle::engine {
+			attribute mass redefines vehicle::engine::mass;
+		}
+		part frontAxleAssembly redefines vehicle::frontAxleAssembly {
+			attribute mass redefines vehicle::frontAxleAssembly::mass;
+		}
+		part rearAxleAssembly redefines vehicle::rearAxleAssembly {
+			attribute mass redefines vehicle::rearAxleAssembly::mass;
+		}
+		
+		bind massAnalysis.totalMass = mass;
+		bind massAnalysis.componentMasses = engine.mass;
+		bind massAnalysis.componentMasses = frontAxleAssembly.mass;
+		bind massAnalysis.componentMasses = rearAxleAssembly.mass;
+	}
+	
+	part vehicle1b :> vehicle {		
+		assert constraint massAnalysis : MassAnalysis {
+			attribute redefines totalMass = mass;
+			attribute redefines componentMasses = (engine.mass, frontAxleAssembly.mass, rearAxleAssembly.mass);		
+		}	
+	}
+		
+	constraint def MassAnalysis2 { 
+		in totalMass : MassValue;
+		in componentMasses: MassValue[0..*];
+		
+		totalMass == sum(componentMasses)
+	}
+	
+	part vehicle2a :> vehicle {
+		assert constraint massConstraint : MassAnalysis2;
+		
+		bind massConstraint.totalMass = mass;
+		bind massConstraint.componentMasses = engine.mass;
+		bind massConstraint.componentMasses = frontAxleAssembly.mass;
+		bind massConstraint.componentMasses = rearAxleAssembly.mass;
+	}
+		
+	part vehicle2b :> vehicle {
+		assert constraint massAnalysis2 : MassAnalysis2 {
+			in totalMass = mass;
+			in componentMasses = (engine.mass, frontAxleAssembly.mass, rearAxleAssembly.mass);
+		}
+	}
+	
+	constraint def MassAnalysis3 {
+		in totalMass : MassValue;
+		in componentMasses: MassValue[0..*];
+	}
+	
+	constraint massAnalysis3 : MassAnalysis3 {
+		in totalMass : MassValue;
+		in componentMasses: MassValue[0..*];
+		
+		totalMass == sum(componentMasses)
+	}
+	
+	part vehicle3 :> vehicle {
+		assert massAnalysis3 {
+			in totalMass = mass;
+			in componentMasses = (engine.mass, frontAxleAssembly.mass, rearAxleAssembly.mass);
+		}
+	}
+	
+	part vehicle4 :> vehicle {
+		assert constraint { mass == engine.mass + frontAxleAssembly.mass + rearAxleAssembly.mass }
+	}
+	
+	constraint massLimitation { mass : MassValue; massLimit : MassValue; mass < massLimit }
+	assert not massLimitation { :>> mass = vehicle3.mass; :>> massLimit = vehicle4.mass; }
+}
+````

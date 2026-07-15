@@ -1,0 +1,114 @@
+# NOMAGIC ATTACHMENT: comments_in_specification_panel.png
+
+- attachment_id: `304008340`
+- space_key: `MLABC`
+- parent_page_id: `304008334`
+- parent_page_title: (2026x Refresh1) Comments
+- media_type: `image/png`
+- reported_bytes: 109338
+- download_url: https://docs.nomagic.com/download/attachments/304008334/comments_in_specification_panel.png?version=1&modificationDate=1777465266190&api=v2
+- payload_kind: `metadata-only`
+- downloaded_sha256: not-downloaded
+
+## PAYLOAD STATUS
+
+Binary or image attachment is inventoried by official metadata; no binary bytes are embedded in this Markdown-only corpus.
+
+
+## EXACT ATTACHMENT METADATA
+
+````json
+{
+  "id": "304008340",
+  "type": "attachment",
+  "status": "current",
+  "title": "comments_in_specification_panel.png",
+  "version": {
+    "by": {
+      "type": "known",
+      "username": "ingabe",
+      "userKey": "ff80808151f3008c0152c05ba1a40003",
+      "profilePicture": {
+        "path": "/download/attachments/7415957/user-avatar",
+        "width": 48,
+        "height": 48,
+        "isDefault": false
+      },
+      "displayName": "Inga A.",
+      "_links": {
+        "self": "https://docs.nomagic.com/rest/api/user?key=ff80808151f3008c0152c05ba1a40003"
+      },
+      "_expandable": {
+        "status": ""
+      }
+    },
+    "when": "2026-04-29T14:21:06.190+02:00",
+    "message": "",
+    "number": 1,
+    "minorEdit": true,
+    "hidden": false,
+    "_links": {
+      "self": "https://docs.nomagic.com/rest/experimental/content/304008340/version/1"
+    },
+    "_expandable": {
+      "content": "/rest/api/content/304008340"
+    }
+  },
+  "position": -1,
+  "container": {
+    "id": "304008334",
+    "type": "page",
+    "status": "current",
+    "title": "(2026x Refresh1) Comments",
+    "position": 3,
+    "extensions": {
+      "position": 3
+    },
+    "_links": {
+      "webui": "/spaces/MLABC/pages/304008334/2026x+Refresh1+Comments",
+      "edit": "/pages/resumedraft.action?draftId=304008334",
+      "tinyui": "/x/jsweEg",
+      "self": "https://docs.nomagic.com/rest/api/content/304008334"
+    },
+    "_expandable": {
+      "container": "/rest/api/space/MLABC",
+      "metadata": "",
+      "operations": "",
+      "children": "/rest/api/content/304008334/child",
+      "restrictions": "/rest/api/content/304008334/restriction/byOperation",
+      "history": "/rest/api/content/304008334/history",
+      "ancestors": "",
+      "body": "",
+      "version": "",
+      "descendants": "/rest/api/content/304008334/descendant",
+      "space": "/rest/api/space/MLABC",
+      "relevantViewRestrictions": "/rest/api/content/304008334/restriction/relevantViewRestrictions"
+    }
+  },
+  "metadata": {
+    "mediaType": "image/png"
+  },
+  "extensions": {
+    "mediaType": "image/png",
+    "fileSize": 109338,
+    "comment": ""
+  },
+  "_links": {
+    "download": "/download/attachments/304008334/comments_in_specification_panel.png?version=1&modificationDate=1777465266190&api=v2",
+    "thumbnail": "/download/thumbnails/304008334/comments_in_specification_panel.png?api=v2",
+    "webui": "/spaces/MLABC/pages/304008334/2026x+Refresh1+Comments?preview=%2F304008334%2F304008340%2Fcomments_in_specification_panel.png",
+    "self": "https://docs.nomagic.com/rest/api/content/304008340"
+  },
+  "_expandable": {
+    "operations": "",
+    "children": "/rest/api/content/304008340/child",
+    "restrictions": "/rest/api/content/304008340/restriction/byOperation",
+    "history": "/rest/api/content/304008340/history",
+    "ancestors": "",
+    "body": "",
+    "descendants": "/rest/api/content/304008340/descendant",
+    "space": "/rest/api/space/MLABC",
+    "relevantViewRestrictions": "/rest/api/content/304008340/restriction/relevantViewRestrictions"
+  }
+}
+````

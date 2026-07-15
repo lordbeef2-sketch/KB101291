@@ -1,0 +1,114 @@
+# NOMAGIC ATTACHMENT: Navigate_to_diagram_UML.png
+
+- attachment_id: `194643153`
+- space_key: `MSA2024xR2`
+- parent_page_id: `194643149`
+- parent_page_title: 2024x Refresh2 Version News
+- media_type: `image/png`
+- reported_bytes: 53931
+- download_url: https://docs.nomagic.com/download/attachments/194643149/Navigate_to_diagram_UML.png?version=1&modificationDate=1731047916338&api=v2
+- payload_kind: `metadata-only`
+- downloaded_sha256: not-downloaded
+
+## PAYLOAD STATUS
+
+Binary or image attachment is inventoried by official metadata; no binary bytes are embedded in this Markdown-only corpus.
+
+
+## EXACT ATTACHMENT METADATA
+
+````json
+{
+  "id": "194643153",
+  "type": "attachment",
+  "status": "current",
+  "title": "Navigate_to_diagram_UML.png",
+  "version": {
+    "by": {
+      "type": "known",
+      "username": "kbe12",
+      "userKey": "2c9f81f87674fd7d017a0928ba470000",
+      "profilePicture": {
+        "path": "/images/icons/profilepics/default.svg",
+        "width": 48,
+        "height": 48,
+        "isDefault": true
+      },
+      "displayName": "Kristina B.",
+      "_links": {
+        "self": "https://docs.nomagic.com/rest/api/user?key=2c9f81f87674fd7d017a0928ba470000"
+      },
+      "_expandable": {
+        "status": ""
+      }
+    },
+    "when": "2024-11-08T07:38:36.338+01:00",
+    "message": "",
+    "number": 1,
+    "minorEdit": true,
+    "hidden": false,
+    "_links": {
+      "self": "https://docs.nomagic.com/rest/experimental/content/194643153/version/1"
+    },
+    "_expandable": {
+      "content": "/rest/api/content/194643153"
+    }
+  },
+  "position": -1,
+  "container": {
+    "id": "194643149",
+    "type": "page",
+    "status": "current",
+    "title": "2024x Refresh2 Version News",
+    "position": 0,
+    "extensions": {
+      "position": 0
+    },
+    "_links": {
+      "webui": "/spaces/MSA2024xR2/pages/194643149/2024x+Refresh2+Version+News",
+      "edit": "/pages/resumedraft.action?draftId=194643149&draftShareId=219db0ce-c836-46e4-8f87-ec439f6ebdfa",
+      "tinyui": "/x/zQSaCw",
+      "self": "https://docs.nomagic.com/rest/api/content/194643149"
+    },
+    "_expandable": {
+      "container": "/rest/api/space/MSA2024xR2",
+      "metadata": "",
+      "operations": "",
+      "children": "/rest/api/content/194643149/child",
+      "restrictions": "/rest/api/content/194643149/restriction/byOperation",
+      "history": "/rest/api/content/194643149/history",
+      "ancestors": "",
+      "body": "",
+      "version": "",
+      "descendants": "/rest/api/content/194643149/descendant",
+      "space": "/rest/api/space/MSA2024xR2",
+      "relevantViewRestrictions": "/rest/api/content/194643149/restriction/relevantViewRestrictions"
+    }
+  },
+  "metadata": {
+    "mediaType": "image/png"
+  },
+  "extensions": {
+    "mediaType": "image/png",
+    "fileSize": 53931,
+    "comment": ""
+  },
+  "_links": {
+    "download": "/download/attachments/194643149/Navigate_to_diagram_UML.png?version=1&modificationDate=1731047916338&api=v2",
+    "thumbnail": "/download/thumbnails/194643149/Navigate_to_diagram_UML.png?api=v2",
+    "webui": "/spaces/MSA2024xR2/pages/194643149/2024x+Refresh2+Version+News?preview=%2F194643149%2F194643153%2FNavigate_to_diagram_UML.png",
+    "self": "https://docs.nomagic.com/rest/api/content/194643153"
+  },
+  "_expandable": {
+    "operations": "",
+    "children": "/rest/api/content/194643153/child",
+    "restrictions": "/rest/api/content/194643153/restriction/byOperation",
+    "history": "/rest/api/content/194643153/history",
+    "ancestors": "",
+    "body": "",
+    "descendants": "/rest/api/content/194643153/descendant",
+    "space": "/rest/api/space/MSA2024xR2",
+    "relevantViewRestrictions": "/rest/api/content/194643153/restriction/relevantViewRestrictions"
+  }
+}
+````

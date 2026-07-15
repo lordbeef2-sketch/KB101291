@@ -1,0 +1,192 @@
+# JAVA OPENAPI: ExecutionEngineDescriptor (2024x API)
+
+- source_url: https://jdocs.nomagic.com/2024xRefresh1/com/nomagic/magicdraw/simulation/engine/ExecutionEngineDescriptor.html
+- source_path: `com/nomagic/magicdraw/simulation/engine/ExecutionEngineDescriptor.html`
+- source_sha256: `40c4d17631c1e12e9a2d2836834a6d1d0059ffe6409f6810fc76a81ded9698f5`
+- captured_utc: `2026-07-14T16:51:31.045335+00:00`
+
+## NORMALIZED JAVADOC CONTENT
+
+======== START OF CLASS DATA ========
+
+Package [com.nomagic.magicdraw.simulation.engine](package-summary.html)
+
+## Interface ExecutionEngineDescriptor
+
+All Known Implementing Classes:
+`[AbstractExecutionEngineDescriptor](AbstractExecutionEngineDescriptor.html)`
+
+@OpenApipublic interfaceExecutionEngineDescriptor
+
+The descriptor which provides such information as engine's name, engine's icon also can check whether an element can
+ be executed by an engine which is created from this descriptor and can create an engine instance. All execution
+ engines must provide this descriptor and register it to [`SimulationManager`](../SimulationManager.html).
+
+See Also:
+[`ExecutionEngine`](ExecutionEngine.html)
+[`SimulationManager`](../SimulationManager.html)
+
+========== METHOD SUMMARY =========== 
+Method Summary
+All MethodsInstance MethodsAbstract Methods
+Modifier and Type
+Method
+Description
+`boolean`
+`[canExecute](#canExecute(com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Element))([Element](../../../uml2/ext/magicdraw/classes/mdkernel/Element.html) element)`
+Return `true` if the specified `element` can be executed by an engine created from this
+ descriptor, otherwise `false`.
+`[ExecutionEngine](ExecutionEngine.html)`
+`[createEngine](#createEngine())()`
+Returns the newly created engine instance.
+`[String](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html)`
+`[getEngineName](#getEngineName())()`
+Returns an engine's name.
+
+============ METHOD DETAIL ========== 
+Method Details
+getEngineName
+@OpenApi[String](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html) getEngineName()
+Returns an engine's name. The name of an engine that can be created by this descriptor.
+Returns:
+an engine's name.
+canExecute
+@OpenApiboolean canExecute([Element](../../../uml2/ext/magicdraw/classes/mdkernel/Element.html) element)
+Return `true` if the specified `element` can be executed by an engine created from this
+ descriptor, otherwise `false`.
+Parameters:
+`element` - an element to be checked.
+Returns:
+`true` if the specified `element` can be executed by an engine created from this
+ descriptor, otherwise `false`.
+createEngine
+@OpenApi[ExecutionEngine](ExecutionEngine.html) createEngine()
+Returns the newly created engine instance.
+ Do not call this method directly, as created engine needs to be initialized.
+Returns:
+the newly created engine instance.
+
+========= END OF CLASS DATA =========
+
+## EXACT JAVADOC MAIN HTML
+
+````html
+<main role="main">
+<!-- ======== START OF CLASS DATA ======== -->
+<div class="header">
+<div class="sub-title"><span class="package-label-in-type">Package</span> <a href="package-summary.html">com.nomagic.magicdraw.simulation.engine</a></div>
+<h1 class="title" title="Interface ExecutionEngineDescriptor">Interface ExecutionEngineDescriptor</h1>
+</div>
+<section class="class-description" id="class-description">
+<dl class="notes">
+<dt>All Known Implementing Classes:</dt>
+<dd><code><a href="AbstractExecutionEngineDescriptor.html" title="class in com.nomagic.magicdraw.simulation.engine">AbstractExecutionEngineDescriptor</a></code></dd>
+</dl>
+<hr/>
+<div class="type-signature"><span class="annotations">@OpenApi
+</span><span class="modifiers">public interface </span><span class="element-name type-name-label">ExecutionEngineDescriptor</span></div>
+<div class="block">The descriptor which provides such information as engine's name, engine's icon also can check whether an element can
+ be executed by an engine which is created from this descriptor and can create an engine instance. All execution
+ engines must provide this descriptor and register it to <a href="../SimulationManager.html" title="class in com.nomagic.magicdraw.simulation"><code>SimulationManager</code></a>.</div>
+<dl class="notes">
+<dt>See Also:</dt>
+<dd>
+<ul class="see-list">
+<li><a href="ExecutionEngine.html" title="class in com.nomagic.magicdraw.simulation.engine"><code>ExecutionEngine</code></a></li>
+<li><a href="../SimulationManager.html" title="class in com.nomagic.magicdraw.simulation"><code>SimulationManager</code></a></li>
+</ul>
+</dd>
+</dl>
+</section>
+<section class="summary">
+<ul class="summary-list">
+<!-- ========== METHOD SUMMARY =========== -->
+<li>
+<section class="method-summary" id="method-summary">
+<h2>Method Summary</h2>
+<div id="method-summary-table">
+<div aria-orientation="horizontal" class="table-tabs" role="tablist"><button aria-controls="method-summary-table.tabpanel" aria-selected="true" class="active-table-tab" id="method-summary-table-tab0" onclick="show('method-summary-table', 'method-summary-table', 3)" onkeydown="switchTab(event)" role="tab" tabindex="0">All Methods</button><button aria-controls="method-summary-table.tabpanel" aria-selected="false" class="table-tab" id="method-summary-table-tab2" onclick="show('method-summary-table', 'method-summary-table-tab2', 3)" onkeydown="switchTab(event)" role="tab" tabindex="-1">Instance Methods</button><button aria-controls="method-summary-table.tabpanel" aria-selected="false" class="table-tab" id="method-summary-table-tab3" onclick="show('method-summary-table', 'method-summary-table-tab3', 3)" onkeydown="switchTab(event)" role="tab" tabindex="-1">Abstract Methods</button></div>
+<div id="method-summary-table.tabpanel" role="tabpanel">
+<div aria-labelledby="method-summary-table-tab0" class="summary-table three-column-summary">
+<div class="table-header col-first">Modifier and Type</div>
+<div class="table-header col-second">Method</div>
+<div class="table-header col-last">Description</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>boolean</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a class="member-name-link" href="#canExecute(com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Element)">canExecute</a><wbr/>(<a href="../../../uml2/ext/magicdraw/classes/mdkernel/Element.html" title="interface in com.nomagic.uml2.ext.magicdraw.classes.mdkernel">Element</a> element)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
+<div class="block">Return <code>true</code> if the specified <code>element</code> can be executed by an engine created from this
+ descriptor, otherwise <code>false</code>.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="ExecutionEngine.html" title="class in com.nomagic.magicdraw.simulation.engine">ExecutionEngine</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a class="member-name-link" href="#createEngine()">createEngine</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
+<div class="block">Returns the newly created engine instance.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a class="external-link" href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang">String</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a class="member-name-link" href="#getEngineName()">getEngineName</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
+<div class="block">Returns an engine's name.</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</li>
+</ul>
+</section>
+<section class="details">
+<ul class="details-list">
+<!-- ============ METHOD DETAIL ========== -->
+<li>
+<section class="method-details" id="method-detail">
+<h2>Method Details</h2>
+<ul class="member-list">
+<li>
+<section class="detail" id="getEngineName()">
+<h3>getEngineName</h3>
+<div class="member-signature"><span class="annotations">@OpenApi
+</span><span class="return-type"><a class="external-link" href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang">String</a></span> <span class="element-name">getEngineName</span>()</div>
+<div class="block">Returns an engine's name. The name of an engine that can be created by this descriptor.</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>an engine's name.</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="canExecute(com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Element)">
+<h3>canExecute</h3>
+<div class="member-signature"><span class="annotations">@OpenApi
+</span><span class="return-type">boolean</span> <span class="element-name">canExecute</span><wbr/><span class="parameters">(<a href="../../../uml2/ext/magicdraw/classes/mdkernel/Element.html" title="interface in com.nomagic.uml2.ext.magicdraw.classes.mdkernel">Element</a> element)</span></div>
+<div class="block">Return <code>true</code> if the specified <code>element</code> can be executed by an engine created from this
+ descriptor, otherwise <code>false</code>.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>element</code> - an element to be checked.</dd>
+<dt>Returns:</dt>
+<dd><code>true</code> if the specified <code>element</code> can be executed by an engine created from this
+         descriptor, otherwise <code>false</code>.</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="createEngine()">
+<h3>createEngine</h3>
+<div class="member-signature"><span class="annotations">@OpenApi
+</span><span class="return-type"><a href="ExecutionEngine.html" title="class in com.nomagic.magicdraw.simulation.engine">ExecutionEngine</a></span> <span class="element-name">createEngine</span>()</div>
+<div class="block">Returns the newly created engine instance.
+ Do not call this method directly, as created engine needs to be initialized.</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>the newly created engine instance.</dd>
+</dl>
+</section>
+</li>
+</ul>
+</section>
+</li>
+</ul>
+</section>
+<!-- ========= END OF CLASS DATA ========= -->
+</main>
+````

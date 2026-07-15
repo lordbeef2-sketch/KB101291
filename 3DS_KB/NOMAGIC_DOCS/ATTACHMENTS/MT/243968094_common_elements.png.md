@@ -1,0 +1,114 @@
+# NOMAGIC ATTACHMENT: common_elements.png
+
+- attachment_id: `243968094`
+- space_key: `MT`
+- parent_page_id: `243968093`
+- parent_page_title: Auxiliary diagram symbols
+- media_type: `image/png`
+- reported_bytes: 6017
+- download_url: https://docs.nomagic.com/download/attachments/243968093/common_elements.png?version=1&modificationDate=1753951850081&api=v2
+- payload_kind: `metadata-only`
+- downloaded_sha256: not-downloaded
+
+## PAYLOAD STATUS
+
+Binary or image attachment is inventoried by official metadata; no binary bytes are embedded in this Markdown-only corpus.
+
+
+## EXACT ATTACHMENT METADATA
+
+````json
+{
+  "id": "243968094",
+  "type": "attachment",
+  "status": "current",
+  "title": "common_elements.png",
+  "version": {
+    "by": {
+      "type": "known",
+      "username": "ingabe",
+      "userKey": "ff80808151f3008c0152c05ba1a40003",
+      "profilePicture": {
+        "path": "/download/attachments/7415957/user-avatar",
+        "width": 48,
+        "height": 48,
+        "isDefault": false
+      },
+      "displayName": "Inga A.",
+      "_links": {
+        "self": "https://docs.nomagic.com/rest/api/user?key=ff80808151f3008c0152c05ba1a40003"
+      },
+      "_expandable": {
+        "status": ""
+      }
+    },
+    "when": "2025-07-31T10:50:50.081+02:00",
+    "message": "",
+    "number": 1,
+    "minorEdit": true,
+    "hidden": false,
+    "_links": {
+      "self": "https://docs.nomagic.com/rest/experimental/content/243968094/version/1"
+    },
+    "_expandable": {
+      "content": "/rest/api/content/243968094"
+    }
+  },
+  "position": -1,
+  "container": {
+    "id": "243968093",
+    "type": "page",
+    "status": "current",
+    "title": "Auxiliary diagram symbols",
+    "position": 6,
+    "extensions": {
+      "position": 6
+    },
+    "_links": {
+      "webui": "/spaces/MT/pages/243968093/Auxiliary+diagram+symbols",
+      "edit": "/pages/resumedraft.action?draftId=243968093",
+      "tinyui": "/x/XaiKDg",
+      "self": "https://docs.nomagic.com/rest/api/content/243968093"
+    },
+    "_expandable": {
+      "container": "/rest/api/space/MT",
+      "metadata": "",
+      "operations": "",
+      "children": "/rest/api/content/243968093/child",
+      "restrictions": "/rest/api/content/243968093/restriction/byOperation",
+      "history": "/rest/api/content/243968093/history",
+      "ancestors": "",
+      "body": "",
+      "version": "",
+      "descendants": "/rest/api/content/243968093/descendant",
+      "space": "/rest/api/space/MT",
+      "relevantViewRestrictions": "/rest/api/content/243968093/restriction/relevantViewRestrictions"
+    }
+  },
+  "metadata": {
+    "mediaType": "image/png"
+  },
+  "extensions": {
+    "mediaType": "image/png",
+    "fileSize": 6017,
+    "comment": ""
+  },
+  "_links": {
+    "download": "/download/attachments/243968093/common_elements.png?version=1&modificationDate=1753951850081&api=v2",
+    "thumbnail": "/download/thumbnails/243968093/common_elements.png?api=v2",
+    "webui": "/spaces/MT/pages/243968093/Auxiliary+diagram+symbols?preview=%2F243968093%2F243968094%2Fcommon_elements.png",
+    "self": "https://docs.nomagic.com/rest/api/content/243968094"
+  },
+  "_expandable": {
+    "operations": "",
+    "children": "/rest/api/content/243968094/child",
+    "restrictions": "/rest/api/content/243968094/restriction/byOperation",
+    "history": "/rest/api/content/243968094/history",
+    "ancestors": "",
+    "body": "",
+    "descendants": "/rest/api/content/243968094/descendant",
+    "space": "/rest/api/space/MT",
+    "relevantViewRestrictions": "/rest/api/content/243968094/restriction/relevantViewRestrictions"
+  }
+}
+````

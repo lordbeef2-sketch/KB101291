@@ -1,0 +1,114 @@
+# NOMAGIC ATTACHMENT: addproperty.png
+
+- attachment_id: `227169664`
+- space_key: `MCM2024xR3`
+- parent_page_id: `227169660`
+- parent_page_title: Creating and removing a necessary and sufficient condition
+- media_type: `image/png`
+- reported_bytes: 61400
+- download_url: https://docs.nomagic.com/download/attachments/227169660/addproperty.png?version=1&modificationDate=1746429437291&api=v2
+- payload_kind: `metadata-only`
+- downloaded_sha256: not-downloaded
+
+## PAYLOAD STATUS
+
+Binary or image attachment is inventoried by official metadata; no binary bytes are embedded in this Markdown-only corpus.
+
+
+## EXACT ATTACHMENT METADATA
+
+````json
+{
+  "id": "227169664",
+  "type": "attachment",
+  "status": "current",
+  "title": "addproperty.png",
+  "version": {
+    "by": {
+      "type": "known",
+      "username": "rae6",
+      "userKey": "2c9f81f87be2b373017dc8d7b9750000",
+      "profilePicture": {
+        "path": "/images/icons/profilepics/default.svg",
+        "width": 48,
+        "height": 48,
+        "isDefault": true
+      },
+      "displayName": "Ranveersinha A.",
+      "_links": {
+        "self": "https://docs.nomagic.com/rest/api/user?key=2c9f81f87be2b373017dc8d7b9750000"
+      },
+      "_expandable": {
+        "status": ""
+      }
+    },
+    "when": "2025-05-05T09:17:17.291+02:00",
+    "message": "",
+    "number": 1,
+    "minorEdit": false,
+    "hidden": false,
+    "_links": {
+      "self": "https://docs.nomagic.com/rest/experimental/content/227169664/version/1"
+    },
+    "_expandable": {
+      "content": "/rest/api/content/227169664"
+    }
+  },
+  "position": -1,
+  "container": {
+    "id": "227169660",
+    "type": "page",
+    "status": "current",
+    "title": "Creating and removing a necessary and sufficient condition",
+    "position": 14,
+    "extensions": {
+      "position": 14
+    },
+    "_links": {
+      "webui": "/spaces/MCM2024xR3/pages/227169660/Creating+and+removing+a+necessary+and+sufficient+condition",
+      "edit": "/pages/resumedraft.action?draftId=227169660",
+      "tinyui": "/x/fFWKDQ",
+      "self": "https://docs.nomagic.com/rest/api/content/227169660"
+    },
+    "_expandable": {
+      "container": "/rest/api/space/MCM2024xR3",
+      "metadata": "",
+      "operations": "",
+      "children": "/rest/api/content/227169660/child",
+      "restrictions": "/rest/api/content/227169660/restriction/byOperation",
+      "history": "/rest/api/content/227169660/history",
+      "ancestors": "",
+      "body": "",
+      "version": "",
+      "descendants": "/rest/api/content/227169660/descendant",
+      "space": "/rest/api/space/MCM2024xR3",
+      "relevantViewRestrictions": "/rest/api/content/227169660/restriction/relevantViewRestrictions"
+    }
+  },
+  "metadata": {
+    "mediaType": "image/png"
+  },
+  "extensions": {
+    "mediaType": "image/png",
+    "fileSize": 61400,
+    "comment": ""
+  },
+  "_links": {
+    "download": "/download/attachments/227169660/addproperty.png?version=1&modificationDate=1746429437291&api=v2",
+    "thumbnail": "/download/thumbnails/227169660/addproperty.png?api=v2",
+    "webui": "/spaces/MCM2024xR3/pages/227169660/Creating+and+removing+a+necessary+and+sufficient+condition?preview=%2F227169660%2F227169664%2Faddproperty.png",
+    "self": "https://docs.nomagic.com/rest/api/content/227169664"
+  },
+  "_expandable": {
+    "operations": "",
+    "children": "/rest/api/content/227169664/child",
+    "restrictions": "/rest/api/content/227169664/restriction/byOperation",
+    "history": "/rest/api/content/227169664/history",
+    "ancestors": "",
+    "body": "",
+    "descendants": "/rest/api/content/227169664/descendant",
+    "space": "/rest/api/space/MCM2024xR3",
+    "relevantViewRestrictions": "/rest/api/content/227169664/restriction/relevantViewRestrictions"
+  }
+}
+````

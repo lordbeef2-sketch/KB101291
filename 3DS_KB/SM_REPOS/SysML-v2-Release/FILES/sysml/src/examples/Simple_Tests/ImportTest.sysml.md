@@ -1,0 +1,32 @@
+# OFFICIAL REPOSITORY FILE: SysML-v2-Release/sysml/src/examples/Simple Tests/ImportTest.sysml
+
+- repository: `SysML-v2-Release`
+- source_path: `sysml/src/examples/Simple Tests/ImportTest.sysml`
+- source_url: https://github.com/Systems-Modeling/SysML-v2-Release/blob/288d129c0d532065d45434bbb48a920898b719af/sysml/src/examples/Simple Tests/ImportTest.sysml
+- source_bytes: 398
+- source_sha256: `46dc93640f8c0ee70b8d27931b8276919fb541405df59950b8cbcf4759f7e0cc`
+- decoded_as: `utf-8`
+
+
+## EXACT SOURCE
+
+````sysml
+package ImportTest {
+    package Pkg1 {
+    	private import Pkg2::Pkg21::Pkg211::P211;
+    	private import Pkg2::Pkg21::*;
+    	private import Pkg211::*::**;
+        part p11 : Pkg211::P211;
+        part def P12;
+    }
+
+    package Pkg2 {
+        private import Pkg1::*;
+        package Pkg21 {
+        	package Pkg211 {
+        		part def P211 :> P12;
+        	}
+        }
+    }
+}
+````

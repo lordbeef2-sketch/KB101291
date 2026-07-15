@@ -1,0 +1,154 @@
+# OFFICIAL REPOSITORY FILE: SysML-v2-Pilot-Implementation/org.omg.sysml.model/src/main/java/org/omg/sysml/lang/sysml/ActionUsage.java
+
+- repository: `SysML-v2-Pilot-Implementation`
+- source_path: `org.omg.sysml.model/src/main/java/org/omg/sysml/lang/sysml/ActionUsage.java`
+- source_url: https://github.com/Systems-Modeling/SysML-v2-Pilot-Implementation/blob/fa709f28dfd49dfdb7ee83e4e19da2f57e0eb3aa/org.omg.sysml.model/src/main/java/org/omg/sysml/lang/sysml/ActionUsage.java
+- source_bytes: 6559
+- source_sha256: `e0ea32998b31bbcf1b94bc228aa65b067930082364c2d3c0b28991aa5d18a4c8`
+- decoded_as: `utf-8`
+
+
+## EXACT SOURCE
+
+````java
+/**
+ */
+package org.omg.sysml.lang.sysml;
+
+import org.eclipse.emf.common.util.EList;
+
+/**
+ * <!-- begin-user-doc -->
+ * A representation of the model object '<em><b>Action Usage</b></em>'.
+ * <!-- end-user-doc -->
+ *
+ * <!-- begin-model-doc -->
+ * <p>An <code>ActionUsage</code> is a <code>Usage</code> that is also a <code>Step</code>, and, so, is typed by a <code>Behavior</code>. Nominally, if the type is an <code>ActionDefinition</code>, an <code>ActionUsage</code> is a <code>Usage</code> of that <code>ActionDefinition</code> within a system. However, other kinds of kernel <code>Behaviors</code> are also allowed, to permit use of <code>Behaviors</code> from the Kernel Model Libraries.</p>
+ * 
+ * isSubactionUsage() implies
+ *     specializesFromLibrary('Actions::Action::subactions')
+ * specializesFromLibrary('Actions::actions')
+ * isComposite and owningType <> null and
+ * (owningType.oclIsKindOf(PartDefinition) or
+ *  owningType.oclIsKindOf(PartUsage)) implies
+ *     specializesFromLibrary('Parts::Part::ownedActions')
+ * owningFeatureMembership <> null and
+ * owningFeatureMembership.oclIsKindOf(StateSubactionMembership) implies
+ *     let kind : StateSubactionKind = 
+ *         owningFeatureMembership.oclAsType(StateSubactionMembership).kind in
+ *     if kind = StateSubactionKind::entry then
+ *         redefinesFromLibrary('States::StateAction::entryAction')
+ *     else if kind = StateSubactionKind::do then
+ *         redefinesFromLibrary('States::StateAction::doAction')
+ *     else
+ *         redefinesFromLibrary('States::StateAction::exitAction')
+ *     endif endif
+ * <!-- end-model-doc -->
+ *
+ * <p>
+ * The following features are supported:
+ * </p>
+ * <ul>
+ *   <li>{@link org.omg.sysml.lang.sysml.ActionUsage#getActionDefinition <em>Action Definition</em>}</li>
+ * </ul>
+ *
+ * @see org.omg.sysml.lang.sysml.SysMLPackage#getActionUsage()
+ * @model
+ * @generated
+ */
+public interface ActionUsage extends OccurrenceUsage, Step {
+	/**
+	 * Returns the value of the '<em><b>Action Definition</b></em>' reference list.
+	 * The list contents are of type {@link org.omg.sysml.lang.sysml.Behavior}.
+	 * <p>
+	 * This feature redefines the following features:
+	 * </p>
+	 * <ul>
+	 *   <li>'{@link org.omg.sysml.lang.sysml.Step#getBehavior() <em>Behavior</em>}'</li>
+	 *   <li>'{@link org.omg.sysml.lang.sysml.OccurrenceUsage#getOccurrenceDefinition() <em>Occurrence Definition</em>}'</li>
+	 * </ul>
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * <p>The <code>Behaviors</code> that are the <code>types</code> of this <code>ActionUsage</code>. Nominally, these would be <code>ActionDefinitions</code>, but other kinds of Kernel <code>Behaviors</code> are also allowed, to permit use of <code>Behaviors</code> from the Kernel Model Libraries.</p> 
+	 * 
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Action Definition</em>' reference list.
+	 * @see org.omg.sysml.lang.sysml.SysMLPackage#getActionUsage_ActionDefinition()
+	 * @model transient="true" volatile="true" derived="true"
+	 *        annotation="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName body='definedAction'"
+	 *        annotation="redefines"
+	 *        annotation="http://www.omg.org/spec/SysML"
+	 * @generated
+	 */
+	EList<Behavior> getActionDefinition();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * <p>Return the owned input <code>parameters</code> of this <code>ActionUsage</code>.</p>
+	 * input->select(f | f.owner = self)
+	 * <!-- end-model-doc -->
+	 * @model ordered="false"
+	 *        annotation="http://www.omg.org/spec/SysML"
+	 * @generated
+	 */
+	EList<Feature> inputParameters();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * <p>Return the <code>i</code>-th owned input <code>parameter</code> of the <code>ActionUsage</code>. Return null if the <code>ActionUsage</code> has less than <code>i</code> owned input <code>parameters</code>.</p>
+	 * if inputParameters()->size() < i then null
+	 * else inputParameters()->at(i)
+	 * endif
+	 * <!-- end-model-doc -->
+	 * @model ordered="false" iRequired="true" iOrdered="false"
+	 *        annotation="http://www.omg.org/spec/SysML"
+	 * @generated
+	 */
+	Feature inputParameter(int i);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * <p>Return the <code>i</code>-th argument <code>Expression</code> of an <code>ActionUsage</code>, defined as the <code>value</code> <code>Expression</code> of the <code>FeatureValue</code> of the <code>i</code>-th owned input <code>parameter</code> of the <code>ActionUsage</code>. Return null if the <code>ActionUsage</code> has less than <code>i</code> owned input <code>parameters</code> or the <code>i</code>-th owned input <code>parameter</code> has no <code>FeatureValue</code>.</p>
+	 * if inputParameter(i) = null then null
+	 * else
+	 *     let featureValue : Sequence(FeatureValue) = inputParameter(i).
+	 *         ownedMembership->select(oclIsKindOf(FeatureValue)) in
+	 *     if featureValue->isEmpty() then null
+	 *     else featureValue->at(1).value
+	 *     endif
+	 * endif
+	 * <!-- end-model-doc -->
+	 * @model ordered="false" iRequired="true" iOrdered="false"
+	 *        annotation="http://www.omg.org/spec/SysML"
+	 * @generated
+	 */
+	Expression argument(int i);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * <p>Check if this <code>ActionUsage</code> is composite and has an <code>owningType</code> that is an <code>ActionDefinition</code> or <code>ActionUsage</code> but is <em>not</em> the <code>entryAction</code> or <code>exitAction</em></code> of a <code>StateDefinition</code> or <code>StateUsage</code>. If so, then it represents an <code><em>Action</em></code> that is a <code><em>subaction</em></code> of another <code><em>Action</em></code>.</p>
+	 * isComposite and owningType <> null and
+	 * (owningType.oclIsKindOf(ActionDefinition) or
+	 *  owningType.oclIsKindOf(ActionUsage)) and
+	 * (owningFeatureMembership.oclIsKindOf(StateSubactionMembership) implies
+	 *  owningFeatureMembership.oclAsType(StateSubactionMembership).kind = 
+	 *     StateSubactionKind::do)
+	 * <!-- end-model-doc -->
+	 * @model kind="operation" required="true" ordered="false"
+	 *        annotation="http://www.omg.org/spec/SysML"
+	 * @generated
+	 */
+	boolean isSubactionUsage();
+
+} // ActionUsage
+
+````

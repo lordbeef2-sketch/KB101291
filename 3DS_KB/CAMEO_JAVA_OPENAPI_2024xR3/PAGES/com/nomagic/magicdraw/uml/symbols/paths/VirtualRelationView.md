@@ -1,0 +1,722 @@
+# JAVA OPENAPI: VirtualRelationView (2024x Refresh3 API)
+
+- source_url: https://jdocs.nomagic.com/2024xRefresh3/com/nomagic/magicdraw/uml/symbols/paths/VirtualRelationView.html
+- source_path: `com/nomagic/magicdraw/uml/symbols/paths/VirtualRelationView.html`
+- source_sha256: `3b62bf3fb151b2c61f4da0e9121bdfdc4f2408a176dd9060d4c869a01554f432`
+- captured_utc: `2026-07-14T16:56:01.152521+00:00`
+
+## NORMALIZED JAVADOC CONTENT
+
+======== START OF CLASS DATA ========
+
+Package [com.nomagic.magicdraw.uml.symbols.paths](package-summary.html)
+
+## Class VirtualRelationView
+
+[java.lang.Object](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html)
+com.nomagic.magicdraw.uml.MDElementImpl
+[com.nomagic.magicdraw.uml.symbols.PresentationElement](../PresentationElement.html)
+[com.nomagic.magicdraw.uml.symbols.paths.PathConnector](PathConnector.html)
+[com.nomagic.magicdraw.uml.symbols.paths.PathElement](PathElement.html)
+com.nomagic.magicdraw.uml.symbols.paths.ContainerLinkView
+com.nomagic.magicdraw.uml.symbols.paths.VirtualRelationView
+
+All Implemented Interfaces:
+`[BaseElement](../../BaseElement.html)`, `[MDElement](../../MDElement.html)`, `[ModelElementProvider](../../ModelElementProvider.html)`, `com.nomagic.magicdraw.uml.symbols.LabelOwner`, `com.nomagic.magicdraw.uml.symbols.LineJumpDrawer`, `com.nomagic.magicdraw.uml.symbols.PropertyBasedPresentationElement`, `com.nomagic.magicdraw.uml.symbols.SuspendShapeAutoResizeModeProvider`, `[NameOwner](../../../utils/NameOwner.html)`, `[PropertyChangeListener](https://docs.oracle.com/en/java/javase/17/docs/api/java.desktop/java/beans/PropertyChangeListener.html)`, `[Cloneable](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Cloneable.html)`, `[Comparable](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Comparable.html)`, `[EventListener](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/EventListener.html)`
+
+@OpenApipublic classVirtualRelationView
+extends com.nomagic.magicdraw.uml.symbols.paths.ContainerLinkView
+implements com.nomagic.magicdraw.uml.symbols.PropertyBasedPresentationElement
+
+Virtual relation symbol
+
+=========== FIELD SUMMARY =========== 
+Field Summary
+Fields inherited from class com.nomagic.magicdraw.uml.symbols.paths.[PathElement](PathElement.html)
+`[BEZIER](PathElement.html#BEZIER), [LINE_STYLE](PathElement.html#LINE_STYLE), [OBLIQUE](PathElement.html#OBLIQUE), [RECTILINEAR](PathElement.html#RECTILINEAR)`
+Fields inherited from class com.nomagic.magicdraw.uml.symbols.paths.[PathConnector](PathConnector.html)
+`[showsProxy](PathConnector.html#showsProxy)`
+Fields inherited from class com.nomagic.magicdraw.uml.symbols.[PresentationElement](../PresentationElement.html)
+`[DASHED_STROKE](../PresentationElement.html#DASHED_STROKE), [DEFAULT_LINE_WIDTH](../PresentationElement.html#DEFAULT_LINE_WIDTH), [DOTTED_STROKE](../PresentationElement.html#DOTTED_STROKE), [HANDLE_SIZE](../PresentationElement.html#HANDLE_SIZE), [MAX_LINE_WIDTH](../PresentationElement.html#MAX_LINE_WIDTH), [MIN_LINE_WIDTH](../PresentationElement.html#MIN_LINE_WIDTH), [peStyle](../PresentationElement.html#peStyle), [SHADOW_WIDTH](../PresentationElement.html#SHADOW_WIDTH), [SOLID_STROKE](../PresentationElement.html#SOLID_STROKE)`
+ ======== CONSTRUCTOR SUMMARY ======== 
+Constructor Summary
+Constructors
+Constructor
+Description
+`[VirtualRelationView](#%3Cinit%3E())()`
+
+`[VirtualRelationView](#%3Cinit%3E(com.nomagic.magicdraw.uml.symbols.PresentationElement))([PresentationElement](../PresentationElement.html) parent)`
+
+`[VirtualRelationView](#%3Cinit%3E(com.nomagic.magicdraw.uml.symbols.PresentationElement,java.lang.String))([PresentationElement](../PresentationElement.html) parent,
+ [String](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html) ruleKey)`
+ ========== METHOD SUMMARY =========== 
+Method Summary
+All MethodsInstance MethodsConcrete Methods
+Modifier and Type
+Method
+Description
+`void`
+`[accept](#accept(com.nomagic.magicdraw.uml.Visitor))([Visitor](../../Visitor.html) visitor)`
+Method accepts a visitor, and calls method "visit<class name>(this)" of a visitor.
+`[PresentationElement](../PresentationElement.html)`
+`[asPresentationElement](#asPresentationElement())()`
+
+`[String](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html)`
+`[constructNameTextToDisplay](#constructNameTextToDisplay())()`
+
+`protected com.nomagic.magicdraw.uml.symbols.shapes.NameLabelWrapper`
+`[createNameLabelWrapper](#createNameLabelWrapper())()`
+
+`[List](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html)<[Element](../../../../uml2/ext/magicdraw/classes/mdkernel/Element.html)>`
+`[getConnectionElements](#getConnectionElements())()`
+
+`[String](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html)`
+`[getHumanType](#getHumanType())()`
+Returns human representation of the data type
+`[String](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html)`
+`[getName](#getName())()`
+Gets container link name
+`com.dassault_systemes.modeler.foundation.image.pathicon.PathIcon`
+`[getPathIcon](#getPathIcon())()`
+
+`[String](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html)`
+`[getRuleKey](#getRuleKey())()`
+
+`void`
+`[internalSilentApply](#internalSilentApply())()`
+Silently applies all properties after initialization
+`boolean`
+`[isClientAcceptable](#isClientAcceptable(com.nomagic.magicdraw.uml.symbols.PresentationElement))([PresentationElement](../PresentationElement.html) client)`
+Checks if client is acceptable for relation
+`boolean`
+`[isCreatable](#isCreatable())()`
+Flag to indicate if relation can be created in diagram manually
+`boolean`
+`[isFixed](#isFixed())()`
+If a path tied to its supplier and client (cannot be reconnected)
+`boolean`
+`[isSupplierAcceptable](#isSupplierAcceptable(com.nomagic.magicdraw.uml.symbols.PresentationElement))([PresentationElement](../PresentationElement.html) supplier)`
+Checks if supplier is acceptable for relation
+`boolean`
+`[isTextEditable](#isTextEditable())()`
+Checks text editing flag.
+`boolean`
+`[isValid](#isValid())()`
+
+`void`
+`[propertyChange](#propertyChange(java.beans.PropertyChangeEvent))([PropertyChangeEvent](https://docs.oracle.com/en/java/javase/17/docs/api/java.desktop/java/beans/PropertyChangeEvent.html) e)`
+Listens for property change it can be: data was edited text box was edited
+`void`
+`[setRuleKey](#setRuleKey(java.lang.String))([String](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html) ruleKey)`
+Methods inherited from class com.nomagic.magicdraw.uml.symbols.paths.ContainerLinkView
+`addLabel, addPresentationElement, canAddChild, canAddInstance, clearShowsProxy, clone, createLabels, createSmartListenerConfig, editName, getLabelHandler, getManipulatedElementAt, getNameLabelBox, getNameLabelWrapper, getPathAdornmentSize, getPresentationElementAt, getPresentationElementIndex, getPresentationElements, getProxyPresentationElementsStream, getSupplierConnectionType, internalApplyProperties, internalUpdatePresentationElement, isChildVisible, isLabelWrapText, isNameWrapped, isShowNameBox, layoutLabelOnNotifyBreakPointsChanged, notifyBreakPointsChanged, notifyBreakPointsChangedForElement, paintChildren, recursiveAutosize, removeLabel, removePresentationElement, sAddPresentationElement, setLocationForChild, setName, setNameResizeLabel, setNameWrapped, setPresentationElements, setShowNameBox, setSuspendLabelAutoDisplayMode, setSuspendShapeAutoResizeMode, setTextEditable, sRemovePresentationElement, sSetElement, sSetNameWrapped, sSetPresentationElements, sSetShowNameBox, sSetSuspendLabelAutoDisplayMode, updateChildren, updateNameBox`
+Methods inherited from class com.nomagic.magicdraw.uml.symbols.paths.[PathElement](PathElement.html)
+`[addConnectedPathElement](PathElement.html#addConnectedPathElement(com.nomagic.magicdraw.uml.symbols.paths.PathElement)), [addLineJumps](PathElement.html#addLineJumps(java.awt.geom.GeneralPath,java.awt.Point,java.awt.Point,java.awt.Point)), [applyStrokeForLineDrawing](PathElement.html#applyStrokeForLineDrawing(com.nomagic.magicdraw.uml.symbols.PresentationElement,java.awt.Graphics2D,boolean,java.awt.BasicStroke)), [askDeleteDataConfirmation](PathElement.html#askDeleteDataConfirmation()), [atInsert](PathElement.html#atInsert()), [breakPointsChanged](PathElement.html#breakPointsChanged(java.util.List,java.util.List)), [cacheActualDrawPoints](PathElement.html#cacheActualDrawPoints(java.awt.Point,java.awt.Point,java.util.List)), [cacheValues](PathElement.html#cacheValues(java.awt.Point,java.awt.Point,java.awt.Point,java.awt.Point,java.util.List)), [calculatePathBounds](PathElement.html#calculatePathBounds(java.awt.Point,java.awt.Point,java.util.List)), [canChangeClient](PathElement.html#canChangeClient()), [canChangeLineStyle](PathElement.html#canChangeLineStyle()), [canChangeSupplier](PathElement.html#canChangeSupplier()), [canClearBreakPoints](PathElement.html#canClearBreakPoints()), [clearClientTranslation](PathElement.html#clearClientTranslation()), [clearRegisteredLineJumpInfos](PathElement.html#clearRegisteredLineJumpInfos()), [clearSupplierTranslation](PathElement.html#clearSupplierTranslation()), [connectModelElement](PathElement.html#connectModelElement(com.nomagic.magicdraw.uml.symbols.paths.ConnectModelElementParticipant)), [coversPoint](PathElement.html#coversPoint(int,int,com.nomagic.magicdraw.uml.symbols.IntersectionKind)), [createFillStrategy](PathElement.html#createFillStrategy()), [dispose](PathElement.html#dispose()), [draw](PathElement.html#draw(com.nomagic.magicdraw.uml.symbols.DiagramPaintContext)), [draw](PathElement.html#draw(java.awt.Graphics2D,java.awt.Point,java.awt.Point,java.util.List)), [dynamicPathIcon](PathElement.html#dynamicPathIcon()), [dynamicPathIcon](PathElement.html#dynamicPathIcon(com.dassault_systemes.modeler.foundation.image.pathicon.PathIcon)), [findOwnerForElement](PathElement.html#findOwnerForElement(com.nomagic.magicdraw.uml.symbols.PresentationElement,com.dassault_systemes.modeler.foundation.model.ModelElementOwnershipContext)), [findOwnerForElement](PathElement.html#findOwnerForElement(com.nomagic.magicdraw.uml.symbols.PresentationElement,com.nomagic.magicdraw.uml.symbols.PresentationElement,com.nomagic.magicdraw.uml.symbols.PresentationElement,com.dassault_systemes.modeler.foundation.model.ModelElementOwnershipContext)), [getActualClientDrawPoint](PathElement.html#getActualClientDrawPoint()), [getActualSupplierDrawPoint](PathElement.html#getActualSupplierDrawPoint()), [getAllBreakPoints](PathElement.html#getAllBreakPoints()), [getBezierPath](PathElement.html#getBezierPath()), [getBezierPath](PathElement.html#getBezierPath(java.util.List)), [getBounds](PathElement.html#getBounds()), [getBoundsToRepaint](PathElement.html#getBoundsToRepaint()), [getBreakPoint](PathElement.html#getBreakPoint(int)), [getBreakPointCount](PathElement.html#getBreakPointCount()), [getBreakPoints](PathElement.html#getBreakPoints()), [getCachedActualClientDrawPoint](PathElement.html#getCachedActualClientDrawPoint()), [getCachedActualSupplierDrawPoint](PathElement.html#getCachedActualSupplierDrawPoint()), [getClient](PathElement.html#getClient()), [getClientConnectionType](PathElement.html#getClientConnectionType()), [getClientDrawPoint](PathElement.html#getClientDrawPoint()), [getClientPoint](PathElement.html#getClientPoint()), [getCustomClientPoint](PathElement.html#getCustomClientPoint()), [getCustomStereotypeIcon](PathElement.html#getCustomStereotypeIcon(com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Element)), [getCustomSupplierPoint](PathElement.html#getCustomSupplierPoint()), [getDefaultParentForData](PathElement.html#getDefaultParentForData()), [getIndexOfCoveredPath](PathElement.html#getIndexOfCoveredPath(int,int)), [getIndexOfCoveredPathInternal](PathElement.html#getIndexOfCoveredPathInternal(int,int,int,int)), [getIntersection](PathElement.html#getIntersection(int,int,com.nomagic.magicdraw.uml.symbols.paths.PathElement)), [getLineJumpStartAngle](PathElement.html#getLineJumpStartAngle(java.awt.Point)), [getLinkLineStyle](PathElement.html#getLinkLineStyle()), [getMiddlePoint](PathElement.html#getMiddlePoint()), [getNearestLinkPart](PathElement.html#getNearestLinkPart(int,int)), [getNearestPoint](PathElement.html#getNearestPoint(java.awt.Point)), [getNewBreakPointIndex](PathElement.html#getNewBreakPointIndex(java.awt.Point,java.util.List)), [getNewPointByTheLink](PathElement.html#getNewPointByTheLink(java.util.List,java.util.List,java.awt.Point)), [getNextEnd](PathElement.html#getNextEnd(com.nomagic.magicdraw.uml.symbols.PresentationElement)), [getNextPoint](PathElement.html#getNextPoint(java.awt.Point)), [getNotCopyBounds](PathElement.html#getNotCopyBounds()), [getOwnStyleDelegate](PathElement.html#getOwnStyleDelegate()), [getPathPainter](PathElement.html#getPathPainter()), [getPaths](PathElement.html#getPaths()), [getPointOnPath](PathElement.html#getPointOnPath(java.awt.Point,java.awt.Point,java.util.List,double)), [getPreviousPoint](PathElement.html#getPreviousPoint(java.awt.Point)), [getSupplier](PathElement.html#getSupplier()), [getSupplierDrawPoint](PathElement.html#getSupplierDrawPoint()), [getSupplierPoint](PathElement.html#getSupplierPoint()), [getSuspendShapeAutoResizeMode](PathElement.html#getSuspendShapeAutoResizeMode()), [handleRemoveBreaksAction](PathElement.html#handleRemoveBreaksAction()), [hasClientPoint](PathElement.html#hasClientPoint()), [hasManipulator](PathElement.html#hasManipulator()), [hasSharedModelElement](PathElement.html#hasSharedModelElement()), [hasSupplierPoint](PathElement.html#hasSupplierPoint()), [internalGetBoundsShape](PathElement.html#internalGetBoundsShape(com.nomagic.magicdraw.uml.symbols.ConverterToShape)), [internalGetPresentationElementStroke](PathElement.html#internalGetPresentationElementStroke(boolean,int)), [internalGetPresentationElementStroke](PathElement.html#internalGetPresentationElementStroke(boolean,int,int)), [internalGetPresentationElementStroke](PathElement.html#internalGetPresentationElementStroke(int)), [internalMovedAsToSelf](PathElement.html#internalMovedAsToSelf(int,int)), [internalSnapToGrid](PathElement.html#internalSnapToGrid(float)), [intersects](PathElement.html#intersects(int,int,int,int,com.nomagic.magicdraw.uml.symbols.IntersectionKind)), [intersectsInternal](PathElement.html#intersectsInternal(int,int,int,int)), [isAlwaysToSelf](PathElement.html#isAlwaysToSelf()), [isBezier](PathElement.html#isBezier()), [isBezierIntersects](PathElement.html#isBezierIntersects(int,int,int,int)), [isBreakable](PathElement.html#isBreakable()), [isConnectable](PathElement.html#isConnectable(com.nomagic.magicdraw.uml.symbols.PresentationElement,com.nomagic.magicdraw.uml.symbols.PresentationElement)), [isConnectable](PathElement.html#isConnectable(com.nomagic.magicdraw.uml.symbols.PresentationElement,com.nomagic.magicdraw.uml.symbols.PresentationElement,java.util.Map)), [isDrawLineJumps](PathElement.html#isDrawLineJumps()), [isLinkLineStyleDefined](PathElement.html#isLinkLineStyleDefined()), [isOblique](PathElement.html#isOblique()), [isRectilinear](PathElement.html#isRectilinear()), [isRounded](PathElement.html#isRounded()), [isSmartLayoutNeeded](PathElement.html#isSmartLayoutNeeded()), [isSnapToGrid](PathElement.html#isSnapToGrid()), [isToSelf](PathElement.html#isToSelf()), [isUseFlowLayoutLogic](PathElement.html#isUseFlowLayoutLogic()), [isVertical](PathElement.html#isVertical()), [makeRectilinear](PathElement.html#makeRectilinear()), [makeRectilinear](PathElement.html#makeRectilinear(boolean)), [moveLinkToClientParent](PathElement.html#moveLinkToClientParent(boolean)), [movePathElement](PathElement.html#movePathElement(com.nomagic.magicdraw.uml.symbols.paths.PathElement,com.nomagic.magicdraw.uml.symbols.paths.PathConnector)), [needsToMoveOtherEnd](PathElement.html#needsToMoveOtherEnd()), [nextStyle](PathElement.html#nextStyle()), [notifyRepaintManager](PathElement.html#notifyRepaintManager(boolean)), [notifyRepaintManager](PathElement.html#notifyRepaintManager(java.util.List,java.util.List)), [optimizeLoops](PathElement.html#optimizeLoops()), [paintSelf](PathElement.html#paintSelf(com.nomagic.magicdraw.uml.symbols.DiagramPaintContext)), [preDisposeOnUpdate](PathElement.html#preDisposeOnUpdate()), [prepareForLineDrawing](PathElement.html#prepareForLineDrawing(java.awt.Graphics2D,boolean)), [registerLineJumpInfos](PathElement.html#registerLineJumpInfos(int,java.awt.Point,java.util.List)), [registerLineJumpStartAngle](PathElement.html#registerLineJumpStartAngle(int,java.awt.Point,double)), [removeBreakPoints](PathElement.html#removeBreakPoints()), [removeBreaks](PathElement.html#removeBreaks(java.util.List)), [removeRedundantBreakPoints](PathElement.html#removeRedundantBreakPoints(java.util.List)), [removeUnnecessaryBreakPoints](PathElement.html#removeUnnecessaryBreakPoints()), [resetCache](PathElement.html#resetCache()), [resizeParent](PathElement.html#resizeParent()), [sAddBreakPoint](PathElement.html#sAddBreakPoint(java.awt.Point)), [sClearBreakPoints](PathElement.html#sClearBreakPoints()), [setBounds](PathElement.html#setBounds(java.awt.Rectangle)), [setBreakable](PathElement.html#setBreakable(boolean)), [setBreakPoints](PathElement.html#setBreakPoints(java.util.List)), [setCachedPathBounds](PathElement.html#setCachedPathBounds(java.awt.Rectangle)), [setClient](PathElement.html#setClient(com.nomagic.magicdraw.uml.symbols.PresentationElement)), [setClientPoint](PathElement.html#setClientPoint(java.awt.Point)), [setCustomClientPoint](PathElement.html#setCustomClientPoint(java.awt.Point)), [setCustomSupplierPoint](PathElement.html#setCustomSupplierPoint(java.awt.Point)), [setLineJumpPlace](PathElement.html#setLineJumpPlace(com.nomagic.magicdraw.uml.symbols.LineJumpPlace)), [setLinkLineStyle](PathElement.html#setLinkLineStyle(java.lang.String)), [setPathPainter](PathElement.html#setPathPainter(com.nomagic.magicdraw.uml.symbols.paths.painters.PathPainter)), [setRectilinear](PathElement.html#setRectilinear()), [setRounded](PathElement.html#setRounded(boolean)), [setSmartLayoutNeeded](PathElement.html#setSmartLayoutNeeded(boolean)), [setSupplier](PathElement.html#setSupplier(com.nomagic.magicdraw.uml.symbols.PresentationElement)), [setSupplierPoint](PathElement.html#setSupplierPoint(java.awt.Point)), [simpleSetBounds](PathElement.html#simpleSetBounds(java.awt.Rectangle)), [sSetBounds](PathElement.html#sSetBounds(java.awt.Rectangle)), [sSetBreakable](PathElement.html#sSetBreakable(boolean)), [sSetBreakPoint](PathElement.html#sSetBreakPoint(java.awt.Point,int)), [sSetBreakPoints](PathElement.html#sSetBreakPoints(java.util.List)), [sSetClient](PathElement.html#sSetClient(com.nomagic.magicdraw.uml.symbols.PresentationElement)), [sSetClientPoint](PathElement.html#sSetClientPoint(java.awt.Point)), [sSetLinkLineStyle](PathElement.html#sSetLinkLineStyle(java.lang.String)), [sSetParent](PathElement.html#sSetParent(com.nomagic.magicdraw.uml.symbols.PresentationElement)), [sSetRounded](PathElement.html#sSetRounded(boolean)), [sSetSupplier](PathElement.html#sSetSupplier(com.nomagic.magicdraw.uml.symbols.PresentationElement)), [sSetSupplierPoint](PathElement.html#sSetSupplierPoint(java.awt.Point)), [sSetSuspendShapeAutoResizeMode](PathElement.html#sSetSuspendShapeAutoResizeMode(java.lang.String)), [swapEnds](PathElement.html#swapEnds()), [translateClientPoint](PathElement.html#translateClientPoint(java.awt.Rectangle,java.awt.Rectangle)), [translateSupplierPoint](PathElement.html#translateSupplierPoint(java.awt.Rectangle,java.awt.Rectangle)), [useOtherExistingElement](PathElement.html#useOtherExistingElement())`
+Methods inherited from class com.nomagic.magicdraw.uml.symbols.paths.[PathConnector](PathConnector.html)
+`[checkShowsProxy](PathConnector.html#checkShowsProxy()), [disposeConnectedPaths](PathConnector.html#disposeConnectedPaths()), [findSymbolForEnd](PathConnector.html#findSymbolForEnd(com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Element,java.lang.Class,boolean)), [findSymbolForEnd](PathConnector.html#findSymbolForEnd(java.util.stream.Stream,boolean)), [getConnectedPathElement](PathConnector.html#getConnectedPathElement(com.dassault_systemes.modeler.foundation.model.ModelElement)), [getConnectedPathElementCount](PathConnector.html#getConnectedPathElementCount()), [getConnectedPathElements](PathConnector.html#getConnectedPathElements()), [getConnectedPathElements](PathConnector.html#getConnectedPathElements(boolean)), [getConnectedPathElements](PathConnector.html#getConnectedPathElements(boolean,boolean)), [getPreferredArrowLength](PathConnector.html#getPreferredArrowLength()), [isShowsProxy](PathConnector.html#isShowsProxy()), [movePathElement](PathConnector.html#movePathElement(com.nomagic.magicdraw.uml.symbols.paths.PathElement,boolean)), [movePathElements](PathConnector.html#movePathElements()), [removeConnectedPathElement](PathConnector.html#removeConnectedPathElement(com.nomagic.magicdraw.uml.symbols.paths.PathElement)), [sAddConnectedPathElement](PathConnector.html#sAddConnectedPathElement(com.nomagic.magicdraw.uml.symbols.paths.PathElement)), [selectPathsForMoving](PathConnector.html#selectPathsForMoving(java.util.List)), [setParent](PathConnector.html#setParent(com.nomagic.magicdraw.uml.symbols.PresentationElement)), [setVisibility](PathConnector.html#setVisibility(com.nomagic.magicdraw.uml.symbols.PresentationElementVisibility)), [sRemoveConnectedPathElement](PathConnector.html#sRemoveConnectedPathElement(com.nomagic.magicdraw.uml.symbols.paths.PathElement)), [sSetConnectedPathElements](PathConnector.html#sSetConnectedPathElements(java.util.List)), [sSetVisibility](PathConnector.html#sSetVisibility(com.nomagic.magicdraw.uml.symbols.PresentationElementVisibility)), [supportsVisibleConnectedPathElementsIfSelfInvisible](PathConnector.html#supportsVisibleConnectedPathElementsIfSelfInvisible())`
+Methods inherited from class com.nomagic.magicdraw.uml.symbols.[PresentationElement](../PresentationElement.html)
+`[addPresentationElement](../PresentationElement.html#addPresentationElement(com.nomagic.magicdraw.uml.symbols.PresentationElement)), [addPresentationElementWithoutResize](../PresentationElement.html#addPresentationElementWithoutResize(com.nomagic.magicdraw.uml.symbols.PresentationElement)), [addProperty](../PresentationElement.html#addProperty(com.nomagic.magicdraw.properties.Property)), [adjustBoundsBeforeChange](../PresentationElement.html#adjustBoundsBeforeChange(java.awt.Rectangle,boolean,java.util.Collection)), [adjustChildBounds](../PresentationElement.html#adjustChildBounds(java.awt.Rectangle,com.nomagic.magicdraw.uml.symbols.PresentationElement)), [adjustChildBoundsForMoving](../PresentationElement.html#adjustChildBoundsForMoving(java.awt.Rectangle,com.nomagic.magicdraw.uml.symbols.PresentationElement)), [alwaysShowTooltip](../PresentationElement.html#alwaysShowTooltip()), [applyProperties](../PresentationElement.html#applyProperties(com.dassault_systemes.modeler.magic.diagram.styledelegates.PresentationElementStyleChanger)), [atInsertChildren](../PresentationElement.html#atInsertChildren()), [autosizeAndResizeManipulatedParent](../PresentationElement.html#autosizeAndResizeManipulatedParent()), [autosizeAndResizeParent](../PresentationElement.html#autosizeAndResizeParent()), [beforeDelete](../PresentationElement.html#beforeDelete(com.dassault_systemes.modeler.foundation.editing.CompositeCommand,java.util.Collection)), [boundsChanged](../PresentationElement.html#boundsChanged()), [boundsChanged](../PresentationElement.html#boundsChanged(java.awt.Rectangle)), [canAddChild](../PresentationElement.html#canAddChild(com.nomagic.magicdraw.uml.BaseElement)), [canAddInstance](../PresentationElement.html#canAddInstance(com.nomagic.magicdraw.uml.BaseElement)), [canBeDisposedOnUpdate](../PresentationElement.html#canBeDisposedOnUpdate()), [canChangeElementOwner](../PresentationElement.html#canChangeElementOwner(java.util.Collection,com.nomagic.magicdraw.uml.BaseElement)), [canChangeParent](../PresentationElement.html#canChangeParent(java.util.Collection,com.nomagic.magicdraw.uml.BaseElement,boolean)), [canChangeParent](../PresentationElement.html#canChangeParent(java.util.Collection,com.nomagic.magicdraw.uml.BaseElement)), [canFill](../PresentationElement.html#canFill()), [canHavePaths](../PresentationElement.html#canHavePaths()), [changeProperties](../PresentationElement.html#changeProperties(com.dassault_systemes.modeler.magic.diagram.styledelegates.PresentationElementStyleChanger)), [checkElementOwnerOnChange](../PresentationElement.html#checkElementOwnerOnChange(com.nomagic.magicdraw.uml.symbols.PresentationElement)), [checkProxyVisibility](../PresentationElement.html#checkProxyVisibility(com.nomagic.magicdraw.uml.symbols.PresentationElementVisibility)), [childrenForMoving](../PresentationElement.html#childrenForMoving()), [collectSubManipulatedElements](../PresentationElement.html#collectSubManipulatedElements(java.util.List)), [collectSubPresentationElements](../PresentationElement.html#collectSubPresentationElements(java.util.Collection)), [collectSubPresentationElements](../PresentationElement.html#collectSubPresentationElements(java.util.Collection,java.util.function.Predicate)), [collectSubShowingPresentationElements](../PresentationElement.html#collectSubShowingPresentationElements(java.util.Collection)), [coversPoint](../PresentationElement.html#coversPoint(int,int)), [createPresentationElementStyle](../PresentationElement.html#createPresentationElementStyle()), [createPropertyChangeListener](../PresentationElement.html#createPropertyChangeListener()), [disposeChildren](../PresentationElement.html#disposeChildren()), [disposePropertyChangeListener](../PresentationElement.html#disposePropertyChangeListener()), [drawBackground](../PresentationElement.html#drawBackground(com.nomagic.magicdraw.uml.symbols.DiagramPaintContext)), [drawSymbol](../PresentationElement.html#drawSymbol(com.nomagic.magicdraw.uml.symbols.DiagramPaintContext)), [drawSymbolBackground](../PresentationElement.html#drawSymbolBackground(com.nomagic.magicdraw.uml.symbols.DiagramPaintContext)), [dynamicFillColor](../PresentationElement.html#dynamicFillColor()), [dynamicLineColor](../PresentationElement.html#dynamicLineColor()), [dynamicLineWidth](../PresentationElement.html#dynamicLineWidth()), [dynamicLineWidth](../PresentationElement.html#dynamicLineWidth(int)), [dynamicPaintShadow](../PresentationElement.html#dynamicPaintShadow()), [dynamicStroke](../PresentationElement.html#dynamicStroke()), [dynamicStroke](../PresentationElement.html#dynamicStroke(int)), [dynamicStroke](../PresentationElement.html#dynamicStroke(java.awt.BasicStroke)), [dynamicStyleFillColor](../PresentationElement.html#dynamicStyleFillColor(java.awt.Color,boolean)), [dynamicStyleLineColor](../PresentationElement.html#dynamicStyleLineColor(java.awt.Color)), [dynamicStyleTextColor](../PresentationElement.html#dynamicStyleTextColor(java.awt.Color)), [dynamicStyleTransparency](../PresentationElement.html#dynamicStyleTransparency()), [dynamicStyleTransparency](../PresentationElement.html#dynamicStyleTransparency(javax.swing.Icon)), [dynamicStyleValue](../PresentationElement.html#dynamicStyleValue(T,java.util.function.BiFunction)), [dynamicTextAlignment](../PresentationElement.html#dynamicTextAlignment(com.nomagic.magicdraw.uml.symbols.shapes.TextObject.HorizontalPosition)), [dynamicTextColor](../PresentationElement.html#dynamicTextColor()), [editName](../PresentationElement.html#editName(java.awt.event.KeyEvent)), [findOwnerForChildElement](../PresentationElement.html#findOwnerForChildElement(com.nomagic.magicdraw.uml.symbols.PresentationElement)), [findPresentationElement](../PresentationElement.html#findPresentationElement(java.util.Collection,com.dassault_systemes.modeler.foundation.model.ModelElement)), [firePropertyChange](../PresentationElement.html#firePropertyChange(java.lang.String,java.lang.Object,java.lang.Object)), [generateID](../PresentationElement.html#generateID()), [getAbstractDiagramPresentationElement](../PresentationElement.html#getAbstractDiagramPresentationElement()), [getActualElement](../PresentationElement.html#getActualElement()), [getAdditionalRenderersToNotifyOnPropertiesChange](../PresentationElement.html#getAdditionalRenderersToNotifyOnPropertiesChange()), [getAssignableModelElementsClasses](../PresentationElement.html#getAssignableModelElementsClasses()), [getBoundsShape](../PresentationElement.html#getBoundsShape(com.nomagic.magicdraw.uml.symbols.ConverterToShape)), [getBoundsWithChildrenOnEdge](../PresentationElement.html#getBoundsWithChildrenOnEdge()), [getCenterlinePoint](../PresentationElement.html#getCenterlinePoint()), [getCenterlinePointX](../PresentationElement.html#getCenterlinePointX()), [getCenterlinePointY](../PresentationElement.html#getCenterlinePointY()), [getChildPresentationElementForContextMenu](../PresentationElement.html#getChildPresentationElementForContextMenu(java.awt.Point)), [getChildrenWithSymbolProperties](../PresentationElement.html#getChildrenWithSymbolProperties()), [getConfiguration](../PresentationElement.html#getConfiguration()), [getDiagramPresentationElement](../PresentationElement.html#getDiagramPresentationElement()), [getDiagramSurface](../PresentationElement.html#getDiagramSurface()), [getDrawComparator](../PresentationElement.html#getDrawComparator()), [getDynamicConfigurations](../PresentationElement.html#getDynamicConfigurations()), [getDynamicStyleOwner](../PresentationElement.html#getDynamicStyleOwner()), [getEffectiveStyleDelegate](../PresentationElement.html#getEffectiveStyleDelegate()), [getEffectiveStyleOwner](../PresentationElement.html#getEffectiveStyleOwner()), [getElement](../PresentationElement.html#getElement()), [getElementsForRelationshipConnecting](../PresentationElement.html#getElementsForRelationshipConnecting()), [getElementToConnectRelationship](../PresentationElement.html#getElementToConnectRelationship(com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Element,boolean)), [getFillColor](../PresentationElement.html#getFillColor()), [getFont](../PresentationElement.html#getFont()), [getFontHeight](../PresentationElement.html#getFontHeight()), [getFontRenderContext](../PresentationElement.html#getFontRenderContext()), [getHumanName](../PresentationElement.html#getHumanName()), [getLineColor](../PresentationElement.html#getLineColor()), [getLineWidth](../PresentationElement.html#getLineWidth()), [getManipulatedElementAt](../PresentationElement.html#getManipulatedElementAt(java.awt.Point)), [getManipulatedElementAt](../PresentationElement.html#getManipulatedElementAt(java.awt.Point,com.nomagic.magicdraw.uml.symbols.SortManagerProvider)), [getManipulatedIntersectionWith](../PresentationElement.html#getManipulatedIntersectionWith(java.awt.Rectangle)), [getManipulatedIntersectionWith](../PresentationElement.html#getManipulatedIntersectionWith(java.awt.Rectangle,boolean)), [getManipulatedIntersectionWith](../PresentationElement.html#getManipulatedIntersectionWith(java.awt.Rectangle,boolean,com.nomagic.magicdraw.uml.symbols.IntersectionKind)), [getManipulatedIntersectionWith](../PresentationElement.html#getManipulatedIntersectionWith(java.awt.Rectangle,com.nomagic.magicdraw.uml.symbols.IntersectionKind)), [getManipulatedParent](../PresentationElement.html#getManipulatedParent()), [getManipulatedPresentationElements](../PresentationElement.html#getManipulatedPresentationElements()), [getManipulationBounds](../PresentationElement.html#getManipulationBounds(java.awt.Point)), [getManipulationPreferredDimension](../PresentationElement.html#getManipulationPreferredDimension()), [getMiddlePoint](../PresentationElement.html#getMiddlePoint(java.awt.Point)), [getMiddlePointX](../PresentationElement.html#getMiddlePointX()), [getMiddlePointX](../PresentationElement.html#getMiddlePointX(java.awt.Point)), [getMiddlePointY](../PresentationElement.html#getMiddlePointY()), [getMiddlePointY](../PresentationElement.html#getMiddlePointY(java.awt.Point)), [getMinimumDimension](../PresentationElement.html#getMinimumDimension()), [getModelElement](../PresentationElement.html#getModelElement()), [getModelElementsForRelationshipConnecting](../PresentationElement.html#getModelElementsForRelationshipConnecting()), [getModelElementToConnectRelationship](../PresentationElement.html#getModelElementToConnectRelationship(com.dassault_systemes.modeler.foundation.model.ModelElement,boolean)), [getModelElementToMove](../PresentationElement.html#getModelElementToMove()), [getNotZoomedTolerance](../PresentationElement.html#getNotZoomedTolerance()), [getObjectParent](../PresentationElement.html#getObjectParent()), [getParent](../PresentationElement.html#getParent()), [getParentSymbolStyleOwner](../PresentationElement.html#getParentSymbolStyleOwner()), [getPreferredBounds](../PresentationElement.html#getPreferredBounds()), [getPreferredDimension](../PresentationElement.html#getPreferredDimension()), [getPreferredDimensionForAutosize](../PresentationElement.html#getPreferredDimensionForAutosize()), [getPreferredSize](../PresentationElement.html#getPreferredSize()), [getPresentationElementAt](../PresentationElement.html#getPresentationElementAt(int)), [getPresentationElementAt](../PresentationElement.html#getPresentationElementAt(java.awt.Point)), [getPresentationElementAt](../PresentationElement.html#getPresentationElementAt(java.awt.Point,com.nomagic.magicdraw.uml.symbols.SortManagerProvider)), [getPresentationElementAt](../PresentationElement.html#getPresentationElementAt(java.awt.Point,com.nomagic.magicdraw.uml.symbols.SortManagerProvider,com.nomagic.magicdraw.uml.symbols.IntersectionKind)), [getPresentationElementCount](../PresentationElement.html#getPresentationElementCount()), [getPresentationElementsAt](../PresentationElement.html#getPresentationElementsAt(java.awt.Point)), [getPresentationElementsAt](../PresentationElement.html#getPresentationElementsAt(java.awt.Point,com.nomagic.magicdraw.uml.symbols.IntersectionKind)), [getPresentationElementsAt](../PresentationElement.html#getPresentationElementsAt(java.awt.Point,com.nomagic.magicdraw.uml.symbols.SortManagerProvider)), [getPresentationElementsAt](../PresentationElement.html#getPresentationElementsAt(java.awt.Point,com.nomagic.magicdraw.uml.symbols.SortManagerProvider,com.nomagic.magicdraw.uml.symbols.IntersectionKind)), [getPresentationElementStroke](../PresentationElement.html#getPresentationElementStroke()), [getPresentationElementStroke](../PresentationElement.html#getPresentationElementStroke(int)), [getProjectImpl](../PresentationElement.html#getProjectImpl()), [getProperty](../PresentationElement.html#getProperty(java.lang.String)), [getPropertyManager](../PresentationElement.html#getPropertyManager()), [getPropertyManagerName](../PresentationElement.html#getPropertyManagerName()), [getRenderer](../PresentationElement.html#getRenderer()), [getSelected](../PresentationElement.html#getSelected()), [getStroke](../PresentationElement.html#getStroke(float,int,int,float,float%5B%5D,float)), [getStroke](../PresentationElement.html#getStroke(int)), [getStroke](../PresentationElement.html#getStroke(int,int)), [getStroke](../PresentationElement.html#getStroke(int,int,int)), [getStroke](../PresentationElement.html#getStroke(int,int,int,int)), [getStroke](../PresentationElement.html#getStroke(java.awt.BasicStroke,int)), [getStyle](../PresentationElement.html#getStyle()), [getSymbolRenderer](../PresentationElement.html#getSymbolRenderer(com.nomagic.magicdraw.uml.symbols.PresentationElement)), [getTextColor](../PresentationElement.html#getTextColor()), [getTolerance](../PresentationElement.html#getTolerance()), [getVisibility](../PresentationElement.html#getVisibility()), [getVisiblePresentationElements](../PresentationElement.html#getVisiblePresentationElements()), [handleModelDelete](../PresentationElement.html#handleModelDelete()), [hasManipulatedPresentationElements](../PresentationElement.html#hasManipulatedPresentationElements()), [initialize](../PresentationElement.html#initialize()), [initializeAndAutosize](../PresentationElement.html#initializeAndAutosize()), [internalBeforeUpdate](../PresentationElement.html#internalBeforeUpdate(com.nomagic.magicdraw.uml.symbols.SymbolDecorator)), [internalCreatePropertyChangeListener](../PresentationElement.html#internalCreatePropertyChangeListener(com.nomagic.magicdraw.uml.symbols.PresentationElement.SmartListenerConfigData)), [internalGetModelElementsForRelationshipConnecting](../PresentationElement.html#internalGetModelElementsForRelationshipConnecting()), [internalGetModelElementsForRelationshipConnecting](../PresentationElement.html#internalGetModelElementsForRelationshipConnecting(com.nomagic.magicdraw.uml.symbols.PresentationElement)), [internalGetModelElementToConnectRelationship](../PresentationElement.html#internalGetModelElementToConnectRelationship(com.dassault_systemes.modeler.foundation.model.ModelElement,boolean)), [internalGetSpecificFont](../PresentationElement.html#internalGetSpecificFont()), [internalGetSpecificTextColor](../PresentationElement.html#internalGetSpecificTextColor()), [internalIsSuitableToConnectRelationship](../PresentationElement.html#internalIsSuitableToConnectRelationship(com.dassault_systemes.modeler.foundation.model.RelationshipEnd)), [internalIsSuitableToConnectRelationship](../PresentationElement.html#internalIsSuitableToConnectRelationship(com.nomagic.magicdraw.uml.symbols.PresentationElement,com.dassault_systemes.modeler.foundation.model.RelationshipEnd)), [internalSnapToGrid](../PresentationElement.html#internalSnapToGrid(java.awt.Point,float)), [intersects](../PresentationElement.html#intersects(int,int,int,int)), [invalidate](../PresentationElement.html#invalidate()), [isCanChildrenChangeEdge](../PresentationElement.html#isCanChildrenChangeEdge()), [isContentHidden](../PresentationElement.html#isContentHidden()), [isCreateElementListener](../PresentationElement.html#isCreateElementListener()), [isDetectable](../PresentationElement.html#isDetectable()), [isDisposed](../PresentationElement.html#isDisposed()), [isLayouting](../PresentationElement.html#isLayouting()), [isMovableByMoveManager](../PresentationElement.html#isMovableByMoveManager()), [isNotNull](../PresentationElement.html#isNotNull(com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Element)), [isParentOf](../PresentationElement.html#isParentOf(com.nomagic.magicdraw.uml.BaseElement)), [isParentOf](../PresentationElement.html#isParentOf(com.nomagic.magicdraw.uml.symbols.PresentationElement)), [isPreserveProportionsWhenGrowing](../PresentationElement.html#isPreserveProportionsWhenGrowing()), [isSelected](../PresentationElement.html#isSelected()), [isShowElementTypeAsLabel](../PresentationElement.html#isShowElementTypeAsLabel()), [isSortable](../PresentationElement.html#isSortable()), [isSuitableToConnectRelationship](../PresentationElement.html#isSuitableToConnectRelationship(com.dassault_systemes.modeler.foundation.model.RelationshipEnd)), [isUseFillColor](../PresentationElement.html#isUseFillColor()), [isUseFillColorByProperty](../PresentationElement.html#isUseFillColorByProperty()), [isUseGradientForFill](../PresentationElement.html#isUseGradientForFill()), [isVisible](../PresentationElement.html#isVisible()), [isVisibleInDiagram](../PresentationElement.html#isVisibleInDiagram()), [isVisibleOrShrunken](../PresentationElement.html#isVisibleOrShrunken()), [movePathElementsRecursively](../PresentationElement.html#movePathElementsRecursively()), [mustShowContextMenu](../PresentationElement.html#mustShowContextMenu()), [notifyCreated](../PresentationElement.html#notifyCreated()), [notifyDiagramFrameSizeChange](../PresentationElement.html#notifyDiagramFrameSizeChange()), [onChildAdd](../PresentationElement.html#onChildAdd(com.nomagic.magicdraw.uml.symbols.PresentationElement)), [onChildRemove](../PresentationElement.html#onChildRemove(com.nomagic.magicdraw.uml.symbols.PresentationElement)), [onDiagramSurfaceSet](../PresentationElement.html#onDiagramSurfaceSet()), [onFind](../PresentationElement.html#onFind()), [onFind](../PresentationElement.html#onFind(boolean)), [onFontChange](../PresentationElement.html#onFontChange()), [onParentChange](../PresentationElement.html#onParentChange(com.nomagic.magicdraw.uml.symbols.PresentationElement,com.nomagic.magicdraw.uml.symbols.PresentationElement)), [paintAdornments](../PresentationElement.html#paintAdornments(com.nomagic.magicdraw.uml.symbols.DiagramPaintContext)), [paintAdornmentsBackground](../PresentationElement.html#paintAdornmentsBackground(com.nomagic.magicdraw.uml.symbols.DiagramPaintContext)), [paintChildrenAndAdornments](../PresentationElement.html#paintChildrenAndAdornments(com.nomagic.magicdraw.uml.symbols.DiagramPaintContext)), [paintChildrenBackground](../PresentationElement.html#paintChildrenBackground(com.nomagic.magicdraw.uml.symbols.DiagramPaintContext)), [paintSelfBackground](../PresentationElement.html#paintSelfBackground(com.nomagic.magicdraw.uml.symbols.DiagramPaintContext)), [prepareForLineDrawing](../PresentationElement.html#prepareForLineDrawing(java.awt.Graphics2D)), [prepareForShadowDrawing](../PresentationElement.html#prepareForShadowDrawing(java.awt.Graphics2D)), [prepareForTextDrawing](../PresentationElement.html#prepareForTextDrawing(java.awt.Graphics2D)), [recreateListeners](../PresentationElement.html#recreateListeners()), [registerInSortManager](../PresentationElement.html#registerInSortManager()), [rememberBounds](../PresentationElement.html#rememberBounds()), [rememberBounds](../PresentationElement.html#rememberBounds(java.awt.Rectangle)), [removeFromSortManager](../PresentationElement.html#removeFromSortManager()), [removeItSelfOnUpdate](../PresentationElement.html#removeItSelfOnUpdate()), [sAddPresentationElement](../PresentationElement.html#sAddPresentationElement(com.nomagic.magicdraw.uml.symbols.PresentationElement)), [selectChildrenForMoving](../PresentationElement.html#selectChildrenForMoving()), [selectObjectsForMoving](../PresentationElement.html#selectObjectsForMoving()), [setAllSelected](../PresentationElement.html#setAllSelected(boolean)), [setBounds](../PresentationElement.html#setBounds(int,int,int,int)), [setCreateElementListener](../PresentationElement.html#setCreateElementListener(boolean)), [setDummyResizeMode](../PresentationElement.html#setDummyResizeMode(boolean)), [setElement](../PresentationElement.html#setElement(com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Element)), [setFillColor](../PresentationElement.html#setFillColor(java.awt.Color)), [setFont](../PresentationElement.html#setFont(java.awt.Font)), [setLayouting](../PresentationElement.html#setLayouting(boolean)), [setLineColor](../PresentationElement.html#setLineColor(java.awt.Color)), [setLineWidth](../PresentationElement.html#setLineWidth(int)), [setLoadedVisibility](../PresentationElement.html#setLoadedVisibility(boolean)), [setLocation](../PresentationElement.html#setLocation(int,int)), [setLocation](../PresentationElement.html#setLocation(java.awt.Point)), [setModelElement](../PresentationElement.html#setModelElement(com.dassault_systemes.modeler.foundation.model.ModelElement)), [setNeedRecreateListeners](../PresentationElement.html#setNeedRecreateListeners(boolean)), [setPropertyManagerName](../PresentationElement.html#setPropertyManagerName(java.lang.String)), [setSelected](../PresentationElement.html#setSelected(boolean)), [setSelected](../PresentationElement.html#setSelected(java.util.List)), [setSize](../PresentationElement.html#setSize(int,int)), [setSize](../PresentationElement.html#setSize(com.nomagic.ui.UnmodifiableDimension)), [setSize](../PresentationElement.html#setSize(java.awt.Dimension)), [setTextColor](../PresentationElement.html#setTextColor(java.awt.Color)), [setUseFillColor](../PresentationElement.html#setUseFillColor(boolean)), [setVisible](../PresentationElement.html#setVisible(boolean)), [silentApply](../PresentationElement.html#silentApply()), [silentApply](../PresentationElement.html#silentApply(boolean)), [simpleSetBounds](../PresentationElement.html#simpleSetBounds(int,int,int,int)), [snapToGrid](../PresentationElement.html#snapToGrid(java.awt.Point,float)), [snapToGrid](../PresentationElement.html#snapToGrid(java.awt.Rectangle,float)), [snapViewToGrid](../PresentationElement.html#snapViewToGrid(float)), [sortObjectsByX](../PresentationElement.html#sortObjectsByX(java.util.List)), [sortObjectsByY](../PresentationElement.html#sortObjectsByY(java.util.List)), [sSetBounds](../PresentationElement.html#sSetBounds(int,int,int,int)), [sSetLocation](../PresentationElement.html#sSetLocation(int,int)), [sSetLocation](../PresentationElement.html#sSetLocation(java.awt.Point)), [sSetModelElement](../PresentationElement.html#sSetModelElement(com.dassault_systemes.modeler.foundation.model.ModelElement)), [sSetParentForAll](../PresentationElement.html#sSetParentForAll(java.util.Collection)), [sSetSize](../PresentationElement.html#sSetSize(int,int)), [sSetSize](../PresentationElement.html#sSetSize(com.nomagic.ui.UnmodifiableDimension)), [sSetSize](../PresentationElement.html#sSetSize(java.awt.Dimension)), [sSetVisible](../PresentationElement.html#sSetVisible(boolean)), [tryToDeleteModelElementUponRemoval](../PresentationElement.html#tryToDeleteModelElementUponRemoval()), [update](../PresentationElement.html#update()), [updateAfterLoad](../PresentationElement.html#updateAfterLoad()), [updateLabelsIgnoringSuspendableLater](../PresentationElement.html#updateLabelsIgnoringSuspendableLater(java.util.Collection)), [updateLater](../PresentationElement.html#updateLater()), [updateModelByView](../PresentationElement.html#updateModelByView()), [updateModelByViewInternal](../PresentationElement.html#updateModelByViewInternal()), [updateViewAfterPropertyChange](../PresentationElement.html#updateViewAfterPropertyChange()), [useParentProperties](../PresentationElement.html#useParentProperties()), [useParentStyle](../PresentationElement.html#useParentStyle())`
+Methods inherited from class com.nomagic.magicdraw.uml.MDElementImpl
+`accept, addPropertyChangeListener, canAdd, canAddChild, canBeDeleted, canDeleteChild, compareTo, createSortKeys, getClassType, getID, getProjectProvider, getResourceID, getSortKeys, hasListeners, isEditable, removeAllParents, removeAllPropertyChangeListeners, removePropertyChangeListener, setID, setProjectProvider, setResourceIDProvider, sGetID, toString`
+Methods inherited from class java.lang.[Object](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html)
+`[equals](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#equals(java.lang.Object)), [finalize](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#finalize()), [getClass](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#getClass()), [hashCode](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#hashCode()), [notify](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#notify()), [notifyAll](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#notifyAll()), [wait](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#wait()), [wait](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#wait(long)), [wait](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#wait(long,int))`
+Methods inherited from interface com.nomagic.magicdraw.uml.[BaseElement](../../BaseElement.html)
+`[canAdd](../../BaseElement.html#canAdd(com.nomagic.magicdraw.uml.BaseElement)), [isSelfChangeable](../../BaseElement.html#isSelfChangeable())`
+Methods inherited from interface com.nomagic.magicdraw.uml.symbols.LabelOwner
+`getElement, getModelElement`
+Methods inherited from interface com.nomagic.magicdraw.uml.symbols.LineJumpDrawer
+`getLineWidth`
+Methods inherited from interface com.nomagic.magicdraw.uml.[MDElement](../../MDElement.html)
+`[getProject](../../MDElement.html#getProject())`
+Methods inherited from interface com.nomagic.magicdraw.uml.symbols.PropertyBasedPresentationElement
+`addProperty, getProperty, getPropertyManager`
+
+========= CONSTRUCTOR DETAIL ======== 
+Constructor Details
+VirtualRelationView
+public VirtualRelationView()
+VirtualRelationView
+public VirtualRelationView(@CheckForNull
+ [PresentationElement](../PresentationElement.html) parent)
+VirtualRelationView
+public VirtualRelationView(@CheckForNull
+ [PresentationElement](../PresentationElement.html) parent,
+ @CheckForNull
+ [String](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html) ruleKey)
+ ============ METHOD DETAIL ========== 
+Method Details
+internalSilentApply
+public void internalSilentApply()
+Description copied from class: `[PresentationElement](../PresentationElement.html#internalSilentApply())`
+Silently applies all properties after initialization
+Overrides:
+`internalSilentApply` in class `com.nomagic.magicdraw.uml.symbols.paths.ContainerLinkView`
+isClientAcceptable
+public boolean isClientAcceptable([PresentationElement](../PresentationElement.html) client)
+Checks if client is acceptable for relation
+Parameters:
+`client` - client
+Returns:
+true if acceptable, else false
+isCreatable
+public boolean isCreatable()
+Flag to indicate if relation can be created in diagram manually
+Returns:
+true if can be created, else false
+isSupplierAcceptable
+public boolean isSupplierAcceptable([PresentationElement](../PresentationElement.html) supplier)
+Checks if supplier is acceptable for relation
+Parameters:
+`supplier` - supplier
+Returns:
+true if acceptable, else false
+getRuleKey
+public [String](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html) getRuleKey()
+isValid
+public boolean isValid()
+getConnectionElements
+public [List](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html)<[Element](../../../../uml2/ext/magicdraw/classes/mdkernel/Element.html)> getConnectionElements()
+setRuleKey
+public void setRuleKey(@CheckForNull
+ [String](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html) ruleKey)
+isFixed
+public boolean isFixed()
+Description copied from class: `[PathElement](PathElement.html#isFixed())`
+If a path tied to its supplier and client (cannot be reconnected)
+Overrides:
+`[isFixed](PathElement.html#isFixed())` in class `[PathElement](PathElement.html)`
+Returns:
+true, if it can be reconnected, else false
+accept
+public void accept([Visitor](../../Visitor.html) visitor)
+ throws [Exception](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Exception.html)
+Description copied from interface: `[MDElement](../../MDElement.html#accept(com.nomagic.magicdraw.uml.Visitor))`
+Method accepts a visitor, and calls method "visit<class name>(this)" of a visitor.
+ See "Visitor" pattern for more details.
+Specified by:
+`[accept](../../MDElement.html#accept(com.nomagic.magicdraw.uml.Visitor))` in interface `[MDElement](../../MDElement.html)`
+Overrides:
+`accept` in class `com.nomagic.magicdraw.uml.symbols.paths.ContainerLinkView`
+Parameters:
+`visitor` - which visits this element.
+Throws:
+`[Exception](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Exception.html)`
+isTextEditable
+public boolean isTextEditable()
+Description copied from class: `[PresentationElement](../PresentationElement.html#isTextEditable())`
+Checks text editing flag.
+Overrides:
+`[isTextEditable](../PresentationElement.html#isTextEditable())` in class `[PresentationElement](../PresentationElement.html)`
+Returns:
+`true` if the object view text is editable; `false` otherwise.
+getPathIcon
+@CheckForNullpublic com.dassault_systemes.modeler.foundation.image.pathicon.PathIcon getPathIcon()
+Overrides:
+`[getPathIcon](PathElement.html#getPathIcon())` in class `[PathElement](PathElement.html)`
+createNameLabelWrapper
+protected com.nomagic.magicdraw.uml.symbols.shapes.NameLabelWrapper createNameLabelWrapper()
+Overrides:
+`createNameLabelWrapper` in class `com.nomagic.magicdraw.uml.symbols.paths.ContainerLinkView`
+getName
+public [String](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html) getName()
+Description copied from class: `com.nomagic.magicdraw.uml.symbols.paths.ContainerLinkView`
+Gets container link name
+Specified by:
+`[getName](../../MDElement.html#getName())` in interface `[MDElement](../../MDElement.html)`
+Specified by:
+`[getName](../../../utils/NameOwner.html#getName())` in interface `[NameOwner](../../../utils/NameOwner.html)`
+Overrides:
+`getName` in class `com.nomagic.magicdraw.uml.symbols.paths.ContainerLinkView`
+Returns:
+container link name
+getHumanType
+public [String](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html) getHumanType()
+Description copied from class: `[PresentationElement](../PresentationElement.html#getHumanType())`
+Returns human representation of the data type
+Specified by:
+`[getHumanType](../../BaseElement.html#getHumanType())` in interface `[BaseElement](../../BaseElement.html)`
+Overrides:
+`[getHumanType](../PresentationElement.html#getHumanType())` in class `[PresentationElement](../PresentationElement.html)`
+Returns:
+the name of the data
+constructNameTextToDisplay
+public [String](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html) constructNameTextToDisplay()
+Overrides:
+`constructNameTextToDisplay` in class `com.nomagic.magicdraw.uml.symbols.paths.ContainerLinkView`
+Returns:
+pure name text for displaying
+propertyChange
+public void propertyChange([PropertyChangeEvent](https://docs.oracle.com/en/java/javase/17/docs/api/java.desktop/java/beans/PropertyChangeEvent.html) e)
+Description copied from class: `[PresentationElement](../PresentationElement.html#propertyChange(java.beans.PropertyChangeEvent))`
+Listens for property change it can be: data was edited text box was edited
+Specified by:
+`[propertyChange](https://docs.oracle.com/en/java/javase/17/docs/api/java.desktop/java/beans/PropertyChangeListener.html#propertyChange(java.beans.PropertyChangeEvent))` in interface `[PropertyChangeListener](https://docs.oracle.com/en/java/javase/17/docs/api/java.desktop/java/beans/PropertyChangeListener.html)`
+Overrides:
+`[propertyChange](../PresentationElement.html#propertyChange(java.beans.PropertyChangeEvent))` in class `[PresentationElement](../PresentationElement.html)`
+asPresentationElement
+public [PresentationElement](../PresentationElement.html) asPresentationElement()
+Specified by:
+`asPresentationElement` in interface `com.nomagic.magicdraw.uml.symbols.LabelOwner`
+Specified by:
+`asPresentationElement` in interface `com.nomagic.magicdraw.uml.symbols.PropertyBasedPresentationElement`
+Returns:
+converts itself to [`PresentationElement`](../PresentationElement.html)
+
+========= END OF CLASS DATA =========
+
+## EXACT JAVADOC MAIN HTML
+
+````html
+<main role="main">
+<!-- ======== START OF CLASS DATA ======== -->
+<div class="header">
+<div class="sub-title"><span class="package-label-in-type">Package</span> <a href="package-summary.html">com.nomagic.magicdraw.uml.symbols.paths</a></div>
+<h1 class="title" title="Class VirtualRelationView">Class VirtualRelationView</h1>
+</div>
+<div class="inheritance" title="Inheritance Tree"><a class="external-link" href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang">java.lang.Object</a>
+<div class="inheritance">com.nomagic.magicdraw.uml.MDElementImpl
+<div class="inheritance"><a href="../PresentationElement.html" title="class in com.nomagic.magicdraw.uml.symbols">com.nomagic.magicdraw.uml.symbols.PresentationElement</a>
+<div class="inheritance"><a href="PathConnector.html" title="class in com.nomagic.magicdraw.uml.symbols.paths">com.nomagic.magicdraw.uml.symbols.paths.PathConnector</a>
+<div class="inheritance"><a href="PathElement.html" title="class in com.nomagic.magicdraw.uml.symbols.paths">com.nomagic.magicdraw.uml.symbols.paths.PathElement</a>
+<div class="inheritance">com.nomagic.magicdraw.uml.symbols.paths.ContainerLinkView
+<div class="inheritance">com.nomagic.magicdraw.uml.symbols.paths.VirtualRelationView</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<section class="class-description" id="class-description">
+<dl class="notes">
+<dt>All Implemented Interfaces:</dt>
+<dd><code><a href="../../BaseElement.html" title="interface in com.nomagic.magicdraw.uml">BaseElement</a></code>, <code><a href="../../MDElement.html" title="interface in com.nomagic.magicdraw.uml">MDElement</a></code>, <code><a href="../../ModelElementProvider.html" title="interface in com.nomagic.magicdraw.uml">ModelElementProvider</a></code>, <code>com.nomagic.magicdraw.uml.symbols.LabelOwner</code>, <code>com.nomagic.magicdraw.uml.symbols.LineJumpDrawer</code>, <code>com.nomagic.magicdraw.uml.symbols.PropertyBasedPresentationElement</code>, <code>com.nomagic.magicdraw.uml.symbols.SuspendShapeAutoResizeModeProvider</code>, <code><a href="../../../utils/NameOwner.html" title="interface in com.nomagic.magicdraw.utils">NameOwner</a></code>, <code><a class="external-link" href="https://docs.oracle.com/en/java/javase/17/docs/api/java.desktop/java/beans/PropertyChangeListener.html" title="class or interface in java.beans">PropertyChangeListener</a></code>, <code><a class="external-link" href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Cloneable.html" title="class or interface in java.lang">Cloneable</a></code>, <code><a class="external-link" href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Comparable.html" title="class or interface in java.lang">Comparable</a></code>, <code><a class="external-link" href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/EventListener.html" title="class or interface in java.util">EventListener</a></code></dd>
+</dl>
+<hr/>
+<div class="type-signature"><span class="annotations">@OpenApi
+</span><span class="modifiers">public class </span><span class="element-name type-name-label">VirtualRelationView</span>
+<span class="extends-implements">extends com.nomagic.magicdraw.uml.symbols.paths.ContainerLinkView
+implements com.nomagic.magicdraw.uml.symbols.PropertyBasedPresentationElement</span></div>
+<div class="block">Virtual relation symbol</div>
+</section>
+<section class="summary">
+<ul class="summary-list">
+<!-- =========== FIELD SUMMARY =========== -->
+<li>
+<section class="field-summary" id="field-summary">
+<h2>Field Summary</h2>
+<div class="inherited-list">
+<h3 id="fields-inherited-from-class-com.nomagic.magicdraw.uml.symbols.paths.PathElement">Fields inherited from class com.nomagic.magicdraw.uml.symbols.paths.<a href="PathElement.html" title="class in com.nomagic.magicdraw.uml.symbols.paths">PathElement</a></h3>
+<code><a href="PathElement.html#BEZIER">BEZIER</a>, <a href="PathElement.html#LINE_STYLE">LINE_STYLE</a>, <a href="PathElement.html#OBLIQUE">OBLIQUE</a>, <a href="PathElement.html#RECTILINEAR">RECTILINEAR</a></code></div>
+<div class="inherited-list">
+<h3 id="fields-inherited-from-class-com.nomagic.magicdraw.uml.symbols.paths.PathConnector">Fields inherited from class com.nomagic.magicdraw.uml.symbols.paths.<a href="PathConnector.html" title="class in com.nomagic.magicdraw.uml.symbols.paths">PathConnector</a></h3>
+<code><a href="PathConnector.html#showsProxy">showsProxy</a></code></div>
+<div class="inherited-list">
+<h3 id="fields-inherited-from-class-com.nomagic.magicdraw.uml.symbols.PresentationElement">Fields inherited from class com.nomagic.magicdraw.uml.symbols.<a href="../PresentationElement.html" title="class in com.nomagic.magicdraw.uml.symbols">PresentationElement</a></h3>
+<code><a href="../PresentationElement.html#DASHED_STROKE">DASHED_STROKE</a>, <a href="../PresentationElement.html#DEFAULT_LINE_WIDTH">DEFAULT_LINE_WIDTH</a>, <a href="../PresentationElement.html#DOTTED_STROKE">DOTTED_STROKE</a>, <a href="../PresentationElement.html#HANDLE_SIZE">HANDLE_SIZE</a>, <a href="../PresentationElement.html#MAX_LINE_WIDTH">MAX_LINE_WIDTH</a>, <a href="../PresentationElement.html#MIN_LINE_WIDTH">MIN_LINE_WIDTH</a>, <a href="../PresentationElement.html#peStyle">peStyle</a>, <a href="../PresentationElement.html#SHADOW_WIDTH">SHADOW_WIDTH</a>, <a href="../PresentationElement.html#SOLID_STROKE">SOLID_STROKE</a></code></div>
+</section>
+</li>
+<!-- ======== CONSTRUCTOR SUMMARY ======== -->
+<li>
+<section class="constructor-summary" id="constructor-summary">
+<h2>Constructor Summary</h2>
+<div class="caption"><span>Constructors</span></div>
+<div class="summary-table two-column-summary">
+<div class="table-header col-first">Constructor</div>
+<div class="table-header col-last">Description</div>
+<div class="col-constructor-name even-row-color"><code><a class="member-name-link" href="#%3Cinit%3E()">VirtualRelationView</a>()</code></div>
+<div class="col-last even-row-color"> </div>
+<div class="col-constructor-name odd-row-color"><code><a class="member-name-link" href="#%3Cinit%3E(com.nomagic.magicdraw.uml.symbols.PresentationElement)">VirtualRelationView</a><wbr/>(<a href="../PresentationElement.html" title="class in com.nomagic.magicdraw.uml.symbols">PresentationElement</a> parent)</code></div>
+<div class="col-last odd-row-color"> </div>
+<div class="col-constructor-name even-row-color"><code><a class="member-name-link" href="#%3Cinit%3E(com.nomagic.magicdraw.uml.symbols.PresentationElement,java.lang.String)">VirtualRelationView</a><wbr/>(<a href="../PresentationElement.html" title="class in com.nomagic.magicdraw.uml.symbols">PresentationElement</a> parent,
+ <a class="external-link" href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang">String</a> ruleKey)</code></div>
+<div class="col-last even-row-color"> </div>
+</div>
+</section>
+</li>
+<!-- ========== METHOD SUMMARY =========== -->
+<li>
+<section class="method-summary" id="method-summary">
+<h2>Method Summary</h2>
+<div id="method-summary-table">
+<div aria-orientation="horizontal" class="table-tabs" role="tablist"><button aria-controls="method-summary-table.tabpanel" aria-selected="true" class="active-table-tab" id="method-summary-table-tab0" onclick="show('method-summary-table', 'method-summary-table', 3)" onkeydown="switchTab(event)" role="tab" tabindex="0">All Methods</button><button aria-controls="method-summary-table.tabpanel" aria-selected="false" class="table-tab" id="method-summary-table-tab2" onclick="show('method-summary-table', 'method-summary-table-tab2', 3)" onkeydown="switchTab(event)" role="tab" tabindex="-1">Instance Methods</button><button aria-controls="method-summary-table.tabpanel" aria-selected="false" class="table-tab" id="method-summary-table-tab4" onclick="show('method-summary-table', 'method-summary-table-tab4', 3)" onkeydown="switchTab(event)" role="tab" tabindex="-1">Concrete Methods</button></div>
+<div aria-labelledby="method-summary-table-tab0" id="method-summary-table.tabpanel" role="tabpanel">
+<div class="summary-table three-column-summary">
+<div class="table-header col-first">Modifier and Type</div>
+<div class="table-header col-second">Method</div>
+<div class="table-header col-last">Description</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a class="member-name-link" href="#accept(com.nomagic.magicdraw.uml.Visitor)">accept</a><wbr/>(<a href="../../Visitor.html" title="class in com.nomagic.magicdraw.uml">Visitor</a> visitor)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Method accepts a visitor, and calls method "visit&lt;class name&gt;(this)" of a visitor.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../PresentationElement.html" title="class in com.nomagic.magicdraw.uml.symbols">PresentationElement</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a class="member-name-link" href="#asPresentationElement()">asPresentationElement</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"> </div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a class="external-link" href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang">String</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a class="member-name-link" href="#constructNameTextToDisplay()">constructNameTextToDisplay</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"> </div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>protected com.nomagic.magicdraw.uml.symbols.shapes.NameLabelWrapper</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a class="member-name-link" href="#createNameLabelWrapper()">createNameLabelWrapper</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"> </div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a class="external-link" href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util">List</a>&lt;<a href="../../../../uml2/ext/magicdraw/classes/mdkernel/Element.html" title="interface in com.nomagic.uml2.ext.magicdraw.classes.mdkernel">Element</a>&gt;</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a class="member-name-link" href="#getConnectionElements()">getConnectionElements</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"> </div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a class="external-link" href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang">String</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a class="member-name-link" href="#getHumanType()">getHumanType</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Returns human representation of the data type</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a class="external-link" href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang">String</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a class="member-name-link" href="#getName()">getName</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Gets container link name</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>com.dassault_systemes.modeler.foundation.image.pathicon.PathIcon</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a class="member-name-link" href="#getPathIcon()">getPathIcon</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"> </div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a class="external-link" href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang">String</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a class="member-name-link" href="#getRuleKey()">getRuleKey</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"> </div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a class="member-name-link" href="#internalSilentApply()">internalSilentApply</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Silently applies all properties after initialization</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a class="member-name-link" href="#isClientAcceptable(com.nomagic.magicdraw.uml.symbols.PresentationElement)">isClientAcceptable</a><wbr/>(<a href="../PresentationElement.html" title="class in com.nomagic.magicdraw.uml.symbols">PresentationElement</a> client)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Checks if client is acceptable for relation</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a class="member-name-link" href="#isCreatable()">isCreatable</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Flag to indicate if relation can be created in diagram manually</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a class="member-name-link" href="#isFixed()">isFixed</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">If a path tied to its supplier and client (cannot be reconnected)</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a class="member-name-link" href="#isSupplierAcceptable(com.nomagic.magicdraw.uml.symbols.PresentationElement)">isSupplierAcceptable</a><wbr/>(<a href="../PresentationElement.html" title="class in com.nomagic.magicdraw.uml.symbols">PresentationElement</a> supplier)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Checks if supplier is acceptable for relation</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a class="member-name-link" href="#isTextEditable()">isTextEditable</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Checks text editing flag.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a class="member-name-link" href="#isValid()">isValid</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"> </div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a class="member-name-link" href="#propertyChange(java.beans.PropertyChangeEvent)">propertyChange</a><wbr/>(<a class="external-link" href="https://docs.oracle.com/en/java/javase/17/docs/api/java.desktop/java/beans/PropertyChangeEvent.html" title="class or interface in java.beans">PropertyChangeEvent</a> e)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Listens for property change it can be: data was edited text box was edited</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a class="member-name-link" href="#setRuleKey(java.lang.String)">setRuleKey</a><wbr/>(<a class="external-link" href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang">String</a> ruleKey)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"> </div>
+</div>
+</div>
+</div>
+<div class="inherited-list">
+<h3 id="methods-inherited-from-class-com.nomagic.magicdraw.uml.symbols.paths.ContainerLinkView">Methods inherited from class com.nomagic.magicdraw.uml.symbols.paths.ContainerLinkView</h3>
+<code>addLabel, addPresentationElement, canAddChild, canAddInstance, clearShowsProxy, clone, createLabels, createSmartListenerConfig, editName, getLabelHandler, getManipulatedElementAt, getNameLabelBox, getNameLabelWrapper, getPathAdornmentSize, getPresentationElementAt, getPresentationElementIndex, getPresentationElements, getProxyPresentationElementsStream, getSupplierConnectionType, internalApplyProperties, internalUpdatePresentationElement, isChildVisible, isLabelWrapText, isNameWrapped, isShowNameBox, layoutLabelOnNotifyBreakPointsChanged, notifyBreakPointsChanged, notifyBreakPointsChangedForElement, paintChildren, recursiveAutosize, removeLabel, removePresentationElement, sAddPresentationElement, setLocationForChild, setName, setNameResizeLabel, setNameWrapped, setPresentationElements, setShowNameBox, setSuspendLabelAutoDisplayMode, setSuspendShapeAutoResizeMode, setTextEditable, sRemovePresentationElement, sSetElement, sSetNameWrapped, sSetPresentationElements, sSetShowNameBox, sSetSuspendLabelAutoDisplayMode, updateChildren, updateNameBox</code></div>
+<div class="inherited-list">
+<h3 id="methods-inherited-from-class-com.nomagic.magicdraw.uml.symbols.paths.PathElement">Methods inherited from class com.nomagic.magicdraw.uml.symbols.paths.<a href="PathElement.html" title="class in com.nomagic.magicdraw.uml.symbols.paths">PathElement</a></h3>
+<code><a href="PathElement.html#addConnectedPathElement(com.nomagic.magicdraw.uml.symbols.paths.PathElement)">addConnectedPathElement</a>, <a href="PathElement.html#addLineJumps(java.awt.geom.GeneralPath,java.awt.Point,java.awt.Point,java.awt.Point)">addLineJumps</a>, <a href="PathElement.html#applyStrokeForLineDrawing(com.nomagic.magicdraw.uml.symbols.PresentationElement,java.awt.Graphics2D,boolean,java.awt.BasicStroke)">applyStrokeForLineDrawing</a>, <a href="PathElement.html#askDeleteDataConfirmation()">askDeleteDataConfirmation</a>, <a href="PathElement.html#atInsert()">atInsert</a>, <a href="PathElement.html#breakPointsChanged(java.util.List,java.util.List)">breakPointsChanged</a>, <a href="PathElement.html#cacheActualDrawPoints(java.awt.Point,java.awt.Point,java.util.List)">cacheActualDrawPoints</a>, <a href="PathElement.html#cacheValues(java.awt.Point,java.awt.Point,java.awt.Point,java.awt.Point,java.util.List)">cacheValues</a>, <a href="PathElement.html#calculatePathBounds(java.awt.Point,java.awt.Point,java.util.List)">calculatePathBounds</a>, <a href="PathElement.html#canChangeClient()">canChangeClient</a>, <a href="PathElement.html#canChangeLineStyle()">canChangeLineStyle</a>, <a href="PathElement.html#canChangeSupplier()">canChangeSupplier</a>, <a href="PathElement.html#canClearBreakPoints()">canClearBreakPoints</a>, <a href="PathElement.html#clearClientTranslation()">clearClientTranslation</a>, <a href="PathElement.html#clearRegisteredLineJumpInfos()">clearRegisteredLineJumpInfos</a>, <a href="PathElement.html#clearSupplierTranslation()">clearSupplierTranslation</a>, <a href="PathElement.html#connectModelElement(com.nomagic.magicdraw.uml.symbols.paths.ConnectModelElementParticipant)">connectModelElement</a>, <a href="PathElement.html#coversPoint(int,int,com.nomagic.magicdraw.uml.symbols.IntersectionKind)">coversPoint</a>, <a href="PathElement.html#createFillStrategy()">createFillStrategy</a>, <a href="PathElement.html#dispose()">dispose</a>, <a href="PathElement.html#draw(com.nomagic.magicdraw.uml.symbols.DiagramPaintContext)">draw</a>, <a href="PathElement.html#draw(java.awt.Graphics2D,java.awt.Point,java.awt.Point,java.util.List)">draw</a>, <a href="PathElement.html#dynamicPathIcon()">dynamicPathIcon</a>, <a href="PathElement.html#dynamicPathIcon(com.dassault_systemes.modeler.foundation.image.pathicon.PathIcon)">dynamicPathIcon</a>, <a href="PathElement.html#findOwnerForElement(com.nomagic.magicdraw.uml.symbols.PresentationElement,com.dassault_systemes.modeler.foundation.model.ModelElementOwnershipContext)">findOwnerForElement</a>, <a href="PathElement.html#findOwnerForElement(com.nomagic.magicdraw.uml.symbols.PresentationElement,com.nomagic.magicdraw.uml.symbols.PresentationElement,com.nomagic.magicdraw.uml.symbols.PresentationElement,com.dassault_systemes.modeler.foundation.model.ModelElementOwnershipContext)">findOwnerForElement</a>, <a href="PathElement.html#getActualClientDrawPoint()">getActualClientDrawPoint</a>, <a href="PathElement.html#getActualSupplierDrawPoint()">getActualSupplierDrawPoint</a>, <a href="PathElement.html#getAllBreakPoints()">getAllBreakPoints</a>, <a href="PathElement.html#getBezierPath()">getBezierPath</a>, <a href="PathElement.html#getBezierPath(java.util.List)">getBezierPath</a>, <a href="PathElement.html#getBounds()">getBounds</a>, <a href="PathElement.html#getBoundsToRepaint()">getBoundsToRepaint</a>, <a href="PathElement.html#getBreakPoint(int)">getBreakPoint</a>, <a href="PathElement.html#getBreakPointCount()">getBreakPointCount</a>, <a href="PathElement.html#getBreakPoints()">getBreakPoints</a>, <a href="PathElement.html#getCachedActualClientDrawPoint()">getCachedActualClientDrawPoint</a>, <a href="PathElement.html#getCachedActualSupplierDrawPoint()">getCachedActualSupplierDrawPoint</a>, <a href="PathElement.html#getClient()">getClient</a>, <a href="PathElement.html#getClientConnectionType()">getClientConnectionType</a>, <a href="PathElement.html#getClientDrawPoint()">getClientDrawPoint</a>, <a href="PathElement.html#getClientPoint()">getClientPoint</a>, <a href="PathElement.html#getCustomClientPoint()">getCustomClientPoint</a>, <a href="PathElement.html#getCustomStereotypeIcon(com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Element)">getCustomStereotypeIcon</a>, <a href="PathElement.html#getCustomSupplierPoint()">getCustomSupplierPoint</a>, <a href="PathElement.html#getDefaultParentForData()">getDefaultParentForData</a>, <a href="PathElement.html#getIndexOfCoveredPath(int,int)">getIndexOfCoveredPath</a>, <a href="PathElement.html#getIndexOfCoveredPathInternal(int,int,int,int)">getIndexOfCoveredPathInternal</a>, <a href="PathElement.html#getIntersection(int,int,com.nomagic.magicdraw.uml.symbols.paths.PathElement)">getIntersection</a>, <a href="PathElement.html#getLineJumpStartAngle(java.awt.Point)">getLineJumpStartAngle</a>, <a href="PathElement.html#getLinkLineStyle()">getLinkLineStyle</a>, <a href="PathElement.html#getMiddlePoint()">getMiddlePoint</a>, <a href="PathElement.html#getNearestLinkPart(int,int)">getNearestLinkPart</a>, <a href="PathElement.html#getNearestPoint(java.awt.Point)">getNearestPoint</a>, <a href="PathElement.html#getNewBreakPointIndex(java.awt.Point,java.util.List)">getNewBreakPointIndex</a>, <a href="PathElement.html#getNewPointByTheLink(java.util.List,java.util.List,java.awt.Point)">getNewPointByTheLink</a>, <a href="PathElement.html#getNextEnd(com.nomagic.magicdraw.uml.symbols.PresentationElement)">getNextEnd</a>, <a href="PathElement.html#getNextPoint(java.awt.Point)">getNextPoint</a>, <a href="PathElement.html#getNotCopyBounds()">getNotCopyBounds</a>, <a href="PathElement.html#getOwnStyleDelegate()">getOwnStyleDelegate</a>, <a href="PathElement.html#getPathPainter()">getPathPainter</a>, <a href="PathElement.html#getPaths()">getPaths</a>, <a href="PathElement.html#getPointOnPath(java.awt.Point,java.awt.Point,java.util.List,double)">getPointOnPath</a>, <a href="PathElement.html#getPreviousPoint(java.awt.Point)">getPreviousPoint</a>, <a href="PathElement.html#getSupplier()">getSupplier</a>, <a href="PathElement.html#getSupplierDrawPoint()">getSupplierDrawPoint</a>, <a href="PathElement.html#getSupplierPoint()">getSupplierPoint</a>, <a href="PathElement.html#getSuspendShapeAutoResizeMode()">getSuspendShapeAutoResizeMode</a>, <a href="PathElement.html#handleRemoveBreaksAction()">handleRemoveBreaksAction</a>, <a href="PathElement.html#hasClientPoint()">hasClientPoint</a>, <a href="PathElement.html#hasManipulator()">hasManipulator</a>, <a href="PathElement.html#hasSharedModelElement()">hasSharedModelElement</a>, <a href="PathElement.html#hasSupplierPoint()">hasSupplierPoint</a>, <a href="PathElement.html#internalGetBoundsShape(com.nomagic.magicdraw.uml.symbols.ConverterToShape)">internalGetBoundsShape</a>, <a href="PathElement.html#internalGetPresentationElementStroke(boolean,int)">internalGetPresentationElementStroke</a>, <a href="PathElement.html#internalGetPresentationElementStroke(boolean,int,int)">internalGetPresentationElementStroke</a>, <a href="PathElement.html#internalGetPresentationElementStroke(int)">internalGetPresentationElementStroke</a>, <a href="PathElement.html#internalMovedAsToSelf(int,int)">internalMovedAsToSelf</a>, <a href="PathElement.html#internalSnapToGrid(float)">internalSnapToGrid</a>, <a href="PathElement.html#intersects(int,int,int,int,com.nomagic.magicdraw.uml.symbols.IntersectionKind)">intersects</a>, <a href="PathElement.html#intersectsInternal(int,int,int,int)">intersectsInternal</a>, <a href="PathElement.html#isAlwaysToSelf()">isAlwaysToSelf</a>, <a href="PathElement.html#isBezier()">isBezier</a>, <a href="PathElement.html#isBezierIntersects(int,int,int,int)">isBezierIntersects</a>, <a href="PathElement.html#isBreakable()">isBreakable</a>, <a href="PathElement.html#isConnectable(com.nomagic.magicdraw.uml.symbols.PresentationElement,com.nomagic.magicdraw.uml.symbols.PresentationElement)">isConnectable</a>, <a href="PathElement.html#isConnectable(com.nomagic.magicdraw.uml.symbols.PresentationElement,com.nomagic.magicdraw.uml.symbols.PresentationElement,java.util.Map)">isConnectable</a>, <a href="PathElement.html#isDrawLineJumps()">isDrawLineJumps</a>, <a href="PathElement.html#isLinkLineStyleDefined()">isLinkLineStyleDefined</a>, <a href="PathElement.html#isOblique()">isOblique</a>, <a href="PathElement.html#isRectilinear()">isRectilinear</a>, <a href="PathElement.html#isRounded()">isRounded</a>, <a href="PathElement.html#isSmartLayoutNeeded()">isSmartLayoutNeeded</a>, <a href="PathElement.html#isSnapToGrid()">isSnapToGrid</a>, <a href="PathElement.html#isToSelf()">isToSelf</a>, <a href="PathElement.html#isUseFlowLayoutLogic()">isUseFlowLayoutLogic</a>, <a href="PathElement.html#isVertical()">isVertical</a>, <a href="PathElement.html#makeRectilinear()">makeRectilinear</a>, <a href="PathElement.html#makeRectilinear(boolean)">makeRectilinear</a>, <a href="PathElement.html#moveLinkToClientParent(boolean)">moveLinkToClientParent</a>, <a href="PathElement.html#movePathElement(com.nomagic.magicdraw.uml.symbols.paths.PathElement,com.nomagic.magicdraw.uml.symbols.paths.PathConnector)">movePathElement</a>, <a href="PathElement.html#needsToMoveOtherEnd()">needsToMoveOtherEnd</a>, <a href="PathElement.html#nextStyle()">nextStyle</a>, <a href="PathElement.html#notifyRepaintManager(boolean)">notifyRepaintManager</a>, <a href="PathElement.html#notifyRepaintManager(java.util.List,java.util.List)">notifyRepaintManager</a>, <a href="PathElement.html#optimizeLoops()">optimizeLoops</a>, <a href="PathElement.html#paintSelf(com.nomagic.magicdraw.uml.symbols.DiagramPaintContext)">paintSelf</a>, <a href="PathElement.html#preDisposeOnUpdate()">preDisposeOnUpdate</a>, <a href="PathElement.html#prepareForLineDrawing(java.awt.Graphics2D,boolean)">prepareForLineDrawing</a>, <a href="PathElement.html#registerLineJumpInfos(int,java.awt.Point,java.util.List)">registerLineJumpInfos</a>, <a href="PathElement.html#registerLineJumpStartAngle(int,java.awt.Point,double)">registerLineJumpStartAngle</a>, <a href="PathElement.html#removeBreakPoints()">removeBreakPoints</a>, <a href="PathElement.html#removeBreaks(java.util.List)">removeBreaks</a>, <a href="PathElement.html#removeRedundantBreakPoints(java.util.List)">removeRedundantBreakPoints</a>, <a href="PathElement.html#removeUnnecessaryBreakPoints()">removeUnnecessaryBreakPoints</a>, <a href="PathElement.html#resetCache()">resetCache</a>, <a href="PathElement.html#resizeParent()">resizeParent</a>, <a href="PathElement.html#sAddBreakPoint(java.awt.Point)">sAddBreakPoint</a>, <a href="PathElement.html#sClearBreakPoints()">sClearBreakPoints</a>, <a href="PathElement.html#setBounds(java.awt.Rectangle)">setBounds</a>, <a href="PathElement.html#setBreakable(boolean)">setBreakable</a>, <a href="PathElement.html#setBreakPoints(java.util.List)">setBreakPoints</a>, <a href="PathElement.html#setCachedPathBounds(java.awt.Rectangle)">setCachedPathBounds</a>, <a href="PathElement.html#setClient(com.nomagic.magicdraw.uml.symbols.PresentationElement)">setClient</a>, <a href="PathElement.html#setClientPoint(java.awt.Point)">setClientPoint</a>, <a href="PathElement.html#setCustomClientPoint(java.awt.Point)">setCustomClientPoint</a>, <a href="PathElement.html#setCustomSupplierPoint(java.awt.Point)">setCustomSupplierPoint</a>, <a href="PathElement.html#setLineJumpPlace(com.nomagic.magicdraw.uml.symbols.LineJumpPlace)">setLineJumpPlace</a>, <a href="PathElement.html#setLinkLineStyle(java.lang.String)">setLinkLineStyle</a>, <a href="PathElement.html#setPathPainter(com.nomagic.magicdraw.uml.symbols.paths.painters.PathPainter)">setPathPainter</a>, <a href="PathElement.html#setRectilinear()">setRectilinear</a>, <a href="PathElement.html#setRounded(boolean)">setRounded</a>, <a href="PathElement.html#setSmartLayoutNeeded(boolean)">setSmartLayoutNeeded</a>, <a href="PathElement.html#setSupplier(com.nomagic.magicdraw.uml.symbols.PresentationElement)">setSupplier</a>, <a href="PathElement.html#setSupplierPoint(java.awt.Point)">setSupplierPoint</a>, <a href="PathElement.html#simpleSetBounds(java.awt.Rectangle)">simpleSetBounds</a>, <a href="PathElement.html#sSetBounds(java.awt.Rectangle)">sSetBounds</a>, <a href="PathElement.html#sSetBreakable(boolean)">sSetBreakable</a>, <a href="PathElement.html#sSetBreakPoint(java.awt.Point,int)">sSetBreakPoint</a>, <a href="PathElement.html#sSetBreakPoints(java.util.List)">sSetBreakPoints</a>, <a href="PathElement.html#sSetClient(com.nomagic.magicdraw.uml.symbols.PresentationElement)">sSetClient</a>, <a href="PathElement.html#sSetClientPoint(java.awt.Point)">sSetClientPoint</a>, <a href="PathElement.html#sSetLinkLineStyle(java.lang.String)">sSetLinkLineStyle</a>, <a href="PathElement.html#sSetParent(com.nomagic.magicdraw.uml.symbols.PresentationElement)">sSetParent</a>, <a href="PathElement.html#sSetRounded(boolean)">sSetRounded</a>, <a href="PathElement.html#sSetSupplier(com.nomagic.magicdraw.uml.symbols.PresentationElement)">sSetSupplier</a>, <a href="PathElement.html#sSetSupplierPoint(java.awt.Point)">sSetSupplierPoint</a>, <a href="PathElement.html#sSetSuspendShapeAutoResizeMode(java.lang.String)">sSetSuspendShapeAutoResizeMode</a>, <a href="PathElement.html#swapEnds()">swapEnds</a>, <a href="PathElement.html#translateClientPoint(java.awt.Rectangle,java.awt.Rectangle)">translateClientPoint</a>, <a href="PathElement.html#translateSupplierPoint(java.awt.Rectangle,java.awt.Rectangle)">translateSupplierPoint</a>, <a href="PathElement.html#useOtherExistingElement()">useOtherExistingElement</a></code></div>
+<div class="inherited-list">
+<h3 id="methods-inherited-from-class-com.nomagic.magicdraw.uml.symbols.paths.PathConnector">Methods inherited from class com.nomagic.magicdraw.uml.symbols.paths.<a href="PathConnector.html" title="class in com.nomagic.magicdraw.uml.symbols.paths">PathConnector</a></h3>
+<code><a href="PathConnector.html#checkShowsProxy()">checkShowsProxy</a>, <a href="PathConnector.html#disposeConnectedPaths()">disposeConnectedPaths</a>, <a href="PathConnector.html#findSymbolForEnd(com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Element,java.lang.Class,boolean)">findSymbolForEnd</a>, <a href="PathConnector.html#findSymbolForEnd(java.util.stream.Stream,boolean)">findSymbolForEnd</a>, <a href="PathConnector.html#getConnectedPathElement(com.dassault_systemes.modeler.foundation.model.ModelElement)">getConnectedPathElement</a>, <a href="PathConnector.html#getConnectedPathElementCount()">getConnectedPathElementCount</a>, <a href="PathConnector.html#getConnectedPathElements()">getConnectedPathElements</a>, <a href="PathConnector.html#getConnectedPathElements(boolean)">getConnectedPathElements</a>, <a href="PathConnector.html#getConnectedPathElements(boolean,boolean)">getConnectedPathElements</a>, <a href="PathConnector.html#getPreferredArrowLength()">getPreferredArrowLength</a>, <a href="PathConnector.html#isShowsProxy()">isShowsProxy</a>, <a href="PathConnector.html#movePathElement(com.nomagic.magicdraw.uml.symbols.paths.PathElement,boolean)">movePathElement</a>, <a href="PathConnector.html#movePathElements()">movePathElements</a>, <a href="PathConnector.html#removeConnectedPathElement(com.nomagic.magicdraw.uml.symbols.paths.PathElement)">removeConnectedPathElement</a>, <a href="PathConnector.html#sAddConnectedPathElement(com.nomagic.magicdraw.uml.symbols.paths.PathElement)">sAddConnectedPathElement</a>, <a href="PathConnector.html#selectPathsForMoving(java.util.List)">selectPathsForMoving</a>, <a href="PathConnector.html#setParent(com.nomagic.magicdraw.uml.symbols.PresentationElement)">setParent</a>, <a href="PathConnector.html#setVisibility(com.nomagic.magicdraw.uml.symbols.PresentationElementVisibility)">setVisibility</a>, <a href="PathConnector.html#sRemoveConnectedPathElement(com.nomagic.magicdraw.uml.symbols.paths.PathElement)">sRemoveConnectedPathElement</a>, <a href="PathConnector.html#sSetConnectedPathElements(java.util.List)">sSetConnectedPathElements</a>, <a href="PathConnector.html#sSetVisibility(com.nomagic.magicdraw.uml.symbols.PresentationElementVisibility)">sSetVisibility</a>, <a href="PathConnector.html#supportsVisibleConnectedPathElementsIfSelfInvisible()">supportsVisibleConnectedPathElementsIfSelfInvisible</a></code></div>
+<div class="inherited-list">
+<h3 id="methods-inherited-from-class-com.nomagic.magicdraw.uml.symbols.PresentationElement">Methods inherited from class com.nomagic.magicdraw.uml.symbols.<a href="../PresentationElement.html" title="class in com.nomagic.magicdraw.uml.symbols">PresentationElement</a></h3>
+<code><a href="../PresentationElement.html#addPresentationElement(com.nomagic.magicdraw.uml.symbols.PresentationElement)">addPresentationElement</a>, <a href="../PresentationElement.html#addPresentationElementWithoutResize(com.nomagic.magicdraw.uml.symbols.PresentationElement)">addPresentationElementWithoutResize</a>, <a href="../PresentationElement.html#addProperty(com.nomagic.magicdraw.properties.Property)">addProperty</a>, <a href="../PresentationElement.html#adjustBoundsBeforeChange(java.awt.Rectangle,boolean,java.util.Collection)">adjustBoundsBeforeChange</a>, <a href="../PresentationElement.html#adjustChildBounds(java.awt.Rectangle,com.nomagic.magicdraw.uml.symbols.PresentationElement)">adjustChildBounds</a>, <a href="../PresentationElement.html#adjustChildBoundsForMoving(java.awt.Rectangle,com.nomagic.magicdraw.uml.symbols.PresentationElement)">adjustChildBoundsForMoving</a>, <a href="../PresentationElement.html#alwaysShowTooltip()">alwaysShowTooltip</a>, <a href="../PresentationElement.html#applyProperties(com.dassault_systemes.modeler.magic.diagram.styledelegates.PresentationElementStyleChanger)">applyProperties</a>, <a href="../PresentationElement.html#atInsertChildren()">atInsertChildren</a>, <a href="../PresentationElement.html#autosizeAndResizeManipulatedParent()">autosizeAndResizeManipulatedParent</a>, <a href="../PresentationElement.html#autosizeAndResizeParent()">autosizeAndResizeParent</a>, <a href="../PresentationElement.html#beforeDelete(com.dassault_systemes.modeler.foundation.editing.CompositeCommand,java.util.Collection)">beforeDelete</a>, <a href="../PresentationElement.html#boundsChanged()">boundsChanged</a>, <a href="../PresentationElement.html#boundsChanged(java.awt.Rectangle)">boundsChanged</a>, <a href="../PresentationElement.html#canAddChild(com.nomagic.magicdraw.uml.BaseElement)">canAddChild</a>, <a href="../PresentationElement.html#canAddInstance(com.nomagic.magicdraw.uml.BaseElement)">canAddInstance</a>, <a href="../PresentationElement.html#canBeDisposedOnUpdate()">canBeDisposedOnUpdate</a>, <a href="../PresentationElement.html#canChangeElementOwner(java.util.Collection,com.nomagic.magicdraw.uml.BaseElement)">canChangeElementOwner</a>, <a href="../PresentationElement.html#canChangeParent(java.util.Collection,com.nomagic.magicdraw.uml.BaseElement,boolean)">canChangeParent</a>, <a href="../PresentationElement.html#canChangeParent(java.util.Collection,com.nomagic.magicdraw.uml.BaseElement)">canChangeParent</a>, <a href="../PresentationElement.html#canFill()">canFill</a>, <a href="../PresentationElement.html#canHavePaths()">canHavePaths</a>, <a href="../PresentationElement.html#changeProperties(com.dassault_systemes.modeler.magic.diagram.styledelegates.PresentationElementStyleChanger)">changeProperties</a>, <a href="../PresentationElement.html#checkElementOwnerOnChange(com.nomagic.magicdraw.uml.symbols.PresentationElement)">checkElementOwnerOnChange</a>, <a href="../PresentationElement.html#checkProxyVisibility(com.nomagic.magicdraw.uml.symbols.PresentationElementVisibility)">checkProxyVisibility</a>, <a href="../PresentationElement.html#childrenForMoving()">childrenForMoving</a>, <a href="../PresentationElement.html#collectSubManipulatedElements(java.util.List)">collectSubManipulatedElements</a>, <a href="../PresentationElement.html#collectSubPresentationElements(java.util.Collection)">collectSubPresentationElements</a>, <a href="../PresentationElement.html#collectSubPresentationElements(java.util.Collection,java.util.function.Predicate)">collectSubPresentationElements</a>, <a href="../PresentationElement.html#collectSubShowingPresentationElements(java.util.Collection)">collectSubShowingPresentationElements</a>, <a href="../PresentationElement.html#coversPoint(int,int)">coversPoint</a>, <a href="../PresentationElement.html#createPresentationElementStyle()">createPresentationElementStyle</a>, <a href="../PresentationElement.html#createPropertyChangeListener()">createPropertyChangeListener</a>, <a href="../PresentationElement.html#disposeChildren()">disposeChildren</a>, <a href="../PresentationElement.html#disposePropertyChangeListener()">disposePropertyChangeListener</a>, <a href="../PresentationElement.html#drawBackground(com.nomagic.magicdraw.uml.symbols.DiagramPaintContext)">drawBackground</a>, <a href="../PresentationElement.html#drawSymbol(com.nomagic.magicdraw.uml.symbols.DiagramPaintContext)">drawSymbol</a>, <a href="../PresentationElement.html#drawSymbolBackground(com.nomagic.magicdraw.uml.symbols.DiagramPaintContext)">drawSymbolBackground</a>, <a href="../PresentationElement.html#dynamicFillColor()">dynamicFillColor</a>, <a href="../PresentationElement.html#dynamicLineColor()">dynamicLineColor</a>, <a href="../PresentationElement.html#dynamicLineWidth()">dynamicLineWidth</a>, <a href="../PresentationElement.html#dynamicLineWidth(int)">dynamicLineWidth</a>, <a href="../PresentationElement.html#dynamicPaintShadow()">dynamicPaintShadow</a>, <a href="../PresentationElement.html#dynamicStroke()">dynamicStroke</a>, <a href="../PresentationElement.html#dynamicStroke(int)">dynamicStroke</a>, <a href="../PresentationElement.html#dynamicStroke(java.awt.BasicStroke)">dynamicStroke</a>, <a href="../PresentationElement.html#dynamicStyleFillColor(java.awt.Color,boolean)">dynamicStyleFillColor</a>, <a href="../PresentationElement.html#dynamicStyleLineColor(java.awt.Color)">dynamicStyleLineColor</a>, <a href="../PresentationElement.html#dynamicStyleTextColor(java.awt.Color)">dynamicStyleTextColor</a>, <a href="../PresentationElement.html#dynamicStyleTransparency()">dynamicStyleTransparency</a>, <a href="../PresentationElement.html#dynamicStyleTransparency(javax.swing.Icon)">dynamicStyleTransparency</a>, <a href="../PresentationElement.html#dynamicStyleValue(T,java.util.function.BiFunction)">dynamicStyleValue</a>, <a href="../PresentationElement.html#dynamicTextAlignment(com.nomagic.magicdraw.uml.symbols.shapes.TextObject.HorizontalPosition)">dynamicTextAlignment</a>, <a href="../PresentationElement.html#dynamicTextColor()">dynamicTextColor</a>, <a href="../PresentationElement.html#editName(java.awt.event.KeyEvent)">editName</a>, <a href="../PresentationElement.html#findOwnerForChildElement(com.nomagic.magicdraw.uml.symbols.PresentationElement)">findOwnerForChildElement</a>, <a href="../PresentationElement.html#findPresentationElement(java.util.Collection,com.dassault_systemes.modeler.foundation.model.ModelElement)">findPresentationElement</a>, <a href="../PresentationElement.html#firePropertyChange(java.lang.String,java.lang.Object,java.lang.Object)">firePropertyChange</a>, <a href="../PresentationElement.html#generateID()">generateID</a>, <a href="../PresentationElement.html#getAbstractDiagramPresentationElement()">getAbstractDiagramPresentationElement</a>, <a href="../PresentationElement.html#getActualElement()">getActualElement</a>, <a href="../PresentationElement.html#getAdditionalRenderersToNotifyOnPropertiesChange()">getAdditionalRenderersToNotifyOnPropertiesChange</a>, <a href="../PresentationElement.html#getAssignableModelElementsClasses()">getAssignableModelElementsClasses</a>, <a href="../PresentationElement.html#getBoundsShape(com.nomagic.magicdraw.uml.symbols.ConverterToShape)">getBoundsShape</a>, <a href="../PresentationElement.html#getBoundsWithChildrenOnEdge()">getBoundsWithChildrenOnEdge</a>, <a href="../PresentationElement.html#getCenterlinePoint()">getCenterlinePoint</a>, <a href="../PresentationElement.html#getCenterlinePointX()">getCenterlinePointX</a>, <a href="../PresentationElement.html#getCenterlinePointY()">getCenterlinePointY</a>, <a href="../PresentationElement.html#getChildPresentationElementForContextMenu(java.awt.Point)">getChildPresentationElementForContextMenu</a>, <a href="../PresentationElement.html#getChildrenWithSymbolProperties()">getChildrenWithSymbolProperties</a>, <a href="../PresentationElement.html#getConfiguration()">getConfiguration</a>, <a href="../PresentationElement.html#getDiagramPresentationElement()">getDiagramPresentationElement</a>, <a href="../PresentationElement.html#getDiagramSurface()">getDiagramSurface</a>, <a href="../PresentationElement.html#getDrawComparator()">getDrawComparator</a>, <a href="../PresentationElement.html#getDynamicConfigurations()">getDynamicConfigurations</a>, <a href="../PresentationElement.html#getDynamicStyleOwner()">getDynamicStyleOwner</a>, <a href="../PresentationElement.html#getEffectiveStyleDelegate()">getEffectiveStyleDelegate</a>, <a href="../PresentationElement.html#getEffectiveStyleOwner()">getEffectiveStyleOwner</a>, <a href="../PresentationElement.html#getElement()">getElement</a>, <a href="../PresentationElement.html#getElementsForRelationshipConnecting()">getElementsForRelationshipConnecting</a>, <a href="../PresentationElement.html#getElementToConnectRelationship(com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Element,boolean)">getElementToConnectRelationship</a>, <a href="../PresentationElement.html#getFillColor()">getFillColor</a>, <a href="../PresentationElement.html#getFont()">getFont</a>, <a href="../PresentationElement.html#getFontHeight()">getFontHeight</a>, <a href="../PresentationElement.html#getFontRenderContext()">getFontRenderContext</a>, <a href="../PresentationElement.html#getHumanName()">getHumanName</a>, <a href="../PresentationElement.html#getLineColor()">getLineColor</a>, <a href="../PresentationElement.html#getLineWidth()">getLineWidth</a>, <a href="../PresentationElement.html#getManipulatedElementAt(java.awt.Point)">getManipulatedElementAt</a>, <a href="../PresentationElement.html#getManipulatedElementAt(java.awt.Point,com.nomagic.magicdraw.uml.symbols.SortManagerProvider)">getManipulatedElementAt</a>, <a href="../PresentationElement.html#getManipulatedIntersectionWith(java.awt.Rectangle)">getManipulatedIntersectionWith</a>, <a href="../PresentationElement.html#getManipulatedIntersectionWith(java.awt.Rectangle,boolean)">getManipulatedIntersectionWith</a>, <a href="../PresentationElement.html#getManipulatedIntersectionWith(java.awt.Rectangle,boolean,com.nomagic.magicdraw.uml.symbols.IntersectionKind)">getManipulatedIntersectionWith</a>, <a href="../PresentationElement.html#getManipulatedIntersectionWith(java.awt.Rectangle,com.nomagic.magicdraw.uml.symbols.IntersectionKind)">getManipulatedIntersectionWith</a>, <a href="../PresentationElement.html#getManipulatedParent()">getManipulatedParent</a>, <a href="../PresentationElement.html#getManipulatedPresentationElements()">getManipulatedPresentationElements</a>, <a href="../PresentationElement.html#getManipulationBounds(java.awt.Point)">getManipulationBounds</a>, <a href="../PresentationElement.html#getManipulationPreferredDimension()">getManipulationPreferredDimension</a>, <a href="../PresentationElement.html#getMiddlePoint(java.awt.Point)">getMiddlePoint</a>, <a href="../PresentationElement.html#getMiddlePointX()">getMiddlePointX</a>, <a href="../PresentationElement.html#getMiddlePointX(java.awt.Point)">getMiddlePointX</a>, <a href="../PresentationElement.html#getMiddlePointY()">getMiddlePointY</a>, <a href="../PresentationElement.html#getMiddlePointY(java.awt.Point)">getMiddlePointY</a>, <a href="../PresentationElement.html#getMinimumDimension()">getMinimumDimension</a>, <a href="../PresentationElement.html#getModelElement()">getModelElement</a>, <a href="../PresentationElement.html#getModelElementsForRelationshipConnecting()">getModelElementsForRelationshipConnecting</a>, <a href="../PresentationElement.html#getModelElementToConnectRelationship(com.dassault_systemes.modeler.foundation.model.ModelElement,boolean)">getModelElementToConnectRelationship</a>, <a href="../PresentationElement.html#getModelElementToMove()">getModelElementToMove</a>, <a href="../PresentationElement.html#getNotZoomedTolerance()">getNotZoomedTolerance</a>, <a href="../PresentationElement.html#getObjectParent()">getObjectParent</a>, <a href="../PresentationElement.html#getParent()">getParent</a>, <a href="../PresentationElement.html#getParentSymbolStyleOwner()">getParentSymbolStyleOwner</a>, <a href="../PresentationElement.html#getPreferredBounds()">getPreferredBounds</a>, <a href="../PresentationElement.html#getPreferredDimension()">getPreferredDimension</a>, <a href="../PresentationElement.html#getPreferredDimensionForAutosize()">getPreferredDimensionForAutosize</a>, <a href="../PresentationElement.html#getPreferredSize()">getPreferredSize</a>, <a href="../PresentationElement.html#getPresentationElementAt(int)">getPresentationElementAt</a>, <a href="../PresentationElement.html#getPresentationElementAt(java.awt.Point)">getPresentationElementAt</a>, <a href="../PresentationElement.html#getPresentationElementAt(java.awt.Point,com.nomagic.magicdraw.uml.symbols.SortManagerProvider)">getPresentationElementAt</a>, <a href="../PresentationElement.html#getPresentationElementAt(java.awt.Point,com.nomagic.magicdraw.uml.symbols.SortManagerProvider,com.nomagic.magicdraw.uml.symbols.IntersectionKind)">getPresentationElementAt</a>, <a href="../PresentationElement.html#getPresentationElementCount()">getPresentationElementCount</a>, <a href="../PresentationElement.html#getPresentationElementsAt(java.awt.Point)">getPresentationElementsAt</a>, <a href="../PresentationElement.html#getPresentationElementsAt(java.awt.Point,com.nomagic.magicdraw.uml.symbols.IntersectionKind)">getPresentationElementsAt</a>, <a href="../PresentationElement.html#getPresentationElementsAt(java.awt.Point,com.nomagic.magicdraw.uml.symbols.SortManagerProvider)">getPresentationElementsAt</a>, <a href="../PresentationElement.html#getPresentationElementsAt(java.awt.Point,com.nomagic.magicdraw.uml.symbols.SortManagerProvider,com.nomagic.magicdraw.uml.symbols.IntersectionKind)">getPresentationElementsAt</a>, <a href="../PresentationElement.html#getPresentationElementStroke()">getPresentationElementStroke</a>, <a href="../PresentationElement.html#getPresentationElementStroke(int)">getPresentationElementStroke</a>, <a href="../PresentationElement.html#getProjectImpl()">getProjectImpl</a>, <a href="../PresentationElement.html#getProperty(java.lang.String)">getProperty</a>, <a href="../PresentationElement.html#getPropertyManager()">getPropertyManager</a>, <a href="../PresentationElement.html#getPropertyManagerName()">getPropertyManagerName</a>, <a href="../PresentationElement.html#getRenderer()">getRenderer</a>, <a href="../PresentationElement.html#getSelected()">getSelected</a>, <a href="../PresentationElement.html#getStroke(float,int,int,float,float%5B%5D,float)">getStroke</a>, <a href="../PresentationElement.html#getStroke(int)">getStroke</a>, <a href="../PresentationElement.html#getStroke(int,int)">getStroke</a>, <a href="../PresentationElement.html#getStroke(int,int,int)">getStroke</a>, <a href="../PresentationElement.html#getStroke(int,int,int,int)">getStroke</a>, <a href="../PresentationElement.html#getStroke(java.awt.BasicStroke,int)">getStroke</a>, <a href="../PresentationElement.html#getStyle()">getStyle</a>, <a href="../PresentationElement.html#getSymbolRenderer(com.nomagic.magicdraw.uml.symbols.PresentationElement)">getSymbolRenderer</a>, <a href="../PresentationElement.html#getTextColor()">getTextColor</a>, <a href="../PresentationElement.html#getTolerance()">getTolerance</a>, <a href="../PresentationElement.html#getVisibility()">getVisibility</a>, <a href="../PresentationElement.html#getVisiblePresentationElements()">getVisiblePresentationElements</a>, <a href="../PresentationElement.html#handleModelDelete()">handleModelDelete</a>, <a href="../PresentationElement.html#hasManipulatedPresentationElements()">hasManipulatedPresentationElements</a>, <a href="../PresentationElement.html#initialize()">initialize</a>, <a href="../PresentationElement.html#initializeAndAutosize()">initializeAndAutosize</a>, <a href="../PresentationElement.html#internalBeforeUpdate(com.nomagic.magicdraw.uml.symbols.SymbolDecorator)">internalBeforeUpdate</a>, <a href="../PresentationElement.html#internalCreatePropertyChangeListener(com.nomagic.magicdraw.uml.symbols.PresentationElement.SmartListenerConfigData)">internalCreatePropertyChangeListener</a>, <a href="../PresentationElement.html#internalGetModelElementsForRelationshipConnecting()">internalGetModelElementsForRelationshipConnecting</a>, <a href="../PresentationElement.html#internalGetModelElementsForRelationshipConnecting(com.nomagic.magicdraw.uml.symbols.PresentationElement)">internalGetModelElementsForRelationshipConnecting</a>, <a href="../PresentationElement.html#internalGetModelElementToConnectRelationship(com.dassault_systemes.modeler.foundation.model.ModelElement,boolean)">internalGetModelElementToConnectRelationship</a>, <a href="../PresentationElement.html#internalGetSpecificFont()">internalGetSpecificFont</a>, <a href="../PresentationElement.html#internalGetSpecificTextColor()">internalGetSpecificTextColor</a>, <a href="../PresentationElement.html#internalIsSuitableToConnectRelationship(com.dassault_systemes.modeler.foundation.model.RelationshipEnd)">internalIsSuitableToConnectRelationship</a>, <a href="../PresentationElement.html#internalIsSuitableToConnectRelationship(com.nomagic.magicdraw.uml.symbols.PresentationElement,com.dassault_systemes.modeler.foundation.model.RelationshipEnd)">internalIsSuitableToConnectRelationship</a>, <a href="../PresentationElement.html#internalSnapToGrid(java.awt.Point,float)">internalSnapToGrid</a>, <a href="../PresentationElement.html#intersects(int,int,int,int)">intersects</a>, <a href="../PresentationElement.html#invalidate()">invalidate</a>, <a href="../PresentationElement.html#isCanChildrenChangeEdge()">isCanChildrenChangeEdge</a>, <a href="../PresentationElement.html#isContentHidden()">isContentHidden</a>, <a href="../PresentationElement.html#isCreateElementListener()">isCreateElementListener</a>, <a href="../PresentationElement.html#isDetectable()">isDetectable</a>, <a href="../PresentationElement.html#isDisposed()">isDisposed</a>, <a href="../PresentationElement.html#isLayouting()">isLayouting</a>, <a href="../PresentationElement.html#isMovableByMoveManager()">isMovableByMoveManager</a>, <a href="../PresentationElement.html#isNotNull(com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Element)">isNotNull</a>, <a href="../PresentationElement.html#isParentOf(com.nomagic.magicdraw.uml.BaseElement)">isParentOf</a>, <a href="../PresentationElement.html#isParentOf(com.nomagic.magicdraw.uml.symbols.PresentationElement)">isParentOf</a>, <a href="../PresentationElement.html#isPreserveProportionsWhenGrowing()">isPreserveProportionsWhenGrowing</a>, <a href="../PresentationElement.html#isSelected()">isSelected</a>, <a href="../PresentationElement.html#isShowElementTypeAsLabel()">isShowElementTypeAsLabel</a>, <a href="../PresentationElement.html#isSortable()">isSortable</a>, <a href="../PresentationElement.html#isSuitableToConnectRelationship(com.dassault_systemes.modeler.foundation.model.RelationshipEnd)">isSuitableToConnectRelationship</a>, <a href="../PresentationElement.html#isUseFillColor()">isUseFillColor</a>, <a href="../PresentationElement.html#isUseFillColorByProperty()">isUseFillColorByProperty</a>, <a href="../PresentationElement.html#isUseGradientForFill()">isUseGradientForFill</a>, <a href="../PresentationElement.html#isVisible()">isVisible</a>, <a href="../PresentationElement.html#isVisibleInDiagram()">isVisibleInDiagram</a>, <a href="../PresentationElement.html#isVisibleOrShrunken()">isVisibleOrShrunken</a>, <a href="../PresentationElement.html#movePathElementsRecursively()">movePathElementsRecursively</a>, <a href="../PresentationElement.html#mustShowContextMenu()">mustShowContextMenu</a>, <a href="../PresentationElement.html#notifyCreated()">notifyCreated</a>, <a href="../PresentationElement.html#notifyDiagramFrameSizeChange()">notifyDiagramFrameSizeChange</a>, <a href="../PresentationElement.html#onChildAdd(com.nomagic.magicdraw.uml.symbols.PresentationElement)">onChildAdd</a>, <a href="../PresentationElement.html#onChildRemove(com.nomagic.magicdraw.uml.symbols.PresentationElement)">onChildRemove</a>, <a href="../PresentationElement.html#onDiagramSurfaceSet()">onDiagramSurfaceSet</a>, <a href="../PresentationElement.html#onFind()">onFind</a>, <a href="../PresentationElement.html#onFind(boolean)">onFind</a>, <a href="../PresentationElement.html#onFontChange()">onFontChange</a>, <a href="../PresentationElement.html#onParentChange(com.nomagic.magicdraw.uml.symbols.PresentationElement,com.nomagic.magicdraw.uml.symbols.PresentationElement)">onParentChange</a>, <a href="../PresentationElement.html#paintAdornments(com.nomagic.magicdraw.uml.symbols.DiagramPaintContext)">paintAdornments</a>, <a href="../PresentationElement.html#paintAdornmentsBackground(com.nomagic.magicdraw.uml.symbols.DiagramPaintContext)">paintAdornmentsBackground</a>, <a href="../PresentationElement.html#paintChildrenAndAdornments(com.nomagic.magicdraw.uml.symbols.DiagramPaintContext)">paintChildrenAndAdornments</a>, <a href="../PresentationElement.html#paintChildrenBackground(com.nomagic.magicdraw.uml.symbols.DiagramPaintContext)">paintChildrenBackground</a>, <a href="../PresentationElement.html#paintSelfBackground(com.nomagic.magicdraw.uml.symbols.DiagramPaintContext)">paintSelfBackground</a>, <a href="../PresentationElement.html#prepareForLineDrawing(java.awt.Graphics2D)">prepareForLineDrawing</a>, <a href="../PresentationElement.html#prepareForShadowDrawing(java.awt.Graphics2D)">prepareForShadowDrawing</a>, <a href="../PresentationElement.html#prepareForTextDrawing(java.awt.Graphics2D)">prepareForTextDrawing</a>, <a href="../PresentationElement.html#recreateListeners()">recreateListeners</a>, <a href="../PresentationElement.html#registerInSortManager()">registerInSortManager</a>, <a href="../PresentationElement.html#rememberBounds()">rememberBounds</a>, <a href="../PresentationElement.html#rememberBounds(java.awt.Rectangle)">rememberBounds</a>, <a href="../PresentationElement.html#removeFromSortManager()">removeFromSortManager</a>, <a href="../PresentationElement.html#removeItSelfOnUpdate()">removeItSelfOnUpdate</a>, <a href="../PresentationElement.html#sAddPresentationElement(com.nomagic.magicdraw.uml.symbols.PresentationElement)">sAddPresentationElement</a>, <a href="../PresentationElement.html#selectChildrenForMoving()">selectChildrenForMoving</a>, <a href="../PresentationElement.html#selectObjectsForMoving()">selectObjectsForMoving</a>, <a href="../PresentationElement.html#setAllSelected(boolean)">setAllSelected</a>, <a href="../PresentationElement.html#setBounds(int,int,int,int)">setBounds</a>, <a href="../PresentationElement.html#setCreateElementListener(boolean)">setCreateElementListener</a>, <a href="../PresentationElement.html#setDummyResizeMode(boolean)">setDummyResizeMode</a>, <a href="../PresentationElement.html#setElement(com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Element)">setElement</a>, <a href="../PresentationElement.html#setFillColor(java.awt.Color)">setFillColor</a>, <a href="../PresentationElement.html#setFont(java.awt.Font)">setFont</a>, <a href="../PresentationElement.html#setLayouting(boolean)">setLayouting</a>, <a href="../PresentationElement.html#setLineColor(java.awt.Color)">setLineColor</a>, <a href="../PresentationElement.html#setLineWidth(int)">setLineWidth</a>, <a href="../PresentationElement.html#setLoadedVisibility(boolean)">setLoadedVisibility</a>, <a href="../PresentationElement.html#setLocation(int,int)">setLocation</a>, <a href="../PresentationElement.html#setLocation(java.awt.Point)">setLocation</a>, <a href="../PresentationElement.html#setModelElement(com.dassault_systemes.modeler.foundation.model.ModelElement)">setModelElement</a>, <a href="../PresentationElement.html#setNeedRecreateListeners(boolean)">setNeedRecreateListeners</a>, <a href="../PresentationElement.html#setPropertyManagerName(java.lang.String)">setPropertyManagerName</a>, <a href="../PresentationElement.html#setSelected(boolean)">setSelected</a>, <a href="../PresentationElement.html#setSelected(java.util.List)">setSelected</a>, <a href="../PresentationElement.html#setSize(int,int)">setSize</a>, <a href="../PresentationElement.html#setSize(com.nomagic.ui.UnmodifiableDimension)">setSize</a>, <a href="../PresentationElement.html#setSize(java.awt.Dimension)">setSize</a>, <a href="../PresentationElement.html#setTextColor(java.awt.Color)">setTextColor</a>, <a href="../PresentationElement.html#setUseFillColor(boolean)">setUseFillColor</a>, <a href="../PresentationElement.html#setVisible(boolean)">setVisible</a>, <a href="../PresentationElement.html#silentApply()">silentApply</a>, <a href="../PresentationElement.html#silentApply(boolean)">silentApply</a>, <a href="../PresentationElement.html#simpleSetBounds(int,int,int,int)">simpleSetBounds</a>, <a href="../PresentationElement.html#snapToGrid(java.awt.Point,float)">snapToGrid</a>, <a href="../PresentationElement.html#snapToGrid(java.awt.Rectangle,float)">snapToGrid</a>, <a href="../PresentationElement.html#snapViewToGrid(float)">snapViewToGrid</a>, <a href="../PresentationElement.html#sortObjectsByX(java.util.List)">sortObjectsByX</a>, <a href="../PresentationElement.html#sortObjectsByY(java.util.List)">sortObjectsByY</a>, <a href="../PresentationElement.html#sSetBounds(int,int,int,int)">sSetBounds</a>, <a href="../PresentationElement.html#sSetLocation(int,int)">sSetLocation</a>, <a href="../PresentationElement.html#sSetLocation(java.awt.Point)">sSetLocation</a>, <a href="../PresentationElement.html#sSetModelElement(com.dassault_systemes.modeler.foundation.model.ModelElement)">sSetModelElement</a>, <a href="../PresentationElement.html#sSetParentForAll(java.util.Collection)">sSetParentForAll</a>, <a href="../PresentationElement.html#sSetSize(int,int)">sSetSize</a>, <a href="../PresentationElement.html#sSetSize(com.nomagic.ui.UnmodifiableDimension)">sSetSize</a>, <a href="../PresentationElement.html#sSetSize(java.awt.Dimension)">sSetSize</a>, <a href="../PresentationElement.html#sSetVisible(boolean)">sSetVisible</a>, <a href="../PresentationElement.html#tryToDeleteModelElementUponRemoval()">tryToDeleteModelElementUponRemoval</a>, <a href="../PresentationElement.html#update()">update</a>, <a href="../PresentationElement.html#updateAfterLoad()">updateAfterLoad</a>, <a href="../PresentationElement.html#updateLabelsIgnoringSuspendableLater(java.util.Collection)">updateLabelsIgnoringSuspendableLater</a>, <a href="../PresentationElement.html#updateLater()">updateLater</a>, <a href="../PresentationElement.html#updateModelByView()">updateModelByView</a>, <a href="../PresentationElement.html#updateModelByViewInternal()">updateModelByViewInternal</a>, <a href="../PresentationElement.html#updateViewAfterPropertyChange()">updateViewAfterPropertyChange</a>, <a href="../PresentationElement.html#useParentProperties()">useParentProperties</a>, <a href="../PresentationElement.html#useParentStyle()">useParentStyle</a></code></div>
+<div class="inherited-list">
+<h3 id="methods-inherited-from-class-com.nomagic.magicdraw.uml.MDElementImpl">Methods inherited from class com.nomagic.magicdraw.uml.MDElementImpl</h3>
+<code>accept, addPropertyChangeListener, canAdd, canAddChild, canBeDeleted, canDeleteChild, compareTo, createSortKeys, getClassType, getID, getProjectProvider, getResourceID, getSortKeys, hasListeners, isEditable, removeAllParents, removeAllPropertyChangeListeners, removePropertyChangeListener, setID, setProjectProvider, setResourceIDProvider, sGetID, toString</code></div>
+<div class="inherited-list">
+<h3 id="methods-inherited-from-class-java.lang.Object">Methods inherited from class java.lang.<a class="external-link" href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang">Object</a></h3>
+<code><a class="external-link" href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#equals(java.lang.Object)" title="class or interface in java.lang">equals</a>, <a class="external-link" href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#finalize()" title="class or interface in java.lang">finalize</a>, <a class="external-link" href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#getClass()" title="class or interface in java.lang">getClass</a>, <a class="external-link" href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#hashCode()" title="class or interface in java.lang">hashCode</a>, <a class="external-link" href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#notify()" title="class or interface in java.lang">notify</a>, <a class="external-link" href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#notifyAll()" title="class or interface in java.lang">notifyAll</a>, <a class="external-link" href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#wait()" title="class or interface in java.lang">wait</a>, <a class="external-link" href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#wait(long)" title="class or interface in java.lang">wait</a>, <a class="external-link" href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#wait(long,int)" title="class or interface in java.lang">wait</a></code></div>
+<div class="inherited-list">
+<h3 id="methods-inherited-from-class-com.nomagic.magicdraw.uml.BaseElement">Methods inherited from interface com.nomagic.magicdraw.uml.<a href="../../BaseElement.html" title="interface in com.nomagic.magicdraw.uml">BaseElement</a></h3>
+<code><a href="../../BaseElement.html#canAdd(com.nomagic.magicdraw.uml.BaseElement)">canAdd</a>, <a href="../../BaseElement.html#isSelfChangeable()">isSelfChangeable</a></code></div>
+<div class="inherited-list">
+<h3 id="methods-inherited-from-class-com.nomagic.magicdraw.uml.symbols.LabelOwner">Methods inherited from interface com.nomagic.magicdraw.uml.symbols.LabelOwner</h3>
+<code>getElement, getModelElement</code></div>
+<div class="inherited-list">
+<h3 id="methods-inherited-from-class-com.nomagic.magicdraw.uml.symbols.LineJumpDrawer">Methods inherited from interface com.nomagic.magicdraw.uml.symbols.LineJumpDrawer</h3>
+<code>getLineWidth</code></div>
+<div class="inherited-list">
+<h3 id="methods-inherited-from-class-com.nomagic.magicdraw.uml.MDElement">Methods inherited from interface com.nomagic.magicdraw.uml.<a href="../../MDElement.html" title="interface in com.nomagic.magicdraw.uml">MDElement</a></h3>
+<code><a href="../../MDElement.html#getProject()">getProject</a></code></div>
+<div class="inherited-list">
+<h3 id="methods-inherited-from-class-com.nomagic.magicdraw.uml.symbols.PropertyBasedPresentationElement">Methods inherited from interface com.nomagic.magicdraw.uml.symbols.PropertyBasedPresentationElement</h3>
+<code>addProperty, getProperty, getPropertyManager</code></div>
+</section>
+</li>
+</ul>
+</section>
+<section class="details">
+<ul class="details-list">
+<!-- ========= CONSTRUCTOR DETAIL ======== -->
+<li>
+<section class="constructor-details" id="constructor-detail">
+<h2>Constructor Details</h2>
+<ul class="member-list">
+<li>
+<section class="detail" id="&lt;init&gt;()">
+<h3>VirtualRelationView</h3>
+<div class="member-signature"><span class="modifiers">public</span> <span class="element-name">VirtualRelationView</span>()</div>
+</section>
+</li>
+<li>
+<section class="detail" id="&lt;init&gt;(com.nomagic.magicdraw.uml.symbols.PresentationElement)">
+<h3>VirtualRelationView</h3>
+<div class="member-signature"><span class="modifiers">public</span> <span class="element-name">VirtualRelationView</span><wbr/><span class="parameters">(@CheckForNull
+ <a href="../PresentationElement.html" title="class in com.nomagic.magicdraw.uml.symbols">PresentationElement</a> parent)</span></div>
+</section>
+</li>
+<li>
+<section class="detail" id="&lt;init&gt;(com.nomagic.magicdraw.uml.symbols.PresentationElement,java.lang.String)">
+<h3>VirtualRelationView</h3>
+<div class="member-signature"><span class="modifiers">public</span> <span class="element-name">VirtualRelationView</span><wbr/><span class="parameters">(@CheckForNull
+ <a href="../PresentationElement.html" title="class in com.nomagic.magicdraw.uml.symbols">PresentationElement</a> parent,
+ @CheckForNull
+ <a class="external-link" href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang">String</a> ruleKey)</span></div>
+</section>
+</li>
+</ul>
+</section>
+</li>
+<!-- ============ METHOD DETAIL ========== -->
+<li>
+<section class="method-details" id="method-detail">
+<h2>Method Details</h2>
+<ul class="member-list">
+<li>
+<section class="detail" id="internalSilentApply()">
+<h3>internalSilentApply</h3>
+<div class="member-signature"><span class="modifiers">public</span> <span class="return-type">void</span> <span class="element-name">internalSilentApply</span>()</div>
+<div class="block"><span class="descfrm-type-label">Description copied from class: <code><a href="../PresentationElement.html#internalSilentApply()">PresentationElement</a></code></span></div>
+<div class="block">Silently applies all properties after initialization</div>
+<dl class="notes">
+<dt>Overrides:</dt>
+<dd><code>internalSilentApply</code> in class <code>com.nomagic.magicdraw.uml.symbols.paths.ContainerLinkView</code></dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="isClientAcceptable(com.nomagic.magicdraw.uml.symbols.PresentationElement)">
+<h3>isClientAcceptable</h3>
+<div class="member-signature"><span class="modifiers">public</span> <span class="return-type">boolean</span> <span class="element-name">isClientAcceptable</span><wbr/><span class="parameters">(<a href="../PresentationElement.html" title="class in com.nomagic.magicdraw.uml.symbols">PresentationElement</a> client)</span></div>
+<div class="block">Checks if client is acceptable for relation</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>client</code> - client</dd>
+<dt>Returns:</dt>
+<dd>true if acceptable, else false</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="isCreatable()">
+<h3>isCreatable</h3>
+<div class="member-signature"><span class="modifiers">public</span> <span class="return-type">boolean</span> <span class="element-name">isCreatable</span>()</div>
+<div class="block">Flag to indicate if relation can be created in diagram manually</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>true if can be created, else false</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="isSupplierAcceptable(com.nomagic.magicdraw.uml.symbols.PresentationElement)">
+<h3>isSupplierAcceptable</h3>
+<div class="member-signature"><span class="modifiers">public</span> <span class="return-type">boolean</span> <span class="element-name">isSupplierAcceptable</span><wbr/><span class="parameters">(<a href="../PresentationElement.html" title="class in com.nomagic.magicdraw.uml.symbols">PresentationElement</a> supplier)</span></div>
+<div class="block">Checks if supplier is acceptable for relation</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>supplier</code> - supplier</dd>
+<dt>Returns:</dt>
+<dd>true if acceptable, else false</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="getRuleKey()">
+<h3>getRuleKey</h3>
+<div class="member-signature"><span class="modifiers">public</span> <span class="return-type"><a class="external-link" href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang">String</a></span> <span class="element-name">getRuleKey</span>()</div>
+</section>
+</li>
+<li>
+<section class="detail" id="isValid()">
+<h3>isValid</h3>
+<div class="member-signature"><span class="modifiers">public</span> <span class="return-type">boolean</span> <span class="element-name">isValid</span>()</div>
+</section>
+</li>
+<li>
+<section class="detail" id="getConnectionElements()">
+<h3>getConnectionElements</h3>
+<div class="member-signature"><span class="modifiers">public</span> <span class="return-type"><a class="external-link" href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util">List</a>&lt;<a href="../../../../uml2/ext/magicdraw/classes/mdkernel/Element.html" title="interface in com.nomagic.uml2.ext.magicdraw.classes.mdkernel">Element</a>&gt;</span> <span class="element-name">getConnectionElements</span>()</div>
+</section>
+</li>
+<li>
+<section class="detail" id="setRuleKey(java.lang.String)">
+<h3>setRuleKey</h3>
+<div class="member-signature"><span class="modifiers">public</span> <span class="return-type">void</span> <span class="element-name">setRuleKey</span><wbr/><span class="parameters">(@CheckForNull
+ <a class="external-link" href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang">String</a> ruleKey)</span></div>
+</section>
+</li>
+<li>
+<section class="detail" id="isFixed()">
+<h3>isFixed</h3>
+<div class="member-signature"><span class="modifiers">public</span> <span class="return-type">boolean</span> <span class="element-name">isFixed</span>()</div>
+<div class="block"><span class="descfrm-type-label">Description copied from class: <code><a href="PathElement.html#isFixed()">PathElement</a></code></span></div>
+<div class="block">If a path tied to its supplier and client (cannot be reconnected)</div>
+<dl class="notes">
+<dt>Overrides:</dt>
+<dd><code><a href="PathElement.html#isFixed()">isFixed</a></code> in class <code><a href="PathElement.html" title="class in com.nomagic.magicdraw.uml.symbols.paths">PathElement</a></code></dd>
+<dt>Returns:</dt>
+<dd>true, if it can be reconnected, else false</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="accept(com.nomagic.magicdraw.uml.Visitor)">
+<h3>accept</h3>
+<div class="member-signature"><span class="modifiers">public</span> <span class="return-type">void</span> <span class="element-name">accept</span><wbr/><span class="parameters">(<a href="../../Visitor.html" title="class in com.nomagic.magicdraw.uml">Visitor</a> visitor)</span>
+            throws <span class="exceptions"><a class="external-link" href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Exception.html" title="class or interface in java.lang">Exception</a></span></div>
+<div class="block"><span class="descfrm-type-label">Description copied from interface: <code><a href="../../MDElement.html#accept(com.nomagic.magicdraw.uml.Visitor)">MDElement</a></code></span></div>
+<div class="block">Method accepts a visitor, and calls method "visit&lt;class name&gt;(this)" of a visitor.
+ See "Visitor" pattern for more details.</div>
+<dl class="notes">
+<dt>Specified by:</dt>
+<dd><code><a href="../../MDElement.html#accept(com.nomagic.magicdraw.uml.Visitor)">accept</a></code> in interface <code><a href="../../MDElement.html" title="interface in com.nomagic.magicdraw.uml">MDElement</a></code></dd>
+<dt>Overrides:</dt>
+<dd><code>accept</code> in class <code>com.nomagic.magicdraw.uml.symbols.paths.ContainerLinkView</code></dd>
+<dt>Parameters:</dt>
+<dd><code>visitor</code> - which visits this element.</dd>
+<dt>Throws:</dt>
+<dd><code><a class="external-link" href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Exception.html" title="class or interface in java.lang">Exception</a></code></dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="isTextEditable()">
+<h3>isTextEditable</h3>
+<div class="member-signature"><span class="modifiers">public</span> <span class="return-type">boolean</span> <span class="element-name">isTextEditable</span>()</div>
+<div class="block"><span class="descfrm-type-label">Description copied from class: <code><a href="../PresentationElement.html#isTextEditable()">PresentationElement</a></code></span></div>
+<div class="block">Checks text editing flag.</div>
+<dl class="notes">
+<dt>Overrides:</dt>
+<dd><code><a href="../PresentationElement.html#isTextEditable()">isTextEditable</a></code> in class <code><a href="../PresentationElement.html" title="class in com.nomagic.magicdraw.uml.symbols">PresentationElement</a></code></dd>
+<dt>Returns:</dt>
+<dd><code>true</code> if the object view text is editable; <code>false</code> otherwise.</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="getPathIcon()">
+<h3>getPathIcon</h3>
+<div class="member-signature"><span class="annotations">@CheckForNull
+</span><span class="modifiers">public</span> <span class="return-type">com.dassault_systemes.modeler.foundation.image.pathicon.PathIcon</span> <span class="element-name">getPathIcon</span>()</div>
+<dl class="notes">
+<dt>Overrides:</dt>
+<dd><code><a href="PathElement.html#getPathIcon()">getPathIcon</a></code> in class <code><a href="PathElement.html" title="class in com.nomagic.magicdraw.uml.symbols.paths">PathElement</a></code></dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="createNameLabelWrapper()">
+<h3>createNameLabelWrapper</h3>
+<div class="member-signature"><span class="modifiers">protected</span> <span class="return-type">com.nomagic.magicdraw.uml.symbols.shapes.NameLabelWrapper</span> <span class="element-name">createNameLabelWrapper</span>()</div>
+<dl class="notes">
+<dt>Overrides:</dt>
+<dd><code>createNameLabelWrapper</code> in class <code>com.nomagic.magicdraw.uml.symbols.paths.ContainerLinkView</code></dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="getName()">
+<h3>getName</h3>
+<div class="member-signature"><span class="modifiers">public</span> <span class="return-type"><a class="external-link" href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang">String</a></span> <span class="element-name">getName</span>()</div>
+<div class="block"><span class="descfrm-type-label">Description copied from class: <code>com.nomagic.magicdraw.uml.symbols.paths.ContainerLinkView</code></span></div>
+<div class="block">Gets container link name</div>
+<dl class="notes">
+<dt>Specified by:</dt>
+<dd><code><a href="../../MDElement.html#getName()">getName</a></code> in interface <code><a href="../../MDElement.html" title="interface in com.nomagic.magicdraw.uml">MDElement</a></code></dd>
+<dt>Specified by:</dt>
+<dd><code><a href="../../../utils/NameOwner.html#getName()">getName</a></code> in interface <code><a href="../../../utils/NameOwner.html" title="interface in com.nomagic.magicdraw.utils">NameOwner</a></code></dd>
+<dt>Overrides:</dt>
+<dd><code>getName</code> in class <code>com.nomagic.magicdraw.uml.symbols.paths.ContainerLinkView</code></dd>
+<dt>Returns:</dt>
+<dd>container link name</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="getHumanType()">
+<h3>getHumanType</h3>
+<div class="member-signature"><span class="modifiers">public</span> <span class="return-type"><a class="external-link" href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang">String</a></span> <span class="element-name">getHumanType</span>()</div>
+<div class="block"><span class="descfrm-type-label">Description copied from class: <code><a href="../PresentationElement.html#getHumanType()">PresentationElement</a></code></span></div>
+<div class="block">Returns human representation of the data type</div>
+<dl class="notes">
+<dt>Specified by:</dt>
+<dd><code><a href="../../BaseElement.html#getHumanType()">getHumanType</a></code> in interface <code><a href="../../BaseElement.html" title="interface in com.nomagic.magicdraw.uml">BaseElement</a></code></dd>
+<dt>Overrides:</dt>
+<dd><code><a href="../PresentationElement.html#getHumanType()">getHumanType</a></code> in class <code><a href="../PresentationElement.html" title="class in com.nomagic.magicdraw.uml.symbols">PresentationElement</a></code></dd>
+<dt>Returns:</dt>
+<dd>the name of the data</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="constructNameTextToDisplay()">
+<h3>constructNameTextToDisplay</h3>
+<div class="member-signature"><span class="modifiers">public</span> <span class="return-type"><a class="external-link" href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang">String</a></span> <span class="element-name">constructNameTextToDisplay</span>()</div>
+<dl class="notes">
+<dt>Overrides:</dt>
+<dd><code>constructNameTextToDisplay</code> in class <code>com.nomagic.magicdraw.uml.symbols.paths.ContainerLinkView</code></dd>
+<dt>Returns:</dt>
+<dd>pure name text for displaying</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="propertyChange(java.beans.PropertyChangeEvent)">
+<h3>propertyChange</h3>
+<div class="member-signature"><span class="modifiers">public</span> <span class="return-type">void</span> <span class="element-name">propertyChange</span><wbr/><span class="parameters">(<a class="external-link" href="https://docs.oracle.com/en/java/javase/17/docs/api/java.desktop/java/beans/PropertyChangeEvent.html" title="class or interface in java.beans">PropertyChangeEvent</a> e)</span></div>
+<div class="block"><span class="descfrm-type-label">Description copied from class: <code><a href="../PresentationElement.html#propertyChange(java.beans.PropertyChangeEvent)">PresentationElement</a></code></span></div>
+<div class="block">Listens for property change it can be: data was edited text box was edited</div>
+<dl class="notes">
+<dt>Specified by:</dt>
+<dd><code><a class="external-link" href="https://docs.oracle.com/en/java/javase/17/docs/api/java.desktop/java/beans/PropertyChangeListener.html#propertyChange(java.beans.PropertyChangeEvent)" title="class or interface in java.beans">propertyChange</a></code> in interface <code><a class="external-link" href="https://docs.oracle.com/en/java/javase/17/docs/api/java.desktop/java/beans/PropertyChangeListener.html" title="class or interface in java.beans">PropertyChangeListener</a></code></dd>
+<dt>Overrides:</dt>
+<dd><code><a href="../PresentationElement.html#propertyChange(java.beans.PropertyChangeEvent)">propertyChange</a></code> in class <code><a href="../PresentationElement.html" title="class in com.nomagic.magicdraw.uml.symbols">PresentationElement</a></code></dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="asPresentationElement()">
+<h3>asPresentationElement</h3>
+<div class="member-signature"><span class="modifiers">public</span> <span class="return-type"><a href="../PresentationElement.html" title="class in com.nomagic.magicdraw.uml.symbols">PresentationElement</a></span> <span class="element-name">asPresentationElement</span>()</div>
+<dl class="notes">
+<dt>Specified by:</dt>
+<dd><code>asPresentationElement</code> in interface <code>com.nomagic.magicdraw.uml.symbols.LabelOwner</code></dd>
+<dt>Specified by:</dt>
+<dd><code>asPresentationElement</code> in interface <code>com.nomagic.magicdraw.uml.symbols.PropertyBasedPresentationElement</code></dd>
+<dt>Returns:</dt>
+<dd>converts itself to <a href="../PresentationElement.html" title="class in com.nomagic.magicdraw.uml.symbols"><code>PresentationElement</code></a></dd>
+</dl>
+</section>
+</li>
+</ul>
+</section>
+</li>
+</ul>
+</section>
+<!-- ========= END OF CLASS DATA ========= -->
+</main>
+````

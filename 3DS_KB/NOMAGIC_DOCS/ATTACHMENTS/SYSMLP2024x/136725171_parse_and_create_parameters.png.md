@@ -1,0 +1,114 @@
+# NOMAGIC ATTACHMENT: parse_and_create_parameters.png
+
+- attachment_id: `136725171`
+- space_key: `SYSMLP2024x`
+- parent_page_id: `136725169`
+- parent_page_title: Defining Constraint Blocks
+- media_type: `image/png`
+- reported_bytes: 7400
+- download_url: https://docs.nomagic.com/download/attachments/136725169/parse_and_create_parameters.png?version=1&modificationDate=1695293641162&api=v2
+- payload_kind: `metadata-only`
+- downloaded_sha256: not-downloaded
+
+## PAYLOAD STATUS
+
+Binary or image attachment is inventoried by official metadata; no binary bytes are embedded in this Markdown-only corpus.
+
+
+## EXACT ATTACHMENT METADATA
+
+````json
+{
+  "id": "136725171",
+  "type": "attachment",
+  "status": "current",
+  "title": "parse_and_create_parameters.png",
+  "version": {
+    "by": {
+      "type": "known",
+      "username": "kbe12",
+      "userKey": "2c9f81f87674fd7d017a0928ba470000",
+      "profilePicture": {
+        "path": "/images/icons/profilepics/default.svg",
+        "width": 48,
+        "height": 48,
+        "isDefault": true
+      },
+      "displayName": "Kristina B.",
+      "_links": {
+        "self": "https://docs.nomagic.com/rest/api/user?key=2c9f81f87674fd7d017a0928ba470000"
+      },
+      "_expandable": {
+        "status": ""
+      }
+    },
+    "when": "2023-09-21T12:54:01.162+02:00",
+    "message": "",
+    "number": 1,
+    "minorEdit": true,
+    "hidden": false,
+    "_links": {
+      "self": "https://docs.nomagic.com/rest/experimental/content/136725171/version/1"
+    },
+    "_expandable": {
+      "content": "/rest/api/content/136725171"
+    }
+  },
+  "position": -1,
+  "container": {
+    "id": "136725169",
+    "type": "page",
+    "status": "current",
+    "title": "Defining Constraint Blocks",
+    "position": 0,
+    "extensions": {
+      "position": 0
+    },
+    "_links": {
+      "webui": "/spaces/SYSMLP2024x/pages/136725169/Defining+Constraint+Blocks",
+      "edit": "/pages/resumedraft.action?draftId=136725169",
+      "tinyui": "/x/sUImC",
+      "self": "https://docs.nomagic.com/rest/api/content/136725169"
+    },
+    "_expandable": {
+      "container": "/rest/api/space/SYSMLP2024x",
+      "metadata": "",
+      "operations": "",
+      "children": "/rest/api/content/136725169/child",
+      "restrictions": "/rest/api/content/136725169/restriction/byOperation",
+      "history": "/rest/api/content/136725169/history",
+      "ancestors": "",
+      "body": "",
+      "version": "",
+      "descendants": "/rest/api/content/136725169/descendant",
+      "space": "/rest/api/space/SYSMLP2024x",
+      "relevantViewRestrictions": "/rest/api/content/136725169/restriction/relevantViewRestrictions"
+    }
+  },
+  "metadata": {
+    "mediaType": "image/png"
+  },
+  "extensions": {
+    "mediaType": "image/png",
+    "fileSize": 7400,
+    "comment": ""
+  },
+  "_links": {
+    "download": "/download/attachments/136725169/parse_and_create_parameters.png?version=1&modificationDate=1695293641162&api=v2",
+    "thumbnail": "/download/thumbnails/136725169/parse_and_create_parameters.png?api=v2",
+    "webui": "/spaces/SYSMLP2024x/pages/136725169/Defining+Constraint+Blocks?preview=%2F136725169%2F136725171%2Fparse_and_create_parameters.png",
+    "self": "https://docs.nomagic.com/rest/api/content/136725171"
+  },
+  "_expandable": {
+    "operations": "",
+    "children": "/rest/api/content/136725171/child",
+    "restrictions": "/rest/api/content/136725171/restriction/byOperation",
+    "history": "/rest/api/content/136725171/history",
+    "ancestors": "",
+    "body": "",
+    "descendants": "/rest/api/content/136725171/descendant",
+    "space": "/rest/api/space/SYSMLP2024x",
+    "relevantViewRestrictions": "/rest/api/content/136725171/restriction/relevantViewRestrictions"
+  }
+}
+````

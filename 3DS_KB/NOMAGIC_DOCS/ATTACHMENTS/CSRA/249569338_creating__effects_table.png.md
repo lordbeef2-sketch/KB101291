@@ -1,0 +1,114 @@
+# NOMAGIC ATTACHMENT: creating _effects_table.png
+
+- attachment_id: `249569338`
+- space_key: `CSRA`
+- parent_page_id: `249569331`
+- parent_page_title: Effects Table
+- media_type: `image/png`
+- reported_bytes: 30749
+- download_url: https://docs.nomagic.com/download/attachments/249569331/creating%20_effects_table.png?version=1&modificationDate=1755606244019&api=v2
+- payload_kind: `metadata-only`
+- downloaded_sha256: not-downloaded
+
+## PAYLOAD STATUS
+
+Binary or image attachment is inventoried by official metadata; no binary bytes are embedded in this Markdown-only corpus.
+
+
+## EXACT ATTACHMENT METADATA
+
+````json
+{
+  "id": "249569338",
+  "type": "attachment",
+  "status": "current",
+  "title": "creating _effects_table.png",
+  "version": {
+    "by": {
+      "type": "known",
+      "username": "ingabe",
+      "userKey": "ff80808151f3008c0152c05ba1a40003",
+      "profilePicture": {
+        "path": "/download/attachments/7415957/user-avatar",
+        "width": 48,
+        "height": 48,
+        "isDefault": false
+      },
+      "displayName": "Inga A.",
+      "_links": {
+        "self": "https://docs.nomagic.com/rest/api/user?key=ff80808151f3008c0152c05ba1a40003"
+      },
+      "_expandable": {
+        "status": ""
+      }
+    },
+    "when": "2025-08-19T14:24:04.019+02:00",
+    "message": "",
+    "number": 1,
+    "minorEdit": true,
+    "hidden": false,
+    "_links": {
+      "self": "https://docs.nomagic.com/rest/experimental/content/249569338/version/1"
+    },
+    "_expandable": {
+      "content": "/rest/api/content/249569338"
+    }
+  },
+  "position": -1,
+  "container": {
+    "id": "249569331",
+    "type": "page",
+    "status": "current",
+    "title": "Effects Table",
+    "position": 4,
+    "extensions": {
+      "position": 4
+    },
+    "_links": {
+      "webui": "/spaces/CSRA/pages/249569331/Effects+Table",
+      "edit": "/pages/resumedraft.action?draftId=249569331",
+      "tinyui": "/x/MyDgDg",
+      "self": "https://docs.nomagic.com/rest/api/content/249569331"
+    },
+    "_expandable": {
+      "container": "/rest/api/space/CSRA",
+      "metadata": "",
+      "operations": "",
+      "children": "/rest/api/content/249569331/child",
+      "restrictions": "/rest/api/content/249569331/restriction/byOperation",
+      "history": "/rest/api/content/249569331/history",
+      "ancestors": "",
+      "body": "",
+      "version": "",
+      "descendants": "/rest/api/content/249569331/descendant",
+      "space": "/rest/api/space/CSRA",
+      "relevantViewRestrictions": "/rest/api/content/249569331/restriction/relevantViewRestrictions"
+    }
+  },
+  "metadata": {
+    "mediaType": "image/png"
+  },
+  "extensions": {
+    "mediaType": "image/png",
+    "fileSize": 30749,
+    "comment": ""
+  },
+  "_links": {
+    "download": "/download/attachments/249569331/creating%20_effects_table.png?version=1&modificationDate=1755606244019&api=v2",
+    "thumbnail": "/download/thumbnails/249569331/creating%20_effects_table.png?api=v2",
+    "webui": "/spaces/CSRA/pages/249569331/Effects+Table?preview=%2F249569331%2F249569338%2Fcreating+_effects_table.png",
+    "self": "https://docs.nomagic.com/rest/api/content/249569338"
+  },
+  "_expandable": {
+    "operations": "",
+    "children": "/rest/api/content/249569338/child",
+    "restrictions": "/rest/api/content/249569338/restriction/byOperation",
+    "history": "/rest/api/content/249569338/history",
+    "ancestors": "",
+    "body": "",
+    "descendants": "/rest/api/content/249569338/descendant",
+    "space": "/rest/api/space/CSRA",
+    "relevantViewRestrictions": "/rest/api/content/249569338/restriction/relevantViewRestrictions"
+  }
+}
+````

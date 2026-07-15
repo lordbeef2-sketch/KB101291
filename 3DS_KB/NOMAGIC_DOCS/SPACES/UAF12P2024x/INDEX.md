@@ -1,0 +1,15 @@
+# SPACE INDEX: UAF 1.2 Plugin 2024x
+
+- build_complete: true
+- space_key: `UAF12P2024x`
+- page_count: 1316
+- source: https://docs.nomagic.com/spaces/UAF12P2024x/overview
+- captured_utc: `2026-07-14T16:57:08.352275+00:00`
+
+## CHUNKS
+
+- `UAF12P2024x_pages_0001.md`
+- `UAF12P2024x_pages_0002.md`
+- `UAF12P2024x_pages_0003.md`
+- `UAF12P2024x_pages_0004.md`
+- `UAF12P2024x_pages_0005.md`

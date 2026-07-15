@@ -1,0 +1,108 @@
+# JAVA OPENAPI: NotificationTextStyle (2024x API)
+
+- source_url: https://jdocs.nomagic.com/2024xRefresh1/com/nomagic/magicdraw/ui/notification/text/NotificationTextStyle.html
+- source_path: `com/nomagic/magicdraw/ui/notification/text/NotificationTextStyle.html`
+- source_sha256: `7c3d3d35430e51fa503da5cfe52b03ce1a4e1a1ce299ca3366331f84c99f71fe`
+- captured_utc: `2026-07-14T16:52:04.438779+00:00`
+
+## NORMALIZED JAVADOC CONTENT
+
+======== START OF CLASS DATA ========
+
+Package [com.nomagic.magicdraw.ui.notification.text](package-summary.html)
+
+## Interface NotificationTextStyle
+
+@OpenApiAllpublic interfaceNotificationTextStyle
+Represents notification message text formatter.
+
+========== METHOD SUMMARY =========== 
+Method Summary
+All MethodsInstance MethodsAbstract Methods
+Modifier and Type
+Method
+Description
+`[String](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html)`
+`[getText](#getText(com.nomagic.magicdraw.ui.notification.AbstractNotification))([AbstractNotification](../AbstractNotification.html) notification)`
+Returns formatted notification text.
+
+============ METHOD DETAIL ========== 
+Method Details
+getText
+[String](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html) getText([AbstractNotification](../AbstractNotification.html) notification)
+Returns formatted notification text.
+Parameters:
+`notification` - notification text to format
+Returns:
+notification formatted text.
+
+========= END OF CLASS DATA =========
+
+## EXACT JAVADOC MAIN HTML
+
+````html
+<main role="main">
+<!-- ======== START OF CLASS DATA ======== -->
+<div class="header">
+<div class="sub-title"><span class="package-label-in-type">Package</span> <a href="package-summary.html">com.nomagic.magicdraw.ui.notification.text</a></div>
+<h1 class="title" title="Interface NotificationTextStyle">Interface NotificationTextStyle</h1>
+</div>
+<section class="class-description" id="class-description">
+<hr/>
+<div class="type-signature"><span class="annotations">@OpenApiAll
+</span><span class="modifiers">public interface </span><span class="element-name type-name-label">NotificationTextStyle</span></div>
+<div class="block">Represents notification message text formatter.</div>
+</section>
+<section class="summary">
+<ul class="summary-list">
+<!-- ========== METHOD SUMMARY =========== -->
+<li>
+<section class="method-summary" id="method-summary">
+<h2>Method Summary</h2>
+<div id="method-summary-table">
+<div aria-orientation="horizontal" class="table-tabs" role="tablist"><button aria-controls="method-summary-table.tabpanel" aria-selected="true" class="active-table-tab" id="method-summary-table-tab0" onclick="show('method-summary-table', 'method-summary-table', 3)" onkeydown="switchTab(event)" role="tab" tabindex="0">All Methods</button><button aria-controls="method-summary-table.tabpanel" aria-selected="false" class="table-tab" id="method-summary-table-tab2" onclick="show('method-summary-table', 'method-summary-table-tab2', 3)" onkeydown="switchTab(event)" role="tab" tabindex="-1">Instance Methods</button><button aria-controls="method-summary-table.tabpanel" aria-selected="false" class="table-tab" id="method-summary-table-tab3" onclick="show('method-summary-table', 'method-summary-table-tab3', 3)" onkeydown="switchTab(event)" role="tab" tabindex="-1">Abstract Methods</button></div>
+<div id="method-summary-table.tabpanel" role="tabpanel">
+<div aria-labelledby="method-summary-table-tab0" class="summary-table three-column-summary">
+<div class="table-header col-first">Modifier and Type</div>
+<div class="table-header col-second">Method</div>
+<div class="table-header col-last">Description</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a class="external-link" href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang">String</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a class="member-name-link" href="#getText(com.nomagic.magicdraw.ui.notification.AbstractNotification)">getText</a><wbr/>(<a href="../AbstractNotification.html" title="class in com.nomagic.magicdraw.ui.notification">AbstractNotification</a> notification)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
+<div class="block">Returns formatted notification text.</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</li>
+</ul>
+</section>
+<section class="details">
+<ul class="details-list">
+<!-- ============ METHOD DETAIL ========== -->
+<li>
+<section class="method-details" id="method-detail">
+<h2>Method Details</h2>
+<ul class="member-list">
+<li>
+<section class="detail" id="getText(com.nomagic.magicdraw.ui.notification.AbstractNotification)">
+<h3>getText</h3>
+<div class="member-signature"><span class="return-type"><a class="external-link" href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang">String</a></span> <span class="element-name">getText</span><wbr/><span class="parameters">(<a href="../AbstractNotification.html" title="class in com.nomagic.magicdraw.ui.notification">AbstractNotification</a> notification)</span></div>
+<div class="block">Returns formatted notification text.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>notification</code> - notification text to format</dd>
+<dt>Returns:</dt>
+<dd>notification formatted text.</dd>
+</dl>
+</section>
+</li>
+</ul>
+</section>
+</li>
+</ul>
+</section>
+<!-- ========= END OF CLASS DATA ========= -->
+</main>
+````

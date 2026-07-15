@@ -1,0 +1,114 @@
+# NOMAGIC ATTACHMENT: specification-of-transition-event-b.png
+
+- attachment_id: `191923696`
+- space_key: `MSI2024xR2`
+- parent_page_id: `191923677`
+- parent_page_title: Defining the stopwatch Classifier Behavior
+- media_type: `image/png`
+- reported_bytes: 68580
+- download_url: https://docs.nomagic.com/download/attachments/191923677/specification-of-transition-event-b.png?version=1&modificationDate=1728049255773&api=v2
+- payload_kind: `metadata-only`
+- downloaded_sha256: not-downloaded
+
+## PAYLOAD STATUS
+
+Binary or image attachment is inventoried by official metadata; no binary bytes are embedded in this Markdown-only corpus.
+
+
+## EXACT ATTACHMENT METADATA
+
+````json
+{
+  "id": "191923696",
+  "type": "attachment",
+  "status": "current",
+  "title": "specification-of-transition-event-b.png",
+  "version": {
+    "by": {
+      "type": "known",
+      "username": "8acad0e54bbfc3ed014beebdb63b0005",
+      "userKey": "8acad0e54bbfc3ed014beebdb63b0005",
+      "profilePicture": {
+        "path": "/images/icons/profilepics/default.svg",
+        "width": 48,
+        "height": 48,
+        "isDefault": true
+      },
+      "displayName": "user-1438d",
+      "_links": {
+        "self": "https://docs.nomagic.com/rest/api/user?key=8acad0e54bbfc3ed014beebdb63b0005"
+      },
+      "_expandable": {
+        "status": ""
+      }
+    },
+    "when": "2024-10-04T15:40:55.773+02:00",
+    "message": "",
+    "number": 1,
+    "minorEdit": false,
+    "hidden": false,
+    "_links": {
+      "self": "https://docs.nomagic.com/rest/experimental/content/191923696/version/1"
+    },
+    "_expandable": {
+      "content": "/rest/api/content/191923696"
+    }
+  },
+  "position": -1,
+  "container": {
+    "id": "191923677",
+    "type": "page",
+    "status": "current",
+    "title": "Defining the stopwatch Classifier Behavior",
+    "position": 2,
+    "extensions": {
+      "position": 2
+    },
+    "_links": {
+      "webui": "/spaces/MSI2024xR2/pages/191923677/Defining+the+stopwatch+Classifier+Behavior",
+      "edit": "/pages/resumedraft.action?draftId=191923677",
+      "tinyui": "/x/3YVwCw",
+      "self": "https://docs.nomagic.com/rest/api/content/191923677"
+    },
+    "_expandable": {
+      "container": "/rest/api/space/MSI2024xR2",
+      "metadata": "",
+      "operations": "",
+      "children": "/rest/api/content/191923677/child",
+      "restrictions": "/rest/api/content/191923677/restriction/byOperation",
+      "history": "/rest/api/content/191923677/history",
+      "ancestors": "",
+      "body": "",
+      "version": "",
+      "descendants": "/rest/api/content/191923677/descendant",
+      "space": "/rest/api/space/MSI2024xR2",
+      "relevantViewRestrictions": "/rest/api/content/191923677/restriction/relevantViewRestrictions"
+    }
+  },
+  "metadata": {
+    "mediaType": "image/png"
+  },
+  "extensions": {
+    "mediaType": "image/png",
+    "fileSize": 68580,
+    "comment": ""
+  },
+  "_links": {
+    "download": "/download/attachments/191923677/specification-of-transition-event-b.png?version=1&modificationDate=1728049255773&api=v2",
+    "thumbnail": "/download/thumbnails/191923677/specification-of-transition-event-b.png?api=v2",
+    "webui": "/spaces/MSI2024xR2/pages/191923677/Defining+the+stopwatch+Classifier+Behavior?preview=%2F191923677%2F191923696%2Fspecification-of-transition-event-b.png",
+    "self": "https://docs.nomagic.com/rest/api/content/191923696"
+  },
+  "_expandable": {
+    "operations": "",
+    "children": "/rest/api/content/191923696/child",
+    "restrictions": "/rest/api/content/191923696/restriction/byOperation",
+    "history": "/rest/api/content/191923696/history",
+    "ancestors": "",
+    "body": "",
+    "descendants": "/rest/api/content/191923696/descendant",
+    "space": "/rest/api/space/MSI2024xR2",
+    "relevantViewRestrictions": "/rest/api/content/191923696/restriction/relevantViewRestrictions"
+  }
+}
+````

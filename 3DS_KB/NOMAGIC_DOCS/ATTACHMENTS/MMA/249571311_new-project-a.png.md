@@ -1,0 +1,114 @@
+# NOMAGIC ATTACHMENT: new-project-a.png
+
+- attachment_id: `249571311`
+- space_key: `MMA`
+- parent_page_id: `249571309`
+- parent_page_title: Creating a new UML project
+- media_type: `image/png`
+- reported_bytes: 59960
+- download_url: https://docs.nomagic.com/download/attachments/249571309/new-project-a.png?version=1&modificationDate=1755606878408&api=v2
+- payload_kind: `metadata-only`
+- downloaded_sha256: not-downloaded
+
+## PAYLOAD STATUS
+
+Binary or image attachment is inventoried by official metadata; no binary bytes are embedded in this Markdown-only corpus.
+
+
+## EXACT ATTACHMENT METADATA
+
+````json
+{
+  "id": "249571311",
+  "type": "attachment",
+  "status": "current",
+  "title": "new-project-a.png",
+  "version": {
+    "by": {
+      "type": "known",
+      "username": "8acad0e54bbfc3ed014beebdb63b0005",
+      "userKey": "8acad0e54bbfc3ed014beebdb63b0005",
+      "profilePicture": {
+        "path": "/images/icons/profilepics/default.svg",
+        "width": 48,
+        "height": 48,
+        "isDefault": true
+      },
+      "displayName": "user-1438d",
+      "_links": {
+        "self": "https://docs.nomagic.com/rest/api/user?key=8acad0e54bbfc3ed014beebdb63b0005"
+      },
+      "_expandable": {
+        "status": ""
+      }
+    },
+    "when": "2025-08-19T14:34:38.408+02:00",
+    "message": "",
+    "number": 1,
+    "minorEdit": false,
+    "hidden": false,
+    "_links": {
+      "self": "https://docs.nomagic.com/rest/experimental/content/249571311/version/1"
+    },
+    "_expandable": {
+      "content": "/rest/api/content/249571311"
+    }
+  },
+  "position": -1,
+  "container": {
+    "id": "249571309",
+    "type": "page",
+    "status": "current",
+    "title": "Creating a new UML project",
+    "position": 0,
+    "extensions": {
+      "position": 0
+    },
+    "_links": {
+      "webui": "/spaces/MMA/pages/249571309/Creating+a+new+UML+project",
+      "edit": "/pages/resumedraft.action?draftId=249571309",
+      "tinyui": "/x/7SfgDg",
+      "self": "https://docs.nomagic.com/rest/api/content/249571309"
+    },
+    "_expandable": {
+      "container": "/rest/api/space/MMA",
+      "metadata": "",
+      "operations": "",
+      "children": "/rest/api/content/249571309/child",
+      "restrictions": "/rest/api/content/249571309/restriction/byOperation",
+      "history": "/rest/api/content/249571309/history",
+      "ancestors": "",
+      "body": "",
+      "version": "",
+      "descendants": "/rest/api/content/249571309/descendant",
+      "space": "/rest/api/space/MMA",
+      "relevantViewRestrictions": "/rest/api/content/249571309/restriction/relevantViewRestrictions"
+    }
+  },
+  "metadata": {
+    "mediaType": "image/png"
+  },
+  "extensions": {
+    "mediaType": "image/png",
+    "fileSize": 59960,
+    "comment": ""
+  },
+  "_links": {
+    "download": "/download/attachments/249571309/new-project-a.png?version=1&modificationDate=1755606878408&api=v2",
+    "thumbnail": "/download/thumbnails/249571309/new-project-a.png?api=v2",
+    "webui": "/spaces/MMA/pages/249571309/Creating+a+new+UML+project?preview=%2F249571309%2F249571311%2Fnew-project-a.png",
+    "self": "https://docs.nomagic.com/rest/api/content/249571311"
+  },
+  "_expandable": {
+    "operations": "",
+    "children": "/rest/api/content/249571311/child",
+    "restrictions": "/rest/api/content/249571311/restriction/byOperation",
+    "history": "/rest/api/content/249571311/history",
+    "ancestors": "",
+    "body": "",
+    "descendants": "/rest/api/content/249571311/descendant",
+    "space": "/rest/api/space/MMA",
+    "relevantViewRestrictions": "/rest/api/content/249571311/restriction/relevantViewRestrictions"
+  }
+}
+````

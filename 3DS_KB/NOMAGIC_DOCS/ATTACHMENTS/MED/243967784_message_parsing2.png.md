@@ -1,0 +1,114 @@
+# NOMAGIC ATTACHMENT: message_parsing2.png
+
+- attachment_id: `243967784`
+- space_key: `MED`
+- parent_page_id: `243967781`
+- parent_page_title: Message name parsing
+- media_type: `image/png`
+- reported_bytes: 10783
+- download_url: https://docs.nomagic.com/download/attachments/243967781/message_parsing2.png?version=1&modificationDate=1753951841321&api=v2
+- payload_kind: `metadata-only`
+- downloaded_sha256: not-downloaded
+
+## PAYLOAD STATUS
+
+Binary or image attachment is inventoried by official metadata; no binary bytes are embedded in this Markdown-only corpus.
+
+
+## EXACT ATTACHMENT METADATA
+
+````json
+{
+  "id": "243967784",
+  "type": "attachment",
+  "status": "current",
+  "title": "message_parsing2.png",
+  "version": {
+    "by": {
+      "type": "known",
+      "username": "ingabe",
+      "userKey": "ff80808151f3008c0152c05ba1a40003",
+      "profilePicture": {
+        "path": "/download/attachments/7415957/user-avatar",
+        "width": 48,
+        "height": 48,
+        "isDefault": false
+      },
+      "displayName": "Inga A.",
+      "_links": {
+        "self": "https://docs.nomagic.com/rest/api/user?key=ff80808151f3008c0152c05ba1a40003"
+      },
+      "_expandable": {
+        "status": ""
+      }
+    },
+    "when": "2025-07-31T10:50:41.321+02:00",
+    "message": "",
+    "number": 1,
+    "minorEdit": false,
+    "hidden": false,
+    "_links": {
+      "self": "https://docs.nomagic.com/rest/experimental/content/243967784/version/1"
+    },
+    "_expandable": {
+      "content": "/rest/api/content/243967784"
+    }
+  },
+  "position": -1,
+  "container": {
+    "id": "243967781",
+    "type": "page",
+    "status": "current",
+    "title": "Message name parsing",
+    "position": 1,
+    "extensions": {
+      "position": 1
+    },
+    "_links": {
+      "webui": "/spaces/MED/pages/243967781/Message+name+parsing",
+      "edit": "/pages/resumedraft.action?draftId=243967781",
+      "tinyui": "/x/JaeKDg",
+      "self": "https://docs.nomagic.com/rest/api/content/243967781"
+    },
+    "_expandable": {
+      "container": "/rest/api/space/MED",
+      "metadata": "",
+      "operations": "",
+      "children": "/rest/api/content/243967781/child",
+      "restrictions": "/rest/api/content/243967781/restriction/byOperation",
+      "history": "/rest/api/content/243967781/history",
+      "ancestors": "",
+      "body": "",
+      "version": "",
+      "descendants": "/rest/api/content/243967781/descendant",
+      "space": "/rest/api/space/MED",
+      "relevantViewRestrictions": "/rest/api/content/243967781/restriction/relevantViewRestrictions"
+    }
+  },
+  "metadata": {
+    "mediaType": "image/png"
+  },
+  "extensions": {
+    "mediaType": "image/png",
+    "fileSize": 10783,
+    "comment": ""
+  },
+  "_links": {
+    "download": "/download/attachments/243967781/message_parsing2.png?version=1&modificationDate=1753951841321&api=v2",
+    "thumbnail": "/download/thumbnails/243967781/message_parsing2.png?api=v2",
+    "webui": "/spaces/MED/pages/243967781/Message+name+parsing?preview=%2F243967781%2F243967784%2Fmessage_parsing2.png",
+    "self": "https://docs.nomagic.com/rest/api/content/243967784"
+  },
+  "_expandable": {
+    "operations": "",
+    "children": "/rest/api/content/243967784/child",
+    "restrictions": "/rest/api/content/243967784/restriction/byOperation",
+    "history": "/rest/api/content/243967784/history",
+    "ancestors": "",
+    "body": "",
+    "descendants": "/rest/api/content/243967784/descendant",
+    "space": "/rest/api/space/MED",
+    "relevantViewRestrictions": "/rest/api/content/243967784/restriction/relevantViewRestrictions"
+  }
+}
+````

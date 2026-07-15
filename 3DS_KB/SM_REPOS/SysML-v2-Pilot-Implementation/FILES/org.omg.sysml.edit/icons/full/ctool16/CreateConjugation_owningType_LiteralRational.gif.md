@@ -1,0 +1,11 @@
+# OFFICIAL REPOSITORY BINARY INVENTORY: SysML-v2-Pilot-Implementation/org.omg.sysml.edit/icons/full/ctool16/CreateConjugation_owningType_LiteralRational.gif
+
+- repository: `SysML-v2-Pilot-Implementation`
+- source_path: `org.omg.sysml.edit/icons/full/ctool16/CreateConjugation_owningType_LiteralRational.gif`
+- source_url: https://github.com/Systems-Modeling/SysML-v2-Pilot-Implementation/blob/fa709f28dfd49dfdb7ee83e4e19da2f57e0eb3aa/org.omg.sysml.edit/icons/full/ctool16/CreateConjugation_owningType_LiteralRational.gif
+- source_bytes: 223
+- source_sha256: `678a6b44cb2f1280534f05fe64652d28dd9685ea7738d1f0d260245b49e6a09d`
+- payload_status: binary metadata only
+- reason: final knowledge base is Markdown-only; binary bytes are not executable knowledge
+
+

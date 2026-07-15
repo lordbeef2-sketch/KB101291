@@ -1,0 +1,81 @@
+# PYTHON_3_12_13::deprecations/pending-removal-in-3.15.md
+
+<!--SYSTEM_CORPUS id=PYTHON_3_12_13 source_path=deprecations/pending-removal-in-3.15.txt -->
+- source: https://docs.python.org/3.12/
+- archive_sha256: 48e950ab70335f2f49bd0418eaa26ab225942cd9c100e15428dc4f70f21b6ba0
+- license: Python Software Foundation License Version 2; documentation examples additionally Zero Clause BSD
+- fidelity: full-official-plain-text-document
+
+Pending Removal in Python 3.15
+******************************
+
+* "http.server.CGIHTTPRequestHandler" will be removed along with its
+  related "--cgi" flag to "python -m http.server".  It was obsolete
+  and rarely used.  No direct replacement exists.  *Anything* is
+  better than CGI to interface a web server with a request handler.
+
+* "importlib":
+
+  * "load_module()" method: use "exec_module()" instead.
+
+* "locale": "locale.getdefaultlocale()" was deprecated in Python 3.11
+  and originally planned for removal in Python 3.13 (gh-90817), but
+  removal has been postponed to Python 3.15. Use "locale.setlocale()",
+  "locale.getencoding()" and "locale.getlocale()" instead.
+  (Contributed by Hugo van Kemenade in gh-111187.)
+
+* "pathlib": "pathlib.PurePath.is_reserved()" is deprecated and
+  scheduled for removal in Python 3.15. From Python 3.13 onwards, use
+  "os.path.isreserved" to detect reserved paths on Windows.
+
+* "platform": "java_ver()" is deprecated and will be removed in 3.15.
+  It was largely untested, had a confusing API, and was only useful
+  for Jython support. (Contributed by Nikita Sobolev in gh-116349.)
+
+* "sysconfig":
+
+  * The *check_home* argument of "sysconfig.is_python_build()" has
+    been deprecated since Python 3.12.
+
+* "threading": Passing any arguments to "threading.RLock()" is now
+  deprecated. C version allows any numbers of args and kwargs, but
+  they are just ignored. Python version does not allow any arguments.
+  All arguments will be removed from "threading.RLock()" in Python
+  3.15. (Contributed by Nikita Sobolev in gh-102029.)
+
+* "typing.NamedTuple":
+
+  * The undocumented keyword argument syntax for creating "NamedTuple"
+    classes ("NT = NamedTuple("NT", x=int)") is deprecated, and will
+    be disallowed in 3.15. Use the class-based syntax or the
+    functional syntax instead.
+
+* "types":
+
+  * "types.CodeType": Accessing "co_lnotab" was deprecated in **PEP
+    626** since 3.10 and was planned to be removed in 3.12, but it
+    only got a proper "DeprecationWarning" in 3.12. May be removed in
+    3.15. (Contributed by Nikita Sobolev in gh-101866.)
+
+* "typing":
+
+  * When using the functional syntax to create a "NamedTuple" class,
+    failing to pass a value to the *fields* parameter ("NT =
+    NamedTuple("NT")") is deprecated. Passing "None" to the *fields*
+    parameter ("NT = NamedTuple("NT", None)") is also deprecated. Both
+    will be disallowed in Python 3.15. To create a "NamedTuple" class
+    with 0 fields, use "class NT(NamedTuple): pass" or "NT =
+    NamedTuple("NT", [])".
+
+* "typing.TypedDict": When using the functional syntax to create a
+  "TypedDict" class, failing to pass a value to the *fields* parameter
+  ("TD = TypedDict("TD")") is deprecated. Passing "None" to the
+  *fields* parameter ("TD = TypedDict("TD", None)") is also
+  deprecated. Both will be disallowed in Python 3.15. To create a
+  "TypedDict" class with 0 fields, use "class TD(TypedDict): pass" or
+  "TD = TypedDict("TD", {})".
+
+* "wave": Deprecate the "getmark()", "setmark()" and "getmarkers()"
+  methods of the "wave.Wave_read" and "wave.Wave_write" classes. They
+  will be removed in Python 3.15. (Contributed by Victor Stinner in
+  gh-105096.)

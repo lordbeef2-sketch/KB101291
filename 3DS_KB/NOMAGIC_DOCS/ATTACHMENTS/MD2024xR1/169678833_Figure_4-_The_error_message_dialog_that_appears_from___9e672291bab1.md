@@ -1,0 +1,114 @@
+# NOMAGIC ATTACHMENT: Figure 4- The error message dialog that appears from running an invalid sectionBegin directive..png
+
+- attachment_id: `169678833`
+- space_key: `MD2024xR1`
+- parent_page_id: `169678832`
+- parent_page_title: Microsoft Office PowerPoint presentation (PPTX)
+- media_type: `image/png`
+- reported_bytes: 23888
+- download_url: https://docs.nomagic.com/download/attachments/169678832/Figure%204-%20The%20error%20message%20dialog%20that%20appears%20from%20running%20an%20invalid%20sectionBegin%20directive..png?version=1&modificationDate=1715140556846&api=v2
+- payload_kind: `metadata-only`
+- downloaded_sha256: not-downloaded
+
+## PAYLOAD STATUS
+
+Binary or image attachment is inventoried by official metadata; no binary bytes are embedded in this Markdown-only corpus.
+
+
+## EXACT ATTACHMENT METADATA
+
+````json
+{
+  "id": "169678833",
+  "type": "attachment",
+  "status": "current",
+  "title": "Figure 4- The error message dialog that appears from running an invalid sectionBegin directive..png",
+  "version": {
+    "by": {
+      "type": "known",
+      "username": "8acad0e54bbfc3ed014beebdb63b0005",
+      "userKey": "8acad0e54bbfc3ed014beebdb63b0005",
+      "profilePicture": {
+        "path": "/images/icons/profilepics/default.svg",
+        "width": 48,
+        "height": 48,
+        "isDefault": true
+      },
+      "displayName": "user-1438d",
+      "_links": {
+        "self": "https://docs.nomagic.com/rest/api/user?key=8acad0e54bbfc3ed014beebdb63b0005"
+      },
+      "_expandable": {
+        "status": ""
+      }
+    },
+    "when": "2024-05-08T05:55:56.846+02:00",
+    "message": "",
+    "number": 1,
+    "minorEdit": false,
+    "hidden": false,
+    "_links": {
+      "self": "https://docs.nomagic.com/rest/experimental/content/169678833/version/1"
+    },
+    "_expandable": {
+      "content": "/rest/api/content/169678833"
+    }
+  },
+  "position": -1,
+  "container": {
+    "id": "169678832",
+    "type": "page",
+    "status": "current",
+    "title": "Microsoft Office PowerPoint presentation (PPTX)",
+    "position": 2,
+    "extensions": {
+      "position": 2
+    },
+    "_links": {
+      "webui": "/spaces/MD2024xR1/pages/169678832/Microsoft+Office+PowerPoint+presentation+PPTX",
+      "edit": "/pages/resumedraft.action?draftId=169678832",
+      "tinyui": "/x/8BcdCg",
+      "self": "https://docs.nomagic.com/rest/api/content/169678832"
+    },
+    "_expandable": {
+      "container": "/rest/api/space/MD2024xR1",
+      "metadata": "",
+      "operations": "",
+      "children": "/rest/api/content/169678832/child",
+      "restrictions": "/rest/api/content/169678832/restriction/byOperation",
+      "history": "/rest/api/content/169678832/history",
+      "ancestors": "",
+      "body": "",
+      "version": "",
+      "descendants": "/rest/api/content/169678832/descendant",
+      "space": "/rest/api/space/MD2024xR1",
+      "relevantViewRestrictions": "/rest/api/content/169678832/restriction/relevantViewRestrictions"
+    }
+  },
+  "metadata": {
+    "mediaType": "image/png"
+  },
+  "extensions": {
+    "mediaType": "image/png",
+    "fileSize": 23888,
+    "comment": ""
+  },
+  "_links": {
+    "download": "/download/attachments/169678832/Figure%204-%20The%20error%20message%20dialog%20that%20appears%20from%20running%20an%20invalid%20sectionBegin%20directive..png?version=1&modificationDate=1715140556846&api=v2",
+    "thumbnail": "/download/thumbnails/169678832/Figure%204-%20The%20error%20message%20dialog%20that%20appears%20from%20running%20an%20invalid%20sectionBegin%20directive..png?api=v2",
+    "webui": "/spaces/MD2024xR1/pages/169678832/Microsoft+Office+PowerPoint+presentation+PPTX?preview=%2F169678832%2F169678833%2FFigure+4-+The+error+message+dialog+that+appears+from+running+an+invalid+sectionBegin+directive..png",
+    "self": "https://docs.nomagic.com/rest/api/content/169678833"
+  },
+  "_expandable": {
+    "operations": "",
+    "children": "/rest/api/content/169678833/child",
+    "restrictions": "/rest/api/content/169678833/restriction/byOperation",
+    "history": "/rest/api/content/169678833/history",
+    "ancestors": "",
+    "body": "",
+    "descendants": "/rest/api/content/169678833/descendant",
+    "space": "/rest/api/space/MD2024xR1",
+    "relevantViewRestrictions": "/rest/api/content/169678833/restriction/relevantViewRestrictions"
+  }
+}
+````

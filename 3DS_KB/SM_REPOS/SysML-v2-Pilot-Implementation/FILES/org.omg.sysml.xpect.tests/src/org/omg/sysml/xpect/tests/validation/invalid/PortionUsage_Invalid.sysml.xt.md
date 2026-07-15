@@ -1,0 +1,70 @@
+# OFFICIAL REPOSITORY FILE: SysML-v2-Pilot-Implementation/org.omg.sysml.xpect.tests/src/org/omg/sysml/xpect/tests/validation/invalid/PortionUsage_Invalid.sysml.xt
+
+- repository: `SysML-v2-Pilot-Implementation`
+- source_path: `org.omg.sysml.xpect.tests/src/org/omg/sysml/xpect/tests/validation/invalid/PortionUsage_Invalid.sysml.xt`
+- source_url: https://github.com/Systems-Modeling/SysML-v2-Pilot-Implementation/blob/fa709f28dfd49dfdb7ee83e4e19da2f57e0eb3aa/org.omg.sysml.xpect.tests/src/org/omg/sysml/xpect/tests/validation/invalid/PortionUsage_Invalid.sysml.xt
+- source_bytes: 1925
+- source_sha256: `be93f05e088bc790bf7548cab816553fae6440b67b980553ce1da1212cb4f7d8`
+- decoded_as: `utf-8`
+
+
+## EXACT SOURCE
+
+````xtext
+//* 
+XPECT_SETUP org.omg.sysml.xpect.tests.validation.valid.SysMLTests
+	ResourceSet {
+		ThisFile {}
+		File {from ="/library.kernel/Base.kerml"}
+		File {from ="/library.kernel/Links.kerml"}
+		File {from ="/library.kernel/Occurrences.kerml"}
+		File {from ="/library.kernel/Objects.kerml"}
+		File {from ="/library.kernel/Performances.kerml"}
+		File {from ="/library.kernel/BaseFunctions.kerml"}
+		File {from ="/library.kernel/ScalarValues.kerml"}
+		File {from ="/library.kernel/ScalarFunctions.kerml"}
+		File {from ="/library.systems/Items.sysml"}
+		File {from ="/library.systems/Parts.sysml"}
+		File {from ="/library.systems/Ports.sysml"}
+		File {from ="/library.domain/Quantities and Units/ISQ.sysml"}
+		File {from ="/library.domain/Quantities and Units/SI.sysml"}
+		
+
+	}
+	Workspace {
+		JavaProject {
+			SrcFolder {
+				ThisFile {}
+				File {from ="/library.kernel/Base.kerml"}
+				File {from ="/library.kernel/Links.kerml"}
+		       	File {from ="/library.kernel/Occurrences.kerml"}
+				File {from ="/library.kernel/Objects.kerml"}
+				File {from ="/library.kernel/Performances.kerml"}
+				File {from ="/library.kernel/BaseFunctions.kerml"}
+				File {from ="/library.kernel/ScalarValues.kerml"}
+				File {from ="/library.kernel/ScalarFunctions.kerml"}
+				File {from ="/library.systems/Items.sysml"}
+				File {from ="/library.systems/Parts.sysml"}
+				File {from ="/library.systems/Ports.sysml"}
+				File {from ="/library.domain/Quantities and Units/ISQ.sysml"}
+				File {from ="/library.domain/Quantities and Units/SI.sysml"}
+			}
+		}
+	}
+END_SETUP 
+*/
+package PortionUsage_Invalid {	
+	part p1 {
+		snapshot s1;
+		timeslice t1 {
+			snapshot s2;
+		}
+	}
+	
+	// XPECT errors -->"Must be owned by an occurrence definition or usage." at "snapshot s2;"
+	snapshot s2;
+	// XPECT errors -->"Must be owned by an occurrence definition or usage." at "timeslice t2;"	
+	timeslice t2;
+}
+
+````

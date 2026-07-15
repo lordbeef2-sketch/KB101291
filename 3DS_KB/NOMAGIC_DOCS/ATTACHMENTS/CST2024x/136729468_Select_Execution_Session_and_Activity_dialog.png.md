@@ -1,0 +1,114 @@
+# NOMAGIC ATTACHMENT: Select Execution Session and Activity dialog.png
+
+- attachment_id: `136729468`
+- space_key: `CST2024x`
+- parent_page_id: `136729466`
+- parent_page_title: Duration analysis on executed traces
+- media_type: `image/png`
+- reported_bytes: 13629
+- download_url: https://docs.nomagic.com/download/attachments/136729466/Select%20Execution%20Session%20and%20Activity%20dialog.png?version=1&modificationDate=1695362352316&api=v2
+- payload_kind: `metadata-only`
+- downloaded_sha256: not-downloaded
+
+## PAYLOAD STATUS
+
+Binary or image attachment is inventoried by official metadata; no binary bytes are embedded in this Markdown-only corpus.
+
+
+## EXACT ATTACHMENT METADATA
+
+````json
+{
+  "id": "136729468",
+  "type": "attachment",
+  "status": "current",
+  "title": "Select Execution Session and Activity dialog.png",
+  "version": {
+    "by": {
+      "type": "known",
+      "username": "ingabe",
+      "userKey": "ff80808151f3008c0152c05ba1a40003",
+      "profilePicture": {
+        "path": "/download/attachments/7415957/user-avatar",
+        "width": 48,
+        "height": 48,
+        "isDefault": false
+      },
+      "displayName": "Inga A.",
+      "_links": {
+        "self": "https://docs.nomagic.com/rest/api/user?key=ff80808151f3008c0152c05ba1a40003"
+      },
+      "_expandable": {
+        "status": ""
+      }
+    },
+    "when": "2023-09-22T07:59:12.316+02:00",
+    "message": "",
+    "number": 1,
+    "minorEdit": false,
+    "hidden": false,
+    "_links": {
+      "self": "https://docs.nomagic.com/rest/experimental/content/136729468/version/1"
+    },
+    "_expandable": {
+      "content": "/rest/api/content/136729468"
+    }
+  },
+  "position": -1,
+  "container": {
+    "id": "136729466",
+    "type": "page",
+    "status": "current",
+    "title": "Duration analysis on executed traces",
+    "position": 1,
+    "extensions": {
+      "position": 1
+    },
+    "_links": {
+      "webui": "/spaces/CST2024x/pages/136729466/Duration+analysis+on+executed+traces",
+      "edit": "/pages/resumedraft.action?draftId=136729466",
+      "tinyui": "/x/elMmC",
+      "self": "https://docs.nomagic.com/rest/api/content/136729466"
+    },
+    "_expandable": {
+      "container": "/rest/api/space/CST2024x",
+      "metadata": "",
+      "operations": "",
+      "children": "/rest/api/content/136729466/child",
+      "restrictions": "/rest/api/content/136729466/restriction/byOperation",
+      "history": "/rest/api/content/136729466/history",
+      "ancestors": "",
+      "body": "",
+      "version": "",
+      "descendants": "/rest/api/content/136729466/descendant",
+      "space": "/rest/api/space/CST2024x",
+      "relevantViewRestrictions": "/rest/api/content/136729466/restriction/relevantViewRestrictions"
+    }
+  },
+  "metadata": {
+    "mediaType": "image/png"
+  },
+  "extensions": {
+    "mediaType": "image/png",
+    "fileSize": 13629,
+    "comment": ""
+  },
+  "_links": {
+    "download": "/download/attachments/136729466/Select%20Execution%20Session%20and%20Activity%20dialog.png?version=1&modificationDate=1695362352316&api=v2",
+    "thumbnail": "/download/thumbnails/136729466/Select%20Execution%20Session%20and%20Activity%20dialog.png?api=v2",
+    "webui": "/spaces/CST2024x/pages/136729466/Duration+analysis+on+executed+traces?preview=%2F136729466%2F136729468%2FSelect+Execution+Session+and+Activity+dialog.png",
+    "self": "https://docs.nomagic.com/rest/api/content/136729468"
+  },
+  "_expandable": {
+    "operations": "",
+    "children": "/rest/api/content/136729468/child",
+    "restrictions": "/rest/api/content/136729468/restriction/byOperation",
+    "history": "/rest/api/content/136729468/history",
+    "ancestors": "",
+    "body": "",
+    "descendants": "/rest/api/content/136729468/descendant",
+    "space": "/rest/api/space/CST2024x",
+    "relevantViewRestrictions": "/rest/api/content/136729468/restriction/relevantViewRestrictions"
+  }
+}
+````

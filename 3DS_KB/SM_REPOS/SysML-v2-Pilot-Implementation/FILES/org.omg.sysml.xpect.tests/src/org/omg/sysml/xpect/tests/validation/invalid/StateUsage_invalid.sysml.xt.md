@@ -1,0 +1,112 @@
+# OFFICIAL REPOSITORY FILE: SysML-v2-Pilot-Implementation/org.omg.sysml.xpect.tests/src/org/omg/sysml/xpect/tests/validation/invalid/StateUsage_invalid.sysml.xt
+
+- repository: `SysML-v2-Pilot-Implementation`
+- source_path: `org.omg.sysml.xpect.tests/src/org/omg/sysml/xpect/tests/validation/invalid/StateUsage_invalid.sysml.xt`
+- source_url: https://github.com/Systems-Modeling/SysML-v2-Pilot-Implementation/blob/fa709f28dfd49dfdb7ee83e4e19da2f57e0eb3aa/org.omg.sysml.xpect.tests/src/org/omg/sysml/xpect/tests/validation/invalid/StateUsage_invalid.sysml.xt
+- source_bytes: 3965
+- source_sha256: `88867cafcae9c13f7c4692d897487d61b2de380b3e0e2f952afb25f0b95ff0d9`
+- decoded_as: `utf-8`
+
+
+## EXACT SOURCE
+
+````xtext
+//*
+XPECT_SETUP org.omg.sysml.xpect.tests.validation.invalid.SysMLTests
+	ResourceSet {
+		ThisFile {}
+		File {from ="/library.kernel/Base.kerml"}
+		File {from ="/library.kernel/Occurrences.kerml"}
+		File {from ="/library.kernel/Objects.kerml"}
+		File {from ="/library.kernel/Performances.kerml"}
+		File {from ="/library.kernel/Transfers.kerml"}
+		File {from ="/library.kernel/ControlPerformances.kerml"}
+		File {from ="/library.kernel/StatePerformances.kerml"}
+		File {from ="/library.kernel/TransitionPerformances.kerml"}
+		File {from ="/library.systems/Items.sysml"}
+		File {from ="/library.systems/Parts.sysml"}
+		File {from ="/library.systems/Ports.sysml"}
+		File {from ="/library.systems/Actions.sysml"}
+		File {from ="/library.systems/States.sysml"}
+	}
+	Workspace {
+		JavaProject {
+			SrcFolder {
+				ThisFile {}
+				File {from ="/library.kernel/Base.kerml"}
+				File {from ="/library.kernel/Occurrences.kerml"}
+				File {from ="/library.kernel/Objects.kerml"}
+				File {from ="/library.kernel/Performances.kerml"}
+				File {from ="/library.kernel/Transfers.kerml"}
+				File {from ="/library.kernel/ControlPerformances.kerml"}
+				File {from ="/library.kernel/StatePerformances.kerml"}
+				File {from ="/library.kernel/TransitionPerformances.kerml"}
+				File {from ="/library.systems/Items.sysml"}
+				File {from ="/library.systems/Parts.sysml"}
+				File {from ="/library.systems/Ports.sysml"}
+				File {from ="/library.systems/Actions.sysml"}
+				File {from ="/library.systems/States.sysml"}
+			}
+		}
+	}
+END_SETUP 
+*/
+package StateUsage_invalid {
+	
+	part def A;
+	attribute def VT;
+	action ac;
+	// XPECT errors --> "A state must be typed by state definitions." at "state s1 : A;"
+	//* XPECT warnings ---
+	   "Duplicate of inherited member name 'self' from Part, StateAction" at "state s1 : A;"
+	   "Duplicate of inherited member name 'start' from Part, StateAction" at "state s1 : A;"
+	   "Duplicate of inherited member name 'done' from Part, StateAction" at "state s1 : A;"
+	--- */
+	state s1 : A;
+	// XPECT errors --> "A state must be typed by state definitions." at "state s2 : VT;"
+	// XPECT warnings --> "Duplicate of inherited member name 'self' from DataValue, StateAction" at "state s2 : VT;"
+	state s2 : VT;
+	// XPECT errors --> "A state must be typed by state definitions." at "state s3 : ac;"
+	state s3 : ac;
+	
+	state s4 {
+		entry action a1;
+		//XPECT errors --> "A state may have at most one entry action." at "entry action a2;"
+		entry action a2;
+		
+		do action b1;
+		//XPECT errors --> "A state may have at most one do action." at "do action b2;"
+  		do action b2;
+  		
+  		exit action c1;
+		//XPECT errors --> "A state may have at most one exit action." at "exit action c2;"
+  		exit action c2;
+  		
+		//XPECT errors --> "A state must be typed by state definitions." at "state sa : A;"
+		//* XPECT warnings ---
+		   "Duplicate of inherited member name 'self' from Part, StateAction" at "state sa : A;"
+		   "Duplicate of inherited member name 'start' from Part, StateAction" at "state sa : A;"
+		   "Duplicate of inherited member name 'done' from Part, StateAction" at "state sa : A;"
+		--- */
+		state sa : A;
+	}
+	
+	ref s :> s4;
+	
+	//XPECT errors --> "Must reference a state." at "s"
+	exhibit s;
+	
+	//XPECT errors --> "A state must be typed by state definitions." at "exhibit s.sa;"
+	//* XPECT warnings ---
+	   "Duplicate of inherited member name 'self' from Part, StateAction" at "exhibit s.sa;"
+	   "Duplicate of inherited member name 'start' from Part, StateAction" at "exhibit s.sa;"
+	   "Duplicate of inherited member name 'done' from Part, StateAction" at "exhibit s.sa;"
+	   "Duplicate of inherited member name 'self' from Part, StateAction" at "s.sa"
+	   "Duplicate of inherited member name 'start' from Part, StateAction" at "s.sa"
+	   "Duplicate of inherited member name 'done' from Part, StateAction" at "s.sa"
+	--- */
+	exhibit s.sa;
+	
+}
+
+````

@@ -1,0 +1,925 @@
+# NOMAGIC ATTACHMENT: utilities_2024xRefresh1.zip
+
+- attachment_id: `304002523`
+- space_key: `MCS`
+- parent_page_id: `304002521`
+- parent_page_title: (2026x Refresh1) Admin Tools
+- media_type: `application/zip`
+- reported_bytes: 12266
+- download_url: https://docs.nomagic.com/download/attachments/304002521/utilities_2024xRefresh1.zip?version=1&modificationDate=1777452463231&api=v2
+- payload_kind: `archive-expanded`
+- downloaded_sha256: `8cf204a91e0e6d6f78ea8a9d67d99634b112a5ddb4e29c7f500dd4911c970422`
+
+## ARCHIVE CONTENTS
+
+### ENTRY: add-twc-shortcuts.sh
+
+- bytes: 5432
+- crc32: `83094e70`
+- decoded_as: `utf-8`
+
+````text
+#!/bin/bash
+# Teamwork Cloud shortcut installer script for Linux systems. 
+# This script is meant to enhance access to log and configuration 
+# files associated with Teamwork Cloud operations. 
+# The log and configuration files are all available in one 
+# location and are symbolically linked.
+# 
+# Configuration files can be edited from this path.
+# Additional scripts are copied and system path can be set.
+# Default Path: <Install-Path>/Utilities/AdminTools
+
+CD_ALIAS=cdtwc
+TWC_ENV_PATH=/etc/twcloud/twcloud-env
+WAP_SVC_PATH=/etc/systemd/system/webapp.service
+INSTALLER_DIR=$(dirname "$(realpath $0)")
+DEBUG_LOG=".shortcut-setup.log"
+PRODUCT="Teamwork Cloud"
+
+if [ "$EUID" -ne 0 ];then
+	echo "Please run as root or sudo."
+	exit 1
+fi
+# Obtain TWC environment paths and set install path.
+if [ -f $TWC_ENV_PATH ]; then
+	source $TWC_ENV_PATH
+	USER_HOME_PATH=$(eval echo ~$TWCLOUD_OWNR)
+	if [[ $TWCLOUD_HOME =~ "CollaborationStudio" ]]; then PRODUCT="Magic Collaboration Studio"; fi
+	if [ -d ${TWCLOUD_HOME%/*}/Utilities ]; then
+		SETUP_DIR=${TWCLOUD_HOME%/*}/Utilities/AdminTools
+	else
+		SETUP_DIR=$TWCLOUD_HOME/Utilities/AdminTools
+	fi
+	mkdir -p $SETUP_DIR
+fi
+# Obtain Web App Platform Installation path
+if [ -f $WAP_SVC_PATH ]; then
+	WAP_PATH=$(cat $WAP_SVC_PATH | grep CATALINA_HOME_WEBAPP | cut -f3 -d\=)
+fi
+echo
+echo "======================================================================" | tee $INSTALLER_DIR/$DEBUG_LOG
+echo "$PRODUCT Configuration and Log Shortcut Installation" | tee -a $INSTALLER_DIR/$DEBUG_LOG
+echo "======================================================================" | tee -a $INSTALLER_DIR/$DEBUG_LOG
+echo
+echo "Shortcuts will be installed at: $SETUP_DIR" | tee -a $INSTALLER_DIR/$DEBUG_LOG
+echo
+read -p "Proceed with shortcut installation (y to continue)? " qinstall
+if ! [[ $qinstall =~ [yY](es)* ]]; then
+	echo
+	echo "Exited installation." | tee -a $INSTALLER_DIR/$DEBUG_LOG
+	exit 1
+fi
+echo
+echo "Install From: $INSTALLER_DIR" | tee -a $INSTALLER_DIR/$DEBUG_LOG
+echo "Setup In: $SETUP_DIR" | tee -a $INSTALLER_DIR/$DEBUG_LOG
+echo
+# Copy scripts to Utilities/AdminTools path if installing from another location.
+if ! [ $INSTALLER_DIR == $SETUP_DIR ]; then
+	foundfiles=$(find $INSTALLER_DIR -type f -name "*.sh" | wc -l)
+	if (( foundfiles > 5 )); then
+		cp -f *.sh $SETUP_DIR/
+	else
+		echo "Utility scripts not found. Unable to copy to destination." | tee -a $INSTALLER_DIR/$DEBUG_LOG
+	fi
+fi
+cd $SETUP_DIR
+chmod a+x *.sh
+# Clear out previous symbolic links.
+rm -f "log-*"
+rm -f "conf-*"
+
+# Determine the latest TWC version installed and link files.
+if grep -q 2024x $TWCLOUD_HOME/osmc/twc-rest-swagger.json; then
+	echo "$PRODUCT 24x installation found" | tee -a $INSTALLER_DIR/$DEBUG_LOG
+	ln -sf $TWCLOUD_HOME/logs/server.log ./log-twc
+	ln -sf $WAP_PATH/logs/catalina.out ./log-tomcat
+	ln -sf $WAP_PATH/logs/webappplatform/webapp.log ./log-webapp
+	ln -sf $WAP_PATH/logs/webappplatform/admin.log ./log-webapp-admin
+	ln -sf $WAP_PATH/logs/webappplatform/authentication.log ./log-auth
+	ln -sf $WAP_PATH/shared/conf/authserver.properties ./conf-auth
+elif [ -d $USER_HOME_PATH/.twcloud/2022x ]; then
+	echo "$PRODUCT 22x installation found" | tee -a $INSTALLER_DIR/$DEBUG_LOG
+	ln -sf $USER_HOME_PATH/.twcloud/2022x/server.log ./log-twc
+	if [ -d $TWCLOUD_HOME/../Utilities ]; then
+		echo "22x Refresh 2 Configuration"
+		ln -sf $WAP_PATH/logs/webappplatform/webapp.log ./log-webapp
+		ln -sf $WAP_PATH/logs/webappplatform/admin.log ./log-webapp-admin
+	else
+		ln -sf $WAP_PATH/logs/webappplatform/web-app.log ./log-webapp
+	fi
+	ln -sf $WAP_PATH/logs/webappplatform/authentication.log ./log-auth
+	ln -sf $WAP_PATH/shared/conf/authserver.properties ./conf-auth
+elif [ -d $USER_HOME_PATH/.twcloud/2021x ]; then
+	echo "$PRODUCT 21x installation found" | tee -a $INSTALLER_DIR/$DEBUG_LOG
+	ln -sf $USER_HOME_PATH/.twcloud/2021x/server.log ./log-twc
+	ln -sf $USER_HOME_PATH/.authserver/2021x/authserver.log ./log-auth
+	ln -sf $WAP_PATH/logs/webappplatform/web-app.log ./log-webapp
+	ln -sf $TWCLOUD_HOME/AuthServer/config/authserver.properties ./conf-auth
+elif [ -d $USER_HOME_PATH/.twcloud/19.0 ]; then
+	echo "$PRODUCT v19 installation found" | tee -a $INSTALLER_DIR/$DEBUG_LOG
+	ln -sf $USER_HOME_PATH/.twcloud/19.0/server.log ./log-twc
+	ln -sf $USER_HOME_PATH/.authserver/19.0/authserver.log ./log-auth
+	ln -sf $WAP_PATH/logs/webappplatform/web-app.log ./log-webapp
+	ln -sf $TWCLOUD_HOME/AuthServer/config/authserver.properties ./conf-auth
+fi
+ln -sf $TWCLOUD_HOME/configuration/application.conf ./conf-twc
+ln -sf $WAP_PATH/shared/conf/webappplatform.properties ./conf-webapp
+if [ -d /var/log/cassandra ]; then
+	ln -sf /var/log/cassandra/system.log ./log-cassandra
+	if [ -d /etc/cassandra ]; then ln -sf /etc/cassandra/conf cassandra-dir; fi
+fi
+echo
+echo "Do you want the utilities to be globally available (set \$PATH)?"
+read -p "Add to system path (y to continue): " qinstall
+if [[ $qinstall =~ [yY](es)* ]]; then
+	echo "export PATH=\$PATH:$SETUP_DIR" > /etc/profile.d/twc.sh
+	echo "alias $CD_ALIAS=\"cd $SETUP_DIR && pwd\"" >> /etc/profile.d/twc.sh
+	echo
+	echo "Global path has been configured." | tee -a $INSTALLER_DIR/$DEBUG_LOG
+	echo " Use $CD_ALIAS command to change directory to shortcuts."
+	echo " Run the following command to apply global path for this session:"
+	echo "   source /etc/profile.d/twc.sh" | tee -a $INSTALLER_DIR/$DEBUG_LOG
+	echo
+fi
+
+echo "Setup complete." | tee -a $INSTALLER_DIR/$DEBUG_LOG
+
+````
+
+### ENTRY: backup-twc-configs.sh
+
+- bytes: 1574
+- crc32: `30c78d59`
+- decoded_as: `utf-8`
+
+````text
+#!/bin/bash
+# This script archives all the configuration files plus keystore/certificate files from an existing installation.
+
+TWC_BACKUP_PATH=/opt/local/TWC_Backup
+
+TWC_ENV_PATH=/etc/twcloud/twcloud-env
+WAP_SVC_PATH=/etc/systemd/system/webapp.service
+
+if [ -f $TWC_ENV_PATH ]; then source $TWC_ENV_PATH; fi
+if [ -f $WAP_SVC_PATH ]; then WAP_PATH=$(cat $WAP_SVC_PATH | grep CATALINA_HOME_WEBAPP | cut -f3 -d\=); fi
+
+mkdir -p $TWC_BACKUP_PATH
+TWC_TMP_DIR=$(pwd)/_tmp
+mkdir $TWC_TMP_DIR
+if [ -d $TWCLOUD_HOME ]; then
+	mkdir -p $TWC_TMP_DIR/TeamworkCloud
+	if [ -d $TWCLOUD_HOME/AuthServer ]; then
+		mkdir -p $TWC_TMP_DIR/TeamworkCloud/AuthServer
+		cp -rf $TWCLOUD_HOME/AuthServer/config $TWC_TMP_DIR/TeamworkCloud/AuthServer/
+		rm -f $TWCLOUD_HOME/TeamworkCloud/AuthServer/truststore.jks
+	fi
+	cp -f $TWCLOUD_HOME/jvm.options $TWC_TMP_DIR/TeamworkCloud/
+	cp -rf $TWCLOUD_HOME/configuration $TWC_TMP_DIR/TeamworkCloud/
+fi
+if [ -d $WAP_PATH ]; then
+	mkdir -p $TWC_TMP_DIR/WebAppPlatform
+	mkdir -p $TWC_TMP_DIR/WebAppPlatform/shared
+	cp -rf $WAP_PATH/conf $TWC_TMP_DIR/WebAppPlatform/
+	cp -rf $WAP_PATH/shared/conf $TWC_TMP_DIR/WebAppPlatform/shared/
+fi
+
+echo
+echo "Backing up configuration files ..."
+echo
+TWC_CFG_PKG_PREFIX=TWC-configs
+TWC_CFG_EXE_TIME=$(date +"%Y%m%d-%H")
+TWC_CFG_PKG=$TWC_CFG_PKG_PREFIX-$TWC_CFG_EXE_TIME.tar
+cd $TWC_TMP_DIR && tar cf $TWC_CFG_PKG --exclude=data --exclude=*.txt --exclude=*.jks --exclude=*.ini --exclude=Catalina * && mv $TWC_CFG_PKG $TWC_BACKUP_PATH && cd ..
+rm -rf $TWC_TMP_DIR
+echo
+echo "Backup saved to: $TWC_BACKUP_PATH/$TWC_CFG_PKG"
+echo
+````
+
+### ENTRY: cassandra-stop.sh
+
+- bytes: 526
+- crc32: `225dccbe`
+- decoded_as: `utf-8`
+
+````text
+#!/bin/bash
+# Proper shutdown of cassandra service by flushing data to disk first.
+
+SERVICE_PATH=/etc/systemd/system/
+
+if [ "$EUID" -ne 0 ];then
+	echo "Please run as root or sudo."
+	exit 1
+fi
+echo "Cassandra Node Shutdown"
+if [ -f $SERVICE_PATH/cassandra.service ]; then
+	if systemctl is-active -q cassandra; then
+		echo "Performing nodetool drain"
+		nodetool drain
+		echo "Stopping cassandra"
+		systemctl stop cassandra
+	else
+		echo "cassandra - service was not in an active state"
+	fi
+fi
+echo "Cassandra has been shut down."
+````
+
+### ENTRY: check-env.sh
+
+- bytes: 3327
+- crc32: `29f9f977`
+- decoded_as: `utf-8`
+
+````text
+#!/bin/bash
+# Script for obtaining Linux server environment information.
+# Output will list information relevant to Teamwork Cloud installation and troubleshooting.
+# Elevated permissions should not be required to run this script.
+echo
+# Determine installed edition and version (TWC/MCS).
+TWC_ENV_PATH=/etc/twcloud/twcloud-env
+if [ -f $TWC_ENV_PATH ]; then
+	source $TWC_ENV_PATH
+	if [[ $TWCLOUD_HOME =~ "CollaborationStudio" ]]; then
+		echo "Magic Collaboration Studio Installation Found"
+	else
+		echo "Teamwork Cloud Installation Found"
+	fi
+	VER_FILE=$TWCLOUD_HOME/osmc/twc-rest-swagger.json
+	if [ -f $VER_FILE ]; then
+		TWC_VERSION=$(grep -A 1 '"title": "Teamwork Cloud REST API"' $VER_FILE | tail -n 1 | cut -d ":" -f2 | tr -d '"')
+		echo "Installed Version:$TWC_VERSION"
+	else
+		echo "Unable to determine TWC/MCS version."
+	fi
+else
+	echo "TWC/MCS Installation not complete."
+fi
+# Find Java versions installed and current default.
+echo
+if type -p java  > /dev/null; then
+	JAVA_VERSION=$(java --version | head -n1 |cut -d " " -f1,2)
+	echo "Default Java: $JAVA_VERSION"
+else
+	echo "Java not found on system."
+fi
+if [ -f /var/lib/alternatives/jre_1.8.0 ]; then echo "Java 1.8 available"; fi
+if [ -f /var/lib/alternatives/jre_11 ]; then echo "Java 11 available"; fi
+if [ -f /var/lib/alternatives/jre_17 ]; then echo "Java 17 available"; fi
+
+if [ -f /etc/os-release ]; then
+	source /etc/os-release
+	echo "Operating System: $PRETTY_NAME" 
+fi
+# Determine system security profile storage mount restrictions
+FIPS_STATUS=$(cat /proc/sys/crypto/fips_enabled)
+SELINUX_STATUS=$(getenforce)
+FAPOLICYD_STATUS=$(systemctl is-active fapolicyd)
+echo
+if [[ $(findmnt /home | grep noexec) ]]; then
+    echo "/home is mounted with noexec. Releases prior to 24x may encounter issues."
+fi
+if [ "$FIPS_STATUS" == "1" ]; then
+    echo "FIPS Mode is enabled. Keystore handling may be affected."
+fi
+if [ "$FAPOLICYD_STATUS" ==  "active" ]; then
+    echo "The fapolicyd service is active. Additional custom rules will need to be configured for services to run."
+fi
+if type selinuxenabled > /dev/null; then
+	selinuxenabled
+	if [ $? -eq 1 ]; then
+		echo "SELinux is enabled."
+		if [ "$SELINUX_STATUS" == "Enforcing" ]; then
+			echo "SELinux is set to enforcing. Operations may be affected."
+		fi
+	fi
+fi
+echo
+# Check mount and swap status for Cassandra environment
+if type -p cassandra  > /dev/null; then	
+	echo "Cassandra Version: $(cassandra -v)"
+	if [[ ! $(lsblk -l | grep /data) ]]; then
+		echo "Cassandra storage requirement exception: /data is not mounted on separate disk."
+	fi
+	if [[ ! $(lsblk -l | grep /logs) ]]; then
+		echo "Cassandra storage requirement excpetion: /logs is not mounted on separate disk."
+	fi
+	if [[ $(swapon -s) ]]; then
+		echo "Cassandra storage requirement exception: Swap is active. Turn off for better performance."
+	fi
+	if [[ $(findmnt /tmp | grep noexec) ]]; then
+		echo "Potential system exception: /tmp is mounted with noexec. Cassandra service may not be able to start. See FAQ documentation for solution."
+	fi
+	if type selinuxenabled > /dev/null; then
+		selinuxenabled
+		if [ $? -eq 1 ]; then
+			if [[ $(findmnt /dev/shm | grep noexec) ]]; then
+				echo "Potential system exception: /dev/shm is mounted with noexec. Cassandra service may not start when SELinux is enabled. Remount with exec."
+			fi
+		fi
+	fi
+fi
+echo
+
+````
+
+### ENTRY: compare-twc-config.sh
+
+- bytes: 3519
+- crc32: `97e411a0`
+- decoded_as: `utf-8`
+
+````text
+#!/bin/bash
+# Compare current TWC/MCS installation against a reference set of configuration files.
+#  Reference configs can be a tar archive generated from backup-twc-configs.sh or TWC/MCS no-install package. 
+#  User can specify reference source either as a path to a directory or actual package file location.
+#  Location can be specified either on the commandline during script execution or set below in $DEFAULT_SRC_PATH.
+#  Default source will be the oldest tar archive of TWC-configs in /opt/local/TWC_Backup.
+
+# Set path to file or directory containing configuration backup or no-install package.
+# This path can either be specified on the commandline, or by setting $DEFAULT_SRC_PATH below
+DEFAULT_SRC_PATH=/opt/local/TWC_Backup
+OUTPUT_FILE="output_config_diff.txt"
+
+echo
+cat /dev/null > $OUTPUT_FILE   #Clear out previous comparison.
+# Check whether path specified exists. Terminates if user provided incorrect path.
+DIFF_SRC_PATH=$1
+if [ $# -eq 0 ]; then DIFF_SRC_PATH=$DEFAULT_SRC_PATH; fi
+
+if [ -f $DIFF_SRC_PATH ] || [ -d $DIFF_SRC_PATH ]; then
+	echo "Comparison Source Path: $DIFF_SRC_PATH"
+else
+	echo "Invalid path: $DIFF_SRC_PATH"
+	exit 1
+fi
+
+# If only a directory path is specified, find either the oldest config backup or newest no-install package.
+if [ -d $DIFF_SRC_PATH ]; then
+	BASE_PATH=$DIFF_SRC_PATH
+	if ls $DIFF_SRC_PATH/TWC-configs* > /dev/null 2>&1; then
+		DIFF_SRC_PATH=$(ls -t $BASE_PATH/TWC-configs* | tail -1)
+		echo "Using oldest config backup as source for comparison: $DIFF_SRC_PATH"
+	elif ls $DIFF_SRC_PATH/*no_install_linux* > /dev/null 2>&1; then
+		DIFF_SRC_PATH=$(ls -tr $BASE_PATH/*no_install_linux* | tail -1)
+		echo "No-Install package used as source for comparison: $DIFF_SRC_PATH"
+	else
+		echo "No recognizable source file found in path: $DIFF_SRC_PATH"
+		exit 1
+	fi
+fi
+
+# Extract source configuration files into temp folder for comparison.
+TMPDIR=$(pwd)/_tmp
+mkdir -p $TMPDIR
+echo
+echo "Extracting source config files ..."
+if [ -f $DIFF_SRC_PATH ]; then
+	if [[ $DIFF_SRC_PATH =~ "no_install" ]]; then
+		if [[ $DIFF_SRC_PATH =~ "twcloud" ]]; then
+			BASE_DIR=CATIANoMagicServices
+		else
+			BASE_DIR=MagicCollaborationStudio
+		fi
+		unzip -q $DIFF_SRC_PATH "$BASE_DIR/TeamworkCloud/configuration/*" -d $TMPDIR/
+		unzip -q $DIFF_SRC_PATH "$BASE_DIR/TeamworkCloud/jvm.options" -d $TMPDIR/
+		unzip -q $DIFF_SRC_PATH "$BASE_DIR/WebAppPlatform/conf/*" -d $TMPDIR/
+		unzip -q $DIFF_SRC_PATH "$BASE_DIR/WebAppPlatform/shared/*" -d $TMPDIR/
+		mv $TMPDIR/$BASE_DIR/* $TMPDIR/
+	elif [[ $DIFF_SRC_PATH =~ "TWC-configs" ]]; then
+		tar -xf $DIFF_SRC_PATH -C $TMPDIR
+	fi
+fi
+echo
+
+# Find Teamwork Cloud and Web Application Platform installation paths, if they exist.
+# Perform diff comparison against source files.
+TWC_ENV_PATH=/etc/twcloud/twcloud-env
+WAP_SVC_PATH=/etc/systemd/system/webapp.service
+if [ -f $TWC_ENV_PATH ]; then 
+	source $TWC_ENV_PATH
+	echo "Comparing with Teamwork Cloud configurations: $TWCLOUD_HOME"
+	diff -bu $TMPDIR/TeamworkCloud/jvm.options $TWCLOUD_HOME/jvm.options >> $OUTPUT_FILE
+	diff -bur $TMPDIR/TeamworkCloud/configuration $TWCLOUD_HOME/configuration >> $OUTPUT_FILE
+fi
+if [ -f $WAP_SVC_PATH ]; then
+	WAP_PATH=$(cat $WAP_SVC_PATH | grep CATALINA_HOME_WEBAPP | cut -f3 -d\=)
+	echo "Comparing with Web Application Platform configurations: $WAP_PATH"
+	diff -bur $TMPDIR/WebAppPlatform/conf $WAP_PATH/conf >> $OUTPUT_FILE
+	diff -bur $TMPDIR/WebAppPlatform/shared $WAP_PATH/shared >> $OUTPUT_FILE
+fi
+
+rm -rf $TMPDIR
+echo
+echo "Report generated in: $OUTPUT_FILE"
+echo
+````
+
+### ENTRY: find-update-config.sh
+
+- bytes: 2428
+- crc32: `930c2189`
+- decoded_as: `utf-8`
+
+````text
+#!/bin/bash
+# The main purpose of this script is to update the server address for
+# all Teamwork Cloud configuration files. This script will only work
+# with shortcuts created in the AdminTools path. Additional features
+# include search for currently-configured server address, and general 
+# text search in configuration files.
+if [ "$EUID" -ne 0 ];then
+	echo "Please run as root or sudo."
+	exit 1
+fi
+
+printhelp() {
+	cat <<HELP
+Usage: find-update-config.sh [search text]/[old address] [new address]
+
+Search and replace server address in all configuration files when both old 
+and new addresses are specified together. If only search text is specified, 
+only search will be performed.
+
+Options:
+	search text     Find specified text (no space) in configuration files.
+	old address     Locate old address to be replaced.
+	new address     Specify address to replace with.
+	[no option]     Find addresses set in current configuration. Display help.
+
+HELP
+	exit 1
+}
+NUM_CONFIG_FILES=$(find conf-* 2>/dev/null | wc -l)
+if [[ $BIN_FOUND == '0' ]]; then
+	echo "No configuration files found in current path. Please create shortcuts first."
+	exit 1
+fi
+echo
+if [[ $# -eq 1 ]]; then
+	echo "===SEARCH RESULTS==="
+	for file in conf-*; do
+		echo "$file: $(basename $(readlink -f $file))"
+		egrep -v '^\s*#' $file | grep -n $1
+		echo
+	done
+	echo "===SEARCH COMPLETE==="
+elif [[ $# -eq 2 ]]; then
+	FIND_ADDR=$1
+	REPLACE_ADDR=$2
+	underline=$(tput smul)
+	nounderline=$(tput rmul)
+	echo "Replace ${underline}$FIND_ADDR${nounderline} with ${underline}$REPLACE_ADDR${nounderline} on this server."
+	echo "WARNING: This change will affect system funcationality. A backup will be made before replacement."
+	read -p "  Confirm to proceed (y): " qinstall
+	if [[ $qinstall =~ [yY](es)* ]]; then
+		$(dirname $(readlink -f $0))/backup-twc-configs.sh
+		echo "Performing replacement"
+		for file in conf-*; do
+			EDIT_FILE=$(readlink -f $file)
+			echo "   in $EDIT_FILE"
+			sed -i "s/$FIND_ADDR/$REPLACE_ADDR/g" $EDIT_FILE
+		done
+		echo "Complete"
+	else
+		echo "Exited without performing replacement."
+	fi
+else
+	echo "===ADDRESS SPECIFICATION SEARCH==="
+	declare -a searchlist=("whitelist" "seed-nodes =" "hostname =" "contact-point =" "authentication.server.ip=" "twc.ip=" "service.url=")
+	for file in conf-*; do
+		for i in "${searchlist[@]}"; do
+			grep "$i" $file | sed 's/^[ \t]*//;s/[ \t]*$//'
+		done
+	done
+	echo "===END SEARCH==="
+	echo
+	printhelp
+fi
+echo
+````
+
+### ENTRY: README.md
+
+- bytes: 3227
+- crc32: `75295f59`
+- decoded_as: `utf-8`
+
+````markdown
+Teamwork Cloud utilities package for:
+* Creating shortcuts to the most important configuration and log files associated with TWC
+* Managing TWC services (start, stop, and status check), with Cassandra as option
+* Troubleshooting issues with scripts for checking server environment and ports
+* Backing up configuration files and keystores
+* Comparing configurations between installation and a reference set (backup or No-Install)
+
+#### add-twc-shortcuts.sh
+This script creates symbolic links to key Teamwork Cloud log and configuration files so everything can be accessed in one place. For older versions of TWC/MCS, the <install-root>/Utilities/AdminTools path is created all utilities are copied over as well. A system path entry is set optionally in /etc/profile.d/twc.sh.
+
+TWC versions 19.0 to 24x are supported.
+
+To add scripts to system path after installation:
+
+`source /etc/profile.d/twc.sh` 
+
+**File Mapping**
+- config-auth: authserver.properties
+- config-twc: application.conf
+- config-webapp: webappplatform.properties
+- log-auth: authserver.log or authentication.log, depending on version
+- log-cassandra: system.log, if Cassandra is installed on the same server
+- log-twc: server.log
+- log-webapp: webapp.log or web-app.log, depending on version
+- log-webapp-admin: admin.log if version is 22xR2
+- cassandra-dir: Cassandra configuration file directory
+
+#### Utilities
+
+**check-env.sh**
+
+Outputs a report of server environment settings. Useful for troubleshooting.
+
+**compare-twc-config.sh**
+
+Performs comparison of currently-installed Teamwork Cloud configuration against a reference set of configurations. Reference set can be either be from a backup or the no-install package.
+
+**backup-twc-configs.sh**
+
+Creates a backup of all TWC/MCS configuration files and keystore/certificate. The package is stored in a tar archive.
+
+**cassandra-stop.sh**
+
+Stop Cassandra service by performing a nodetool drain first.
+
+**twc-start.sh**
+
+Start all associated TWC services. Cassandra service start can also be included if "db" is provided as commandline argument: `twc-start.sh db`. Older TWC versions with authserver is also supported.
+
+**twc-stop.sh**
+
+Stop all relevant TWC services. There is a version check to determine whether authserver service exists. Cassandra service stop can also be included if "db" is provided as commandline argument: `twc-stop.sh db` (cassandra.stop will be called)
+
+**twcstat.sh**
+
+Check on the status of all installed services: twcloud, webapp, zookeeper, cassandra, and lmadmin. Script can also output port binding for each service with `twcstat.sh network` command. If Cassandra service is active, a nodetool check is also performed for mode status. This script can be run without root/sudo permission. However, when run as root/sudo, startup logs will be generated for services that are inactive or failed.
+
+**webapp-trim.sh**
+
+Reduce the number of webapps (.war) files to run on the server. Edit the $RUN_LIST in script file to set which webapps to run. All other webapps will be moved to a backup directory. Use `webapp-trim.sh restore` to restore all webapps back to the run path. Use `webapp-trim.sh min` to run with the minimum set of webapps for troubleshooting and fast startup. 
+
+
+````
+
+### ENTRY: twc-start.sh
+
+- bytes: 1050
+- crc32: `035ae368`
+- decoded_as: `utf-8`
+
+````text
+#!/bin/bash
+# Start all Teamwork Cloud services that are installed on the system.
+#  Add "db" option include Cassandra startup.
+
+SERVICE_PATH=/etc/systemd/system/
+svc_names="twcloud zookeeper webapp authserver"
+startup_file=/var/tmp/twcsvc   #Reference file to use for service start time comparison.
+echo
+if [ "$EUID" -ne 0 ];then
+	echo "Please run as root or sudo."
+	exit 1
+fi
+
+# Start Cassandra service if db option is specified
+if [ "$1" == "db" ]; then
+	if systemctl is-active -q cassandra; then
+		echo "cassandra - service is already running"
+	else
+		echo "Starting Cassandra"
+		systemctl start cassandra
+		sleep 10
+	fi
+fi
+for curr_svc in $svc_names
+do
+	if [ -f $SERVICE_PATH/$curr_svc.service ]; then
+		if systemctl is-active -q $curr_svc; then
+			echo "$curr_svc - service already running"
+		else
+			echo "Starting $curr_svc"
+			SECONDS=0  #Begin counting elapsed time since service start.
+			date -u > $startup_file
+			systemctl start $curr_svc
+		fi
+	fi
+done
+echo
+echo "Service startup initiated. Use twcstat.sh to check service status."
+echo
+````
+
+### ENTRY: twcstat.sh
+
+- bytes: 1676
+- crc32: `1a8ffe3e`
+- decoded_as: `utf-8`
+
+````text
+#!/bin/bash
+# Check the status of all installed Teamwork Cloud services.
+#  Only installed services will be checked. 
+#  Commandline option (network) to check port binding for each service.
+
+SERVICE_PATH=/etc/systemd/system/
+TWC_STATUS=1
+
+svc_names="twcloud zookeeper webapp authserver cassandra lmadmin"
+
+# Use "network" option to also check port bindings.
+check_port () {
+	for value in $1
+	do
+		netstat -nlt | grep :"$value"
+	done
+}
+txtbold='\e[1m'
+txtred='\e[0;31m'
+txtgrn='\e[0;32m'
+txtend='\e[0m'
+# Loop through all possible services and check status. 
+for curr_svc in $svc_names
+do
+	if [ -f $SERVICE_PATH/$curr_svc.service ]; then
+		echo
+		if systemctl is-active -q $curr_svc; then
+			echo -e "Service ${txtbold}$curr_svc${txtend} is ${txtgrn}ACTIVE${txtend}"
+			if [ "$curr_svc" == "cassandra" ]; then echo $(nodetool netstats | grep Mode); fi
+			if [ "$1" == "network" ]; then
+				case $curr_svc in
+					twcloud)
+						port_list="3579 8111 2552 10002"
+					;;
+					zookeeper)
+						port_list="2181"
+					;;
+					webapp)
+						port_list="8443"
+					;;
+					authserver)
+						port_list="8555"
+					;;
+					cassandra)
+						port_list="9042 7000 7199"
+					;;
+					lmadmin)
+						port_list="1101 8090"
+				esac
+				echo "Default port(s): $port_list"
+				check_port "$port_list"
+			fi
+		else
+			echo -e "Service ${txtbold}$curr_svc${txtend} is ${txtred}DOWN${txtend}"
+			#With root/sudo permission, the log from the latest startup will be written out.
+			if [ "$EUID" -eq 0 ]; then
+				startup_log="startup-$curr_svc.log"
+				journalctl -u twcloud -b > $(dirname "$0")/$startup_log
+				echo "View $startup_log in $(dirname "$0") for more details."
+			fi
+		fi
+	fi
+done
+echo
+
+````
+
+### ENTRY: twc-stop.sh
+
+- bytes: 777
+- crc32: `b5c5d7e5`
+- decoded_as: `utf-8`
+
+````text
+#!/bin/bash
+# Stop all Teamwork Cloud services that are currently running.
+#  Add "db" option to execution to stop Cassandra as well.
+
+SERVICE_PATH=/etc/systemd/system/
+
+svc_names="webapp twcloud zookeeper authserver"
+
+if [ "$EUID" -ne 0 ]; then
+	echo "Please run as root or sudo."
+	exit 1
+fi
+echo
+echo "Stopping all Teamwork Cloud services."
+# Loop through service list and stop services.
+for curr_svc in $svc_names
+do
+	if [ -f $SERVICE_PATH/$curr_svc.service ]; then
+		if systemctl is-active -q $curr_svc; then
+			echo "Stopping $curr_svc ..."
+			systemctl stop $curr_svc
+		else
+			echo "$curr_svc - service was not in an active state"
+		fi
+	fi
+done
+# Stop Cassandra if "db" option is provided
+if [ "$1" == "db" ]; then
+	$(dirname "$0")/cassandra-stop.sh
+fi
+echo "Done"
+echo
+
+````
+
+### ENTRY: webapp-trim.sh
+
+- bytes: 2243
+- crc32: `68cc0edf`
+- decoded_as: `utf-8`
+
+````text
+#!/bin/bash
+# Trim down the number of webapps that are installed. 
+#  This script can be used to speed up Web Application Platform startup by reducing the
+#  number of webapps that are installed. Edit the $RUN_LIST below to specify webapps to run.
+
+#List of webapps to run on your server. Specify the webapps you would like to run here.
+RUN_LIST="admin authentication resources webapp "
+
+printhelp() {
+	cat <<HELP
+Usage: webapp-trim.sh [option]
+
+Edit RUN_LIST in script to specify web apps to activate. 
+Execute with no options to active web apps in RUN_LIST.
+
+Options:
+	restore		Activate all web apps
+	min		Activate the minimum web apps for troubleshooting
+	help		Display this help page
+
+HELP
+	exit 1
+}
+
+echo
+if [ "$EUID" -ne 0 ];then
+	echo "Please run as root or sudo."
+	exit 1
+fi
+
+#List of all webapps available (DO NOT EDIT).
+full_list="admin authentication collaborator document-exporter oslc reports resources resource-usage-map simulation webapp"
+min_list="authentication webapp"
+
+if [ "$1" == "restore" ]; then
+	RUN_LIST=$full_list
+elif [ "$1" == "min" ]; then
+	RUN_LIST=$min_list
+elif [ "$1" == "help" ] || [ "$1" == "-h" ]; then
+	printhelp
+fi
+
+#Obtain Web App Platform installation path
+WAP_SVC_PATH=/etc/systemd/system/webapp.service
+if [ -f $WAP_SVC_PATH ]; then
+	if systemctl is-active -q webapp; then
+		echo "The webapp service is currently running. Please stop the service and retry."
+		exit 1
+	fi
+	WAP_PATH=$(cat $WAP_SVC_PATH | grep CATALINA_HOME_WEBAPP | cut -f3 -d\=)
+else
+	echo "Web Application Platform installation not found."
+	exit 1
+fi
+
+webapps_path=${WAP_PATH}/webapps
+backup_path=${WAP_PATH}/unused_webapps
+echo "Currently installed webapps:"
+basename --suffix=.war -- $webapps_path/*.war
+echo
+echo "Activating Web Apps:"
+for i in ${RUN_LIST[@]}; do echo $i; done
+#Keep only the webapps specified in RUN_LIST. Move other webapps to unused_webapps path.
+mkdir -p $backup_path
+cd $webapps_path
+#If trim was performed previously, restore all webapps and re-do trim.
+if ls $backup_path/*.war &>/dev/null; then mv -f ${backup_path}/*.war ./; fi
+for file in $full_list
+do
+	if [[ ! " ${RUN_LIST[*]} " =~ " ${file} " ]]; then
+		mv -f ${file}.war ${backup_path}/
+		rm -rf ${file}
+	fi
+done
+echo
+echo "Operation complete."
+echo
+
+````
+
+
+## EXACT ATTACHMENT METADATA
+
+````json
+{
+  "id": "304002523",
+  "type": "attachment",
+  "status": "current",
+  "title": "utilities_2024xRefresh1.zip",
+  "version": {
+    "by": {
+      "type": "known",
+      "username": "jse21",
+      "userKey": "2c9f81f87be2b373017e241b5e8b0001",
+      "profilePicture": {
+        "path": "/download/attachments/85767822/user-avatar",
+        "width": 48,
+        "height": 48,
+        "isDefault": false
+      },
+      "displayName": "Jonė Š.",
+      "_links": {
+        "self": "https://docs.nomagic.com/rest/api/user?key=2c9f81f87be2b373017e241b5e8b0001"
+      },
+      "_expandable": {
+        "status": ""
+      }
+    },
+    "when": "2026-04-29T10:47:43.231+02:00",
+    "message": "",
+    "number": 1,
+    "minorEdit": false,
+    "hidden": false,
+    "_links": {
+      "self": "https://docs.nomagic.com/rest/experimental/content/304002523/version/1"
+    },
+    "_expandable": {
+      "content": "/rest/api/content/304002523"
+    }
+  },
+  "position": -1,
+  "container": {
+    "id": "304002521",
+    "type": "page",
+    "status": "current",
+    "title": "(2026x Refresh1) Admin Tools",
+    "position": 3,
+    "extensions": {
+      "position": 3
+    },
+    "_links": {
+      "webui": "/spaces/MCS/pages/304002521/2026x+Refresh1+Admin+Tools",
+      "edit": "/pages/resumedraft.action?draftId=304002521",
+      "tinyui": "/x/2bUeEg",
+      "self": "https://docs.nomagic.com/rest/api/content/304002521"
+    },
+    "_expandable": {
+      "container": "/rest/api/space/MCS",
+      "metadata": "",
+      "operations": "",
+      "children": "/rest/api/content/304002521/child",
+      "restrictions": "/rest/api/content/304002521/restriction/byOperation",
+      "history": "/rest/api/content/304002521/history",
+      "ancestors": "",
+      "body": "",
+      "version": "",
+      "descendants": "/rest/api/content/304002521/descendant",
+      "space": "/rest/api/space/MCS",
+      "relevantViewRestrictions": "/rest/api/content/304002521/restriction/relevantViewRestrictions"
+    }
+  },
+  "metadata": {
+    "mediaType": "application/zip"
+  },
+  "extensions": {
+    "mediaType": "application/zip",
+    "fileSize": 12266,
+    "comment": ""
+  },
+  "_links": {
+    "download": "/download/attachments/304002521/utilities_2024xRefresh1.zip?version=1&modificationDate=1777452463231&api=v2",
+    "webui": "/spaces/MCS/pages/304002521/2026x+Refresh1+Admin+Tools?preview=%2F304002521%2F304002523%2Futilities_2024xRefresh1.zip",
+    "self": "https://docs.nomagic.com/rest/api/content/304002523"
+  },
+  "_expandable": {
+    "operations": "",
+    "children": "/rest/api/content/304002523/child",
+    "restrictions": "/rest/api/content/304002523/restriction/byOperation",
+    "history": "/rest/api/content/304002523/history",
+    "ancestors": "",
+    "body": "",
+    "descendants": "/rest/api/content/304002523/descendant",
+    "space": "/rest/api/space/MCS",
+    "relevantViewRestrictions": "/rest/api/content/304002523/restriction/relevantViewRestrictions"
+  }
+}
+````

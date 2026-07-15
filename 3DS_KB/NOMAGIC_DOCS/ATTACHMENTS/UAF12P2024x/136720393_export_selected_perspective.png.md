@@ -1,0 +1,114 @@
+# NOMAGIC ATTACHMENT: export_selected_perspective.png
+
+- attachment_id: `136720393`
+- space_key: `UAF12P2024x`
+- parent_page_id: `136720387`
+- parent_page_title: Customize Perspectives dialog
+- media_type: `image/png`
+- reported_bytes: 233
+- download_url: https://docs.nomagic.com/download/attachments/136720387/export_selected_perspective.png?version=1&modificationDate=1695284913718&api=v2
+- payload_kind: `metadata-only`
+- downloaded_sha256: not-downloaded
+
+## PAYLOAD STATUS
+
+Binary or image attachment is inventoried by official metadata; no binary bytes are embedded in this Markdown-only corpus.
+
+
+## EXACT ATTACHMENT METADATA
+
+````json
+{
+  "id": "136720393",
+  "type": "attachment",
+  "status": "current",
+  "title": "export_selected_perspective.png",
+  "version": {
+    "by": {
+      "type": "known",
+      "username": "agnpal",
+      "userKey": "ff80808151426f0e0151af8b0d360002",
+      "profilePicture": {
+        "path": "/download/attachments/6598412/user-avatar",
+        "width": 48,
+        "height": 48,
+        "isDefault": false
+      },
+      "displayName": "Agne P.",
+      "_links": {
+        "self": "https://docs.nomagic.com/rest/api/user?key=ff80808151426f0e0151af8b0d360002"
+      },
+      "_expandable": {
+        "status": ""
+      }
+    },
+    "when": "2023-09-21T10:28:33.718+02:00",
+    "message": "",
+    "number": 1,
+    "minorEdit": false,
+    "hidden": false,
+    "_links": {
+      "self": "https://docs.nomagic.com/rest/experimental/content/136720393/version/1"
+    },
+    "_expandable": {
+      "content": "/rest/api/content/136720393"
+    }
+  },
+  "position": -1,
+  "container": {
+    "id": "136720387",
+    "type": "page",
+    "status": "current",
+    "title": "Customize Perspectives dialog",
+    "position": 2,
+    "extensions": {
+      "position": 2
+    },
+    "_links": {
+      "webui": "/spaces/UAF12P2024x/pages/136720387/Customize+Perspectives+dialog",
+      "edit": "/pages/resumedraft.action?draftId=136720387",
+      "tinyui": "/x/AzAmC",
+      "self": "https://docs.nomagic.com/rest/api/content/136720387"
+    },
+    "_expandable": {
+      "container": "/rest/api/space/UAF12P2024x",
+      "metadata": "",
+      "operations": "",
+      "children": "/rest/api/content/136720387/child",
+      "restrictions": "/rest/api/content/136720387/restriction/byOperation",
+      "history": "/rest/api/content/136720387/history",
+      "ancestors": "",
+      "body": "",
+      "version": "",
+      "descendants": "/rest/api/content/136720387/descendant",
+      "space": "/rest/api/space/UAF12P2024x",
+      "relevantViewRestrictions": "/rest/api/content/136720387/restriction/relevantViewRestrictions"
+    }
+  },
+  "metadata": {
+    "mediaType": "image/png"
+  },
+  "extensions": {
+    "mediaType": "image/png",
+    "fileSize": 233,
+    "comment": ""
+  },
+  "_links": {
+    "download": "/download/attachments/136720387/export_selected_perspective.png?version=1&modificationDate=1695284913718&api=v2",
+    "thumbnail": "/download/thumbnails/136720387/export_selected_perspective.png?api=v2",
+    "webui": "/spaces/UAF12P2024x/pages/136720387/Customize+Perspectives+dialog?preview=%2F136720387%2F136720393%2Fexport_selected_perspective.png",
+    "self": "https://docs.nomagic.com/rest/api/content/136720393"
+  },
+  "_expandable": {
+    "operations": "",
+    "children": "/rest/api/content/136720393/child",
+    "restrictions": "/rest/api/content/136720393/restriction/byOperation",
+    "history": "/rest/api/content/136720393/history",
+    "ancestors": "",
+    "body": "",
+    "descendants": "/rest/api/content/136720393/descendant",
+    "space": "/rest/api/space/UAF12P2024x",
+    "relevantViewRestrictions": "/rest/api/content/136720393/restriction/relevantViewRestrictions"
+  }
+}
+````

@@ -1,0 +1,114 @@
+# NOMAGIC ATTACHMENT: manageLocked_menu.png
+
+- attachment_id: `137991787`
+- space_key: `MCS2024x`
+- parent_page_id: `137991786`
+- parent_page_title: Releasing locked elements
+- media_type: `image/png`
+- reported_bytes: 3258
+- download_url: https://docs.nomagic.com/download/attachments/137991786/manageLocked_menu.png?version=1&modificationDate=1695977458443&api=v2
+- payload_kind: `metadata-only`
+- downloaded_sha256: not-downloaded
+
+## PAYLOAD STATUS
+
+Binary or image attachment is inventoried by official metadata; no binary bytes are embedded in this Markdown-only corpus.
+
+
+## EXACT ATTACHMENT METADATA
+
+````json
+{
+  "id": "137991787",
+  "type": "attachment",
+  "status": "current",
+  "title": "manageLocked_menu.png",
+  "version": {
+    "by": {
+      "type": "known",
+      "username": "ingabe",
+      "userKey": "ff80808151f3008c0152c05ba1a40003",
+      "profilePicture": {
+        "path": "/download/attachments/7415957/user-avatar",
+        "width": 48,
+        "height": 48,
+        "isDefault": false
+      },
+      "displayName": "Inga A.",
+      "_links": {
+        "self": "https://docs.nomagic.com/rest/api/user?key=ff80808151f3008c0152c05ba1a40003"
+      },
+      "_expandable": {
+        "status": ""
+      }
+    },
+    "when": "2023-09-29T10:50:58.443+02:00",
+    "message": "",
+    "number": 1,
+    "minorEdit": false,
+    "hidden": false,
+    "_links": {
+      "self": "https://docs.nomagic.com/rest/experimental/content/137991787/version/1"
+    },
+    "_expandable": {
+      "content": "/rest/api/content/137991787"
+    }
+  },
+  "position": -1,
+  "container": {
+    "id": "137991786",
+    "type": "page",
+    "status": "current",
+    "title": "Releasing locked elements",
+    "position": 6,
+    "extensions": {
+      "position": 6
+    },
+    "_links": {
+      "webui": "/spaces/MCS2024x/pages/137991786/Releasing+locked+elements",
+      "edit": "/pages/resumedraft.action?draftId=137991786",
+      "tinyui": "/x/apY5C",
+      "self": "https://docs.nomagic.com/rest/api/content/137991786"
+    },
+    "_expandable": {
+      "container": "/rest/api/space/MCS2024x",
+      "metadata": "",
+      "operations": "",
+      "children": "/rest/api/content/137991786/child",
+      "restrictions": "/rest/api/content/137991786/restriction/byOperation",
+      "history": "/rest/api/content/137991786/history",
+      "ancestors": "",
+      "body": "",
+      "version": "",
+      "descendants": "/rest/api/content/137991786/descendant",
+      "space": "/rest/api/space/MCS2024x",
+      "relevantViewRestrictions": "/rest/api/content/137991786/restriction/relevantViewRestrictions"
+    }
+  },
+  "metadata": {
+    "mediaType": "image/png"
+  },
+  "extensions": {
+    "mediaType": "image/png",
+    "fileSize": 3258,
+    "comment": ""
+  },
+  "_links": {
+    "download": "/download/attachments/137991786/manageLocked_menu.png?version=1&modificationDate=1695977458443&api=v2",
+    "thumbnail": "/download/thumbnails/137991786/manageLocked_menu.png?api=v2",
+    "webui": "/spaces/MCS2024x/pages/137991786/Releasing+locked+elements?preview=%2F137991786%2F137991787%2FmanageLocked_menu.png",
+    "self": "https://docs.nomagic.com/rest/api/content/137991787"
+  },
+  "_expandable": {
+    "operations": "",
+    "children": "/rest/api/content/137991787/child",
+    "restrictions": "/rest/api/content/137991787/restriction/byOperation",
+    "history": "/rest/api/content/137991787/history",
+    "ancestors": "",
+    "body": "",
+    "descendants": "/rest/api/content/137991787/descendant",
+    "space": "/rest/api/space/MCS2024x",
+    "relevantViewRestrictions": "/rest/api/content/137991787/restriction/relevantViewRestrictions"
+  }
+}
+````

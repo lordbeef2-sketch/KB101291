@@ -1,0 +1,104 @@
+# OFFICIAL REPOSITORY FILE: SysML-v2-Pilot-Implementation/org.omg.sysml.xpect.tests/src/org/omg/sysml/xpect/tests/simpletests/VariabilityTest.sysml.xt
+
+- repository: `SysML-v2-Pilot-Implementation`
+- source_path: `org.omg.sysml.xpect.tests/src/org/omg/sysml/xpect/tests/simpletests/VariabilityTest.sysml.xt`
+- source_url: https://github.com/Systems-Modeling/SysML-v2-Pilot-Implementation/blob/fa709f28dfd49dfdb7ee83e4e19da2f57e0eb3aa/org.omg.sysml.xpect.tests/src/org/omg/sysml/xpect/tests/simpletests/VariabilityTest.sysml.xt
+- source_bytes: 2588
+- source_sha256: `53e016b5d730a322ba0955dac6d6d36e91462e7074acac81390e794e004f782b`
+- decoded_as: `utf-8`
+
+
+## EXACT SOURCE
+
+````xtext
+//* 
+XPECT_SETUP org.omg.sysml.xpect.tests.simpletests.SysMLTests
+	ResourceSet {
+		ThisFile {}
+		File {from ="/library.kernel/Base.kerml"}
+		File {from ="/library.kernel/Links.kerml"}
+       	File {from ="/library.kernel/Occurrences.kerml"}
+       	File {from ="/library.kernel/Objects.kerml"}
+       	File {from ="/library.kernel/Performances.kerml"}
+ 		File {from ="/library.systems/Items.sysml"}
+ 		File {from ="/library.systems/Parts.sysml"}
+ 		File {from ="/library.systems/Ports.sysml"}
+		File {from ="/library.systems/Actions.sysml"}
+		File {from ="/library.systems/Calculations.sysml"}
+		File {from ="/library.systems/Cases.sysml"}
+		File {from ="/library.systems/UseCases.sysml"}
+		File {from ="/library.systems/AnalysisCases.sysml"}
+		File {from ="/library.systems/VerificationCases.sysml"}
+		File {from ="/library.systems/Constraints.sysml"}
+		File {from ="/library.systems/Requirements.sysml"}
+	}
+	Workspace {
+		JavaProject {
+			SrcFolder {
+				ThisFile {}
+				File {from ="/library.kernel/Base.kerml"}
+				File {from ="/library.kernel/Links.kerml"}
+		       	File {from ="/library.kernel/Occurrences.kerml"}
+		       	File {from ="/library.kernel/Performances.kerml"}
+		       	File {from ="/library.kernel/Objects.kerml"}
+				File {from ="/library.systems/Items.sysml"}
+				File {from ="/library.systems/Parts.sysml"}
+ 				File {from ="/library.systems/Ports.sysml"}
+				File {from ="/library.systems/Actions.sysml"}
+				File {from ="/library.systems/Calculations.sysml"}
+				File {from ="/library.systems/Cases.sysml"}
+				File {from ="/library.systems/UseCases.sysml"}
+				File {from ="/library.systems/AnalysisCases.sysml"}
+				File {from ="/library.systems/VerificationCases.sysml"}
+				File {from ="/library.systems/UseCases.sysml"}
+				File {from ="/library.systems/Constraints.sysml"}
+				File {from ="/library.systems/Requirements.sysml"}
+			}
+		}
+	}
+END_SETUP 
+*/
+// XPECT noErrors ---> ""
+package VariabilityTest {
+	part def P {
+		attribute a;
+	}
+	
+	part def Q :> P;
+	attribute def B;
+	variation part def V :> P {
+		variant part x : Q {
+			attribute b : B :>> a;
+		}
+	}
+	
+	part q : Q;
+	variation part v : P {
+		variant q {
+			attribute b : B :>> a;
+		}
+	}
+	
+	part y : P = v::q;
+	
+	variation action def A {
+		variant action a1;
+		variant action a2;
+	}
+	
+	variation case uc1 {
+    	variant use case uc11;
+    	variant use case uc12;
+    }
+
+    variation analysis a1;
+    
+    variation verification v1;
+    
+    variation requirement r {
+    	variant requirement r1;
+    }
+	
+}
+
+````

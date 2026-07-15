@@ -1,0 +1,114 @@
+# NOMAGIC ATTACHMENT: generateHTML.PNG
+
+- attachment_id: `191922669`
+- space_key: `MSI2024xR2`
+- parent_page_id: `191922667`
+- parent_page_title: Image switching in web user interface
+- media_type: `image/png`
+- reported_bytes: 7995
+- download_url: https://docs.nomagic.com/download/attachments/191922667/generateHTML.PNG?version=1&modificationDate=1728049199041&api=v2
+- payload_kind: `metadata-only`
+- downloaded_sha256: not-downloaded
+
+## PAYLOAD STATUS
+
+Binary or image attachment is inventoried by official metadata; no binary bytes are embedded in this Markdown-only corpus.
+
+
+## EXACT ATTACHMENT METADATA
+
+````json
+{
+  "id": "191922669",
+  "type": "attachment",
+  "status": "current",
+  "title": "generateHTML.PNG",
+  "version": {
+    "by": {
+      "type": "known",
+      "username": "8acad0e54bbfc3ed014beebdb63b0005",
+      "userKey": "8acad0e54bbfc3ed014beebdb63b0005",
+      "profilePicture": {
+        "path": "/images/icons/profilepics/default.svg",
+        "width": 48,
+        "height": 48,
+        "isDefault": true
+      },
+      "displayName": "user-1438d",
+      "_links": {
+        "self": "https://docs.nomagic.com/rest/api/user?key=8acad0e54bbfc3ed014beebdb63b0005"
+      },
+      "_expandable": {
+        "status": ""
+      }
+    },
+    "when": "2024-10-04T15:39:59.041+02:00",
+    "message": "",
+    "number": 1,
+    "minorEdit": false,
+    "hidden": false,
+    "_links": {
+      "self": "https://docs.nomagic.com/rest/experimental/content/191922669/version/1"
+    },
+    "_expandable": {
+      "content": "/rest/api/content/191922669"
+    }
+  },
+  "position": -1,
+  "container": {
+    "id": "191922667",
+    "type": "page",
+    "status": "current",
+    "title": "Image switching in web user interface",
+    "position": 4,
+    "extensions": {
+      "position": 4
+    },
+    "_links": {
+      "webui": "/spaces/MSI2024xR2/pages/191922667/Image+switching+in+web+user+interface",
+      "edit": "/pages/resumedraft.action?draftId=191922667",
+      "tinyui": "/x/64FwCw",
+      "self": "https://docs.nomagic.com/rest/api/content/191922667"
+    },
+    "_expandable": {
+      "container": "/rest/api/space/MSI2024xR2",
+      "metadata": "",
+      "operations": "",
+      "children": "/rest/api/content/191922667/child",
+      "restrictions": "/rest/api/content/191922667/restriction/byOperation",
+      "history": "/rest/api/content/191922667/history",
+      "ancestors": "",
+      "body": "",
+      "version": "",
+      "descendants": "/rest/api/content/191922667/descendant",
+      "space": "/rest/api/space/MSI2024xR2",
+      "relevantViewRestrictions": "/rest/api/content/191922667/restriction/relevantViewRestrictions"
+    }
+  },
+  "metadata": {
+    "mediaType": "image/png"
+  },
+  "extensions": {
+    "mediaType": "image/png",
+    "fileSize": 7995,
+    "comment": ""
+  },
+  "_links": {
+    "download": "/download/attachments/191922667/generateHTML.PNG?version=1&modificationDate=1728049199041&api=v2",
+    "thumbnail": "/download/thumbnails/191922667/generateHTML.PNG?api=v2",
+    "webui": "/spaces/MSI2024xR2/pages/191922667/Image+switching+in+web+user+interface?preview=%2F191922667%2F191922669%2FgenerateHTML.PNG",
+    "self": "https://docs.nomagic.com/rest/api/content/191922669"
+  },
+  "_expandable": {
+    "operations": "",
+    "children": "/rest/api/content/191922669/child",
+    "restrictions": "/rest/api/content/191922669/restriction/byOperation",
+    "history": "/rest/api/content/191922669/history",
+    "ancestors": "",
+    "body": "",
+    "descendants": "/rest/api/content/191922669/descendant",
+    "space": "/rest/api/space/MSI2024xR2",
+    "relevantViewRestrictions": "/rest/api/content/191922669/restriction/relevantViewRestrictions"
+  }
+}
+````

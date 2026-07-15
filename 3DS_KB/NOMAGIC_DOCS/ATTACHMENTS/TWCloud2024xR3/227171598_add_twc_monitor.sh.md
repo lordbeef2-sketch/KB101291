@@ -1,0 +1,128 @@
+# NOMAGIC ATTACHMENT: add_twc_monitor.sh
+
+- attachment_id: `227171598`
+- space_key: `TWCloud2024xR3`
+- parent_page_id: `227171588`
+- parent_page_title: Installation using scripts
+- media_type: `text/x-sh`
+- reported_bytes: 631
+- download_url: https://docs.nomagic.com/download/attachments/227171588/add_twc_monitor.sh?version=1&modificationDate=1746450346238&api=v2
+- payload_kind: `text-exact`
+- downloaded_sha256: `349ea6c78f712e1cffb15c25186febe9e0755cbc6a32000dd672ee9059e60d12`
+
+## EXACT ATTACHMENT SOURCE
+
+````text
+#!/bin/bash
+echo "=========================================="
+echo "Monitor additional TWC node     "
+echo "=========================================="
+read -e -p "Please enter the hostname of the Teamwork Cloud Node (as obtained via the hostname command):  "  -i ""  HOSTNAME
+echo "" 
+read -e -p "Please enter the IP Address of the Teamwork Cloud Node:  "  -i ""  IPADDRESS
+echo "" 
+JMXFILE=twcloud-$HOSTNAME.json
+sudo sed -e "s/HOST_NAME/$HOSTNAME/g" twcloud.json.template > $JMXFILE
+sudo sed -i "s/IP_ADDRESS/$IPADDRESS/g" $JMXFILE
+sudo chmod 755 $JMXFILE
+sudo \cp -fR $JMXFILE /var/lib/jmxtrans/
+sudo systemctl restart jmxtrans
+````
+
+
+## EXACT ATTACHMENT METADATA
+
+````json
+{
+  "id": "227171598",
+  "type": "attachment",
+  "status": "current",
+  "title": "add_twc_monitor.sh",
+  "version": {
+    "by": {
+      "type": "known",
+      "username": "jse21",
+      "userKey": "2c9f81f87be2b373017e241b5e8b0001",
+      "profilePicture": {
+        "path": "/download/attachments/85767822/user-avatar",
+        "width": 48,
+        "height": 48,
+        "isDefault": false
+      },
+      "displayName": "Jonė Š.",
+      "_links": {
+        "self": "https://docs.nomagic.com/rest/api/user?key=2c9f81f87be2b373017e241b5e8b0001"
+      },
+      "_expandable": {
+        "status": ""
+      }
+    },
+    "when": "2025-05-05T15:05:46.238+02:00",
+    "message": "",
+    "number": 1,
+    "minorEdit": false,
+    "hidden": false,
+    "_links": {
+      "self": "https://docs.nomagic.com/rest/experimental/content/227171598/version/1"
+    },
+    "_expandable": {
+      "content": "/rest/api/content/227171598"
+    }
+  },
+  "position": -1,
+  "container": {
+    "id": "227171588",
+    "type": "page",
+    "status": "current",
+    "title": "Installation using scripts",
+    "position": 0,
+    "extensions": {
+      "position": 0
+    },
+    "_links": {
+      "webui": "/spaces/TWCloud2024xR3/pages/227171588/Installation+using+scripts",
+      "edit": "/pages/resumedraft.action?draftId=227171588",
+      "tinyui": "/x/BF2KDQ",
+      "self": "https://docs.nomagic.com/rest/api/content/227171588"
+    },
+    "_expandable": {
+      "container": "/rest/api/space/TWCloud2024xR3",
+      "metadata": "",
+      "operations": "",
+      "children": "/rest/api/content/227171588/child",
+      "restrictions": "/rest/api/content/227171588/restriction/byOperation",
+      "history": "/rest/api/content/227171588/history",
+      "ancestors": "",
+      "body": "",
+      "version": "",
+      "descendants": "/rest/api/content/227171588/descendant",
+      "space": "/rest/api/space/TWCloud2024xR3",
+      "relevantViewRestrictions": "/rest/api/content/227171588/restriction/relevantViewRestrictions"
+    }
+  },
+  "metadata": {
+    "mediaType": "text/x-sh"
+  },
+  "extensions": {
+    "mediaType": "text/x-sh",
+    "fileSize": 631,
+    "comment": ""
+  },
+  "_links": {
+    "download": "/download/attachments/227171588/add_twc_monitor.sh?version=1&modificationDate=1746450346238&api=v2",
+    "webui": "/spaces/TWCloud2024xR3/pages/227171588/Installation+using+scripts?preview=%2F227171588%2F227171598%2Fadd_twc_monitor.sh",
+    "self": "https://docs.nomagic.com/rest/api/content/227171598"
+  },
+  "_expandable": {
+    "operations": "",
+    "children": "/rest/api/content/227171598/child",
+    "restrictions": "/rest/api/content/227171598/restriction/byOperation",
+    "history": "/rest/api/content/227171598/history",
+    "ancestors": "",
+    "body": "",
+    "descendants": "/rest/api/content/227171598/descendant",
+    "space": "/rest/api/space/TWCloud2024xR3",
+    "relevantViewRestrictions": "/rest/api/content/227171598/restriction/relevantViewRestrictions"
+  }
+}
+````

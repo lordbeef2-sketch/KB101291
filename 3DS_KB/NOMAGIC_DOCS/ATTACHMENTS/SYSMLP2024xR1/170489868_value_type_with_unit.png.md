@@ -1,0 +1,114 @@
+# NOMAGIC ATTACHMENT: value_type_with_unit.png
+
+- attachment_id: `170489868`
+- space_key: `SYSMLP2024xR1`
+- parent_page_id: `170489867`
+- parent_page_title: Value Type
+- media_type: `image/png`
+- reported_bytes: 11225
+- download_url: https://docs.nomagic.com/download/attachments/170489867/value_type_with_unit.png?version=1&modificationDate=1715180780331&api=v2
+- payload_kind: `metadata-only`
+- downloaded_sha256: not-downloaded
+
+## PAYLOAD STATUS
+
+Binary or image attachment is inventoried by official metadata; no binary bytes are embedded in this Markdown-only corpus.
+
+
+## EXACT ATTACHMENT METADATA
+
+````json
+{
+  "id": "170489868",
+  "type": "attachment",
+  "status": "current",
+  "title": "value_type_with_unit.png",
+  "version": {
+    "by": {
+      "type": "known",
+      "username": "8acad0e54bbfc3ed014bc5820ea00002",
+      "userKey": "8acad0e54bbfc3ed014bc5820ea00002",
+      "profilePicture": {
+        "path": "/images/icons/profilepics/default.svg",
+        "width": 48,
+        "height": 48,
+        "isDefault": true
+      },
+      "displayName": "user-6f8ee",
+      "_links": {
+        "self": "https://docs.nomagic.com/rest/api/user?key=8acad0e54bbfc3ed014bc5820ea00002"
+      },
+      "_expandable": {
+        "status": ""
+      }
+    },
+    "when": "2024-05-08T17:06:20.331+02:00",
+    "message": "",
+    "number": 1,
+    "minorEdit": true,
+    "hidden": false,
+    "_links": {
+      "self": "https://docs.nomagic.com/rest/experimental/content/170489868/version/1"
+    },
+    "_expandable": {
+      "content": "/rest/api/content/170489868"
+    }
+  },
+  "position": -1,
+  "container": {
+    "id": "170489867",
+    "type": "page",
+    "status": "current",
+    "title": "Value Type",
+    "position": 56,
+    "extensions": {
+      "position": 56
+    },
+    "_links": {
+      "webui": "/spaces/SYSMLP2024xR1/pages/170489867/Value+Type",
+      "edit": "/pages/resumedraft.action?draftId=170489867",
+      "tinyui": "/x/C3gpCg",
+      "self": "https://docs.nomagic.com/rest/api/content/170489867"
+    },
+    "_expandable": {
+      "container": "/rest/api/space/SYSMLP2024xR1",
+      "metadata": "",
+      "operations": "",
+      "children": "/rest/api/content/170489867/child",
+      "restrictions": "/rest/api/content/170489867/restriction/byOperation",
+      "history": "/rest/api/content/170489867/history",
+      "ancestors": "",
+      "body": "",
+      "version": "",
+      "descendants": "/rest/api/content/170489867/descendant",
+      "space": "/rest/api/space/SYSMLP2024xR1",
+      "relevantViewRestrictions": "/rest/api/content/170489867/restriction/relevantViewRestrictions"
+    }
+  },
+  "metadata": {
+    "mediaType": "image/png"
+  },
+  "extensions": {
+    "mediaType": "image/png",
+    "fileSize": 11225,
+    "comment": ""
+  },
+  "_links": {
+    "download": "/download/attachments/170489867/value_type_with_unit.png?version=1&modificationDate=1715180780331&api=v2",
+    "thumbnail": "/download/thumbnails/170489867/value_type_with_unit.png?api=v2",
+    "webui": "/spaces/SYSMLP2024xR1/pages/170489867/Value+Type?preview=%2F170489867%2F170489868%2Fvalue_type_with_unit.png",
+    "self": "https://docs.nomagic.com/rest/api/content/170489868"
+  },
+  "_expandable": {
+    "operations": "",
+    "children": "/rest/api/content/170489868/child",
+    "restrictions": "/rest/api/content/170489868/restriction/byOperation",
+    "history": "/rest/api/content/170489868/history",
+    "ancestors": "",
+    "body": "",
+    "descendants": "/rest/api/content/170489868/descendant",
+    "space": "/rest/api/space/SYSMLP2024xR1",
+    "relevantViewRestrictions": "/rest/api/content/170489868/restriction/relevantViewRestrictions"
+  }
+}
+````

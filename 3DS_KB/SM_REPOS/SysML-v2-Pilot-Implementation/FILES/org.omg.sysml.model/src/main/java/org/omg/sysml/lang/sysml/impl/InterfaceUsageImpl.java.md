@@ -1,0 +1,177 @@
+# OFFICIAL REPOSITORY FILE: SysML-v2-Pilot-Implementation/org.omg.sysml.model/src/main/java/org/omg/sysml/lang/sysml/impl/InterfaceUsageImpl.java
+
+- repository: `SysML-v2-Pilot-Implementation`
+- source_path: `org.omg.sysml.model/src/main/java/org/omg/sysml/lang/sysml/impl/InterfaceUsageImpl.java`
+- source_url: https://github.com/Systems-Modeling/SysML-v2-Pilot-Implementation/blob/fa709f28dfd49dfdb7ee83e4e19da2f57e0eb3aa/org.omg.sysml.model/src/main/java/org/omg/sysml/lang/sysml/impl/InterfaceUsageImpl.java
+- source_bytes: 4226
+- source_sha256: `f42876481d5feef98ce93011ef43cc7733a7b5e4d0c65900f11c26e1df1fc145`
+- decoded_as: `utf-8`
+
+
+## EXACT SOURCE
+
+````java
+/**
+ */
+package org.omg.sysml.lang.sysml.impl;
+
+import java.util.Collection;
+
+import org.eclipse.emf.common.util.EList;
+
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EStructuralFeature;
+
+import org.omg.sysml.lang.sysml.AssociationStructure;
+import org.omg.sysml.lang.sysml.InterfaceDefinition;
+import org.omg.sysml.lang.sysml.InterfaceUsage;
+import org.omg.sysml.lang.sysml.SysMLPackage;
+
+/**
+ * <!-- begin-user-doc -->
+ * An implementation of the model object '<em><b>Interface Usage</b></em>'.
+ * <!-- end-user-doc -->
+ * <p>
+ * The following features are implemented:
+ * </p>
+ * <ul>
+ *   <li>{@link org.omg.sysml.lang.sysml.impl.InterfaceUsageImpl#getInterfaceDefinition <em>Interface Definition</em>}</li>
+ * </ul>
+ *
+ * @generated
+ */
+public class InterfaceUsageImpl extends ConnectionUsageImpl implements InterfaceUsage {
+	/**
+	 * The cached setting delegate for the '{@link #getInterfaceDefinition() <em>Interface Definition</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getInterfaceDefinition()
+	 * @generated
+	 * @ordered
+	 */
+	protected EStructuralFeature.Internal.SettingDelegate INTERFACE_DEFINITION__ESETTING_DELEGATE = ((EStructuralFeature.Internal)SysMLPackage.Literals.INTERFACE_USAGE__INTERFACE_DEFINITION).getSettingDelegate();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected InterfaceUsageImpl() {
+		super();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	protected EClass eStaticClass() {
+		return SysMLPackage.Literals.INTERFACE_USAGE;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public EList<InterfaceDefinition> getInterfaceDefinition() {
+		return (EList<InterfaceDefinition>)INTERFACE_DEFINITION__ESETTING_DELEGATE.dynamicGet(this, null, 0, true, false);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean isSetInterfaceDefinition() {
+		return !getInterfaceDefinition().isEmpty();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Object eGet(int featureID, boolean resolve, boolean coreType) {
+		switch (featureID) {
+			case SysMLPackage.INTERFACE_USAGE__INTERFACE_DEFINITION:
+				return getInterfaceDefinition();
+		}
+		return super.eGet(featureID, resolve, coreType);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public void eSet(int featureID, Object newValue) {
+		switch (featureID) {
+			case SysMLPackage.INTERFACE_USAGE__INTERFACE_DEFINITION:
+				getInterfaceDefinition().clear();
+				getInterfaceDefinition().addAll((Collection<? extends InterfaceDefinition>)newValue);
+				return;
+		}
+		super.eSet(featureID, newValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void eUnset(int featureID) {
+		switch (featureID) {
+			case SysMLPackage.INTERFACE_USAGE__INTERFACE_DEFINITION:
+				getInterfaceDefinition().clear();
+				return;
+		}
+		super.eUnset(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public boolean eIsSet(int featureID) {
+		switch (featureID) {
+			case SysMLPackage.INTERFACE_USAGE__CONNECTION_DEFINITION:
+				return isSetConnectionDefinition();
+			case SysMLPackage.INTERFACE_USAGE__INTERFACE_DEFINITION:
+				return isSetInterfaceDefinition();
+		}
+		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<AssociationStructure> getConnectionDefinition() {
+		@SuppressWarnings("unchecked")
+		EList<AssociationStructure> interfaceDefinition = (EList<AssociationStructure>)((EList<?>)getInterfaceDefinition());
+		return interfaceDefinition;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean isSetConnectionDefinition() {
+  		return false;
+	}
+
+} //InterfaceUsageImpl
+
+````

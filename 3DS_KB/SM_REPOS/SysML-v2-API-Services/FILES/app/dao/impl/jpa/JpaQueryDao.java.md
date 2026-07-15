@@ -1,0 +1,134 @@
+# OFFICIAL REPOSITORY FILE: SysML-v2-API-Services/app/dao/impl/jpa/JpaQueryDao.java
+
+- repository: `SysML-v2-API-Services`
+- source_path: `app/dao/impl/jpa/JpaQueryDao.java`
+- source_url: https://github.com/Systems-Modeling/SysML-v2-API-Services/blob/0af711b14bbcea7b240bb0a3a65817ae68302092/app/dao/impl/jpa/JpaQueryDao.java
+- source_bytes: 4570
+- source_sha256: `2d86f2b14481b553d04c7f745445953d7ff514df8581f6bf85a7174ab1e0fe2a`
+- decoded_as: `utf-8`
+
+
+## EXACT SOURCE
+
+````java
+/*
+ * SysML v2 REST/HTTP Pilot Implementation
+ * Copyright (C) 2020 InterCAX LLC
+ * Copyright (C) 2020 California Institute of Technology ("Caltech")
+ * Copyright (C) 2021 Twingineer LLC
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the Eclipse Public License as published by
+ * the Eclipse Foundation, version 2 of the License.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * Eclipse Public License for more details.
+ *
+ * You should have received a copy of the Eclipse Public License
+ * along with this program.  If not, see <https://www.eclipse.org/legal/epl-2.0/>.
+ *
+ * @license EPL-2.0 <http://spdx.org/licenses/EPL-2.0>
+ */
+
+package dao.impl.jpa;
+
+import dao.QueryDao;
+import jpa.manager.JPAManager;
+import org.omg.sysml.lifecycle.Project;
+import org.omg.sysml.query.Query;
+import org.omg.sysml.query.impl.QueryImpl;
+import org.omg.sysml.query.impl.QueryImpl_;
+
+import javax.annotation.Nullable;
+import javax.inject.Inject;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
+import javax.persistence.NoResultException;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.*;
+import java.util.*;
+import java.util.stream.Collectors;
+
+public class JpaQueryDao extends SimpleJpaDao<Query, QueryImpl> implements QueryDao {
+
+    @Inject
+    public JpaQueryDao(JPAManager jpaManager) {
+        super(jpaManager, QueryImpl.class, QueryImpl_.id);
+    }
+
+    @Override
+    public Optional<Query> persist(Query query) {
+        return jpaManager.transact(em -> {
+/*
+            query.setScope(
+                    query.getScope().stream()
+                            .filter(identity -> Objects.nonNull(identity.getId()))
+                            .map(em::merge)
+                            .collect(Collectors.toSet())
+            );
+*/
+            return super.persist(query, em);
+        });
+    }
+
+    @Override
+    public List<Query> findAllByProject(Project project, @Nullable UUID after, @Nullable UUID before, int maxResults) {
+        return jpaManager.transact(em -> {
+            CriteriaBuilder builder = em.getCriteriaBuilder();
+            CriteriaQuery<QueryImpl> query = builder.createQuery(QueryImpl.class);
+            Root<QueryImpl> root = query.from(QueryImpl.class);
+            Path<UUID> idPath = root.get(QueryImpl_.id);
+            Expression<Boolean> where = builder.equal(root.get(QueryImpl_.owningProject), project);
+            query.select(root);
+            Paginated<TypedQuery<QueryImpl>> paginated = paginateQuery(after, before, maxResults, query, builder, em, idPath, where);
+            List<Query> result = paginated.get()
+                    .getResultStream()
+                    .collect(Collectors.toList());
+            if (paginated.isReversed()) {
+                Collections.reverse(result);
+            }
+            return result;
+        });
+    }
+
+    @Override
+    public Optional<Query> findByProjectAndId(Project project, UUID id) {
+        return jpaManager.transact(em -> {
+            return _findByProjectAndId(project, id, em);
+        });
+    }
+
+    private Optional<Query> _findByProjectAndId(Project project, UUID id, EntityManager em) {
+        CriteriaBuilder builder = em.getCriteriaBuilder();
+        CriteriaQuery<QueryImpl> query = builder.createQuery(QueryImpl.class);
+        Root<QueryImpl> root = query.from(QueryImpl.class);
+        query.select(root)
+                .where(builder.and(
+                        builder.equal(root.get(QueryImpl_.owningProject), project),
+                        builder.equal(root.get(QueryImpl_.id), id)
+                ));
+        try {
+            return Optional.of(em.createQuery(query).getSingleResult());
+        } catch (NoResultException e) {
+            return Optional.empty();
+        }
+    }
+
+    @Override
+    public Optional<Query> deleteByProjectAndId(Project project, UUID id) {
+        return jpaManager.transact(em -> {
+            Optional<Query> query = _findByProjectAndId(project, id, em);
+            query.ifPresent(q -> {
+                EntityTransaction transaction = em.getTransaction();
+                transaction.begin();
+                em.remove(q);
+                transaction.commit();
+            });
+            return query;
+        });
+    }
+}
+
+````

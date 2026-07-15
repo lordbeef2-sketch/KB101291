@@ -1,0 +1,114 @@
+# NOMAGIC ATTACHMENT: Address_Book-Creating_AddressBook_put.png
+
+- attachment_id: `137990187`
+- space_key: `MAF2024x`
+- parent_page_id: `137990186`
+- parent_page_title: Creating AddressBook operations
+- media_type: `image/png`
+- reported_bytes: 92623
+- download_url: https://docs.nomagic.com/download/attachments/137990186/Address_Book-Creating_AddressBook_put.png?version=1&modificationDate=1695383601435&api=v2
+- payload_kind: `metadata-only`
+- downloaded_sha256: not-downloaded
+
+## PAYLOAD STATUS
+
+Binary or image attachment is inventoried by official metadata; no binary bytes are embedded in this Markdown-only corpus.
+
+
+## EXACT ATTACHMENT METADATA
+
+````json
+{
+  "id": "137990187",
+  "type": "attachment",
+  "status": "current",
+  "title": "Address_Book-Creating_AddressBook_put.png",
+  "version": {
+    "by": {
+      "type": "known",
+      "username": "agnpal",
+      "userKey": "ff80808151426f0e0151af8b0d360002",
+      "profilePicture": {
+        "path": "/download/attachments/6598412/user-avatar",
+        "width": 48,
+        "height": 48,
+        "isDefault": false
+      },
+      "displayName": "Agne P.",
+      "_links": {
+        "self": "https://docs.nomagic.com/rest/api/user?key=ff80808151426f0e0151af8b0d360002"
+      },
+      "_expandable": {
+        "status": ""
+      }
+    },
+    "when": "2023-09-22T13:53:21.435+02:00",
+    "message": "",
+    "number": 1,
+    "minorEdit": false,
+    "hidden": false,
+    "_links": {
+      "self": "https://docs.nomagic.com/rest/experimental/content/137990187/version/1"
+    },
+    "_expandable": {
+      "content": "/rest/api/content/137990187"
+    }
+  },
+  "position": -1,
+  "container": {
+    "id": "137990186",
+    "type": "page",
+    "status": "current",
+    "title": "Creating AddressBook operations",
+    "position": 3,
+    "extensions": {
+      "position": 3
+    },
+    "_links": {
+      "webui": "/spaces/MAF2024x/pages/137990186/Creating+AddressBook+operations",
+      "edit": "/pages/resumedraft.action?draftId=137990186",
+      "tinyui": "/x/KpA5C",
+      "self": "https://docs.nomagic.com/rest/api/content/137990186"
+    },
+    "_expandable": {
+      "container": "/rest/api/space/MAF2024x",
+      "metadata": "",
+      "operations": "",
+      "children": "/rest/api/content/137990186/child",
+      "restrictions": "/rest/api/content/137990186/restriction/byOperation",
+      "history": "/rest/api/content/137990186/history",
+      "ancestors": "",
+      "body": "",
+      "version": "",
+      "descendants": "/rest/api/content/137990186/descendant",
+      "space": "/rest/api/space/MAF2024x",
+      "relevantViewRestrictions": "/rest/api/content/137990186/restriction/relevantViewRestrictions"
+    }
+  },
+  "metadata": {
+    "mediaType": "image/png"
+  },
+  "extensions": {
+    "mediaType": "image/png",
+    "fileSize": 92623,
+    "comment": ""
+  },
+  "_links": {
+    "download": "/download/attachments/137990186/Address_Book-Creating_AddressBook_put.png?version=1&modificationDate=1695383601435&api=v2",
+    "thumbnail": "/download/thumbnails/137990186/Address_Book-Creating_AddressBook_put.png?api=v2",
+    "webui": "/spaces/MAF2024x/pages/137990186/Creating+AddressBook+operations?preview=%2F137990186%2F137990187%2FAddress_Book-Creating_AddressBook_put.png",
+    "self": "https://docs.nomagic.com/rest/api/content/137990187"
+  },
+  "_expandable": {
+    "operations": "",
+    "children": "/rest/api/content/137990187/child",
+    "restrictions": "/rest/api/content/137990187/restriction/byOperation",
+    "history": "/rest/api/content/137990187/history",
+    "ancestors": "",
+    "body": "",
+    "descendants": "/rest/api/content/137990187/descendant",
+    "space": "/rest/api/space/MAF2024x",
+    "relevantViewRestrictions": "/rest/api/content/137990187/restriction/relevantViewRestrictions"
+  }
+}
+````

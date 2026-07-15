@@ -1,0 +1,114 @@
+# NOMAGIC ATTACHMENT: cancel_comment.png
+
+- attachment_id: `143394879`
+- space_key: `TWCloud2024x`
+- parent_page_id: `143394871`
+- parent_page_title: Creating and editing textual comments
+- media_type: `image/png`
+- reported_bytes: 275
+- download_url: https://docs.nomagic.com/download/attachments/143394871/cancel_comment.png?version=1&modificationDate=1700133949206&api=v2
+- payload_kind: `metadata-only`
+- downloaded_sha256: not-downloaded
+
+## PAYLOAD STATUS
+
+Binary or image attachment is inventoried by official metadata; no binary bytes are embedded in this Markdown-only corpus.
+
+
+## EXACT ATTACHMENT METADATA
+
+````json
+{
+  "id": "143394879",
+  "type": "attachment",
+  "status": "current",
+  "title": "cancel_comment.png",
+  "version": {
+    "by": {
+      "type": "known",
+      "username": "ingabe",
+      "userKey": "ff80808151f3008c0152c05ba1a40003",
+      "profilePicture": {
+        "path": "/download/attachments/7415957/user-avatar",
+        "width": 48,
+        "height": 48,
+        "isDefault": false
+      },
+      "displayName": "Inga A.",
+      "_links": {
+        "self": "https://docs.nomagic.com/rest/api/user?key=ff80808151f3008c0152c05ba1a40003"
+      },
+      "_expandable": {
+        "status": ""
+      }
+    },
+    "when": "2023-11-16T12:25:49.206+01:00",
+    "message": "",
+    "number": 1,
+    "minorEdit": true,
+    "hidden": false,
+    "_links": {
+      "self": "https://docs.nomagic.com/rest/experimental/content/143394879/version/1"
+    },
+    "_expandable": {
+      "content": "/rest/api/content/143394879"
+    }
+  },
+  "position": -1,
+  "container": {
+    "id": "143394871",
+    "type": "page",
+    "status": "current",
+    "title": "Creating and editing textual comments",
+    "position": 0,
+    "extensions": {
+      "position": 0
+    },
+    "_links": {
+      "webui": "/spaces/TWCloud2024x/pages/143394871/Creating+and+editing+textual+comments",
+      "edit": "/pages/resumedraft.action?draftId=143394871",
+      "tinyui": "/x/NwiMC",
+      "self": "https://docs.nomagic.com/rest/api/content/143394871"
+    },
+    "_expandable": {
+      "container": "/rest/api/space/TWCloud2024x",
+      "metadata": "",
+      "operations": "",
+      "children": "/rest/api/content/143394871/child",
+      "restrictions": "/rest/api/content/143394871/restriction/byOperation",
+      "history": "/rest/api/content/143394871/history",
+      "ancestors": "",
+      "body": "",
+      "version": "",
+      "descendants": "/rest/api/content/143394871/descendant",
+      "space": "/rest/api/space/TWCloud2024x",
+      "relevantViewRestrictions": "/rest/api/content/143394871/restriction/relevantViewRestrictions"
+    }
+  },
+  "metadata": {
+    "mediaType": "image/png"
+  },
+  "extensions": {
+    "mediaType": "image/png",
+    "fileSize": 275,
+    "comment": ""
+  },
+  "_links": {
+    "download": "/download/attachments/143394871/cancel_comment.png?version=1&modificationDate=1700133949206&api=v2",
+    "thumbnail": "/download/thumbnails/143394871/cancel_comment.png?api=v2",
+    "webui": "/spaces/TWCloud2024x/pages/143394871/Creating+and+editing+textual+comments?preview=%2F143394871%2F143394879%2Fcancel_comment.png",
+    "self": "https://docs.nomagic.com/rest/api/content/143394879"
+  },
+  "_expandable": {
+    "operations": "",
+    "children": "/rest/api/content/143394879/child",
+    "restrictions": "/rest/api/content/143394879/restriction/byOperation",
+    "history": "/rest/api/content/143394879/history",
+    "ancestors": "",
+    "body": "",
+    "descendants": "/rest/api/content/143394879/descendant",
+    "space": "/rest/api/space/TWCloud2024x",
+    "relevantViewRestrictions": "/rest/api/content/143394879/restriction/relevantViewRestrictions"
+  }
+}
+````

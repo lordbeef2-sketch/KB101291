@@ -1,0 +1,114 @@
+# NOMAGIC ATTACHMENT: move_button.png
+
+- attachment_id: `254423025`
+- space_key: `SYSML2P`
+- parent_page_id: `254423020`
+- parent_page_title: (2026x) Migration from SysML v1 to SysML v2
+- media_type: `image/png`
+- reported_bytes: 216
+- download_url: https://docs.nomagic.com/download/attachments/254423020/move_button.png?version=1&modificationDate=1757680447234&api=v2
+- payload_kind: `metadata-only`
+- downloaded_sha256: not-downloaded
+
+## PAYLOAD STATUS
+
+Binary or image attachment is inventoried by official metadata; no binary bytes are embedded in this Markdown-only corpus.
+
+
+## EXACT ATTACHMENT METADATA
+
+````json
+{
+  "id": "254423025",
+  "type": "attachment",
+  "status": "current",
+  "title": "move_button.png",
+  "version": {
+    "by": {
+      "type": "known",
+      "username": "ingabe",
+      "userKey": "ff80808151f3008c0152c05ba1a40003",
+      "profilePicture": {
+        "path": "/download/attachments/7415957/user-avatar",
+        "width": 48,
+        "height": 48,
+        "isDefault": false
+      },
+      "displayName": "Inga A.",
+      "_links": {
+        "self": "https://docs.nomagic.com/rest/api/user?key=ff80808151f3008c0152c05ba1a40003"
+      },
+      "_expandable": {
+        "status": ""
+      }
+    },
+    "when": "2025-09-12T14:34:07.234+02:00",
+    "message": "",
+    "number": 1,
+    "minorEdit": false,
+    "hidden": false,
+    "_links": {
+      "self": "https://docs.nomagic.com/rest/experimental/content/254423025/version/1"
+    },
+    "_expandable": {
+      "content": "/rest/api/content/254423025"
+    }
+  },
+  "position": -1,
+  "container": {
+    "id": "254423020",
+    "type": "page",
+    "status": "current",
+    "title": "(2026x) Migration from SysML v1 to SysML v2",
+    "position": 8,
+    "extensions": {
+      "position": 8
+    },
+    "_links": {
+      "webui": "/spaces/SYSML2P/pages/254423020/2026x+Migration+from+SysML+v1+to+SysML+v2",
+      "edit": "/pages/resumedraft.action?draftId=254423020",
+      "tinyui": "/x/7C8qDw",
+      "self": "https://docs.nomagic.com/rest/api/content/254423020"
+    },
+    "_expandable": {
+      "container": "/rest/api/space/SYSML2P",
+      "metadata": "",
+      "operations": "",
+      "children": "/rest/api/content/254423020/child",
+      "restrictions": "/rest/api/content/254423020/restriction/byOperation",
+      "history": "/rest/api/content/254423020/history",
+      "ancestors": "",
+      "body": "",
+      "version": "",
+      "descendants": "/rest/api/content/254423020/descendant",
+      "space": "/rest/api/space/SYSML2P",
+      "relevantViewRestrictions": "/rest/api/content/254423020/restriction/relevantViewRestrictions"
+    }
+  },
+  "metadata": {
+    "mediaType": "image/png"
+  },
+  "extensions": {
+    "mediaType": "image/png",
+    "fileSize": 216,
+    "comment": ""
+  },
+  "_links": {
+    "download": "/download/attachments/254423020/move_button.png?version=1&modificationDate=1757680447234&api=v2",
+    "thumbnail": "/download/thumbnails/254423020/move_button.png?api=v2",
+    "webui": "/spaces/SYSML2P/pages/254423020/2026x+Migration+from+SysML+v1+to+SysML+v2?preview=%2F254423020%2F254423025%2Fmove_button.png",
+    "self": "https://docs.nomagic.com/rest/api/content/254423025"
+  },
+  "_expandable": {
+    "operations": "",
+    "children": "/rest/api/content/254423025/child",
+    "restrictions": "/rest/api/content/254423025/restriction/byOperation",
+    "history": "/rest/api/content/254423025/history",
+    "ancestors": "",
+    "body": "",
+    "descendants": "/rest/api/content/254423025/descendant",
+    "space": "/rest/api/space/SYSML2P",
+    "relevantViewRestrictions": "/rest/api/content/254423025/restriction/relevantViewRestrictions"
+  }
+}
+````

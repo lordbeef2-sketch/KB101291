@@ -1,0 +1,55 @@
+# OFFICIAL REPOSITORY FILE: SysML-v2-Pilot-Implementation/org.omg.kerml.xtext/META-INF/MANIFEST.MF
+
+- repository: `SysML-v2-Pilot-Implementation`
+- source_path: `org.omg.kerml.xtext/META-INF/MANIFEST.MF`
+- source_url: https://github.com/Systems-Modeling/SysML-v2-Pilot-Implementation/blob/fa709f28dfd49dfdb7ee83e4e19da2f57e0eb3aa/org.omg.kerml.xtext/META-INF/MANIFEST.MF
+- source_bytes: 1519
+- source_sha256: `2be1c66bb00126d12c4146cceb2a56edba6694d68727b41ca66cf38dc0b36c99`
+- decoded_as: `utf-8`
+
+
+## EXACT SOURCE
+
+````text
+Manifest-Version: 1.0
+Automatic-Module-Name: org.omg.kerml.xtext
+Bundle-ManifestVersion: 2
+Bundle-Name: org.omg.kerml.xtext
+Bundle-RequiredExecutionEnvironment: JavaSE-21
+Bundle-Version: 0.60.1.qualifier
+Bundle-SymbolicName: org.omg.kerml.xtext; singleton:=true
+Bundle-ActivationPolicy: lazy
+Require-Bundle: org.eclipse.xtext,
+ org.eclipse.xtext.xbase,
+ org.eclipse.equinox.common;bundle-version="3.5.0",
+ org.eclipse.xtext.xbase.lib;bundle-version="2.14.0",
+ org.eclipse.xtext.util,
+ org.eclipse.xtend.lib;bundle-version="2.14.0",
+ org.antlr.runtime;bundle-version="[3.2.0,3.2.1)",
+ org.omg.sysml.model.bundle;bundle-version="0.60.1",
+ org.omg.sysml.logic.bundle;bundle-version="0.60.1",
+ org.omg.sysml;bundle-version="0.60.1",
+ org.eclipse.uml2.uml,
+ org.eclipse.uml2.uml.resources,
+ org.omg.kerml.expressions.xtext;bundle-version="0.60.1",
+ com.google.gson,
+ org.eclipse.xtext.common.types,
+ org.objectweb.asm;bundle-version="9.3.0";resolution:=optional
+Export-Package: org.omg.kerml.xtext,
+ org.omg.kerml.xtext.conversion,
+ org.omg.kerml.xtext.generator,
+ org.omg.kerml.xtext.library,
+ org.omg.kerml.xtext.linking,
+ org.omg.kerml.xtext.naming,
+ org.omg.kerml.xtext.parser.antlr,
+ org.omg.kerml.xtext.parser.antlr.internal,
+ org.omg.kerml.xtext.scoping,
+ org.omg.kerml.xtext.serializer,
+ org.omg.kerml.xtext.services,
+ org.omg.kerml.xtext.util,
+ org.omg.kerml.xtext.validation,
+ org.omg.kerml.xtext.xmi
+Import-Package: org.apache.log4j
+Bundle-Vendor: SysML v2 Submission Team
+
+````

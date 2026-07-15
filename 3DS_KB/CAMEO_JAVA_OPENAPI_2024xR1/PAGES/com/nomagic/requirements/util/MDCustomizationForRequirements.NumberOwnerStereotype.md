@@ -1,0 +1,536 @@
+# JAVA OPENAPI: MDCustomizationForRequirements.NumberOwnerStereotype (2024x API)
+
+- source_url: https://jdocs.nomagic.com/2024xRefresh1/com/nomagic/requirements/util/MDCustomizationForRequirements.NumberOwnerStereotype.html
+- source_path: `com/nomagic/requirements/util/MDCustomizationForRequirements.NumberOwnerStereotype.html`
+- source_sha256: `dc1a7694c3c6559e0cd9863875487ad64976af5e7da12b7ca7ea81d20767dc6b`
+- captured_utc: `2026-07-14T16:52:21.454004+00:00`
+
+## NORMALIZED JAVADOC CONTENT
+
+======== START OF CLASS DATA ========
+
+Package [com.nomagic.requirements.util](package-summary.html)
+
+## Class MDCustomizationForRequirements.NumberOwnerStereotype
+
+[java.lang.Object](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html)
+[com.nomagic.profiles.ProfileImplementation.StereotypeWrapper](../../profiles/ProfileImplementation.StereotypeWrapper.html)
+com.nomagic.requirements.util.MDCustomizationForRequirements.NumberOwnerStereotype
+
+Enclosing class:
+[MDCustomizationForRequirements](MDCustomizationForRequirements.html)
+
+public static classMDCustomizationForRequirements.NumberOwnerStereotype
+extends [ProfileImplementation.StereotypeWrapper](../../profiles/ProfileImplementation.StereotypeWrapper.html)
+
+=========== FIELD SUMMARY =========== 
+Field Summary
+Fields
+Modifier and Type
+Field
+Description
+`static final [String](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html)`
+`[NUMBERINGSTYLE](#NUMBERINGSTYLE)`
+
+`static final [String](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html)`
+`[PREFIX](#PREFIX)`
+
+`static final [String](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html)`
+`[SEPARATOR](#SEPARATOR)`
+
+`static final [String](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html)`
+`[STEREOTYPE_NAME](#STEREOTYPE_NAME)`
+ ======== CONSTRUCTOR SUMMARY ======== 
+Constructor Summary
+Constructors
+Modifier
+Constructor
+Description
+`protected`
+`[NumberOwnerStereotype](#%3Cinit%3E(com.nomagic.requirements.util.MDCustomizationForRequirements))([MDCustomizationForRequirements](MDCustomizationForRequirements.html) profile)`
+ ========== METHOD SUMMARY =========== 
+Method Summary
+All MethodsStatic MethodsInstance MethodsConcrete Methods
+Modifier and Type
+Method
+Description
+`protected void`
+`[clear](#clear())()`
+
+`void`
+`[clearNumberingStyle](#clearNumberingStyle(com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Element))([Element](../../uml2/ext/magicdraw/classes/mdkernel/Element.html) element)`
+
+`void`
+`[clearPrefix](#clearPrefix(com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Element))([Element](../../uml2/ext/magicdraw/classes/mdkernel/Element.html) element)`
+
+`void`
+`[clearSeparator](#clearSeparator(com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Element))([Element](../../uml2/ext/magicdraw/classes/mdkernel/Element.html) element)`
+
+`[MDCustomizationForRequirements.NumberingStyleEnum](MDCustomizationForRequirements.NumberingStyleEnum.html)`
+`[getNumberingStyle](#getNumberingStyle(com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Element))([Element](../../uml2/ext/magicdraw/classes/mdkernel/Element.html) element)`
+
+`[Property](../../uml2/ext/magicdraw/classes/mdkernel/Property.html)`
+`[getNumberingStyleProperty](#getNumberingStyleProperty())()`
+
+`[Object](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html)`
+`[getPrefix](#getPrefix(com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Element))([Element](../../uml2/ext/magicdraw/classes/mdkernel/Element.html) element)`
+
+`[Property](../../uml2/ext/magicdraw/classes/mdkernel/Property.html)`
+`[getPrefixProperty](#getPrefixProperty())()`
+
+`[Object](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html)`
+`[getSeparator](#getSeparator(com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Element))([Element](../../uml2/ext/magicdraw/classes/mdkernel/Element.html) element)`
+
+`[Property](../../uml2/ext/magicdraw/classes/mdkernel/Property.html)`
+`[getSeparatorProperty](#getSeparatorProperty())()`
+
+`[Stereotype](../../uml2/ext/magicdraw/mdprofiles/Stereotype.html)`
+`[getStereotype](#getStereotype())()`
+Returns stereotype for this wrapper.
+`boolean`
+`[is](#is(com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Element))([Element](../../uml2/ext/magicdraw/classes/mdkernel/Element.html) element)`
+
+`static boolean`
+`[isInstance](#isInstance(com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Element))([Element](../../uml2/ext/magicdraw/classes/mdkernel/Element.html) element)`
+
+`void`
+`[setNumberingStyle](#setNumberingStyle(com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Element,com.nomagic.requirements.util.MDCustomizationForRequirements.NumberingStyleEnum))([Element](../../uml2/ext/magicdraw/classes/mdkernel/Element.html) element,
+ [MDCustomizationForRequirements.NumberingStyleEnum](MDCustomizationForRequirements.NumberingStyleEnum.html) value)`
+
+`void`
+`[setPrefix](#setPrefix(com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Element,java.lang.Object))([Element](../../uml2/ext/magicdraw/classes/mdkernel/Element.html) element,
+ [Object](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html) value)`
+
+`void`
+`[setSeparator](#setSeparator(com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Element,java.lang.Object))([Element](../../uml2/ext/magicdraw/classes/mdkernel/Element.html) element,
+ [Object](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html) value)`
+Methods inherited from class com.nomagic.profiles.[ProfileImplementation.StereotypeWrapper](../../profiles/ProfileImplementation.StereotypeWrapper.html)
+`[apply](../../profiles/ProfileImplementation.StereotypeWrapper.html#apply(com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Element)), [isDerivedStereotype](../../profiles/ProfileImplementation.StereotypeWrapper.html#isDerivedStereotype(com.nomagic.uml2.ext.magicdraw.mdprofiles.Stereotype)), [isSameOrDerivedStereotype](../../profiles/ProfileImplementation.StereotypeWrapper.html#isSameOrDerivedStereotype(com.nomagic.uml2.ext.magicdraw.mdprofiles.Stereotype)), [unApply](../../profiles/ProfileImplementation.StereotypeWrapper.html#unApply(com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Element))`
+Methods inherited from class java.lang.[Object](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html)
+`[clone](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#clone()), [equals](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#equals(java.lang.Object)), [finalize](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#finalize()), [getClass](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#getClass()), [hashCode](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#hashCode()), [notify](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#notify()), [notifyAll](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#notifyAll()), [toString](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#toString()), [wait](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#wait()), [wait](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#wait(long)), [wait](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#wait(long,int))`
+
+============ FIELD DETAIL =========== 
+Field Details
+STEREOTYPE_NAME
+public static final [String](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html) STEREOTYPE_NAME
+See Also:
+[Constant Field Values](../../../../constant-values.html#com.nomagic.requirements.util.MDCustomizationForRequirements.NumberOwnerStereotype.STEREOTYPE_NAME)
+NUMBERINGSTYLE
+public static final [String](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html) NUMBERINGSTYLE
+See Also:
+[Constant Field Values](../../../../constant-values.html#com.nomagic.requirements.util.MDCustomizationForRequirements.NumberOwnerStereotype.NUMBERINGSTYLE)
+PREFIX
+public static final [String](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html) PREFIX
+See Also:
+[Constant Field Values](../../../../constant-values.html#com.nomagic.requirements.util.MDCustomizationForRequirements.NumberOwnerStereotype.PREFIX)
+SEPARATOR
+public static final [String](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html) SEPARATOR
+See Also:
+[Constant Field Values](../../../../constant-values.html#com.nomagic.requirements.util.MDCustomizationForRequirements.NumberOwnerStereotype.SEPARATOR)
+ ========= CONSTRUCTOR DETAIL ======== 
+Constructor Details
+NumberOwnerStereotype
+protected NumberOwnerStereotype([MDCustomizationForRequirements](MDCustomizationForRequirements.html) profile)
+ ============ METHOD DETAIL ========== 
+Method Details
+getStereotype
+public [Stereotype](../../uml2/ext/magicdraw/mdprofiles/Stereotype.html) getStereotype()
+Description copied from class: `[ProfileImplementation.StereotypeWrapper](../../profiles/ProfileImplementation.StereotypeWrapper.html#getStereotype())`
+Returns stereotype for this wrapper.
+Specified by:
+`[getStereotype](../../profiles/ProfileImplementation.StereotypeWrapper.html#getStereotype())` in class `[ProfileImplementation.StereotypeWrapper](../../profiles/ProfileImplementation.StereotypeWrapper.html)`
+Returns:
+stereotype
+getNumberingStyleProperty
+@CheckForNullpublic [Property](../../uml2/ext/magicdraw/classes/mdkernel/Property.html) getNumberingStyleProperty()
+getPrefixProperty
+@CheckForNullpublic [Property](../../uml2/ext/magicdraw/classes/mdkernel/Property.html) getPrefixProperty()
+getSeparatorProperty
+@CheckForNullpublic [Property](../../uml2/ext/magicdraw/classes/mdkernel/Property.html) getSeparatorProperty()
+setNumberingStyle
+public void setNumberingStyle([Element](../../uml2/ext/magicdraw/classes/mdkernel/Element.html) element,
+ @CheckForNull
+ [MDCustomizationForRequirements.NumberingStyleEnum](MDCustomizationForRequirements.NumberingStyleEnum.html) value)
+clearNumberingStyle
+public void clearNumberingStyle([Element](../../uml2/ext/magicdraw/classes/mdkernel/Element.html) element)
+getNumberingStyle
+@CheckForNullpublic [MDCustomizationForRequirements.NumberingStyleEnum](MDCustomizationForRequirements.NumberingStyleEnum.html) getNumberingStyle([Element](../../uml2/ext/magicdraw/classes/mdkernel/Element.html) element)
+setPrefix
+public void setPrefix([Element](../../uml2/ext/magicdraw/classes/mdkernel/Element.html) element,
+ @CheckForNull
+ [Object](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html) value)
+clearPrefix
+public void clearPrefix([Element](../../uml2/ext/magicdraw/classes/mdkernel/Element.html) element)
+getPrefix
+@CheckForNullpublic [Object](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html) getPrefix([Element](../../uml2/ext/magicdraw/classes/mdkernel/Element.html) element)
+setSeparator
+public void setSeparator([Element](../../uml2/ext/magicdraw/classes/mdkernel/Element.html) element,
+ @CheckForNull
+ [Object](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html) value)
+clearSeparator
+public void clearSeparator([Element](../../uml2/ext/magicdraw/classes/mdkernel/Element.html) element)
+getSeparator
+@CheckForNullpublic [Object](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html) getSeparator([Element](../../uml2/ext/magicdraw/classes/mdkernel/Element.html) element)
+clear
+protected void clear()
+is
+public boolean is(@CheckForNull
+ [Element](../../uml2/ext/magicdraw/classes/mdkernel/Element.html) element)
+isInstance
+public static boolean isInstance(@CheckForNull
+ [Element](../../uml2/ext/magicdraw/classes/mdkernel/Element.html) element)
+
+========= END OF CLASS DATA =========
+
+## EXACT JAVADOC MAIN HTML
+
+````html
+<main role="main">
+<!-- ======== START OF CLASS DATA ======== -->
+<div class="header">
+<div class="sub-title"><span class="package-label-in-type">Package</span> <a href="package-summary.html">com.nomagic.requirements.util</a></div>
+<h1 class="title" title="Class MDCustomizationForRequirements.NumberOwnerStereotype">Class MDCustomizationForRequirements.NumberOwnerStereotype</h1>
+</div>
+<div class="inheritance" title="Inheritance Tree"><a class="external-link" href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang">java.lang.Object</a>
+<div class="inheritance"><a href="../../profiles/ProfileImplementation.StereotypeWrapper.html" title="class in com.nomagic.profiles">com.nomagic.profiles.ProfileImplementation.StereotypeWrapper</a>
+<div class="inheritance">com.nomagic.requirements.util.MDCustomizationForRequirements.NumberOwnerStereotype</div>
+</div>
+</div>
+<section class="class-description" id="class-description">
+<dl class="notes">
+<dt>Enclosing class:</dt>
+<dd><a href="MDCustomizationForRequirements.html" title="class in com.nomagic.requirements.util">MDCustomizationForRequirements</a></dd>
+</dl>
+<hr/>
+<div class="type-signature"><span class="modifiers">public static class </span><span class="element-name type-name-label">MDCustomizationForRequirements.NumberOwnerStereotype</span>
+<span class="extends-implements">extends <a href="../../profiles/ProfileImplementation.StereotypeWrapper.html" title="class in com.nomagic.profiles">ProfileImplementation.StereotypeWrapper</a></span></div>
+</section>
+<section class="summary">
+<ul class="summary-list">
+<!-- =========== FIELD SUMMARY =========== -->
+<li>
+<section class="field-summary" id="field-summary">
+<h2>Field Summary</h2>
+<div class="caption"><span>Fields</span></div>
+<div class="summary-table three-column-summary">
+<div class="table-header col-first">Modifier and Type</div>
+<div class="table-header col-second">Field</div>
+<div class="table-header col-last">Description</div>
+<div class="col-first even-row-color"><code>static final <a class="external-link" href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang">String</a></code></div>
+<div class="col-second even-row-color"><code><a class="member-name-link" href="#NUMBERINGSTYLE">NUMBERINGSTYLE</a></code></div>
+<div class="col-last even-row-color"> </div>
+<div class="col-first odd-row-color"><code>static final <a class="external-link" href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang">String</a></code></div>
+<div class="col-second odd-row-color"><code><a class="member-name-link" href="#PREFIX">PREFIX</a></code></div>
+<div class="col-last odd-row-color"> </div>
+<div class="col-first even-row-color"><code>static final <a class="external-link" href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang">String</a></code></div>
+<div class="col-second even-row-color"><code><a class="member-name-link" href="#SEPARATOR">SEPARATOR</a></code></div>
+<div class="col-last even-row-color"> </div>
+<div class="col-first odd-row-color"><code>static final <a class="external-link" href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang">String</a></code></div>
+<div class="col-second odd-row-color"><code><a class="member-name-link" href="#STEREOTYPE_NAME">STEREOTYPE_NAME</a></code></div>
+<div class="col-last odd-row-color"> </div>
+</div>
+</section>
+</li>
+<!-- ======== CONSTRUCTOR SUMMARY ======== -->
+<li>
+<section class="constructor-summary" id="constructor-summary">
+<h2>Constructor Summary</h2>
+<div class="caption"><span>Constructors</span></div>
+<div class="summary-table three-column-summary">
+<div class="table-header col-first">Modifier</div>
+<div class="table-header col-second">Constructor</div>
+<div class="table-header col-last">Description</div>
+<div class="col-first even-row-color"><code>protected </code></div>
+<div class="col-constructor-name even-row-color"><code><a class="member-name-link" href="#%3Cinit%3E(com.nomagic.requirements.util.MDCustomizationForRequirements)">NumberOwnerStereotype</a><wbr/>(<a href="MDCustomizationForRequirements.html" title="class in com.nomagic.requirements.util">MDCustomizationForRequirements</a> profile)</code></div>
+<div class="col-last even-row-color"> </div>
+</div>
+</section>
+</li>
+<!-- ========== METHOD SUMMARY =========== -->
+<li>
+<section class="method-summary" id="method-summary">
+<h2>Method Summary</h2>
+<div id="method-summary-table">
+<div aria-orientation="horizontal" class="table-tabs" role="tablist"><button aria-controls="method-summary-table.tabpanel" aria-selected="true" class="active-table-tab" id="method-summary-table-tab0" onclick="show('method-summary-table', 'method-summary-table', 3)" onkeydown="switchTab(event)" role="tab" tabindex="0">All Methods</button><button aria-controls="method-summary-table.tabpanel" aria-selected="false" class="table-tab" id="method-summary-table-tab1" onclick="show('method-summary-table', 'method-summary-table-tab1', 3)" onkeydown="switchTab(event)" role="tab" tabindex="-1">Static Methods</button><button aria-controls="method-summary-table.tabpanel" aria-selected="false" class="table-tab" id="method-summary-table-tab2" onclick="show('method-summary-table', 'method-summary-table-tab2', 3)" onkeydown="switchTab(event)" role="tab" tabindex="-1">Instance Methods</button><button aria-controls="method-summary-table.tabpanel" aria-selected="false" class="table-tab" id="method-summary-table-tab4" onclick="show('method-summary-table', 'method-summary-table-tab4', 3)" onkeydown="switchTab(event)" role="tab" tabindex="-1">Concrete Methods</button></div>
+<div id="method-summary-table.tabpanel" role="tabpanel">
+<div aria-labelledby="method-summary-table-tab0" class="summary-table three-column-summary">
+<div class="table-header col-first">Modifier and Type</div>
+<div class="table-header col-second">Method</div>
+<div class="table-header col-last">Description</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>protected void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a class="member-name-link" href="#clear()">clear</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"> </div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a class="member-name-link" href="#clearNumberingStyle(com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Element)">clearNumberingStyle</a><wbr/>(<a href="../../uml2/ext/magicdraw/classes/mdkernel/Element.html" title="interface in com.nomagic.uml2.ext.magicdraw.classes.mdkernel">Element</a> element)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"> </div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a class="member-name-link" href="#clearPrefix(com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Element)">clearPrefix</a><wbr/>(<a href="../../uml2/ext/magicdraw/classes/mdkernel/Element.html" title="interface in com.nomagic.uml2.ext.magicdraw.classes.mdkernel">Element</a> element)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"> </div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a class="member-name-link" href="#clearSeparator(com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Element)">clearSeparator</a><wbr/>(<a href="../../uml2/ext/magicdraw/classes/mdkernel/Element.html" title="interface in com.nomagic.uml2.ext.magicdraw.classes.mdkernel">Element</a> element)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"> </div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="MDCustomizationForRequirements.NumberingStyleEnum.html" title="enum class in com.nomagic.requirements.util">MDCustomizationForRequirements.NumberingStyleEnum</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a class="member-name-link" href="#getNumberingStyle(com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Element)">getNumberingStyle</a><wbr/>(<a href="../../uml2/ext/magicdraw/classes/mdkernel/Element.html" title="interface in com.nomagic.uml2.ext.magicdraw.classes.mdkernel">Element</a> element)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"> </div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../../uml2/ext/magicdraw/classes/mdkernel/Property.html" title="interface in com.nomagic.uml2.ext.magicdraw.classes.mdkernel">Property</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a class="member-name-link" href="#getNumberingStyleProperty()">getNumberingStyleProperty</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"> </div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a class="external-link" href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang">Object</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a class="member-name-link" href="#getPrefix(com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Element)">getPrefix</a><wbr/>(<a href="../../uml2/ext/magicdraw/classes/mdkernel/Element.html" title="interface in com.nomagic.uml2.ext.magicdraw.classes.mdkernel">Element</a> element)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"> </div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../../uml2/ext/magicdraw/classes/mdkernel/Property.html" title="interface in com.nomagic.uml2.ext.magicdraw.classes.mdkernel">Property</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a class="member-name-link" href="#getPrefixProperty()">getPrefixProperty</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"> </div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a class="external-link" href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang">Object</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a class="member-name-link" href="#getSeparator(com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Element)">getSeparator</a><wbr/>(<a href="../../uml2/ext/magicdraw/classes/mdkernel/Element.html" title="interface in com.nomagic.uml2.ext.magicdraw.classes.mdkernel">Element</a> element)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"> </div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../../uml2/ext/magicdraw/classes/mdkernel/Property.html" title="interface in com.nomagic.uml2.ext.magicdraw.classes.mdkernel">Property</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a class="member-name-link" href="#getSeparatorProperty()">getSeparatorProperty</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"> </div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../../uml2/ext/magicdraw/mdprofiles/Stereotype.html" title="interface in com.nomagic.uml2.ext.magicdraw.mdprofiles">Stereotype</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a class="member-name-link" href="#getStereotype()">getStereotype</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Returns stereotype for this wrapper.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a class="member-name-link" href="#is(com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Element)">is</a><wbr/>(<a href="../../uml2/ext/magicdraw/classes/mdkernel/Element.html" title="interface in com.nomagic.uml2.ext.magicdraw.classes.mdkernel">Element</a> element)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"> </div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static boolean</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a class="member-name-link" href="#isInstance(com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Element)">isInstance</a><wbr/>(<a href="../../uml2/ext/magicdraw/classes/mdkernel/Element.html" title="interface in com.nomagic.uml2.ext.magicdraw.classes.mdkernel">Element</a> element)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"> </div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a class="member-name-link" href="#setNumberingStyle(com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Element,com.nomagic.requirements.util.MDCustomizationForRequirements.NumberingStyleEnum)">setNumberingStyle</a><wbr/>(<a href="../../uml2/ext/magicdraw/classes/mdkernel/Element.html" title="interface in com.nomagic.uml2.ext.magicdraw.classes.mdkernel">Element</a> element,
+ <a href="MDCustomizationForRequirements.NumberingStyleEnum.html" title="enum class in com.nomagic.requirements.util">MDCustomizationForRequirements.NumberingStyleEnum</a> value)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"> </div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a class="member-name-link" href="#setPrefix(com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Element,java.lang.Object)">setPrefix</a><wbr/>(<a href="../../uml2/ext/magicdraw/classes/mdkernel/Element.html" title="interface in com.nomagic.uml2.ext.magicdraw.classes.mdkernel">Element</a> element,
+ <a class="external-link" href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang">Object</a> value)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"> </div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a class="member-name-link" href="#setSeparator(com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Element,java.lang.Object)">setSeparator</a><wbr/>(<a href="../../uml2/ext/magicdraw/classes/mdkernel/Element.html" title="interface in com.nomagic.uml2.ext.magicdraw.classes.mdkernel">Element</a> element,
+ <a class="external-link" href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang">Object</a> value)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"> </div>
+</div>
+</div>
+</div>
+<div class="inherited-list">
+<h3 id="methods-inherited-from-class-com.nomagic.profiles.ProfileImplementation.StereotypeWrapper">Methods inherited from class com.nomagic.profiles.<a href="../../profiles/ProfileImplementation.StereotypeWrapper.html" title="class in com.nomagic.profiles">ProfileImplementation.StereotypeWrapper</a></h3>
+<code><a href="../../profiles/ProfileImplementation.StereotypeWrapper.html#apply(com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Element)">apply</a>, <a href="../../profiles/ProfileImplementation.StereotypeWrapper.html#isDerivedStereotype(com.nomagic.uml2.ext.magicdraw.mdprofiles.Stereotype)">isDerivedStereotype</a>, <a href="../../profiles/ProfileImplementation.StereotypeWrapper.html#isSameOrDerivedStereotype(com.nomagic.uml2.ext.magicdraw.mdprofiles.Stereotype)">isSameOrDerivedStereotype</a>, <a href="../../profiles/ProfileImplementation.StereotypeWrapper.html#unApply(com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Element)">unApply</a></code></div>
+<div class="inherited-list">
+<h3 id="methods-inherited-from-class-java.lang.Object">Methods inherited from class java.lang.<a class="external-link" href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang">Object</a></h3>
+<code><a class="external-link" href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#clone()" title="class or interface in java.lang">clone</a>, <a class="external-link" href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#equals(java.lang.Object)" title="class or interface in java.lang">equals</a>, <a class="external-link" href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#finalize()" title="class or interface in java.lang">finalize</a>, <a class="external-link" href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#getClass()" title="class or interface in java.lang">getClass</a>, <a class="external-link" href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#hashCode()" title="class or interface in java.lang">hashCode</a>, <a class="external-link" href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#notify()" title="class or interface in java.lang">notify</a>, <a class="external-link" href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#notifyAll()" title="class or interface in java.lang">notifyAll</a>, <a class="external-link" href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#toString()" title="class or interface in java.lang">toString</a>, <a class="external-link" href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#wait()" title="class or interface in java.lang">wait</a>, <a class="external-link" href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#wait(long)" title="class or interface in java.lang">wait</a>, <a class="external-link" href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#wait(long,int)" title="class or interface in java.lang">wait</a></code></div>
+</section>
+</li>
+</ul>
+</section>
+<section class="details">
+<ul class="details-list">
+<!-- ============ FIELD DETAIL =========== -->
+<li>
+<section class="field-details" id="field-detail">
+<h2>Field Details</h2>
+<ul class="member-list">
+<li>
+<section class="detail" id="STEREOTYPE_NAME">
+<h3>STEREOTYPE_NAME</h3>
+<div class="member-signature"><span class="modifiers">public static final</span> <span class="return-type"><a class="external-link" href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang">String</a></span> <span class="element-name">STEREOTYPE_NAME</span></div>
+<dl class="notes">
+<dt>See Also:</dt>
+<dd>
+<ul class="see-list">
+<li><a href="../../../../constant-values.html#com.nomagic.requirements.util.MDCustomizationForRequirements.NumberOwnerStereotype.STEREOTYPE_NAME">Constant Field Values</a></li>
+</ul>
+</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="NUMBERINGSTYLE">
+<h3>NUMBERINGSTYLE</h3>
+<div class="member-signature"><span class="modifiers">public static final</span> <span class="return-type"><a class="external-link" href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang">String</a></span> <span class="element-name">NUMBERINGSTYLE</span></div>
+<dl class="notes">
+<dt>See Also:</dt>
+<dd>
+<ul class="see-list">
+<li><a href="../../../../constant-values.html#com.nomagic.requirements.util.MDCustomizationForRequirements.NumberOwnerStereotype.NUMBERINGSTYLE">Constant Field Values</a></li>
+</ul>
+</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="PREFIX">
+<h3>PREFIX</h3>
+<div class="member-signature"><span class="modifiers">public static final</span> <span class="return-type"><a class="external-link" href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang">String</a></span> <span class="element-name">PREFIX</span></div>
+<dl class="notes">
+<dt>See Also:</dt>
+<dd>
+<ul class="see-list">
+<li><a href="../../../../constant-values.html#com.nomagic.requirements.util.MDCustomizationForRequirements.NumberOwnerStereotype.PREFIX">Constant Field Values</a></li>
+</ul>
+</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="SEPARATOR">
+<h3>SEPARATOR</h3>
+<div class="member-signature"><span class="modifiers">public static final</span> <span class="return-type"><a class="external-link" href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang">String</a></span> <span class="element-name">SEPARATOR</span></div>
+<dl class="notes">
+<dt>See Also:</dt>
+<dd>
+<ul class="see-list">
+<li><a href="../../../../constant-values.html#com.nomagic.requirements.util.MDCustomizationForRequirements.NumberOwnerStereotype.SEPARATOR">Constant Field Values</a></li>
+</ul>
+</dd>
+</dl>
+</section>
+</li>
+</ul>
+</section>
+</li>
+<!-- ========= CONSTRUCTOR DETAIL ======== -->
+<li>
+<section class="constructor-details" id="constructor-detail">
+<h2>Constructor Details</h2>
+<ul class="member-list">
+<li>
+<section class="detail" id="&lt;init&gt;(com.nomagic.requirements.util.MDCustomizationForRequirements)">
+<h3>NumberOwnerStereotype</h3>
+<div class="member-signature"><span class="modifiers">protected</span> <span class="element-name">NumberOwnerStereotype</span><wbr/><span class="parameters">(<a href="MDCustomizationForRequirements.html" title="class in com.nomagic.requirements.util">MDCustomizationForRequirements</a> profile)</span></div>
+</section>
+</li>
+</ul>
+</section>
+</li>
+<!-- ============ METHOD DETAIL ========== -->
+<li>
+<section class="method-details" id="method-detail">
+<h2>Method Details</h2>
+<ul class="member-list">
+<li>
+<section class="detail" id="getStereotype()">
+<h3>getStereotype</h3>
+<div class="member-signature"><span class="modifiers">public</span> <span class="return-type"><a href="../../uml2/ext/magicdraw/mdprofiles/Stereotype.html" title="interface in com.nomagic.uml2.ext.magicdraw.mdprofiles">Stereotype</a></span> <span class="element-name">getStereotype</span>()</div>
+<div class="block"><span class="descfrm-type-label">Description copied from class: <code><a href="../../profiles/ProfileImplementation.StereotypeWrapper.html#getStereotype()">ProfileImplementation.StereotypeWrapper</a></code></span></div>
+<div class="block">Returns stereotype for this wrapper.</div>
+<dl class="notes">
+<dt>Specified by:</dt>
+<dd><code><a href="../../profiles/ProfileImplementation.StereotypeWrapper.html#getStereotype()">getStereotype</a></code> in class <code><a href="../../profiles/ProfileImplementation.StereotypeWrapper.html" title="class in com.nomagic.profiles">ProfileImplementation.StereotypeWrapper</a></code></dd>
+<dt>Returns:</dt>
+<dd>stereotype</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="getNumberingStyleProperty()">
+<h3>getNumberingStyleProperty</h3>
+<div class="member-signature"><span class="annotations">@CheckForNull
+</span><span class="modifiers">public</span> <span class="return-type"><a href="../../uml2/ext/magicdraw/classes/mdkernel/Property.html" title="interface in com.nomagic.uml2.ext.magicdraw.classes.mdkernel">Property</a></span> <span class="element-name">getNumberingStyleProperty</span>()</div>
+</section>
+</li>
+<li>
+<section class="detail" id="getPrefixProperty()">
+<h3>getPrefixProperty</h3>
+<div class="member-signature"><span class="annotations">@CheckForNull
+</span><span class="modifiers">public</span> <span class="return-type"><a href="../../uml2/ext/magicdraw/classes/mdkernel/Property.html" title="interface in com.nomagic.uml2.ext.magicdraw.classes.mdkernel">Property</a></span> <span class="element-name">getPrefixProperty</span>()</div>
+</section>
+</li>
+<li>
+<section class="detail" id="getSeparatorProperty()">
+<h3>getSeparatorProperty</h3>
+<div class="member-signature"><span class="annotations">@CheckForNull
+</span><span class="modifiers">public</span> <span class="return-type"><a href="../../uml2/ext/magicdraw/classes/mdkernel/Property.html" title="interface in com.nomagic.uml2.ext.magicdraw.classes.mdkernel">Property</a></span> <span class="element-name">getSeparatorProperty</span>()</div>
+</section>
+</li>
+<li>
+<section class="detail" id="setNumberingStyle(com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Element,com.nomagic.requirements.util.MDCustomizationForRequirements.NumberingStyleEnum)">
+<h3>setNumberingStyle</h3>
+<div class="member-signature"><span class="modifiers">public</span> <span class="return-type">void</span> <span class="element-name">setNumberingStyle</span><wbr/><span class="parameters">(<a href="../../uml2/ext/magicdraw/classes/mdkernel/Element.html" title="interface in com.nomagic.uml2.ext.magicdraw.classes.mdkernel">Element</a> element,
+ @CheckForNull
+ <a href="MDCustomizationForRequirements.NumberingStyleEnum.html" title="enum class in com.nomagic.requirements.util">MDCustomizationForRequirements.NumberingStyleEnum</a> value)</span></div>
+</section>
+</li>
+<li>
+<section class="detail" id="clearNumberingStyle(com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Element)">
+<h3>clearNumberingStyle</h3>
+<div class="member-signature"><span class="modifiers">public</span> <span class="return-type">void</span> <span class="element-name">clearNumberingStyle</span><wbr/><span class="parameters">(<a href="../../uml2/ext/magicdraw/classes/mdkernel/Element.html" title="interface in com.nomagic.uml2.ext.magicdraw.classes.mdkernel">Element</a> element)</span></div>
+</section>
+</li>
+<li>
+<section class="detail" id="getNumberingStyle(com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Element)">
+<h3>getNumberingStyle</h3>
+<div class="member-signature"><span class="annotations">@CheckForNull
+</span><span class="modifiers">public</span> <span class="return-type"><a href="MDCustomizationForRequirements.NumberingStyleEnum.html" title="enum class in com.nomagic.requirements.util">MDCustomizationForRequirements.NumberingStyleEnum</a></span> <span class="element-name">getNumberingStyle</span><wbr/><span class="parameters">(<a href="../../uml2/ext/magicdraw/classes/mdkernel/Element.html" title="interface in com.nomagic.uml2.ext.magicdraw.classes.mdkernel">Element</a> element)</span></div>
+</section>
+</li>
+<li>
+<section class="detail" id="setPrefix(com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Element,java.lang.Object)">
+<h3>setPrefix</h3>
+<div class="member-signature"><span class="modifiers">public</span> <span class="return-type">void</span> <span class="element-name">setPrefix</span><wbr/><span class="parameters">(<a href="../../uml2/ext/magicdraw/classes/mdkernel/Element.html" title="interface in com.nomagic.uml2.ext.magicdraw.classes.mdkernel">Element</a> element,
+ @CheckForNull
+ <a class="external-link" href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang">Object</a> value)</span></div>
+</section>
+</li>
+<li>
+<section class="detail" id="clearPrefix(com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Element)">
+<h3>clearPrefix</h3>
+<div class="member-signature"><span class="modifiers">public</span> <span class="return-type">void</span> <span class="element-name">clearPrefix</span><wbr/><span class="parameters">(<a href="../../uml2/ext/magicdraw/classes/mdkernel/Element.html" title="interface in com.nomagic.uml2.ext.magicdraw.classes.mdkernel">Element</a> element)</span></div>
+</section>
+</li>
+<li>
+<section class="detail" id="getPrefix(com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Element)">
+<h3>getPrefix</h3>
+<div class="member-signature"><span class="annotations">@CheckForNull
+</span><span class="modifiers">public</span> <span class="return-type"><a class="external-link" href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang">Object</a></span> <span class="element-name">getPrefix</span><wbr/><span class="parameters">(<a href="../../uml2/ext/magicdraw/classes/mdkernel/Element.html" title="interface in com.nomagic.uml2.ext.magicdraw.classes.mdkernel">Element</a> element)</span></div>
+</section>
+</li>
+<li>
+<section class="detail" id="setSeparator(com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Element,java.lang.Object)">
+<h3>setSeparator</h3>
+<div class="member-signature"><span class="modifiers">public</span> <span class="return-type">void</span> <span class="element-name">setSeparator</span><wbr/><span class="parameters">(<a href="../../uml2/ext/magicdraw/classes/mdkernel/Element.html" title="interface in com.nomagic.uml2.ext.magicdraw.classes.mdkernel">Element</a> element,
+ @CheckForNull
+ <a class="external-link" href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang">Object</a> value)</span></div>
+</section>
+</li>
+<li>
+<section class="detail" id="clearSeparator(com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Element)">
+<h3>clearSeparator</h3>
+<div class="member-signature"><span class="modifiers">public</span> <span class="return-type">void</span> <span class="element-name">clearSeparator</span><wbr/><span class="parameters">(<a href="../../uml2/ext/magicdraw/classes/mdkernel/Element.html" title="interface in com.nomagic.uml2.ext.magicdraw.classes.mdkernel">Element</a> element)</span></div>
+</section>
+</li>
+<li>
+<section class="detail" id="getSeparator(com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Element)">
+<h3>getSeparator</h3>
+<div class="member-signature"><span class="annotations">@CheckForNull
+</span><span class="modifiers">public</span> <span class="return-type"><a class="external-link" href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang">Object</a></span> <span class="element-name">getSeparator</span><wbr/><span class="parameters">(<a href="../../uml2/ext/magicdraw/classes/mdkernel/Element.html" title="interface in com.nomagic.uml2.ext.magicdraw.classes.mdkernel">Element</a> element)</span></div>
+</section>
+</li>
+<li>
+<section class="detail" id="clear()">
+<h3>clear</h3>
+<div class="member-signature"><span class="modifiers">protected</span> <span class="return-type">void</span> <span class="element-name">clear</span>()</div>
+</section>
+</li>
+<li>
+<section class="detail" id="is(com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Element)">
+<h3>is</h3>
+<div class="member-signature"><span class="modifiers">public</span> <span class="return-type">boolean</span> <span class="element-name">is</span><wbr/><span class="parameters">(@CheckForNull
+ <a href="../../uml2/ext/magicdraw/classes/mdkernel/Element.html" title="interface in com.nomagic.uml2.ext.magicdraw.classes.mdkernel">Element</a> element)</span></div>
+</section>
+</li>
+<li>
+<section class="detail" id="isInstance(com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Element)">
+<h3>isInstance</h3>
+<div class="member-signature"><span class="modifiers">public static</span> <span class="return-type">boolean</span> <span class="element-name">isInstance</span><wbr/><span class="parameters">(@CheckForNull
+ <a href="../../uml2/ext/magicdraw/classes/mdkernel/Element.html" title="interface in com.nomagic.uml2.ext.magicdraw.classes.mdkernel">Element</a> element)</span></div>
+</section>
+</li>
+</ul>
+</section>
+</li>
+</ul>
+</section>
+<!-- ========= END OF CLASS DATA ========= -->
+</main>
+````

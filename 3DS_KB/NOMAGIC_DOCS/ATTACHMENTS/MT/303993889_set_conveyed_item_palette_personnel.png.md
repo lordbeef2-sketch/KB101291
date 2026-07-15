@@ -1,0 +1,114 @@
+# NOMAGIC ATTACHMENT: set_conveyed_item_palette_personnel.png
+
+- attachment_id: `303993889`
+- space_key: `MT`
+- parent_page_id: `303993885`
+- parent_page_title: (2026x Refresh1) Working with Personnel Internal Connectivity diagram
+- media_type: `image/png`
+- reported_bytes: 25058
+- download_url: https://docs.nomagic.com/download/attachments/303993885/set_conveyed_item_palette_personnel.png?version=1&modificationDate=1777364622000&api=v2
+- payload_kind: `metadata-only`
+- downloaded_sha256: not-downloaded
+
+## PAYLOAD STATUS
+
+Binary or image attachment is inventoried by official metadata; no binary bytes are embedded in this Markdown-only corpus.
+
+
+## EXACT ATTACHMENT METADATA
+
+````json
+{
+  "id": "303993889",
+  "type": "attachment",
+  "status": "current",
+  "title": "set_conveyed_item_palette_personnel.png",
+  "version": {
+    "by": {
+      "type": "known",
+      "username": "ingabe",
+      "userKey": "ff80808151f3008c0152c05ba1a40003",
+      "profilePicture": {
+        "path": "/download/attachments/7415957/user-avatar",
+        "width": 48,
+        "height": 48,
+        "isDefault": false
+      },
+      "displayName": "Inga A.",
+      "_links": {
+        "self": "https://docs.nomagic.com/rest/api/user?key=ff80808151f3008c0152c05ba1a40003"
+      },
+      "_expandable": {
+        "status": ""
+      }
+    },
+    "when": "2026-04-28T10:23:42.000+02:00",
+    "message": "",
+    "number": 1,
+    "minorEdit": true,
+    "hidden": false,
+    "_links": {
+      "self": "https://docs.nomagic.com/rest/experimental/content/303993889/version/1"
+    },
+    "_expandable": {
+      "content": "/rest/api/content/303993889"
+    }
+  },
+  "position": -1,
+  "container": {
+    "id": "303993885",
+    "type": "page",
+    "status": "current",
+    "title": "(2026x Refresh1) Working with Personnel Internal Connectivity diagram",
+    "position": 1,
+    "extensions": {
+      "position": 1
+    },
+    "_links": {
+      "webui": "/spaces/MT/pages/303993885/2026x+Refresh1+Working+with+Personnel+Internal+Connectivity+diagram",
+      "edit": "/pages/resumedraft.action?draftId=303993885",
+      "tinyui": "/x/HZQeEg",
+      "self": "https://docs.nomagic.com/rest/api/content/303993885"
+    },
+    "_expandable": {
+      "container": "/rest/api/space/MT",
+      "metadata": "",
+      "operations": "",
+      "children": "/rest/api/content/303993885/child",
+      "restrictions": "/rest/api/content/303993885/restriction/byOperation",
+      "history": "/rest/api/content/303993885/history",
+      "ancestors": "",
+      "body": "",
+      "version": "",
+      "descendants": "/rest/api/content/303993885/descendant",
+      "space": "/rest/api/space/MT",
+      "relevantViewRestrictions": "/rest/api/content/303993885/restriction/relevantViewRestrictions"
+    }
+  },
+  "metadata": {
+    "mediaType": "image/png"
+  },
+  "extensions": {
+    "mediaType": "image/png",
+    "fileSize": 25058,
+    "comment": ""
+  },
+  "_links": {
+    "download": "/download/attachments/303993885/set_conveyed_item_palette_personnel.png?version=1&modificationDate=1777364622000&api=v2",
+    "thumbnail": "/download/thumbnails/303993885/set_conveyed_item_palette_personnel.png?api=v2",
+    "webui": "/spaces/MT/pages/303993885/2026x+Refresh1+Working+with+Personnel+Internal+Connectivity+diagram?preview=%2F303993885%2F303993889%2Fset_conveyed_item_palette_personnel.png",
+    "self": "https://docs.nomagic.com/rest/api/content/303993889"
+  },
+  "_expandable": {
+    "operations": "",
+    "children": "/rest/api/content/303993889/child",
+    "restrictions": "/rest/api/content/303993889/restriction/byOperation",
+    "history": "/rest/api/content/303993889/history",
+    "ancestors": "",
+    "body": "",
+    "descendants": "/rest/api/content/303993889/descendant",
+    "space": "/rest/api/space/MT",
+    "relevantViewRestrictions": "/rest/api/content/303993889/restriction/relevantViewRestrictions"
+  }
+}
+````

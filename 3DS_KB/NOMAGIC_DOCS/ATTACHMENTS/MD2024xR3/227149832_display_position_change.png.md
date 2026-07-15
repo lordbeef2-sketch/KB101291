@@ -1,0 +1,114 @@
+# NOMAGIC ATTACHMENT: display_position_change.png
+
+- attachment_id: `227149832`
+- space_key: `MD2024xR3`
+- parent_page_id: `227149830`
+- parent_page_title: Diagram banners
+- media_type: `image/png`
+- reported_bytes: 32914
+- download_url: https://docs.nomagic.com/download/attachments/227149830/display_position_change.png?version=1&modificationDate=1746160244949&api=v2
+- payload_kind: `metadata-only`
+- downloaded_sha256: not-downloaded
+
+## PAYLOAD STATUS
+
+Binary or image attachment is inventoried by official metadata; no binary bytes are embedded in this Markdown-only corpus.
+
+
+## EXACT ATTACHMENT METADATA
+
+````json
+{
+  "id": "227149832",
+  "type": "attachment",
+  "status": "current",
+  "title": "display_position_change.png",
+  "version": {
+    "by": {
+      "type": "known",
+      "username": "kbe12",
+      "userKey": "2c9f81f87674fd7d017a0928ba470000",
+      "profilePicture": {
+        "path": "/images/icons/profilepics/default.svg",
+        "width": 48,
+        "height": 48,
+        "isDefault": true
+      },
+      "displayName": "Kristina B.",
+      "_links": {
+        "self": "https://docs.nomagic.com/rest/api/user?key=2c9f81f87674fd7d017a0928ba470000"
+      },
+      "_expandable": {
+        "status": ""
+      }
+    },
+    "when": "2025-05-02T06:30:44.949+02:00",
+    "message": "",
+    "number": 1,
+    "minorEdit": true,
+    "hidden": false,
+    "_links": {
+      "self": "https://docs.nomagic.com/rest/experimental/content/227149832/version/1"
+    },
+    "_expandable": {
+      "content": "/rest/api/content/227149832"
+    }
+  },
+  "position": -1,
+  "container": {
+    "id": "227149830",
+    "type": "page",
+    "status": "current",
+    "title": "Diagram banners",
+    "position": 13,
+    "extensions": {
+      "position": 13
+    },
+    "_links": {
+      "webui": "/spaces/MD2024xR3/pages/227149830/Diagram+banners",
+      "edit": "/pages/resumedraft.action?draftId=227149830",
+      "tinyui": "/x/BgiKDQ",
+      "self": "https://docs.nomagic.com/rest/api/content/227149830"
+    },
+    "_expandable": {
+      "container": "/rest/api/space/MD2024xR3",
+      "metadata": "",
+      "operations": "",
+      "children": "/rest/api/content/227149830/child",
+      "restrictions": "/rest/api/content/227149830/restriction/byOperation",
+      "history": "/rest/api/content/227149830/history",
+      "ancestors": "",
+      "body": "",
+      "version": "",
+      "descendants": "/rest/api/content/227149830/descendant",
+      "space": "/rest/api/space/MD2024xR3",
+      "relevantViewRestrictions": "/rest/api/content/227149830/restriction/relevantViewRestrictions"
+    }
+  },
+  "metadata": {
+    "mediaType": "image/png"
+  },
+  "extensions": {
+    "mediaType": "image/png",
+    "fileSize": 32914,
+    "comment": ""
+  },
+  "_links": {
+    "download": "/download/attachments/227149830/display_position_change.png?version=1&modificationDate=1746160244949&api=v2",
+    "thumbnail": "/download/thumbnails/227149830/display_position_change.png?api=v2",
+    "webui": "/spaces/MD2024xR3/pages/227149830/Diagram+banners?preview=%2F227149830%2F227149832%2Fdisplay_position_change.png",
+    "self": "https://docs.nomagic.com/rest/api/content/227149832"
+  },
+  "_expandable": {
+    "operations": "",
+    "children": "/rest/api/content/227149832/child",
+    "restrictions": "/rest/api/content/227149832/restriction/byOperation",
+    "history": "/rest/api/content/227149832/history",
+    "ancestors": "",
+    "body": "",
+    "descendants": "/rest/api/content/227149832/descendant",
+    "space": "/rest/api/space/MD2024xR3",
+    "relevantViewRestrictions": "/rest/api/content/227149832/restriction/relevantViewRestrictions"
+  }
+}
+````

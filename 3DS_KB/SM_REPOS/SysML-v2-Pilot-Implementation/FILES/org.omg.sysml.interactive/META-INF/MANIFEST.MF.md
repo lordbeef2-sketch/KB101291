@@ -1,0 +1,36 @@
+# OFFICIAL REPOSITORY FILE: SysML-v2-Pilot-Implementation/org.omg.sysml.interactive/META-INF/MANIFEST.MF
+
+- repository: `SysML-v2-Pilot-Implementation`
+- source_path: `org.omg.sysml.interactive/META-INF/MANIFEST.MF`
+- source_url: https://github.com/Systems-Modeling/SysML-v2-Pilot-Implementation/blob/fa709f28dfd49dfdb7ee83e4e19da2f57e0eb3aa/org.omg.sysml.interactive/META-INF/MANIFEST.MF
+- source_bytes: 845
+- source_sha256: `a1735c8354e721e51a0636033681e363f25b1b61166847877c6c1cc75040d303`
+- decoded_as: `utf-8`
+
+
+## EXACT SOURCE
+
+````text
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: org.omg.sysml.interactive
+Bundle-RequiredExecutionEnvironment: JavaSE-21
+Bundle-SymbolicName: org.omg.sysml.interactive
+Bundle-Version: 0.60.1.qualifier
+Export-Package: org.omg.sysml.interactive
+Require-Bundle: org.eclipse.emf.ecore,
+ com.google.inject,
+ org.eclipse.xtext,
+ org.omg.sysml.model.bundle;bundle-version="0.60.1",
+ org.omg.sysml.logic.bundle;bundle-version="0.60.1",
+ org.omg.sysml;bundle-version="0.60.1",
+ org.omg.sysml.execution;bundle-version="0.60.1",
+ org.omg.kerml.xtext;bundle-version="0.60.1",
+ org.omg.sysml.xtext;bundle-version="0.60.1",
+ com.google.gson;bundle-version="2.8.6",
+ org.eclipse.xtext.common.types
+Import-Package: org.omg.sysml.plantuml
+Bundle-Vendor: SysML v2 Submission Team
+Automatic-Module-Name: org.omg.sysml.interactive
+
+````

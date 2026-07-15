@@ -1,0 +1,114 @@
+# NOMAGIC ATTACHMENT: child_result.png
+
+- attachment_id: `272730906`
+- space_key: `MT`
+- parent_page_id: `272730896`
+- parent_page_title: (2026x) Report Data Management Pane
+- media_type: `image/png`
+- reported_bytes: 68382
+- download_url: https://docs.nomagic.com/download/attachments/272730896/child_result.png?version=1&modificationDate=1764074267909&api=v2
+- payload_kind: `metadata-only`
+- downloaded_sha256: not-downloaded
+
+## PAYLOAD STATUS
+
+Binary or image attachment is inventoried by official metadata; no binary bytes are embedded in this Markdown-only corpus.
+
+
+## EXACT ATTACHMENT METADATA
+
+````json
+{
+  "id": "272730906",
+  "type": "attachment",
+  "status": "current",
+  "title": "child_result.png",
+  "version": {
+    "by": {
+      "type": "known",
+      "username": "ingabe",
+      "userKey": "ff80808151f3008c0152c05ba1a40003",
+      "profilePicture": {
+        "path": "/download/attachments/7415957/user-avatar",
+        "width": 48,
+        "height": 48,
+        "isDefault": false
+      },
+      "displayName": "Inga A.",
+      "_links": {
+        "self": "https://docs.nomagic.com/rest/api/user?key=ff80808151f3008c0152c05ba1a40003"
+      },
+      "_expandable": {
+        "status": ""
+      }
+    },
+    "when": "2025-11-25T13:37:47.909+01:00",
+    "message": "",
+    "number": 1,
+    "minorEdit": false,
+    "hidden": false,
+    "_links": {
+      "self": "https://docs.nomagic.com/rest/experimental/content/272730906/version/1"
+    },
+    "_expandable": {
+      "content": "/rest/api/content/272730906"
+    }
+  },
+  "position": -1,
+  "container": {
+    "id": "272730896",
+    "type": "page",
+    "status": "current",
+    "title": "(2026x) Report Data Management Pane",
+    "position": 1,
+    "extensions": {
+      "position": 1
+    },
+    "_links": {
+      "webui": "/spaces/MT/pages/272730896/2026x+Report+Data+Management+Pane",
+      "edit": "/pages/resumedraft.action?draftId=272730896",
+      "tinyui": "/x/EItBE",
+      "self": "https://docs.nomagic.com/rest/api/content/272730896"
+    },
+    "_expandable": {
+      "container": "/rest/api/space/MT",
+      "metadata": "",
+      "operations": "",
+      "children": "/rest/api/content/272730896/child",
+      "restrictions": "/rest/api/content/272730896/restriction/byOperation",
+      "history": "/rest/api/content/272730896/history",
+      "ancestors": "",
+      "body": "",
+      "version": "",
+      "descendants": "/rest/api/content/272730896/descendant",
+      "space": "/rest/api/space/MT",
+      "relevantViewRestrictions": "/rest/api/content/272730896/restriction/relevantViewRestrictions"
+    }
+  },
+  "metadata": {
+    "mediaType": "image/png"
+  },
+  "extensions": {
+    "mediaType": "image/png",
+    "fileSize": 68382,
+    "comment": ""
+  },
+  "_links": {
+    "download": "/download/attachments/272730896/child_result.png?version=1&modificationDate=1764074267909&api=v2",
+    "thumbnail": "/download/thumbnails/272730896/child_result.png?api=v2",
+    "webui": "/spaces/MT/pages/272730896/2026x+Report+Data+Management+Pane?preview=%2F272730896%2F272730906%2Fchild_result.png",
+    "self": "https://docs.nomagic.com/rest/api/content/272730906"
+  },
+  "_expandable": {
+    "operations": "",
+    "children": "/rest/api/content/272730906/child",
+    "restrictions": "/rest/api/content/272730906/restriction/byOperation",
+    "history": "/rest/api/content/272730906/history",
+    "ancestors": "",
+    "body": "",
+    "descendants": "/rest/api/content/272730906/descendant",
+    "space": "/rest/api/space/MT",
+    "relevantViewRestrictions": "/rest/api/content/272730906/restriction/relevantViewRestrictions"
+  }
+}
+````

@@ -1,0 +1,320 @@
+# OFFICIAL REPOSITORY FILE: SysML-v2-Pilot-Implementation/org.omg.kerml.xpect.tests/src/org/omg/kerml/xpect/tests/imports/local/Import_Filtered.kerml.xt
+
+- repository: `SysML-v2-Pilot-Implementation`
+- source_path: `org.omg.kerml.xpect.tests/src/org/omg/kerml/xpect/tests/imports/local/Import_Filtered.kerml.xt`
+- source_url: https://github.com/Systems-Modeling/SysML-v2-Pilot-Implementation/blob/fa709f28dfd49dfdb7ee83e4e19da2f57e0eb3aa/org.omg.kerml.xpect.tests/src/org/omg/kerml/xpect/tests/imports/local/Import_Filtered.kerml.xt
+- source_bytes: 12519
+- source_sha256: `e8e3eaa3e1a08eca52185c621fc4e3c29b0f10a4068b728cee69fdf75601e5cc`
+- decoded_as: `utf-8`
+
+
+## EXACT SOURCE
+
+````xtext
+//* 
+XPECT_SETUP org.omg.kerml.xpect.tests.imports.local.KerMLImportLocalTest
+	ResourceSet {
+		ThisFile {}
+			File {from ="/library/Base.kerml"}
+			File {from ="/library/Occurrences.kerml"}
+			File {from ="/library/Objects.kerml"}
+			File {from ="/library/Metaobjects.kerml"}
+			File {from ="/library/Performances.kerml"}
+		    File {from ="/library/ScalarValues.kerml"}
+		    File {from ="/library/BaseFunctions.kerml"}
+		    File {from ="/library/ControlFunctions.kerml"}
+		    File {from ="/library/KerML.kerml"}
+	}
+	Workspace {
+		JavaProject {
+			SrcFolder {
+				ThisFile {}
+				File {from ="/library/Base.kerml"}
+				File {from ="/library/Occurrences.kerml"}
+				File {from ="/library/Objects.kerml"}
+				File {from ="/library/Metaobjects.kerml"}
+			   	File {from ="/library/Performances.kerml"}
+		       	File {from ="/library/ScalarValues.kerml"}
+		       	File {from ="/library/BaseFunctions.kerml"}
+		       	File {from ="/library/ControlFunctions.kerml"}
+		       	File {from ="/library/KerML.kerml"}
+			}
+		}
+	}
+END_SETUP 
+*/
+
+package Import_Filtered {
+	metaclass Safety {
+		feature isMandatory: ScalarValues::Boolean[0..1];
+	}
+	metaclass Security;
+	
+	classifier vehicle1_c1 {
+		classifier interior {
+			classifier alarm {@Security;}
+			classifier seatBelt {@Safety{isMandatory = true;}}
+			classifier frontSeat;
+			classifier driverAirBag {@Safety;}
+		}
+		classifier bodyAssy {
+			classifier body;
+			classifier bumper {@Safety;}
+			classifier keylessEntry {@Security;}
+		}
+		classifier wheelAssy {
+			classifier wheel;
+			classifier antilockBrakes {@Safety{isMandatory = false;}}
+		}
+	}
+	
+	package 'Safety Features_1' {
+		public import vehicle1_c1::**;
+		filter @Safety;
+	
+		classifier b :> seatBelt;
+		classifier d :> driverAirBag;
+		classifier g :> bumper;  
+		classifier j :> antilockBrakes;
+
+		// XPECT errors --> "Couldn't resolve reference to Classifier 'alarm'." at "alarm"
+		classifier a :> alarm; 
+		// XPECT errors --> "Couldn't resolve reference to Classifier 'frontSeat'." at "frontSeat"
+		classifier c :> frontSeat;  
+		// XPECT errors --> "Couldn't resolve reference to Classifier 'body'." at "body"
+		classifier f :> body;  
+		// XPECT errors --> "Couldn't resolve reference to Classifier 'keylessEntry'." at "keylessEntry"
+		classifier h :> keylessEntry;  
+		// XPECT errors --> "Couldn't resolve reference to Classifier 'wheel'." at "wheel"
+		classifier i :> wheel;  
+	}
+	
+	package 'Safety Features_2' {
+		public import vehicle1_c1::**[@Safety];
+		
+		classifier b :> seatBelt;
+		classifier d :> driverAirBag;
+		classifier g :> bumper;  
+		classifier j :> antilockBrakes;
+		
+		// XPECT errors --> "Couldn't resolve reference to Classifier 'alarm'." at "alarm"
+		classifier a :> alarm; 
+		// XPECT errors --> "Couldn't resolve reference to Classifier 'frontSeat'." at "frontSeat"
+		classifier c :> frontSeat;  
+		// XPECT errors --> "Couldn't resolve reference to Classifier 'body'." at "body"
+		classifier f :> body;  
+		// XPECT errors --> "Couldn't resolve reference to Classifier 'keylessEntry'." at "keylessEntry"
+		classifier h :> keylessEntry;  
+		// XPECT errors --> "Couldn't resolve reference to Classifier 'wheel'." at "wheel"
+		classifier i :> wheel;  
+	}
+	
+	package 'Security Features' {
+		public import vehicle1_c1::interior::*[@Security];
+		
+		classifier a :> alarm;  
+		//not imported
+		// XPECT errors --> "Couldn't resolve reference to Classifier 'keylessEntry'." at "keylessEntry"
+		classifier h :> keylessEntry;
+		//not 
+		// XPECT errors --> "Couldn't resolve reference to Classifier 'seatBelt'." at "seatBelt"
+		classifier b :> seatBelt; 
+		// XPECT errors --> "Couldn't resolve reference to Classifier 'frontSeat'." at "frontSeat"
+		classifier c :> frontSeat;  
+		// XPECT errors --> "Couldn't resolve reference to Classifier 'driverAirBag'." at "driverAirBag"
+		classifier d :> driverAirBag;  
+		// XPECT errors --> "Couldn't resolve reference to Classifier 'body'." at "body"
+		classifier f :> body;  
+		// XPECT errors --> "Couldn't resolve reference to Classifier 'bumper'." at "bumper"
+		classifier g :> bumper;  
+		// XPECT errors --> "Couldn't resolve reference to Classifier 'wheel'." at "wheel"
+		classifier i :> wheel;  
+		// XPECT errors --> "Couldn't resolve reference to Classifier 'antilockBrakes'." at "antilockBrakes"
+		classifier j :> antilockBrakes; 
+		
+	}
+	
+	package 'Security Features_1' {
+		public import vehicle1_c1::**[@Security];
+		
+		classifier a :> alarm;  
+		classifier h :> keylessEntry;
+
+		//not 
+		// XPECT errors --> "Couldn't resolve reference to Classifier 'seatBelt'." at "seatBelt"
+		classifier b :> seatBelt; 
+		// XPECT errors --> "Couldn't resolve reference to Classifier 'frontSeat'." at "frontSeat"
+		classifier c :> frontSeat;  
+		// XPECT errors --> "Couldn't resolve reference to Classifier 'driverAirBag'." at "driverAirBag"
+		classifier d :> driverAirBag;  
+		// XPECT errors --> "Couldn't resolve reference to Classifier 'body'." at "body"
+		classifier f :> body;  
+		// XPECT errors --> "Couldn't resolve reference to Classifier 'bumper'." at "bumper"
+		classifier g :> bumper;  
+		// XPECT errors --> "Couldn't resolve reference to Classifier 'wheel'." at "wheel"
+		classifier i :> wheel;  
+		// XPECT errors --> "Couldn't resolve reference to Classifier 'antilockBrakes'." at "antilockBrakes"
+		classifier j :> antilockBrakes; 
+		
+	}
+	
+	package 'Security Features_2' {
+		public import vehicle1_c1::**;
+		filter @Security;
+		
+		classifier a :> alarm;  
+		classifier h :> keylessEntry;
+
+		//not 
+		// XPECT errors --> "Couldn't resolve reference to Classifier 'seatBelt'." at "seatBelt"
+		classifier b :> seatBelt; 
+		// XPECT errors --> "Couldn't resolve reference to Classifier 'frontSeat'." at "frontSeat"
+		classifier c :> frontSeat;  
+		// XPECT errors --> "Couldn't resolve reference to Classifier 'driverAirBag'." at "driverAirBag"
+		classifier d :> driverAirBag;  
+		// XPECT errors --> "Couldn't resolve reference to Classifier 'body'." at "body"
+		classifier f :> body;  
+		// XPECT errors --> "Couldn't resolve reference to Classifier 'bumper'." at "bumper"
+		classifier g :> bumper;  
+		// XPECT errors --> "Couldn't resolve reference to Classifier 'wheel'." at "wheel"
+		classifier i :> wheel;  
+		// XPECT errors --> "Couldn't resolve reference to Classifier 'antilockBrakes'." at "antilockBrakes"
+		classifier j :> antilockBrakes; 
+		
+	}		
+	
+	package 'Safety & Security Features_1' {
+		public import vehicle1_c1::**;
+		filter @Safety or @Security;
+		
+		//safety
+		classifier b :> seatBelt; 
+		classifier d :> driverAirBag;  
+		classifier g :> bumper; 
+		classifier j :> antilockBrakes;
+		//security
+		classifier a :> alarm;
+		classifier h :> keylessEntry; 
+		
+		//not
+		// XPECT errors --> "Couldn't resolve reference to Classifier 'frontSeat'." at "frontSeat"
+		classifier c :> frontSeat;  
+		// XPECT errors --> "Couldn't resolve reference to Classifier 'body'." at "body"
+		classifier f :> body;  
+		// XPECT errors --> "Couldn't resolve reference to Classifier 'wheel'." at "wheel"
+		classifier i :> wheel;  
+	}
+	
+	package 'Safety & Security Features_2' {
+		public import vehicle1_c1::**[@Safety or @Security];
+		
+		//safety
+		classifier b :> seatBelt; 
+		classifier d :> driverAirBag;  
+		classifier g :> bumper; 
+		classifier j :> antilockBrakes;
+		//security
+		classifier a :> alarm;
+		classifier h :> keylessEntry; 
+		
+		//not
+		// XPECT errors --> "Couldn't resolve reference to Classifier 'frontSeat'." at "frontSeat"
+		classifier c :> frontSeat;  
+		// XPECT errors --> "Couldn't resolve reference to Classifier 'body'." at "body"
+		classifier f :> body;  
+		// XPECT errors --> "Couldn't resolve reference to Classifier 'wheel'." at "wheel"
+		classifier i :> wheel;  
+	}
+	
+	package 'Safety & Security Features_3' {
+		public import vehicle1_c1::**[@Safety and @Security];
+		
+		// XPECT errors --> "Couldn't resolve reference to Classifier 'alarm'." at "alarm"
+		classifier a :> alarm; 
+		// XPECT errors --> "Couldn't resolve reference to Classifier 'seatBelt'." at "seatBelt"
+		classifier b :> seatBelt;
+		// XPECT errors --> "Couldn't resolve reference to Classifier 'frontSeat'." at "frontSeat"
+		classifier c :> frontSeat; 
+		// XPECT errors --> "Couldn't resolve reference to Classifier 'driverAirBag'." at "driverAirBag"
+		classifier d :> driverAirBag; 
+		// XPECT errors --> "Couldn't resolve reference to Classifier 'body'." at "body"
+		classifier f :> body; 
+		// XPECT errors --> "Couldn't resolve reference to Classifier 'bumper'." at "bumper"
+		classifier g :> bumper; 
+		// XPECT errors --> "Couldn't resolve reference to Classifier 'keylessEntry'." at "keylessEntry"
+		classifier h :> keylessEntry;  
+		// XPECT errors --> "Couldn't resolve reference to Classifier 'wheel'." at "wheel"
+		classifier i :> wheel; 
+		// XPECT errors --> "Couldn't resolve reference to Classifier 'antilockBrakes'." at "antilockBrakes"
+		classifier j :> antilockBrakes; 
+	}
+	
+	package 'Mandatory Features_true_1' {
+		public import vehicle1_c1::**[(as Safety).isMandatory];
+		classifier b :> seatBelt; 
+		
+		// XPECT errors --> "Couldn't resolve reference to Classifier 'alarm'." at "alarm"
+		classifier a :> alarm; 
+		// XPECT errors --> "Couldn't resolve reference to Classifier 'frontSeat'." at "frontSeat"
+		classifier c :> frontSeat; 
+		// XPECT errors --> "Couldn't resolve reference to Classifier 'driverAirBag'." at "driverAirBag"
+		classifier d :> driverAirBag; 
+		// XPECT errors --> "Couldn't resolve reference to Classifier 'body'." at "body"
+		classifier f :> body; 
+		// XPECT errors --> "Couldn't resolve reference to Classifier 'bumper'." at "bumper"
+		classifier g :> bumper; 
+		// XPECT errors --> "Couldn't resolve reference to Classifier 'keylessEntry'." at "keylessEntry"
+		classifier h :> keylessEntry;  
+		// XPECT errors --> "Couldn't resolve reference to Classifier 'wheel'." at "wheel"
+		classifier i :> wheel; 
+		// XPECT errors --> "Couldn't resolve reference to Classifier 'antilockBrakes'." at "antilockBrakes"
+		classifier j :> antilockBrakes; 
+	}
+	
+	package 'Mandatory Features_true_2' {
+		public import vehicle1_c1::**[(as Safety).isMandatory == true]; 
+		classifier b :> seatBelt; 
+
+		// XPECT errors --> "Couldn't resolve reference to Classifier 'alarm'." at "alarm"
+		classifier a :> alarm; 
+		// XPECT errors --> "Couldn't resolve reference to Classifier 'frontSeat'." at "frontSeat"
+		classifier c :> frontSeat; 
+		// XPECT errors --> "Couldn't resolve reference to Classifier 'driverAirBag'." at "driverAirBag"
+		classifier d :> driverAirBag; 
+		// XPECT errors --> "Couldn't resolve reference to Classifier 'body'." at "body"
+		classifier f :> body; 
+		// XPECT errors --> "Couldn't resolve reference to Classifier 'bumper'." at "bumper"
+		classifier g :> bumper; 
+		// XPECT errors --> "Couldn't resolve reference to Classifier 'keylessEntry'." at "keylessEntry"
+		classifier h :> keylessEntry;  
+		// XPECT errors --> "Couldn't resolve reference to Classifier 'wheel'." at "wheel"
+		classifier i :> wheel; 
+		// XPECT errors --> "Couldn't resolve reference to Classifier 'antilockBrakes'." at "antilockBrakes"
+		classifier j :> antilockBrakes; 
+	}
+	
+	package 'Mandatory Features_false' {
+		public import vehicle1_c1::**[(as Safety).isMandatory == false]; 
+		classifier j :> antilockBrakes; 
+		
+		// XPECT errors --> "Couldn't resolve reference to Classifier 'alarm'." at "alarm"
+		classifier a :> alarm; 
+		// XPECT errors --> "Couldn't resolve reference to Classifier 'seatBelt'." at "seatBelt"
+		classifier b :> seatBelt;
+		// XPECT errors --> "Couldn't resolve reference to Classifier 'frontSeat'." at "frontSeat"
+		classifier c :> frontSeat; 
+		// XPECT errors --> "Couldn't resolve reference to Classifier 'driverAirBag'." at "driverAirBag"
+		classifier d :> driverAirBag; 
+		// XPECT errors --> "Couldn't resolve reference to Classifier 'body'." at "body"
+		classifier f :> body; 
+		// XPECT errors --> "Couldn't resolve reference to Classifier 'bumper'." at "bumper"
+		classifier g :> bumper; 
+		// XPECT errors --> "Couldn't resolve reference to Classifier 'keylessEntry'." at "keylessEntry"
+		classifier h :> keylessEntry;  
+		// XPECT errors --> "Couldn't resolve reference to Classifier 'wheel'." at "wheel"
+		classifier i :> wheel; 		
+	}	
+}
+
+	
+````

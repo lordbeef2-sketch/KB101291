@@ -1,0 +1,95 @@
+# OFFICIAL REPOSITORY FILE: SysML-v2-Release/doc/images/sysml/clause-8.2.3/while-condition.svg
+
+- repository: `SysML-v2-Release`
+- source_path: `doc/images/sysml/clause-8.2.3/while-condition.svg`
+- source_url: https://github.com/Systems-Modeling/SysML-v2-Release/blob/288d129c0d532065d45434bbb48a920898b719af/doc/images/sysml/clause-8.2.3/while-condition.svg
+- source_bytes: 2696
+- source_sha256: `f0eb36b06901bc6efdf23690358fdcfa1006e2e96b33a184ffc1ded520f699e2`
+- decoded_as: `utf-8`
+
+
+## EXACT SOURCE
+
+````xml
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   version="1.1"
+   id="svg1"
+   width="272"
+   height="16"
+   viewBox="0 0 272 16"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs1">
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath2">
+      <path
+         d="M 0,0 H 849.02344 V 50.976563 H 0 Z"
+         transform="scale(0.31999999)"
+         clip-rule="evenodd"
+         id="path2" />
+    </clipPath>
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath4">
+      <path
+         d="m 3.125,0 h 843.75 V 50.976563 H 3.125 Z"
+         transform="matrix(0.3390068,0,0,0.3390068,76.746587,3798.9999)"
+         clip-rule="evenodd"
+         id="path4" />
+    </clipPath>
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath6">
+      <path
+         d="m 3.125,0 h 843.75 V 50.976563 H 3.125 Z"
+         transform="matrix(0.3390068,0,0,0.3390068,77.246592,3799.4998)"
+         clip-rule="evenodd"
+         id="path6" />
+    </clipPath>
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath7">
+      <path
+         d="m 3.125,0 h 843.75 V 50.976563 H 3.125 Z"
+         transform="matrix(0.3390068,0,0,0.3390068,-101.61279,-12.500117)"
+         clip-rule="evenodd"
+         id="path7" />
+    </clipPath>
+  </defs>
+  <g
+     id="g1">
+    <path
+       id="path1"
+       d="M 0,0 H 272 V 16 H 0 Z"
+       style="fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none"
+       clip-path="url(#clipPath2)" />
+    <path
+       id="path3"
+       d="M 80,3800 H 360"
+       style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1"
+       transform="matrix(0.94393382,0,0,0.94393382,-72.443699,-3586.0045)"
+       clip-path="url(#clipPath4)" />
+    <path
+       id="path5"
+       d="m 179,3801 h 83 v 14 h -83 z"
+       style="fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none"
+       transform="matrix(0.94393382,0,0,0.94393382,-72.915671,-3586.4764)"
+       clip-path="url(#clipPath6)" />
+    <text
+       id="text6"
+       xml:space="preserve"
+       transform="matrix(0.94393382,0,0,0.94393382,95.915747,11.799283)"
+       clip-path="url(#clipPath7)"><tspan
+         id="tspan6"
+         style="font-variant:normal;font-weight:normal;font-size:12px;font-family:Arial;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none"
+         x="0"
+         y="0">'while condition'</tspan></text>
+  </g>
+</svg>
+
+````

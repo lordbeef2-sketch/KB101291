@@ -1,0 +1,114 @@
+# NOMAGIC ATTACHMENT: str_expr_calling_modelHelper_method.png
+
+- attachment_id: `189142867`
+- space_key: `MD2024xR2`
+- parent_page_id: `189142866`
+- parent_page_title: Creating executable opaque behaviors
+- media_type: `image/png`
+- reported_bytes: 12522
+- download_url: https://docs.nomagic.com/download/attachments/189142866/str_expr_calling_modelHelper_method.png?version=1&modificationDate=1727980775448&api=v2
+- payload_kind: `metadata-only`
+- downloaded_sha256: not-downloaded
+
+## PAYLOAD STATUS
+
+Binary or image attachment is inventoried by official metadata; no binary bytes are embedded in this Markdown-only corpus.
+
+
+## EXACT ATTACHMENT METADATA
+
+````json
+{
+  "id": "189142867",
+  "type": "attachment",
+  "status": "current",
+  "title": "str_expr_calling_modelHelper_method.png",
+  "version": {
+    "by": {
+      "type": "known",
+      "username": "kbe12",
+      "userKey": "2c9f81f87674fd7d017a0928ba470000",
+      "profilePicture": {
+        "path": "/images/icons/profilepics/default.svg",
+        "width": 48,
+        "height": 48,
+        "isDefault": true
+      },
+      "displayName": "Kristina B.",
+      "_links": {
+        "self": "https://docs.nomagic.com/rest/api/user?key=2c9f81f87674fd7d017a0928ba470000"
+      },
+      "_expandable": {
+        "status": ""
+      }
+    },
+    "when": "2024-10-03T20:39:35.448+02:00",
+    "message": "",
+    "number": 1,
+    "minorEdit": false,
+    "hidden": false,
+    "_links": {
+      "self": "https://docs.nomagic.com/rest/experimental/content/189142867/version/1"
+    },
+    "_expandable": {
+      "content": "/rest/api/content/189142867"
+    }
+  },
+  "position": -1,
+  "container": {
+    "id": "189142866",
+    "type": "page",
+    "status": "current",
+    "title": "Creating executable opaque behaviors",
+    "position": 1,
+    "extensions": {
+      "position": 1
+    },
+    "_links": {
+      "webui": "/spaces/MD2024xR2/pages/189142866/Creating+executable+opaque+behaviors",
+      "edit": "/pages/resumedraft.action?draftId=189142866",
+      "tinyui": "/x/UhdGCw",
+      "self": "https://docs.nomagic.com/rest/api/content/189142866"
+    },
+    "_expandable": {
+      "container": "/rest/api/space/MD2024xR2",
+      "metadata": "",
+      "operations": "",
+      "children": "/rest/api/content/189142866/child",
+      "restrictions": "/rest/api/content/189142866/restriction/byOperation",
+      "history": "/rest/api/content/189142866/history",
+      "ancestors": "",
+      "body": "",
+      "version": "",
+      "descendants": "/rest/api/content/189142866/descendant",
+      "space": "/rest/api/space/MD2024xR2",
+      "relevantViewRestrictions": "/rest/api/content/189142866/restriction/relevantViewRestrictions"
+    }
+  },
+  "metadata": {
+    "mediaType": "image/png"
+  },
+  "extensions": {
+    "mediaType": "image/png",
+    "fileSize": 12522,
+    "comment": ""
+  },
+  "_links": {
+    "download": "/download/attachments/189142866/str_expr_calling_modelHelper_method.png?version=1&modificationDate=1727980775448&api=v2",
+    "thumbnail": "/download/thumbnails/189142866/str_expr_calling_modelHelper_method.png?api=v2",
+    "webui": "/spaces/MD2024xR2/pages/189142866/Creating+executable+opaque+behaviors?preview=%2F189142866%2F189142867%2Fstr_expr_calling_modelHelper_method.png",
+    "self": "https://docs.nomagic.com/rest/api/content/189142867"
+  },
+  "_expandable": {
+    "operations": "",
+    "children": "/rest/api/content/189142867/child",
+    "restrictions": "/rest/api/content/189142867/restriction/byOperation",
+    "history": "/rest/api/content/189142867/history",
+    "ancestors": "",
+    "body": "",
+    "descendants": "/rest/api/content/189142867/descendant",
+    "space": "/rest/api/space/MD2024xR2",
+    "relevantViewRestrictions": "/rest/api/content/189142867/restriction/relevantViewRestrictions"
+  }
+}
+````

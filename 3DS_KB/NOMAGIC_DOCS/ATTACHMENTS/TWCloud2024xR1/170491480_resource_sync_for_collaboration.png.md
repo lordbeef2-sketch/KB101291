@@ -1,0 +1,114 @@
+# NOMAGIC ATTACHMENT: resource_sync_for_collaboration.png
+
+- attachment_id: `170491480`
+- space_key: `TWCloud2024xR1`
+- parent_page_id: `170491477`
+- parent_page_title: Cross-cluster resource synchronization
+- media_type: `image/png`
+- reported_bytes: 21287
+- download_url: https://docs.nomagic.com/download/attachments/170491477/resource_sync_for_collaboration.png?version=1&modificationDate=1715246051395&api=v2
+- payload_kind: `metadata-only`
+- downloaded_sha256: not-downloaded
+
+## PAYLOAD STATUS
+
+Binary or image attachment is inventoried by official metadata; no binary bytes are embedded in this Markdown-only corpus.
+
+
+## EXACT ATTACHMENT METADATA
+
+````json
+{
+  "id": "170491480",
+  "type": "attachment",
+  "status": "current",
+  "title": "resource_sync_for_collaboration.png",
+  "version": {
+    "by": {
+      "type": "known",
+      "username": "ingabe",
+      "userKey": "ff80808151f3008c0152c05ba1a40003",
+      "profilePicture": {
+        "path": "/download/attachments/7415957/user-avatar",
+        "width": 48,
+        "height": 48,
+        "isDefault": false
+      },
+      "displayName": "Inga A.",
+      "_links": {
+        "self": "https://docs.nomagic.com/rest/api/user?key=ff80808151f3008c0152c05ba1a40003"
+      },
+      "_expandable": {
+        "status": ""
+      }
+    },
+    "when": "2024-05-09T11:14:11.395+02:00",
+    "message": "",
+    "number": 1,
+    "minorEdit": false,
+    "hidden": false,
+    "_links": {
+      "self": "https://docs.nomagic.com/rest/experimental/content/170491480/version/1"
+    },
+    "_expandable": {
+      "content": "/rest/api/content/170491480"
+    }
+  },
+  "position": -1,
+  "container": {
+    "id": "170491477",
+    "type": "page",
+    "status": "current",
+    "title": "Cross-cluster resource synchronization",
+    "position": 2,
+    "extensions": {
+      "position": 2
+    },
+    "_links": {
+      "webui": "/spaces/TWCloud2024xR1/pages/170491477/Cross-cluster+resource+synchronization",
+      "edit": "/pages/resumedraft.action?draftId=170491477",
+      "tinyui": "/x/VX4pCg",
+      "self": "https://docs.nomagic.com/rest/api/content/170491477"
+    },
+    "_expandable": {
+      "container": "/rest/api/space/TWCloud2024xR1",
+      "metadata": "",
+      "operations": "",
+      "children": "/rest/api/content/170491477/child",
+      "restrictions": "/rest/api/content/170491477/restriction/byOperation",
+      "history": "/rest/api/content/170491477/history",
+      "ancestors": "",
+      "body": "",
+      "version": "",
+      "descendants": "/rest/api/content/170491477/descendant",
+      "space": "/rest/api/space/TWCloud2024xR1",
+      "relevantViewRestrictions": "/rest/api/content/170491477/restriction/relevantViewRestrictions"
+    }
+  },
+  "metadata": {
+    "mediaType": "image/png"
+  },
+  "extensions": {
+    "mediaType": "image/png",
+    "fileSize": 21287,
+    "comment": ""
+  },
+  "_links": {
+    "download": "/download/attachments/170491477/resource_sync_for_collaboration.png?version=1&modificationDate=1715246051395&api=v2",
+    "thumbnail": "/download/thumbnails/170491477/resource_sync_for_collaboration.png?api=v2",
+    "webui": "/spaces/TWCloud2024xR1/pages/170491477/Cross-cluster+resource+synchronization?preview=%2F170491477%2F170491480%2Fresource_sync_for_collaboration.png",
+    "self": "https://docs.nomagic.com/rest/api/content/170491480"
+  },
+  "_expandable": {
+    "operations": "",
+    "children": "/rest/api/content/170491480/child",
+    "restrictions": "/rest/api/content/170491480/restriction/byOperation",
+    "history": "/rest/api/content/170491480/history",
+    "ancestors": "",
+    "body": "",
+    "descendants": "/rest/api/content/170491480/descendant",
+    "space": "/rest/api/space/TWCloud2024xR1",
+    "relevantViewRestrictions": "/rest/api/content/170491480/restriction/relevantViewRestrictions"
+  }
+}
+````
