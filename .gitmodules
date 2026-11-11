@@ -1,0 +1,3 @@
+[submodule "LANGFLOW_KB/upstream-langflow"]
+	path = LANGFLOW_KB/upstream-langflow
+	url = https://github.com/langflow-ai/langflow.git
