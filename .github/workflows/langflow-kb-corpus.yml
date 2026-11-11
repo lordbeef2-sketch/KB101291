@@ -1,0 +1,61 @@
+name: Langflow 1.13.2 full KB corpus build
+
+on:
+  push:
+    paths:
+      - "LANGFLOW_KB/**"
+      - ".github/workflows/langflow-kb-corpus.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    name: Verify pinned source and generate LLM corpus
+    runs-on: ubuntu-latest
+    timeout-minutes: 50
+    steps:
+      - name: Checkout repository and pinned Langflow full corpus
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          fetch-depth: 1
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Compile KB Python tools (syntax)
+        run: |
+          python -m py_compile LANGFLOW_KB/scripts/build_corpus.py
+          python -m py_compile LANGFLOW_KB/scripts/bootstrap_flow.py
+          python -m py_compile LANGFLOW_KB/scripts/validate_and_report.py
+
+      - name: Generate full source/docs/component/CLI/API corpus
+        run: |
+          python LANGFLOW_KB/scripts/build_corpus.py
+
+      - name: Verify corpus completeness manifest
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import json
+          p=Path('LANGFLOW_KB/generated')
+          m=json.loads((p/'manifest.json').read_text())
+          assert m['upstream_git_commit']=='8b42952d734de18e34c2838ff6c634efb1815878'
+          assert m['counts']['components_candidates']>10, m
+          assert m['counts']['retrieval_chunks']>200, m
+          assert m['counts']['exported_flow_examples']>=1, m
+          assert (p/'documents.jsonl').stat().st_size>10000
+          print(json.dumps(m, indent=2))
+          PY
+
+      - name: Upload reproducible LLM KB corpus
+        uses: actions/upload-artifact@v4
+        with:
+          name: langflow-1.13.2-llm-full-corpus
+          path: LANGFLOW_KB/generated/
+          if-no-files-found: error
+          retention-days: 30

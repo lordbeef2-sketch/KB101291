@@ -45,3 +45,7 @@ A base LLM **alone** cannot certify that a flow runs. It needs a local validatio
 Keep the old pin and audit trail. Review Langflow upstream release notes and security advisories before upgrading; create a new versioned branch/checkpoint; change the gitlink to the reviewed tag; regenerate the corpus and run regression/evaluation tests; then merge. Never silently assume `main` upstream is the same as this pin.
 
 Primary upstream: https://github.com/langflow-ai/langflow/releases/tag/v1.13.2
+
+## GitHub Actions corpus build
+
+[`Langflow 1.13.2 full KB corpus build`](../../actions/workflows/langflow-kb-corpus.yml) checks out the pinned upstream submodule, compiles the Python scripts, generates the full source/doc/component/CLI/API retrieval corpus, checks manifest coverage, and uploads a 30-day downloadable artifact. An Action run and its result must be verified separately; adding the workflow does not prove the corpus build passed.
