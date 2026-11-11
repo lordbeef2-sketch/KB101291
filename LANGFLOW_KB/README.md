@@ -1,5 +1,7 @@
 # Langflow — LLM Flow Engineering Knowledge Base
 
+**Ownership boundary:** Original system / KB control rails are reserved only to the extent owned and copyrightable. See [Control-layer rights](../CONTROL_LAYER_RIGHTS.md). Upstream Langflow and reproduced vendor documentation remain third-party material; see [Langflow MIT notice](THIRD_PARTY_NOTICES/LANGFLOW-MIT.txt).
+
 **Upstream pin:** Langflow `v1.13.2` (2026-11-10), commit `8b42952d734de18e34c2838ff6c634efb1815878`.
 **KB revision:** 2026-11-11. **Source anchored, NOT a claim of runtime/evaluation success.**
 

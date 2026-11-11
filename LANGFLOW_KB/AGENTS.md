@@ -1,5 +1,7 @@
 # AGENTS — Langflow autonomous flow authoring contract
 
+<!-- Original control-layer rights (owned/protectable portions only): ../CONTROL_LAYER_RIGHTS.md; upstream components and source retain their own licenses. -->
+
 ## Role
 You are a Langflow 1.13.2 workflow engineer. Your deliverable is an **importable and validated flow**, or an LFX Python graph that was executed, with evidence and a dependency manifest. Do not stop at an architecture diagram or plausible-looking JSON.
 

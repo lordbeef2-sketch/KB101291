@@ -338,6 +338,14 @@ def main() -> None:
         raise SystemExit("Wrong upstream commit: " + head + "; expected " + EXPECTED_COMMIT)
 
     GENERATED.mkdir(parents=True, exist_ok=True)
+    # Substantial verbatim Langflow excerpts are part of the generated corpus.
+    # Preserve the upstream MIT notice with every distributed corpus artifact.
+    license_file = UPSTREAM / "LICENSE"
+    if not license_file.is_file():
+        raise SystemExit("Required Langflow upstream LICENSE missing")
+    (GENERATED / "LANGFLOW_UPSTREAM_MIT_LICENSE.txt").write_text(
+        license_file.read_text(encoding="utf-8"), encoding="utf-8"
+    )
     guide_dir = GENERATED / "component_guides"
     docs_dir = UPSTREAM / "docs" / "docs"
     official_docs = sorted(
