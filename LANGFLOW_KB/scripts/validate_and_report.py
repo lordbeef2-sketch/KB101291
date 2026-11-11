@@ -7,24 +7,34 @@ No provider keys are printed or stored. Output is deliberately not saved.
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import shutil
 import subprocess
 from datetime import datetime, timezone
 from pathlib import Path
 
-MAX_OUTPUT = 1200
-
-
 def run(argv, timeout):
+    # Never persist stdout/stderr or the user-provided input value by default.
+    # Flow output and error traces can contain prompt text, access tokens or PII.
+    safe_command = [
+        "<REDACTED>" if i and argv[i - 1] == "--input-value" else arg
+        for i, arg in enumerate(argv)
+    ]
     try:
         p = subprocess.run(argv, capture_output=True, text=True, timeout=timeout, check=False)
-        return {"command": argv, "exit_code": p.returncode,
-                "stdout_tail": p.stdout[-MAX_OUTPUT:], "stderr_tail": p.stderr[-MAX_OUTPUT:],
-                "timed_out": False}
+        return {
+            "command": safe_command,
+            "exit_code": p.returncode,
+            "stdout_characters": len(p.stdout),
+            "stderr_characters": len(p.stderr),
+            "stdout_sha256": hashlib.sha256(p.stdout.encode()).hexdigest(),
+            "stderr_sha256": hashlib.sha256(p.stderr.encode()).hexdigest(),
+            "timed_out": False,
+        }
     except subprocess.TimeoutExpired:
-        return {"command": argv, "exit_code": None, "timed_out": True,
-                "stdout_tail": "", "stderr_tail": "Command timed out"}
+        return {"command": safe_command, "exit_code": None, "timed_out": True,
+                "stdout_characters": None, "stderr_characters": None}
 
 
 def main():
